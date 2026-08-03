@@ -1,35 +1,31 @@
 import os
 from pathlib import Path
+from flask import json
 import pandas as pd
 from dotenv import load_dotenv
-import duckdb
 import ibis
 
-load_dotenv(override=True)
-env_data_dir = os.getenv("DATA_DIR")
-if env_data_dir is None:
-	raise ValueError("DATA_DIR environment variable is not set. Please set it in the .env file.")
-
+from traverse import build_raw_file_dict
+from dirs import get_data_dirs
 pd.options.mode.chained_assignment = None  # default='warn'
 
-# define paths
-user = "lazycst"
-root_dir = Path(os.getcwd()).parent.parent
+dirs = get_data_dirs()
+      
+# # list industry subfolders
+# industries = [d.name for d in data_dir.iterdir() if d.is_dir()]
+# print(f"Found {len(industries)} industry folders.")
+# print(industries)
 
-work_dir = root_dir / "build" / "src"
-data_dir = Path(env_data_dir)						# On mobile env, set DATA_DIR in .env to "H:/Other computers/My computer/fame_clean/1_FAME_raw_data/2025.07.30"
-output_dir = root_dir / "build" / "output"
-
-output_dir.mkdir(parents=True, exist_ok=True)
-
-# list industry subfolders
-industries = [d.name for d in data_dir.iterdir() if d.is_dir()]
-print(f"Found {len(industries)} industry folders.")
-print(industries)
+# Build the raw file dictionary
+# Display output as json in ../output/raw_file_dict.json
+raw_file_dict = build_raw_file_dict(dirs.raw_data_dir)
+with open(dirs.output_dir / "raw_file_dict.json", "w") as f:
+    json.dump(raw_file_dict, f, indent=4)
+    print(f"✅ Successfully built raw file dictionary and saved to: {dirs.output_dir / 'raw_file_dict.json'}")
 
 def init_fame_database_ibis():
     
-    db_path = output_dir / "fame_data.duckdb"
+    db_path = dirs.output_dir / "fame_data.duckdb"
     
     # 2. Connect to DuckDB using Ibis
     con = ibis.duckdb.connect(str(db_path))
@@ -115,5 +111,5 @@ def init_fame_database_ibis():
     except Exception as e:
         print(f"❌ Error creating table: {e}")
 
-if __name__ == "__main__":
-    init_fame_database_ibis()
+# if __name__ == "__main__":
+#     init_fame_database_ibis()
