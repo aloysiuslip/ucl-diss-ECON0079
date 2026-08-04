@@ -1,27 +1,13 @@
-import os
-from pathlib import Path
 from flask import json
 import pandas as pd
-from dotenv import load_dotenv
 import ibis
 
-from traverse import build_raw_file_dict
-from dirs import get_data_dirs
 pd.options.mode.chained_assignment = None  # default='warn'
-
-dirs = get_data_dirs()
       
 # # list industry subfolders
 # industries = [d.name for d in data_dir.iterdir() if d.is_dir()]
 # print(f"Found {len(industries)} industry folders.")
 # print(industries)
-
-# Build the raw file dictionary
-# Display output as json in ../output/raw_file_dict.json
-raw_file_dict = build_raw_file_dict(dirs.raw_data_dir)
-with open(dirs.output_dir / "raw_file_dict.json", "w") as f:
-    json.dump(raw_file_dict, f, indent=4)
-    print(f"✅ Successfully built raw file dictionary and saved to: {dirs.output_dir / 'raw_file_dict.json'}")
 
 def init_fame_database_ibis():
     

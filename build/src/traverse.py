@@ -9,7 +9,7 @@ from pathlib import Path
 # under each of the subdirectories of of the industry/key,
 # ex: /01/a1_ID, /01/a2_key_finance
 
-def build_raw_file_dict(dir: Path) -> dict[str, dict[str, str]]:
+def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
 
     raw_file_dict = {}
     errors = []
@@ -52,7 +52,10 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, str]]:
                     continue
 
                 # Store the file path in the dictionary
-                raw_file_dict[industry][key] = str(file.name)
+                raw_file_dict[industry][key] = [
+                    str(file.name),
+                    str(file)
+                ]
 
     if len(errors) > 0:
         for error in errors:

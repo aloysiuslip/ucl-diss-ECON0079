@@ -34,7 +34,9 @@ def get_data_dirs() -> dict[str, Path]:
 
     # Load some dir paths from the current script's parent directory
     user = "lazycst"
-    root_dir = Path(os.getcwd())
+    # Build root dir based on the location of the current script, which is in build/src
+    root_dir = Path(__file__).parent.parent
+    print(f"Root directory: {root_dir}")
     work_dir = root_dir / "build" / "src"
     output_dir = root_dir / "build" / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
