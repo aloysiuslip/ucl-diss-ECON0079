@@ -11,4 +11,4 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 ---
 # Known bugs
 
-[] creating a bunch of build/ folders everywhere
+[]
