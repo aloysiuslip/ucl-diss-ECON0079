@@ -38,6 +38,8 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
 
             key = key_dir.name
 
+            if key not in raw_file_dict[industry]:
+                raw_file_dict[industry][key] = []
             for file in key_dir.iterdir():
                 if not file.is_file():
                     errors.append(f"Expected file but found directory: {file.name}")
@@ -52,10 +54,10 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
                     continue
 
                 # Store the file path in the dictionary
-                raw_file_dict[industry][key] = [
+                raw_file_dict[industry][key].append([
                     str(file.name),
                     str(file)
-                ]
+                ])
 
     if len(errors) > 0:
         for error in errors:
