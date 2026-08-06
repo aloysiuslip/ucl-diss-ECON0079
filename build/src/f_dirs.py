@@ -3,7 +3,15 @@ from pathlib import Path
 from dotenv import load_dotenv
 from typing import NamedTuple
 
-def get_data_dirs() -> dict[str, Path]:
+class DirPaths(NamedTuple):
+	root_data_dir: Path | None
+	data_dir: Path | None
+	raw_data_dir: Path | None
+	root_dir: Path
+	work_dir: Path
+	output_dir: Path
+     
+def get_data_dirs() -> DirPaths:
 
     # Load dir paths from .env file
     load_dotenv(override=True)
@@ -40,27 +48,6 @@ def get_data_dirs() -> dict[str, Path]:
     output_dir = root_dir / "build" / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # return data_dir, root_data_dir, root_dir, work_dir, output_dir
-
-    # Above is a tuplet return of all the possible dir paths
-    # If I wanted to return a named output variable from this function
-    # ex: calling it would be {root_dir} = get_data_dirs()
-    # obviously not necessarily in that exact syntax
-    # Then the viability of doing that in python is questionable,
-    # but I could return a dictionary instead of a tuplet
-    # The most concise way to do that below
-    # without having to duplicate writing out keys and values is:
-    # return {k: v for k, v in locals().items() if isinstance(v, Path) or v is None}
-
-    # Alternatively, return an output which I can access as output.data_dir
-    # when calling this function
-    class DirPaths(NamedTuple):
-        root_data_dir: Path
-        data_dir: Path
-        raw_data_dir: Path
-        root_dir: Path
-        work_dir: Path
-        output_dir: Path
     return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir, work_dir, output_dir)
 
 # If this file is run as a script, then call the function and print the results
