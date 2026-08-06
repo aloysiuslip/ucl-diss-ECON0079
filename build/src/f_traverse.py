@@ -9,7 +9,10 @@ from pathlib import Path
 # under each of the subdirectories of of the industry/key,
 # ex: /01/a1_ID, /01/a2_key_finance
 
-def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
+# Declare a 'RawFileDict' type for the return value of the function
+RawFileDict = dict[str, dict[str, list[str]]]
+
+def build_raw_file_dict(dir: Path) -> RawFileDict:
 
     raw_file_dict = {}
     errors = []

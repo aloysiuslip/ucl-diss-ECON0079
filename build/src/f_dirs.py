@@ -3,7 +3,15 @@ from pathlib import Path
 from dotenv import load_dotenv
 from typing import NamedTuple
 
-def get_data_dirs() -> dict[str, Path]:
+class DirPaths(NamedTuple):
+	root_data_dir: Path | None
+	data_dir: Path | None
+	raw_data_dir: Path | None
+	root_dir: Path
+	work_dir: Path
+	output_dir: Path
+     
+def get_data_dirs() -> DirPaths:
 
     # Load dir paths from .env file
     load_dotenv(override=True)
@@ -36,6 +44,9 @@ def get_data_dirs() -> dict[str, Path]:
     user = "lazycst"
     # Build root dir based on the location of the current script, which is in build/src
     root_dir = Path(__file__).parent.parent
+    print(f"Current script's parent directory: {Path(__file__)}")
+    
+    print(root_dir)
     print(f"Root directory: {root_dir}")
     work_dir = root_dir / "build" / "src"
     output_dir = root_dir / "build" / "output"
@@ -55,11 +66,4 @@ def get_data_dirs() -> dict[str, Path]:
 
     # Alternatively, return an output which I can access as output.data_dir
     # when calling this function
-    class DirPaths(NamedTuple):
-        root_data_dir: Path
-        data_dir: Path
-        raw_data_dir: Path
-        root_dir: Path
-        work_dir: Path
-        output_dir: Path
     return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir, work_dir, output_dir)
