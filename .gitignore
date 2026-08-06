@@ -67,6 +67,8 @@ db.sqlite3
 db.sqlite3-journal
 *.duckdb
 *.duckdb.wal
+# gitignore anything in a folder called 'output' which ends with .csv
+*/output/*.csv
 
 # Flask stuff:
 instance/
