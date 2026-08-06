@@ -5,6 +5,9 @@
 Activate the virtual environment with `source venv/bin/activate` on Linux or macOS, or `venv\Scripts\activate` on Windows.
 .venv should be added to .gitignore to avoid committing the virtual environment to version control.
 
+# Cleaning process
+- Some raw sheets have primary_address missing
+- Some have some columns duplicated
 ### Database
 Note that the ibis-framework package is not the same as the ibis package in PyPI. These two libraries cannot coexist in the same Python environment, as they are both imported with the ibis module name.
 
