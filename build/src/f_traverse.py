@@ -13,10 +13,9 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
 
     raw_file_dict = {}
     errors = []
+    passed_inds = ['Traversing industry directory: ']
 
     for industry_dir in dir.iterdir():
-        print(f"Traversing industry directory: {industry_dir.name}")
-        # ex: [data_dir]/01, [data_dir]/02, etc.
 
         if not industry_dir.is_dir():
             errors.append(f"Expected directory but found file: {industry_dir.name}")
@@ -26,6 +25,15 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
         if not industry_dir.name.isdigit() or len(industry_dir.name) != 2:
             errors.append(f"Expected 2-digit SIC code but found: {industry_dir.name}")
             continue
+
+        if len(passed_inds) == 1 and passed_inds[0] == 'Traversing industry directory: ':
+            passed_inds[0] = f"Traversing industry directory: {industry_dir.name}"
+        else:
+            passed_inds.append(industry_dir.name)
+        print(f"\r{', '.join(passed_inds)}", end="", flush=True)
+        if len(passed_inds) % 15 == 0 and len(passed_inds) > 0:
+            print('')
+            passed_inds = []
 
         industry = industry_dir.name
         raw_file_dict[industry] = {}
@@ -67,4 +75,20 @@ def build_raw_file_dict(dir: Path) -> dict[str, dict[str, list[str]]]:
                 f.write("Errors found:\n")
                 f.write(error + "\n")
 
+    print('')
     return raw_file_dict
+
+from flask import json
+import pandas as pd
+from f_traverse import build_raw_file_dict
+from f_dirs import get_data_dirs
+dirs = get_data_dirs()
+
+if __name__ == "__main__":
+
+    pd.options.mode.chained_assignment = None  # default='warn'
+
+    raw_file_dict = build_raw_file_dict(dirs.raw_data_dir)
+    # with open(dirs.output_dir / "raw_file_dict.json", "w") as f:
+    #     json.dump(raw_file_dict, f, indent=4)
+    print(f"✅ Successfully built raw file dictionary and saved to: {dirs.output_dir / 'raw_file_dict.json'}")

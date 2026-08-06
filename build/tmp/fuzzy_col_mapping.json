@@ -1,0 +1,149 @@
+{
+    "company_name": [
+        "Company name"
+    ],
+    "registered_number": [
+        "Registered number"
+    ],
+    "ticker_symbol": [
+        "Ticker symbol"
+    ],
+    "ro_address": [
+        "R/O Address"
+    ],
+    "ro_address_line_1": [
+        "R/O Address, line 1"
+    ],
+    "ro_address_line_2": [
+        "R/O Address, line 2"
+    ],
+    "ro_address_line_3": [
+        "R/O Address, line 3"
+    ],
+    "ro_address_line_4": [
+        "R/O Address, line 4"
+    ],
+    "ro_address_line_5": [
+        "R/O Address, line 5"
+    ],
+    "ro_city": [
+        "R/O City"
+    ],
+    "ro_county": [
+        "R/O County"
+    ],
+    "ro_postcode": [
+        "R/O Postcode"
+    ],
+    "ro_full_postcode": [
+        "R/O Full Postcode"
+    ],
+    "ro_country": [
+        "R/O Country"
+    ],
+    "ro_latitude": [
+        "R/O Latitude"
+    ],
+    "ro_longitude": [
+        "R/O Longitude"
+    ],
+    "ro_nuts_region": [
+        "R/O NUTS region"
+    ],
+    "ro_postal_region": [
+        "R/O Postal region"
+    ],
+    "ro_phone": [
+        "R/O Phone"
+    ],
+    "ro_phone_registered_on_tps": [
+        "R/O Phone registered on TPS"
+    ],
+    "ro_phone_registered_on_ctps": [
+        "R/O Phone registered on CTPS"
+    ],
+    "primary_trading_address": [
+        "Primary trading address"
+    ],
+    "primary_trading_address_latitude": [
+        "Primary trading address Latitude"
+    ],
+    "primary_trading_address_longitude": [
+        "Primary trading address Longitude"
+    ],
+    "primary_trading_address_no_of_employees": [
+        "Primary trading address No of employees"
+    ],
+    "branch_name": [
+        "Branch name"
+    ],
+    "trade_description": [
+        "Trade description"
+    ],
+    "primary_uk_sic_2007_code": [
+        "Primary UK SIC (2007) code"
+    ],
+    "primary_uk_sic_2007_description": [
+        "Primary UK SIC (2007) description"
+    ],
+    "full_overview": [
+        "Full overview"
+    ],
+    "history": [
+        "History"
+    ],
+    "primary_business_line": [
+        "Primary business line"
+    ],
+    "secondary_business_line": [
+        "Secondary business line"
+    ],
+    "main_activity": [
+        "Main activity"
+    ],
+    "secondary_activity": [
+        "Secondary activity"
+    ],
+    "main_products_and_services": [
+        "Main products and services"
+    ],
+    "size_estimate": [
+        "Size estimate"
+    ],
+    "strategy_organization_and_policy": [
+        "Strategy,  organization and policy"
+    ],
+    "strategic_alliances": [
+        "Strategic alliances"
+    ],
+    "membership_of_a_network": [
+        "Membership of a network"
+    ],
+    "main_brand_names": [
+        "Main brand names"
+    ],
+    "main_domestic_country": [
+        "Main domestic country"
+    ],
+    "main_foreign_countries_or_regions": [
+        "Main foreign countries or regions"
+    ],
+    "main_production_sites": [
+        "Main production sites"
+    ],
+    "main_distribution_sites": [
+        "Main distribution sites"
+    ],
+    "main_sales_representation_sites": [
+        "Main sales representation sites"
+    ],
+    "main_customers": [
+        "Main customers"
+    ],
+    "latest_accounts_date": [
+        "Latest accounts date"
+    ],
+    "no_of_available_years": [
+        "No of available years"
+    ]
+}
