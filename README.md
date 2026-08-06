@@ -11,5 +11,4 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 ---
 # Known bugs
 
-[] can't get the root_dir to be in the right place
-[] can't get the fame_schema to actually match what I told it
+[] creating a bunch of build/ folders everywhere

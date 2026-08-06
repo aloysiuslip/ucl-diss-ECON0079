@@ -34,9 +34,8 @@ def get_data_dirs() -> dict[str, Path]:
 
     # Load some dir paths from the current script's parent directory
     user = "lazycst"
-    # Build root dir based on the location of the current script, which is in build/src
-    root_dir = Path(__file__).parent.parent
-    print(f"Root directory: {root_dir}")
+    file_path = Path(__file__).resolve()            # the absolute path to the current script
+    root_dir = file_path.parent.parent.parent
     work_dir = root_dir / "build" / "src"
     output_dir = root_dir / "build" / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -63,3 +62,18 @@ def get_data_dirs() -> dict[str, Path]:
         work_dir: Path
         output_dir: Path
     return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir, work_dir, output_dir)
+
+# If this file is run as a script, then call the function and print the results
+if __name__ == "__main__":
+    dirs = get_data_dirs()
+
+    # Print every item in the dirs dictionary
+    # But 'DirPaths' object has no attribute 'items'
+    # Iterate over them
+    for attr in dir(dirs):
+        if attr.startswith('_'):
+            continue
+        if callable(getattr(dirs, attr)):
+            continue
+
+        print(f"{attr}: {getattr(dirs, attr)}")
