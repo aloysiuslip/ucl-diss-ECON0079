@@ -81,15 +81,16 @@ def build_raw_file_dict(dir: Path) -> RawFileDict:
     print('')
     return raw_file_dict
 
-from flask import json
 import pandas as pd
-from f_traverse import build_raw_file_dict
-from f_dirs import get_data_dirs
+from f_0_dirs import get_data_dirs
 dirs = get_data_dirs()
 
 if __name__ == "__main__":
 
-    pd.options.mode.chained_assignment = None  # default='warn'
+    pd.options.mode.chained_assignment = None
+
+    if dirs.raw_data_dir is None:
+        raise ValueError("❌ RAW_DATA_DIR environment variable is not set or is invalid. Please check your .env file.")
 
     raw_file_dict = build_raw_file_dict(dirs.raw_data_dir)
     # with open(dirs.output_dir / "raw_file_dict.json", "w") as f:
