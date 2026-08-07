@@ -158,7 +158,7 @@ def set_na_columns(columns: list[str] | set[str], df: pd.DataFrame) -> pd.DataFr
 # Excel date serials for years 2000-2030 fall roughly between 36526 and 47482
 # This is a fairly dangerous function that could distort my data
 # We apply lots of safeguards and flag any changes
-def fix_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
+def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
 
     for col in df.columns:
         if not "date" in col.lower():
@@ -166,10 +166,12 @@ def fix_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
         if not pd.api.types.is_numeric_dtype(df[col]):
             continue
 
-        valid_range = df[col].dropna().between(35000, 50000)
-        if not valid_range.all():
-            continue
+        valid_range = df[col].dropna().between(30000, 50000) # roughly between 1982 and 2037
         if len(valid_range) == 0:
+            continue
+        if not valid_range.all():
+            print(f"⚠️ Column '{col}' contains values outside the expected Excel date serial range (30000-50000) in file {ref}. Skipping conversion for this column.")
+            print(f"⚠️ Values outside range: {df[col][~valid_range].tolist()}")
             continue
 
         df[col] = pd.to_datetime(df[col], unit="D", origin="1899-12-30", errors="coerce").dt.date
@@ -180,5 +182,5 @@ def fix_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
 if __name__ == "__main__":
     # filter_df_entry(df=pd.DataFrame(), ind="01", property="a1_ID", file_ref="18_01 1")
     test_drop_duplicate_columns()
-    # test_fix_excel_dates()
+    # test_handle_excel_dates()
     # test_check_df_matches_schema()

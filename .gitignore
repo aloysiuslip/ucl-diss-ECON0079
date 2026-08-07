@@ -70,6 +70,7 @@ db.sqlite3-journal
 # gitignore anything in a folder called 'output' which ends with .csv
 */output/*.csv
 */tmp/*.csv
+*/tmp/*.xlsx
 
 # Flask stuff:
 instance/
