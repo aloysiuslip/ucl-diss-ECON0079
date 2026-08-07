@@ -1,4 +1,6 @@
 import pandas as pd
+import ibis
+from typing import Union
 
 # Set flags in the DataFrame to indicate whether data was available for certain columns.
 def set_data_av_flags(raw: pd.DataFrame, derived: pd.DataFrame
@@ -59,6 +61,71 @@ def test_set_data_av_flags():
     assert result_df4['has_ptaddress'].tolist() == [False, False, False], "Test failed for has_ptaddress flag with only latitude and longitude columns"
     assert result_df4['has_ptaddress_latlong'].tolist() == [True, True, True], "Test failed for has_ptaddress_latlong flag with only latitude and longitude columns"
     print("✅ All tests passed for set_data_av_flags function.")
+
+# --- Date processing #
+
+# Inspects an Ibis Schema (or dict mapping col->type), finds all date/timestamp fields,
+# and automatically converts numeric Excel serials (e.g. 43616.0) or string dates
+# in the DataFrame into proper Python date objects.
+def coerce_df_dates_from_schema(schema: ibis.Schema, df: pd.DataFrame) -> pd.DataFrame:
+
+    df = df.copy()
+
+    for f in schema.fields:
+        if f.col_name not in df.columns:
+            continue
+
+        if not isinstance(f.type, ibis.expr.datatypes.Date):
+            continue
+
+        series = df[f.col_name]
+
+        # Case A: Column contains numeric Excel serials (floats/ints like 43616.0)
+        if pd.api.types.is_numeric_dtype(series):
+            df[f.col_name] = pd.to_datetime(
+                series, 
+                unit="D", 
+                origin="1899-12-30", 
+                errors="coerce"
+            ).dt.date
+
+        # Case B: Column contains string representations (e.g. "2019-06-01" or "43616.0")
+        elif pd.api.types.is_object_dtype(series) or pd.api.types.is_string_dtype(series):
+            # Try numeric conversion first in case serials were read as strings (e.g., "43616.0")
+            numeric_series = pd.to_numeric(series, errors="coerce")
+            
+            if numeric_series.notna().any():
+                # Has numeric serials as strings
+                converted_dates = pd.to_datetime(
+                    numeric_series, 
+                    unit="D", 
+                    origin="1899-12-30", 
+                    errors="coerce"
+                ).dt.date   
+                
+                # Fill any non-numeric string dates (fallback parsing)
+                fallback_dates = pd.to_datetime(series, errors="coerce").dt.date
+                df[f.col_name] = converted_dates.fillna(fallback_dates)
+            else:
+                # Standard string date parsing
+                df[f.col_name] = pd.to_datetime(series, errors="coerce").dt.date#
+
+        # Case C: column is already a pandas datetime or date type, no action needed
+        elif pd.api.types.is_datetime64_any_dtype(series):
+            continue
+        elif pd.api.types.is_datetime64_dtype(series):
+            continue
+        elif pd.api.types.is_datetime64_ns_dtype(series):
+            continue
+
+        else:
+            continue
+
+        print(f"⚠️ Coerced column '{f.col_name}' to datetime based on schema type '{f.type}'")
+
+    return df
+
+# --- #
 
 if __name__ == "__main__":
 

@@ -21,3 +21,4 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 # Known bugs
 
 [] primary address and main distribution sites missing from some files, currently throws an error
+[] write tests for fix_excel_dates and test_check_df_matches_schema

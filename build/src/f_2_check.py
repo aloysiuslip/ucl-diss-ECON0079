@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 import pandas as pd
 
 def filter_df_entry(
@@ -48,7 +48,7 @@ def test_drop_duplicate_columns():
 from ibis import Schema
 
 # Given a schema and a DataFrame, check if the DataFrame matches the schema
-def check_df_matches_schema(mapping: Schema | dict[str, Any], df: pd.DataFrame, test_mode: bool = False) -> bool: # type: ignore
+def check_df_matches_schema(mapping: Union[Schema, dict[str, Any]], df: pd.DataFrame, test_mode: bool = False) -> bool:
 
     schema_names = set()
     if isinstance(mapping, Schema):
@@ -77,7 +77,25 @@ def check_df_matches_schema(mapping: Schema | dict[str, Any], df: pd.DataFrame, 
         if not test_mode:
             raise ValueError(f"❌ Column count mismatch: Expected {len(schema_names)} columns, but got {len(df_names)}")
         return False
+
+    # Check if the registered_number column is missing or has any NaN values
+    # as this is our primary key
+    if 'registered_number' not in df.columns:
+        if not test_mode:
+            raise ValueError("❌ Missing primary key column: registered_number")
+        return False
     
+    if df['registered_number'].isnull().any():
+        if not test_mode:
+            raise ValueError("❌ Primary key column 'registered_number' contains NaN values")
+        return False
+
+    # Check if the registered_number column has any duplicate values
+    if df['registered_number'].duplicated().any():
+        if not test_mode:
+            raise ValueError("❌ Primary key column 'registered_number' contains duplicate values")
+        return False
+
     return True
 
 # # Test for check_df_matches_schema based on the ibis.schema object
@@ -136,8 +154,31 @@ def set_na_columns(columns: list[str] | set[str], df: pd.DataFrame) -> pd.DataFr
         if col not in df.columns:
             df[col] = pd.NA
     return df
-    
+
+# Excel date serials for years 2000-2030 fall roughly between 36526 and 47482
+# This is a fairly dangerous function that could distort my data
+# We apply lots of safeguards and flag any changes
+def fix_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
+
+    for col in df.columns:
+        if not "date" in col.lower():
+            continue
+        if not pd.api.types.is_numeric_dtype(df[col]):
+            continue
+
+        valid_range = df[col].dropna().between(35000, 50000)
+        if not valid_range.all():
+            continue
+        if len(valid_range) == 0:
+            continue
+
+        df[col] = pd.to_datetime(df[col], unit="D", origin="1899-12-30", errors="coerce").dt.date
+        print(f"⚠️ Converted Excel date serials to datetime for column '{col}'{' in file ' + ref if ref else ''}")
+
+    return df
+
 if __name__ == "__main__":
     # filter_df_entry(df=pd.DataFrame(), ind="01", property="a1_ID", file_ref="18_01 1")
     test_drop_duplicate_columns()
+    # test_fix_excel_dates()
     # test_check_df_matches_schema()
