@@ -30,8 +30,6 @@ def set_address(raw: pd.DataFrame, derived: pd.DataFrame = pd.DataFrame(columns=
 # in the DataFrame into proper Python date objects.
 def coerce_df_dates_from_schema(schema: ibis.Schema, df: pd.DataFrame) -> pd.DataFrame:
 
-    df = df.copy()
-
     for field_name in schema.fields:
         field_type = schema.fields[field_name]
         if field_name not in df.columns:
@@ -66,21 +64,14 @@ def coerce_df_dates_from_schema(schema: ibis.Schema, df: pd.DataFrame) -> pd.Dat
                 ).dt.date   
                 
                 # Fill any non-numeric string dates (fallback parsing)
-                fallback_dates = pd.to_datetime(series, errors="coerce").dt.date
+                fallback_dates = pd.to_datetime(series, errors="coerce")
                 df[field_name] = converted_dates.fillna(fallback_dates)
             else:
                 # Standard string date parsing
-                df[field_name] = pd.to_datetime(series, errors="coerce").dt.date#
+                df[field_name] = pd.to_datetime(series, errors="coerce")
 
         # Case C: column is already a pandas datetime or date type, no action needed
         elif pd.api.types.is_datetime64_any_dtype(series):
-            continue
-        elif pd.api.types.is_datetime64_dtype(series):
-            continue
-        elif pd.api.types.is_datetime64_ns_dtype(series):
-            continue
-
-        else:
             continue
 
         print(f"⚠️ Coerced column '{field_name}' to datetime based on schema type '{field_type}'")

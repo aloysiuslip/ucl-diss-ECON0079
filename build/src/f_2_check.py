@@ -163,18 +163,23 @@ def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
     for col in df.columns:
         if not "date" in col.lower():
             continue
-        if not pd.api.types.is_numeric_dtype(df[col]):
+
+        if pd.api.types.is_datetime64_any_dtype(df[col]):
             continue
 
-        valid_range = df[col].dropna().between(30000, 50000) # roughly between 1982 and 2037
-        if len(valid_range) == 0:
-            continue
-        if not valid_range.all():
-            print(f"⚠️ Column '{col}' contains values outside the expected Excel date serial range (30000-50000) in file {ref}. Skipping conversion for this column.")
-            print(f"⚠️ Values outside range: {df[col][~valid_range].tolist()}")
+        numeric_col = pd.to_numeric(df[col], errors='coerce')
+
+        # If it's completely empty after coercion, but wasn't empty before, 
+        # it might be standard date strings (e.g., "2023-01-01"). Parse them normally.
+        if numeric_col.isna().all() and not df[col].isna().all():
+             df[col] = pd.to_datetime(df[col], errors="coerce")
+             continue
+        
+        if not pd.api.types.is_numeric_dtype(numeric_col):
             continue
 
-        df[col] = pd.to_datetime(df[col], unit="D", origin="1899-12-30", errors="coerce").dt.date
+        # Keeping it as datetime64[ns] (removing .dt.date) for Ibis/DuckDB compatibility
+        df[col] = pd.to_datetime(numeric_col, unit="D", origin="1899-12-30", errors="coerce")
         print(f"⚠️ Converted Excel date serials to datetime for column '{col}'{' in file ' + ref if ref else ''}")
 
     return df

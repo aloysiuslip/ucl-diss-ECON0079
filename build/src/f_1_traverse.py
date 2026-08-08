@@ -12,11 +12,12 @@ from pathlib import Path
 # Declare a 'RawFileDict' type for the return value of the function
 RawFileDict = dict[str, dict[str, list[str]]]
 
-def build_raw_file_dict(dir: Path) -> RawFileDict:
+def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
 
     raw_file_dict = {}
     errors = []
     passed_inds = ['Traversing industry directory: ']
+    file_paths_processed = 0
 
     for industry_dir in dir.iterdir():
 
@@ -69,6 +70,7 @@ def build_raw_file_dict(dir: Path) -> RawFileDict:
                     str(file.name),
                     str(file)
                 ])
+                file_paths_processed += 1
 
     if len(errors) > 0:
         for error in errors:
@@ -79,7 +81,7 @@ def build_raw_file_dict(dir: Path) -> RawFileDict:
                 f.write(error + "\n")
 
     print('')
-    return raw_file_dict
+    return raw_file_dict, file_paths_processed
 
 import pandas as pd
 from f_0_dirs import get_data_dirs
