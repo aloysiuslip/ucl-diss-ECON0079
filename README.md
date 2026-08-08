@@ -22,3 +22,6 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 
 [] primary address and main distribution sites missing from some files, currently throws an error
 [] write tests for handle_excel_dates and test_check_df_matches_schema
+[] process yearly variables
+[] cast and process geospatial data
+[] review Lars data processing checklist
