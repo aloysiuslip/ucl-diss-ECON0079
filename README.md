@@ -16,17 +16,28 @@ Activate the virtual environment with `source venv/bin/activate` on Linux or mac
 
 ### Database
 Note that the ibis-framework package is not the same as the ibis package in PyPI. These two libraries cannot coexist in the same Python environment, as they are both imported with the ibis module name.
+- We engineer the loop to load first, and then write on each batch transforming with panda.
+- This is done so transformations are done in RAM with one I/O per industry.
+- This means less I/O writes to stop the hard drive being the bottleneck
 
 ---
-# Known bugs
+### FIX known bugs
 
 [] primary address and main distribution sites missing from some files, currently throws an error
-[] write tests for handle_excel_dates and test_check_df_matches_schema
-[] process yearly variables
+[] 
+[] Warning: ❌ Extra columns in DataFrame: {'file_code', 'industry_code'}
+❌ Error processing folder 01
+❌ Pipeline failed: IbisTypeError - Arguments registered_number:unknown and registered_number:string are not comparable
+
+### TODO
+[] Unpivot yearly variables
 [] cast and process geospatial data
 [] review Lars data processing checklist
 
-# TODO: loop improvements
+### Tests to write
+[] handle_excel_dates
+[] test_check_df_matches_schema
+
 
 1. Write to database batch processing.
 DuckDB is columnar and built for analytical bulk operations. You should never update it row-by-row or file-by-file.

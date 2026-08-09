@@ -1,6 +1,6 @@
 import pandas as pd
 import ibis
-from typing import Union
+from typing import Any, Union
 
 
 # def set_address with raw and derived dataframes parameters
@@ -30,8 +30,8 @@ def set_address(raw: pd.DataFrame, derived: pd.DataFrame = pd.DataFrame(columns=
 # in the DataFrame into proper Python date objects.
 def coerce_df_dates_from_schema(schema: ibis.Schema, df: pd.DataFrame) -> pd.DataFrame:
 
-    for field_name in schema.fields:
-        field_type = schema.fields[field_name]
+    for field_name, field_type in schema.fields.items():
+
         if field_name not in df.columns:
             continue
 
@@ -77,5 +77,54 @@ def coerce_df_dates_from_schema(schema: ibis.Schema, df: pd.DataFrame) -> pd.Dat
         print(f"⚠️ Coerced column '{field_name}' to datetime based on schema type '{field_type}'")
 
     return df
+
+# Finds date fields in the schema and attempts to parse them natively in Ibis.
+# Handles both standard date strings and Excel numeric serials.
+def coerce_ibis_dates_from_schema(schema: ibis.Schema, table: ibis.expr.types.Table) -> ibis.expr.types.Table:
+
+    mutations = {}
+    
+    for field_name, field_type in schema.items():
+        if field_name not in table.columns:
+            continue
+            
+        if not isinstance(field_type, ibis.expr.datatypes.Date):
+            continue
+            
+        col = table[field_name]
+        
+        # 1. Standard Cast: Tries to parse strings (e.g., '2019-06-01') or existing datetimes
+        standard_cast = col.try_cast(field_type)
+        
+        # 2. Excel Math: Tries to cast to integer and add to the 1899-12-30 epoch
+        # (If the data is a standard string, try_cast('int32') gracefully returns NULL)
+        excel_math = (
+            ibis.date('1899-12-30') + (ibis.interval(days=1) * col.try_cast('int32'))
+        ).cast(field_type)
+        
+        # 3. Coalesce: Take the standard cast. If it failed, take the Excel math.
+        mutations[field_name] = ibis.coalesce(standard_cast, excel_math)
+        
+    # Apply the date conversions (if any) and return the table
+    if mutations:
+        return table.mutate(**mutations)
+    return table
+
+
+# Mimics pd.DataFrame.reindex(). 
+# Filters to schema columns, adds missing columns as typed NULLs, and sets the order.
+# .select() accepts a dictionary, applying our rules and ordering simultaneously
+def reindex_ibis_table(schema: ibis.Schema, table: ibis.expr.types.Table, fill_value: Any = ibis.null()) -> ibis.expr.types.Table:
+   
+    projection: dict[str, ibis.expr.types.Value] = {}
+    for col_name, col_type in schema.items():
+        if col_name in table.columns:
+            # Column exists, just pass it through
+            projection[col_name] = table[col_name]
+        else:
+            # Column is missing, generate a virtual NULL with the exact DuckDB type
+            projection[col_name] = fill_value.cast(col_type) # type: ignore   
+    
+    return table.select(**projection)
 
 # --- #

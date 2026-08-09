@@ -48,13 +48,13 @@ def test_drop_duplicate_columns():
 from ibis import Schema
 
 # Given a schema and a DataFrame, check if the DataFrame matches the schema
-def check_df_matches_schema(mapping: Union[Schema, dict[str, Any]], df: pd.DataFrame, test_mode: bool = False) -> bool:
+def check_df_matches_schema(mapping: Union[Schema, pd.DataFrame], df: pd.DataFrame, test_mode: bool = False) -> bool:
 
     schema_names = set()
     if isinstance(mapping, Schema):
         schema_names = set(mapping.keys())
-    elif isinstance(mapping, dict):
-        schema_names = set(mapping.keys())
+    elif isinstance(mapping, pd.DataFrame):
+        schema_names = set(mapping["key"].tolist())
     else:
         raise ValueError("Mapping must be an ibis Schema or a dictionary.")
     df_names = set(df.columns)
@@ -98,54 +98,6 @@ def check_df_matches_schema(mapping: Union[Schema, dict[str, Any]], df: pd.DataF
 
     return True
 
-# # Test for check_df_matches_schema based on the ibis.schema object
-# # don't use the fuzzy_col_by_index object because it doesn't contain all the columns of the schema
-# def test_check_df_matches_schema():
-
-#     # Hardcode a test for all the column names in the scheme in a dataframe and check that the function returns True
-#     hard_names = [
-#         "company_name", "registered_number", "ticker_symbol", "ro_address", "ro_address_line_1", "ro_address_line_2", "ro_address_line_3",
-#         "ro_address_line_4", "ro_address_line_5", "ro_city", "ro_county", "ro_postcode", "ro_full_postcode", "ro_country", "ro_latitude", "ro_longitude",
-#         "ro_nuts_region", "ro_postal_region", "ro_phone", "ro_phone_registered_on_tps", "ro_phone_registered_on_ctps", "primary_trading_address", "primary_trading_address_latitude",
-#         "primary_trading_address_longitude", "primary_trading_address_no_of_employees", "branch_name", "trade_description", "primary_uk_sic_2007_code",
-#         "primary_uk_sic_2007_description", "full_overview", "history", "primary_business_line", "secondary_business_line", "main_activity", "secondary_activity",
-#         "main_products_and_services", "size_estimate", "strategy_organization_and_policy", "strategic_alliances", "membership_of_a_network", "main_brand_names",
-#         "main_domestic_country", "main_foreign_countries_or_regions", "main_production_sites", "main_distribution_sites", "main_sales_representation_sites", "main_customers",
-#         "latest_accounts_date", "no_of_available_years"
-#     ]
-
-#     test_mapping_dict = {col: "foobar" for col in hard_names}
-
-#     # Create a DataFrame with correct column names
-#     correct_df = pd.DataFrame(columns=list(schema_fixed_ibis.keys()))
-#     assert check_df_matches_schema(test_mapping_dict, correct_df) == True, "Test failed for DataFrame with correct schema"
-    
-#     # Create a DataFrame with missing columns
-#     incorrect_df_missing = pd.DataFrame(columns=list(schema_fixed_ibis.keys())[:-1])  # Remove last column
-#     assert check_df_matches_schema(incorrect_df_missing, test_mode=True) == False, "Test failed for DataFrame with missing columns"
-    
-#     # Create a DataFrame with extra columns
-#     incorrect_df_extra = pd.DataFrame(columns=list(schema_fixed_ibis.keys()) + ["extra_column"])
-#     assert check_df_matches_schema(incorrect_df_extra, test_mode=True) == False, "Test failed for DataFrame with extra columns"
-    
-#     # Create a DataFrame with incorrect column count (fewer columns)
-#     incorrect_df_count = pd.DataFrame(columns=[col for col in list(schema_fixed_ibis.keys())[:-1]])  # Remove last column
-#     assert check_df_matches_schema(incorrect_df_count, test_mode=True) == False, "Test failed for DataFrame with incorrect column count"
-
-
-#     hardcoded_df = pd.DataFrame(columns=hard_names)
-#     assert check_df_matches_schema(hardcoded_df) == True, "Test failed for hardcoded DataFrame with correct schema"
-
-#     hard_names2 = hard_names + ["extra_column"]
-#     hardcoded_df2 = pd.DataFrame(columns=hard_names2)
-#     assert check_df_matches_schema(hardcoded_df2, test_mode=True) == False, "Test should have rejected hardcoded DataFrame with extra column"
-
-#     hard_names3 = hard_names[:-1]
-#     hardcoded_df3 = pd.DataFrame(columns=hard_names3)
-#     assert check_df_matches_schema(hardcoded_df3, test_mode=True) == False, "Test failed for hardcoded DataFrame with missing column"
-
-#     print("✅ All tests passed for check_df_matches_schema.")
-
 # Given a list of column names and a DataFrame, add any missing columns to the DataFrame with NaN values
 def set_na_columns(columns: list[str] | set[str], df: pd.DataFrame) -> pd.DataFrame:
     if isinstance(columns, set):
@@ -164,7 +116,13 @@ def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
         if not "date" in col.lower():
             continue
 
+        if col.lower().startswith("consolidated"):
+            continue
+
         if pd.api.types.is_datetime64_any_dtype(df[col]):
+            continue
+
+        if not (pd.api.types.is_numeric_dtype(df[col]) or pd.api.types.is_string_dtype(df[col])):
             continue
 
         numeric_col = pd.to_numeric(df[col], errors='coerce')
@@ -183,6 +141,50 @@ def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
         print(f"⚠️ Converted Excel date serials to datetime for column '{col}'{' in file ' + ref if ref else ''}")
 
     return df
+
+def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: str, start_year: int, end_year: int, ref: str = "") -> pd.DataFrame:
+
+    if property in ["a1_ID", "a5_misc"]:
+        df.rename(columns=fuzzy_map, inplace=True)           # Rename according to our mapping
+        return df
+    
+    # For yearly properties, we need to take each column name
+    # If it matches a fuzzy mapping in the schema (no modifications)
+    # Then just do a simple rename with shcmea_raw_fuzzy_col_map
+    # If it doesn't match, we need to check if it has a year in the name
+    # If it does, extract the year (last 4 digits), trim whitespace off the remainder
+    # Then check if the remainder matches a fuzzy mapping in the schema
+    # If it does, rename the column to the schema name using schema_raw_fuzzy_col_map
+    # And reappend _[year] to the schema name, ex: consolidated_2019
+    # We will process the years later via pivots
+    elif property in ["a2_key_finance", "a3_assets", "a4_profits"]:
+        
+        df_raw_renamed = {}
+        for col in df.columns:
+
+            if col in fuzzy_map:
+                df_raw_renamed[col] = fuzzy_map[col]
+                continue
+            if len(col) < 4:
+                continue
+            if not col[-4:].isdigit():
+                continue
+
+            year = int(col[-4:])
+            if year < start_year or year > end_year:
+                raise ValueError(f"❌ Error: Column name '{col}' has year {year} outside of range {start_year}-{end_year}")
+            base_col_name = col[:-4].strip().replace('\n', '')  # Remove the year and trim whitespace
+            if base_col_name not in fuzzy_map:
+                raise ValueError(f"❌ Error: Column name '{col}' base name '{base_col_name}' not found in schema mapping")
+
+            new_col_name = f"{fuzzy_map[base_col_name]}_{year}"
+            df_raw_renamed[col] = new_col_name
+        # print(f"--- Created column mapping for file {ref} which are: {df_raw_renamed}")
+        df.rename(columns=df_raw_renamed, inplace=True)
+        return df
+
+    else:
+        raise ValueError(f"❌ Error: Property '{property}' not recognized for renaming columns. Ref: {ref}")
 
 if __name__ == "__main__":
     # filter_df_entry(df=pd.DataFrame(), ind="01", property="a1_ID", file_ref="18_01 1")
