@@ -1,44 +1,8 @@
 # Tables in DuckDB database
 
-## fame_derived
-
-### Number of rows: 1,163,133
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number            string
-  has_ptaddress                boolean
-  has_ptaddress_latlong        boolean
-  is_public                    boolean
-  has_company_branch_mismatch  boolean
-  industry_codes               string
-  file_codes                   string
-}
-```
-
-### Head of table:
-
-```
-  registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
-0          11215576           True                   True      False   
-1          11215628           True                   True      False   
-2          11215660           True                  False      False   
-3          11215674           True                  False      False   
-4          11215683           True                  False      False   
-
-   has_company_branch_mismatch industry_codes file_codes  
-0                        False             68    13_23 1  
-1                        False             68    13_23 1  
-2                        False             68    13_23 1  
-3                        False             68    13_23 1  
-4                        False             68    13_23 1  
-```
-
 ## fame_fixed
 
-### Number of rows: 1,163,133
+### Number of rows: 111,911
 
 ### Schema:
 
@@ -79,68 +43,104 @@ ibis.Schema {
 ### Head of table:
 
 ```
-                company_name registered_number ticker_symbol  \
-0  MANTEQ PROPERTIES LIMITED          11215576           NaN   
-1                 ODIIBO LTD          11215628           NaN   
-2           TRIANGOL LIMITED          11215660           NaN   
-3           DULCE DOMUM LTD.          11215674           NaN   
-4       B4M PROPERTY LIMITED          11215683           NaN   
+                    company_name registered_number ticker_symbol  \
+0        W.& R. BARNETT, LIMITED          NI000166           NaN   
+1   FRONTIER AGRICULTURE LIMITED          05288567           NaN   
+2         HOOK 2 SISTERS LIMITED          05969169           NaN   
+3  OPENFIELD AGRICULTURE LIMITED          03548572           NaN   
+4    MCCAIN FOODS (G.B.) LIMITED          00733218           NaN   
 
-                                          ro_address       ro_address_line_1  \
-0  21 Wilmer Close, Kingston Upon Thames, Surrey,...         21 Wilmer Close   
-1            221 Corporation Street, London, E15 3DL  221 Corporation Street   
-2                      158 Horn Lane, London, W3 6PH           158 Horn Lane   
-3  Unit 3 Ambrose House, Meteor Court, Barnett Wa...    Unit 3 Ambrose House   
-4      80 Uplands, Stevenage, Hertfordshire, SG2 7DW              80 Uplands   
+                                          ro_address  \
+0  Clarendon House, 23 Clarendon Road, Belfast, C...   
+1  Group Secretarial Department, 10 Grosvenor Str...   
+2               Cote, Bampton, Oxfordshire, OX18 2EG   
+3  Honey Pot Lane, Colsterworth, Grantham, Lincol...   
+4  Havers Hill, Eastfield, Scarborough, North Yor...   
 
-                  ro_address_line_2 ro_address_line_3 ro_address_line_4  \
-0                               NaN               NaN               NaN   
-1                               NaN               NaN               NaN   
-2                               NaN               NaN               NaN   
-3  Meteor Court, Barnett Way, Barnw               NaN               NaN   
-4                               NaN               NaN               NaN   
+              ro_address_line_1    ro_address_line_2 ro_address_line_3  \
+0               Clarendon House    23 Clarendon Road               NaN   
+1  Group Secretarial Department  10 Grosvenor Street               NaN   
+2                          Cote                  NaN               NaN   
+3                Honey Pot Lane         Colsterworth               NaN   
+4                   Havers Hill            Eastfield               NaN   
 
-  ro_address_line_5               ro_city  ...  \
-0               NaN  Kingston Upon Thames  ...   
-1               NaN                London  ...   
-2               NaN                London  ...   
-3               NaN            Gloucester  ...   
-4               NaN             Stevenage  ...   
+  ro_address_line_4 ro_address_line_5      ro_city  ...  \
+0               NaN               NaN      Belfast  ...   
+1               NaN               NaN       London  ...   
+2               NaN               NaN      Bampton  ...   
+3               NaN               NaN     Grantham  ...   
+4               NaN               NaN  Scarborough  ...   
 
   primary_trading_address_latitude primary_trading_address_longitude  \
-0                  51° 25' 38.0" N                    0° 17' 25.5" W   
-1                  51° 31' 32.6" N                     0° 0' 17.4" E   
+0                  54° 36' 24.3" N                    5° 55' 13.8" W   
+1                              NaN                               NaN   
 2                              NaN                               NaN   
-3                              NaN                               NaN   
-4                              NaN                               NaN   
+3                  52° 47' 16.0" N                    0° 35' 25.2" W   
+4                  54° 14' 19.3" N                    0° 23' 26.7" W   
 
-                 branch_name primary_uk_sic_2007_code  \
-0  MANTEQ PROPERTIES LIMITED                    68100   
-1                 ODIIBO LTD                    47820   
-2           TRIANGOL LIMITED                    68209   
-3           DULCE DOMUM LTD.                    68209   
-4       B4M PROPERTY LIMITED                    68100   
+                     branch_name primary_uk_sic_2007_code  \
+0        W.& R. BARNETT, LIMITED                     1430   
+1   FRONTIER AGRICULTURE LIMITED                     1610   
+2         HOOK 2 SISTERS LIMITED                     1470   
+3  OPENFIELD AGRICULTURE LIMITED                     1630   
+4    MCCAIN FOODS (G.B.) LIMITED                    10390   
 
                      primary_uk_sic_2007_description latest_accounts_date  \
-0              Buying and selling of own real estate           2024-03-31   
-1  Retail sale via stalls and markets of textiles...           2023-02-28   
-2  Letting and operating of own or leased real es...           2024-02-28   
-3  Letting and operating of own or leased real es...           2024-02-28   
-4              Buying and selling of own real estate           2024-03-31   
+0                Raising of horses and other equines           2023-07-31   
+1             Support activities for crop production           2024-06-26   
+2                                 Raising of poultry           2023-07-31   
+3                       Post-harvest crop activities           2023-06-30   
+4  Other processing and preserving of fruit and v...           2023-06-30   
 
-  no_of_available_years                     guo guo_nb       entity_type  
-0                     6  MR MATTHEW SUI HUI MAN      2  Controlled subs.  
-1                     5      MR MAHFUZUR RAHMAN      3  Controlled subs.  
-2                     6                     NaN      0    Independent co  
-3                     6                     NaN      0   Single location  
-4                     6    B4M PROPERTY LIMITED      2               GUO  
+  no_of_available_years                           guo guo_nb       entity_type  
+0                    20  W&R BARNETT HOLDINGS LIMITED     62  Controlled subs.  
+1                    20  FRONTIER AGRICULTURE LIMITED     20               GUO  
+2                    17                           NaN      0    Independent co  
+3                    20       OPENFIELD GROUP LIMITED      7  Controlled subs.  
+4                    20       MCCAIN FOODS GROUP INC.    176  Controlled subs.  
 
 [5 rows x 29 columns]
 ```
 
+## fame_derived
+
+### Number of rows: 111,911
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number            string
+  has_ptaddress                boolean
+  has_ptaddress_latlong        boolean
+  is_public                    boolean
+  has_company_branch_mismatch  boolean
+  industry_codes               string
+  file_codes                   string
+}
+```
+
+### Head of table:
+
+```
+  registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
+0          NI000166           True                   True      False   
+1          05288567          False                  False      False   
+2          05969169           True                  False      False   
+3          03548572           True                   True      False   
+4          00733218           True                   True      False   
+
+   has_company_branch_mismatch industry_codes file_codes  
+0                        False             01      12_31  
+1                        False             01      12_31  
+2                        False             01      12_31  
+3                        False             01      12_31  
+4                        False             01      12_31  
+```
+
 ## fame_yearly
 
-### Number of rows: 4,812,011
+### Number of rows: 1,355,849
 
 ### Schema:
 
@@ -178,39 +178,39 @@ ibis.Schema {
 
 ```
   registered_number  year consolidated  turnover  shareholders_funds  \
-0          13193125  2024         None    95.659              24.699   
-1          03040581  2024         None       NaN            1803.134   
-2          03636759  2024         None       NaN               0.506   
-3          05153984  2024         None       NaN             -11.221   
-4          05703262  2024         None       NaN             226.379   
+0          03386933  2023         None       NaN                 NaN   
+1          03386933  2015         None       NaN                 NaN   
+2          03386933  2010         None       NaN                 NaN   
+3          03404547  2014         None       NaN                 NaN   
+4          03404547  2018         None       NaN                 NaN   
 
-   profit_loss_pretax  employees  tangibles  tangibles_land_and_buildings  \
-0              29.537          1     24.000                           NaN   
-1                 NaN         15    122.767                           NaN   
-2                 NaN          3      0.001                           NaN   
-3                 NaN          4      4.092                           NaN   
-4                 NaN          6    604.873                           NaN   
+   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
+0                 NaN      None        NaN                           NaN   
+1                 NaN      None        NaN                           NaN   
+2                 NaN      None        NaN                           NaN   
+3                 NaN      None        NaN                           NaN   
+4                 NaN      None        NaN                           NaN   
 
-   tangibles_land_freehold  ...  total_assets  liabilites_lt  cos  dividends  \
-0                      NaN  ...        24.699            NaN  NaN        NaN   
-1                      NaN  ...      2132.693        -30.399  NaN        NaN   
-2                      NaN  ...        20.933            NaN  NaN        NaN   
-3                      NaN  ...        73.232        -33.470  NaN        NaN   
-4                      NaN  ...      1055.096            NaN  NaN        NaN   
+   tangibles_land_freehold  ...  total_assets  liabilites_lt      cos  \
+0                      NaN  ...           NaN            NaN      NaN   
+1                      NaN  ...           NaN            NaN      NaN   
+2                      NaN  ...           NaN            NaN      NaN   
+3                      NaN  ...           NaN            NaN -150.632   
+4                      NaN  ...           NaN            NaN      NaN   
 
-   r_and_d  remuneration_employees  wages  social_security_costs  \
-0      NaN                     NaN    NaN                    NaN   
-1      NaN                     NaN    NaN                    NaN   
-2      NaN                     NaN    NaN                    NaN   
-3      NaN                     NaN    NaN                    NaN   
-4      NaN                     NaN    NaN                    NaN   
+   dividends  r_and_d  remuneration_employees  wages  social_security_costs  \
+0        NaN      NaN                     NaN    NaN                    NaN   
+1        NaN      NaN                     NaN    NaN                    NaN   
+2        NaN      NaN                     NaN    NaN                    NaN   
+3        NaN      NaN                     NaN    NaN                    NaN   
+4        NaN      NaN                     NaN    NaN                    NaN   
 
    pensions_costs  ebitda  
-0             NaN  29.537  
-1             NaN     NaN  
-2             NaN     NaN  
-3             NaN     NaN  
-4             NaN     NaN  
+0             NaN   0.073  
+1             NaN   0.043  
+2             NaN  -0.075  
+3             NaN  45.770  
+4             NaN  40.944  
 
 [5 rows x 25 columns]
 ```

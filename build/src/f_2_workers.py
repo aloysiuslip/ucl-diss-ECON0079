@@ -1,5 +1,8 @@
 import pandas as pd
+from f_0_dirs import get_data_dirs
 from f_2_check import drop_duplicate_columns, rename_df_with_years
+
+dirs = get_data_dirs()
 
 # INGEST
 # Worker function to process a single Excel file in an isolated CPU process.
@@ -9,9 +12,10 @@ def ingest_single_excel_file(args):
     
     try:
         # LOAD
+        fame_na_strings = ["n.a.", "n.a", "N.A.", "N.A", "n/a", "N/A", "-", ""]
         df_raw = pd.read_excel(file_path, engine='calamine', sheet_name='Results', header=0, dtype={
             "Registered number": str            # "Leading Zeros" Trap
-        })
+        }, na_values=fame_na_strings, keep_default_na=True)
         df_raw.drop(df_raw.columns[0], axis=1, inplace=True)
         df_raw = drop_duplicate_columns(df_raw)
         
@@ -36,5 +40,10 @@ def ingest_single_excel_file(args):
         return df_raw2
         
     except Exception as e:
-        print(f"⚠️ Worker Error on file {file_name}: {e}")
+        # This is run as a worker so we need better error logging than just printing the exception.
+        # Write to outdir errors.log file
+        with open(dirs.output_dir / "errors.log", "a") as f:
+            # Encode the error to avoid 'charmap' codec can't encode issues
+            f.write(f"Error processing file {file_name} for property {property_name}")
+            f.write(f"{str(e).encode('utf-8', 'replace').decode('utf-8')}\n")
         return None  # Return None on failure to filter out later

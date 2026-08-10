@@ -1,5 +1,6 @@
 from typing import Any, Union
 import pandas as pd
+from pygments.unistring import So
 from sqlglot import case
 
 #---- Columns ---#
@@ -134,26 +135,32 @@ def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
 # If 'may_mix' is False, ignore the column
 # otherwise, check the column in the df, and ensure that it is the value specified in the 'type' column of the schema
 def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
-    
-    for _, row in schema.iterrows():
+
+    # Filter the rows of the schema dataframe where 'may_mix' is True and the 'key' is in the df columns
+    rows_mixed_types = schema[
+        (schema["may_mix"] == True) &
+        (schema["key"].isin(df.columns))
+    ]
+
+    for _, row in rows_mixed_types.iterrows():
         col_name = row["key"]
-        may_mix = row.get("may_mix", False)
         expected_type = row["type"]
 
-        if not may_mix:
-            continue
-
-        if col_name not in df.columns:
-            continue
-
         actual_type = df[col_name].dtype
+        if actual_type == expected_type:
+            continue
+        if actual_type == "str" and expected_type == "string":
+            continue
+
+        # print(f"--- Matching column '{col_name}' in file '{ref}' with actual type '{actual_type}' to expected type '{expected_type}'")
 
         match expected_type:
-
             case 'int64':
                 match actual_type:
                     case 'int64':
                         continue
+                    case 'float64':
+                        df[col_name] = df[col_name].astype('Int64')
                     case 'str':
                         df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('Int64')
                     case 'object':
@@ -176,18 +183,25 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
 
             case 'boolean':
                 match actual_type:
-
-                    # This is the case for consolidated property where values are
-                    # 'Consolidated', 'Unconsolidated', or na. We should reflect that trivalent logic
                     case 'string':
-                        df[col_name] = df[col_name].str.lower().str.trim().map({
+                        df[col_name] = df[col_name].str.lower().str.strip().map({
                             'consolidated': True,
                             'unconsolidated': False
                         }).astype('boolean')
                     case 'bool':
                         df[col_name] = df[col_name].astype('boolean')
                     case 'object':
-                        df[col_name] = df[col_name].astype('boolean')
+                        # String methods has no attribute 'trim'
+                        df[col_name] = df[col_name].astype(str).str.lower().str.strip().map({
+                            'consolidated': True,
+                            'unconsolidated': False
+                        }).astype('boolean')
+                    case 'float64':
+                        # column is 1, 0, or NaN. Convert to boolean
+                        df[col_name] = df[col_name].map({
+                            1.0: True,
+                            0.0: False
+                        }).astype('boolean')
                     case _:
                         raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'boolean'")
 
@@ -199,11 +213,21 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
 
     return df
 
+# Rename columns of raw df to standardise it
+# We've modified this to make the fuzzy_map as comprehensive as possible
+# To reduce computations in this loop
 def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: str, start_year: int, end_year: int, delimiter: str="@", ref: str = "") -> pd.DataFrame:
 
+    unrecognised_columns = df.columns[~df.columns.isin(fuzzy_map.keys())]
+    if len(unrecognised_columns) > 0:
+        print(f"⚠️ Unrecognised columns in file '{ref}': {unrecognised_columns}")
+        print(f"Fuzzy map keys: {list(fuzzy_map.keys())}")
+    df.rename(columns=fuzzy_map, inplace=True)                 # Rename according to our mapping
     if property in ["a1_ID", "a5_misc"]:
-        df.rename(columns=fuzzy_map, inplace=True)           # Rename according to our mapping
         return df
+
+    if property not in ["a2_key_finance", "a3_assets", "a4_profits"]:
+        raise ValueError(f"❌ Error: Unknown property '{property}'. Ref: {ref}")
     
     # For yearly properties, we need to take each column name
     # If it matches a fuzzy mapping in the schema (no modifications)
@@ -214,34 +238,29 @@ def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: 
     # If it does, rename the column to the schema name using schema_raw_fuzzy_col_map
     # And reappend _[year] to the schema name, ex: consolidated_2019
     # We will process the years later via pivots
-    elif property in ["a2_key_finance", "a3_assets", "a4_profits"]:
-        
-        df_raw_renamed = {}
-        for col in df.columns:
 
-            if col in fuzzy_map:
-                df_raw_renamed[col] = fuzzy_map[col]
-                continue
-            if len(col) < 4:
-                continue
-            if not col[-4:].isdigit():
-                continue
 
-            year = int(col[-4:])
-            if year < start_year or year > end_year:
-                raise ValueError(f"❌ Error: Column name '{col}' has year {year} outside of range {start_year}-{end_year}")
-            base_col_name = col[:-4].strip().replace('\n', '')  # Remove the year and trim whitespace
-            if base_col_name not in fuzzy_map:
-                raise ValueError(f"❌ Error: Column name '{col}' base name '{base_col_name}' not found in schema mapping")
+    build_new_col_map = {}
+    for col in unrecognised_columns:
 
-            new_col_name = f"{fuzzy_map[base_col_name]}{delimiter}{year}"
-            df_raw_renamed[col] = new_col_name
-        # print(f"--- Created column mapping for file {ref} which are: {df_raw_renamed}")
-        df.rename(columns=df_raw_renamed, inplace=True)
-        return df
+        if len(col) < 4:
+            continue
+        if not col[-4:].isdigit():
+            continue
+    
+        year = int(col[-4:])
+        if year < start_year or year > end_year:
+            raise ValueError(f"❌ Error: Column name '{col}' has year {year} outside of range {start_year}-{end_year}")
+        base_col_name = col[:-4].strip().replace('\n', '')  # Remove the year and trim whitespace
+        if base_col_name not in fuzzy_map:
+            raise ValueError(f"❌ Error: Column name '{col}' base name '{base_col_name}' not found in schema mapping")
 
-    else:
-        raise ValueError(f"❌ Error: Property '{property}' not recognized for renaming columns. Ref: {ref}")
+        new_col_name = f"{fuzzy_map[base_col_name]}{delimiter}{year}"
+        build_new_col_map[col] = new_col_name
+
+    print(f"--- Created column mapping for file {ref} which are: {build_new_col_map}")
+    df.rename(columns=build_new_col_map, inplace=True)
+    return df
 
 if __name__ == "__main__":
     # filter_df_entry(df=pd.DataFrame(), ind="01", property="a1_ID", file_ref="18_01 1")

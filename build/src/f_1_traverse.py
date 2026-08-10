@@ -70,18 +70,16 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, dict[str, dict[str, int
 
                 # Store the file path in the dictionary
                 raw_file_dict[industry][property].append([
-                    str(file.name),
+                    file.name,
                     str(file)
                 ])
                 file_paths_processed += 1
                 file_count[industry][property] = file_count[industry][property] + 1
 
     if len(errors) > 0:
-        for error in errors:
-            # Error file is this script's parent directory /output/traverse_errors.txt
-            error_file = Path(__file__).parent.parent / "output" / "traverse_errors.txt"
-            with open(error_file, "w") as f:
-                f.write("Errors found:\n")
+        error_file = dirs.output_dir / "errors.log"
+        with open(error_file, "a") as f:
+            for error in errors:
                 f.write(error + "\n")
 
     print('')
