@@ -42,7 +42,7 @@ def ingest_single_excel_file(args):
     except Exception as e:
         # This is run as a worker so we need better error logging than just printing the exception.
         # Write to outdir errors.log file
-        with open(dirs.output_dir / "errors.log", "a") as f:
+        with open(dirs.root_dir / "build" / "logs" / "errors.log", "a") as f:
             # Encode the error to avoid 'charmap' codec can't encode issues
             f.write(f"Error processing file {file_name} for property {property_name}")
             f.write(f"{str(e).encode('utf-8', 'replace').decode('utf-8')}\n")

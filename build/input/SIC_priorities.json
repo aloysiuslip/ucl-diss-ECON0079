@@ -1,0 +1,242 @@
+[
+    {
+        "Division": "62",
+        "Score": 10,
+        "Description": "Computer programming, consultancy and related activities",
+        "File_Count": 714,
+        "Files Count": {
+            "a1_ID": 42,
+            "a2_key_finance": 94,
+            "a3_assets": 278,
+            "a4_profits": 281,
+            "a5_misc": 19,
+            "total": 714
+        }
+    },
+    {
+        "Division": "63",
+        "Score": 10,
+        "Description": "Computing infrastructure, data processing, hosting and other information service activities",
+        "File_Count": 134,
+        "Files Count": {
+            "a1_ID": 8,
+            "a2_key_finance": 18,
+            "a3_assets": 52,
+            "a4_profits": 52,
+            "a5_misc": 4,
+            "total": 134
+        }
+    },
+    {
+        "Division": "70",
+        "Score": 10,
+        "Description": "Activities of head offices and management consultancy",
+        "File_Count": 705,
+        "Files Count": {
+            "a1_ID": 42,
+            "a2_key_finance": 92,
+            "a3_assets": 275,
+            "a4_profits": 277,
+            "a5_misc": 19,
+            "total": 705
+        },
+        "Errored": true
+    },
+    {
+        "Division": "72",
+        "Score": 10,
+        "Description": "Scientific research and development",
+        "File_Count": 43,
+        "Files Count": {
+            "a1_ID": 3,
+            "a2_key_finance": 6,
+            "a3_assets": 16,
+            "a4_profits": 16,
+            "a5_misc": 2,
+            "total": 43
+        }
+    },
+    {
+        "Division": "64",
+        "Score": 9,
+        "Description": "Financial service activities, except insurance and pension funding",
+        "File_Count": 287,
+        "Files Count": {
+            "a1_ID": 17,
+            "a2_key_finance": 38,
+            "a3_assets": 112,
+            "a4_profits": 112,
+            "a5_misc": 8,
+            "total": 287
+        }
+    },
+    {
+        "Division": "65",
+        "Score": 9,
+        "Description": "Insurance, reinsurance and pension funding, except compulsory social security",
+        "File_Count": 22,
+        "Files Count": {
+            "a1_ID": 2,
+            "a2_key_finance": 3,
+            "a3_assets": 8,
+            "a4_profits": 8,
+            "a5_misc": 1,
+            "total": 22
+        }
+    },
+    {
+        "Division": "66",
+        "Score": 9,
+        "Description": "Activities auxiliary to financial services and insurance activities",
+        "File_Count": 83,
+        "Files Count": {
+            "a1_ID": 5,
+            "a2_key_finance": 11,
+            "a3_assets": 32,
+            "a4_profits": 32,
+            "a5_misc": 3,
+            "total": 83
+        }
+    },
+    {
+        "Division": "69",
+        "Score": 9,
+        "Description": "Legal and accounting activities",
+        "File_Count": 178,
+        "Files Count": {
+            "a1_ID": 11,
+            "a2_key_finance": 24,
+            "a3_assets": 69,
+            "a4_profits": 69,
+            "a5_misc": 5,
+            "total": 178
+        }
+    },
+    {
+        "Division": "71",
+        "Score": 9,
+        "Description": "Architectural and engineering activities; technical testing and analysis",
+        "File_Count": 223,
+        "Files Count": {
+            "a1_ID": 14,
+            "a2_key_finance": 29,
+            "a3_assets": 87,
+            "a4_profits": 87,
+            "a5_misc": 6,
+            "total": 223
+        }
+    },
+    {
+        "Division": "58",
+        "Score": 8,
+        "Description": "Publishing activities",
+        "File_Count": 162,
+        "Files Count": {
+            "a1_ID": 10,
+            "a2_key_finance": 21,
+            "a3_assets": 63,
+            "a4_profits": 63,
+            "a5_misc": 5,
+            "total": 162
+        }
+    },
+    {
+        "Division": "61",
+        "Score": 8,
+        "Description": "Telecommunication",
+        "File_Count": 59,
+        "Files Count": {
+            "a1_ID": 4,
+            "a2_key_finance": 7,
+            "a3_assets": 23,
+            "a4_profits": 23,
+            "a5_misc": 2,
+            "total": 59
+        }
+    },
+    {
+        "Division": "73",
+        "Score": 8,
+        "Description": "Activities of advertising, market research and public relations",
+        "File_Count": 137,
+        "Files Count": {
+            "a1_ID": 8,
+            "a2_key_finance": 18,
+            "a3_assets": 53,
+            "a4_profits": 54,
+            "a5_misc": 4,
+            "total": 137
+        }
+    },
+    {
+        "Division": "74",
+        "Score": 8,
+        "Description": "Other professional, scientific and technical activities",
+        "File_Count": 305,
+        "Files Count": {
+            "a1_ID": 17,
+            "a2_key_finance": 40,
+            "a3_assets": 121,
+            "a4_profits": 119,
+            "a5_misc": 8,
+            "total": 305
+        },
+        "Errored": true
+    },
+    {
+        "Division": "59",
+        "Score": 7,
+        "Description": "Motion picture, video and television programme production, sound recording and music publishing activities",
+        "File_Count": 149,
+        "Files Count": {
+            "a1_ID": 9,
+            "a2_key_finance": 20,
+            "a3_assets": 58,
+            "a4_profits": 58,
+            "a5_misc": 4,
+            "total": 149
+        }
+    },
+    {
+        "Division": "60",
+        "Score": 7,
+        "Description": "Programming, broadcasting, news agency and other content distribution activities",
+        "File_Count": 14,
+        "Files Count": {
+            "a1_ID": 1,
+            "a2_key_finance": 2,
+            "a3_assets": 5,
+            "a4_profits": 5,
+            "a5_misc": 1,
+            "total": 14
+        }
+    },
+    {
+        "Division": "85",
+        "Score": 7,
+        "Description": "Education",
+        "File_Count": 289,
+        "Files Count": {
+            "a1_ID": 17,
+            "a2_key_finance": 38,
+            "a3_assets": 113,
+            "a4_profits": 113,
+            "a5_misc": 8,
+            "total": 289
+        }
+    },
+    {
+        "Division": "86",
+        "Score": 7,
+        "Description": "Human health activities",
+        "File_Count": 409,
+        "Files Count": {
+            "a1_ID": 24,
+            "a2_key_finance": 54,
+            "a3_assets": 160,
+            "a4_profits": 160,
+            "a5_misc": 11,
+            "total": 409
+        }
+    }
+]

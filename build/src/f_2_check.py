@@ -155,6 +155,14 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
         # print(f"--- Matching column '{col_name}' in file '{ref}' with actual type '{actual_type}' to expected type '{expected_type}'")
 
         match expected_type:
+            
+            case 'string':
+                # Safely forces rogue floats/NaNs to nullable strings
+                df[col_name] = df[col_name].astype("string")
+                
+                # Cleans up any '.0' artifacts that sneaked past Calamine
+                df[col_name] = df[col_name].str.replace(".0", "", regex=False)
+
             case 'int64':
                 match actual_type:
                     case 'int64':

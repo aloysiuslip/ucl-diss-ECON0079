@@ -1,0 +1,243 @@
+Ingesting industry: 62 with 5 properties.
+--- Ingesting property: a1_ID with 42 files. Rate: 0.0 seconds/file
+--- Ingesting property: a2_key_finance with 94 files. Rate: 0.8 seconds/file
+--- Ingesting property: a3_assets with 278 files. Rate: 0.8 seconds/file
+--- Ingesting property: a4_profits with 281 files. Rate: 0.7 seconds/file
+--- Ingesting property: a5_misc with 19 files. Rate: 0.7 seconds/file
+Deriving ingested files for industry: 62. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 62
+✅ Successfully appended derived table from: 62
+Processing yearly variables for industry: 62.
+✅ Successfully appended unpivoted yearly variables from: 62
+Ingesting industry: 63 with 5 properties.
+--- Ingesting property: a1_ID with 8 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 18 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 52 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 52 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 4 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 63. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 63
+✅ Successfully appended derived table from: 63
+Processing yearly variables for industry: 63.
+✅ Successfully appended unpivoted yearly variables from: 63
+Ingesting industry: 70 with 5 properties.
+--- Ingesting property: a1_ID with 42 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 92 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 275 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 277 files. Rate: 0.8 seconds/file
+--- Ingesting property: a5_misc with 19 files. Rate: 0.8 seconds/file
+Deriving ingested files for industry: 70. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+❌ Error processing folder 70
+❌ Pipeline failed: ArrowTypeError - ("Expected bytes, got a 'float' object", 'Conversion failed for column main_brand_names with type object')
+Ingesting industry: 72 with 5 properties.
+Traceback (most recent call last):
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\duckdb\__init__.py", line 1737, in _register_in_memory_table
+    obj = data.to_pyarrow_dataset(schema)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'PandasDataFrameProxy' object has no attribute 'to_pyarrow_dataset'. Did you mean: 'to_pyarrow_bytes'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lazyst\AppData\Local\Temp\ipykernel_17968\1017658067.py", line 153, in <module>
+    con.insert("fame_fixed", table_t_fixed_cast)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\sql\__init__.py", line 457, in insert
+    self._run_pre_execute_hooks(obj)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\duckdb\__init__.py", line 1318, in _run_pre_execute_hooks
+    super()._run_pre_execute_hooks(expr)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\__init__.py", line 1300, in _run_pre_execute_hooks
+    self._register_in_memory_tables(expr)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\__init__.py", line 1277, in _register_in_memory_tables
+    self._register_in_memory_table(memtable)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\backends\duckdb\__init__.py", line 1739, in _register_in_memory_table
+    obj = data.to_pyarrow(schema)
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\ibis\formats\pandas.py", line 446, in to_pyarrow
+    return pa.Table.from_pandas(obj, schema=pyarrow_schema)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pyarrow/table.pxi", line 4769, in pyarrow.lib.Table.from_pandas
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\pyarrow\pandas_compat.py", line 669, in dataframe_to_arrays
+    arrays[i] = maybe_fut.result()
+                ~~~~~~~~~~~~~~~~^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\pyarrow\pandas_compat.py", line 644, in convert_column
+    raise e
+  File "c:\Users\lazyst\AppData\Local\python\pythoncore-3.14-64\Lib\site-packages\pyarrow\pandas_compat.py", line 638, in convert_column
+    result = pa.array(col, type=type_, from_pandas=True, safe=safe)
+  File "pyarrow/array.pxi", line 408, in pyarrow.lib.array
+  File "pyarrow/array.pxi", line 91, in pyarrow.lib._ndarray_to_array
+    check_status(NdarrayToArrow(pool, values, mask, from_pandas,
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowTypeError: ("Expected bytes, got a 'float' object", 'Conversion failed for column main_brand_names with type object')
+--- Ingesting property: a1_ID with 3 files. Rate: 0.8 seconds/file
+--- Ingesting property: a2_key_finance with 6 files. Rate: 0.8 seconds/file
+--- Ingesting property: a3_assets with 16 files. Rate: 0.8 seconds/file
+--- Ingesting property: a4_profits with 16 files. Rate: 0.8 seconds/file
+--- Ingesting property: a5_misc with 2 files. Rate: 0.8 seconds/file
+Deriving ingested files for industry: 72. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 72
+✅ Successfully appended derived table from: 72
+Processing yearly variables for industry: 72.
+✅ Successfully appended unpivoted yearly variables from: 72
+Ingesting industry: 64 with 5 properties.
+--- Ingesting property: a1_ID with 17 files. Rate: 0.8 seconds/file
+--- Ingesting property: a2_key_finance with 38 files. Rate: 0.8 seconds/file
+--- Ingesting property: a3_assets with 112 files. Rate: 0.8 seconds/file
+--- Ingesting property: a4_profits with 112 files. Rate: 0.8 seconds/file
+--- Ingesting property: a5_misc with 8 files. Rate: 0.8 seconds/file
+Deriving ingested files for industry: 64. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 64
+✅ Successfully appended derived table from: 64
+Processing yearly variables for industry: 64.
+✅ Successfully appended unpivoted yearly variables from: 64
+Ingesting industry: 65 with 5 properties.
+--- Ingesting property: a1_ID with 2 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 3 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 8 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 8 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 1 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 65. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+⚠️ Mismatch in raw data validation for file 65/a1_ID)
+Warning: ❌ Missing columns in DataFrame: {'primary_trading_address', 'main_distribution_sites'}
+✅ Successfully appended fixed table from: 65
+✅ Successfully appended derived table from: 65
+Processing yearly variables for industry: 65.
+✅ Successfully appended unpivoted yearly variables from: 65
+Ingesting industry: 66 with 5 properties.
+--- Ingesting property: a1_ID with 5 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 11 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 32 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 32 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 3 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 66. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 66
+✅ Successfully appended derived table from: 66
+Processing yearly variables for industry: 66.
+✅ Successfully appended unpivoted yearly variables from: 66
+Ingesting industry: 69 with 5 properties.
+--- Ingesting property: a1_ID with 11 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 24 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 69 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 69 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 5 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 69. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 69
+✅ Successfully appended derived table from: 69
+Processing yearly variables for industry: 69.
+✅ Successfully appended unpivoted yearly variables from: 69
+Ingesting industry: 71 with 5 properties.
+--- Ingesting property: a1_ID with 14 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 29 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 87 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 87 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 6 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 71. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 71
+✅ Successfully appended derived table from: 71
+Processing yearly variables for industry: 71.
+✅ Successfully appended unpivoted yearly variables from: 71
+Ingesting industry: 58 with 5 properties.
+--- Ingesting property: a1_ID with 10 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 21 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 63 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 63 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 5 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 58. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 58
+✅ Successfully appended derived table from: 58
+Processing yearly variables for industry: 58.
+✅ Successfully appended unpivoted yearly variables from: 58
+Ingesting industry: 61 with 5 properties.
+--- Ingesting property: a1_ID with 4 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 7 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 23 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 23 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 2 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 61. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 61
+✅ Successfully appended derived table from: 61
+Processing yearly variables for industry: 61.
+✅ Successfully appended unpivoted yearly variables from: 61
+Ingesting industry: 73 with 5 properties.
+--- Ingesting property: a1_ID with 8 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 18 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 53 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 54 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 4 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 73. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 73
+✅ Successfully appended derived table from: 73
+Processing yearly variables for industry: 73.
+✅ Successfully appended unpivoted yearly variables from: 73
+Ingesting industry: 74 with 5 properties.
+--- Ingesting property: a1_ID with 17 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 40 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 121 files. Rate: 0.9 seconds/file
+⚠️ Warning: A file failed to process for property 'a3_assets' in industry '74'.
+⚠️ Warning: A file failed to process for property 'a3_assets' in industry '74'.
+⚠️ Warning: A file failed to process for property 'a3_assets' in industry '74'.
+--- Ingesting property: a4_profits with 119 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 8 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 74. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 74
+✅ Successfully appended derived table from: 74
+Processing yearly variables for industry: 74.
+✅ Successfully appended unpivoted yearly variables from: 74
+Ingesting industry: 59 with 5 properties.
+--- Ingesting property: a1_ID with 9 files. Rate: 0.9 seconds/file
+--- Ingesting property: a2_key_finance with 20 files. Rate: 0.9 seconds/file
+--- Ingesting property: a3_assets with 58 files. Rate: 0.9 seconds/file
+--- Ingesting property: a4_profits with 58 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 4 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 59. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 59
+✅ Successfully appended derived table from: 59
+Processing yearly variables for industry: 59.
+✅ Successfully appended unpivoted yearly variables from: 59
+Ingesting industry: 60 with 5 properties.
+--- Ingesting property: a1_ID with 1 files. Rate: 1.0 seconds/file
+--- Ingesting property: a2_key_finance with 2 files. Rate: 1.0 seconds/file
+--- Ingesting property: a3_assets with 5 files. Rate: 1.0 seconds/file
+--- Ingesting property: a4_profits with 5 files. Rate: 1.0 seconds/file
+--- Ingesting property: a5_misc with 1 files. Rate: 1.0 seconds/file
+Deriving ingested files for industry: 60. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+⚠️ Mismatch in raw data validation for file 60/a1_ID)
+Warning: ❌ Missing columns in DataFrame: {'primary_trading_address', 'main_distribution_sites'}
+✅ Successfully appended fixed table from: 60
+✅ Successfully appended derived table from: 60
+Processing yearly variables for industry: 60.
+✅ Successfully appended unpivoted yearly variables from: 60
+Ingesting industry: 85 with 5 properties.
+--- Ingesting property: a1_ID with 17 files. Rate: 1.0 seconds/file
+--- Ingesting property: a2_key_finance with 38 files. Rate: 1.0 seconds/file
+--- Ingesting property: a3_assets with 113 files. Rate: 1.0 seconds/file
+--- Ingesting property: a4_profits with 113 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 8 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 85. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 85
+✅ Successfully appended derived table from: 85
+Processing yearly variables for industry: 85.
+✅ Successfully appended unpivoted yearly variables from: 85
+Ingesting industry: 86 with 5 properties.
+--- Ingesting property: a1_ID with 24 files. Rate: 1.0 seconds/file
+--- Ingesting property: a2_key_finance with 54 files. Rate: 1.0 seconds/file
+--- Ingesting property: a3_assets with 160 files. Rate: 1.0 seconds/file
+--- Ingesting property: a4_profits with 160 files. Rate: 0.9 seconds/file
+--- Ingesting property: a5_misc with 11 files. Rate: 0.9 seconds/file
+Deriving ingested files for industry: 86. Properties with data: a1_ID, a2_key_finance, a3_assets, a4_profits, a5_misc
+✅ Successfully appended fixed table from: 86
+✅ Successfully appended derived table from: 86
+Processing yearly variables for industry: 86.
+✅ Successfully appended unpivoted yearly variables from: 86

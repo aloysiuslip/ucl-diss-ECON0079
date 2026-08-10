@@ -2,7 +2,7 @@
 
 ## fame_fixed
 
-### Number of rows: 111,911
+### Number of rows: 2,530,879
 
 ### Schema:
 
@@ -104,7 +104,7 @@ ibis.Schema {
 
 ## fame_derived
 
-### Number of rows: 111,911
+### Number of rows: 2,530,879
 
 ### Schema:
 
@@ -140,7 +140,7 @@ ibis.Schema {
 
 ## fame_yearly
 
-### Number of rows: 1,355,849
+### Number of rows: 31,568,718
 
 ### Schema:
 

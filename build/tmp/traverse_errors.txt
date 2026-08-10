@@ -1,2 +1,0 @@
-Errors found:
-Expected 2-digit SIC code but found: _company_year_consolidation_empl_flag
