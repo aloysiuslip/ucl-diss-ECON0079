@@ -180,7 +180,7 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
                     # This is the case for consolidated property where values are
                     # 'Consolidated', 'Unconsolidated', or na. We should reflect that trivalent logic
                     case 'string':
-                        df[col_name] = df[col_name].str.lower().map({
+                        df[col_name] = df[col_name].str.lower().str.trim().map({
                             'consolidated': True,
                             'unconsolidated': False
                         }).astype('boolean')
