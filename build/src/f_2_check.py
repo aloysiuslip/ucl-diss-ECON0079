@@ -2,21 +2,6 @@ from typing import Any, Union
 import pandas as pd
 from sqlglot import case
 
-def filter_df_entry(
-    df: pd.DataFrame,       # raw pandas dataframe based on the 
-    ind: str,               # 2-digit SIC code of the industry
-    property: str,          # sections of files, ex: a1_ID, a2_key_finance, etc.
-    file_ref: str           # tail of the filename, ex: "18_01 1", "18_04"
-) -> pd.DataFrame:
-    
-    print("hello world")
-
-    # Filter out rows from the dataframe where the property 'no_of_available_years' is zero
-    df1 = df[df['no_of_available_years'] > 0]
-
-
-    return df1
-
 #---- Columns ---#
 
 def drop_duplicate_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -188,7 +173,24 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
                         df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('float64')
                     case _:
                         raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'float64'")
-                    
+
+            case 'boolean':
+                match actual_type:
+
+                    # This is the case for consolidated property where values are
+                    # 'Consolidated', 'Unconsolidated', or na. We should reflect that trivalent logic
+                    case 'string':
+                        df[col_name] = df[col_name].str.lower().map({
+                            'consolidated': True,
+                            'unconsolidated': False
+                        }).astype('boolean')
+                    case 'bool':
+                        df[col_name] = df[col_name].astype('boolean')
+                    case 'object':
+                        df[col_name] = df[col_name].astype('boolean')
+                    case _:
+                        raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'boolean'")
+
             case 'string':
                 df[col_name] = df[col_name].astype("string").str.replace(r'\.0$', '', regex=True)   
 
