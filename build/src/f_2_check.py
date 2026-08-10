@@ -176,6 +176,19 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
                     case _:
                         raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'int64'")
 
+            case 'float64':
+                match actual_type:
+                    case 'float64':
+                        continue
+                    case 'int64':
+                        df[col_name] = df[col_name].astype('float64')
+                    case 'str':
+                        df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('float64')
+                    case 'object':
+                        df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('float64')
+                    case _:
+                        raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'float64'")
+                    
             case 'string':
                 df[col_name] = df[col_name].astype("string").str.replace(r'\.0$', '', regex=True)   
 
@@ -184,7 +197,7 @@ def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") ->
 
     return df
 
-def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: str, start_year: int, end_year: int, ref: str = "") -> pd.DataFrame:
+def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: str, start_year: int, end_year: int, delimiter: str="@", ref: str = "") -> pd.DataFrame:
 
     if property in ["a1_ID", "a5_misc"]:
         df.rename(columns=fuzzy_map, inplace=True)           # Rename according to our mapping
@@ -219,7 +232,7 @@ def rename_df_with_years(df: pd.DataFrame, fuzzy_map: dict[str, str], property: 
             if base_col_name not in fuzzy_map:
                 raise ValueError(f"❌ Error: Column name '{col}' base name '{base_col_name}' not found in schema mapping")
 
-            new_col_name = f"{fuzzy_map[base_col_name]}_{year}"
+            new_col_name = f"{fuzzy_map[base_col_name]}{delimiter}{year}"
             df_raw_renamed[col] = new_col_name
         # print(f"--- Created column mapping for file {ref} which are: {df_raw_renamed}")
         df.rename(columns=df_raw_renamed, inplace=True)
