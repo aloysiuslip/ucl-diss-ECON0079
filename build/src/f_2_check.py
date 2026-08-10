@@ -1,5 +1,6 @@
 from typing import Any, Union
 import pandas as pd
+from sqlglot import case
 
 def filter_df_entry(
     df: pd.DataFrame,       # raw pandas dataframe based on the 
@@ -139,6 +140,47 @@ def handle_excel_dates(df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
         # Keeping it as datetime64[ns] (removing .dt.date) for Ibis/DuckDB compatibility
         df[col] = pd.to_datetime(numeric_col, unit="D", origin="1899-12-30", errors="coerce")
         print(f"⚠️ Converted Excel date serials to datetime for column '{col}'{' in file ' + ref if ref else ''}")
+
+    return df
+
+# For every column in the df dataframe
+# The schema dataframe has column 'key' which is the column name
+# And a 'may_mix' column which is a boolean
+# If 'may_mix' is False, ignore the column
+# otherwise, check the column in the df, and ensure that it is the value specified in the 'type' column of the schema
+def handle_mixed_types(schema: pd.DataFrame, df: pd.DataFrame, ref: str = "") -> pd.DataFrame:
+    
+    for _, row in schema.iterrows():
+        col_name = row["key"]
+        may_mix = row.get("may_mix", False)
+        expected_type = row["type"]
+
+        if not may_mix:
+            continue
+
+        if col_name not in df.columns:
+            continue
+
+        actual_type = df[col_name].dtype
+
+        match expected_type:
+
+            case 'int64':
+                match actual_type:
+                    case 'int64':
+                        continue
+                    case 'str':
+                        df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('Int64')
+                    case 'object':
+                        df[col_name] = pd.to_numeric(df[col_name], errors='coerce').astype('Int64')
+                    case _:
+                        raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized actual type '{actual_type}' for expected type 'int64'")
+
+            case 'string':
+                df[col_name] = df[col_name].astype("string").str.replace(r'\.0$', '', regex=True)   
+
+            case _:
+                raise ValueError(f"❌ Column '{col_name}' in file '{ref}' has an unrecognized expected type '{expected_type}'")
 
     return df
 

@@ -13,6 +13,7 @@ Activate the virtual environment with `source venv/bin/activate` on Linux or mac
 - Some raw sheets have primary_address missing
 - Some have some columns duplicated
 - The property key 'Strategy, organization and policy' has additional whitespace in some files
+- Cleaned some columns which stored 'nan' as string
 
 ### Database
 Note that the ibis-framework package is not the same as the ibis package in PyPI. These two libraries cannot coexist in the same Python environment, as they are both imported with the ibis module name.

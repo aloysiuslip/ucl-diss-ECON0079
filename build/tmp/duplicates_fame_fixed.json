@@ -1,0 +1,5082 @@
+[
+    {
+        "table": "fame_fixed",
+        "registered_number": "00246133",
+        "company_name": "WORKSOP MANOR ESTATES,LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00275988",
+        "company_name": "TORTWORTH ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00281692",
+        "company_name": "BUTSER TURF AND TIMBER COMPANY LIMITED(THE)",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00294357",
+        "company_name": "GRASSHOPPER 2000 LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00470406",
+        "company_name": "BOURNE FARM (HALSTEAD) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00489027",
+        "company_name": "G.H. (WHITSBURY) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00527041",
+        "company_name": "COLLEGE VALLEY ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00550481",
+        "company_name": "YATTENDON ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00598466",
+        "company_name": "LYNTON DOWNS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00605232",
+        "company_name": "FRED WOOD & SON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00606593",
+        "company_name": "DAVIES (IMPLEMENTS) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00665530",
+        "company_name": "FRITH PARK FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00683453",
+        "company_name": "H.R. MAINWARING (FARMERS) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00722468",
+        "company_name": "LEOWARE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00837627",
+        "company_name": "D.W.F. TULLOCH & CO. LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00886404",
+        "company_name": "BARTON FARMS LIMITED(THE)",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00920584",
+        "company_name": "R.R. WATERER & CO.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "00970290",
+        "company_name": "D.E.PERKINS(FOREST MANAGEMENT)LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01270303",
+        "company_name": "MILLBANK FARMING COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01287000",
+        "company_name": "SYLVESTER FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01360773",
+        "company_name": "DUNGATES FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01378213",
+        "company_name": "FACCOMBE ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01378643",
+        "company_name": "G.H.C (MANAGEMENT) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01606396",
+        "company_name": "SOLWAY FORESTRY AND LANDSCAPING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01618971",
+        "company_name": "SPRAYTRAC LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01673305",
+        "company_name": "RAPHICAN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01834578",
+        "company_name": "ATHERALLS FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01890661",
+        "company_name": "SLATE HOUSE FARMS (ELSTED) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "01947947",
+        "company_name": "ONE-IRON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02075084",
+        "company_name": "CROSS OAKS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02082644",
+        "company_name": "TAP UK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02090141",
+        "company_name": "STOWELL PARK ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02105188",
+        "company_name": "FOWBERRY FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02143030",
+        "company_name": "MAJESTIC HOMES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02321450",
+        "company_name": "BLACKDOWN RIDGE ESTATE LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02345359",
+        "company_name": "SEAGREENS INTERNATIONAL PARTNERSHIP TRUSTEES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02433265",
+        "company_name": "TIM RADBOURNE (AGRICULTURAL CONTRACTING) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02481170",
+        "company_name": "EUCALYPTUS TREES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02585491",
+        "company_name": "ELVEDEN FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02647374",
+        "company_name": "SEVERN GORGE COUNTRYSIDE TRUST",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02664544",
+        "company_name": "IPLEY MANOR FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02747902",
+        "company_name": "GLEDSWOOD ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02861256",
+        "company_name": "DELTA ECHO LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02896276",
+        "company_name": "MANOR FARM PLANT HIRE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02899286",
+        "company_name": "ROCKET III COMPUTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02993281",
+        "company_name": "KEVERAL SUSTAINABLE LAND HOLDINGS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "02997643",
+        "company_name": "BAILEY BROS. (SOUTHERN) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03020196",
+        "company_name": "BUCKLEIGH FARM & TIMBER MERCHANTS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03080425",
+        "company_name": "RAYMED LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03100148",
+        "company_name": "ELVENDON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03105058",
+        "company_name": "SOWRAY LIVESTOCK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03120629",
+        "company_name": "THE ECOLOGICAL ENTERPRISE COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03121120",
+        "company_name": "MGGR (UK) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03137843",
+        "company_name": "DORSINGTON FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03299462",
+        "company_name": "ZEBRA-FOX LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03324623",
+        "company_name": "ANTSPIRE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03332940",
+        "company_name": "LOWER LUTHEREDGE FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03464976",
+        "company_name": "ABERNETHIE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03468160",
+        "company_name": "GHYLL PARK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03497682",
+        "company_name": "WILLJAMMER LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03507623",
+        "company_name": "STANDARD TREES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03522103",
+        "company_name": "SMITHCROWN LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03796588",
+        "company_name": "LIVING WITH RESPECT COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03852080",
+        "company_name": "TUBNEY WOODS",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03864888",
+        "company_name": "NH FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "03910698",
+        "company_name": "AFFINITY WOODLAND WORKERS CO-OPERATIVE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04116544",
+        "company_name": "AGRIMECH FARMING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04120274",
+        "company_name": "DRYAD LAND & TREE CARE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04157257",
+        "company_name": "DB RESEARCH & MARKETING CONSULTANTS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04273640",
+        "company_name": "STEVE WOODWARD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04316532",
+        "company_name": "CORPORATE AVIATION CONSULTANCY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04325213",
+        "company_name": "KIMEX DEVELOPMENTS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04342744",
+        "company_name": "JOHN BROWN NURSERIES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04416631",
+        "company_name": "MARTELL TIMBER LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04425351",
+        "company_name": "PENCHRISE ESTATE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04474864",
+        "company_name": "JEMM CONTRACTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04552180",
+        "company_name": "IMON SITE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04572771",
+        "company_name": "PALMERS (ISLE OF WIGHT) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04577031",
+        "company_name": "WEASDALE NURSERIES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04618763",
+        "company_name": "C E TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04628122",
+        "company_name": "TOTALLY TREES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04655017",
+        "company_name": "LONGHAY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04831024",
+        "company_name": "RUBY COUNTRY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04848389",
+        "company_name": "THE BILSINGTON PRIORY ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04848501",
+        "company_name": "A TOP TWENTY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04880759",
+        "company_name": "T J EWBANK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "04986012",
+        "company_name": "W R C S LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05010517",
+        "company_name": "BOWPLANT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05024480",
+        "company_name": "KINGSLEY LAND SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05030987",
+        "company_name": "WARDEN HILL FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05037404",
+        "company_name": "SPECIALISED GROUNDCARE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05107320",
+        "company_name": "ARKADY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05121815",
+        "company_name": "ANTUR CYMUNED BRITHDIR MAWR CYFYNGEDIG",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05168039",
+        "company_name": "VOXMETRICS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05292905",
+        "company_name": "J H AGRICULTURE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05391961",
+        "company_name": "ED KNIGHT CONTRACTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05399405",
+        "company_name": "NOBLE NORDMANN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05428834",
+        "company_name": "BIOSPHERE ORGANICS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05759570",
+        "company_name": "MOORLAND & MEADOW RESTORATION LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05814631",
+        "company_name": "DEVON LIGHT AND POWER LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05840288",
+        "company_name": "CHRONOS GANESCH LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05852432",
+        "company_name": "ARB-CORE TREE CARE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "05906367",
+        "company_name": "CROCHAIL FOREST LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06084188",
+        "company_name": "WOODLAND & SPORTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06139117",
+        "company_name": "PAPION ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06198001",
+        "company_name": "INTELLICONSULTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06230483",
+        "company_name": "THE WYRE COMMUNITY LAND TRUST",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06330026",
+        "company_name": "ASHTEAD TREES AND GARDENS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06345736",
+        "company_name": "TWEETS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06360791",
+        "company_name": "WOODLAND TRUST FARMING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06449291",
+        "company_name": "JAYMAC ENTERPRISES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06462703",
+        "company_name": "CADDIS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06467894",
+        "company_name": "TOPSAIL ASSOCIATES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06470323",
+        "company_name": "WYVOLS COURT FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06481911",
+        "company_name": "MILES AGRICULTURAL SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06499285",
+        "company_name": "SOLARIS ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06665248",
+        "company_name": "CALVADNACK LAND TRUST LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06725152",
+        "company_name": "DHA LANDSCAPE SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06738452",
+        "company_name": "MAPLE CONSULTANCY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06781066",
+        "company_name": "HUNGERLANDS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "06837924",
+        "company_name": "MARK JD ADAMSON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07006501",
+        "company_name": "T SEYMOUR LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07022996",
+        "company_name": "GREENS (CORNWALL) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07034461",
+        "company_name": "7K SOLUTIONS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07105483",
+        "company_name": "SOCIETA AGRICOLA POGGIOBUCO LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07105908",
+        "company_name": "HOPE AVIATION LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07109049",
+        "company_name": "ALLT POWER LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07162228",
+        "company_name": "EFORESTS",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07174641",
+        "company_name": "CONTRACKED LANDS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07196957",
+        "company_name": "CLEAR SOURCE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07262532",
+        "company_name": "HORTUS CRAFT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07293440",
+        "company_name": "THE PROFOREST INITIATIVE",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07300173",
+        "company_name": "THE FOREST PROJECT TFP LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07302434",
+        "company_name": "EASTLEIGH FENCING SUPPLIES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07320026",
+        "company_name": "THE COUNTRYSIDE REGENERATION TRUST LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07353417",
+        "company_name": "WILD BUSHCRAFT COMPANY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07358276",
+        "company_name": "MILLTOP ORCHARD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07363539",
+        "company_name": "SELJAHOL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07608456",
+        "company_name": "HENZELL ENTERPRISES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07632885",
+        "company_name": "G G MORGAN & SONS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07641507",
+        "company_name": "DALMONDS WOOD FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07652583",
+        "company_name": "THE MOUNTAIN FOOD COMPANY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07695833",
+        "company_name": "WILLIAM NOTCUTT ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07699781",
+        "company_name": "SILURIAN ENERGY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07709364",
+        "company_name": "OK FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07731270",
+        "company_name": "J. FRANK FARMS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07801552",
+        "company_name": "SEYEL LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07841776",
+        "company_name": "OAKLEIGH GARDEN FARM & WOODLAND MANAGEMENT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "07991219",
+        "company_name": "ESSEX ARBORICULTURE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08002296",
+        "company_name": "COPY CLOUGH PLANTATION LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08098711",
+        "company_name": "WILVA INVESTMENTS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08115801",
+        "company_name": "INTACE TECHNOVATIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08230301",
+        "company_name": "GEWERBLICHE UND LANDWIRTSCHAFTLICHE DIENSTLEISTUNGEN BEHR IN RADBRUCH LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08274607",
+        "company_name": "FARM ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08299873",
+        "company_name": "TWIG SOLUTIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08318008",
+        "company_name": "AZTEC FARMING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08322120",
+        "company_name": "WANDERSTAFF'S TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08398103",
+        "company_name": "TREES AND LAND CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08432172",
+        "company_name": "MARTIN MEE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08456355",
+        "company_name": "SNCG ECOSCAPES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08460200",
+        "company_name": "TOM LEWIS CONTRACTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08675716",
+        "company_name": "CHRISTMAS TREE GROWERS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08711233",
+        "company_name": "DAN JACKSON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08747616",
+        "company_name": "SOUTHERN FARMS & FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08763417",
+        "company_name": "BURNSWARK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08765900",
+        "company_name": "LILBURN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08774772",
+        "company_name": "EVERGREEN FARMING & FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08800235",
+        "company_name": "GASP SOLUTIONS (S) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08800278",
+        "company_name": "GASP SOLUTIONS (E) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08813433",
+        "company_name": "AULDMAY K ELAN LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08825238",
+        "company_name": "CHAMBERS SOUTHERN MEADOWS FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08881247",
+        "company_name": "ALAN GRIFFITHS TURF AND FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08899041",
+        "company_name": "ZOMBA TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08901585",
+        "company_name": "PARAGON VOLTA LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08916393",
+        "company_name": "JOHN LIDDELL STC LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08925609",
+        "company_name": "TROPICAL FOREST PLANTATIONS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08939560",
+        "company_name": "JOAN LETT TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08941533",
+        "company_name": "BRENDA COPPLE 2 TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08969776",
+        "company_name": "R & J JACKSON LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "08994165",
+        "company_name": "KJR CONTRACTS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09021556",
+        "company_name": "TRANSITION TOWN DORCHESTER CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09199412",
+        "company_name": "JACKSONS FARM AND FOREST LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09215026",
+        "company_name": "KATHLEEN FRANCES TRADING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09247792",
+        "company_name": "DAVID HARES LANDSCAPE ARCHITECTURE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09272685",
+        "company_name": "DPS FORESTRY & LAND MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09335518",
+        "company_name": "UNDERHILL FARM ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09360833",
+        "company_name": "GATSBY AFRICA",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09384584",
+        "company_name": "TOM PATRICK TREE SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09445523",
+        "company_name": "DUNGATES SPORTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09478775",
+        "company_name": "MALOLO LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09556796",
+        "company_name": "CONSERVATION PIGS LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09758207",
+        "company_name": "SWITCHENERGIA LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09816077",
+        "company_name": "WHITMORE ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09873879",
+        "company_name": "FRININGHAM MANOR ENTERPRISES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09877283",
+        "company_name": "J PITMAN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09887269",
+        "company_name": "PERMAFUTURE AGROECOLOGY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "09959385",
+        "company_name": "THE BENACRE COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10087956",
+        "company_name": "GWYNT FFINNANT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10158280",
+        "company_name": "T GARDENER LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10173209",
+        "company_name": "TERRA NUTRA LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10179075",
+        "company_name": "AITCH CONSERVATION LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10257329",
+        "company_name": "RICHARD THOMAS AND CO (HYDRO) LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10270251",
+        "company_name": "WEST DRON FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10271504",
+        "company_name": "HOWELLS FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10308926",
+        "company_name": "ASHBY SELF STORAGE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10352142",
+        "company_name": "HORT TECH LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10362154",
+        "company_name": "RICHARD HARNETT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10397899",
+        "company_name": "TREEPEOPLEUK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10407359",
+        "company_name": "UNITED HOTEL MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10473834",
+        "company_name": "J FREEMAN CONTRACTORS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10515405",
+        "company_name": "WESSEX HEDGELAYING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10518989",
+        "company_name": "WORGAN'S WOOD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10619629",
+        "company_name": "LANCASHIRE AG LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10643297",
+        "company_name": "ENVIROTEC GROUP LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10674024",
+        "company_name": "BRUIN FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10711461",
+        "company_name": "G&L PEST SOLUTIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10806886",
+        "company_name": "AMBIOS LSF LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10902509",
+        "company_name": "S J KERRIGAN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10940766",
+        "company_name": "DPGR CONTRACTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10975954",
+        "company_name": "ARBORLEC SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10984311",
+        "company_name": "HH1810 LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10986064",
+        "company_name": "ROBERTS ARBORICULTURE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "10998678",
+        "company_name": "COOPER AGRICULTURAL SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11005281",
+        "company_name": "FORREST LAND MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11043906",
+        "company_name": "SILVICULTURE NORTH LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11045755",
+        "company_name": "KUTELKA LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11059661",
+        "company_name": "DLC VEGETATION MANAGEMENT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11125517",
+        "company_name": "ELLIS CONTRACT SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11134691",
+        "company_name": "AGRI AND MUNICIPAL SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11172162",
+        "company_name": "GLOBAL AGRICULTURAL SUPPLIES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11237438",
+        "company_name": "APEX TREE CARE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11243516",
+        "company_name": "ECO HORTICULTURE PRODUCTS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11252685",
+        "company_name": "CHAMARIN TERROIRS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11269717",
+        "company_name": "THE HALCROW ESTATE COMPANY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11292931",
+        "company_name": "FARMSMART LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11337594",
+        "company_name": "SUPER DRY FIREWOOD LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11341104",
+        "company_name": "TB FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11420029",
+        "company_name": "JLNH LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11424527",
+        "company_name": "RAINFORD BROOK FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11476933",
+        "company_name": "COPY CLOUGH PLANTATION LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11483453",
+        "company_name": "ARTEMIS DEER CONSULTANCY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11534760",
+        "company_name": "WELL HORSE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11550695",
+        "company_name": "LONGROVE FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11568726",
+        "company_name": "MAYA MUSHROOMS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11603958",
+        "company_name": "THE RAINFORESTER LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11611678",
+        "company_name": "ECO MOSS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11630728",
+        "company_name": "ASHMORE FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11639024",
+        "company_name": "GREEN LEAF TREES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11639783",
+        "company_name": "STONELEY FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11640623",
+        "company_name": "ALDRIDGE MILL LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11649853",
+        "company_name": "THE SANCTUARY AT STOER LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11692298",
+        "company_name": "WESTMOOR BOTANICALS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11707224",
+        "company_name": "SCHUTZ UND ERHALTUNG DER LANDWIRTSCHAFT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11742184",
+        "company_name": "FALCONSFLIGHT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11773335",
+        "company_name": "LARASA LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11827353",
+        "company_name": "OECO SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11845415",
+        "company_name": "APPLETON CONTRACTING SOUTH LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11898346",
+        "company_name": "ACORN AGRICULTURAL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11925514",
+        "company_name": "O&J CONTRACTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11949270",
+        "company_name": "CREWOOD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "11977321",
+        "company_name": "QUERCUS HILL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12060678",
+        "company_name": "GREEN IS VENTURES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12090634",
+        "company_name": "SHAPARACK LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12105779",
+        "company_name": "COTSWOLD TREES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12107958",
+        "company_name": "ONE GARDEN BRIGHTON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12140222",
+        "company_name": "TANKERDALE WILDLIFE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12142686",
+        "company_name": "SPACE FOR NATURE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12168375",
+        "company_name": "DRONFIELD GARDEN MAINTENANCE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12189843",
+        "company_name": "GREENGEN ENVIRONMENTAL SOLUTIONS COMMUNITY INTEREST COMPANY",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12202249",
+        "company_name": "OWEN HART SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12226892",
+        "company_name": "BROCKLESBY ACTIVITIES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12236347",
+        "company_name": "CROATIAN WALNUT (UK) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12278243",
+        "company_name": "MEADOWS BROTHERS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12282145",
+        "company_name": "SOMERWOOD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12303602",
+        "company_name": "BOWEN LANDSCAPE MANAGEMENT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12325549",
+        "company_name": "SUNFLOWER GARDEN CASH AND CARRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12350364",
+        "company_name": "SILVA MARIS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12394253",
+        "company_name": "RED HEART TREE CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12403712",
+        "company_name": "CFC TREE & FOREST FOUNDATION",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12417116",
+        "company_name": "CELESTAGROUP LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12427374",
+        "company_name": "FJJJJ LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12437469",
+        "company_name": "THE RAD ART COMMUNITY ACTION STATION LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12445613",
+        "company_name": "WATTS IN THE WOODS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12465213",
+        "company_name": "GOODWINS FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12489411",
+        "company_name": "SIDWELL FARMS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12516546",
+        "company_name": "TOM FESTING SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12517102",
+        "company_name": "PRICE10 CONTRACTING LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12518319",
+        "company_name": "ELEVATION AGRICULTURE AND ZERO EMISSION LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12528192",
+        "company_name": "IKON DEERSTALKING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12531275",
+        "company_name": "STERT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12549364",
+        "company_name": "ALLER WOOD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12556584",
+        "company_name": "ENZED MANUKA LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12561834",
+        "company_name": "STEALTH ARCHITECTURE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12563348",
+        "company_name": "OAKAPPLE COMMUNITY FARM",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12580531",
+        "company_name": "JDR SKID STEER SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12657699",
+        "company_name": "LANDFORD TREES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12689044",
+        "company_name": "R2 CONSULTING AND CONTRACTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12706791",
+        "company_name": "NUTNUT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12733026",
+        "company_name": "HOLLINGBOURNE FARM (JA) LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12745656",
+        "company_name": "EWHURST PARK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12933085",
+        "company_name": "RAGLEY ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12937407",
+        "company_name": "STEVENSON COUNTRY SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12944717",
+        "company_name": "MARTIN OAKES T/A SPECIALIST PADDOCK MAINTENANCE SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "12954879",
+        "company_name": "DESERT TURFCARE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13027747",
+        "company_name": "OAKDENE ORCHARD LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13049411",
+        "company_name": "FARM UNDER THE RADAR C.I.C.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13092855",
+        "company_name": "NEWTONS FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13100755",
+        "company_name": "KST TRAILERS AND FABRICATION LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13127247",
+        "company_name": "PARADISE VALLEY NURSERIES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13142879",
+        "company_name": "URBAN MUSHROOMS LONDON LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13150510",
+        "company_name": "CAPES FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13158193",
+        "company_name": "BEGIN BY STARTING CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13160763",
+        "company_name": "REPLANT THE PLANET LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13179959",
+        "company_name": "S & N CONTRACTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13201184",
+        "company_name": "GLYN MYFYR MARKET GARDEN LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13215704",
+        "company_name": "WOODLAND EDGE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13228204",
+        "company_name": "COPPICE MEADOW LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13280135",
+        "company_name": "THE TONEWOOD FOREST",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13307494",
+        "company_name": "THE WOODLAND WOOM C.I.C.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13340909",
+        "company_name": "TREE TOKENS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13345546",
+        "company_name": "BARRETT COMBINED SERVICES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13370280",
+        "company_name": "MARCGOODFELLOW UK COMMERCIAL HOLDING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13399005",
+        "company_name": "MOUNT REGEN LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13421129",
+        "company_name": "K HUTCHINSON & SON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13421354",
+        "company_name": "A. STEMN ORGANISATION LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13428758",
+        "company_name": "HIPPO GLOBAL HOLDING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13448721",
+        "company_name": "FROG LEARNING CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13457982",
+        "company_name": "NJ BUSINESS ENTERPRISE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13459428",
+        "company_name": "MARSHFIELD BOTANICALS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13467101",
+        "company_name": "LEWIS MILLS CONTRACTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13474275",
+        "company_name": "WOODS COMMON LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13512728",
+        "company_name": "MENTER PANDY CYF.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13517754",
+        "company_name": "MILL LANE FARMING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13518264",
+        "company_name": "CAPE FARMING AND FORESTRY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13543262",
+        "company_name": "ECO HAND SYSTEM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13575825",
+        "company_name": "EDGELEY LODGE FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13577816",
+        "company_name": "VEGAN LAND MOVEMENT CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13719351",
+        "company_name": "ESSINK EXCAVATIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13726479",
+        "company_name": "AZIENDA AGRICOLA PODERE PIANSALIPANO LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13880163",
+        "company_name": "STILL GAME FIELDCRAFT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13908571",
+        "company_name": "LJR FENCING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13930145",
+        "company_name": "TIRBWCH LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13946091",
+        "company_name": "TAPE4TREES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13946354",
+        "company_name": "FORESTER TREE CARE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13953855",
+        "company_name": "GREEN ENERGY 2022 LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "13963027",
+        "company_name": "BAMBERGER GROUP LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14011344",
+        "company_name": "PARCAU FARMS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14020127",
+        "company_name": "THE HOLMS FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14022458",
+        "company_name": "WEST RHODEN LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14040085",
+        "company_name": "MIRKWOOD LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14053609",
+        "company_name": "PIP & CROWN RURAL SOLUTIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14064736",
+        "company_name": "OLD WOOD ORGANIC COMMUNITY INTEREST COMPANY",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14096446",
+        "company_name": "JG RURAL & AGRICULTURAL SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14158145",
+        "company_name": "ALYON PERMACULTURE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14170857",
+        "company_name": "MYNACHE FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14219956",
+        "company_name": "NATURAL INTERNATIONAL EXPORTS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14223435",
+        "company_name": "J BRANNAN SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14237057",
+        "company_name": "ONCO TRADE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14253282",
+        "company_name": "HOLFORD FOREST FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14328047",
+        "company_name": "PROFOREST GROUP LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14382949",
+        "company_name": "GREEN LANE RURAL SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14471590",
+        "company_name": "BIOCHAR ENERGY SUSTAINABLE TECHNOLOGIES PTY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14508984",
+        "company_name": "YORKSHIRE WOODLAND MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14516341",
+        "company_name": "HUMBLEWEEDS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14516557",
+        "company_name": "KWIZDA AGRO UK LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14530100",
+        "company_name": "BAREFOOT GROWING CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14559293",
+        "company_name": "KARMUNITY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14564202",
+        "company_name": "GREEN LIFE INNOVATIONS CIC",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14571341",
+        "company_name": "THE LOG CLUB LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14580440",
+        "company_name": "AGRICULTURAL RESOURCE CONSULTANTS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14604250",
+        "company_name": "PLANT.NG WILD COMMUNITY TREE NURSERY C.I.C.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14630977",
+        "company_name": "MYCOSIA LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14641728",
+        "company_name": "EASTHALL FARMS TRADING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14695105",
+        "company_name": "LOGS 4 U LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14706967",
+        "company_name": "ARMOURED HEDGEHOG LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14712762",
+        "company_name": "CAPREOLUS ECOLOGY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14726690",
+        "company_name": "JOBS UK BRISTOL LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14752353",
+        "company_name": "D GERRARD AGRI SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14753563",
+        "company_name": "PIONEER HABITATS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14777998",
+        "company_name": "C. FYFE COUNTRYSIDE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14778310",
+        "company_name": "WICKEN CONTRACTING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14785052",
+        "company_name": "HEDGES & HURDLES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14862980",
+        "company_name": "CHERRY TREE FARM PETALS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "14893335",
+        "company_name": "HANTCHE & CRAME FAMILY FARM LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "15021519",
+        "company_name": "JOBS UK NORTH SOMERSET LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "NI002864",
+        "company_name": "CLANDEBOYE ESTATE COMPANY LIMITED-THE",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "NI030285",
+        "company_name": "MEENACAHAN LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "NI653140",
+        "company_name": "MUTTLEY N MOGGIES PETCARE SOLUTIONS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "NI667938",
+        "company_name": "STONETHORN FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "R0000205",
+        "company_name": "J.A.B. ENTERPRISES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC007139",
+        "company_name": "JAMES FINLAY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC012574",
+        "company_name": "DAWYCK ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC012762",
+        "company_name": "MORAY ESTATES PROPERTIES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC012965",
+        "company_name": "THE ABERCAIRNY ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC013800",
+        "company_name": "BROWNS PLANTATIONS KENYA LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC021187",
+        "company_name": "CLINT ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC028733",
+        "company_name": "TORWOODLEE AND BUCKHOLM ESTATES COMPANY. LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC035370",
+        "company_name": "WITCHHILL (WOODLANDS AND TRADING) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC039534",
+        "company_name": "WILLIAMSTON ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC040128",
+        "company_name": "MONYMUSK LAND COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC041909",
+        "company_name": "LEDNATHIE ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC044769",
+        "company_name": "ARDTORNISH ESTATE COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC047272",
+        "company_name": "GOATFOOT CONTRACTORS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC049686",
+        "company_name": "HAMISH CATHIE (HOLDINGS) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC055296",
+        "company_name": "CRUIVIE AND BRIGHOUSE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC060119",
+        "company_name": "MARK HILL FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC060467",
+        "company_name": "GOWANBANK FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC064102",
+        "company_name": "TRESSADY ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC067365",
+        "company_name": "BRIAN MURRAY & COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC072027",
+        "company_name": "DINAR ESTATE MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC076665",
+        "company_name": "ABERUCHILL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC085321",
+        "company_name": "LAIRDMANNOCH ENTERPRISES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC097336",
+        "company_name": "LUD CASTLE (COMPUTING) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC122343",
+        "company_name": "DUNNINALD ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC124520",
+        "company_name": "CRAIGENGILLAN ESTATES (NO 1) COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC124718",
+        "company_name": "INCHMARLO FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC126621",
+        "company_name": "DELNABO ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC127767",
+        "company_name": "HIGHLANDERS HOLDING LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC142619",
+        "company_name": "M.J. & A. BOUGHEY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC146230",
+        "company_name": "MEIKLE CLOAK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC159748",
+        "company_name": "THE BOWHOUSE FARMING COMPANY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC161377",
+        "company_name": "ERIBOLL FORESTRY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC174006",
+        "company_name": "INVERDRILL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC176522",
+        "company_name": "GLAISTERS FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC180063",
+        "company_name": "BALGRAY LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC180993",
+        "company_name": "ST. FREDERIKSLUND ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC190141",
+        "company_name": "STRATHACRE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC191248",
+        "company_name": "EDENWOOD FARMS LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC201427",
+        "company_name": "WINDY EDGE ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC208577",
+        "company_name": "ESKDALE WOOD & WILDLIFE MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC211265",
+        "company_name": "BALLOGIE (DEVELOPMENTS) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC223910",
+        "company_name": "BIRDSTON ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC235572",
+        "company_name": "MEIKLE FINDOWIE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC296793",
+        "company_name": "WINDY HOUSE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC305011",
+        "company_name": "CAIRNTON ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC305446",
+        "company_name": "DUNCAN G GRANT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC305630",
+        "company_name": "ADVENTEC LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC305970",
+        "company_name": "ACGK LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC313865",
+        "company_name": "HH ROESNER PROPERTY MANAGEMENT LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC316888",
+        "company_name": "GREEN TEAM CHRISTMAS TREES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC327337",
+        "company_name": "INVERAWE ESTATES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC329549",
+        "company_name": "HAACO LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC351044",
+        "company_name": "KINDROCHET LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC375057",
+        "company_name": "MAVISTON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC382314",
+        "company_name": "HERDS (OLDMELDRUM) LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC391908",
+        "company_name": "MUNRO LANDSCAPE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC398898",
+        "company_name": "MIDDLESHAW COUNTRY ENTERPRISES LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC420903",
+        "company_name": "REIVE PLANT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC424260",
+        "company_name": "UPPER GLENFINTAIG ESTATE FARM LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC424288",
+        "company_name": "GAME MANAGEMENT SCOTLAND LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC436394",
+        "company_name": "BREADALBANE ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC443459",
+        "company_name": "BLAR 'A CHAORUINN ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC449097",
+        "company_name": "H2O HYDRO LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC478405",
+        "company_name": "CORSTANE LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC481081",
+        "company_name": "GALLOWAY AGRI LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC506646",
+        "company_name": "R & J ATKINSON LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC510983",
+        "company_name": "ARDMACHDONIE PARTNERSHIP LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC520717",
+        "company_name": "TICKIE ENTERPRISES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC546606",
+        "company_name": "BLR LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC553856",
+        "company_name": "WOODLAND SPACES COMMUNITY INTEREST COMPANY",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC565302",
+        "company_name": "ARKAIG FORESTRY COOPERATIVE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC576238",
+        "company_name": "ECO INDIGO LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC579671",
+        "company_name": "SD DIGGER HIRE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC580626",
+        "company_name": "BRIN ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC589464",
+        "company_name": "HALKIRK SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC590769",
+        "company_name": "WOODEND DEER MANAGEMENT SERVICES LTD.",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC593236",
+        "company_name": "ABERDEENSHIRE FARM CONTRACTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC604253",
+        "company_name": "MANOR CONSULTANCY SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC615528",
+        "company_name": "HATTON ESTATE TURRIFF LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC615533",
+        "company_name": "CONGASH ESTATE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC622318",
+        "company_name": "MACDONALD ESTATES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC627463",
+        "company_name": "CONTRAFENCE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC627961",
+        "company_name": "LOGIEALMOND ESTATE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC646772",
+        "company_name": "CARBON OFFSETTING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC646775",
+        "company_name": "CARBON OFFSETTING INTERNATIONAL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC646875",
+        "company_name": "THE CARBON EXCHANGE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC646887",
+        "company_name": "THE CARBON EXCHANGE INTERNATIONAL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC655495",
+        "company_name": "ESKAN SPIRITS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC658897",
+        "company_name": "R SHEARER CONSULTANCY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC661500",
+        "company_name": "TREETAPE UK LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC662763",
+        "company_name": "BIRTHTREE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC670248",
+        "company_name": "WINDWARD SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC679138",
+        "company_name": "FORESTRY AND FARM FENCING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC679923",
+        "company_name": "DOUGARIE ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC688116",
+        "company_name": "VALINDRA GROUP LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC689985",
+        "company_name": "CCR AGRI SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC690371",
+        "company_name": "PERTHSHIRE HORTICULTURE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC694446",
+        "company_name": "THE FOREST RIDGE PROJECT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC701646",
+        "company_name": "HIGHLANDS REWILDING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC705038",
+        "company_name": "MCKELLARS OF AYRSHIRE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC714339",
+        "company_name": "UNDERGROUND TREES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC714738",
+        "company_name": "HARPER SEEDS LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC715951",
+        "company_name": "GROOM WILDLIFE AND ENVIRONMENTAL LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC716301",
+        "company_name": "ACHADAPHAIL CROFT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC721541",
+        "company_name": "OSA VIVERE LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC724051",
+        "company_name": "CHALLENGER ESTATE LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC724267",
+        "company_name": "R & A KINCAID LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC735102",
+        "company_name": "WEST COAST WILDLIFE AND FORESTRY SERVICES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC741938",
+        "company_name": "C. ANDERSON AGRI & FORESTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC741982",
+        "company_name": "SR MORRISON LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC742275",
+        "company_name": "THE WILD FACTOR LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC744450",
+        "company_name": "LYNWILG CROFT LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC746646",
+        "company_name": "FOUR BRAES LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC749342",
+        "company_name": "BARRAS MARINE & AGRI LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC750825",
+        "company_name": "FLOCKHART FENCING LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC757880",
+        "company_name": "JUNIPER PHEASANTRY LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC767412",
+        "company_name": "QARLBO SCOTLAND LTD",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    },
+    {
+        "table": "fame_fixed",
+        "registered_number": "SC774782",
+        "company_name": "WOOPLAW FARMING LIMITED",
+        "industry_codes": null,
+        "file_codes": null,
+        "rows": 2,
+        "all_other_properties_identical": true,
+        "differing_properties": {}
+    }
+]

@@ -12,9 +12,10 @@ from pathlib import Path
 # Declare a 'RawFileDict' type for the return value of the function
 RawFileDict = dict[str, dict[str, list[str]]]
 
-def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
+def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, dict[str, dict[str, int]], int]:
 
     raw_file_dict = {}
+    file_count: dict[str, dict[str, int]] = {}
     errors = []
     passed_inds = ['Traversing industry directory: ']
     file_paths_processed = 0
@@ -41,6 +42,7 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
 
         industry = industry_dir.name
         raw_file_dict[industry] = {}
+        file_count[industry] = {}
         for key_dir in industry_dir.iterdir():
             # ex: [data_dir]/01/a1_ID, [data_dir]/01/a2_key_finance, etc.
 
@@ -48,10 +50,11 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
                 errors.append(f"Expected directory but found file: {key_dir.name}")
                 continue
 
-            key = key_dir.name
+            property = key_dir.name
 
-            if key not in raw_file_dict[industry]:
-                raw_file_dict[industry][key] = []
+            if property not in raw_file_dict[industry]:
+                raw_file_dict[industry][property] = []
+            file_count[industry][property] = 0
             for file in key_dir.iterdir():
                 if not file.is_file():
                     errors.append(f"Expected file but found directory: {file.name}")
@@ -66,11 +69,12 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
                     continue
 
                 # Store the file path in the dictionary
-                raw_file_dict[industry][key].append([
+                raw_file_dict[industry][property].append([
                     str(file.name),
                     str(file)
                 ])
                 file_paths_processed += 1
+                file_count[industry][property] = file_count[industry][property] + 1
 
     if len(errors) > 0:
         for error in errors:
@@ -81,7 +85,7 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, int]:
                 f.write(error + "\n")
 
     print('')
-    return raw_file_dict, file_paths_processed
+    return raw_file_dict, file_count, file_paths_processed
 
 import pandas as pd
 from f_0_dirs import get_data_dirs
