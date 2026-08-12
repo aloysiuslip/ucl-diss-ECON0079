@@ -4,12 +4,14 @@ from dotenv import load_dotenv
 from typing import NamedTuple
 
 class DirPaths(NamedTuple):
-	root_data_dir: Path | None
-	data_dir: Path | None
-	raw_data_dir: Path | None
-	root_dir: Path
-	work_dir: Path
-	output_dir: Path
+    root_data_dir: Path | None
+    data_dir: Path | None
+    raw_data_dir: Path | None
+    root_dir: Path
+    work_dir: Path
+    output_dir: Path
+    input_dir: Path
+    tmp_dir: Path
      
 def get_data_dirs() -> DirPaths:
 
@@ -44,11 +46,16 @@ def get_data_dirs() -> DirPaths:
     user = "lazycst"
     file_path = Path(__file__).resolve()            # the absolute path to the current script
     root_dir = file_path.parent.parent.parent
+
     work_dir = root_dir / "build" / "src"
+    input_dir = root_dir / "build" / "input"
+    tmp_dir = root_dir / "build" / "tmp"
     output_dir = root_dir / "build" / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir, work_dir, output_dir)
+    return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir,
+                    work_dir, output_dir, input_dir, tmp_dir
+    )
 
 # If this file is run as a script, then call the function and print the results
 if __name__ == "__main__":
