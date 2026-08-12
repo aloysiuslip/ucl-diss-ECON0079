@@ -2,7 +2,7 @@
 
 ## fame_fixed
 
-### Number of rows: 2,656,297
+### Number of rows: 2,419,878
 
 ### Schema:
 
@@ -43,68 +43,68 @@ ibis.Schema {
 ### Head of table:
 
 ```
-                    company_name registered_number ticker_symbol  \
-0        W.& R. BARNETT, LIMITED          NI000166           NaN   
-1   FRONTIER AGRICULTURE LIMITED          05288567           NaN   
-2         HOOK 2 SISTERS LIMITED          05969169           NaN   
-3  OPENFIELD AGRICULTURE LIMITED          03548572           NaN   
-4    MCCAIN FOODS (G.B.) LIMITED          00733218           NaN   
+                          company_name registered_number ticker_symbol  \
+0                     NKS SOFTWARE LTD          10323124           NaN   
+1  PIVOTAL CONSULTING SERVICES LIMITED          10323176           NaN   
+2           SIDETONE TELECOMMS LIMITED          10323183           NaN   
+3           TURQUOISE SOFTWARE LIMITED          10323222           NaN   
+4                      CLOUD 8 LIMITED          10323223           NaN   
 
                                           ro_address  \
-0  Clarendon House, 23 Clarendon Road, Belfast, C...   
-1  Group Secretarial Department, 10 Grosvenor Str...   
-2               Cote, Bampton, Oxfordshire, OX18 2EG   
-3  Honey Pot Lane, Colsterworth, Grantham, Lincol...   
-4  Havers Hill, Eastfield, Scarborough, North Yor...   
+0  10 Brassie Close, Basingstoke, Hampshire, RG24...   
+1  7 Rutland Road, Westwood, Nottingham, Nottingh...   
+2  Premier Suite 4 Churchill Court, 58 Station Ro...   
+3  Plaza 8 Kd Tower, Cotterells, Hemel Hempstead,...   
+4         Kemp House 160 City Road, London, EC1V 2NX   
 
-              ro_address_line_1    ro_address_line_2 ro_address_line_3  \
-0               Clarendon House    23 Clarendon Road               NaN   
-1  Group Secretarial Department  10 Grosvenor Street               NaN   
-2                          Cote                  NaN               NaN   
-3                Honey Pot Lane         Colsterworth               NaN   
-4                   Havers Hill            Eastfield               NaN   
+                 ro_address_line_1 ro_address_line_2 ro_address_line_3  \
+0                 10 Brassie Close               NaN               NaN   
+1                   7 Rutland Road          Westwood               NaN   
+2  Premier Suite 4 Churchill Court   58 Station Road             North   
+3                 Plaza 8 Kd Tower        Cotterells               NaN   
+4         Kemp House 160 City Road               NaN               NaN   
 
-  ro_address_line_4 ro_address_line_5      ro_city  ...  \
-0               NaN               NaN      Belfast  ...   
-1               NaN               NaN       London  ...   
-2               NaN               NaN      Bampton  ...   
-3               NaN               NaN     Grantham  ...   
-4               NaN               NaN  Scarborough  ...   
+  ro_address_line_4 ro_address_line_5          ro_city  ...  \
+0               NaN               NaN      Basingstoke  ...   
+1               NaN               NaN       Nottingham  ...   
+2               NaN               NaN           Harrow  ...   
+3               NaN               NaN  Hemel Hempstead  ...   
+4               NaN               NaN           London  ...   
 
   primary_trading_address_latitude primary_trading_address_longitude  \
-0                  54° 36' 24.3" N                    5° 55' 13.8" W   
-1                              NaN                               NaN   
+0                              NaN                               NaN   
+1                   53° 3' 36.5" N                    1° 19' 32.8" W   
 2                              NaN                               NaN   
-3                  52° 47' 16.0" N                    0° 35' 25.2" W   
-4                  54° 14' 19.3" N                    0° 23' 26.7" W   
+3                              NaN                               NaN   
+4                              NaN                               NaN   
 
-                     branch_name primary_uk_sic_2007_code  \
-0        W.& R. BARNETT, LIMITED                     1430   
-1   FRONTIER AGRICULTURE LIMITED                     1610   
-2         HOOK 2 SISTERS LIMITED                     1470   
-3  OPENFIELD AGRICULTURE LIMITED                     1630   
-4    MCCAIN FOODS (G.B.) LIMITED                    10390   
+                           branch_name primary_uk_sic_2007_code  \
+0                     NKS SOFTWARE LTD                    62020   
+1  PIVOTAL CONSULTING SERVICES LIMITED                    62090   
+2                                  NaN                    62090   
+3           TURQUOISE SOFTWARE LIMITED                    62020   
+4                                  NaN                    62020   
 
                      primary_uk_sic_2007_description latest_accounts_date  \
-0                Raising of horses and other equines           2023-07-31   
-1             Support activities for crop production           2024-06-26   
-2                                 Raising of poultry           2023-07-31   
-3                       Post-harvest crop activities           2023-06-30   
-4  Other processing and preserving of fruit and v...           2023-06-30   
+0                    Computer consultancy activities           2024-08-31   
+1  Other information technology and computer serv...           2024-08-31   
+2  Other information technology and computer serv...           2021-08-31   
+3                    Computer consultancy activities           2018-08-31   
+4                    Computer consultancy activities           2017-08-31   
 
-  no_of_available_years                           guo guo_nb       entity_type  
-0                    20  W&R BARNETT HOLDINGS LIMITED     62  Controlled subs.  
-1                    20  FRONTIER AGRICULTURE LIMITED     20               GUO  
-2                    17                           NaN      0    Independent co  
-3                    20       OPENFIELD GROUP LIMITED      7  Controlled subs.  
-4                    20       MCCAIN FOODS GROUP INC.    176  Controlled subs.  
+  no_of_available_years  guo guo_nb      entity_type  
+0                     8  NaN      0   Independent co  
+1                     8  NaN      0   Independent co  
+2                     5  NaN      0  Single location  
+3                     2  NaN      0  Single location  
+4                     1  NaN      0  Single location  
 
 [5 rows x 29 columns]
 ```
 
 ## fame_derived
 
-### Number of rows: 2,539,268
+### Number of rows: 2,491,459
 
 ### Schema:
 
@@ -124,23 +124,23 @@ ibis.Schema {
 
 ```
   registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
-0          NI000166           True                   True      False   
-1          05288567          False                  False      False   
-2          05969169           True                  False      False   
-3          03548572           True                   True      False   
-4          00733218           True                   True      False   
+0          10523260           True                   True      False   
+1          10523294          False                  False      False   
+2          10523302           True                   True      False   
+3          10523398          False                  False      False   
+4          10523406          False                  False      False   
 
-   has_company_branch_mismatch industry_codes file_codes  
-0                        False             01      12_31  
-1                        False             01      12_31  
-2                        False             01      12_31  
-3                        False             01      12_31  
-4                        False             01      12_31  
+  has_company_branch_mismatch industry_codes file_codes  
+0                       False             62    18_37 1  
+1                        None             62    18_37 1  
+2                       False             62    18_37 1  
+3                       False             62    18_37 1  
+4                       False             62    18_37 1  
 ```
 
 ## fame_yearly
 
-### Number of rows: 31,906,525
+### Number of rows: 14,009,970
 
 ### Schema:
 
@@ -177,40 +177,40 @@ ibis.Schema {
 ### Head of table:
 
 ```
-  registered_number  year consolidated  turnover  shareholders_funds  \
-0          03386933  2023         None       NaN                 NaN   
-1          03386933  2015         None       NaN                 NaN   
-2          03386933  2010         None       NaN                 NaN   
-3          03404547  2014         None       NaN                 NaN   
-4          03404547  2018         None       NaN                 NaN   
+  registered_number  year  consolidated  turnover  shareholders_funds  \
+0          09324129  2019         False       NaN               5.030   
+1          09326979  2016         False       NaN               0.178   
+2          09368629  2016         False       NaN               0.001   
+3          SC621085  2022         False       NaN              -2.100   
+4          SC631312  2021         False       NaN               8.197   
 
-   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
-0                 NaN      None        NaN                           NaN   
-1                 NaN      None        NaN                           NaN   
-2                 NaN      None        NaN                           NaN   
-3                 NaN      None        NaN                           NaN   
-4                 NaN      None        NaN                           NaN   
+   profit_loss_pretax  employees  tangibles  tangibles_land_and_buildings  \
+0                 NaN        NaN        NaN                           NaN   
+1                 NaN        NaN        NaN                           NaN   
+2                 NaN        NaN        NaN                           NaN   
+3                 NaN        1.0        NaN                           NaN   
+4                 NaN        1.0      3.974                           NaN   
 
-   tangibles_land_freehold  ...  total_assets  liabilites_lt      cos  \
-0                      NaN  ...           NaN            NaN      NaN   
-1                      NaN  ...           NaN            NaN      NaN   
-2                      NaN  ...           NaN            NaN      NaN   
-3                      NaN  ...           NaN            NaN -150.632   
-4                      NaN  ...           NaN            NaN      NaN   
+   tangibles_land_freehold  ...  total_assets  liabilites_lt  cos  dividends  \
+0                      NaN  ...         5.030            NaN  NaN        NaN   
+1                      NaN  ...         5.810            NaN  NaN        NaN   
+2                      NaN  ...         1.013            NaN  NaN        NaN   
+3                      NaN  ...         0.082            NaN  NaN        NaN   
+4                      NaN  ...        10.462            NaN  NaN        NaN   
 
-   dividends  r_and_d  remuneration_employees  wages  social_security_costs  \
-0        NaN      NaN                     NaN    NaN                    NaN   
-1        NaN      NaN                     NaN    NaN                    NaN   
-2        NaN      NaN                     NaN    NaN                    NaN   
-3        NaN      NaN                     NaN    NaN                    NaN   
-4        NaN      NaN                     NaN    NaN                    NaN   
+   r_and_d  remuneration_employees  wages  social_security_costs  \
+0      NaN                     NaN    NaN                    NaN   
+1      NaN                     NaN    NaN                    NaN   
+2      NaN                     NaN    NaN                    NaN   
+3      NaN                     NaN    NaN                    NaN   
+4      NaN                     NaN    NaN                    NaN   
 
    pensions_costs  ebitda  
-0             NaN   0.073  
-1             NaN   0.043  
-2             NaN  -0.075  
-3             NaN  45.770  
-4             NaN  40.944  
+0             NaN     NaN  
+1             NaN     NaN  
+2             NaN     NaN  
+3             NaN     NaN  
+4             NaN     NaN  
 
 [5 rows x 25 columns]
 ```
