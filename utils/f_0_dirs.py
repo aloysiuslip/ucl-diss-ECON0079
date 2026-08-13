@@ -12,6 +12,7 @@ class DirPaths(NamedTuple):
     output_dir: Path
     input_dir: Path
     tmp_dir: Path
+    db_path: Path
      
 def get_data_dirs(segment = "build") -> DirPaths:
 
@@ -56,9 +57,10 @@ def get_data_dirs(segment = "build") -> DirPaths:
     tmp_dir = root_dir / segment / "tmp"
     output_dir = root_dir / segment / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
+    db_path = root_dir / "build" / "output" / "fame_data.duckdb"
     
     return DirPaths(root_data_dir, data_dir, raw_data_dir, root_dir,
-                    work_dir, output_dir, input_dir, tmp_dir
+                    work_dir, output_dir, input_dir, tmp_dir, db_path
     )
 
 # If this file is run as a script, then call the function and print the results
