@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Mount Google Drive",
+            "type": "shell",
+            "command": "sudo mount -t drvfs H: /mnt/h",
+            "windows": {
+                "command": "sudo mount -t drvfs H: /mnt/h"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+            }
+        }
+    ]
+}

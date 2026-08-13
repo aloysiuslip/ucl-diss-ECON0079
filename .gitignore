@@ -72,6 +72,7 @@ db.sqlite3-journal
 */output/*.csv
 */tmp/*.csv
 */tmp/*.xlsx
+~$*
 *.tmp
 
 # Flask stuff:
