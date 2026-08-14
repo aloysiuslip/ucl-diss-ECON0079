@@ -1,285 +1,5 @@
 # Tables in DuckDB database
 
-## fame_yearly
-
-### Number of rows: 24,260,361
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number             string
-  year                          int64
-  consolidated                  boolean
-  turnover                      float64
-  shareholders_funds            float64
-  profit_loss_pretax            float64
-  employees                     int64
-  tangibles                     float64
-  tangibles_land_and_buildings  float64
-  tangibles_land_freehold       float64
-  tangibles_land_leasehold      float64
-  fixed_other                   float64
-  intangibles                   float64
-  fixed_total                   float64
-  liabilities                   float64
-  total_assets                  float64
-  liabilites_lt                 float64
-  cos                           float64
-  dividends                     float64
-  r_and_d                       float64
-  remuneration_employees        float64
-  wages                         float64
-  social_security_costs         float64
-  pensions_costs                float64
-  ebitda                        float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year consolidated  turnover  shareholders_funds  \
-0          03386933  2023         None       NaN                 NaN   
-1          03386933  2015         None       NaN                 NaN   
-2          03386933  2010         None       NaN                 NaN   
-3          03404547  2014         None       NaN                 NaN   
-4          03404547  2018         None       NaN                 NaN   
-
-   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
-0                 NaN      None        NaN                           NaN   
-1                 NaN      None        NaN                           NaN   
-2                 NaN      None        NaN                           NaN   
-3                 NaN      None        NaN                           NaN   
-4                 NaN      None        NaN                           NaN   
-
-   tangibles_land_freehold  ...  total_assets  liabilites_lt      cos  \
-0                      NaN  ...           NaN            NaN      NaN   
-1                      NaN  ...           NaN            NaN      NaN   
-2                      NaN  ...           NaN            NaN      NaN   
-3                      NaN  ...           NaN            NaN -150.632   
-4                      NaN  ...           NaN            NaN      NaN   
-
-   dividends  r_and_d  remuneration_employees  wages  social_security_costs  \
-0        NaN      NaN                     NaN    NaN                    NaN   
-1        NaN      NaN                     NaN    NaN                    NaN   
-2        NaN      NaN                     NaN    NaN                    NaN   
-3        NaN      NaN                     NaN    NaN                    NaN   
-4        NaN      NaN                     NaN    NaN                    NaN   
-
-   pensions_costs  ebitda  
-0             NaN   0.073  
-1             NaN   0.043  
-2             NaN  -0.075  
-3             NaN  45.770  
-4             NaN  40.944  
-
-[5 rows x 25 columns]
-```
-
-## lars_yearly
-
-### Number of rows: 0
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number                         string
-  company_name                              string
-  year                                      string
-  consolidated                              string
-  employees                                 string
-  systemA_industry                          string
-  cons_uncons                               string
-  turnover_th_gbp                           string
-  shareholders_funds_th_gbp                 string
-  profit_loss_before_taxation_th_gbp        string
-  number_of_employees                       string
-  total_assets_th_gbp                       string
-  ebitda_th_gbp                             string
-  current_liabilities_th_gbp                string
-  long_term_liabilities_th_gbp              string
-  research_development_th_gbp               string
-  wages_salaries_th_gbp                     string
-  interest_paid_th_gbp                      string
-  taxation_th_gbp                           string
-  depreciation_th_gbp                       string
-  tangible_assets_th_gbp                    string
-  intangible_assets_th_gbp                  string
-  fixed_assets_th_gbp                       string
-  other_fixed_assets_th_gbp                 string
-  pension_costs_th_gbp                      string
-  social_security_costs_th_gbp              string
-  dividends_distributable_profit_th_gbp     string
-  systemB_group                             string
-  cost_of_sales_th_gbp                      string
-  exceptional_items_pre_gp_th_gbp           string
-  cash_out_in_flow_investing_activ_th_gbp   string
-  capital_expenditure_financ_invest_th_gbp  string
-  acquisition_disposal_th_gbp               string
-  equity_dividends_paid_th_gbp              string
-  company_name_raw                          string
-}
-```
-
-### Head of table:
-
-```
-  registered_number        company_name  year consolidated employees  \
-0           0028326  BLACKSTAR GROUP SE  2013            1        16   
-1           0028326  BLACKSTAR GROUP SE  2014            1        13   
-2           0028326  BLACKSTAR GROUP SE  2015            1        15   
-3           0028326  BLACKSTAR GROUP SE  2016            1        12   
-4           0043472     SCOTTY GROUP SE  2011            1        31   
-
-  systemA_industry   cons_uncons turnover_th_gbp shareholders_funds_th_gbp  \
-0               58  Consolidated             NaN                     74804   
-1               58  Consolidated           13737                     80563   
-2               58  Consolidated           22316                    230416   
-3               58  Consolidated           19696                    179223   
-4               26  Consolidated            5002                      5673   
-
-  profit_loss_before_taxation_th_gbp  ... social_security_costs_th_gbp  \
-0                              12203  ...                          NaN   
-1                               8168  ...                          NaN   
-2                              18384  ...                          NaN   
-3                             -33814  ...                          NaN   
-4                               -200  ...                          340   
-
-  dividends_distributable_profit_th_gbp   systemB_group cost_of_sales_th_gbp  \
-0                                 -1382  58_59_60_61_63                  NaN   
-1                                 -1034  58_59_60_61_63                  NaN   
-2                                  -647  58_59_60_61_63                  NaN   
-3                                  -466  58_59_60_61_63                  NaN   
-4                                   NaN           22_30                -2072   
-
-  exceptional_items_pre_gp_th_gbp cash_out_in_flow_investing_activ_th_gbp  \
-0                             NaN                                     -37   
-1                             NaN                                     -10   
-2                             NaN                                      -3   
-3                             NaN                                    -171   
-4                             NaN                                    -145   
-
-  capital_expenditure_financ_invest_th_gbp acquisition_disposal_th_gbp  \
-0                                      NaN                         NaN   
-1                                      NaN                         NaN   
-2                                      NaN                         NaN   
-3                                      NaN                         NaN   
-4                                      NaN                         NaN   
-
-  equity_dividends_paid_th_gbp    company_name_raw  
-0                        -1382  BLACKSTAR GROUP SE  
-1                        -1034  BLACKSTAR GROUP SE  
-2                         -647  BLACKSTAR GROUP SE  
-3                         -466  BLACKSTAR GROUP SE  
-4                          NaN     SCOTTY GROUP SE  
-
-[5 rows x 35 columns]
-```
-
-### Unique industry_codes in fame_derived: 01, 02, 03, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 41, 42, 45, 46, 49, 50, 51, 52, 53, 55, 56, 58, 59, 60, 61, 62, 63, 64, 65, 66, 68, 69, 70, 71, 72, 73, 74, 75, 77, 78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99## fame_fixed
-
-### Number of rows: 7,948,736
-
-### Schema:
-
-```
-ibis.Schema {
-  company_name                       string
-  registered_number                  string
-  ticker_symbol                      string
-  ro_address                         string
-  ro_address_line_1                  string
-  ro_address_line_2                  string
-  ro_address_line_3                  string
-  ro_address_line_4                  string
-  ro_address_line_5                  string
-  ro_city                            string
-  ro_county                          string
-  ro_postcode                        string
-  ro_full_postcode                   string
-  ro_country                         string
-  ro_latitude                        string
-  ro_longitude                       string
-  ro_nuts_region                     string
-  ro_postal_region                   string
-  primary_trading_address            string
-  primary_trading_address_latitude   string
-  primary_trading_address_longitude  string
-  branch_name                        string
-  primary_uk_sic_2007_code           int64
-  primary_uk_sic_2007_description    string
-  latest_accounts_date               date
-  no_of_available_years              int64
-  guo                                string
-  guo_nb                             int64
-  entity_type                        string
-}
-```
-
-### Head of table:
-
-```
-                            company_name registered_number ticker_symbol  \
-0     GATOR INTERMEDIATE HOLDCO (UK) LTD          11899400           NaN   
-1                         KIEWIT UK LTD.          08817563           NaN   
-2           LIQUID GAS EQUIPMENT LIMITED          SC434537           NaN   
-3                   CAMFED INTERNATIONAL          02874653           NaN   
-4  OCEANEERING SERVICES OVERSEAS LIMITED          03295446           NaN   
-
-                                          ro_address  \
-0  Clarendon House, 23 Clarendon Road, Belfast, C...   
-1  Group Secretarial Department, 10 Grosvenor Str...   
-2               Cote, Bampton, Oxfordshire, OX18 2EG   
-3  Honey Pot Lane, Colsterworth, Grantham, Lincol...   
-4  Havers Hill, Eastfield, Scarborough, North Yor...   
-
-              ro_address_line_1    ro_address_line_2 ro_address_line_3  \
-0               Clarendon House    23 Clarendon Road               NaN   
-1  Group Secretarial Department  10 Grosvenor Street               NaN   
-2                          Cote                  NaN               NaN   
-3                Honey Pot Lane         Colsterworth               NaN   
-4                   Havers Hill            Eastfield               NaN   
-
-  ro_address_line_4 ro_address_line_5      ro_city  ...  \
-0               NaN               NaN      Belfast  ...   
-1               NaN               NaN       London  ...   
-2               NaN               NaN      Bampton  ...   
-3               NaN               NaN     Grantham  ...   
-4               NaN               NaN  Scarborough  ...   
-
-  primary_trading_address_latitude primary_trading_address_longitude  \
-0                              NaN                               NaN   
-1                              NaN                               NaN   
-2                              NaN                               NaN   
-3                              NaN                               NaN   
-4                              NaN                               NaN   
-
-                     branch_name primary_uk_sic_2007_code  \
-0        W.& R. BARNETT, LIMITED                     1430   
-1   FRONTIER AGRICULTURE LIMITED                     1610   
-2         HOOK 2 SISTERS LIMITED                     1470   
-3  OPENFIELD AGRICULTURE LIMITED                     1630   
-4    MCCAIN FOODS (G.B.) LIMITED                    10390   
-
-                     primary_uk_sic_2007_description latest_accounts_date  \
-0                Raising of horses and other equines           2023-07-31   
-1             Support activities for crop production           2024-06-26   
-2                                 Raising of poultry           2023-07-31   
-3                       Post-harvest crop activities           2023-06-30   
-4  Other processing and preserving of fruit and v...           2023-06-30   
-
-  no_of_available_years                           guo guo_nb       entity_type  
-0                    20  W&R BARNETT HOLDINGS LIMITED     62  Controlled subs.  
-1                    20  FRONTIER AGRICULTURE LIMITED     20               GUO  
-2                    17                           NaN      0    Independent co  
-3                    20       OPENFIELD GROUP LIMITED      7  Controlled subs.  
-4                    20       MCCAIN FOODS GROUP INC.    176  Controlled subs.  
-
-[5 rows x 29 columns]
-```
-
 ## lars_fixed
 
 ### Number of rows: 452,638
@@ -341,19 +61,26 @@ ibis.Schema {
 3                   NaN                     8           2023-12-31   
 4                   NaN                     8           2023-12-31   
 
-            company_name_B inactive  ...      legal_form  \
-0       BLACKSTAR GROUP SE       No  ...      Public AIM   
-1          SCOTTY GROUP SE       No  ...           Other   
-2       PETRA DIAMONDS LTD       No  ...      Public AIM   
-3               HISCOX LTD       No  ...  Public, Quoted   
-4  LANCASHIRE HOLDINGS LTD       No  ...  Public, Quoted   
+            company_name_B inactive quoted own_data woco bv_d_id_number  \
+0       BLACKSTAR GROUP SE       No     No       No   No     GBH0028326   
+1          SCOTTY GROUP SE       No     No       No   No     GBH0043472   
+2       PETRA DIAMONDS LTD       No     No       No   No     GBH0053787   
+3               HISCOX LTD       No    Yes       No   No     GBH0054897   
+4  LANCASHIRE HOLDINGS LTD       No    Yes       No   No     GBH0056130   
 
-  date_of_incorporation accounting_reference_date registered_accounts_type  \
-0                   NaN                       NaN                      NaN   
-1            2012-05-11                       NaN                      NaN   
-2            1997-03-25                       NaN                      NaN   
-3            2006-09-06                       NaN                      NaN   
-4            2005-10-12                       NaN                      NaN   
+  company_status status_date      legal_form date_of_incorporation  \
+0         Active         NaN      Public AIM                   NaN   
+1         Active         NaN           Other            2012-05-11   
+2         Active         NaN      Public AIM            1997-03-25   
+3         Active         NaN  Public, Quoted            2006-09-06   
+4         Active         NaN  Public, Quoted            2005-10-12   
+
+  accounting_reference_date registered_accounts_type  \
+0                       NaN                      NaN   
+1                       NaN                      NaN   
+2                       NaN                      NaN   
+3                       NaN                      NaN   
+4                       NaN                      NaN   
 
   jordans_company_classification account_currency guo_name guo_bv_d_id_number  \
 0               Fame A, full a/c              GBP      NaN                NaN   
@@ -368,13 +95,126 @@ ibis.Schema {
 2      NaN                NaN  
 3      NaN                NaN  
 4      NaN                NaN  
+```
 
-[5 rows x 26 columns]
+## fame_yearly
+
+### Number of rows: 40,846,539
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  consolidated  turnover  shareholders_funds  \
+0          IE145517  2007         False       NaN           757.13466   
+1          IE205077  2015         False       NaN                 NaN   
+2          SC263368  2011         False    27.965            39.65400   
+3          SC150956  2008         False       NaN            -3.08000   
+4          05312357  2011         False       NaN             1.02000   
+
+   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
+0                 NaN      None        NaN                           NaN   
+1                 NaN      None        NaN                           NaN   
+2              25.714      None        NaN                           NaN   
+3                 NaN      None        NaN                           NaN   
+4                 NaN      None      2.777                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                      NaN                       NaN                 NaN   
+1                      NaN                       NaN                 NaN   
+2                      NaN                       NaN                 NaN   
+3                      NaN                       NaN                 NaN   
+4                      NaN                       NaN                 NaN   
+
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                           NaN              NaN                 NaN   
+1                           NaN              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                           NaN              NaN                 NaN   
+4                           NaN              NaN                 NaN   
+
+   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
+0          NaN          NaN                NaN          NaN  -166.945063   
+1          NaN          NaN                NaN          NaN          NaN   
+2          NaN          NaN                NaN          NaN   -19.363000   
+3          NaN          NaN                NaN          NaN    -4.080000   
+4        2.777          NaN                NaN        2.777    -9.550000   
+
+   total_assets  liabilites_lt    cos  admin_expenses  interest_paid  \
+0    924.079723            NaN    NaN             NaN            NaN   
+1           NaN            NaN    NaN             NaN            NaN   
+2     59.017000            NaN -0.611           -1.64            NaN   
+3      1.390000          -0.39    NaN             NaN            NaN   
+4     10.570000            NaN    NaN             NaN            NaN   
+
+   profit_loss_pretax2    tax  dividends  depreciation  r_and_d  \
+0                  NaN    NaN        NaN           NaN      NaN   
+1                  NaN    NaN        NaN           NaN      NaN   
+2               25.714 -6.929        NaN           NaN      NaN   
+3                  NaN    NaN        NaN        24.768      NaN   
+4                  NaN    NaN        NaN           NaN      NaN   
+
+   remuneration_employees  wages  social_security_costs  pensions_costs  \
+0                     NaN    NaN                    NaN             NaN   
+1                     NaN    NaN                    NaN             NaN   
+2                     NaN    NaN                    NaN             NaN   
+3                     NaN    NaN                    NaN             NaN   
+4                     NaN    NaN                    NaN             NaN   
+
+   other_staff_costs  renumeration_directors  ebitda  
+0                NaN                     NaN     NaN  
+1                NaN                     NaN     NaN  
+2                NaN                     NaN  25.714  
+3                NaN                     NaN     NaN  
+4                NaN                     NaN     NaN  
 ```
 
 ## fame_derived
 
-### Number of rows: 1,942,561
+### Number of rows: 7,948,736
 
 ### Schema:
 
@@ -392,5 +232,281 @@ ibis.Schema {
 
 ### Head of table:
 
-[5 rows x 26 columns]
 ```
+  registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
+0          11899400          False                  False      False   
+1          08817563          False                  False      False   
+2          SC434537           True                  False      False   
+3          02874653           True                  False      False   
+4          03295446          False                  False      False   
+
+  has_company_branch_mismatch industry_codes file_codes  
+0                       False             99      12_49  
+1                        None             99      12_49  
+2                       False             99      12_49  
+3                       False             99      12_49  
+4                        None             99      12_49  
+```
+
+## lars_yearly
+
+### Number of rows: 2,378,089
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number                         string
+  company_name                              string
+  year                                      string
+  consolidated                              string
+  employees                                 string
+  systemA_industry                          string
+  cons_uncons                               string
+  turnover_th_gbp                           string
+  shareholders_funds_th_gbp                 string
+  profit_loss_before_taxation_th_gbp        string
+  number_of_employees                       string
+  total_assets_th_gbp                       string
+  ebitda_th_gbp                             string
+  current_liabilities_th_gbp                string
+  long_term_liabilities_th_gbp              string
+  research_development_th_gbp               string
+  wages_salaries_th_gbp                     string
+  interest_paid_th_gbp                      string
+  taxation_th_gbp                           string
+  depreciation_th_gbp                       string
+  tangible_assets_th_gbp                    string
+  intangible_assets_th_gbp                  string
+  fixed_assets_th_gbp                       string
+  other_fixed_assets_th_gbp                 string
+  pension_costs_th_gbp                      string
+  social_security_costs_th_gbp              string
+  dividends_distributable_profit_th_gbp     string
+  systemB_group                             string
+  cost_of_sales_th_gbp                      string
+  exceptional_items_pre_gp_th_gbp           string
+  cash_out_in_flow_investing_activ_th_gbp   string
+  capital_expenditure_financ_invest_th_gbp  string
+  acquisition_disposal_th_gbp               string
+  equity_dividends_paid_th_gbp              string
+  company_name_raw                          string
+}
+```
+
+### Head of table:
+
+```
+  registered_number        company_name  year consolidated employees  \
+0           0028326  BLACKSTAR GROUP SE  2013            1        16   
+1           0028326  BLACKSTAR GROUP SE  2014            1        13   
+2           0028326  BLACKSTAR GROUP SE  2015            1        15   
+3           0028326  BLACKSTAR GROUP SE  2016            1        12   
+4           0043472     SCOTTY GROUP SE  2011            1        31   
+
+  systemA_industry   cons_uncons turnover_th_gbp shareholders_funds_th_gbp  \
+0               58  Consolidated             NaN                     74804   
+1               58  Consolidated           13737                     80563   
+2               58  Consolidated           22316                    230416   
+3               58  Consolidated           19696                    179223   
+4               26  Consolidated            5002                      5673   
+
+  profit_loss_before_taxation_th_gbp number_of_employees total_assets_th_gbp  \
+0                              12203                  16               75701   
+1                               8168                  13               85856   
+2                              18384                  15              254899   
+3                             -33814                  12              200788   
+4                               -200                  31                7517   
+
+  ebitda_th_gbp current_liabilities_th_gbp long_term_liabilities_th_gbp  \
+0         12233                       -882                          -15   
+1          8587                      -5292                           -1   
+2         18730                     -24475                           -8   
+3        -31522                     -21500                          -65   
+4          3805                      -1684                         -159   
+
+  research_development_th_gbp wages_salaries_th_gbp interest_paid_th_gbp  \
+0                         NaN                  1674                 -223   
+1                         NaN                   NaN                 -489   
+2                         NaN                   NaN                 -322   
+3                         NaN                   NaN                -2334   
+4                         NaN                  1709                  -27   
+
+  taxation_th_gbp depreciation_th_gbp tangible_assets_th_gbp  \
+0              15                  16                     78   
+1               8                  12                     66   
+2              15                   6                     56   
+3             -45                  16                    222   
+4             287                  88                    214   
+
+  intangible_assets_th_gbp fixed_assets_th_gbp other_fixed_assets_th_gbp  \
+0                       51               67937                       NaN   
+1                       49               82094                       NaN   
+2                      NaN              252167                       NaN   
+3                      NaN              199901                       NaN   
+4                     4971                5672                       NaN   
+
+  pension_costs_th_gbp social_security_costs_th_gbp  \
+0                  NaN                          NaN   
+1                  NaN                          NaN   
+2                  NaN                          NaN   
+3                  NaN                          NaN   
+4                  NaN                          340   
+
+  dividends_distributable_profit_th_gbp   systemB_group cost_of_sales_th_gbp  \
+0                                 -1382  58_59_60_61_63                  NaN   
+1                                 -1034  58_59_60_61_63                  NaN   
+2                                  -647  58_59_60_61_63                  NaN   
+3                                  -466  58_59_60_61_63                  NaN   
+4                                   NaN           22_30                -2072   
+
+  exceptional_items_pre_gp_th_gbp cash_out_in_flow_investing_activ_th_gbp  \
+0                             NaN                                     -37   
+1                             NaN                                     -10   
+2                             NaN                                      -3   
+3                             NaN                                    -171   
+4                             NaN                                    -145   
+
+  capital_expenditure_financ_invest_th_gbp acquisition_disposal_th_gbp  \
+0                                      NaN                         NaN   
+1                                      NaN                         NaN   
+2                                      NaN                         NaN   
+3                                      NaN                         NaN   
+4                                      NaN                         NaN   
+
+  equity_dividends_paid_th_gbp    company_name_raw  
+0                        -1382  BLACKSTAR GROUP SE  
+1                        -1034  BLACKSTAR GROUP SE  
+2                         -647  BLACKSTAR GROUP SE  
+3                         -466  BLACKSTAR GROUP SE  
+4                          NaN     SCOTTY GROUP SE  
+```
+
+## fame_fixed
+
+### Number of rows: 7,948,736
+
+### Schema:
+
+```
+ibis.Schema {
+  company_name                       string
+  registered_number                  string
+  ticker_symbol                      string
+  ro_address                         string
+  ro_address_line_1                  string
+  ro_address_line_2                  string
+  ro_address_line_3                  string
+  ro_address_line_4                  string
+  ro_address_line_5                  string
+  ro_city                            string
+  ro_county                          string
+  ro_postcode                        string
+  ro_full_postcode                   string
+  ro_country                         string
+  ro_latitude                        string
+  ro_longitude                       string
+  ro_nuts_region                     string
+  ro_postal_region                   string
+  primary_trading_address            string
+  primary_trading_address_latitude   string
+  primary_trading_address_longitude  string
+  branch_name                        string
+  primary_uk_sic_2007_code           int64
+  primary_uk_sic_2007_description    string
+  latest_accounts_date               date
+  no_of_available_years              int64
+  guo                                string
+  guo_nb                             int64
+  entity_type                        string
+}
+```
+
+### Head of table:
+
+```
+                            company_name registered_number ticker_symbol  \
+0     GATOR INTERMEDIATE HOLDCO (UK) LTD          11899400           NaN   
+1                         KIEWIT UK LTD.          08817563           NaN   
+2           LIQUID GAS EQUIPMENT LIMITED          SC434537           NaN   
+3                   CAMFED INTERNATIONAL          02874653           NaN   
+4  OCEANEERING SERVICES OVERSEAS LIMITED          03295446           NaN   
+
+                                          ro_address  \
+0  Lincoln House, Wellington Crescent, Fradley Pa...   
+1  c/o Winston & Strawn London Llp, Citypoint One...   
+2  Rosyth Business Park Rosyth, Dunfermline, Fife...   
+3  20 Station Road, Cambridge, Cambridgeshire, CB...   
+4  c/o Company Secretarial Departme, 280 Bishopsg...   
+
+                  ro_address_line_1               ro_address_line_2  \
+0                     Lincoln House             Wellington Crescent   
+1   c/o Winston & Strawn London Llp  Citypoint One Ropemaker Street   
+2       Rosyth Business Park Rosyth                             NaN   
+3                   20 Station Road                             NaN   
+4  c/o Company Secretarial Departme                 280 Bishopsgate   
+
+  ro_address_line_3 ro_address_line_4 ro_address_line_5      ro_city  \
+0      Fradley Park               NaN               NaN    Lichfield   
+1               NaN               NaN               NaN       London   
+2               NaN               NaN               NaN  Dunfermline   
+3               NaN               NaN               NaN    Cambridge   
+4               NaN               NaN               NaN       London   
+
+        ro_county ro_postcode ro_full_postcode ro_country      ro_latitude  \
+0   Staffordshire        WS13         WS13 8RZ    England  52° 42' 12.7" N   
+1          London        EC2Y         EC2Y 9AW    England  51° 31' 10.8" N   
+2            Fife        KY11         KY11 2YD   Scotland              NaN   
+3  Cambridgeshire        CB 1          CB1 2JD    England  52° 11' 41.5" N   
+4          London        EC2M         EC2M 4AG    England              NaN   
+
+     ro_longitude           ro_nuts_region ro_postal_region  \
+0  1° 46' 53.5" W  West Midlands (England)    West Midlands   
+1   0° 5' 20.1" W                   London     London Inner   
+2             NaN                 Scotland         Scotland   
+3    0° 8' 3.2" E          East of England          Eastern   
+4             NaN                      NaN     London Inner   
+
+                             primary_trading_address  \
+0                                                NaN   
+1                                                NaN   
+2  Rosyth Business Park Rosyth, Dunfermline, Fife...   
+3  20 Station Road, Cambridge, Cambridgeshire, CB...   
+4                                                NaN   
+
+  primary_trading_address_latitude primary_trading_address_longitude  \
+0                              NaN                               NaN   
+1                              NaN                               NaN   
+2                              NaN                               NaN   
+3                              NaN                               NaN   
+4                              NaN                               NaN   
+
+                          branch_name  primary_uk_sic_2007_code  \
+0  GATOR INTERMEDIATE HOLDCO (UK) LTD                     99000   
+1                                 NaN                     99000   
+2        LIQUID GAS EQUIPMENT LIMITED                     99000   
+3                CAMFED INTERNATIONAL                     99000   
+4                                 NaN                     99000   
+
+                     primary_uk_sic_2007_description latest_accounts_date  \
+0  Activities of extraterritorial organisations a...           2023-12-31   
+1  Activities of extraterritorial organisations a...           2014-12-31   
+2  Activities of extraterritorial organisations a...           2024-03-31   
+3  Activities of extraterritorial organisations a...           2023-12-31   
+4  Activities of extraterritorial organisations a...           2023-12-31   
+
+   no_of_available_years                              guo  guo_nb  \
+0                      5            GAYTOR PARENT LIMITED      73   
+1                      1                              NaN       0   
+2                     11  BABCOCK INTERNATIONAL GROUP PLC     211   
+3                     20                              NaN       0   
+4                     20    OCEANEERING INTERNATIONAL INC      94   
+
+        entity_type  
+0  Controlled subs.  
+1   Single location  
+2  Controlled subs.  
+3   Single location  
+4  Controlled subs.  
+```
+
