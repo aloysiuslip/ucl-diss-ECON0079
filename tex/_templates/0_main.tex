@@ -1,0 +1,34 @@
+\documentclass[12pt,a4paper]{article}
+\input{preamble_dissertation}
+
+\begin{document}
+
+% Front matter: Roman page numbers
+\pagenumbering{roman}
+
+\input{1_title}
+\newpage
+\input{2_declaration}
+\newpage
+\input{3_toc}
+\newpage
+\input{4_lof}
+\newpage
+\input{5_abstract}
+\newpage
+
+% Main body: Arabic page numbers from 1
+\pagenumbering{arabic}
+
+% ---------------------------------------------------------------
+% Insert dissertation sections here, e.g.:
+%   \section{Introduction}
+%   \section{Conclusions}
+% ---------------------------------------------------------------
+\
+\newpage
+\input{6_bibliography}
+\newpage
+\input{7_appendices}
+
+\end{document}

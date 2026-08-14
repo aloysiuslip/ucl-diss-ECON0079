@@ -86,7 +86,7 @@ def build_raw_file_dict(dir: Path) -> tuple[RawFileDict, dict[str, dict[str, int
     return raw_file_dict, file_count, file_paths_processed
 
 import pandas as pd
-from f_0_dirs import get_data_dirs
+from utils.f_0_dirs import get_data_dirs
 dirs = get_data_dirs()
 
 if __name__ == "__main__":

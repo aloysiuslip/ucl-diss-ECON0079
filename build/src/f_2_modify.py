@@ -1,7 +1,6 @@
 import pandas as pd
 import ibis
-from typing import Any, Union
-
+from typing import Any
 
 # def set_address with raw and derived dataframes parameters
 # dataframe has columns address_raw (str) and address_level (int)

@@ -27,6 +27,7 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 ---
 ### FIX known bugs
 1h2m runtime in priority list
+- Memory error years: 47, 74. 43, some error
 
 ### TODO
 [] cast and process geospatial data

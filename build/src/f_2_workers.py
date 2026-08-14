@@ -1,5 +1,5 @@
 import pandas as pd
-from f_0_dirs import get_data_dirs
+from utils.f_0_dirs import get_data_dirs
 from f_2_check import drop_duplicate_columns, rename_df_with_years
 
 dirs = get_data_dirs()
