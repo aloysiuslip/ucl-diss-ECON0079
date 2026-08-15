@@ -30,5 +30,5 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 - Memory error years: 47, 74. 43, some error
 
 ### TODO
+[] migrate ingest to get rid of fame_derived completely
 [] cast and process geospatial data
-[] review Lars data processing checklist

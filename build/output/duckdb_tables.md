@@ -1,160 +1,215 @@
 # Tables in DuckDB database
 
-## fame_fixed
+## fame_yearly
 
-### Number of rows: 9,795,622
+### Number of rows: 48,764,719
 
 ### Schema:
 
 ```
 ibis.Schema {
-  company_name                       string
-  registered_number                  string
-  ticker_symbol                      string
-  ro_address                         string
-  ro_address_line_1                  string
-  ro_address_line_2                  string
-  ro_address_line_3                  string
-  ro_address_line_4                  string
-  ro_address_line_5                  string
-  ro_city                            string
-  ro_county                          string
-  ro_postcode                        string
-  ro_full_postcode                   string
-  ro_country                         string
-  ro_latitude                        string
-  ro_longitude                       string
-  ro_nuts_region                     string
-  ro_postal_region                   string
-  primary_trading_address            string
-  primary_trading_address_latitude   string
-  primary_trading_address_longitude  string
-  branch_name                        string
-  primary_uk_sic_2007_code           int64
-  primary_uk_sic_2007_description    string
-  latest_accounts_date               date
-  no_of_available_years              int64
-  guo                                string
-  guo_nb                             int64
-  entity_type                        string
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
 }
 ```
 
 ### Head of table:
 
 ```
-                          company_name registered_number ticker_symbol  \
-0                         CLERMARE LTD          11236558           NaN   
-1                  A FRY & CO. LIMITED          11236559           NaN   
-2  PRISK INTERNATIONAL TRADING LIMITED          11236582           NaN   
-3                  REGVOLUTION LIMITED          11236594           NaN   
-4                   WILDFIRE GAMES LTD          11236612           NaN   
+  registered_number  year  consolidated  turnover  shareholders_funds  \
+0          05930391  2014         False       NaN               6.300   
+1          06086182  2009         False       NaN               0.001   
+2          06090468  2008         False       NaN               0.280   
+3          14263317  2023         False       NaN               0.002   
+4          00876306  2010         False       NaN             783.064   
 
-                                          ro_address  \
-0  Telecom House, 125-135 Preston Road, Brighton,...   
-1  11 Oakwood Court, Brook Meadow, South Molton, ...   
-2  Alexandra Gate Business Centre L, 2 Alexandra ...   
-3  71-75 Shelton Street, Covent Garden, London, W...   
-4  83 South Moor Drive, Goldthorpe, Rotherham, So...   
+   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
+0                 NaN      None        NaN                           NaN   
+1                 NaN      None        NaN                           NaN   
+2                 NaN      None      1.041                           NaN   
+3                 NaN      None        NaN                           NaN   
+4                 NaN      None        NaN                           NaN   
 
-                  ro_address_line_1     ro_address_line_2 ro_address_line_3  \
-0                     Telecom House  125-135 Preston Road               NaN   
-1                  11 Oakwood Court          Brook Meadow               NaN   
-2  Alexandra Gate Business Centre L      2 Alexandra Gate               NaN   
-3              71-75 Shelton Street         Covent Garden               NaN   
-4               83 South Moor Drive            Goldthorpe               NaN   
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                      NaN                       NaN                 NaN   
+1                      NaN                       NaN                 NaN   
+2                      NaN                       NaN                 NaN   
+3                      NaN                       NaN                 NaN   
+4                      NaN                       NaN                 NaN   
 
-  ro_address_line_4 ro_address_line_5       ro_city        ro_county  \
-0               NaN               NaN      Brighton      East Sussex   
-1               NaN               NaN  South Molton            Devon   
-2               NaN               NaN       Cardiff  South Glamorgan   
-3               NaN               NaN        London           London   
-4               NaN               NaN     Rotherham  South Yorkshire   
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                           NaN              NaN                 NaN   
+1                           NaN              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                           NaN              NaN                 NaN   
+4                           NaN              NaN                 NaN   
 
-  ro_postcode ro_full_postcode ro_country      ro_latitude   ro_longitude  \
-0        BN 1          BN1 6AF    England  50° 50' 25.0" N   0° 9' 0.7" W   
-1        EX36         EX36 4BN    England              NaN            NaN   
-2        CF24         CF24 2SA      Wales              NaN            NaN   
-3        WC2H         WC2H 9JQ    England  51° 30' 49.4" N  0° 7' 31.4" W   
-4        S 63          S63 9QA    England              NaN            NaN   
+   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
+0          NaN          NaN                NaN          NaN          NaN   
+1          NaN          NaN                NaN          NaN          NaN   
+2          NaN          NaN                NaN        1.041       -2.249   
+3          NaN          NaN                NaN          NaN          NaN   
+4          NaN          NaN                NaN          NaN      -19.633   
 
-         ro_nuts_region    ro_postal_region  \
-0  South East (England)       South Eastern   
-1  South West (England)       South Western   
-2                 Wales               Wales   
-3                London        London Inner   
-4                   NaN  Yorks & Humberside   
+   total_assets  liabilites_lt  cos  admin_expenses  interest_paid  \
+0         6.300            NaN  NaN             NaN            NaN   
+1         0.001            NaN  NaN             NaN            NaN   
+2         2.529            NaN  NaN             NaN            NaN   
+3         0.002            NaN  NaN             NaN            NaN   
+4       802.697            NaN  NaN             NaN            NaN   
 
-                             primary_trading_address  \
-0                                                NaN   
-1  11 Oakwood Court, Brook Meadow, South Molton, ...   
-2                                                NaN   
-3                                                NaN   
-4  83 South Moor Drive, Goldthorpe, Rotherham, So...   
+   profit_loss_pretax2  tax  dividends  depreciation  r_and_d  \
+0                  NaN  NaN        NaN           NaN      NaN   
+1                  NaN  NaN        NaN           NaN      NaN   
+2                  NaN  NaN        NaN         0.334      NaN   
+3                  NaN  NaN        NaN           NaN      NaN   
+4                  NaN  NaN        NaN           NaN      NaN   
 
-  primary_trading_address_latitude primary_trading_address_longitude  \
-0                              NaN                               NaN   
-1                              NaN                               NaN   
-2                              NaN                               NaN   
-3                              NaN                               NaN   
-4                  53° 29' 59.0" N                    1° 18' 14.5" W   
+   remuneration_employees  wages  social_security_costs  pensions_costs  \
+0                     NaN    NaN                    NaN             NaN   
+1                     NaN    NaN                    NaN             NaN   
+2                     NaN    NaN                    NaN             NaN   
+3                     NaN    NaN                    NaN             NaN   
+4                     NaN    NaN                    NaN             NaN   
 
-           branch_name  primary_uk_sic_2007_code  \
-0                  NaN                     62020   
-1  A FRY & CO. LIMITED                     10840   
-2                  NaN                     62012   
-3                  NaN                     62020   
-4   WILDFIRE GAMES LTD                     62011   
-
-                     primary_uk_sic_2007_description latest_accounts_date  \
-0                    Computer consultancy activities           2021-05-31   
-1           Manufacture of condiments and seasonings           2020-03-31   
-2         Business and domestic software development           2021-09-30   
-3                    Computer consultancy activities           2020-03-31   
-4  Ready-made interactive leisure and entertainme...           2024-03-31   
-
-   no_of_available_years            guo  guo_nb       entity_type  
-0                      4            NaN       0   Single location  
-1                      2            NaN       0   Single location  
-2                      3            NaN       0   Single location  
-3                      2            NaN       0   Single location  
-4                      6  MR ADAM LEWIS       2  Controlled subs.  
+   other_staff_costs  renumeration_directors  ebitda  
+0                NaN                     NaN     NaN  
+1                NaN                     NaN     NaN  
+2                NaN                     NaN     NaN  
+3                NaN                     NaN     NaN  
+4                NaN                     NaN     NaN  
 ```
 
-## fame_derived
+## lars_fixed
 
-### Number of rows: 9,283,479
+### Number of rows: 452,638
 
 ### Schema:
 
 ```
 ibis.Schema {
-  registered_number            string
-  has_ptaddress                boolean
-  has_ptaddress_latlong        boolean
-  is_public                    boolean
-  has_company_branch_mismatch  boolean
-  industry_codes               string
-  file_codes                   string
+  registered_number                string
+  company_name_A                   string
+  primary_uk_sic_2007_code         string
+  primary_uk_sic_2007_description  string
+  full_overview                    string
+  primary_business_line            string
+  no_of_available_years            string
+  latest_accounts_date             string
+  company_name_B                   string
+  inactive                         string
+  quoted                           string
+  own_data                         string
+  woco                             string
+  bv_d_id_number                   string
+  company_status                   string
+  status_date                      string
+  legal_form                       string
+  date_of_incorporation            string
+  accounting_reference_date        string
+  registered_accounts_type         string
+  jordans_company_classification   string
+  account_currency                 string
+  guo_name                         string
+  guo_bv_d_id_number               string
+  duo_name                         string
+  duo_bv_d_id_number               string
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
-0          11899400          False                  False      False   
-1          08817563          False                  False      False   
-2          SC434537           True                  False      False   
-3          02874653           True                  False      False   
-4          03295446          False                  False      False   
+  registered_number           company_name_A primary_uk_sic_2007_code  \
+0           0028326       BLACKSTAR GROUP SE                    66120   
+1           0043472          SCOTTY GROUP SE                    26309   
+2           0053787       PETRA DIAMONDS LTD                    08990   
+3           0054897               HISCOX LTD                    65120   
+4           0056130  LANCASHIRE HOLDINGS LTD                    65120   
 
-  has_company_branch_mismatch industry_codes file_codes  
-0                       False             99      12_49  
-1                        None             99      12_49  
-2                       False             99      12_49  
-3                       False             99      12_49  
-4                        None             99      12_49  
+                     primary_uk_sic_2007_description full_overview  \
+0         Security and commodity contracts brokerage           NaN   
+1  Manufacture of communication equipment (other ...           NaN   
+2                  Other mining and quarrying n.e.c.           NaN   
+3                                 Non-life insurance           NaN   
+4                                 Non-life insurance           NaN   
+
+  primary_business_line no_of_available_years latest_accounts_date  \
+0                   NaN                     6           2016-06-30   
+1                   NaN                     1           2011-12-31   
+2                   NaN                     7           2017-06-30   
+3                   NaN                     8           2023-12-31   
+4                   NaN                     8           2023-12-31   
+
+            company_name_B inactive quoted own_data woco bv_d_id_number  \
+0       BLACKSTAR GROUP SE       No     No       No   No     GBH0028326   
+1          SCOTTY GROUP SE       No     No       No   No     GBH0043472   
+2       PETRA DIAMONDS LTD       No     No       No   No     GBH0053787   
+3               HISCOX LTD       No    Yes       No   No     GBH0054897   
+4  LANCASHIRE HOLDINGS LTD       No    Yes       No   No     GBH0056130   
+
+  company_status status_date      legal_form date_of_incorporation  \
+0         Active         NaN      Public AIM                   NaN   
+1         Active         NaN           Other            2012-05-11   
+2         Active         NaN      Public AIM            1997-03-25   
+3         Active         NaN  Public, Quoted            2006-09-06   
+4         Active         NaN  Public, Quoted            2005-10-12   
+
+  accounting_reference_date registered_accounts_type  \
+0                       NaN                      NaN   
+1                       NaN                      NaN   
+2                       NaN                      NaN   
+3                       NaN                      NaN   
+4                       NaN                      NaN   
+
+  jordans_company_classification account_currency guo_name guo_bv_d_id_number  \
+0               Fame A, full a/c              GBP      NaN                NaN   
+1               Fame A, full a/c              GBP      NaN                NaN   
+2               Fame A, full a/c              GBP      NaN                NaN   
+3               Fame A, full a/c              GBP      NaN                NaN   
+4               Fame A, full a/c              GBP      NaN                NaN   
+
+  duo_name duo_bv_d_id_number  
+0      NaN                NaN  
+1      NaN                NaN  
+2      NaN                NaN  
+3      NaN                NaN  
+4      NaN                NaN  
 ```
 
 ## lars_yearly
@@ -291,215 +346,133 @@ ibis.Schema {
 4                          NaN     SCOTTY GROUP SE  
 ```
 
-## lars_fixed
+## fame_fixed
 
-### Number of rows: 452,638
+### Number of rows: 8,323,347
 
 ### Schema:
 
 ```
 ibis.Schema {
-  registered_number                string
-  company_name_A                   string
-  primary_uk_sic_2007_code         string
-  primary_uk_sic_2007_description  string
-  full_overview                    string
-  primary_business_line            string
-  no_of_available_years            string
-  latest_accounts_date             string
-  company_name_B                   string
-  inactive                         string
-  quoted                           string
-  own_data                         string
-  woco                             string
-  bv_d_id_number                   string
-  company_status                   string
-  status_date                      string
-  legal_form                       string
-  date_of_incorporation            string
-  accounting_reference_date        string
-  registered_accounts_type         string
-  jordans_company_classification   string
-  account_currency                 string
-  guo_name                         string
-  guo_bv_d_id_number               string
-  duo_name                         string
-  duo_bv_d_id_number               string
+  company_name                       string
+  registered_number                  string
+  ticker_symbol                      string
+  ro_address                         string
+  ro_address_line_1                  string
+  ro_address_line_2                  string
+  ro_address_line_3                  string
+  ro_address_line_4                  string
+  ro_address_line_5                  string
+  ro_city                            string
+  ro_county                          string
+  ro_postcode                        string
+  ro_full_postcode                   string
+  ro_country                         string
+  ro_latitude                        string
+  ro_longitude                       string
+  ro_nuts_region                     string
+  ro_postal_region                   string
+  primary_trading_address            string
+  primary_trading_address_latitude   string
+  primary_trading_address_longitude  string
+  branch_name                        string
+  primary_uk_sic_2007_code           int64
+  primary_uk_sic_2007_description    string
+  latest_accounts_date               date
+  no_of_available_years              int64
+  guo                                string
+  guo_nb                             int64
+  entity_type                        string
+  industry_codes                     string
+  file_codes                         string
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number           company_name_A primary_uk_sic_2007_code  \
-0           0028326       BLACKSTAR GROUP SE                    66120   
-1           0043472          SCOTTY GROUP SE                    26309   
-2           0053787       PETRA DIAMONDS LTD                    08990   
-3           0054897               HISCOX LTD                    65120   
-4           0056130  LANCASHIRE HOLDINGS LTD                    65120   
+                     company_name registered_number ticker_symbol  \
+0   SERISABELLE (DEGANWY) LIMITED          09889640           NaN   
+1       PERFECT SOLUTIONS INT LTD          09889655           NaN   
+2     THE STRENGTH TEMPLE LIMITED          09889705           NaN   
+3  SIMPLY HAIR EXTENSIONS LIMITED          09889730           NaN   
+4   I.K ENTERPRISE LONDON LIMITED          09889745           NaN   
 
-                     primary_uk_sic_2007_description full_overview  \
-0         Security and commodity contracts brokerage           NaN   
-1  Manufacture of communication equipment (other ...           NaN   
-2                  Other mining and quarrying n.e.c.           NaN   
-3                                 Non-life insurance           NaN   
-4                                 Non-life insurance           NaN   
+                                          ro_address  \
+0  2nd Floor, London House, London Road South, Po...   
+1  Unit 6 859A High Road, Goodmayes, Ilford, Esse...   
+2  360 House 7 Cambridge Court, 210 Shepherds Bus...   
+3  c/o Cheryl Taylor, 2 The Chaplin Wrotham Road,...   
+4  Grand Union House, 20 Kentish Town Road, Londo...   
 
-  primary_business_line no_of_available_years latest_accounts_date  \
-0                   NaN                     6           2016-06-30   
-1                   NaN                     1           2011-12-31   
-2                   NaN                     7           2017-06-30   
-3                   NaN                     8           2023-12-31   
-4                   NaN                     8           2023-12-31   
+             ro_address_line_1           ro_address_line_2 ro_address_line_3  \
+0      2nd Floor, London House           London Road South           Poynton   
+1        Unit 6 859A High Road                   Goodmayes               NaN   
+2  360 House 7 Cambridge Court     210 Shepherds Bush Road               NaN   
+3            c/o Cheryl Taylor  2 The Chaplin Wrotham Road     Borough Green   
+4            Grand Union House        20 Kentish Town Road               NaN   
 
-            company_name_B inactive quoted own_data woco bv_d_id_number  \
-0       BLACKSTAR GROUP SE       No     No       No   No     GBH0028326   
-1          SCOTTY GROUP SE       No     No       No   No     GBH0043472   
-2       PETRA DIAMONDS LTD       No     No       No   No     GBH0053787   
-3               HISCOX LTD       No    Yes       No   No     GBH0054897   
-4  LANCASHIRE HOLDINGS LTD       No    Yes       No   No     GBH0056130   
+  ro_address_line_4 ro_address_line_5    ro_city ro_county ro_postcode  \
+0               NaN               NaN  Stockport  Cheshire        SK12   
+1               NaN               NaN     Ilford     Essex        IG 3   
+2               NaN               NaN     London    London        W  6   
+3               NaN               NaN  Sevenoaks      Kent        TN15   
+4               NaN               NaN     London    London        NW 1   
 
-  company_status status_date      legal_form date_of_incorporation  \
-0         Active         NaN      Public AIM                   NaN   
-1         Active         NaN           Other            2012-05-11   
-2         Active         NaN      Public AIM            1997-03-25   
-3         Active         NaN  Public, Quoted            2006-09-06   
-4         Active         NaN  Public, Quoted            2005-10-12   
+  ro_full_postcode ro_country      ro_latitude    ro_longitude  \
+0         SK12 1YP    England  53° 20' 39.9" N   2° 7' 32.3" W   
+1          IG3 8TG    England              NaN             NaN   
+2           W6 7NJ    England              NaN             NaN   
+3         TN15 8DB    England  51° 17' 44.7" N  0° 18' 31.1" E   
+4          NW1 9NX    England  51° 32' 26.9" N   0° 8' 31.7" W   
 
-  accounting_reference_date registered_accounts_type  \
-0                       NaN                      NaN   
-1                       NaN                      NaN   
-2                       NaN                      NaN   
-3                       NaN                      NaN   
-4                       NaN                      NaN   
+         ro_nuts_region ro_postal_region  \
+0  North West (England)       North West   
+1                London     London Outer   
+2                London     London Inner   
+3  South East (England)    South Eastern   
+4                London     London Inner   
 
-  jordans_company_classification account_currency guo_name guo_bv_d_id_number  \
-0               Fame A, full a/c              GBP      NaN                NaN   
-1               Fame A, full a/c              GBP      NaN                NaN   
-2               Fame A, full a/c              GBP      NaN                NaN   
-3               Fame A, full a/c              GBP      NaN                NaN   
-4               Fame A, full a/c              GBP      NaN                NaN   
+                             primary_trading_address  \
+0                                                NaN   
+1                                                NaN   
+2                                                NaN   
+3  c/o Cheryl Taylor, 2 The Chaplin Wrotham Road,...   
+4                                                NaN   
 
-  duo_name duo_bv_d_id_number  
-0      NaN                NaN  
-1      NaN                NaN  
-2      NaN                NaN  
-3      NaN                NaN  
-4      NaN                NaN  
-```
+  primary_trading_address_latitude primary_trading_address_longitude  \
+0                              NaN                               NaN   
+1                              NaN                               NaN   
+2                              NaN                               NaN   
+3                  51° 17' 44.7" N                    0° 18' 31.1" E   
+4                              NaN                               NaN   
 
-## fame_yearly
+                      branch_name  primary_uk_sic_2007_code  \
+0                             NaN                     96090   
+1                             NaN                     96090   
+2                             NaN                     96040   
+3  SIMPLY HAIR EXTENSIONS LIMITED                     96020   
+4                             NaN                     96090   
 
-### Number of rows: 48,764,719
+            primary_uk_sic_2007_description latest_accounts_date  \
+0  Other personal service activities n.e.c.           2016-11-30   
+1  Other personal service activities n.e.c.           2016-11-30   
+2            Physical well-being activities           2017-11-30   
+3   Hairdressing and other beauty treatment           2020-11-30   
+4  Other personal service activities n.e.c.           2016-11-30   
 
-### Schema:
+   no_of_available_years  guo  guo_nb      entity_type industry_codes  \
+0                      1  NaN       0  Single location             96   
+1                      1  NaN       0  Single location             96   
+2                      2  NaN       0  Single location             96   
+3                      5  NaN       0  Single location             96   
+4                      1  NaN       0  Single location             96   
 
-```
-ibis.Schema {
-  registered_number             string
-  year                          int64
-  consolidated                  boolean
-  turnover                      float64
-  shareholders_funds            float64
-  profit_loss_pretax            float64
-  employees                     int64
-  tangibles                     float64
-  tangibles_land_and_buildings  float64
-  tangibles_land_freehold       float64
-  tangibles_land_leasehold      float64
-  tangibles_fixt_fit            float64
-  tangibles_plant_and_vehicles  float64
-  tangibles_plant               float64
-  tangibles_vehicles            float64
-  fixed_other                   float64
-  intangibles                   float64
-  investments_other             float64
-  fixed_total                   float64
-  liabilities                   float64
-  total_assets                  float64
-  liabilites_lt                 float64
-  cos                           float64
-  admin_expenses                float64
-  interest_paid                 float64
-  profit_loss_pretax2           float64
-  tax                           float64
-  dividends                     float64
-  depreciation                  float64
-  r_and_d                       float64
-  remuneration_employees        float64
-  wages                         float64
-  social_security_costs         float64
-  pensions_costs                float64
-  other_staff_costs             float64
-  renumeration_directors        float64
-  ebitda                        float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  consolidated  turnover  shareholders_funds  \
-0          05930391  2014         False       NaN               6.300   
-1          06086182  2009         False       NaN               0.001   
-2          06090468  2008         False       NaN               0.280   
-3          14263317  2023         False       NaN               0.002   
-4          00876306  2010         False       NaN             783.064   
-
-   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
-0                 NaN      None        NaN                           NaN   
-1                 NaN      None        NaN                           NaN   
-2                 NaN      None      1.041                           NaN   
-3                 NaN      None        NaN                           NaN   
-4                 NaN      None        NaN                           NaN   
-
-   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
-0                      NaN                       NaN                 NaN   
-1                      NaN                       NaN                 NaN   
-2                      NaN                       NaN                 NaN   
-3                      NaN                       NaN                 NaN   
-4                      NaN                       NaN                 NaN   
-
-   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
-0                           NaN              NaN                 NaN   
-1                           NaN              NaN                 NaN   
-2                           NaN              NaN                 NaN   
-3                           NaN              NaN                 NaN   
-4                           NaN              NaN                 NaN   
-
-   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
-0          NaN          NaN                NaN          NaN          NaN   
-1          NaN          NaN                NaN          NaN          NaN   
-2          NaN          NaN                NaN        1.041       -2.249   
-3          NaN          NaN                NaN          NaN          NaN   
-4          NaN          NaN                NaN          NaN      -19.633   
-
-   total_assets  liabilites_lt  cos  admin_expenses  interest_paid  \
-0         6.300            NaN  NaN             NaN            NaN   
-1         0.001            NaN  NaN             NaN            NaN   
-2         2.529            NaN  NaN             NaN            NaN   
-3         0.002            NaN  NaN             NaN            NaN   
-4       802.697            NaN  NaN             NaN            NaN   
-
-   profit_loss_pretax2  tax  dividends  depreciation  r_and_d  \
-0                  NaN  NaN        NaN           NaN      NaN   
-1                  NaN  NaN        NaN           NaN      NaN   
-2                  NaN  NaN        NaN         0.334      NaN   
-3                  NaN  NaN        NaN           NaN      NaN   
-4                  NaN  NaN        NaN           NaN      NaN   
-
-   remuneration_employees  wages  social_security_costs  pensions_costs  \
-0                     NaN    NaN                    NaN             NaN   
-1                     NaN    NaN                    NaN             NaN   
-2                     NaN    NaN                    NaN             NaN   
-3                     NaN    NaN                    NaN             NaN   
-4                     NaN    NaN                    NaN             NaN   
-
-   other_staff_costs  renumeration_directors  ebitda  
-0                NaN                     NaN     NaN  
-1                NaN                     NaN     NaN  
-2                NaN                     NaN     NaN  
-3                NaN                     NaN     NaN  
-4                NaN                     NaN     NaN  
+  file_codes  
+0    17_37 2  
+1    17_37 2  
+2    17_37 2  
+3    17_37 2  
+4    17_37 2  
 ```
 
