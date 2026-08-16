@@ -1,5 +1,139 @@
 # Tables in DuckDB database
 
+## lars_yearly
+
+### Number of rows: 2,378,089
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number                         string
+  company_name                              string
+  year                                      string
+  consolidated                              string
+  employees                                 string
+  systemA_industry                          string
+  cons_uncons                               string
+  turnover_th_gbp                           string
+  shareholders_funds_th_gbp                 string
+  profit_loss_before_taxation_th_gbp        string
+  number_of_employees                       string
+  total_assets_th_gbp                       string
+  ebitda_th_gbp                             string
+  current_liabilities_th_gbp                string
+  long_term_liabilities_th_gbp              string
+  research_development_th_gbp               string
+  wages_salaries_th_gbp                     string
+  interest_paid_th_gbp                      string
+  taxation_th_gbp                           string
+  depreciation_th_gbp                       string
+  tangible_assets_th_gbp                    string
+  intangible_assets_th_gbp                  string
+  fixed_assets_th_gbp                       string
+  other_fixed_assets_th_gbp                 string
+  pension_costs_th_gbp                      string
+  social_security_costs_th_gbp              string
+  dividends_distributable_profit_th_gbp     string
+  systemB_group                             string
+  cost_of_sales_th_gbp                      string
+  exceptional_items_pre_gp_th_gbp           string
+  cash_out_in_flow_investing_activ_th_gbp   string
+  capital_expenditure_financ_invest_th_gbp  string
+  acquisition_disposal_th_gbp               string
+  equity_dividends_paid_th_gbp              string
+  company_name_raw                          string
+}
+```
+
+### Head of table:
+
+```
+  registered_number        company_name  year consolidated employees  \
+0           0028326  BLACKSTAR GROUP SE  2013            1        16   
+1           0028326  BLACKSTAR GROUP SE  2014            1        13   
+2           0028326  BLACKSTAR GROUP SE  2015            1        15   
+3           0028326  BLACKSTAR GROUP SE  2016            1        12   
+4           0043472     SCOTTY GROUP SE  2011            1        31   
+
+  systemA_industry   cons_uncons turnover_th_gbp shareholders_funds_th_gbp  \
+0               58  Consolidated             NaN                     74804   
+1               58  Consolidated           13737                     80563   
+2               58  Consolidated           22316                    230416   
+3               58  Consolidated           19696                    179223   
+4               26  Consolidated            5002                      5673   
+
+  profit_loss_before_taxation_th_gbp number_of_employees total_assets_th_gbp  \
+0                              12203                  16               75701   
+1                               8168                  13               85856   
+2                              18384                  15              254899   
+3                             -33814                  12              200788   
+4                               -200                  31                7517   
+
+  ebitda_th_gbp current_liabilities_th_gbp long_term_liabilities_th_gbp  \
+0         12233                       -882                          -15   
+1          8587                      -5292                           -1   
+2         18730                     -24475                           -8   
+3        -31522                     -21500                          -65   
+4          3805                      -1684                         -159   
+
+  research_development_th_gbp wages_salaries_th_gbp interest_paid_th_gbp  \
+0                         NaN                  1674                 -223   
+1                         NaN                   NaN                 -489   
+2                         NaN                   NaN                 -322   
+3                         NaN                   NaN                -2334   
+4                         NaN                  1709                  -27   
+
+  taxation_th_gbp depreciation_th_gbp tangible_assets_th_gbp  \
+0              15                  16                     78   
+1               8                  12                     66   
+2              15                   6                     56   
+3             -45                  16                    222   
+4             287                  88                    214   
+
+  intangible_assets_th_gbp fixed_assets_th_gbp other_fixed_assets_th_gbp  \
+0                       51               67937                       NaN   
+1                       49               82094                       NaN   
+2                      NaN              252167                       NaN   
+3                      NaN              199901                       NaN   
+4                     4971                5672                       NaN   
+
+  pension_costs_th_gbp social_security_costs_th_gbp  \
+0                  NaN                          NaN   
+1                  NaN                          NaN   
+2                  NaN                          NaN   
+3                  NaN                          NaN   
+4                  NaN                          340   
+
+  dividends_distributable_profit_th_gbp   systemB_group cost_of_sales_th_gbp  \
+0                                 -1382  58_59_60_61_63                  NaN   
+1                                 -1034  58_59_60_61_63                  NaN   
+2                                  -647  58_59_60_61_63                  NaN   
+3                                  -466  58_59_60_61_63                  NaN   
+4                                   NaN           22_30                -2072   
+
+  exceptional_items_pre_gp_th_gbp cash_out_in_flow_investing_activ_th_gbp  \
+0                             NaN                                     -37   
+1                             NaN                                     -10   
+2                             NaN                                      -3   
+3                             NaN                                    -171   
+4                             NaN                                    -145   
+
+  capital_expenditure_financ_invest_th_gbp acquisition_disposal_th_gbp  \
+0                                      NaN                         NaN   
+1                                      NaN                         NaN   
+2                                      NaN                         NaN   
+3                                      NaN                         NaN   
+4                                      NaN                         NaN   
+
+  equity_dividends_paid_th_gbp    company_name_raw  
+0                        -1382  BLACKSTAR GROUP SE  
+1                        -1034  BLACKSTAR GROUP SE  
+2                         -647  BLACKSTAR GROUP SE  
+3                         -466  BLACKSTAR GROUP SE  
+4                          NaN     SCOTTY GROUP SE  
+```
+
 ## fame_fixed
 
 ### Number of rows: 155,170
@@ -222,7 +356,7 @@ ibis.Schema {
 
 ## fame_yearly
 
-### Number of rows: 1,198,728
+### Number of rows: 1,128,490
 
 ### Schema:
 
@@ -272,200 +406,66 @@ ibis.Schema {
 
 ```
   registered_number  year  consolidated   turnover  shareholders_funds  \
-0          06459283  2008         False  82875.000            3145.000   
-1          04690455  2008          True  17222.388            4189.194   
-2          SC169561  2008         False        NaN              94.745   
-3          03486156  2008         False  15523.082            7762.455   
-4          02072152  2008         False   7193.000           29120.000   
+0          02363341  2006          True  12660.069             101.130   
+1          00950699  2006         False   5456.697            2648.863   
+2          03118893  2006          True  14709.910             162.534   
+3          03026300  2006         False  28928.515            7206.625   
+4          SC060639  2006         False        NaN            1045.717   
 
    profit_loss_pretax  employees  tangibles  tangibles_land_and_buildings  \
-0           -2675.000       1936  22656.000                     14919.000   
-1             454.711        261   8593.005                      4318.904   
-2             -14.110         14     16.921                        11.036   
-3          -15856.571        329  50303.520                     48777.135   
-4            3224.000         43     20.000                           NaN   
+0              37.832         72     63.857                           NaN   
+1              23.111         37     92.091                           NaN   
+2            -177.649         15     53.624                           NaN   
+3             808.949         52   2156.315                       1870.25   
+4             151.178         64    418.020                           NaN   
 
    tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
-0                      NaN                       NaN            3815.000   
+0                      NaN                       NaN                 NaN   
 1                      NaN                       NaN                 NaN   
-2                      NaN                       NaN               5.885   
-3                      NaN                 48777.135                 NaN   
-4                      NaN                       NaN              20.000   
+2                      NaN                       NaN               8.937   
+3                      NaN                       NaN              31.950   
+4                      NaN                       NaN              20.449   
 
    tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
-0                      3922.000              NaN                 NaN   
-1                      4274.101              NaN                 NaN   
-2                           NaN              NaN                 NaN   
-3                       710.335          406.815              303.52   
-4                           NaN              NaN                 NaN   
+0                           NaN              NaN                 NaN   
+1                           NaN              NaN                 NaN   
+2                        44.687              NaN                 NaN   
+3                       254.115              NaN                 NaN   
+4                       397.571              NaN                 NaN   
 
    fixed_other  intangibles  investments_other  fixed_total  liabilities  \
-0          NaN      24600.0                NaN    47256.000   -15725.000   
-1          NaN          NaN                NaN     8593.005    -5474.505   
-2          NaN          NaN                NaN       16.921      -26.146   
-3       816.05          NaN            657.473    50960.993   -16607.974   
-4          NaN          NaN                NaN       20.000   -45650.000   
+0          NaN          NaN                NaN       63.857    -5406.286   
+1          NaN          NaN                NaN       92.092    -2295.513   
+2          NaN          NaN                4.1       57.724    -1947.226   
+3          NaN        0.001                NaN     2156.316    -6017.700   
+4          NaN          NaN                NaN      418.020    -2897.758   
 
    total_assets  liabilites_lt        cos  admin_expenses  interest_paid  \
-0     60113.000     -41243.000        NaN      -80306.000      -5479.000   
-1     13915.076      -4251.377 -13011.150       -3506.247       -364.607   
-2       122.463         -1.572        NaN        -374.202            NaN   
-3     55746.109     -31375.680  -7916.638      -21654.218      -2682.553   
-4     74771.000         -1.000        NaN       -5772.000            NaN   
+0      5664.607       -157.191 -10587.042             NaN            NaN   
+1      4944.376            NaN        NaN             NaN            NaN   
+2      2109.760            NaN -13387.445       -1579.087        -63.764   
+3     13224.325            NaN -25192.719       -2983.502            NaN   
+4      3993.700        -50.225        NaN       -1545.316        -51.188   
 
    profit_loss_pretax2      tax  dividends  depreciation  r_and_d  \
-0            -2675.000  180.000        NaN      1982.000      NaN   
-1              454.711  -55.875     -200.0       923.785      NaN   
-2              -14.110      NaN        NaN         6.368      NaN   
-3           -15856.571      NaN        NaN      2069.918      NaN   
-4             3224.000  -37.000        NaN         7.000      NaN   
+0                  NaN      NaN        NaN           NaN      NaN   
+1                  NaN      NaN        NaN           NaN      NaN   
+2             -177.649   17.647        NaN           NaN      NaN   
+3              808.949 -229.190        NaN       172.979      NaN   
+4              151.178  -22.991        NaN        79.220      NaN   
 
-   remuneration_employees      wages  social_security_costs  pensions_costs  \
-0               31647.000  28497.000               2947.000         203.000   
-1                6191.130   5525.717                526.479         138.934   
-2                 291.799    249.001                 18.532          24.266   
-3                5641.233   5192.689                448.544             NaN   
-4                2547.000   2043.000                268.000         236.000   
+   remuneration_employees     wages  social_security_costs  pensions_costs  \
+0               10336.112  8672.321                937.947         725.844   
+1                1002.630   917.443                 85.187             NaN   
+2                 418.627   382.495                 36.132             NaN   
+3                1936.019  1655.821                181.738          98.460   
+4                2154.140  1727.193                182.815         244.132   
 
-   other_staff_costs  renumeration_directors     ebitda  
-0                NaN                 214.000   5578.000  
-1                NaN                 294.666   1628.776  
-2                NaN                     NaN   -367.834  
-3                NaN                     NaN -11977.856  
-4                NaN                 287.000   1428.000  
-```
-
-## lars_yearly
-
-### Number of rows: 2,378,089
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number                         string
-  company_name                              string
-  year                                      string
-  consolidated                              string
-  employees                                 string
-  systemA_industry                          string
-  cons_uncons                               string
-  turnover_th_gbp                           string
-  shareholders_funds_th_gbp                 string
-  profit_loss_before_taxation_th_gbp        string
-  number_of_employees                       string
-  total_assets_th_gbp                       string
-  ebitda_th_gbp                             string
-  current_liabilities_th_gbp                string
-  long_term_liabilities_th_gbp              string
-  research_development_th_gbp               string
-  wages_salaries_th_gbp                     string
-  interest_paid_th_gbp                      string
-  taxation_th_gbp                           string
-  depreciation_th_gbp                       string
-  tangible_assets_th_gbp                    string
-  intangible_assets_th_gbp                  string
-  fixed_assets_th_gbp                       string
-  other_fixed_assets_th_gbp                 string
-  pension_costs_th_gbp                      string
-  social_security_costs_th_gbp              string
-  dividends_distributable_profit_th_gbp     string
-  systemB_group                             string
-  cost_of_sales_th_gbp                      string
-  exceptional_items_pre_gp_th_gbp           string
-  cash_out_in_flow_investing_activ_th_gbp   string
-  capital_expenditure_financ_invest_th_gbp  string
-  acquisition_disposal_th_gbp               string
-  equity_dividends_paid_th_gbp              string
-  company_name_raw                          string
-}
-```
-
-### Head of table:
-
-```
-  registered_number        company_name  year consolidated employees  \
-0           0028326  BLACKSTAR GROUP SE  2013            1        16   
-1           0028326  BLACKSTAR GROUP SE  2014            1        13   
-2           0028326  BLACKSTAR GROUP SE  2015            1        15   
-3           0028326  BLACKSTAR GROUP SE  2016            1        12   
-4           0043472     SCOTTY GROUP SE  2011            1        31   
-
-  systemA_industry   cons_uncons turnover_th_gbp shareholders_funds_th_gbp  \
-0               58  Consolidated             NaN                     74804   
-1               58  Consolidated           13737                     80563   
-2               58  Consolidated           22316                    230416   
-3               58  Consolidated           19696                    179223   
-4               26  Consolidated            5002                      5673   
-
-  profit_loss_before_taxation_th_gbp number_of_employees total_assets_th_gbp  \
-0                              12203                  16               75701   
-1                               8168                  13               85856   
-2                              18384                  15              254899   
-3                             -33814                  12              200788   
-4                               -200                  31                7517   
-
-  ebitda_th_gbp current_liabilities_th_gbp long_term_liabilities_th_gbp  \
-0         12233                       -882                          -15   
-1          8587                      -5292                           -1   
-2         18730                     -24475                           -8   
-3        -31522                     -21500                          -65   
-4          3805                      -1684                         -159   
-
-  research_development_th_gbp wages_salaries_th_gbp interest_paid_th_gbp  \
-0                         NaN                  1674                 -223   
-1                         NaN                   NaN                 -489   
-2                         NaN                   NaN                 -322   
-3                         NaN                   NaN                -2334   
-4                         NaN                  1709                  -27   
-
-  taxation_th_gbp depreciation_th_gbp tangible_assets_th_gbp  \
-0              15                  16                     78   
-1               8                  12                     66   
-2              15                   6                     56   
-3             -45                  16                    222   
-4             287                  88                    214   
-
-  intangible_assets_th_gbp fixed_assets_th_gbp other_fixed_assets_th_gbp  \
-0                       51               67937                       NaN   
-1                       49               82094                       NaN   
-2                      NaN              252167                       NaN   
-3                      NaN              199901                       NaN   
-4                     4971                5672                       NaN   
-
-  pension_costs_th_gbp social_security_costs_th_gbp  \
-0                  NaN                          NaN   
-1                  NaN                          NaN   
-2                  NaN                          NaN   
-3                  NaN                          NaN   
-4                  NaN                          340   
-
-  dividends_distributable_profit_th_gbp   systemB_group cost_of_sales_th_gbp  \
-0                                 -1382  58_59_60_61_63                  NaN   
-1                                 -1034  58_59_60_61_63                  NaN   
-2                                  -647  58_59_60_61_63                  NaN   
-3                                  -466  58_59_60_61_63                  NaN   
-4                                   NaN           22_30                -2072   
-
-  exceptional_items_pre_gp_th_gbp cash_out_in_flow_investing_activ_th_gbp  \
-0                             NaN                                     -37   
-1                             NaN                                     -10   
-2                             NaN                                      -3   
-3                             NaN                                    -171   
-4                             NaN                                    -145   
-
-  capital_expenditure_financ_invest_th_gbp acquisition_disposal_th_gbp  \
-0                                      NaN                         NaN   
-1                                      NaN                         NaN   
-2                                      NaN                         NaN   
-3                                      NaN                         NaN   
-4                                      NaN                         NaN   
-
-  equity_dividends_paid_th_gbp    company_name_raw  
-0                        -1382  BLACKSTAR GROUP SE  
-1                        -1034  BLACKSTAR GROUP SE  
-2                         -647  BLACKSTAR GROUP SE  
-3                         -466  BLACKSTAR GROUP SE  
-4                          NaN     SCOTTY GROUP SE  
+   other_staff_costs  renumeration_directors   ebitda  
+0                NaN                     NaN   -9.903  
+1                NaN                     NaN   65.791  
+2                NaN                     NaN -256.622  
+3                NaN                 428.642  925.273  
+4                NaN                 807.377  264.045  
 ```
 
