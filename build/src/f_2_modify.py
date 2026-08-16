@@ -2,26 +2,6 @@ import pandas as pd
 import ibis
 from typing import Any
 
-# def set_address with raw and derived dataframes parameters
-# dataframe has columns address_raw (str) and address_level (int)
-def set_address(raw: pd.DataFrame, derived: pd.DataFrame = pd.DataFrame(columns=[
-    "registered_number", "address_raw", "address_level"
-])) -> pd.DataFrame:
-
-    # Create a column in derived which corresponds to the column in raw
-    # i.e. finds the matching registered_number if it exists as an entry in derived
-    # or creates the row if it doesn't exist
-    # and then sets address_raw as 'primary_trading_address_longitude' if it exists in raw and is notna
-    # and then sets address_level as 1
-    if 'primary_trading_address' in raw.columns:
-        derived['address_raw'] = raw['primary_trading_address']
-        derived['address_level'] = 1
-    else:
-        derived['address_raw'] = None
-        derived['address_level'] = None
-
-    return derived
-
 # --- Date processing #
 
 # Inspects an Ibis Schema (or dict mapping col->type), finds all date/timestamp fields,
