@@ -1,118 +1,126 @@
 # Tables in DuckDB database
 
-## fame_yearly
+## fame_fixed
 
-### Number of rows: 48,764,719
+### Number of rows: 155,170
 
 ### Schema:
 
 ```
 ibis.Schema {
-  registered_number             string
-  year                          int64
-  consolidated                  boolean
-  turnover                      float64
-  shareholders_funds            float64
-  profit_loss_pretax            float64
-  employees                     int64
-  tangibles                     float64
-  tangibles_land_and_buildings  float64
-  tangibles_land_freehold       float64
-  tangibles_land_leasehold      float64
-  tangibles_fixt_fit            float64
-  tangibles_plant_and_vehicles  float64
-  tangibles_plant               float64
-  tangibles_vehicles            float64
-  fixed_other                   float64
-  intangibles                   float64
-  investments_other             float64
-  fixed_total                   float64
-  liabilities                   float64
-  total_assets                  float64
-  liabilites_lt                 float64
-  cos                           float64
-  admin_expenses                float64
-  interest_paid                 float64
-  profit_loss_pretax2           float64
-  tax                           float64
-  dividends                     float64
-  depreciation                  float64
-  r_and_d                       float64
-  remuneration_employees        float64
-  wages                         float64
-  social_security_costs         float64
-  pensions_costs                float64
-  other_staff_costs             float64
-  renumeration_directors        float64
-  ebitda                        float64
+  company_name                       string
+  registered_number                  string
+  ticker_symbol                      string
+  ro_address                         string
+  ro_address_line_1                  string
+  ro_address_line_2                  string
+  ro_address_line_3                  string
+  ro_address_line_4                  string
+  ro_address_line_5                  string
+  ro_city                            string
+  ro_county                          string
+  ro_postcode                        string
+  ro_full_postcode                   string
+  ro_country                         string
+  ro_latitude                        string
+  ro_longitude                       string
+  ro_nuts_region                     string
+  ro_postal_region                   string
+  primary_trading_address            string
+  primary_trading_address_latitude   string
+  primary_trading_address_longitude  string
+  branch_name                        string
+  primary_uk_sic_2007_code           int64
+  primary_uk_sic_2007_description    string
+  latest_accounts_date               date
+  no_of_available_years              int64
+  guo                                string
+  guo_nb                             int64
+  entity_type                        string
+  industry_codes                     string
+  file_codes                         string
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number  year  consolidated  turnover  shareholders_funds  \
-0          05930391  2014         False       NaN               6.300   
-1          06086182  2009         False       NaN               0.001   
-2          06090468  2008         False       NaN               0.280   
-3          14263317  2023         False       NaN               0.002   
-4          00876306  2010         False       NaN             783.064   
+                          company_name registered_number ticker_symbol  \
+0              BREEDON TRADING LIMITED          00156531           NaN   
+1                    MOUCHEL GROUP PLC          00095369          MCHL   
+2  FERROVIAL CONSTRUCTION (UK) LIMITED          05779755           NaN   
+3                    FP MCCANN LIMITED          NI013563           NaN   
+4                CLANCY DOCWRA LIMITED          00432242           NaN   
 
-   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
-0                 NaN      None        NaN                           NaN   
-1                 NaN      None        NaN                           NaN   
-2                 NaN      None      1.041                           NaN   
-3                 NaN      None        NaN                           NaN   
-4                 NaN      None        NaN                           NaN   
+                                          ro_address     ro_address_line_1  \
+0   Breedon-On-The-Hill, Derby, Derbyshire, DE73 8AP   Breedon-On-The-Hill   
+1  c/o Kpmg Llp, 8 Salisbury Square, London, EC4Y...          c/o Kpmg Llp   
+2  3rd Floor Building 5, Chiswick Business Park, ...  3rd Floor Building 5   
+3  Knockloughrim Quarry, 3 Drumard Road, Magheraf...  Knockloughrim Quarry   
+4  Clare House, Coppermill Lane, Harefield, Uxbri...           Clare House   
 
-   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
-0                      NaN                       NaN                 NaN   
-1                      NaN                       NaN                 NaN   
-2                      NaN                       NaN                 NaN   
-3                      NaN                       NaN                 NaN   
-4                      NaN                       NaN                 NaN   
+        ro_address_line_2 ro_address_line_3 ro_address_line_4  \
+0                     NaN               NaN               NaN   
+1      8 Salisbury Square               NaN               NaN   
+2  Chiswick Business Park               NaN               NaN   
+3          3 Drumard Road               NaN               NaN   
+4         Coppermill Lane         Harefield               NaN   
 
-   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
-0                           NaN              NaN                 NaN   
-1                           NaN              NaN                 NaN   
-2                           NaN              NaN                 NaN   
-3                           NaN              NaN                 NaN   
-4                           NaN              NaN                 NaN   
+  ro_address_line_5      ro_city           ro_county ro_postcode  \
+0               NaN        Derby          Derbyshire        DE73   
+1               NaN       London              London        EC4Y   
+2               NaN       London              London        W  4   
+3               NaN  Magherafelt  County Londonderry        BT45   
+4               NaN     Uxbridge           Middlesex        UB 9   
 
-   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
-0          NaN          NaN                NaN          NaN          NaN   
-1          NaN          NaN                NaN          NaN          NaN   
-2          NaN          NaN                NaN        1.041       -2.249   
-3          NaN          NaN                NaN          NaN          NaN   
-4          NaN          NaN                NaN          NaN      -19.633   
+  ro_full_postcode        ro_country      ro_latitude    ro_longitude  \
+0         DE73 8AP           England              NaN             NaN   
+1         EC4Y 8BB           England              NaN             NaN   
+2           W4 5YF           England              NaN             NaN   
+3         BT45 8QA  Northern Ireland  54° 49' 28.3" N  6° 35' 14.9" W   
+4          UB9 6HZ           England  51° 36' 39.6" N   0° 30' 0.9" W   
 
-   total_assets  liabilites_lt  cos  admin_expenses  interest_paid  \
-0         6.300            NaN  NaN             NaN            NaN   
-1         0.001            NaN  NaN             NaN            NaN   
-2         2.529            NaN  NaN             NaN            NaN   
-3         0.002            NaN  NaN             NaN            NaN   
-4       802.697            NaN  NaN             NaN            NaN   
+            ro_nuts_region  ro_postal_region primary_trading_address  \
+0  East Midlands (England)     East Midlands                     NaN   
+1                   London      London Inner                     NaN   
+2                   London      London Inner                     NaN   
+3         Northern Ireland  Northern Ireland                     NaN   
+4          East of England      London Outer                     NaN   
 
-   profit_loss_pretax2  tax  dividends  depreciation  r_and_d  \
-0                  NaN  NaN        NaN           NaN      NaN   
-1                  NaN  NaN        NaN           NaN      NaN   
-2                  NaN  NaN        NaN         0.334      NaN   
-3                  NaN  NaN        NaN           NaN      NaN   
-4                  NaN  NaN        NaN           NaN      NaN   
+  primary_trading_address_latitude primary_trading_address_longitude  \
+0                              NaN                               NaN   
+1                              NaN                               NaN   
+2                  51° 29' 32.6" N                    0° 16' 30.1" W   
+3                  54° 49' 28.3" N                    6° 35' 14.9" W   
+4                  51° 36' 39.6" N                     0° 30' 0.9" W   
 
-   remuneration_employees  wages  social_security_costs  pensions_costs  \
-0                     NaN    NaN                    NaN             NaN   
-1                     NaN    NaN                    NaN             NaN   
-2                     NaN    NaN                    NaN             NaN   
-3                     NaN    NaN                    NaN             NaN   
-4                     NaN    NaN                    NaN             NaN   
+                           branch_name  primary_uk_sic_2007_code  \
+0              BREEDON TRADING LIMITED                      8110   
+1                                  NaN                     42110   
+2  FERROVIAL CONSTRUCTION (UK) LIMITED                     42110   
+3                    FP MCCANN LIMITED                      8110   
+4                CLANCY DOCWRA LIMITED                     42910   
 
-   other_staff_costs  renumeration_directors  ebitda  
-0                NaN                     NaN     NaN  
-1                NaN                     NaN     NaN  
-2                NaN                     NaN     NaN  
-3                NaN                     NaN     NaN  
-4                NaN                     NaN     NaN  
+                     primary_uk_sic_2007_description latest_accounts_date  \
+0  Quarrying of ornamental and building stone, li...           2023-12-31   
+1                Construction of roads and motorways           2011-07-31   
+2                Construction of roads and motorways           2023-12-31   
+3  Quarrying of ornamental and building stone, li...           2023-12-31   
+4                     Construction of water projects           2024-03-31   
+
+   no_of_available_years                            guo  guo_nb  \
+0                     20              BREEDON GROUP PLC      70   
+1                     20                            NaN       0   
+2                     18                   FERROVIAL SE     411   
+3                     20        FP MCCANN GROUP LIMITED       3   
+4                     20  CLANCY GROUP HOLDINGS LIMITED       9   
+
+        entity_type industry_codes         file_codes  
+0  Controlled subs.          08,42        12_44,11_53  
+1   Single location             42              11_53  
+2  Controlled subs.             42              11_53  
+3  Controlled subs.       08,23,42  12_44,22_17,11_53  
+4  Controlled subs.             42              11_53  
 ```
 
 ## lars_fixed
@@ -210,6 +218,121 @@ ibis.Schema {
 2      NaN                NaN  
 3      NaN                NaN  
 4      NaN                NaN  
+```
+
+## fame_yearly
+
+### Number of rows: 1,198,728
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  consolidated   turnover  shareholders_funds  \
+0          06459283  2008         False  82875.000            3145.000   
+1          04690455  2008          True  17222.388            4189.194   
+2          SC169561  2008         False        NaN              94.745   
+3          03486156  2008         False  15523.082            7762.455   
+4          02072152  2008         False   7193.000           29120.000   
+
+   profit_loss_pretax  employees  tangibles  tangibles_land_and_buildings  \
+0           -2675.000       1936  22656.000                     14919.000   
+1             454.711        261   8593.005                      4318.904   
+2             -14.110         14     16.921                        11.036   
+3          -15856.571        329  50303.520                     48777.135   
+4            3224.000         43     20.000                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                      NaN                       NaN            3815.000   
+1                      NaN                       NaN                 NaN   
+2                      NaN                       NaN               5.885   
+3                      NaN                 48777.135                 NaN   
+4                      NaN                       NaN              20.000   
+
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                      3922.000              NaN                 NaN   
+1                      4274.101              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                       710.335          406.815              303.52   
+4                           NaN              NaN                 NaN   
+
+   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
+0          NaN      24600.0                NaN    47256.000   -15725.000   
+1          NaN          NaN                NaN     8593.005    -5474.505   
+2          NaN          NaN                NaN       16.921      -26.146   
+3       816.05          NaN            657.473    50960.993   -16607.974   
+4          NaN          NaN                NaN       20.000   -45650.000   
+
+   total_assets  liabilites_lt        cos  admin_expenses  interest_paid  \
+0     60113.000     -41243.000        NaN      -80306.000      -5479.000   
+1     13915.076      -4251.377 -13011.150       -3506.247       -364.607   
+2       122.463         -1.572        NaN        -374.202            NaN   
+3     55746.109     -31375.680  -7916.638      -21654.218      -2682.553   
+4     74771.000         -1.000        NaN       -5772.000            NaN   
+
+   profit_loss_pretax2      tax  dividends  depreciation  r_and_d  \
+0            -2675.000  180.000        NaN      1982.000      NaN   
+1              454.711  -55.875     -200.0       923.785      NaN   
+2              -14.110      NaN        NaN         6.368      NaN   
+3           -15856.571      NaN        NaN      2069.918      NaN   
+4             3224.000  -37.000        NaN         7.000      NaN   
+
+   remuneration_employees      wages  social_security_costs  pensions_costs  \
+0               31647.000  28497.000               2947.000         203.000   
+1                6191.130   5525.717                526.479         138.934   
+2                 291.799    249.001                 18.532          24.266   
+3                5641.233   5192.689                448.544             NaN   
+4                2547.000   2043.000                268.000         236.000   
+
+   other_staff_costs  renumeration_directors     ebitda  
+0                NaN                 214.000   5578.000  
+1                NaN                 294.666   1628.776  
+2                NaN                     NaN   -367.834  
+3                NaN                     NaN -11977.856  
+4                NaN                 287.000   1428.000  
 ```
 
 ## lars_yearly
@@ -344,135 +467,5 @@ ibis.Schema {
 2                         -647  BLACKSTAR GROUP SE  
 3                         -466  BLACKSTAR GROUP SE  
 4                          NaN     SCOTTY GROUP SE  
-```
-
-## fame_fixed
-
-### Number of rows: 8,323,347
-
-### Schema:
-
-```
-ibis.Schema {
-  company_name                       string
-  registered_number                  string
-  ticker_symbol                      string
-  ro_address                         string
-  ro_address_line_1                  string
-  ro_address_line_2                  string
-  ro_address_line_3                  string
-  ro_address_line_4                  string
-  ro_address_line_5                  string
-  ro_city                            string
-  ro_county                          string
-  ro_postcode                        string
-  ro_full_postcode                   string
-  ro_country                         string
-  ro_latitude                        string
-  ro_longitude                       string
-  ro_nuts_region                     string
-  ro_postal_region                   string
-  primary_trading_address            string
-  primary_trading_address_latitude   string
-  primary_trading_address_longitude  string
-  branch_name                        string
-  primary_uk_sic_2007_code           int64
-  primary_uk_sic_2007_description    string
-  latest_accounts_date               date
-  no_of_available_years              int64
-  guo                                string
-  guo_nb                             int64
-  entity_type                        string
-  industry_codes                     string
-  file_codes                         string
-}
-```
-
-### Head of table:
-
-```
-                     company_name registered_number ticker_symbol  \
-0   SERISABELLE (DEGANWY) LIMITED          09889640           NaN   
-1       PERFECT SOLUTIONS INT LTD          09889655           NaN   
-2     THE STRENGTH TEMPLE LIMITED          09889705           NaN   
-3  SIMPLY HAIR EXTENSIONS LIMITED          09889730           NaN   
-4   I.K ENTERPRISE LONDON LIMITED          09889745           NaN   
-
-                                          ro_address  \
-0  2nd Floor, London House, London Road South, Po...   
-1  Unit 6 859A High Road, Goodmayes, Ilford, Esse...   
-2  360 House 7 Cambridge Court, 210 Shepherds Bus...   
-3  c/o Cheryl Taylor, 2 The Chaplin Wrotham Road,...   
-4  Grand Union House, 20 Kentish Town Road, Londo...   
-
-             ro_address_line_1           ro_address_line_2 ro_address_line_3  \
-0      2nd Floor, London House           London Road South           Poynton   
-1        Unit 6 859A High Road                   Goodmayes               NaN   
-2  360 House 7 Cambridge Court     210 Shepherds Bush Road               NaN   
-3            c/o Cheryl Taylor  2 The Chaplin Wrotham Road     Borough Green   
-4            Grand Union House        20 Kentish Town Road               NaN   
-
-  ro_address_line_4 ro_address_line_5    ro_city ro_county ro_postcode  \
-0               NaN               NaN  Stockport  Cheshire        SK12   
-1               NaN               NaN     Ilford     Essex        IG 3   
-2               NaN               NaN     London    London        W  6   
-3               NaN               NaN  Sevenoaks      Kent        TN15   
-4               NaN               NaN     London    London        NW 1   
-
-  ro_full_postcode ro_country      ro_latitude    ro_longitude  \
-0         SK12 1YP    England  53° 20' 39.9" N   2° 7' 32.3" W   
-1          IG3 8TG    England              NaN             NaN   
-2           W6 7NJ    England              NaN             NaN   
-3         TN15 8DB    England  51° 17' 44.7" N  0° 18' 31.1" E   
-4          NW1 9NX    England  51° 32' 26.9" N   0° 8' 31.7" W   
-
-         ro_nuts_region ro_postal_region  \
-0  North West (England)       North West   
-1                London     London Outer   
-2                London     London Inner   
-3  South East (England)    South Eastern   
-4                London     London Inner   
-
-                             primary_trading_address  \
-0                                                NaN   
-1                                                NaN   
-2                                                NaN   
-3  c/o Cheryl Taylor, 2 The Chaplin Wrotham Road,...   
-4                                                NaN   
-
-  primary_trading_address_latitude primary_trading_address_longitude  \
-0                              NaN                               NaN   
-1                              NaN                               NaN   
-2                              NaN                               NaN   
-3                  51° 17' 44.7" N                    0° 18' 31.1" E   
-4                              NaN                               NaN   
-
-                      branch_name  primary_uk_sic_2007_code  \
-0                             NaN                     96090   
-1                             NaN                     96090   
-2                             NaN                     96040   
-3  SIMPLY HAIR EXTENSIONS LIMITED                     96020   
-4                             NaN                     96090   
-
-            primary_uk_sic_2007_description latest_accounts_date  \
-0  Other personal service activities n.e.c.           2016-11-30   
-1  Other personal service activities n.e.c.           2016-11-30   
-2            Physical well-being activities           2017-11-30   
-3   Hairdressing and other beauty treatment           2020-11-30   
-4  Other personal service activities n.e.c.           2016-11-30   
-
-   no_of_available_years  guo  guo_nb      entity_type industry_codes  \
-0                      1  NaN       0  Single location             96   
-1                      1  NaN       0  Single location             96   
-2                      2  NaN       0  Single location             96   
-3                      5  NaN       0  Single location             96   
-4                      1  NaN       0  Single location             96   
-
-  file_codes  
-0    17_37 2  
-1    17_37 2  
-2    17_37 2  
-3    17_37 2  
-4    17_37 2  
 ```
 
