@@ -17,7 +17,10 @@ def convert_dms_to_decimal(coord_expr: ibis.expr.types.StringScalar) -> ibis.exp
     decimal = deg + (min / 60.0) + (sec / 3600.0)
     
     # South and West must be mathematically negative
-    return ibis.case().when(direction.isin(["S", "W"]), -decimal).else_(decimal).end()
+    return ibis.cases(
+        (direction.isin(["S", "W"]), -decimal),
+        else_=decimal
+    )
 
 def test_convert_dms_to_decimal():
     test_cases = [

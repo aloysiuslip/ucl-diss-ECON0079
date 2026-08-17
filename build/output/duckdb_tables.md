@@ -74,16 +74,16 @@ ibis.Schema {
 4               NaN               NaN               NaN          Newbury   
 
      ro_county ro_postcode ro_full_postcode ro_country      ro_latitude  \
-0  East Sussex        BN 1          BN1 1AL    England  50° 49' 18.1" N   
-1      Suffolk        IP28         IP28 7DE    England  52° 21' 13.2" N   
-2  Oxfordshire        OX10         OX10 9EH    England  51° 35' 30.0" N   
+0  East Sussex        BN 1          BN1 1AL    England  50Â° 49' 18.1" N   
+1      Suffolk        IP28         IP28 7DE    England  52Â° 21' 13.2" N   
+2  Oxfordshire        OX10         OX10 9EH    England  51Â° 35' 30.0" N   
 3        Devon        PL16         PL16 0AS    England              NaN   
 4    Berkshire        RG20         RG20 0AA    England              NaN   
 
     ro_longitude        ro_nuts_region ro_postal_region  \
-0  0° 8' 35.1" W  South East (England)    South Eastern   
-1  0° 30' 3.2" E       East of England          Eastern   
-2  1° 7' 47.9" W  South East (England)         Southern   
+0  0Â° 8' 35.1" W  South East (England)    South Eastern   
+1  0Â° 30' 3.2" E       East of England          Eastern   
+2  1Â° 7' 47.9" W  South East (England)         Southern   
 3            NaN  South West (England)    South Western   
 4            NaN  South East (England)         Southern   
 
@@ -97,7 +97,7 @@ ibis.Schema {
   primary_trading_address_latitude primary_trading_address_longitude  \
 0                              NaN                               NaN   
 1                              NaN                               NaN   
-2                  51° 35' 30.0" N                     1° 7' 47.9" W   
+2                  51Â° 35' 30.0" N                     1Â° 7' 47.9" W   
 3                              NaN                               NaN   
 4                              NaN                               NaN   
 
@@ -319,10 +319,10 @@ ibis.Schema {
 4               NaN               NaN  Manchester        Lancashire   
 
   ro_postcode ro_full_postcode ro_country      ro_latitude    ro_longitude  \
-0        DN20         DN20 8NQ    England   53° 33' 3.6" N  0° 29' 50.4" W   
+0        DN20         DN20 8NQ    England   53Â° 33' 3.6" N  0Â° 29' 50.4" W   
 1        GL15         GL15 5HE    England              NaN             NaN   
-2        GU34         GU34 1HN    England   51° 8' 58.6" N  0° 58' 39.6" W   
-3        TN13         TN13 2OB    England  51° 16' 46.4" N   0° 9' 19.9" E   
+2        GU34         GU34 1HN    England   51Â° 8' 58.6" N  0Â° 58' 39.6" W   
+3        TN13         TN13 2OB    England  51Â° 16' 46.4" N   0Â° 9' 19.9" E   
 4        M  2           M2 4AB    England              NaN             NaN   
 
              ro_nuts_region    ro_postal_region  \
@@ -342,7 +342,7 @@ ibis.Schema {
   primary_trading_address_latitude primary_trading_address_longitude  \
 0                              NaN                               NaN   
 1                              NaN                               NaN   
-2                  51° 30' 51.9" N                    0° 33' 25.8" W   
+2                  51Â° 30' 51.9" N                    0Â° 33' 25.8" W   
 3                              NaN                               NaN   
 4                              NaN                               NaN   
 
@@ -846,30 +846,30 @@ ibis.Schema {
 ibis.Schema {
   registered_number  string
   year               int64
+  employees          int64
+  average_wage       float64
   gva1               float64
   gva2               float64
   gva1_per_worker    float64
   gva2_per_worker    float64
-  employees          int64
-  average_wage       float64
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number  year           gva1  gva2  gva1_per_worker  \
-0          01840419  2006  220307.818391   NaN        54.680521   
-1          01372811  2006     688.614601   NaN        12.520265   
-2          02468057  2006    2062.989386   NaN        43.893391   
-3          SC010677  2006  380625.557672   NaN        56.564951   
-4          03221027  2006     301.723619   NaN        11.604755   
+  registered_number  year  employees  average_wage           gva1  gva2  \
+0          01840419  2006       4029     32.548202  220307.818391   NaN   
+1          01372811  2006         55     42.390261     688.614601   NaN   
+2          02468057  2006         47     43.113194    2062.989386   NaN   
+3          SC010677  2006       6729     27.417540  380625.557672   NaN   
+4          03221027  2006         26     48.352391     301.723619   NaN   
 
-   gva2_per_worker  employees  average_wage  
-0              NaN       4029     32.548202  
-1              NaN         55     42.390261  
-2              NaN         47     43.113194  
-3              NaN       6729     27.417540  
-4              NaN         26     48.352391  
+   gva1_per_worker  gva2_per_worker  
+0        54.680521              NaN  
+1        12.520265              NaN  
+2        43.893391              NaN  
+3        56.564951              NaN  
+4        11.604755              NaN  
 ```
 
