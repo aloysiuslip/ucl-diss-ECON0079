@@ -784,9 +784,9 @@
         "key":"tangibles_fixt_fit",
         "type":"float64",
         "fuzzy_mapping":"Fixtures & Fittingsth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -797,9 +797,9 @@
         "key":"tangibles_plant_and_vehicles",
         "type":"float64",
         "fuzzy_mapping":"Plant & Vehiclesth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -810,9 +810,9 @@
         "key":"tangibles_plant",
         "type":"float64",
         "fuzzy_mapping":"Plantth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -823,9 +823,9 @@
         "key":"tangibles_vehicles",
         "type":"float64",
         "fuzzy_mapping":"Vehiclesth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -862,7 +862,7 @@
         "key":"investments_other",
         "type":"float64",
         "fuzzy_mapping":"Investments & other fixed assetsth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
         "may_mix":false,
         "deflate":"gdpdef",
@@ -929,7 +929,7 @@
         "fuzzy_mapping":"Turnoverth GBP",
         "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -953,9 +953,9 @@
         "key":"admin_expenses",
         "type":"float64",
         "fuzzy_mapping":"Administration Expensesth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -966,9 +966,9 @@
         "key":"interest_paid",
         "type":"float64",
         "fuzzy_mapping":"Interest Paidth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -979,9 +979,9 @@
         "key":"profit_loss_pretax2",
         "type":"float64",
         "fuzzy_mapping":"Profit (Loss) before Taxth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -992,9 +992,9 @@
         "key":"tax",
         "type":"float64",
         "fuzzy_mapping":"Taxationth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -1018,9 +1018,9 @@
         "key":"depreciation",
         "type":"float64",
         "fuzzy_mapping":"Depreciationth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -1096,9 +1096,9 @@
         "key":"other_staff_costs",
         "type":"float64",
         "fuzzy_mapping":"Other Staff Coststh GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"cpih",
         "description":null,
         "Unnamed: 9":null,
@@ -1109,9 +1109,9 @@
         "key":"renumeration_directors",
         "type":"float64",
         "fuzzy_mapping":"Directors' Remunerationth GBP",
-        "keep":"yearly",
+        "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":"gdpdef",
         "description":null,
         "Unnamed: 9":null,
@@ -1124,7 +1124,7 @@
         "fuzzy_mapping":"Number of employees",
         "keep":null,
         "in_ln_set":false,
-        "may_mix":true,
+        "may_mix":false,
         "deflate":null,
         "description":null,
         "Unnamed: 9":null,
@@ -2835,66 +2835,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2006",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2006",
@@ -2921,21 +2861,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2006"
         ]
     },
     {
@@ -3060,66 +2985,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2007",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2007",
@@ -3146,21 +3011,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2007"
         ]
     },
     {
@@ -3285,66 +3135,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2008",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2008",
@@ -3371,21 +3161,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2008"
         ]
     },
     {
@@ -3510,66 +3285,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2009",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2009",
@@ -3596,21 +3311,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2009"
         ]
     },
     {
@@ -3735,66 +3435,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2010",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2010",
@@ -3821,21 +3461,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2010"
         ]
     },
     {
@@ -3960,66 +3585,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2011",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2011",
@@ -4046,21 +3611,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2011"
         ]
     },
     {
@@ -4185,66 +3735,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2012",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2012",
@@ -4271,21 +3761,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2012"
         ]
     },
     {
@@ -4410,66 +3885,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2013",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2013",
@@ -4496,21 +3911,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2013"
         ]
     },
     {
@@ -4635,66 +4035,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2014",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2014",
@@ -4721,21 +4061,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2014"
         ]
     },
     {
@@ -4860,66 +4185,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2015",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2015",
@@ -4946,21 +4211,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2015"
         ]
     },
     {
@@ -5085,66 +4335,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2016",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2016",
@@ -5171,21 +4361,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2016"
         ]
     },
     {
@@ -5310,66 +4485,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2017",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2017",
@@ -5396,21 +4511,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2017"
         ]
     },
     {
@@ -5535,66 +4635,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2018",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2018",
@@ -5621,21 +4661,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2018"
         ]
     },
     {
@@ -5760,66 +4785,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2019",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2019",
@@ -5846,21 +4811,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2019"
         ]
     },
     {
@@ -5985,66 +4935,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2020",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2020",
@@ -6071,21 +4961,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2020"
         ]
     },
     {
@@ -6210,66 +5085,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2021",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2021",
@@ -6296,21 +5111,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2021"
         ]
     },
     {
@@ -6435,66 +5235,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2022",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2022",
@@ -6521,21 +5261,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2022"
         ]
     },
     {
@@ -6660,66 +5385,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2023",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2023",
@@ -6746,21 +5411,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2023"
         ]
     },
     {
@@ -6885,66 +5535,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2024",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2024",
@@ -6971,21 +5561,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2024"
         ]
     },
     {
@@ -7110,66 +5685,6 @@
     },
     {
         "from_raw":"a3_assets",
-        "key":"tangibles_fixt_fit@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Fixtures & Fittingsth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Fixtures & Fittingsth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant_and_vehicles@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Plant & Vehiclesth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plant & Vehiclesth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_plant@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Plantth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Plantth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"tangibles_vehicles@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Vehiclesth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Vehiclesth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
         "key":"fixed_other@2025",
         "type":"float64",
         "fuzzy_mapping":"Other Fixed Assetsth GBP\n2025",
@@ -7196,21 +5711,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Intangible Assetsth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a3_assets",
-        "key":"investments_other@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Investments & other fixed assetsth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":false,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Investments & other fixed assetsth GBP\n2025"
         ]
     },
     {
@@ -7290,66 +5790,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2006",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2006",
@@ -7361,21 +5801,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2006"
         ]
     },
     {
@@ -7455,36 +5880,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2006",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2006",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2006"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2006",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2006",
@@ -7515,66 +5910,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2007",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2007",
@@ -7586,21 +5921,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2007"
         ]
     },
     {
@@ -7680,36 +6000,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2007",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2007",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2007"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2007",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2007",
@@ -7740,66 +6030,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2008",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2008",
@@ -7811,21 +6041,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2008"
         ]
     },
     {
@@ -7905,36 +6120,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2008",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2008",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2008"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2008",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2008",
@@ -7965,66 +6150,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2009",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2009",
@@ -8036,21 +6161,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2009"
         ]
     },
     {
@@ -8130,36 +6240,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2009",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2009",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2009"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2009",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2009",
@@ -8190,66 +6270,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2010",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2010",
@@ -8261,21 +6281,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2010"
         ]
     },
     {
@@ -8355,36 +6360,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2010",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2010",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2010"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2010",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2010",
@@ -8415,66 +6390,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2011",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2011",
@@ -8486,21 +6401,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2011"
         ]
     },
     {
@@ -8580,36 +6480,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2011",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2011",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2011"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2011",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2011",
@@ -8640,66 +6510,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2012",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2012",
@@ -8711,21 +6521,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2012"
         ]
     },
     {
@@ -8805,36 +6600,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2012",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2012",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2012"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2012",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2012",
@@ -8865,66 +6630,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2013",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2013",
@@ -8936,21 +6641,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2013"
         ]
     },
     {
@@ -9030,36 +6720,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2013",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2013",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2013"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2013",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2013",
@@ -9090,66 +6750,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2014",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2014",
@@ -9161,21 +6761,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2014"
         ]
     },
     {
@@ -9255,36 +6840,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2014",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2014",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2014"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2014",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2014",
@@ -9315,66 +6870,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2015",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2015",
@@ -9386,21 +6881,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2015"
         ]
     },
     {
@@ -9480,36 +6960,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2015",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2015",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2015"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2015",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2015",
@@ -9540,66 +6990,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2016",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2016",
@@ -9611,21 +7001,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2016"
         ]
     },
     {
@@ -9705,36 +7080,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2016",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2016",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2016"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2016",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2016",
@@ -9765,66 +7110,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2017",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2017",
@@ -9836,21 +7121,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2017"
         ]
     },
     {
@@ -9930,36 +7200,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2017",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2017",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2017"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2017",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2017",
@@ -9990,66 +7230,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2018",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2018",
@@ -10061,21 +7241,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2018"
         ]
     },
     {
@@ -10155,36 +7320,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2018",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2018",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2018"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2018",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2018",
@@ -10215,66 +7350,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2019",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2019",
@@ -10286,21 +7361,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2019"
         ]
     },
     {
@@ -10380,36 +7440,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2019",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2019",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2019"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2019",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2019",
@@ -10440,66 +7470,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2020",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2020",
@@ -10511,21 +7481,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2020"
         ]
     },
     {
@@ -10605,36 +7560,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2020",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2020",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2020"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2020",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2020",
@@ -10665,66 +7590,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2021",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2021",
@@ -10736,21 +7601,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2021"
         ]
     },
     {
@@ -10830,36 +7680,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2021",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2021",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2021"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2021",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2021",
@@ -10890,66 +7710,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2022",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2022",
@@ -10961,21 +7721,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2022"
         ]
     },
     {
@@ -11055,36 +7800,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2022",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2022",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2022"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2022",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2022",
@@ -11115,66 +7830,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2023",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2023",
@@ -11186,21 +7841,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2023"
         ]
     },
     {
@@ -11280,36 +7920,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2023",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2023",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2023"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2023",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2023",
@@ -11340,66 +7950,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2024",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2024",
@@ -11411,21 +7961,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2024"
         ]
     },
     {
@@ -11505,36 +8040,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"other_staff_costs@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2024",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2024",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2024"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"ebitda@2024",
         "type":"float64",
         "fuzzy_mapping":"EBITDAth GBP\n2024",
@@ -11565,66 +8070,6 @@
     },
     {
         "from_raw":"a4_profits",
-        "key":"admin_expenses@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Administration Expensesth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Administration Expensesth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"interest_paid@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Interest Paidth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Interest Paidth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"profit_loss_pretax2@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Profit (Loss) before Taxth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Profit (Loss) before Taxth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"tax@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Taxationth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Taxationth GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
         "key":"dividends@2025",
         "type":"float64",
         "fuzzy_mapping":"Dividends (Distributable profit)th GBP\n2025",
@@ -11636,21 +8081,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Dividends (Distributable profit)th GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"depreciation@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Depreciationth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Depreciationth GBP\n2025"
         ]
     },
     {
@@ -11726,36 +8156,6 @@
         "Unnamed: 9":null,
         "fml":[
             "Pension Coststh GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"other_staff_costs@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Other Staff Coststh GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"cpih",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Other Staff Coststh GBP\n2025"
-        ]
-    },
-    {
-        "from_raw":"a4_profits",
-        "key":"renumeration_directors@2025",
-        "type":"float64",
-        "fuzzy_mapping":"Directors' Remunerationth GBP\n2025",
-        "keep":"yearly",
-        "in_ln_set":false,
-        "may_mix":true,
-        "deflate":"gdpdef",
-        "description":null,
-        "Unnamed: 9":null,
-        "fml":[
-            "Directors' Remunerationth GBP\n2025"
         ]
     },
     {

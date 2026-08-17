@@ -34,8 +34,8 @@ def ingest_single_excel_file(args):
             if col == 'registered_number' or col in exact_cols or any(col.startswith(yc) for yc in yearly_cols)
         ]
         df_raw2 = df_raw[df_raw_cols].copy()
-
-        df_raw2['file_codes'] = " ".join(file_name.split()[2:]).replace(".xlsx", "")
+        df_raw2['industry_code'] = ind
+        df_raw2['file_code'] = " ".join(file_name.split()[2:]).replace(".xlsx", "")
         
         return df_raw2
         

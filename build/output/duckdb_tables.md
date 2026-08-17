@@ -1,5 +1,610 @@
 # Tables in DuckDB database
 
+## fame_fixed
+
+### Number of rows: 9,283,479
+
+### Schema:
+
+```
+ibis.Schema {
+  company_name                       string
+  registered_number                  string
+  ticker_symbol                      string
+  ro_address                         string
+  ro_address_line_1                  string
+  ro_address_line_2                  string
+  ro_address_line_3                  string
+  ro_address_line_4                  string
+  ro_address_line_5                  string
+  ro_city                            string
+  ro_county                          string
+  ro_postcode                        string
+  ro_full_postcode                   string
+  ro_country                         string
+  ro_latitude                        string
+  ro_longitude                       string
+  ro_nuts_region                     string
+  ro_postal_region                   string
+  primary_trading_address            string
+  primary_trading_address_latitude   string
+  primary_trading_address_longitude  string
+  branch_name                        string
+  primary_uk_sic_2007_code           float64
+  primary_uk_sic_2007_description    string
+  latest_accounts_date               timestamp(6)
+  no_of_available_years              int64
+  guo                                string
+  guo_nb                             float64
+  entity_type                        string
+  industry_codes                     string
+  file_codes                         string
+}
+```
+
+### Head of table:
+
+```
+                    company_name registered_number ticker_symbol  \
+0              RUM COMMITTEE LTD          10682986           NaN   
+1         THE DRAMA ROOM LIMITED          10683009           NaN   
+2                NO DOOR THEATRE          10683173           NaN   
+3  WEST COUNTRY CREATIVE LIMITED          10683266           NaN   
+4              AVO MUSIC LIMITED          10683268           NaN   
+
+                                          ro_address  \
+0  15 - 17 (Werks Central, Middle Street, Brighto...   
+1  Unit A - 82 James Carter Road, Mildenhall Indu...   
+2  7 Winterbrook Lane, Wallingford, Oxfordshire, ...   
+3  Plowden Park, Newton Down, Lifton, Devon, PL16...   
+4  Malverleys, East End, Newbury, Berkshire, RG20...   
+
+               ro_address_line_1             ro_address_line_2  \
+0        15 - 17 (Werks Central)                 Middle Street   
+1  Unit A - 82 James Carter Road  Mildenhall Industrial Estate   
+2             7 Winterbrook Lane                           NaN   
+3                   Plowden Park                   Newton Down   
+4                     Malverleys                      East End   
+
+  ro_address_line_3 ro_address_line_4 ro_address_line_5          ro_city  \
+0               NaN               NaN               NaN         Brighton   
+1               NaN               NaN               NaN  Bury St Edmunds   
+2               NaN               NaN               NaN      Wallingford   
+3               NaN               NaN               NaN           Lifton   
+4               NaN               NaN               NaN          Newbury   
+
+     ro_county ro_postcode ro_full_postcode ro_country      ro_latitude  \
+0  East Sussex        BN 1          BN1 1AL    England  50� 49' 18.1" N   
+1      Suffolk        IP28         IP28 7DE    England  52� 21' 13.2" N   
+2  Oxfordshire        OX10         OX10 9EH    England  51� 35' 30.0" N   
+3        Devon        PL16         PL16 0AS    England              NaN   
+4    Berkshire        RG20         RG20 0AA    England              NaN   
+
+    ro_longitude        ro_nuts_region ro_postal_region  \
+0  0� 8' 35.1" W  South East (England)    South Eastern   
+1  0� 30' 3.2" E       East of England          Eastern   
+2  1� 7' 47.9" W  South East (England)         Southern   
+3            NaN  South West (England)    South Western   
+4            NaN  South East (England)         Southern   
+
+                             primary_trading_address  \
+0                                                NaN   
+1                                                NaN   
+2  7 Winterbrook Lane, Wallingford, Oxfordshire, ...   
+3  Plowden Park, Newton Down, Lifton, Devon, PL16...   
+4                                                NaN   
+
+  primary_trading_address_latitude primary_trading_address_longitude  \
+0                              NaN                               NaN   
+1                              NaN                               NaN   
+2                  51� 35' 30.0" N                     1� 7' 47.9" W   
+3                              NaN                               NaN   
+4                              NaN                               NaN   
+
+                     branch_name  primary_uk_sic_2007_code  \
+0                            NaN                   59200.0   
+1         THE DRAMA ROOM LIMITED                   90010.0   
+2                NO DOOR THEATRE                   90010.0   
+3  WEST COUNTRY CREATIVE LIMITED                   90030.0   
+4              AVO MUSIC LIMITED                   90020.0   
+
+                   primary_uk_sic_2007_description latest_accounts_date  \
+0  Sound recording and music publishing activities           2024-03-31   
+1                                  Performing arts           2019-03-26   
+2                                  Performing arts           2024-03-31   
+3                                Artistic creation           2023-03-31   
+4            Support activities to performing arts           2023-12-31   
+
+   no_of_available_years                         guo  guo_nb  \
+0                      7                         NaN     0.0   
+1                      2                         NaN     0.0   
+2                      7                         NaN     0.0   
+3                      6                         NaN     0.0   
+4                      7  MS ALLEGRA SOPHIA VON OPEL     2.0   
+
+        entity_type industry_codes       file_codes  
+0    Independent co          59,90  18_18 3,17_03 3  
+1   Single location             90          17_03 3  
+2   Single location             90          17_03 3  
+3   Single location             90          17_03 3  
+4  Controlled subs.             90          17_03 3  
+```
+
+## fame_yearly
+
+### Number of rows: 44,865,127
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  consolidated  turnover  shareholders_funds  \
+0          03767701  2006         False       NaN               0.031   
+1          04863460  2006         False      0.25               0.001   
+2          02776047  2006         False       NaN           -7691.182   
+3          SC235667  2006         False       NaN             -19.739   
+4          04655770  2006         False       NaN              14.801   
+
+   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
+0                 NaN      None      8.425                           NaN   
+1              -0.059      None        NaN                           NaN   
+2            -967.394      None        NaN                           NaN   
+3                 NaN      None        NaN                           NaN   
+4                 NaN      None      0.775                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                      NaN                       NaN                 NaN   
+1                      NaN                       NaN                 NaN   
+2                      NaN                       NaN                 NaN   
+3                      NaN                       NaN                 NaN   
+4                      NaN                       NaN                 NaN   
+
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                           NaN              NaN                 NaN   
+1                           NaN              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                           NaN              NaN                 NaN   
+4                           NaN              NaN                 NaN   
+
+   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
+0          NaN          NaN                NaN        8.425      -45.716   
+1          NaN          NaN                NaN          NaN       -0.255   
+2          NaN          NaN           2903.297     2903.297   -10594.480   
+3          NaN         20.0                NaN       20.000      -39.739   
+4          NaN         10.5                NaN       11.275          NaN   
+
+   total_assets  liabilites_lt  cos  admin_expenses  interest_paid  \
+0        46.465         -0.718  NaN             NaN            NaN   
+1         0.256            NaN  NaN          -0.309            NaN   
+2      2903.298            NaN  NaN        -708.992       -258.402   
+3        20.000            NaN  NaN             NaN            NaN   
+4        14.801            NaN  NaN             NaN            NaN   
+
+   profit_loss_pretax2    tax  dividends  depreciation  r_and_d  \
+0                  NaN    NaN        NaN         1.877      NaN   
+1               -0.059  0.059        NaN           NaN      NaN   
+2             -967.394    NaN        NaN           NaN      NaN   
+3                  NaN    NaN        NaN           NaN      NaN   
+4                  NaN    NaN        NaN         0.257      NaN   
+
+   remuneration_employees  wages  social_security_costs  pensions_costs  \
+0                     NaN    NaN                    NaN             NaN   
+1                     NaN    NaN                    NaN             NaN   
+2                     NaN    NaN                    NaN             NaN   
+3                     NaN    NaN                    NaN             NaN   
+4                     NaN    NaN                    NaN             NaN   
+
+   other_staff_costs  renumeration_directors   ebitda  
+0                NaN                     NaN      NaN  
+1                NaN                     NaN   -0.059  
+2                NaN                     NaN -708.992  
+3                NaN                     NaN      NaN  
+4                NaN                     NaN      NaN  
+```
+
+## fame_fixed_filtered
+
+### Number of rows: 152,379
+
+### Schema:
+
+```
+ibis.Schema {
+  company_name                       string
+  registered_number                  string
+  ticker_symbol                      string
+  ro_address                         string
+  ro_address_line_1                  string
+  ro_address_line_2                  string
+  ro_address_line_3                  string
+  ro_address_line_4                  string
+  ro_address_line_5                  string
+  ro_city                            string
+  ro_county                          string
+  ro_postcode                        string
+  ro_full_postcode                   string
+  ro_country                         string
+  ro_latitude                        string
+  ro_longitude                       string
+  ro_nuts_region                     string
+  ro_postal_region                   string
+  primary_trading_address            string
+  primary_trading_address_latitude   string
+  primary_trading_address_longitude  string
+  branch_name                        string
+  primary_uk_sic_2007_code           int64
+  primary_uk_sic_2007_description    string
+  latest_accounts_date               date
+  no_of_available_years              int64
+  guo                                string
+  guo_nb                             int64
+  entity_type                        string
+  industry_codes                     string
+  file_codes                         string
+}
+```
+
+### Head of table:
+
+```
+                             company_name registered_number ticker_symbol  \
+0              AUSTIN HAIR DESIGN LIMITED          04904074           NaN   
+1                 PURELY CREATIVE LIMITED          05191793           NaN   
+2      KINGSTON (T2) HAIRDRESSING LIMITED          05198559           NaN   
+3          GROUP DIRECT MARKETING LIMITED          05602909           NaN   
+4  COMMISSION FOR THE NEW ECONOMY LIMITED          05678007           NaN   
+
+                                          ro_address  \
+0  The Poplars, Bridge Street, Brigg, South Humbe...   
+1  Kings Buildings, Lydney, Gloucestershire, GL15...   
+2  Berkeley House, Amery Street, Alton, Hampshire...   
+3  Markerstudy House, 45 Westerham Road, Sevenoak...   
+4  Frp Advisory Trading Lmited, 4th Floor Abbey H...   
+
+             ro_address_line_1     ro_address_line_2 ro_address_line_3  \
+0   The Poplars, Bridge Street                   NaN               NaN   
+1              Kings Buildings                   NaN               NaN   
+2               Berkeley House          Amery Street               NaN   
+3            Markerstudy House     45 Westerham Road               NaN   
+4  Frp Advisory Trading Lmited  4th Floor Abbey Houe               NaN   
+
+  ro_address_line_4 ro_address_line_5     ro_city         ro_county  \
+0               NaN               NaN       Brigg  South Humberside   
+1               NaN               NaN      Lydney   Gloucestershire   
+2               NaN               NaN       Alton         Hampshire   
+3               NaN               NaN   Sevenoaks              Kent   
+4               NaN               NaN  Manchester        Lancashire   
+
+  ro_postcode ro_full_postcode ro_country      ro_latitude    ro_longitude  \
+0        DN20         DN20 8NQ    England   53� 33' 3.6" N  0� 29' 50.4" W   
+1        GL15         GL15 5HE    England              NaN             NaN   
+2        GU34         GU34 1HN    England   51� 8' 58.6" N  0� 58' 39.6" W   
+3        TN13         TN13 2OB    England  51� 16' 46.4" N   0� 9' 19.9" E   
+4        M  2           M2 4AB    England              NaN             NaN   
+
+             ro_nuts_region    ro_postal_region  \
+0  Yorkshire and The Humber  Yorks & Humberside   
+1      South West (England)       South Western   
+2      South East (England)            Southern   
+3                       NaN       South Eastern   
+4      North West (England)          North West   
+
+                             primary_trading_address  \
+0                                                NaN   
+1                                                NaN   
+2  Berkeley House, Amery Street, Alton, Hampshire...   
+3                                                NaN   
+4                                                NaN   
+
+  primary_trading_address_latitude primary_trading_address_longitude  \
+0                              NaN                               NaN   
+1                              NaN                               NaN   
+2                  51� 30' 51.9" N                    0� 33' 25.8" W   
+3                              NaN                               NaN   
+4                              NaN                               NaN   
+
+                              branch_name  primary_uk_sic_2007_code  \
+0              AUSTIN HAIR DESIGN LIMITED                     96020   
+1                 PURELY CREATIVE LIMITED                     96090   
+2      KINGSTON (T2) HAIRDRESSING LIMITED                     96020   
+3          GROUP DIRECT MARKETING LIMITED                     96090   
+4  COMMISSION FOR THE NEW ECONOMY LIMITED                     96090   
+
+            primary_uk_sic_2007_description latest_accounts_date  \
+0   Hairdressing and other beauty treatment           2019-09-30   
+1  Other personal service activities n.e.c.           2017-12-31   
+2   Hairdressing and other beauty treatment           2023-08-31   
+3  Other personal service activities n.e.c.           2023-12-31   
+4  Other personal service activities n.e.c.           2020-03-31   
+
+   no_of_available_years                                                guo  \
+0                     16                                                NaN   
+1                     13                                                NaN   
+2                     19                                  MR COLIN CAMPBELL   
+3                     18                                VENUS TOPCO LIMITED   
+4                     14  ASSOCIATION OF GREATER MANCHESTER AUTHORITIES THE   
+
+   guo_nb       entity_type industry_codes file_codes  
+0       0   Single location             96    17_35 2  
+1       0   Single location             96    17_35 2  
+2       2  Controlled subs.             96    17_35 2  
+3      31  Controlled subs.             96    17_35 2  
+4       2  Controlled subs.             96    17_35 2  
+```
+
+## fame_yearly_filtered
+
+### Number of rows: 1,128,490
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  consolidated     turnover  shareholders_funds  \
+0          00449956  2024          True     9147.162            3799.237   
+1          05195191  2024          True  1103700.000           -3300.000   
+2          04724733  2024         False    20173.497             329.829   
+3          00040000  2024         False    17729.000           13302.000   
+4          01468061  2024         False    20515.353            9423.725   
+
+   profit_loss_pretax  employees  tangibles  tangibles_land_and_buildings  \
+0             394.044         64   5327.099                      4759.984   
+1           34100.000       1431   9700.000                      3300.000   
+2           -1039.167        186   1372.443                       576.119   
+3             270.000        291   4530.000                      1389.000   
+4             547.198        133    414.028                       150.728   
+
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                 4759.984                       NaN                 NaN   
+1                      NaN                  3300.000              1600.0   
+2                      NaN                   576.119                 NaN   
+3                 1389.000                       NaN                 NaN   
+4                      NaN                   150.728                 NaN   
+
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                       567.115          493.685               73.43   
+1                      4800.000              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                      2911.000         2911.000                 NaN   
+4                           NaN              NaN                 NaN   
+
+   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
+0          NaN      620.785                NaN     5947.884    -5924.989   
+1          NaN    31900.000           5900.000    47500.000  -135300.000   
+2      796.324          NaN              0.001     1372.444    -5955.585   
+3      230.000          NaN            730.000     5260.000    -1751.000   
+4       69.026      153.816                NaN      568.044    -3478.640   
+
+   total_assets  liabilites_lt          cos  admin_expenses  interest_paid  \
+0     12926.217      -3201.991    -4286.532       -4224.588       -273.822   
+1    179600.000     -47600.000 -1030500.000      -34100.000      -6300.000   
+2      6532.487       -247.073   -10337.511       -7062.094         -4.619   
+3     16145.000      -1092.000    -9437.000       -8363.000            NaN   
+4     12902.365            NaN   -10199.462             NaN            NaN   
+
+   profit_loss_pretax2       tax  dividends  depreciation  r_and_d  \
+0              394.044  -158.456        NaN       348.489      NaN   
+1            34100.000 -8600.000   -10800.0      2200.000      NaN   
+2            -1039.167  -340.374        NaN       403.942      NaN   
+3              270.000  -245.000      -94.0       632.000      NaN   
+4                  NaN       NaN        NaN           NaN  699.426   
+
+   remuneration_employees      wages  social_security_costs  pensions_costs  \
+0                2175.147   1945.015                190.813          39.319   
+1               45000.000  39400.000               3600.000        1100.000   
+2                7510.733   6233.949               1209.128          67.656   
+3                8109.000   7127.000                355.000         627.000   
+4                6215.228   5463.645                584.866         166.717   
+
+   other_staff_costs  renumeration_directors     ebitda  
+0                NaN                 271.946   1133.982  
+1              900.0                2884.000  48500.000  
+2                NaN                2186.252   3177.834  
+3                NaN                 520.000    561.000  
+4                NaN                     NaN    626.124  
+```
+
+## fame_yearly_kp
+
+### Number of rows: 1,128,490
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number             string
+  year                          int64
+  consolidated                  boolean
+  turnover                      float64
+  shareholders_funds            float64
+  profit_loss_pretax            float64
+  employees                     int64
+  tangibles                     float64
+  tangibles_land_and_buildings  float64
+  tangibles_land_freehold       float64
+  tangibles_land_leasehold      float64
+  tangibles_fixt_fit            float64
+  tangibles_plant_and_vehicles  float64
+  tangibles_plant               float64
+  tangibles_vehicles            float64
+  fixed_other                   float64
+  intangibles                   float64
+  investments_other             float64
+  fixed_total                   float64
+  liabilities                   float64
+  total_assets                  float64
+  liabilites_lt                 float64
+  cos                           float64
+  admin_expenses                float64
+  interest_paid                 float64
+  profit_loss_pretax2           float64
+  tax                           float64
+  dividends                     float64
+  depreciation                  float64
+  r_and_d                       float64
+  remuneration_employees        float64
+  wages                         float64
+  social_security_costs         float64
+  pensions_costs                float64
+  other_staff_costs             float64
+  renumeration_directors        float64
+  ebitda                        float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  consolidated      turnover  shareholders_funds  \
+0          01840419  2006         False  1.336141e+06       130579.754173   
+1          01372811  2006         False  3.017042e+04         5598.617602   
+2          02468057  2006         False  1.216233e+04         1517.014102   
+3          SC010677  2006         False  1.009202e+06       216944.461305   
+4          03221027  2006         False  1.463114e+04          -99.327769   
+
+   profit_loss_pretax  employees      tangibles  tangibles_land_and_buildings  \
+0        63322.241275       4029  111371.655539                  48323.748103   
+1        -1488.339909         55     190.772382                           NaN   
+2            8.835442         47            NaN                           NaN   
+3       105161.305008       6729  515085.432473                 160816.388467   
+4        -1059.496206         26            NaN                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
+0                      NaN                       NaN                 NaN   
+1                      NaN                       NaN                 NaN   
+2                      NaN                       NaN                 NaN   
+3                      NaN                       NaN                 NaN   
+4                      NaN                       NaN                 NaN   
+
+   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
+0                           NaN              NaN                 NaN   
+1                           NaN              NaN                 NaN   
+2                           NaN              NaN                 NaN   
+3                           NaN              NaN                 NaN   
+4                           NaN              NaN                 NaN   
+
+   fixed_other   intangibles  investments_other    fixed_total    liabilities  \
+0          NaN           NaN                NaN  237502.156297 -625279.344461   
+1          NaN           NaN                NaN     209.691958   -9682.092564   
+2          NaN           NaN                NaN       0.160816   -2862.870690   
+3          NaN  12770.713202                NaN  704911.836115 -377445.523520   
+4          NaN           NaN                NaN            NaN    -972.781487   
+
+   total_assets  liabilites_lt            cos  admin_expenses  interest_paid  \
+0  7.822897e+05  -26430.646434 -781255.474962             NaN            NaN   
+1  1.528071e+04            NaN  -21325.514416             NaN            NaN   
+2  4.379885e+03            NaN   -8574.592666             NaN            NaN   
+3  1.055397e+06 -461006.980273 -512720.485584             NaN            NaN   
+4  8.734537e+02            NaN  -12091.185129             NaN            NaN   
+
+   profit_loss_pretax2  tax  dividends  depreciation  r_and_d  \
+0                  NaN  NaN        NaN           NaN      NaN   
+1                  NaN  NaN        NaN           NaN      NaN   
+2                  NaN  NaN        NaN           NaN      NaN   
+3                  NaN  NaN        NaN           NaN      NaN   
+4                  NaN  NaN        NaN           NaN      NaN   
+
+   remuneration_employees          wages  social_security_costs  \
+0           165971.528256  131136.707617           11631.199017   
+1             3190.253071    2331.464373             253.065111   
+2             2246.147145    2026.320096             203.632515   
+3           199839.803440  184492.628993           12081.818182   
+4             1425.328010    1257.162162             137.144963   
+
+   pensions_costs  other_staff_costs  renumeration_directors         ebitda  
+0    23203.621622                NaN                     NaN   89171.110774  
+1      605.723587                NaN                     NaN   -1642.849772  
+2       16.194534                NaN                     NaN      36.669290  
+3     3265.356265                NaN                     NaN  196132.928680  
+4       31.020885                NaN                     NaN    -955.438543  
+```
+
 ## lars_fixed
 
 ### Number of rows: 452,638
@@ -95,157 +700,6 @@ ibis.Schema {
 2      NaN                NaN  
 3      NaN                NaN  
 4      NaN                NaN  
-```
-
-## fame_yearly
-
-### Number of rows: 40,846,539
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number             string
-  year                          int64
-  consolidated                  boolean
-  turnover                      float64
-  shareholders_funds            float64
-  profit_loss_pretax            float64
-  employees                     int64
-  tangibles                     float64
-  tangibles_land_and_buildings  float64
-  tangibles_land_freehold       float64
-  tangibles_land_leasehold      float64
-  tangibles_fixt_fit            float64
-  tangibles_plant_and_vehicles  float64
-  tangibles_plant               float64
-  tangibles_vehicles            float64
-  fixed_other                   float64
-  intangibles                   float64
-  investments_other             float64
-  fixed_total                   float64
-  liabilities                   float64
-  total_assets                  float64
-  liabilites_lt                 float64
-  cos                           float64
-  admin_expenses                float64
-  interest_paid                 float64
-  profit_loss_pretax2           float64
-  tax                           float64
-  dividends                     float64
-  depreciation                  float64
-  r_and_d                       float64
-  remuneration_employees        float64
-  wages                         float64
-  social_security_costs         float64
-  pensions_costs                float64
-  other_staff_costs             float64
-  renumeration_directors        float64
-  ebitda                        float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  consolidated  turnover  shareholders_funds  \
-0          IE145517  2007         False       NaN           757.13466   
-1          IE205077  2015         False       NaN                 NaN   
-2          SC263368  2011         False    27.965            39.65400   
-3          SC150956  2008         False       NaN            -3.08000   
-4          05312357  2011         False       NaN             1.02000   
-
-   profit_loss_pretax employees  tangibles  tangibles_land_and_buildings  \
-0                 NaN      None        NaN                           NaN   
-1                 NaN      None        NaN                           NaN   
-2              25.714      None        NaN                           NaN   
-3                 NaN      None        NaN                           NaN   
-4                 NaN      None      2.777                           NaN   
-
-   tangibles_land_freehold  tangibles_land_leasehold  tangibles_fixt_fit  \
-0                      NaN                       NaN                 NaN   
-1                      NaN                       NaN                 NaN   
-2                      NaN                       NaN                 NaN   
-3                      NaN                       NaN                 NaN   
-4                      NaN                       NaN                 NaN   
-
-   tangibles_plant_and_vehicles  tangibles_plant  tangibles_vehicles  \
-0                           NaN              NaN                 NaN   
-1                           NaN              NaN                 NaN   
-2                           NaN              NaN                 NaN   
-3                           NaN              NaN                 NaN   
-4                           NaN              NaN                 NaN   
-
-   fixed_other  intangibles  investments_other  fixed_total  liabilities  \
-0          NaN          NaN                NaN          NaN  -166.945063   
-1          NaN          NaN                NaN          NaN          NaN   
-2          NaN          NaN                NaN          NaN   -19.363000   
-3          NaN          NaN                NaN          NaN    -4.080000   
-4        2.777          NaN                NaN        2.777    -9.550000   
-
-   total_assets  liabilites_lt    cos  admin_expenses  interest_paid  \
-0    924.079723            NaN    NaN             NaN            NaN   
-1           NaN            NaN    NaN             NaN            NaN   
-2     59.017000            NaN -0.611           -1.64            NaN   
-3      1.390000          -0.39    NaN             NaN            NaN   
-4     10.570000            NaN    NaN             NaN            NaN   
-
-   profit_loss_pretax2    tax  dividends  depreciation  r_and_d  \
-0                  NaN    NaN        NaN           NaN      NaN   
-1                  NaN    NaN        NaN           NaN      NaN   
-2               25.714 -6.929        NaN           NaN      NaN   
-3                  NaN    NaN        NaN        24.768      NaN   
-4                  NaN    NaN        NaN           NaN      NaN   
-
-   remuneration_employees  wages  social_security_costs  pensions_costs  \
-0                     NaN    NaN                    NaN             NaN   
-1                     NaN    NaN                    NaN             NaN   
-2                     NaN    NaN                    NaN             NaN   
-3                     NaN    NaN                    NaN             NaN   
-4                     NaN    NaN                    NaN             NaN   
-
-   other_staff_costs  renumeration_directors  ebitda  
-0                NaN                     NaN     NaN  
-1                NaN                     NaN     NaN  
-2                NaN                     NaN  25.714  
-3                NaN                     NaN     NaN  
-4                NaN                     NaN     NaN  
-```
-
-## fame_derived
-
-### Number of rows: 7,948,736
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number            string
-  has_ptaddress                boolean
-  has_ptaddress_latlong        boolean
-  is_public                    boolean
-  has_company_branch_mismatch  boolean
-  industry_codes               string
-  file_codes                   string
-}
-```
-
-### Head of table:
-
-```
-  registered_number  has_ptaddress  has_ptaddress_latlong  is_public  \
-0          11899400          False                  False      False   
-1          08817563          False                  False      False   
-2          SC434537           True                  False      False   
-3          02874653           True                  False      False   
-4          03295446          False                  False      False   
-
-  has_company_branch_mismatch industry_codes file_codes  
-0                       False             99      12_49  
-1                        None             99      12_49  
-2                       False             99      12_49  
-3                       False             99      12_49  
-4                        None             99      12_49  
 ```
 
 ## lars_yearly
@@ -382,131 +836,40 @@ ibis.Schema {
 4                          NaN     SCOTTY GROUP SE  
 ```
 
-## fame_fixed
+## working_yearly
 
-### Number of rows: 7,948,736
+### Number of rows: 1,128,490
 
 ### Schema:
 
 ```
 ibis.Schema {
-  company_name                       string
-  registered_number                  string
-  ticker_symbol                      string
-  ro_address                         string
-  ro_address_line_1                  string
-  ro_address_line_2                  string
-  ro_address_line_3                  string
-  ro_address_line_4                  string
-  ro_address_line_5                  string
-  ro_city                            string
-  ro_county                          string
-  ro_postcode                        string
-  ro_full_postcode                   string
-  ro_country                         string
-  ro_latitude                        string
-  ro_longitude                       string
-  ro_nuts_region                     string
-  ro_postal_region                   string
-  primary_trading_address            string
-  primary_trading_address_latitude   string
-  primary_trading_address_longitude  string
-  branch_name                        string
-  primary_uk_sic_2007_code           int64
-  primary_uk_sic_2007_description    string
-  latest_accounts_date               date
-  no_of_available_years              int64
-  guo                                string
-  guo_nb                             int64
-  entity_type                        string
+  registered_number  string
+  year               int64
+  gva1               float64
+  gva2               float64
+  gva1_per_worker    float64
+  gva2_per_worker    float64
+  employees          int64
+  average_wage       float64
 }
 ```
 
 ### Head of table:
 
 ```
-                            company_name registered_number ticker_symbol  \
-0     GATOR INTERMEDIATE HOLDCO (UK) LTD          11899400           NaN   
-1                         KIEWIT UK LTD.          08817563           NaN   
-2           LIQUID GAS EQUIPMENT LIMITED          SC434537           NaN   
-3                   CAMFED INTERNATIONAL          02874653           NaN   
-4  OCEANEERING SERVICES OVERSEAS LIMITED          03295446           NaN   
+  registered_number  year           gva1  gva2  gva1_per_worker  \
+0          01840419  2006  220307.818391   NaN        54.680521   
+1          01372811  2006     688.614601   NaN        12.520265   
+2          02468057  2006    2062.989386   NaN        43.893391   
+3          SC010677  2006  380625.557672   NaN        56.564951   
+4          03221027  2006     301.723619   NaN        11.604755   
 
-                                          ro_address  \
-0  Lincoln House, Wellington Crescent, Fradley Pa...   
-1  c/o Winston & Strawn London Llp, Citypoint One...   
-2  Rosyth Business Park Rosyth, Dunfermline, Fife...   
-3  20 Station Road, Cambridge, Cambridgeshire, CB...   
-4  c/o Company Secretarial Departme, 280 Bishopsg...   
-
-                  ro_address_line_1               ro_address_line_2  \
-0                     Lincoln House             Wellington Crescent   
-1   c/o Winston & Strawn London Llp  Citypoint One Ropemaker Street   
-2       Rosyth Business Park Rosyth                             NaN   
-3                   20 Station Road                             NaN   
-4  c/o Company Secretarial Departme                 280 Bishopsgate   
-
-  ro_address_line_3 ro_address_line_4 ro_address_line_5      ro_city  \
-0      Fradley Park               NaN               NaN    Lichfield   
-1               NaN               NaN               NaN       London   
-2               NaN               NaN               NaN  Dunfermline   
-3               NaN               NaN               NaN    Cambridge   
-4               NaN               NaN               NaN       London   
-
-        ro_county ro_postcode ro_full_postcode ro_country      ro_latitude  \
-0   Staffordshire        WS13         WS13 8RZ    England  52째 42' 12.7" N   
-1          London        EC2Y         EC2Y 9AW    England  51째 31' 10.8" N   
-2            Fife        KY11         KY11 2YD   Scotland              NaN   
-3  Cambridgeshire        CB 1          CB1 2JD    England  52째 11' 41.5" N   
-4          London        EC2M         EC2M 4AG    England              NaN   
-
-     ro_longitude           ro_nuts_region ro_postal_region  \
-0  1째 46' 53.5" W  West Midlands (England)    West Midlands   
-1   0째 5' 20.1" W                   London     London Inner   
-2             NaN                 Scotland         Scotland   
-3    0째 8' 3.2" E          East of England          Eastern   
-4             NaN                      NaN     London Inner   
-
-                             primary_trading_address  \
-0                                                NaN   
-1                                                NaN   
-2  Rosyth Business Park Rosyth, Dunfermline, Fife...   
-3  20 Station Road, Cambridge, Cambridgeshire, CB...   
-4                                                NaN   
-
-  primary_trading_address_latitude primary_trading_address_longitude  \
-0                              NaN                               NaN   
-1                              NaN                               NaN   
-2                              NaN                               NaN   
-3                              NaN                               NaN   
-4                              NaN                               NaN   
-
-                          branch_name  primary_uk_sic_2007_code  \
-0  GATOR INTERMEDIATE HOLDCO (UK) LTD                     99000   
-1                                 NaN                     99000   
-2        LIQUID GAS EQUIPMENT LIMITED                     99000   
-3                CAMFED INTERNATIONAL                     99000   
-4                                 NaN                     99000   
-
-                     primary_uk_sic_2007_description latest_accounts_date  \
-0  Activities of extraterritorial organisations a...           2023-12-31   
-1  Activities of extraterritorial organisations a...           2014-12-31   
-2  Activities of extraterritorial organisations a...           2024-03-31   
-3  Activities of extraterritorial organisations a...           2023-12-31   
-4  Activities of extraterritorial organisations a...           2023-12-31   
-
-   no_of_available_years                              guo  guo_nb  \
-0                      5            GAYTOR PARENT LIMITED      73   
-1                      1                              NaN       0   
-2                     11  BABCOCK INTERNATIONAL GROUP PLC     211   
-3                     20                              NaN       0   
-4                     20    OCEANEERING INTERNATIONAL INC      94   
-
-        entity_type  
-0  Controlled subs.  
-1   Single location  
-2  Controlled subs.  
-3   Single location  
-4  Controlled subs.  
+   gva2_per_worker  employees  average_wage  
+0              NaN       4029     32.548202  
+1              NaN         55     42.390261  
+2              NaN         47     43.113194  
+3              NaN       6729     27.417540  
+4              NaN         26     48.352391  
 ```
 
