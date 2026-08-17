@@ -836,6 +836,33 @@ ibis.Schema {
 4                          NaN     SCOTTY GROUP SE  
 ```
 
+## working_fixed
+
+### Number of rows: 152,379
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number  string
+  address_case       string
+  address_lvl        int64
+  lat_dec            float64
+  lon_dec            float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number address_case  address_lvl    lat_dec   lon_dec
+0          03387617          pta            2  50.796743  0.049564
+1          00508205          pta            2  50.795666  0.050426
+2          04409570          pta            1  50.788250  0.049000
+3          03485336          pta            1  50.794194  0.049889
+4          03582673          pta            2  50.825355 -0.428273
+```
+
 ## working_yearly
 
 ### Number of rows: 1,128,490
