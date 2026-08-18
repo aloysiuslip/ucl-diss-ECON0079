@@ -844,23 +844,50 @@ ibis.Schema {
 
 ```
 ibis.Schema {
-  registered_number  string
-  address_case       string
-  address_lvl        int64
-  lat_dec            float64
-  lon_dec            float64
+  registered_number                string
+  company_name                     string
+  is_public                        boolean
+  industry_codes                   string
+  file_codes                       string
+  primary_uk_sic_2007_code         int64
+  primary_uk_sic_2007_description  string
+  lat_dec                          float64
+  lon_dec                          float64
+  address_lvl                      int64
+  address_case                     string
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number address_case  address_lvl    lat_dec   lon_dec
-0          03387617          pta            2  50.796743  0.049564
-1          00508205          pta            2  50.795666  0.050426
-2          04409570          pta            1  50.788250  0.049000
-3          03485336          pta            1  50.794194  0.049889
-4          03582673          pta            2  50.825355 -0.428273
+  registered_number                                       company_name  \
+0          04050764  IPSWICH AND DISTRICT COUNCIL FOR VOLUNTARY SER...   
+1          04110724                                PSYTECHNICS LIMITED   
+2          09025565                         KENT BLAXILL GROUP LIMITED   
+3          07728211                               VERTAS GROUP LIMITED   
+4          02492078           WOODWARD MARKWELL FINANCIAL ADVISERS LTD   
+
+   is_public industry_codes     file_codes  primary_uk_sic_2007_code  \
+0      False          94,63    19_21,19_10                     63990   
+1      False          72,62    19_27,18_29                     72190   
+2      False             47          22_20                     47520   
+3      False             81          14_50                     81100   
+4      False          64,65  12_47 1,16_34                     65110   
+
+                     primary_uk_sic_2007_description    lat_dec   lon_dec  \
+0        Other information service activities n.e.c.  52.057711  1.152499   
+1  Other research and experimental development on...  52.056583  1.151000   
+2  Retail sale of hardware, paints and glass in s...  51.868472  0.875139   
+3             Combined facilities support activities  52.080500  1.118139   
+4                                     Life insurance  52.056083  1.153194   
+
+   address_lvl address_case  
+0            2          pta  
+1            1          pta  
+2            1          pta  
+3            1          pta  
+4            1          pta  
 ```
 
 ## working_yearly
