@@ -30,8 +30,6 @@ def get_data_dirs(segment = "build") -> DirPaths:
         if env_root_data_dir is None:
             raise ValueError("ROOT_DATA_DIR environment variable is not set.")
         root_data_dir = Path(env_root_data_dir)
-        if not root_data_dir.exists() or not root_data_dir.is_dir():
-            raise ValueError(f"ROOT_DATA_DIR path does not exist or is not a directory: {root_data_dir}")
 
     # Don't hang on a ValueError, just print it and then return an empty string from the overall function
     except ValueError as e:

@@ -21,6 +21,7 @@ db.sqlite3-journal
 */tmp/*.xlsx
 */output/*.xlsx
 */output/duplicates_*.json
+descriptives/input/skinny_NSPL_MAY_2026_UK.csv
 
 ~$*
 *.tmp
@@ -521,4 +522,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,python,tex
+descriptives/input/skinny_NSPL_MAY_2026_UK.csv
