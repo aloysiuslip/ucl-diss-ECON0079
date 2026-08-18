@@ -26,8 +26,6 @@ def get_data_dirs(segment = "build") -> DirPaths:
         if env_data_dir is None:
             raise ValueError("DATA_DIR environment variable is not set.")
         data_dir = Path(env_data_dir)
-        if not data_dir.exists() or not data_dir.is_dir():
-            raise ValueError(f"DATA_DIR path does not exist or is not a directory: {data_dir}")
 
         if env_root_data_dir is None:
             raise ValueError("ROOT_DATA_DIR environment variable is not set.")
