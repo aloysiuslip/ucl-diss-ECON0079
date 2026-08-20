@@ -1,121 +1,121 @@
 # Parameters for model 'tfp1'
 
 ## Estimated Coefficients
-- beta_K: 0.286384
-- beta_L: 0.616892
+- beta_K: 0.285218
+- beta_L: 0.617376
 
 
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                   ln_Y   R-squared:                        0.3313
-Estimator:                   PanelOLS   R-squared (Between):              0.7897
-No. Observations:             1045164   R-squared (Within):               0.3453
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.7912
-Time:                        18:48:07   Log-likelihood                -5.761e+05
+Dep. Variable:                   ln_Y   R-squared:                        0.3289
+Estimator:                   PanelOLS   R-squared (Between):              0.7890
+No. Observations:             1020691   R-squared (Within):               0.3425
+Date:                Wed, Aug 19 2026   R-squared (Overall):              0.7897
+Time:                        11:17:09   Log-likelihood                -5.636e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                    2.24e+05
-Entities:                      140938   P-value                           0.0000
-Avg Obs:                       7.4158   Distribution:                F(2,904206)
+                                        F-statistic:                    2.16e+05
+Entities:                      139334   P-value                           0.0000
+Avg Obs:                       7.3255   Distribution:                F(2,881338)
 Min Obs:                       1.0000                                           
-Max Obs:                       19.000   F-statistic (robust):          2.596e+04
+Max Obs:                       18.000   F-statistic (robust):          2.501e+04
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(2,904206)
-Avg Obs:                    5.501e+04                                           
-Min Obs:                    2.447e+04                                           
+Time periods:                      18   Distribution:                F(2,881338)
+Avg Obs:                    5.671e+04                                           
+Min Obs:                    4.352e+04                                           
 Max Obs:                    6.522e+04                                           
                                                                                 
                              Parameter Estimates                              
 ==============================================================================
             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------
-const          2.9947     0.0365     82.075     0.0000      2.9232      3.0663
-ln_K           0.2864     0.0049     58.427     0.0000      0.2768      0.2960
-ln_L           0.6169     0.0047     131.20     0.0000      0.6077      0.6261
+const          3.0055     0.0371     81.007     0.0000      2.9328      3.0782
+ln_K           0.2852     0.0050     57.335     0.0000      0.2755      0.2950
+ln_L           0.6174     0.0048     129.21     0.0000      0.6080      0.6267
 ==============================================================================
 
-F-test for Poolability: 10.875
+F-test for Poolability: 10.766
 P-value: 0.0000
-Distribution: F(140955,904206)
+Distribution: F(139350,881338)
 
 Included effects: Entity, Time# Parameters for model 'tfp2'
 
 ## Estimated Coefficients
-- beta_K: 0.265447
-- beta_L: 0.610908
+- beta_K: 0.264232
+- beta_L: 0.611431
 
 
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                   ln_Y   R-squared:                        0.2764
-Estimator:                   PanelOLS   R-squared (Between):              0.7146
-No. Observations:              603586   R-squared (Within):               0.2995
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.7390
-Time:                        18:48:12   Log-likelihood                -3.622e+05
+Dep. Variable:                   ln_Y   R-squared:                        0.2748
+Estimator:                   PanelOLS   R-squared (Between):              0.7149
+No. Observations:              592751   R-squared (Within):               0.2977
+Date:                Wed, Aug 19 2026   R-squared (Overall):              0.7386
+Time:                        11:17:15   Log-likelihood                -3.555e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   9.685e+04
-Entities:                       96397   P-value                           0.0000
-Avg Obs:                       6.2615   Distribution:                F(2,507169)
+                                        F-statistic:                   9.424e+04
+Entities:                       95384   P-value                           0.0000
+Avg Obs:                       6.2144   Distribution:                F(2,497348)
 Min Obs:                       1.0000                                           
-Max Obs:                       19.000   F-statistic (robust):          1.183e+04
+Max Obs:                       18.000   F-statistic (robust):           1.15e+04
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(2,507169)
-Avg Obs:                    3.177e+04                                           
-Min Obs:                    1.084e+04                                           
+Time periods:                      18   Distribution:                F(2,497348)
+Avg Obs:                    3.293e+04                                           
+Min Obs:                    3.116e+04                                           
 Max Obs:                    3.542e+04                                           
                                                                                 
                              Parameter Estimates                              
 ==============================================================================
             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------
-const          3.2879     0.0557     59.016     0.0000      3.1787      3.3971
-ln_K           0.2654     0.0072     36.752     0.0000      0.2513      0.2796
-ln_L           0.6109     0.0069     87.993     0.0000      0.5973      0.6245
+const          3.2973     0.0564     58.419     0.0000      3.1867      3.4080
+ln_K           0.2642     0.0073     36.143     0.0000      0.2499      0.2786
+ln_L           0.6114     0.0070     87.031     0.0000      0.5977      0.6252
 ==============================================================================
 
-F-test for Poolability: 9.2668
+F-test for Poolability: 9.2146
 P-value: 0.0000
-Distribution: F(96414,507169)
+Distribution: F(95400,497348)
 
 Included effects: Entity, Time# Parameters for model 'tfp3'
 
 ## Estimated Coefficients
-- beta_K: 0.065087
-- beta_L: 0.719712
+- beta_K: 0.065165
+- beta_L: 0.719415
 
 
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                   ln_Y   R-squared:                        0.2830
-Estimator:                   PanelOLS   R-squared (Between):              0.6597
-No. Observations:             1006904   R-squared (Within):               0.2976
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.6751
-Time:                        18:48:22   Log-likelihood                 -5.75e+05
+Dep. Variable:                   ln_Y   R-squared:                        0.2811
+Estimator:                   PanelOLS   R-squared (Between):              0.6594
+No. Observations:              983564   R-squared (Within):               0.2953
+Date:                Wed, Aug 19 2026   R-squared (Overall):              0.6742
+Time:                        11:17:24   Log-likelihood                -5.622e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   1.719e+05
-Entities:                      135883   P-value                           0.0000
-Avg Obs:                       7.4101   Distribution:                F(2,871001)
+                                        F-statistic:                    1.66e+05
+Entities:                      134354   P-value                           0.0000
+Avg Obs:                       7.3207   Distribution:                F(2,849191)
 Min Obs:                       1.0000                                           
-Max Obs:                       19.000   F-statistic (robust):          2.055e+04
+Max Obs:                       18.000   F-statistic (robust):          1.984e+04
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(2,871001)
-Avg Obs:                    5.299e+04                                           
-Min Obs:                    2.334e+04                                           
+Time periods:                      18   Distribution:                F(2,849191)
+Avg Obs:                    5.464e+04                                           
+Min Obs:                    4.207e+04                                           
 Max Obs:                    6.284e+04                                           
                                                                                 
                              Parameter Estimates                              
 ==============================================================================
             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------
-const          4.7513     0.0185     256.23     0.0000      4.7149      4.7876
-ln_K           0.0651     0.0015     42.406     0.0000      0.0621      0.0681
-ln_L           0.7197     0.0044     164.04     0.0000      0.7111      0.7283
+const          4.7551     0.0189     252.07     0.0000      4.7182      4.7921
+ln_K           0.0652     0.0016     41.754     0.0000      0.0621      0.0682
+ln_L           0.7194     0.0045     161.30     0.0000      0.7107      0.7282
 ==============================================================================
 
-F-test for Poolability: 19.209
+F-test for Poolability: 18.962
 P-value: 0.0000
-Distribution: F(135900,871001)
+Distribution: F(134370,849191)
 
 Included effects: Entity, Time

@@ -74,10 +74,10 @@ ibis.Schema {
 4               NaN               NaN  Manchester        Lancashire   
 
   ro_postcode ro_full_postcode ro_country      ro_latitude    ro_longitude  \
-0        DN20         DN20 8NQ    England   53Â° 33' 3.6" N  0Â° 29' 50.4" W   
+0        DN20         DN20 8NQ    England   53° 33' 3.6" N  0° 29' 50.4" W   
 1        GL15         GL15 5HE    England              NaN             NaN   
-2        GU34         GU34 1HN    England   51Â° 8' 58.6" N  0Â° 58' 39.6" W   
-3        TN13         TN13 2OB    England  51Â° 16' 46.4" N   0Â° 9' 19.9" E   
+2        GU34         GU34 1HN    England   51° 8' 58.6" N  0° 58' 39.6" W   
+3        TN13         TN13 2OB    England  51° 16' 46.4" N   0° 9' 19.9" E   
 4        M  2           M2 4AB    England              NaN             NaN   
 
              ro_nuts_region    ro_postal_region  \
@@ -97,7 +97,7 @@ ibis.Schema {
   primary_trading_address_latitude primary_trading_address_longitude  \
 0                              NaN                               NaN   
 1                              NaN                               NaN   
-2                  51Â° 30' 51.9" N                    0Â° 33' 25.8" W   
+2                  51° 30' 51.9" N                    0° 33' 25.8" W   
 3                              NaN                               NaN   
 4                              NaN                               NaN   
 
@@ -247,7 +247,7 @@ ibis.Schema {
 
 ## fame_yearly_kp
 
-### Number of rows: 1,128,490
+### Number of rows: 1,102,222
 
 ### Schema:
 
@@ -589,149 +589,5 @@ ibis.Schema {
 2                         -647  BLACKSTAR GROUP SE  
 3                         -466  BLACKSTAR GROUP SE  
 4                          NaN     SCOTTY GROUP SE  
-```
-
-## working_fixed
-
-### Number of rows: 152,379
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number  string
-  company_name       string
-  is_public          boolean
-  industry_codes     string
-  file_codes         string
-  sic6               int64
-  sic6_desc          string
-  lat_dec            float64
-  lon_dec            float64
-  address_lvl        int64
-  address_case       string
-  pc8                string
-  ttwa               string
-  pc4                string
-  lat_lon5           string
-}
-```
-
-### Head of table:
-
-```
-  registered_number                                       company_name  \
-0          04050764  IPSWICH AND DISTRICT COUNCIL FOR VOLUNTARY SER...   
-1          04110724                                PSYTECHNICS LIMITED   
-2          01180742                      SUFFOLK LIFE PENSIONS LIMITED   
-3          07728211                               VERTAS GROUP LIMITED   
-4          02492078           WOODWARD MARKWELL FINANCIAL ADVISERS LTD   
-
-   is_public industry_codes     file_codes   sic6  \
-0      False          94,63    19_21,19_10  63990   
-1      False          72,62    19_27,18_29  72190   
-2      False             65          16_34  65300   
-3      False             81          14_50  81100   
-4      False          64,65  12_47 1,16_34  65110   
-
-                                           sic6_desc    lat_dec   lon_dec  \
-0        Other information service activities n.e.c.  52.057711  1.152499   
-1  Other research and experimental development on...  52.056583  1.151000   
-2                                    Pension funding  52.054528  1.147472   
-3             Combined facilities support activities  52.080500  1.118139   
-4                                     Life insurance  52.056083  1.153194   
-
-   address_lvl address_case      pc8       ttwa  pc4          lat_lon5  
-0            2          pta  IP1 1DD  E30000222  IP1   52.05771,1.1525  
-1            1          pta  IP1 1HN  E30000222  IP1    52.05658,1.151  
-2            1          pta  IP1 1QJ  E30000222  IP1  52.05453,1.14747  
-3            1          pta  IP1 1RR  E30000222  IP1   52.0805,1.11814  
-4            1          pta  IP1 1SL  E30000222  IP1  52.05608,1.15319  
-```
-
-## working_yearly
-
-### Number of rows: 1,128,490
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number  string
-  year               int64
-  employees          int64
-  fixed_total        float64
-  total_assets       float64
-  average_wage       float64
-  gva1               float64
-  gva2               float64
-  gva1_per_worker    float64
-  gva2_per_worker    float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  employees    fixed_total  total_assets  \
-0          01840419  2006       4029  237502.156297  7.822897e+05   
-1          01372811  2006         55     209.691958  1.528071e+04   
-2          02468057  2006         47       0.160816  4.379885e+03   
-3          SC010677  2006       6729  704911.836115  1.055397e+06   
-4          03221027  2006         26            NaN  8.734537e+02   
-
-   average_wage           gva1  gva2  gva1_per_worker  gva2_per_worker  
-0     32.548202  220307.818391   NaN        54.680521              NaN  
-1     42.390261     688.614601   NaN        12.520265              NaN  
-2     43.113194    2062.989386   NaN        43.893391              NaN  
-3     27.417540  380625.557672   NaN        56.564951              NaN  
-4     48.352391     301.723619   NaN        11.604755              NaN  
-```
-
-## working_yearly_with_peers
-
-### Number of rows: 1,087,683
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number    string
-  year                 int64
-  employees            int64
-  average_wage         float64
-  gva1                 float64
-  gva2                 float64
-  gva1_per_worker      float64
-  gva2_per_worker      float64
-  peer_tfp_pc8         float64
-  peer_tfp_pc4_donut   float64
-  peer_tfp_ttwa_donut  float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  employees  average_wage          gva1  \
-0          SC411832  2021         36     43.064152   2579.996987   
-1          SC411832  2021         36     43.064152   2579.996987   
-2          SC121527  2021        198     68.005336  13472.060946   
-3          SC359548  2021         76     79.352124  10469.405636   
-4          SC191738  2021         33     50.908733   1833.498684   
-
-           gva2  gva1_per_worker  gva2_per_worker  peer_tfp_pc8  \
-0   2673.614121        71.666583        74.267059     50.731251   
-1   2673.614121        71.666583        74.267059     50.731251   
-2  15052.036807        68.040712        76.020388     57.907791   
-3   7224.560068       137.755337        95.060001    137.755337   
-4   1844.711330        55.560566        55.900343     64.147864   
-
-   peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
-0           82.862341           112.322368  
-1           82.862341           112.322368  
-2           81.817016           112.322368  
-3           77.686745           112.322368  
-4           81.817016           112.322368  
 ```
 

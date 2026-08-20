@@ -3,6 +3,7 @@
 - `pip install -r requirements.txt` to install dependencies
 Activate the virtual environment with `source venv/bin/activate` on Linux or macOS, or `venv\Scripts\activate` on Windows.
 .venv should be added to .gitignore to avoid committing the virtual environment to version control.
+- Pass `fame_data.duckb` and `descriptives/input/skinny_NSPL_MAY_2026_UK.xlsx` back and forth
 
 ### VSC keyboard shortcuts
 - Jupyter: run current cell. When: `editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused`
@@ -16,7 +17,7 @@ Activate the virtual environment with `source venv/bin/activate` on Linux or mac
 
 ### Data
 - 2 million rows in fame_fixed and fame_derived
-- raw: 48 million rows in fame_yearllly. Down to 47.4 million after using a max merge strategy, removing 1.3m
+- raw: 48 million rows in fame_yearly. Down to 47.4 million after using a max merge strategy, removing 1.3m
 - 
 
 ### Database
