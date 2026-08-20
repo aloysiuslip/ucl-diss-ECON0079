@@ -8,19 +8,11 @@
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-<<<<<<< HEAD
-Dep. Variable:                   ln_Y   R-squared:                        0.3289
-Estimator:                   PanelOLS   R-squared (Between):              0.7890
-No. Observations:             1020691   R-squared (Within):               0.3425
-Date:                Wed, Aug 19 2026   R-squared (Overall):              0.7897
-Time:                        11:17:09   Log-likelihood                -5.636e+05
-=======
 Dep. Variable:                   ln_Y   R-squared:                        0.3313
 Estimator:                   PanelOLS   R-squared (Between):              0.7897
 No. Observations:             1045164   R-squared (Within):               0.3453
 Date:                Thu, Aug 20 2026   R-squared (Overall):              0.7912
 Time:                        16:05:23   Log-likelihood                -5.761e+05
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                    2.16e+05
 Entities:                      139334   P-value                           0.0000
@@ -56,19 +48,11 @@ Included effects: Entity, Time# Parameters for model 'tfp2'
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-<<<<<<< HEAD
-Dep. Variable:                   ln_Y   R-squared:                        0.2748
-Estimator:                   PanelOLS   R-squared (Between):              0.7149
-No. Observations:              592751   R-squared (Within):               0.2977
-Date:                Wed, Aug 19 2026   R-squared (Overall):              0.7386
-Time:                        11:17:15   Log-likelihood                -3.555e+05
-=======
 Dep. Variable:                   ln_Y   R-squared:                        0.2764
 Estimator:                   PanelOLS   R-squared (Between):              0.7146
 No. Observations:              603586   R-squared (Within):               0.2995
 Date:                Thu, Aug 20 2026   R-squared (Overall):              0.7390
 Time:                        16:05:30   Log-likelihood                -3.622e+05
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   9.424e+04
 Entities:                       95384   P-value                           0.0000
@@ -104,19 +88,11 @@ Included effects: Entity, Time# Parameters for model 'tfp3'
 ## Model Summary
                           PanelOLS Estimation Summary                           
 ================================================================================
-<<<<<<< HEAD
-Dep. Variable:                   ln_Y   R-squared:                        0.2811
-Estimator:                   PanelOLS   R-squared (Between):              0.6594
-No. Observations:              983564   R-squared (Within):               0.2953
-Date:                Wed, Aug 19 2026   R-squared (Overall):              0.6742
-Time:                        11:17:24   Log-likelihood                -5.622e+05
-=======
 Dep. Variable:                   ln_Y   R-squared:                        0.2830
 Estimator:                   PanelOLS   R-squared (Between):              0.6597
 No. Observations:             1006904   R-squared (Within):               0.2976
 Date:                Thu, Aug 20 2026   R-squared (Overall):              0.6751
 Time:                        16:05:40   Log-likelihood                 -5.75e+05
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                    1.66e+05
 Entities:                      134354   P-value                           0.0000

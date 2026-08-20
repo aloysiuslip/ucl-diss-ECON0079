@@ -133,49 +133,6 @@ ibis.Schema {
 ### Head of table:
 
 ```
-<<<<<<< HEAD
-                    company_name registered_number ticker_symbol  \
-0              RUM COMMITTEE LTD          10682986           NaN   
-1         THE DRAMA ROOM LIMITED          10683009           NaN   
-2                NO DOOR THEATRE          10683173           NaN   
-3  WEST COUNTRY CREATIVE LIMITED          10683266           NaN   
-4              AVO MUSIC LIMITED          10683268           NaN   
-
-                                          ro_address  \
-0  15 - 17 (Werks Central, Middle Street, Brighto...   
-1  Unit A - 82 James Carter Road, Mildenhall Indu...   
-2  7 Winterbrook Lane, Wallingford, Oxfordshire, ...   
-3  Plowden Park, Newton Down, Lifton, Devon, PL16...   
-4  Malverleys, East End, Newbury, Berkshire, RG20...   
-
-               ro_address_line_1             ro_address_line_2  \
-0        15 - 17 (Werks Central)                 Middle Street   
-1  Unit A - 82 James Carter Road  Mildenhall Industrial Estate   
-2             7 Winterbrook Lane                           NaN   
-3                   Plowden Park                   Newton Down   
-4                     Malverleys                      East End   
-
-  ro_address_line_3 ro_address_line_4 ro_address_line_5          ro_city  \
-0               NaN               NaN               NaN         Brighton   
-1               NaN               NaN               NaN  Bury St Edmunds   
-2               NaN               NaN               NaN      Wallingford   
-3               NaN               NaN               NaN           Lifton   
-4               NaN               NaN               NaN          Newbury   
-
-     ro_county ro_postcode ro_full_postcode ro_country      ro_latitude  \
-0  East Sussex        BN 1          BN1 1AL    England  50° 49' 18.1" N   
-1      Suffolk        IP28         IP28 7DE    England  52° 21' 13.2" N   
-2  Oxfordshire        OX10         OX10 9EH    England  51° 35' 30.0" N   
-3        Devon        PL16         PL16 0AS    England              NaN   
-4    Berkshire        RG20         RG20 0AA    England              NaN   
-
-    ro_longitude        ro_nuts_region ro_postal_region  \
-0  0° 8' 35.1" W  South East (England)    South Eastern   
-1  0° 30' 3.2" E       East of England          Eastern   
-2  1° 7' 47.9" W  South East (England)         Southern   
-3            NaN  South West (England)    South Western   
-4            NaN  South East (England)         Southern   
-=======
       pcds   ttwa15cd        lat      long
 0  AB1 0AA  S22000047  57.101459 -2.242858
 1  AB1 0AB  S22000047  57.102539 -2.246315
@@ -185,20 +142,10 @@ ibis.Schema {
 ```
 
 ## spatial_panel_view
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
 
 ### Number of rows: 1,087,683
 
-<<<<<<< HEAD
-  primary_trading_address_latitude primary_trading_address_longitude  \
-0                              NaN                               NaN   
-1                              NaN                               NaN   
-2                  51° 35' 30.0" N                     1° 7' 47.9" W   
-3                              NaN                               NaN   
-4                              NaN                               NaN   
-=======
 ### Schema:
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
 
 ```
 ibis.Schema {
@@ -274,8 +221,6 @@ ibis.Schema {
 4    51.51764,-0.137  
 ```
 
-<<<<<<< HEAD
-=======
 ## fame_yearly
 
 ### Number of rows: 44,865,127
@@ -520,5 +465,3 @@ ibis.Schema {
 3   Single location             90          17_03 3  
 4  Controlled subs.             90          17_03 3  
 ```
-
->>>>>>> ea391f9b5e3220057ab2a99a6a1c9960ed698566
