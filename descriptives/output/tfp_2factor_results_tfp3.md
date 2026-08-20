@@ -11,8 +11,8 @@
 Dep. Variable:                   ln_Y   R-squared:                        0.3313
 Estimator:                   PanelOLS   R-squared (Between):              0.7897
 No. Observations:             1045164   R-squared (Within):               0.3453
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.7912
-Time:                        18:48:07   Log-likelihood                -5.761e+05
+Date:                Thu, Aug 20 2026   R-squared (Overall):              0.7912
+Time:                        16:05:23   Log-likelihood                -5.761e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                    2.24e+05
 Entities:                      140938   P-value                           0.0000
@@ -51,8 +51,8 @@ Included effects: Entity, Time# Parameters for model 'tfp2'
 Dep. Variable:                   ln_Y   R-squared:                        0.2764
 Estimator:                   PanelOLS   R-squared (Between):              0.7146
 No. Observations:              603586   R-squared (Within):               0.2995
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.7390
-Time:                        18:48:12   Log-likelihood                -3.622e+05
+Date:                Thu, Aug 20 2026   R-squared (Overall):              0.7390
+Time:                        16:05:30   Log-likelihood                -3.622e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   9.685e+04
 Entities:                       96397   P-value                           0.0000
@@ -91,8 +91,8 @@ Included effects: Entity, Time# Parameters for model 'tfp3'
 Dep. Variable:                   ln_Y   R-squared:                        0.2830
 Estimator:                   PanelOLS   R-squared (Between):              0.6597
 No. Observations:             1006904   R-squared (Within):               0.2976
-Date:                Tue, Aug 18 2026   R-squared (Overall):              0.6751
-Time:                        18:48:22   Log-likelihood                 -5.75e+05
+Date:                Thu, Aug 20 2026   R-squared (Overall):              0.6751
+Time:                        16:05:40   Log-likelihood                 -5.75e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   1.719e+05
 Entities:                      135883   P-value                           0.0000
