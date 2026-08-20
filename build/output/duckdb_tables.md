@@ -247,7 +247,7 @@ ibis.Schema {
 
 ## fame_yearly_kp
 
-### Number of rows: 1,102,222
+### Number of rows: 1,128,490
 
 ### Schema:
 
@@ -589,5 +589,157 @@ ibis.Schema {
 2                         -647  BLACKSTAR GROUP SE  
 3                         -466  BLACKSTAR GROUP SE  
 4                          NaN     SCOTTY GROUP SE  
+```
+
+## working_fixed
+
+### Number of rows: 152,379
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number  string
+  company_name       string
+  is_public          boolean
+  industry_codes     string
+  file_codes         string
+  sic6               int64
+  sic6_desc          string
+  lat_dec            float64
+  lon_dec            float64
+  address_lvl        int64
+  address_case       string
+  pc8                string
+  ttwa               string
+  pc4                string
+  lat_lon5           string
+}
+```
+
+### Head of table:
+
+```
+  registered_number                                       company_name  \
+0          04050764  IPSWICH AND DISTRICT COUNCIL FOR VOLUNTARY SER...   
+1          04110724                                PSYTECHNICS LIMITED   
+2          01180742                      SUFFOLK LIFE PENSIONS LIMITED   
+3          07728211                               VERTAS GROUP LIMITED   
+4          02492078           WOODWARD MARKWELL FINANCIAL ADVISERS LTD   
+
+   is_public industry_codes     file_codes   sic6  \
+0      False          94,63    19_21,19_10  63990   
+1      False          72,62    19_27,18_29  72190   
+2      False             65          16_34  65300   
+3      False             81          14_50  81100   
+4      False          64,65  12_47 1,16_34  65110   
+
+                                           sic6_desc    lat_dec   lon_dec  \
+0        Other information service activities n.e.c.  52.057711  1.152499   
+1  Other research and experimental development on...  52.056583  1.151000   
+2                                    Pension funding  52.054528  1.147472   
+3             Combined facilities support activities  52.080500  1.118139   
+4                                     Life insurance  52.056083  1.153194   
+
+   address_lvl address_case      pc8       ttwa  pc4          lat_lon5  
+0            2          pta  IP1 1DD  E30000222  IP1   52.05771,1.1525  
+1            1          pta  IP1 1HN  E30000222  IP1    52.05658,1.151  
+2            1          pta  IP1 1QJ  E30000222  IP1  52.05453,1.14747  
+3            1          pta  IP1 1RR  E30000222  IP1   52.0805,1.11814  
+4            1          pta  IP1 1SL  E30000222  IP1  52.05608,1.15319  
+```
+
+## working_yearly
+
+### Number of rows: 1,128,490
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number  string
+  year               int64
+  employees          int64
+  fixed_total        float64
+  total_assets       float64
+  average_wage       float64
+  gva1               float64
+  gva2               float64
+  gva1_per_worker    float64
+  gva2_per_worker    float64
+  tfp                float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  employees    fixed_total   total_assets  \
+0          07404078  2023         30       4.264056      31.001682   
+1          NI031527  2023         62    7659.501766   10463.721206   
+2          14771570  2023         61   19009.842193   26071.303871   
+3          13264637  2023       2269  189051.245000  614721.233000   
+4          13355740  2023         55    4553.341653   28223.947709   
+
+   average_wage           gva1           gva2  gva1_per_worker  \
+0     12.917756     440.659867     452.404906        14.688662   
+1     14.636052    1020.697635            NaN        16.462865   
+2     45.575182    3980.371124    2376.708514        65.251986   
+3     96.326896  281906.284838  334707.946978       124.242523   
+4     48.856937    5019.654347    3257.513342        91.266443   
+
+   gva2_per_worker       tfp  
+0        15.080164  3.006648  
+1              NaN  1.731571  
+2        38.962435  2.841045  
+3       147.513419  3.965358  
+4        59.227515  3.114184  
+```
+
+## working_yearly_with_peers
+
+### Number of rows: 1,087,683
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number    string
+  year                 int64
+  employees            int64
+  average_wage         float64
+  gva1                 float64
+  gva2                 float64
+  gva1_per_worker      float64
+  gva2_per_worker      float64
+  peer_tfp_pc8         float64
+  peer_tfp_pc4_donut   float64
+  peer_tfp_ttwa_donut  float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  employees  average_wage          gva1  \
+0          SC411832  2021         36     43.064152   2579.996987   
+1          SC411832  2021         36     43.064152   2579.996987   
+2          SC121527  2021        198     68.005336  13472.060946   
+3          SC359548  2021         76     79.352124  10469.405636   
+4          SC191738  2021         33     50.908733   1833.498684   
+
+           gva2  gva1_per_worker  gva2_per_worker  peer_tfp_pc8  \
+0   2673.614121        71.666583        74.267059     50.731251   
+1   2673.614121        71.666583        74.267059     50.731251   
+2  15052.036807        68.040712        76.020388     57.907791   
+3   7224.560068       137.755337        95.060001    137.755337   
+4   1844.711330        55.560566        55.900343     64.147864   
+
+   peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
+0           82.862341           112.322368  
+1           82.862341           112.322368  
+2           81.817016           112.322368  
+3           77.686745           112.322368  
+4           81.817016           112.322368  
 ```
 
