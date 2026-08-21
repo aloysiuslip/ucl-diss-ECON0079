@@ -621,32 +621,32 @@ ibis.Schema {
 
 ```
   registered_number                                       company_name  \
-0          04050764  IPSWICH AND DISTRICT COUNCIL FOR VOLUNTARY SER...   
-1          04110724                                PSYTECHNICS LIMITED   
-2          01180742                      SUFFOLK LIFE PENSIONS LIMITED   
-3          07728211                               VERTAS GROUP LIMITED   
-4          02492078           WOODWARD MARKWELL FINANCIAL ADVISERS LTD   
+0          09066969  BLESSED CHRISTOPHER WHARTON CATHOLIC ACADEMY T...   
+1          02416333                                  SAVOY TIMBER LTD.   
+2          06382156                          ONE IN A MILLION (SPORTS)   
+3          06364892              BRADFORD CITY FC COMMUNITY FOUNDATION   
+4          02837030                          MAHARAJA TEXTILES LIMITED   
 
-   is_public industry_codes     file_codes   sic6  \
-0      False          94,63    19_21,19_10  63990   
-1      False          72,62    19_27,18_29  72190   
-2      False             65          16_34  65300   
-3      False             81          14_50  81100   
-4      False          64,65  12_47 1,16_34  65110   
+   is_public industry_codes file_codes   sic6  \
+0      False             85      17_31  85200   
+1      False             46      14_55  46130   
+2      False             93      17_15  93199   
+3      False             93    17_15 2  93199   
+4      False             46    14_56 2  46410   
 
                                            sic6_desc    lat_dec   lon_dec  \
-0        Other information service activities n.e.c.  52.057711  1.152499   
-1  Other research and experimental development on...  52.056583  1.151000   
-2                                    Pension funding  52.054528  1.147472   
-3             Combined facilities support activities  52.080500  1.118139   
-4                                     Life insurance  52.056083  1.153194   
+0                                  Primary education  53.857667 -1.915417   
+1  Agents involved in the sale of timber and buil...  53.805861 -1.759056   
+2  Other sports activities (not including activit...  53.804818 -1.761027   
+3  Other sports activities (not including activit...  53.803593 -1.759486   
+4                              Wholesale of textiles  53.803568 -1.760412   
 
-   address_lvl address_case      pc8       ttwa  pc4          lat_lon5  
-0            2          pta  IP1 1DD  E30000222  IP1   52.05771,1.1525  
-1            1          pta  IP1 1HN  E30000222  IP1    52.05658,1.151  
-2            1          pta  IP1 1QJ  E30000222  IP1  52.05453,1.14747  
-3            1          pta  IP1 1RR  E30000222  IP1   52.0805,1.11814  
-4            1          pta  IP1 1SL  E30000222  IP1  52.05608,1.15319  
+   address_lvl address_case      pc8       ttwa  pc4           lat_lon5  
+0            1          pta  BD8 7AP  E30000018  BD8  53.85767,-1.91542  
+1            1           ro  BD8 7DQ  E30000018  BD8  53.80586,-1.75906  
+2            2          pta  BD8 7DX  E30000018  BD8  53.80482,-1.76103  
+3            2          pta  BD8 7DY  E30000018  BD8  53.80359,-1.75949  
+4            2           ro  BD8 7DZ  E30000018  BD8  53.80357,-1.76041  
 ```
 
 ## working_yearly
@@ -698,7 +698,7 @@ ibis.Schema {
 
 ## working_yearly_with_peers
 
-### Number of rows: 1,087,683
+### Number of rows: 1,081,520
 
 ### Schema:
 
@@ -707,11 +707,14 @@ ibis.Schema {
   registered_number    string
   year                 int64
   employees            int64
+  fixed_total          float64
+  total_assets         float64
   average_wage         float64
   gva1                 float64
   gva2                 float64
   gva1_per_worker      float64
   gva2_per_worker      float64
+  tfp                  float64
   peer_tfp_pc8         float64
   peer_tfp_pc4_donut   float64
   peer_tfp_ttwa_donut  float64
@@ -721,25 +724,25 @@ ibis.Schema {
 ### Head of table:
 
 ```
-  registered_number  year  employees  average_wage          gva1  \
-0          SC411832  2021         36     43.064152   2579.996987   
-1          SC411832  2021         36     43.064152   2579.996987   
-2          SC121527  2021        198     68.005336  13472.060946   
-3          SC359548  2021         76     79.352124  10469.405636   
-4          SC191738  2021         33     50.908733   1833.498684   
+  registered_number  year  employees  fixed_total  total_assets  average_wage  \
+0          01305987  2008        119          NaN   9959.450360     43.247110   
+1          03545114  2008         34   782.624134   2785.185259     30.422256   
+2          00541159  2008         57   104.647482   5044.008633     40.275186   
+3          02858212  2008        197  6272.265099  12650.419996     23.034664   
+4          00514399  2008         56  3212.019914   4866.272360     22.986645   
 
-           gva2  gva1_per_worker  gva2_per_worker  peer_tfp_pc8  \
-0   2673.614121        71.666583        74.267059     50.731251   
-1   2673.614121        71.666583        74.267059     50.731251   
-2  15052.036807        68.040712        76.020388     57.907791   
-3   7224.560068       137.755337        95.060001    137.755337   
-4   1844.711330        55.560566        55.900343     64.147864   
+          gva1         gva2  gva1_per_worker  gva2_per_worker       tfp  \
+0  5399.054953          NaN        45.370210              NaN  3.009247   
+1   551.794263   210.180829        16.229243         6.181789  1.866175   
+2  2353.989212          NaN        41.298056              NaN  2.828044   
+3  7007.554297  3744.629735        35.571342        19.008273  2.890555   
+4  1883.952075  1979.322346        33.642001        35.345042  2.626497   
 
-   peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
-0           82.862341           112.322368  
-1           82.862341           112.322368  
-2           81.817016           112.322368  
-3           77.686745           112.322368  
-4           81.817016           112.322368  
+   peer_tfp_pc8  peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
+0      2.908118            3.030918             2.999694  
+1      2.984323            3.030918             2.999694  
+2      2.920198            3.030918             2.999694  
+3      2.916031            3.030918             2.999694  
+4      2.933634            3.030918             2.999694  
 ```
 

@@ -30,3 +30,5 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 ### TODO
 [] Calculate lat lon from postcode, and then from raw lat long
 [] Compare them to check cases
+[] Understand distance generation process. Currently, we have some errors
+- Both in generating distances within a postcode ()
