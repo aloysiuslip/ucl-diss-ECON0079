@@ -28,5 +28,5 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 
 
 ### TODO
-[] migrate ingest to get rid of fame_derived completely
-[] cast and process geospatial data
+[] Calculate lat lon from postcode, and then from raw lat long
+[] Compare them to check cases
