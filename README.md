@@ -9,7 +9,7 @@ Activate the virtual environment with `source venv/bin/activate` on Linux or mac
 - Jupyter: run current cell. When: `editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused`
 - Python: run Python File in Terminal. When: `exitorTextFocus && resourceExtname =~ /\.py/i`
 
-# Cleaning process
+# Build - data cleaning
 - Some raw sheets have primary_address missing
 - Some have some columns duplicated
 - The property key 'Strategy, organization and policy' has additional whitespace in some files
@@ -26,9 +26,20 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 - This is done so transformations are done in RAM with one I/O per industry.
 - This means less I/O writes to stop the hard drive being the bottleneck
 
-
+# Descriptives
 ### TODO
-[] Calculate lat lon from postcode, and then from raw lat long
-[] Compare them to check cases
-[] Understand distance generation process. Currently, we have some errors
+- [ ] Verify spatial: calculate lat lon from postcode, and then from raw lat long
+- [ ] Compare them to check cases
+- [ ] Understand distance generation process. Currently, we have some errors
 - Both in generating distances within a postcode ()
+  
+# Model
+### TODO
+- [X] Basic TFP panel regression
+- [X] LLM model 1: group TFP averages calculated  
+- [X] LLM model 1: run panel regression with these group averages  
+- [X] LLM model 1: run panel with industry vs non-industry groups too (6 more donut groups)
+- [X] Distance model 2: calculated distances  
+- [ ] Distance model 2: run panel regression with distances  
+- [X] Dynamic model 3: installed and tested the python package  
+- [ ] Dynamic model 3: run and play with LLM in dynamic set-up  
