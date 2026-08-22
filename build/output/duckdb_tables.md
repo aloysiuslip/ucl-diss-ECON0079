@@ -575,8 +575,8 @@ ibis.Schema {
 
 ```
 ibis.Schema {
-  lat       float64
   ttwa15cd  string
+  lat       float64
   long      float64
   pcds      string
 }
@@ -585,12 +585,36 @@ ibis.Schema {
 ### Head of table:
 
 ```
-         lat   ttwa15cd      long     pcds
-0  57.101459  S22000047 -2.242858  AB1 0AA
-1  57.102539  S22000047 -2.246315  AB1 0AB
-2  57.100541  S22000047 -2.248349  AB1 0AD
-3  57.084429  S22000047 -2.255714  AB1 0AE
-4  57.096641  S22000047 -2.258109  AB1 0AF
+    ttwa15cd        lat      long     pcds
+0  S22000047  57.101459 -2.242858  AB1 0AA
+1  S22000047  57.102539 -2.246315  AB1 0AB
+2  S22000047  57.100541 -2.248349  AB1 0AD
+3  S22000047  57.084429 -2.255714  AB1 0AE
+4  S22000047  57.096641 -2.258109  AB1 0AF
+```
+
+## ref_ons_ttwa_name
+
+### Number of rows: 230
+
+### Schema:
+
+```
+ibis.Schema {
+  TTWA11CD  string
+  TTWA11NM  string
+}
+```
+
+### Head of table:
+
+```
+    TTWA11CD                 TTWA11NM
+0  E30000004                 Barnsley
+1  E30000018                 Bradford
+2  E30000029                  Halifax
+3  E30000039                  Skipton
+4  E30000046  Dorchester and Weymouth
 ```
 
 ## lars_fixed
