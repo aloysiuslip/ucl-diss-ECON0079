@@ -360,6 +360,239 @@ ibis.Schema {
 4       31.020885                NaN                     NaN    -955.438543  
 ```
 
+## working_fixed
+
+### Number of rows: 152,379
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number  string
+  company_name       string
+  is_public          boolean
+  industry_codes     string
+  file_codes         string
+  sic6               int64
+  sic6_desc          string
+  lat_dec            float64
+  lon_dec            float64
+  address_lvl        int64
+  address_case       string
+  pc8                string
+  ttwa               string
+  pc4                string
+  lat_lon5           string
+}
+```
+
+### Head of table:
+
+```
+  registered_number                                       company_name  \
+0          09066969  BLESSED CHRISTOPHER WHARTON CATHOLIC ACADEMY T...   
+1          02416333                                  SAVOY TIMBER LTD.   
+2          06382156                          ONE IN A MILLION (SPORTS)   
+3          06364892              BRADFORD CITY FC COMMUNITY FOUNDATION   
+4          02837030                          MAHARAJA TEXTILES LIMITED   
+
+   is_public industry_codes file_codes   sic6  \
+0      False             85      17_31  85200   
+1      False             46      14_55  46130   
+2      False             93      17_15  93199   
+3      False             93    17_15 2  93199   
+4      False             46    14_56 2  46410   
+
+                                           sic6_desc    lat_dec   lon_dec  \
+0                                  Primary education  53.857667 -1.915417   
+1  Agents involved in the sale of timber and buil...  53.805861 -1.759056   
+2  Other sports activities (not including activit...  53.804818 -1.761027   
+3  Other sports activities (not including activit...  53.803593 -1.759486   
+4                              Wholesale of textiles  53.803568 -1.760412   
+
+   address_lvl address_case      pc8       ttwa  pc4           lat_lon5  
+0            1          pta  BD8 7AP  E30000018  BD8  53.85767,-1.91542  
+1            1           ro  BD8 7DQ  E30000018  BD8  53.80586,-1.75906  
+2            2          pta  BD8 7DX  E30000018  BD8  53.80482,-1.76103  
+3            2          pta  BD8 7DY  E30000018  BD8  53.80359,-1.75949  
+4            2           ro  BD8 7DZ  E30000018  BD8  53.80357,-1.76041  
+```
+
+## working_yearly
+
+### Number of rows: 1,128,490
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number  string
+  year               int64
+  employees          int64
+  fixed_total        float64
+  total_assets       float64
+  average_wage       float64
+  gva1               float64
+  gva2               float64
+  gva1_per_worker    float64
+  gva2_per_worker    float64
+  tfp                float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  employees    fixed_total   total_assets  \
+0          07404078  2023         30       4.264056      31.001682   
+1          NI031527  2023         62    7659.501766   10463.721206   
+2          14771570  2023         61   19009.842193   26071.303871   
+3          13264637  2023       2269  189051.245000  614721.233000   
+4          13355740  2023         55    4553.341653   28223.947709   
+
+   average_wage           gva1           gva2  gva1_per_worker  \
+0     12.917756     440.659867     452.404906        14.688662   
+1     14.636052    1020.697635            NaN        16.462865   
+2     45.575182    3980.371124    2376.708514        65.251986   
+3     96.326896  281906.284838  334707.946978       124.242523   
+4     48.856937    5019.654347    3257.513342        91.266443   
+
+   gva2_per_worker       tfp  
+0        15.080164  3.006648  
+1              NaN  1.731571  
+2        38.962435  2.841045  
+3       147.513419  3.965358  
+4        59.227515  3.114184  
+```
+
+## working_yearly_with_peers
+
+### Number of rows: 1,081,520
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number    string
+  year                 int64
+  employees            int64
+  fixed_total          float64
+  total_assets         float64
+  average_wage         float64
+  gva1                 float64
+  gva2                 float64
+  gva1_per_worker      float64
+  gva2_per_worker      float64
+  tfp                  float64
+  peer_tfp_pc8         float64
+  peer_tfp_pc4_donut   float64
+  peer_tfp_ttwa_donut  float64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  employees  fixed_total  total_assets  average_wage  \
+0          01305987  2008        119          NaN   9959.450360     43.247110   
+1          03545114  2008         34   782.624134   2785.185259     30.422256   
+2          00541159  2008         57   104.647482   5044.008633     40.275186   
+3          02858212  2008        197  6272.265099  12650.419996     23.034664   
+4          00514399  2008         56  3212.019914   4866.272360     22.986645   
+
+          gva1         gva2  gva1_per_worker  gva2_per_worker       tfp  \
+0  5399.054953          NaN        45.370210              NaN  3.009247   
+1   551.794263   210.180829        16.229243         6.181789  1.866175   
+2  2353.989212          NaN        41.298056              NaN  2.828044   
+3  7007.554297  3744.629735        35.571342        19.008273  2.890555   
+4  1883.952075  1979.322346        33.642001        35.345042  2.626497   
+
+   peer_tfp_pc8  peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
+0      2.908118            3.030918             2.999694  
+1      2.984323            3.030918             2.999694  
+2      2.920198            3.030918             2.999694  
+3      2.916031            3.030918             2.999694  
+4      2.933634            3.030918             2.999694  
+```
+
+## working_distance
+
+### Number of rows: 43,241,404
+
+### Schema:
+
+```
+ibis.Schema {
+  firm_i           string
+  firm_j           string
+  pc4              string
+  distance_meters  float64
+}
+```
+
+### Head of table:
+
+```
+     firm_i    firm_j   pc4  distance_meters
+0  00385769  03438440  EC3A       159.369294
+1  04016287  03438440  EC3A      7435.180266
+2  11219580  10302482  EC3M       340.743458
+3  08333916  10302482  EC3M       172.635144
+4  01264271  10302482  EC3M       148.291974
+```
+
+## working_distance_filtered
+
+### Number of rows: 43,241,404
+
+### Schema:
+
+```
+ibis.Schema {
+  firm_i           string
+  firm_j           string
+  pc4              string
+  distance_meters  float64
+}
+```
+
+### Head of table:
+
+```
+     firm_i    firm_j   pc4  distance_meters
+0  00385769  03438440  EC3A       159.369294
+1  04016287  03438440  EC3A      7435.180266
+2  11219580  10302482  EC3M       340.743458
+3  08333916  10302482  EC3M       172.635144
+4  01264271  10302482  EC3M       148.291974
+```
+
+## ref_ons_postcode
+
+### Number of rows: 2,726,477
+
+### Schema:
+
+```
+ibis.Schema {
+  lat       float64
+  ttwa15cd  string
+  long      float64
+  pcds      string
+}
+```
+
+### Head of table:
+
+```
+         lat   ttwa15cd      long     pcds
+0  57.101459  S22000047 -2.242858  AB1 0AA
+1  57.102539  S22000047 -2.246315  AB1 0AB
+2  57.100541  S22000047 -2.248349  AB1 0AD
+3  57.084429  S22000047 -2.255714  AB1 0AE
+4  57.096641  S22000047 -2.258109  AB1 0AF
+```
+
 ## lars_fixed
 
 ### Number of rows: 452,638
@@ -589,160 +822,5 @@ ibis.Schema {
 2                         -647  BLACKSTAR GROUP SE  
 3                         -466  BLACKSTAR GROUP SE  
 4                          NaN     SCOTTY GROUP SE  
-```
-
-## working_fixed
-
-### Number of rows: 152,379
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number  string
-  company_name       string
-  is_public          boolean
-  industry_codes     string
-  file_codes         string
-  sic6               int64
-  sic6_desc          string
-  lat_dec            float64
-  lon_dec            float64
-  address_lvl        int64
-  address_case       string
-  pc8                string
-  ttwa               string
-  pc4                string
-  lat_lon5           string
-}
-```
-
-### Head of table:
-
-```
-  registered_number                                       company_name  \
-0          09066969  BLESSED CHRISTOPHER WHARTON CATHOLIC ACADEMY T...   
-1          02416333                                  SAVOY TIMBER LTD.   
-2          06382156                          ONE IN A MILLION (SPORTS)   
-3          06364892              BRADFORD CITY FC COMMUNITY FOUNDATION   
-4          02837030                          MAHARAJA TEXTILES LIMITED   
-
-   is_public industry_codes file_codes   sic6  \
-0      False             85      17_31  85200   
-1      False             46      14_55  46130   
-2      False             93      17_15  93199   
-3      False             93    17_15 2  93199   
-4      False             46    14_56 2  46410   
-
-                                           sic6_desc    lat_dec   lon_dec  \
-0                                  Primary education  53.857667 -1.915417   
-1  Agents involved in the sale of timber and buil...  53.805861 -1.759056   
-2  Other sports activities (not including activit...  53.804818 -1.761027   
-3  Other sports activities (not including activit...  53.803593 -1.759486   
-4                              Wholesale of textiles  53.803568 -1.760412   
-
-   address_lvl address_case      pc8       ttwa  pc4           lat_lon5  
-0            1          pta  BD8 7AP  E30000018  BD8  53.85767,-1.91542  
-1            1           ro  BD8 7DQ  E30000018  BD8  53.80586,-1.75906  
-2            2          pta  BD8 7DX  E30000018  BD8  53.80482,-1.76103  
-3            2          pta  BD8 7DY  E30000018  BD8  53.80359,-1.75949  
-4            2           ro  BD8 7DZ  E30000018  BD8  53.80357,-1.76041  
-```
-
-## working_yearly
-
-### Number of rows: 1,128,490
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number  string
-  year               int64
-  employees          int64
-  fixed_total        float64
-  total_assets       float64
-  average_wage       float64
-  gva1               float64
-  gva2               float64
-  gva1_per_worker    float64
-  gva2_per_worker    float64
-  tfp                float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  employees    fixed_total   total_assets  \
-0          07404078  2023         30       4.264056      31.001682   
-1          NI031527  2023         62    7659.501766   10463.721206   
-2          14771570  2023         61   19009.842193   26071.303871   
-3          13264637  2023       2269  189051.245000  614721.233000   
-4          13355740  2023         55    4553.341653   28223.947709   
-
-   average_wage           gva1           gva2  gva1_per_worker  \
-0     12.917756     440.659867     452.404906        14.688662   
-1     14.636052    1020.697635            NaN        16.462865   
-2     45.575182    3980.371124    2376.708514        65.251986   
-3     96.326896  281906.284838  334707.946978       124.242523   
-4     48.856937    5019.654347    3257.513342        91.266443   
-
-   gva2_per_worker       tfp  
-0        15.080164  3.006648  
-1              NaN  1.731571  
-2        38.962435  2.841045  
-3       147.513419  3.965358  
-4        59.227515  3.114184  
-```
-
-## working_yearly_with_peers
-
-### Number of rows: 1,081,520
-
-### Schema:
-
-```
-ibis.Schema {
-  registered_number    string
-  year                 int64
-  employees            int64
-  fixed_total          float64
-  total_assets         float64
-  average_wage         float64
-  gva1                 float64
-  gva2                 float64
-  gva1_per_worker      float64
-  gva2_per_worker      float64
-  tfp                  float64
-  peer_tfp_pc8         float64
-  peer_tfp_pc4_donut   float64
-  peer_tfp_ttwa_donut  float64
-}
-```
-
-### Head of table:
-
-```
-  registered_number  year  employees  fixed_total  total_assets  average_wage  \
-0          01305987  2008        119          NaN   9959.450360     43.247110   
-1          03545114  2008         34   782.624134   2785.185259     30.422256   
-2          00541159  2008         57   104.647482   5044.008633     40.275186   
-3          02858212  2008        197  6272.265099  12650.419996     23.034664   
-4          00514399  2008         56  3212.019914   4866.272360     22.986645   
-
-          gva1         gva2  gva1_per_worker  gva2_per_worker       tfp  \
-0  5399.054953          NaN        45.370210              NaN  3.009247   
-1   551.794263   210.180829        16.229243         6.181789  1.866175   
-2  2353.989212          NaN        41.298056              NaN  2.828044   
-3  7007.554297  3744.629735        35.571342        19.008273  2.890555   
-4  1883.952075  1979.322346        33.642001        35.345042  2.626497   
-
-   peer_tfp_pc8  peer_tfp_pc4_donut  peer_tfp_ttwa_donut  
-0      2.908118            3.030918             2.999694  
-1      2.984323            3.030918             2.999694  
-2      2.920198            3.030918             2.999694  
-3      2.916031            3.030918             2.999694  
-4      2.933634            3.030918             2.999694  
 ```
 
