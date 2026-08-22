@@ -37,7 +37,6 @@ def compute_distance_matrix(
     if prop_col not in select_cols:
         select_cols.append(prop_col)
     t_clean = t_clean.select(select_cols)
-    print(t_clean.columns)
     db_con.create_view("view_t_clean", t_clean, overwrite=True)
 
     # -------------------------------------------------------------

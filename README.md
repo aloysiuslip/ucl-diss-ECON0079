@@ -39,7 +39,8 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 - [X] LLM model 1: group TFP averages calculated  
 - [X] LLM model 1: run panel regression with these group averages  
 - [X] LLM model 1: run panel with industry vs non-industry groups too (6 more donut groups)
-- [X] Distance model 2: calculated distances  
+- [X] Distance model 2: calculated distances with 5km limit.
+- [X] Distance model 2: improve viz by including each new node as peer.
 - [ ] Distance model 2: run panel regression with distances  
 - [X] Dynamic model 3: installed and tested the python package  
 - [ ] Dynamic model 3: run and play with LLM in dynamic set-up  
