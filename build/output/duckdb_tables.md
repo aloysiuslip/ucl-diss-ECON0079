@@ -400,6 +400,67 @@ ibis.Schema {
 4      2.933634            3.030918             2.999694  
 ```
 
+## working_yearly_with_tfp_wave
+
+### Number of rows: 1,081,520
+
+### Schema:
+
+```
+ibis.Schema {
+  registered_number    string
+  year                 int64
+  employees            int64
+  fixed_total          float64
+  total_assets         float64
+  average_wage         float64
+  gva1                 float64
+  gva2                 float64
+  gva1_per_worker      float64
+  gva2_per_worker      float64
+  tfp                  float64
+  peer_tfp_pc8         float64
+  peer_tfp_pc4_donut   float64
+  peer_tfp_ttwa_donut  float64
+  tfp_wav1             float64
+  tfp_wav2             float64
+  tfp_wav3             float64
+  nb_peers             int64
+}
+```
+
+### Head of table:
+
+```
+  registered_number  year  employees   fixed_total  total_assets  \
+0          00883094  2013         93   9397.718233  12623.299861   
+1          02944316  2008         57      0.001495   3552.013603   
+2          04627487  2009         30     38.441535   1353.419865   
+3          02489891  2006         11           NaN    362.661452   
+4          02108152  2013         10  21108.710731  36733.902193   
+
+   average_wage          gva1        gva2  gva1_per_worker  gva2_per_worker  \
+0     45.701936   4517.663901         NaN        48.577031              NaN   
+1    194.105976  10835.074932         NaN       190.089034              NaN   
+2     54.542120   2002.542597         NaN        66.751420              NaN   
+3     44.126837    501.505227         NaN        45.591384              NaN   
+4     32.861217   1424.520226  407.993276       142.452023        40.799328   
+
+        tfp  peer_tfp_pc8  peer_tfp_pc4_donut  peer_tfp_ttwa_donut  tfp_wav1  \
+0  2.915217           NaN            2.948334             3.167327  3.219600   
+1  4.455152      3.126169            2.947020             3.220576  2.942124   
+2  3.439062      3.105835            3.017165             3.193874  3.073755   
+3  3.050577      3.034067            3.051010             3.180186  3.050604   
+4  2.830832      3.092086            2.873982             3.167327  3.028847   
+
+   tfp_wav2  tfp_wav3  nb_peers  
+0  3.132918  3.213975      8688  
+1  2.929310  3.223899      6957  
+2  3.066205  3.221571      7141  
+3  3.044587  3.200482      6988  
+4  3.016503  3.220929      8648  
+```
+
 ## working_distance_pc4
 
 ### Number of rows: 43,241,404
