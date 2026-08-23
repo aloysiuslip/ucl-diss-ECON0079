@@ -1,9 +1,14 @@
 # Environment
-- `pip freeze > requirements.txt` to save installs
-- `pip install -r requirements.txt` to install dependencies
+- `pip freeze > requirements-main.txt` to save installs
+- `pip install -r requirements-main.txt` to install dependencies
 Activate the virtual environment with `source venv/bin/activate` on Linux or macOS, or `venv\Scripts\activate` on Windows.
 .venv should be added to .gitignore to avoid committing the virtual environment to version control.
-- Pass `fame_data.duckb` and `descriptives/input/skinny_NSPL_MAY_2026_UK.xlsx` back and forth
+
+### Second venv (pydynpd compatibility)
+- `source .venv-pydynpd/bin/activate` or `source .venv-pydynpd/Scripts/activate`
+- `pip install -r requirements-pydynpd.txt`
+- `python -m ipykernel install --user --name=venv-pydynpd --display-name "Python 3 (PyDynPD GMM)"`
+- Leave venv: `deactivate`
 
 ### VSC keyboard shortcuts
 - Jupyter: run current cell. When: `editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !isCompositeNotebook && !notebookEditorFocused`
