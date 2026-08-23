@@ -13,7 +13,7 @@ def compute_distance_matrix(
 
     # Optional parameters
     table_out_name: str | None = None,         # If specified, write the result to a con.table. Otherwise, return the ibis.table expression.
-    prop_col: str = "pc4",              # Filter the possible joins based on string match of a property.
+    prop_col: str | None = None,              # Filter the possible joins based on string match of a property.
     max_distance: int | None = None,   # Filter the possible joins based on max distance. This helps memory usage.
     bind_by_box: bool = False,          # If true, calculates averages among rich dataset across several properties: ttwa, pc4, pc8.
     origin_id: str | None = None          # Rather than all-to-all distances, this specifices one-to-all distances.
@@ -38,7 +38,7 @@ def compute_distance_matrix(
             t.pc8.notnull()
         ])
         select_cols.extend(["pc4", "ttwa", "pc8"])
-    if prop_col not in select_cols:
+    if prop_col and prop_col not in select_cols:
         select_cols.append(prop_col)
     t_clean = t_clean.select(select_cols)
 
@@ -129,6 +129,7 @@ def compute_distance_matrix(
                 .inner_join(tf_j, valid_pc4.pc4_b == tf_j.pc4_j)
                 .filter(tf_i.registered_number_i != tf_j.registered_number_j)
         )
+        print(f"--- Joined maximum {joined.count().execute():,} firm pairs for distance calculation.")
     elif origin_id is not None:
         # One-to-All Join: Link Firms through the specified origin_id
         tf_i_one = tf_i.filter(tf_i.registered_number_i == origin_id)
@@ -138,11 +139,10 @@ def compute_distance_matrix(
         joined = tf_i.inner_join(
             tf_j, 
             [
-                tf_i[prop_col + "_i"] == tf_j[prop_col + "_j"],
+                tf_i[prop_col + "_i"] == tf_j[prop_col + "_j"] if prop_col else True,
                 tf_i.registered_number_i != tf_j.registered_number_j
             ]
         )
-    print(f"--- Joined maximum {joined.count().execute():,} firm pairs for distance calculation.")
 
     # Hybrid Handoff: Register temporary view to query natively
     db_con.create_view("temp_spatial_pairs", joined, overwrite=True)
@@ -233,108 +233,72 @@ def join_fd_tables(table_fixed: ibis.Table, table_distances: ibis.Table,
 # ==========================================
 # Generates a Folium map plotting multiple firm networks in unique colors.
 # Need columns: distance_meters, { firm, lat_dec, lon_dec, pc8 } for both '_target' and '_peer'.
-def plot_folium_network(df_networks: pd.DataFrame, id_d_list: list[list[str]], descent: bool = False) -> folium.Map:
+import folium
+import pandas as pd
+
+def plot_folium_network(
+    df_networks: pd.DataFrame, 
+    ordered_targets: list[list[str]] | None = None, 
+    descent: bool = False
+) -> folium.Map:
+    
     if df_networks.empty:
         print("No network data found to plot.")
         return None # type: ignore
 
-    # Center map on the average coordinates of all targets
     center_lat = df_networks['lat_dec_target'].mean()
     center_lon = df_networks['lon_dec_target'].mean()
     m = folium.Map(location=[center_lat, center_lon], zoom_start=11, tiles="CartoDB positron")
 
-    unique_targets: list[str] = df_networks['firm_target'].unique() # type: ignore
-    depth_targets = { target_id: (idx + 4) // 5 for idx, target_id in enumerate(unique_targets) }
-
-    df_networks_d = df_networks.copy()
-    df_networks_d['depth'] = df_networks_d['firm_target'].map(depth_targets)
-
-    # A palette of distinct Folium-supported colors
-    # This library only supports: {'darkblue', 'orange', 'white', 'darkred', 'pink', 'beige',
-    # 'lightred', 'black', 'lightblue', 'blue', 'lightgray', 'green', 'darkgreen', 'gray',
-    # 'purple', 'cadetblue', 'lightgreen', 'darkpurple', 'red'}
-
-    normal_colours = [
-        'red', 'blue', 'green', 'purple', 'orange', 
-        'darkred', 'cadetblue', 'darkgreen', 'darkpurple', 'black'
-    ]
-    descent_colors = [
-        'blue', 'darkred', 'red', 'lightred', 'pink'
-    ]
+    # ✅ FIX 1: Use the perfectly ordered list from the generator if provided
+    if ordered_targets is None:
+        ordered_targets = [df_networks['firm_target'].unique().tolist()]
+    all_target_ids = [id for sublist in ordered_targets for id in sublist]
+    normal_colours = ['red', 'blue', 'green', 'purple', 'orange', 'darkred', 'cadetblue', 'darkgreen', 'darkpurple', 'black']
+    descent_colors = ['blue', 'darkred', 'red', 'lightred', 'pink']
     colours = descent_colors if descent else normal_colours
 
-    for idx, target_id in enumerate(unique_targets):
+    node_id = 0
+    for depth, arr in enumerate(ordered_targets):
+        for idx, target_id in enumerate(arr):
+            
+            # Protect against targets that might have been filtered out
+            target_data = df_networks[df_networks['firm_target'] == target_id]
+            if target_data.empty:
+                continue
 
-        target_data = df_networks_d[df_networks_d['firm_target'] == target_id]
-        t_lat = target_data['lat_dec_target'].iloc[0]
-        t_lon = target_data['lon_dec_target'].iloc[0]
-        t_pc8 = target_data['pc8_target'].iloc[0]
+            t_lat = target_data['lat_dec_target'].iloc[0]
+            t_lon = target_data['lon_dec_target'].iloc[0]
+            t_pc8 = target_data['pc8_target'].iloc[0]
+            
+            colour = colours[depth % len(colours)] if (descent) else colours[idx % len(colours)]
 
-        depth = target_data['depth'].iloc[0] if descent else None
-        colour = colours[depth % len(colours)] if descent and depth else colours[idx % len(colours)]
-
-        # Add Target Firm Marker (Star)
-        target_obj = {
-            "ID": target_id,
-            "Postcode": t_pc8
-        }
-        if descent:
-            target_obj['Depth'] = depth
-            target_obj['Network'] = idx
-        folium.Marker(
-            location=[t_lat, t_lon],
-            tooltip=(
-                "<b>TARGET FIRM</b><br>" +
-                "<br>".join(": ".join([k, str(v)]) for k, v in target_obj.items())
-            ),
-            icon=folium.Icon(color=colour, icon="star")
-        ).add_to(m)
-
-        max_dist = target_data['distance_meters'].max() or 1 
-
-        # Add Peers and Edges
-        for _, row in target_data.iterrows():
-
-            p_lat = row['lat_dec_peer']
-            p_lon = row['lon_dec_peer']
-            p_pc8 = row['pc8_peer']
-            dist = row['distance_meters']
-            peer_id = row['firm_peer']
-
-            # Skip adding the edge if there exists a row in target_data
-            # Where the target_id in that row is the same as the peer_id in this row
-            # And the depth of that row is less than or equal to the depth of this row
+            target_obj = { "ID": target_id, "Postcode": t_pc8 }
             if descent:
-                if any(
-                    (row['firm_target'] == peer_id) and (row['depth'] <= depth)
-                    for _, row in target_data.iterrows()
-                ):
-                    continue
-            
-            # Peer Marker
-            peer_obj = {
-                "Peer": peer_id,
-                "Postcode": p_pc8,
-                "Distance": f"{dist:,.1f} m"
-            }
-            folium.CircleMarker(
-                location=[p_lat, p_lon],
-                radius=4,
-                color=colour,
-                fill=True,
-                fill_color=colour,
-                fill_opacity=0.6,
-                tooltip="<br>".join(": ".join([k, str(v)]) for k, v in peer_obj.items())
-            ).add_to(m)
-            
-            # Spatial Edge (Fades out over distance)
-            opacity = max(0.1, 1.0 - (dist / max_dist))
-            folium.PolyLine(
-                locations=[(t_lat, t_lon), (p_lat, p_lon)],
-                color=colour,
-                weight=1.5,
-                opacity=opacity,
-                dash_array="5, 5"
+                target_obj['Depth'] = depth
+                target_obj['Network'] = node_id
+            folium.Marker(
+                location=[t_lat, t_lon],
+                tooltip="<b>TARGET FIRM</b><br>" + "<br>".join(": ".join([k, str(v)]) for k, v in target_obj.items()),
+                icon=folium.Icon(color=colour, icon="star")
             ).add_to(m)
 
+            max_dist = target_data['distance_meters'].max() or 1 
+
+            for _, row in target_data.iterrows():
+                p_lat, p_lon = row['lat_dec_peer'], row['lon_dec_peer']
+                dist, peer_id = row['distance_meters'], row['firm_peer']
+                
+                peer_obj = { "Peer": peer_id, "Postcode": row['pc8_peer'], "Distance": f"{dist:,.1f} m" }
+                folium.CircleMarker(
+                    location=[p_lat, p_lon], radius=4, color=colour, fill=True, fill_color=colour,
+                    fill_opacity=0.6, tooltip="<br>".join(": ".join([k, str(v)]) for k, v in peer_obj.items())
+                ).add_to(m)
+                
+                opacity = max(0.1, 1.0 - (dist / max_dist))
+                folium.PolyLine(
+                    locations=[(t_lat, t_lon), (p_lat, p_lon)], color=colour, weight=1.5,
+                    opacity=opacity, dash_array="5, 5"
+                ).add_to(m)
+            node_id += 1
     return m
