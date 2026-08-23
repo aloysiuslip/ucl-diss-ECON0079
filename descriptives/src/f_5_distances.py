@@ -6,21 +6,25 @@ import folium
 # ==========================================
 # 1. Distance calculations
 # ==========================================
+# This produces a symmetric nxn sparse matrix of all distance pairs. Each distance appears twice.
 def compute_distance_matrix(
     db_con: ibis.DuckDBConnection,
     table_in: str | ibis.Table,
-    table_out_name: str | None,
-    prop_col: str = "pc4",
-    max_distance: int | None = 20000,
-    bind_by_box: bool = False
+
+    # Optional parameters
+    table_out_name: str | None = None,         # If specified, write the result to a con.table. Otherwise, return the ibis.table expression.
+    prop_col: str = "pc4",              # Filter the possible joins based on string match of a property.
+    max_distance: int | None = None,   # Filter the possible joins based on max distance. This helps memory usage.
+    bind_by_box: bool = False,          # If true, calculates averages among rich dataset across several properties: ttwa, pc4, pc8.
+    origin_id: str | None = None          # Rather than all-to-all distances, this specifices one-to-all distances.
 ) -> ibis.Table:
+
+    if origin_id is not None and bind_by_box and max_distance is not None:
+        raise ValueError("Cannot use origin_id with bind_by_box and max_distance. Please choose one method of filtering.")
     
     # Install spatial, load spatial
     db_con.raw_sql("INSTALL spatial; LOAD spatial;")
-
     t: ibis.Table = db_con.table(table_in) if isinstance(table_in, str) else table_in
-
-    # Ibis ORM: Filter valid coordinates and required group columns
     t_clean = t.filter([
         t.lon_dec.notnull() & (t.lon_dec != 0),
         t.lat_dec.notnull() & (t.lat_dec != 0)
@@ -37,12 +41,13 @@ def compute_distance_matrix(
     if prop_col not in select_cols:
         select_cols.append(prop_col)
     t_clean = t_clean.select(select_cols)
-    db_con.create_view("view_t_clean", t_clean, overwrite=True)
 
     # -------------------------------------------------------------
     # STEP 1: HIERARCHICAL BOUNDING BOXES (TTWA -> PC4)
     # -------------------------------------------------------------
     if bind_by_box and max_distance is not None:
+
+        db_con.create_view("view_t_clean", t_clean, overwrite=True)
         
         # --- 1A. TTWA Bounding Boxes ---
         # Ibis ORM: Calculate TTWA centroids
@@ -124,6 +129,10 @@ def compute_distance_matrix(
                 .inner_join(tf_j, valid_pc4.pc4_b == tf_j.pc4_j)
                 .filter(tf_i.registered_number_i != tf_j.registered_number_j)
         )
+    elif origin_id is not None:
+        # One-to-All Join: Link Firms through the specified origin_id
+        tf_i_one = tf_i.filter(tf_i.registered_number_i == origin_id)
+        joined = tf_i_one.cross_join(tf_j).filter(tf_i_one.registered_number_i != tf_j.registered_number_j)
     else:
         # Fallback block-diagonal logic if Bounding Volumes are disabled
         joined = tf_i.inner_join(
@@ -203,7 +212,7 @@ def join_fd_tables(table_fixed: ibis.Table, table_distances: ibis.Table,
         table_sampled = (
             table_out
             .mutate(rand_rank=ibis.row_number().over(w))
-            .filter(ibis._.rand_rank < max_peers)
+            .filter(ibis._.rand_rank <= max_peers)
             .drop("rand_rank")
         )
         table_out = table_sampled
@@ -224,7 +233,7 @@ def join_fd_tables(table_fixed: ibis.Table, table_distances: ibis.Table,
 # ==========================================
 # Generates a Folium map plotting multiple firm networks in unique colors.
 # Need columns: distance_meters, { firm, lat_dec, lon_dec, pc8 } for both '_target' and '_peer'.
-def plot_folium_network(df_networks: pd.DataFrame, descent: bool = False) -> folium.Map:
+def plot_folium_network(df_networks: pd.DataFrame, id_d_list: list[list[str]], descent: bool = False) -> folium.Map:
     if df_networks.empty:
         print("No network data found to plot.")
         return None # type: ignore
@@ -241,7 +250,9 @@ def plot_folium_network(df_networks: pd.DataFrame, descent: bool = False) -> fol
     df_networks_d['depth'] = df_networks_d['firm_target'].map(depth_targets)
 
     # A palette of distinct Folium-supported colors
-    # This library only supports: {'darkblue', 'orange', 'white', 'darkred', 'pink', 'beige', 'lightred', 'black', 'lightblue', 'blue', 'lightgray', 'green', 'darkgreen', 'gray', 'purple', 'cadetblue', 'lightgreen', 'darkpurple', 'red'}
+    # This library only supports: {'darkblue', 'orange', 'white', 'darkred', 'pink', 'beige',
+    # 'lightred', 'black', 'lightblue', 'blue', 'lightgray', 'green', 'darkgreen', 'gray',
+    # 'purple', 'cadetblue', 'lightgreen', 'darkpurple', 'red'}
 
     normal_colours = [
         'red', 'blue', 'green', 'purple', 'orange', 
@@ -253,7 +264,7 @@ def plot_folium_network(df_networks: pd.DataFrame, descent: bool = False) -> fol
     colours = descent_colors if descent else normal_colours
 
     for idx, target_id in enumerate(unique_targets):
-        
+
         target_data = df_networks_d[df_networks_d['firm_target'] == target_id]
         t_lat = target_data['lat_dec_target'].iloc[0]
         t_lon = target_data['lon_dec_target'].iloc[0]
