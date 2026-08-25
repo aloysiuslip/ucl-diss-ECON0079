@@ -1,18 +1,51 @@
+% Custom command to insert a centered table from external file with caption
+\newcommand{\wraptable}[2]{%
+    \begin{table}[htbp]
+        \centering
+        \caption{#1}
+        \input{#2}
+    \end{table}%
+}
+
 I start by estimating a basic 2-factor production model, in line with Solow's productivity decomposition.
 Capital is calculated from FAME's \texttt{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
 within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
-The average capital-output ratio is \todo{Insert capital-output ratio}.
+The average capital-output ratio is 6x within FAME when filtering for positive values,
+which is moderately higher than macroeconomic aggregates typically suggest, likely due to accounting standard differences.
 Labour is taken from the number of firm employees from the FAME balance sheet.
 
+\begin{table}[htbp]
+    \begin{center}
+    \caption{Capital-output ratios in FAME corpus of firms}
+    \begin{tabular}{lccc}
+        \toprule\toprule
+        & tangibles 
+        & fixed\_other 
+        & total\_assets
+        \\
+        & 
+        & \footnotesize {(tangibles + intangibles + inv.\_other)} 
+        & \footnotesize {(fixed\_total + current\_assets)} \\ 
+        \midrule
+        Capital-output ratio & 3.53 & 6.00 & 11.56 \\
+        \bottomrule
+    \end{tabular}
+    \end{center}
+\end{table}
+
 \section{Results}
-Baseline TFP calculation
-\input{../../model/output/results_0_tfp}
 
-The result of my LMM model are as follows.
-\input{../../model/output/results_1a_lmm}
+{\wraptable
+    {Baseline TFP calculation from 2-factor production}
+    {../../model/output/results_0_tfp}
 
-The results of my distance decay model are as follows.
-\input{../../model/output/results_2_dd}
-
-The results of my dynamic panel are as follows
-\input{../../model/output/results_3_ivdyn}
+    
+{\wraptable
+    {Static panel linear-in-means using spatial-group TFP averages}
+    {../../model/output/results_1a_lmm}
+\wraptable
+    {Static panel using continuous distance-decay weighted TFP average of peers}
+    {../../model/output/results_3_ivdyn}
+\wraptable
+    {Dynamic panel using instrumented continuous distance-decay weighted TFP}
+    {../../model/output/results_1a_lmm}

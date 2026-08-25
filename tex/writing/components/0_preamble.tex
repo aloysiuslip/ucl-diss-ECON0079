@@ -17,6 +17,18 @@
 
 \usepackage{import}
 
+% Captions
+\usepackage{caption}
+\renewcommand{\thetable}{\Roman{table}}
+\DeclareCaptionLabelFormat{uppercase_table}{TABLE~#2}
+\DeclareCaptionFormat{multiline_title}{#1\par#3}
+\captionsetup[table]{
+    labelformat=uppercase_table, % Uses "TABLE" + Roman numeral
+    labelsep=none,               % Removes colon/period after label
+    format=multiline_title,      % Puts title on line below label
+    justification=centering      % Centers both lines
+}
+
 % Model section
 \usepackage{tabularray}
 \usepackage{float}
