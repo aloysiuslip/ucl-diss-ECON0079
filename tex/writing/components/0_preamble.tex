@@ -5,7 +5,6 @@
 \usepackage{microtype}
 \usepackage{amssymb}
 \usepackage{parskip}
-\usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{url}
@@ -14,8 +13,28 @@
 
 \usepackage{todonotes}
 \usepackage[normalem]{ulem}
-
 \usepackage{import}
+
+% Title and components
+% Centred, normal-weight section headings (no bold, no number).
+% This also applies to \tableofcontents and \listoffigures headings,
+% since LaTeX typesets them via \section*{\contentsname} etc.
+
+% Sections
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\centering} % Centered, large, bold font
+  {\thesection.}                       % Adds section number followed by a dot (e.g., 1.)
+  {1em}                                % Space between number and title text
+  {\MakeUppercase}                     % Automatically forces title text into ALL CAPS
+\titlespacing*{\section}
+  {0pt}                                % Left margin offset
+  {5ex plus 1ex minus .2ex}          % Vertical space ABOVE (increase 2.5ex to 3ex for more space)
+  {1.5ex plus .2ex}                    % Vertical space BELOW
+
+% Paragraph text
+\setlength{\parindent}{20pt}
+\urlstyle{same}
 
 % Captions
 \usepackage{caption}
@@ -44,17 +63,9 @@
 % Bibliography, reference
 \usepackage[round,authoryear]{natbib}
 \bibliographystyle{plainnat}
-
 \setcounter{secnumdepth}{0}
 \pagestyle{plain}
 
-% Centred, normal-weight section headings (no bold, no number).
-% This also applies to \tableofcontents and \listoffigures headings,
-% since LaTeX typesets them via \section*{\contentsname} etc.
-\titleformat{\section}[block]{\bfseries}{}{0em}{}
-\titlespacing*{\section}{0pt}{2em}{1em}
-\setlength{\parindent}{20pt}
-\urlstyle{same}
 
 % TOC/LOF heading names
 \renewcommand{\contentsname}{Table of Contents}
