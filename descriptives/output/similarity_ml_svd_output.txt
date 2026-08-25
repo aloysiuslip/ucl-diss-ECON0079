@@ -1,0 +1,125 @@
+PCA summary:
+     Explained Variance Ratio  Cumulative Explained Variance  Singular Values
+PC1                  0.364488                       0.364488      3338.335090
+PC2                  0.144127                       0.508616      2099.235341
+PC3                  0.094413                       0.603029      1699.039224
+PC4                  0.078733                       0.681762      1551.554983
+PC5                  0.058736                       0.740498      1340.113814
+PC6                  0.041015                       0.781513      1119.845598
+Sample of PC scores
+  registered_number  year  turnover  shareholders_funds  profit_loss_pretax  \
+0          01840419  2006  0.083384            0.010006            0.007452   
+1          01372811  2006 -0.007825           -0.014382           -0.000154   
+2          02468057  2006 -0.009082           -0.015178            0.000022   
+3          SC010677  2006  0.060551            0.026858            0.012361   
+4          03221027  2006 -0.008910           -0.015493           -0.000103   
+
+   employees  tangibles  tangibles_land_and_buildings  \
+0   0.741957   0.040897                      0.025370   
+1  -0.080087  -0.036997                           NaN   
+2  -0.081742        NaN                           NaN   
+3   1.300466   0.323743                      0.181204   
+4  -0.086086        NaN                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  ...  \
+0                      NaN                       NaN  ...   
+1                      NaN                       NaN  ...   
+2                      NaN                       NaN  ...   
+3                      NaN                       NaN  ...   
+4                      NaN                       NaN  ...   
+
+   entity_type__Single location  entity_type__Independent co  \
+0                           NaN                          NaN   
+1                           NaN                          NaN   
+2                           1.0                          NaN   
+3                           NaN                          NaN   
+4                           1.0                          NaN   
+
+   entity_type__Unknown  entity_type__missing       PC1       PC2       PC3  \
+0                   NaN                   NaN  0.085937 -0.309607  0.264258   
+1                   NaN                   NaN -0.026928  0.025380 -0.008577   
+2                   NaN                   NaN -0.027119  0.047456 -0.089887   
+3                   NaN                   NaN  0.168334 -0.264490  0.512825   
+4                   NaN                   NaN -0.027066  0.051420 -0.102676   
+
+        PC4       PC5       PC6  
+0 -1.747327 -0.152045 -0.116147  
+1 -1.749901  0.033375 -0.103105  
+2 -0.224122  0.063981  2.980048  
+3 -1.330281 -0.401022  1.935107  
+4  0.011538  0.088560  4.144677  
+
+[5 rows x 51 columns]
+
+# --- IMPUTED --- #
+PCA summary:
+     Explained Variance Ratio  Cumulative Explained Variance  Singular Values
+PC1                  0.357887                       0.357887      3377.295244
+PC2                  0.141825                       0.499712      2126.044936
+PC3                  0.105472                       0.605184      1833.428584
+PC4                  0.097592                       0.702776      1763.615775
+PC5                  0.066986                       0.769763      1461.128745
+PC6                  0.039064                       0.808827      1115.794593
+Sample of PC scores
+  registered_number  year  turnover  shareholders_funds  profit_loss_pretax  \
+0          01840419  2006  0.083384            0.010006            0.007452   
+1          01372811  2006 -0.007825           -0.014382           -0.000154   
+2          02468057  2006 -0.009082           -0.015178            0.000022   
+3          SC010677  2006  0.060551            0.026858            0.012361   
+4          03221027  2006 -0.008910           -0.015493           -0.000103   
+
+   employees  tangibles  tangibles_land_and_buildings  \
+0   0.741957   0.040897                      0.025370   
+1  -0.080087  -0.036997                           NaN   
+2  -0.081742        NaN                           NaN   
+3   1.300466   0.323743                      0.181204   
+4  -0.086086        NaN                           NaN   
+
+   tangibles_land_freehold  tangibles_land_leasehold  ...  \
+0                      NaN                       NaN  ...   
+1                      NaN                       NaN  ...   
+2                      NaN                       NaN  ...   
+3                      NaN                       NaN  ...   
+4                      NaN                       NaN  ...   
+
+   entity_type__Single location  entity_type__Independent co  \
+0                           NaN                          NaN   
+1                           NaN                          NaN   
+2                           1.0                          NaN   
+3                           NaN                          NaN   
+4                           1.0                          NaN   
+
+   entity_type__Unknown  entity_type__missing       PC1       PC2       PC3  \
+0                   NaN                   NaN  0.144708 -0.324021 -1.896867   
+1                   NaN                   NaN -0.056568  0.060823 -1.916101   
+2                   NaN                   NaN -0.063404  0.087156 -0.651459   
+3                   NaN                   NaN  0.279399 -0.340384 -1.542837   
+4                   NaN                   NaN -0.063828  0.092029 -0.393077   
+
+        PC4       PC5       PC6  
+0  0.385016  0.114904 -0.212454  
+1  0.063301 -0.000171 -0.193708  
+2 -0.110022 -0.048272  2.933562  
+3  0.744449  0.388378  1.918411  
+4 -0.147529 -0.065763  4.127825  
+
+Feature matrix (rows: unique properties, columns: components, values: loadings squared):
+                               sim_pc1   sim_pc2   sim_pc3   sim_pc4   sim_pc5  sim_pc6
+Variance (explained)          0.364488  0.144127  0.094413  0.078733  0.058736 0.041015
+property                                                                               
+shareholders_funds            0.096748       NaN       NaN       NaN       NaN      NaN
+turnover                      0.089470       NaN       NaN       NaN       NaN      NaN
+profit_loss_pretax            0.089001       NaN       NaN       NaN       NaN      NaN
+ebitda                        0.088691       NaN       NaN       NaN       NaN      NaN
+admin_expenses                0.087732       NaN       NaN       NaN       NaN      NaN
+remuneration_employees             NaN  0.225024       NaN       NaN       NaN      NaN
+wages                              NaN  0.224390       NaN       NaN       NaN      NaN
+consolidated_flag                  NaN       NaN  0.313707       NaN       NaN      NaN
+fixed_total                        NaN       NaN       NaN  0.133446       NaN      NaN
+employees                          NaN       NaN       NaN  0.102675       NaN      NaN
+liabilities                        NaN       NaN       NaN  0.100586  0.179871      NaN
+total_assets                       NaN       NaN       NaN  0.069630  0.128747      NaN
+tangibles_land_and_buildings       NaN       NaN       NaN  0.059793       NaN      NaN
+liabilities                        NaN       NaN       NaN  0.100586  0.179871      NaN
+tangibles                          NaN       NaN       NaN       NaN  0.138203      NaN
+total_assets                       NaN       NaN       NaN  0.069630  0.128747      NaN

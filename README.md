@@ -4,6 +4,9 @@
 Activate the virtual environment with `source venv/bin/activate` on Linux or macOS, or `venv\Scripts\activate` on Windows.
 .venv should be added to .gitignore to avoid committing the virtual environment to version control.
 
+### Main venv (fancyimpute)
+- Hot fix `force_all_finite` to `ensure_all_finite` in `.venv-main\Lib\site-packages\fancyimpute\`
+
 ### Second venv (pydynpd compatibility)
 - `source .venv-pydynpd/bin/activate` or `source .venv-pydynpd/Scripts/activate`
 - `pip install -r requirements-pydynpd.txt`
