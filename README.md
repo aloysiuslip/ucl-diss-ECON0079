@@ -7,6 +7,7 @@ Activate the virtual environment with `source venv/bin/activate` on Linux or mac
 ### Second venv (pydynpd compatibility)
 - `source .venv-pydynpd/bin/activate` or `source .venv-pydynpd/Scripts/activate`
 - `pip install -r requirements-pydynpd.txt`
+- `pip install --force-reinstall "numpy<2.0.0" "pandas<2.2.0" pydynpd pyarrow ipykernel`
 - `python -m ipykernel install --user --name=venv-pydynpd --display-name "Python 3 (PyDynPD GMM)"`
 - Leave venv: `deactivate`
 

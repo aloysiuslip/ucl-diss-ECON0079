@@ -16,6 +16,24 @@
             "runOptions": {
                 "runOn": "default" // manual trigger,
             }
+        },
+        {
+            "label": "Load pydynpd venv",
+            "type": "shell",
+            "windows": {
+                "command": "source .venv/Scripts/activate"
+            },
+            "linux": {
+                "command": "source .venv/bin/activate"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "default" // manual trigger,
+            }
         }
     ]
 }
