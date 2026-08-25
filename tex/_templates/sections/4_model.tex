@@ -1,7 +1,15 @@
-\newpage
-\section{Model}
 I start by estimating a basic 2-factor production model, in line with Solow's productivity decomposition.
 Capital is calculated from FAME's \texttt{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
 within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
 The average capital-output ratio is \todo{Insert capital-output ratio}.
 Labour is taken from the number of firm employees from the FAME balance sheet.
+
+\section{Results}
+The result of my LLM model are as follows.
+\input{../../model/output/results_1a_llm}
+
+The results of my distance decay model are as follows.
+\input{../../model/output/results_2_dd}
+
+The results of my dynamic panel are as follows
+\input{../../model/output/results_3_ivdyn}

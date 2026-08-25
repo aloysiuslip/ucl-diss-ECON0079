@@ -1,33 +1,36 @@
 \documentclass[12pt,a4paper]{article}
-\input{preamble_dissertation}
+\input{components/0_preamble}
 
 \begin{document}
 
 % Front matter: Roman page numbers
 \pagenumbering{roman}
 
-\input{1_title}
+\input{components/1_title.tex}
+% \input{1_title}
 \newpage
-\input{2_declaration}
+\input{components/2_declaration}
 \newpage
-\input{3_toc}
+\input{components/3_toc}
 \newpage
-\input{4_lof}
+\input{components/4_lof}
 \newpage
-\input{5_abstract}
+\input{sections/0_abstract}
 \newpage
 
 % Main body: Arabic page numbers from 1
 \pagenumbering{arabic}
 
+\newpage
 \section{Literature}
-\input{section_literature}
+\input{sections/2_literature}
 
 \section{Data}
-\input{section_data}
+\input{sections/3_data}
 
+\newpage
 \section{Model}
-\input{section_model}
+\input{sections/4_model}
 
 \section{Results}
 The result of my LLM model are as follows.
@@ -46,8 +49,8 @@ The results of my dynamic panel are as follows
 % ---------------------------------------------------------------
 \
 \newpage
-\input{6_bibliography}
+\input{components/6_bibliography}
 \newpage
-\input{7_appendices}
+\input{components/7_appendices}
 
 \end{document}
