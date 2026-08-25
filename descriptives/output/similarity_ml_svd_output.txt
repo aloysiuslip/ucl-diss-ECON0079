@@ -104,22 +104,22 @@ Sample of PC scores
 4 -0.147529 -0.065763  4.127825  
 
 Feature matrix (rows: unique properties, columns: components, values: loadings squared):
-                               sim_pc1   sim_pc2   sim_pc3   sim_pc4   sim_pc5  sim_pc6
-Variance (explained)          0.364488  0.144127  0.094413  0.078733  0.058736 0.041015
-property                                                                               
-shareholders_funds            0.096748       NaN       NaN       NaN       NaN      NaN
-turnover                      0.089470       NaN       NaN       NaN       NaN      NaN
-profit_loss_pretax            0.089001       NaN       NaN       NaN       NaN      NaN
-ebitda                        0.088691       NaN       NaN       NaN       NaN      NaN
-admin_expenses                0.087732       NaN       NaN       NaN       NaN      NaN
-remuneration_employees             NaN  0.225024       NaN       NaN       NaN      NaN
-wages                              NaN  0.224390       NaN       NaN       NaN      NaN
-consolidated_flag                  NaN       NaN  0.313707       NaN       NaN      NaN
-fixed_total                        NaN       NaN       NaN  0.133446       NaN      NaN
-employees                          NaN       NaN       NaN  0.102675       NaN      NaN
-liabilities                        NaN       NaN       NaN  0.100586  0.179871      NaN
-total_assets                       NaN       NaN       NaN  0.069630  0.128747      NaN
-tangibles_land_and_buildings       NaN       NaN       NaN  0.059793       NaN      NaN
-liabilities                        NaN       NaN       NaN  0.100586  0.179871      NaN
-tangibles                          NaN       NaN       NaN       NaN  0.138203      NaN
-total_assets                       NaN       NaN       NaN  0.069630  0.128747      NaN
+                               sim_pc1   sim_pc2   sim_pc3   sim_pc4   sim_pc5   sim_pc6
+property                                                                                
+Variance (explained)          0.357887  0.141825  0.105472  0.097592  0.066986  0.039064
+shareholders_funds            0.096748       NaN       NaN       NaN       NaN       NaN
+turnover                      0.089470       NaN       NaN       NaN       NaN       NaN
+profit_loss_pretax            0.089001       NaN       NaN       NaN       NaN       NaN
+ebitda                        0.088691       NaN       NaN       NaN       NaN       NaN
+admin_expenses                0.087732       NaN       NaN       NaN       NaN       NaN
+remuneration_employees             NaN  0.225024       NaN       NaN       NaN       NaN
+wages                              NaN  0.224390       NaN       NaN       NaN       NaN
+consolidated_flag                  NaN       NaN  0.313707       NaN       NaN       NaN
+fixed_total                        NaN       NaN       NaN  0.133446       NaN       NaN
+employees                          NaN       NaN       NaN  0.102675       NaN       NaN
+liabilities                        NaN       NaN       NaN  0.100586  0.179871       NaN
+total_assets                       NaN       NaN       NaN  0.069630  0.128747       NaN
+tangibles_land_and_buildings       NaN       NaN       NaN  0.059793       NaN       NaN
+liabilities                        NaN       NaN       NaN  0.100586  0.179871       NaN
+tangibles                          NaN       NaN       NaN       NaN  0.138203       NaN
+total_assets                       NaN       NaN       NaN  0.069630  0.128747       NaN
