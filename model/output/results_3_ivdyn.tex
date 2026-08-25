@@ -1,6 +1,6 @@
 \begin{center}
-	\begin{tabular}{lc}
-		Parameter & dyn1 \\[0.3em]
+	\begin{tabular}{lccc}
+		Parameter & dyn1 & dyn2 & dyn3 \\[0.3em]
 		\toprule
 		\lblock{
 			$\beta_0$
@@ -10,12 +10,28 @@
 			$1.371$
 			\\
 			\footnotesize{(0.134)***}
+		} & \cblock{
+			$1.577$
+			\\
+			\footnotesize{(0.144)***}
+		} & \cblock{
+			$1.064$
+			\\
+			\footnotesize{(0.103)***}
 		}
 		\\ [0.9em]
 		\lblock{
 			$\beta_1$
 			\\
 			\footnotesize{L1.ln\_gva1}
+		} & \cblock{
+			$0.005$
+			\\
+			\footnotesize{(0.001)***}
+		} & \cblock{
+			$0.005$
+			\\
+			\footnotesize{(0.001)***}
 		} & \cblock{
 			$0.005$
 			\\
@@ -30,6 +46,14 @@
 			$0.696$
 			\\
 			\footnotesize{(0.038)***}
+		} & \cblock{
+			$0.689$
+			\\
+			\footnotesize{(0.037)***}
+		} & \cblock{
+			$0.709$
+			\\
+			\footnotesize{(0.040)***}
 		}
 		\\ [0.9em]
 		\lblock{
@@ -40,6 +64,14 @@
 			$0.259$
 			\\
 			\footnotesize{(0.041)***}
+		} & \cblock{
+			$0.266$
+			\\
+			\footnotesize{(0.041)***}
+		} & \cblock{
+			$0.247$
+			\\
+			\footnotesize{(0.044)***}
 		}
 		\\ [0.9em]
 		\lblock{
@@ -50,6 +82,26 @@
 			$0.503$
 			\\
 			\footnotesize{(0.028)***}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			$\beta_5$
+			\\
+			\footnotesize{tfp\_wav2}
+		} &   & \cblock{
+			$0.423$
+			\\
+			\footnotesize{(0.023)***}
+		} &  
+		\\ [0.9em]
+		\lblock{
+			$\beta_6$
+			\\
+			\footnotesize{tfp\_wav3}
+		} &   &   & \cblock{
+			$0.618$
+			\\
+			\footnotesize{(0.042)***}
 		}
 		\\ [0.9em]
 		\hline
@@ -57,9 +109,25 @@
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.417)}
+		} & \cblock{
+			\text{\sffamily X}
+			\\
+			\footnotesize{(0.459)}
+		} & \cblock{
+			\text{\sffamily X}
+			\\
+			\footnotesize{(0.246)}
 		}
 		\\ [0.9em]
 		AR(1) Test & \cblock{
+			\checkmark
+			\\
+			\footnotesize{(0.000)***}
+		} & \cblock{
+			\checkmark
+			\\
+			\footnotesize{(0.000)***}
+		} & \cblock{
 			\checkmark
 			\\
 			\footnotesize{(0.000)***}
@@ -69,12 +137,20 @@
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.746)}
+		} & \cblock{
+			\text{\sffamily X}
+			\\
+			\footnotesize{(0.600)}
+		} & \cblock{
+			\text{\sffamily X}
+			\\
+			\footnotesize{(0.945)}
 		}
 		\\ [0.9em]
 		\hline
-		Observations & 713,339
+		Observations & 713,339 & 713,339 & 713,339
 		\\
-		i & 139,162
+		i & 139,162 & 139,162 & 139,162
 		\\
 		\bottomrule
 	\end{tabular}

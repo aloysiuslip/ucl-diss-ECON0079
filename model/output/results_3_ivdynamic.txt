@@ -1,5 +1,5 @@
 
---- RUN 2 ---
+--- RUN 2.1 ---
 
 Parquet file path: C:\Users\lazyst\Files\ucl\Dissertation\model\tmp\working_yearly_with_tfp_wave.parquet
 DataFrame loaded successfully with shape: (1027368, 21)
@@ -40,3 +40,87 @@ ln_gva1 L1.ln_gva1 ln_total_assets ln_employees tfp_wav1 | gmm(ln_gva1, 2:4) gmm
 Hansen test of overid. restrictions: chi(5) = 4.990 Prob > Chi2 = 0.417
 Arellano-Bond test for AR(1) in first differences: z = -41.61 Pr > z =0.000
 Arellano-Bond test for AR(2) in first differences: z = 0.32 Pr > z =0.746
+
+--- RUN 2.2 ---
+
+Parquet file path: C:\Users\lazyst\Files\ucl\Dissertation\model\tmp\working_yearly_with_tfp_wave.parquet
+DataFrame loaded successfully with shape: (1027368, 21)
+Generated Command String:
+ln_gva1 L1.ln_gva1 ln_total_assets ln_employees tfp_wav2 | gmm(ln_gva1, 2:4) gmm(ln_total_assets, 2:3) iv(tfp_wav2) | timedumm collapse
+--------------------------------------------------
+ Dynamic panel-data estimation, two-step system GMM
+ Group variable: registered_number                       Number of obs = 713339  
+ Time variable: year                                     Min obs per group: 0    
+ Number of instruments = 27                              Max obs per group: 17   
+ Number of groups = 139162                               Avg obs per group: 5.13 
++-----------------+------------+---------------------+-------------+-----------+-----+
+|     ln_gva1     |   coef.    | Corrected Std. Err. |      z      |   P>|z|   |     |
++-----------------+------------+---------------------+-------------+-----------+-----+
+|    L1.ln_gva1   | 0.0047979  |      0.0009015      |  5.3221325  | 0.0000001 | *** |
+| ln_total_assets | 0.2662496  |      0.0408291      |  6.5210790  | 0.0000000 | *** |
+|   ln_employees  | 0.6894487  |      0.0370229      |  18.6222246 | 0.0000000 | *** |
+|     tfp_wav2    | 0.4225197  |      0.0233361      |  18.1058475 | 0.0000000 | *** |
+|    year_2008    | 0.0013745  |      0.0047507      |  0.2893181  | 0.7723379 |     |
+|    year_2009    | -0.0101959 |      0.0046534      |  -2.1910529 | 0.0284480 |  *  |
+|    year_2010    | -0.0241549 |      0.0049775      |  -4.8528355 | 0.0000012 | *** |
+|    year_2011    | -0.0286971 |      0.0052361      |  -5.4806346 | 0.0000000 | *** |
+|    year_2012    | -0.0209348 |      0.0048715      |  -4.2974381 | 0.0000173 | *** |
+|    year_2013    | -0.0301355 |      0.0044180      |  -6.8210860 | 0.0000000 | *** |
+|    year_2014    | -0.0262803 |      0.0046177      |  -5.6911900 | 0.0000000 | *** |
+|    year_2015    | -0.0215546 |      0.0044351      |  -4.8600464 | 0.0000012 | *** |
+|    year_2016    | -0.0247444 |      0.0044858      |  -5.5162235 | 0.0000000 | *** |
+|    year_2017    | -0.0361774 |      0.0042317      |  -8.5491245 | 0.0000000 | *** |
+|    year_2018    | -0.0451617 |      0.0042925      | -10.5209534 | 0.0000000 | *** |
+|    year_2019    | -0.0441517 |      0.0044532      |  -9.9145550 | 0.0000000 | *** |
+|    year_2020    | -0.0543832 |      0.0050573      | -10.7534238 | 0.0000000 | *** |
+|    year_2021    | -0.0158698 |      0.0069160      |  -2.2946563 | 0.0217528 |  *  |
+|    year_2022    | -0.0209947 |      0.0071179      |  -2.9495667 | 0.0031822 |  ** |
+|    year_2023    | -0.0324825 |      0.0051534      |  -6.3031571 | 0.0000000 | *** |
+|    year_2024    | -0.0689881 |      0.0087602      |  -7.8751660 | 0.0000000 | *** |
+|       _con      | 1.5765463  |      0.1441157      |  10.9394479 | 0.0000000 | *** |
++-----------------+------------+---------------------+-------------+-----------+-----+
+Hansen test of overid. restrictions: chi(5) = 4.658 Prob > Chi2 = 0.459
+Arellano-Bond test for AR(1) in first differences: z = -44.53 Pr > z =0.000
+Arellano-Bond test for AR(2) in first differences: z = 0.52 Pr > z =0.600
+
+--- RUN 2.3 ---
+
+Parquet file path: C:\Users\lazyst\Files\ucl\Dissertation\model\tmp\working_yearly_with_tfp_wave.parquet
+DataFrame loaded successfully with shape: (1027368, 21)
+Generated Command String:
+ln_gva1 L1.ln_gva1 ln_total_assets ln_employees tfp_wav3 | gmm(ln_gva1, 2:4) gmm(ln_total_assets, 2:3) iv(tfp_wav3) | timedumm collapse
+--------------------------------------------------
+ Dynamic panel-data estimation, two-step system GMM
+ Group variable: registered_number                       Number of obs = 713339  
+ Time variable: year                                     Min obs per group: 0    
+ Number of instruments = 27                              Max obs per group: 17   
+ Number of groups = 139162                               Avg obs per group: 5.13 
++-----------------+------------+---------------------+------------+-----------+-----+
+|     ln_gva1     |   coef.    | Corrected Std. Err. |     z      |   P>|z|   |     |
++-----------------+------------+---------------------+------------+-----------+-----+
+|    L1.ln_gva1   | 0.0052145  |      0.0009338      | 5.5842849  | 0.0000000 | *** |
+| ln_total_assets | 0.2473488  |      0.0436216      | 5.6703277  | 0.0000000 | *** |
+|   ln_employees  | 0.7091997  |      0.0396456      | 17.8884689 | 0.0000000 | *** |
+|     tfp_wav3    | 0.6180462  |      0.0418045      | 14.7842196 | 0.0000000 | *** |
+|    year_2008    | 0.0003841  |      0.0048322      | 0.0794959  | 0.9366382 |     |
+|    year_2009    | -0.0074322 |      0.0047903      | -1.5514977 | 0.1207825 |     |
+|    year_2010    | -0.0194672 |      0.0049381      | -3.9422252 | 0.0000807 | *** |
+|    year_2011    | -0.0230329 |      0.0051161      | -4.5020465 | 0.0000067 | *** |
+|    year_2012    | -0.0136639 |      0.0047492      | -2.8771175 | 0.0040133 |  ** |
+|    year_2013    | -0.0224343 |      0.0043851      | -5.1160380 | 0.0000003 | *** |
+|    year_2014    | -0.0213320 |      0.0045761      | -4.6616155 | 0.0000031 | *** |
+|    year_2015    | -0.0161396 |      0.0044047      | -3.6641992 | 0.0002481 | *** |
+|    year_2016    | -0.0173049 |      0.0044544      | -3.8848696 | 0.0001024 | *** |
+|    year_2017    | -0.0260003 |      0.0044223      | -5.8793153 | 0.0000000 | *** |
+|    year_2018    | -0.0327681 |      0.0046491      | -7.0482298 | 0.0000000 | *** |
+|    year_2019    | -0.0333884 |      0.0048708      | -6.8548487 | 0.0000000 | *** |
+|    year_2020    | -0.0371065 |      0.0060841      | -6.0989151 | 0.0000000 | *** |
+|    year_2021    | -0.0100592 |      0.0074020      | -1.3589876 | 0.1741505 |     |
+|    year_2022    | -0.0118962 |      0.0078182      | -1.5216115 | 0.1281065 |     |
+|    year_2023    | -0.0218619 |      0.0058017      | -3.7682048 | 0.0001644 | *** |
+|    year_2024    | -0.0513590 |      0.0079929      | -6.4256105 | 0.0000000 | *** |
+|       _con      | 1.0640752  |      0.1027326      | 10.3577146 | 0.0000000 | *** |
++-----------------+------------+---------------------+------------+-----------+-----+
+Hansen test of overid. restrictions: chi(5) = 6.670 Prob > Chi2 = 0.246
+Arellano-Bond test for AR(1) in first differences: z = -36.12 Pr > z =0.000
+Arellano-Bond test for AR(2) in first differences: z = 0.07 Pr > z =0.945
