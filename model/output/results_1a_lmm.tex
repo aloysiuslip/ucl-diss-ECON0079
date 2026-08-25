@@ -1,11 +1,11 @@
 \begin{center}
 	\begin{tabular}{lccc}
-		Parameter & peer3 & peer3\_no\_firm\_fe & peer3\_employees \\[0.3em]
+		Parameter & lmm & lmm\_no\_firm\_fe & lmm\_employees \\[0.3em]
 		\toprule
 		\lblock{
 			$\beta_0$
 			\\
-			const
+			\footnotesize{const}
 		} & \cblock{
 			$2.075$
 			\\
@@ -15,33 +15,15 @@
 			\\
 			\footnotesize{(0.038)***}
 		} & \cblock{
-			$2.035$
+			$1.202$
 			\\
-			\footnotesize{(0.047)***}
+			\footnotesize{(0.215)***}
 		}
 		\\ [0.9em]
 		\lblock{
 			$\beta_1$
 			\\
-			const
-		} & \cblock{
-			$2.075$
-			\\
-			\footnotesize{(0.044)***}
-		} & \cblock{
-			$0.310$
-			\\
-			\footnotesize{(0.038)***}
-		} & \cblock{
-			$2.035$
-			\\
-			\footnotesize{(0.047)***}
-		}
-		\\ [0.9em]
-		\lblock{
-			$\beta_2$
-			\\
-			peer\_tfp\_ttwa\_donut
+			\footnotesize{peer\_tfp\_ttwa\_donut}
 		} & \cblock{
 			$0.033$
 			\\
@@ -51,25 +33,15 @@
 			\\
 			\footnotesize{(0.013)***}
 		} & \cblock{
-			$0.033$
+			$0.306$
 			\\
-			\footnotesize{(0.013)***}
+			\footnotesize{(0.071)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_3$
+			$\beta_2$
 			\\
-			ln\_employees
-		} &  &  & \cblock{
-			$0.009$
-			\\
-			\footnotesize{(0.004)**}
-		}
-		\\ [0.9em]
-		\lblock{
-			$\beta_4$
-			\\
-			peer\_tfp\_pc4\_donut
+			\footnotesize{peer\_tfp\_pc4\_donut}
 		} & \cblock{
 			$0.015$
 			\\
@@ -85,9 +57,9 @@
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_5$
+			$\beta_3$
 			\\
-			peer\_tfp\_pc8
+			\footnotesize{peer\_tfp\_pc8}
 		} & \cblock{
 			$0.280$
 			\\
@@ -101,7 +73,27 @@
 			\\
 			\footnotesize{(0.005)***}
 		}
-		\\ [1em]
+		\\ [0.9em]
+		\lblock{
+			$\beta_4$
+			\\
+			\footnotesize{peer\_tfp\_pc8\_x\_employees}
+		} &  &  & \cblock{
+			$-0.058$
+			\\
+			\footnotesize{(0.015)***}
+		}
+		\\ [0.9em]
+		\lblock{
+			$\beta_5$
+			\\
+			\footnotesize{ln\_employees}
+		} &  &  & \cblock{
+			$0.184$
+			\\
+			\footnotesize{(0.044)***}
+		}
+		\\ [0.9em]
 		\hline
 		Observations & 764,537 & 764,537 & 764,537
 		\\

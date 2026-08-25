@@ -12,7 +12,7 @@ Dep. Variable:                    tfp   R-squared:                        0.0388
 Estimator:                   PanelOLS   R-squared (Between):              0.1089
 No. Observations:              764537   R-squared (Within):               0.0396
 Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1285
-Time:                        13:04:39   Log-likelihood                -3.354e+05
+Time:                        13:34:36   Log-likelihood                -3.354e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                      8843.1
 Entities:                      107143   P-value                           0.0000
@@ -58,7 +58,7 @@ Dep. Variable:                    tfp   R-squared:                        0.1792
 Estimator:                   PanelOLS   R-squared (Between):              0.1570
 No. Observations:              764537   R-squared (Within):              -0.0001
 Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1798
-Time:                        13:04:43   Log-likelihood                -7.146e+05
+Time:                        13:34:40   Log-likelihood                -7.146e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   5.562e+04
 Entities:                      107143   P-value                           0.0000
@@ -106,7 +106,7 @@ Dep. Variable:                    tfp   R-squared:                        0.0390
 Estimator:                   PanelOLS   R-squared (Between):              0.1134
 No. Observations:              764537   R-squared (Within):               0.0397
 Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1320
-Time:                        13:04:51   Log-likelihood                -3.353e+05
+Time:                        13:34:48   Log-likelihood                -3.353e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                      5332.6
 Entities:                      107143   P-value                           0.0000
