@@ -52,4 +52,11 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 - [X] Distance model 2: improve viz by including each new node as peer.
 - [ ] Distance model 2: run panel regression with distances  
 - [X] Dynamic model 3: installed and tested the python package  
-- [ ] Dynamic model 3: run and play with LLM in dynamic set-up  
+- [ ] Dynamic model 3: run and play with LLM in dynamic set-up
+### Different distance metrics
+- wd_2i, 2d_6i: firms that are in the same industry code, in the region. 
+- wd_0i: firms explicitly no in the same industry code, in the region
+- nd_2i: 
+### Controls
+- [ ] diff-in-diff out-of-region productivity (national level shock)
+- [ ] labour pooling (local demand shock)

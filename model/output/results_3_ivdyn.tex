@@ -1,157 +1,185 @@
 \begin{center}
 	\begin{tabular}{lccc}
-        \toprule \toprule
-		Parameter & dyn1 & dyn2 & dyn3 \\[0.3em]
+		\toprule\toprule
+		\lblock{
+			~
+			\\
+			~
+		} & 		\cblock{
+			\footnotesize{(1)}
+			\\
+			\small{ln(\textit{\textit{gva}\textsubscript{$1$}})}
+		} & 		\cblock{
+			\footnotesize{(2)}
+			\\
+			\small{ln(\textit{\textit{gva}\textsubscript{$1$}})}
+		} & 		\cblock{
+			\footnotesize{(3)}
+			\\
+			\small{ln(\textit{\textit{gva}\textsubscript{$1$}})}
+		} \\[0.8em]
 		\toprule
 		\lblock{
-			$\beta_0$
+			constant
 			\\
-			\footnotesize{const}
-		} & \cblock{
+			~
+		} & 		\cblock{
 			$1.371$
 			\\
 			\footnotesize{(0.134)***}
-		} & \cblock{
+		} & 		\cblock{
 			$1.577$
 			\\
 			\footnotesize{(0.144)***}
-		} & \cblock{
+		} & 		\cblock{
 			$1.064$
 			\\
 			\footnotesize{(0.103)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_1$
+			ln(\textit{\textit{gva}\textsubscript{$1$}})\textsubscript{$t-1$}
 			\\
-			\footnotesize{L1.ln\_gva1}
-		} & \cblock{
+			~
+		} & 		\cblock{
 			$0.005$
 			\\
 			\footnotesize{(0.001)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.005$
 			\\
 			\footnotesize{(0.001)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.005$
 			\\
 			\footnotesize{(0.001)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_2$
+			ln(\textit{\textit{employees}})
 			\\
-			\footnotesize{ln\_employees}
-		} & \cblock{
+			~
+		} & 		\cblock{
 			$0.696$
 			\\
 			\footnotesize{(0.038)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.689$
 			\\
 			\footnotesize{(0.037)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.709$
 			\\
 			\footnotesize{(0.040)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_3$
+			ln(\textit{\textit{total\_assets}})
 			\\
-			\footnotesize{ln\_total\_assets}
-		} & \cblock{
+			~
+		} & 		\cblock{
 			$0.259$
 			\\
 			\footnotesize{(0.041)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.266$
 			\\
 			\footnotesize{(0.041)***}
-		} & \cblock{
+		} & 		\cblock{
 			$0.247$
 			\\
 			\footnotesize{(0.044)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$\beta_4$
+			\textit{tfp\_wav}\textsubscript{$1$}
 			\\
-			\footnotesize{tfp\_wav1}
-		} & \cblock{
+			~
+		} & 		\cblock{
 			$0.503$
 			\\
 			\footnotesize{(0.028)***}
 		} &   &  
 		\\ [0.9em]
 		\lblock{
-			$\beta_5$
+			\textit{tfp\_wav}\textsubscript{$2$}
 			\\
-			\footnotesize{tfp\_wav2}
-		} &   & \cblock{
+			~
+		} &   & 		\cblock{
 			$0.423$
 			\\
 			\footnotesize{(0.023)***}
 		} &  
 		\\ [0.9em]
 		\lblock{
-			$\beta_6$
+			\textit{tfp\_wav}\textsubscript{$3$}
 			\\
-			\footnotesize{tfp\_wav3}
-		} &   &   & \cblock{
+			~
+		} &   &   & 		\cblock{
 			$0.618$
 			\\
 			\footnotesize{(0.042)***}
 		}
 		\\ [0.9em]
 		\hline
-		Hansen Test & \cblock{
+				\lblock{
+			Hansen Test
+			\\
+			~
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.417)}
-		} & \cblock{
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.459)}
-		} & \cblock{
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.246)}
 		}
 		\\ [0.9em]
-		AR(1) Test & \cblock{
+				\lblock{
+			AR(1) Test
+			\\
+			~
+		} & 		\cblock{
 			\checkmark
 			\\
 			\footnotesize{(0.000)***}
-		} & \cblock{
+		} & 		\cblock{
 			\checkmark
 			\\
 			\footnotesize{(0.000)***}
-		} & \cblock{
+		} & 		\cblock{
 			\checkmark
 			\\
 			\footnotesize{(0.000)***}
 		}
 		\\ [0.9em]
-		AR(2) Test & \cblock{
+				\lblock{
+			AR(2) Test
+			\\
+			~
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.746)}
-		} & \cblock{
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.600)}
-		} & \cblock{
+		} & 		\cblock{
 			\text{\sffamily X}
 			\\
 			\footnotesize{(0.945)}
 		}
 		\\ [0.9em]
 		\hline
-		Observations & 713,339 & 713,339 & 713,339
-		\\
 		i & 139,162 & 139,162 & 139,162
+		\\
+		Observations & 713,339 & 713,339 & 713,339
 		\\
 		\bottomrule
 	\end{tabular}
