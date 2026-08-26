@@ -40,7 +40,6 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 - [ ] Verify spatial: calculate lat lon from postcode, and then from raw lat long
 - [ ] Compare them to check cases
 - [ ] Understand distance generation process. Currently, we have some errors
-- Both in generating distances within a postcode ()
   
 # Model
 ### TODO
@@ -60,3 +59,7 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 ### Controls
 - [ ] diff-in-diff out-of-region productivity (national level shock)
 - [ ] labour pooling (local demand shock)
+
+# Tex
+### TODO
+- [ ] Adjust 

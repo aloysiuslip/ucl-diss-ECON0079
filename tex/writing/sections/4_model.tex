@@ -1,31 +1,120 @@
+\section{Model}
+I use a stylised, basic 3-factor production model throughout this analysis.
 
-I start by estimating a basic 2-factor Solow production model at the firm level.
-\par
-Labour input is taken from the number of employees reported on the FAME balance sheet per firm.
-This dataset, like all others, does not include hours worked per employee on a firm-level that would offer a more
-granular productivity (GVA per hour worked) measures. An estimation in this setting would likely have to impute the measure
-from industry aggregates, which would likely confound the true firm-level signal.
-\par
-Capital is FAME's \texttt{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
-within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
-The average capital-output ratio is 6x within FAME when filtering for positive values,
-which is moderately higher than macroeconomic aggregates typically suggest likely due to accounting standard differences.
+\begin{align}
+    \label{eq:structural1}
+    Y_{it} &= L_{it}^\alpha K_{it}^\beta \left[  \sum_{j}f(Z_{jt}) \right]^\gamma
+    \\
+    \label{eq:structural2}
+    z_{it} &= \gamma \left[  \sum_{j}f(z_{jt}) \right]
+\end{align}
 
-\begin{table}[htbp]
-    \begin{center}
-    \caption{Capital-output ratios in FAME corpus of firms}
-    \begin{tabular}{lccc}
-        \toprule\toprule
-        & tangibles 
-        & fixed\_other 
-        & total\_assets
-        \\
-        & 
-        & \footnotesize {(tangibles + intangibles + inv.\_other)} 
-        & \footnotesize {(fixed\_total + current\_assets)} \\ 
-        \midrule
-        Capital-output ratio & 3.53 & 6.00 & 11.56 \\
-        \bottomrule
-    \end{tabular}
-    \end{center}
-\end{table}
+where $Y$, $L$, $K$ are output, labour, and capital as usual. $Z_{jt}$
+is the 2-factor total-factor productivity (TFP) residual.
+Lower case variables indicate logged variables.
+\par
+Theory suggests no restrictions on $\alpha$, $\beta$, and $\gamma$ collectively should be imposed,
+as $\gamma$ is a positive externality.
+\todo{Lucas discusses this}
+\par
+We can show that equation \ref{eq:structural1} implies \ref{eq:structural2},
+permitting us to estimate the structural $\gamma$ parameter flexibly, i.e. both with GVA as the regressand
+or in reduced form via a 2-step process calculating $z_{it}$ via a 2-factor production function first.
+\todo{Show this! Are they equivalent? Show reflection problem}
+
+\subsection{2-factor TFP estimation}
+
+I initially establish a heavily-stylised basic 2-factor production model
+to derive Solow TFP at the firm level.
+Initially, this is static, so the spillover from peer firms via $Z_{jt}$ only occurs in the same $t$-period.
+
+\begin{align}
+    \label{eqn:tfp2factor}
+    Y_{it} &= L_{it}^{\beta_1} K_{it}^{\beta_2}
+    \\
+    \ln(Y_{it}) &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \ln(L_{it}) + \beta_2 \ln(K_{it}) + \varepsilon_{it}
+    \\
+    z_{it} &= \ln(Y_{it}) - \beta_1\ln(L_{it}) + \beta_2\ln(K_{it})
+\end{align}
+
+The 2-factor regression is derived from a Cobb-Douglas production function.
+I conduct this in logs, with firm and time fixed effects, with no imposition on returns to scale.
+I assume exogeneity between the residual and factor input levels.
+
+\par
+The parameter estimates give a labour income share exactly in line with ONS analysis of UK industry-level data
+over the same time period, particularly \itx{corporate gross labour share} which is constructed
+from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+Specifications without fixed or time effects offer similar parameter estimates.
+The capital share of income jumps on a specification with only time fixed effects,
+which is to be expected \todo{explain}.
+Oddly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
+almost entirely eliminates the capital share of income from the regression.
+For the rest of the analysis, I use \itx{total\_assets} as the primary capital measure
+and leave it for future analysis why this dataset yields this phenomenon.
+\wraptable
+    {Baseline TFP calculation from 2-factor production}
+    {../../model/output/results_0_tfp}
+\begin{center}
+    \small
+    All parameters reported with standard errors underneath.
+    Significant estimates against an $H_0: \beta=0$ are indicated with $p<0.1$ (*),
+    $p<0.05$ (**), and $p<0.01$ (***).
+\end{center}
+
+TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
+Equivalently, it is the sum of fixed effects in this specification with the error term,
+which means we should expect it to be exogenous to capital and labour inputs,
+but correlated to both firm effects and time trends.
+By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
+
+\subsection{LMM group peers}
+
+Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
+non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa}.
+
+\begin{align}
+    y_{it} &= \alpha_i + \gamma_t + \beta_0
+                + \sum_{g=1}^3 \beta_g
+                  \sum_{j=1}^{n\in g} \mathbb E[TFP_{jtg}\vert{}g]
+                + \theta w_{it} + \epsilon_{it}
+\end{align}
+
+It is crucial that these groups are non-overlapping, namely the 'doughnut' group identities discussed earlier.
+This allows for the regression to be estimated all at once,
+rather than as 3 separate models. The parameters should be interpreted as cumulative,
+with the total effect of a change in TFP among firms sharing a \itx{pc4} group
+being $\beta_{pc8} + \beta_{pc4}$, and equivalently for \itx{ttwa}.
+  
+\wraptable
+    {Static panel linear-in-means using spatial-group TFP averages}
+    {../../model/output/results_1a_lmm}
+
+The parameter results are exactly in-line with the predictions from theory,
+namely that there is a strong correlation between the TFP of a target firm and its peers.
+Each additional outward group only adds to explain the causal variation
+\par
+Crucially however, these parameter estimates should not be interpreted as causal.
+\todo{thinking about non-overlapping groups theory}
+\todo{... reflection problem}
+
+\subsection{Static panel with distance decay}
+
+\todo{Reformat this table: reorder variables, rename, remove no fe}
+\begin{align}
+    y_{it} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 l_{it} + \theta w_{it} + \epsilon_{it}
+    % y_{it} &= \alpha_i + \gamma_t + \theta w_{it} + \beta E[TFP_{-i,g,t}\vert{}g] + \epsilon_{it}
+    \\
+    z_{it} &= \alpha_i + \gamma_t + \theta w_{it} + \beta f(z_{jt}) + \epsilon_{it}
+\end{align}
+
+\wraptable
+    {Static panel using continuous distance-decay weighted TFP average of peers}
+    {../../model/output/results_2_dd.tex}
+
+\newpage
+\subsection{Dynamic panel}
+
+\wraptable
+    {Dynamic panel using instrumented continuous distance-decay weighted TFP}
+    {../../model/output/results_3_ivdyn}

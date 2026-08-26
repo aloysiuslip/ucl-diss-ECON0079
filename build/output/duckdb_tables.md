@@ -74,10 +74,10 @@ ibis.Schema {
 4               NaN               NaN  Manchester        Lancashire   
 
   ro_postcode ro_full_postcode ro_country      ro_latitude    ro_longitude  \
-0        DN20         DN20 8NQ    England   53° 33' 3.6" N  0° 29' 50.4" W   
+0        DN20         DN20 8NQ    England   53ï¿½ 33' 3.6" N  0ï¿½ 29' 50.4" W   
 1        GL15         GL15 5HE    England              NaN             NaN   
-2        GU34         GU34 1HN    England   51° 8' 58.6" N  0° 58' 39.6" W   
-3        TN13         TN13 2OB    England  51° 16' 46.4" N   0° 9' 19.9" E   
+2        GU34         GU34 1HN    England   51ï¿½ 8' 58.6" N  0ï¿½ 58' 39.6" W   
+3        TN13         TN13 2OB    England  51ï¿½ 16' 46.4" N   0ï¿½ 9' 19.9" E   
 4        M  2           M2 4AB    England              NaN             NaN   
 
              ro_nuts_region    ro_postal_region  \
@@ -97,7 +97,7 @@ ibis.Schema {
   primary_trading_address_latitude primary_trading_address_longitude  \
 0                              NaN                               NaN   
 1                              NaN                               NaN   
-2                  51° 30' 51.9" N                    0° 33' 25.8" W   
+2                  51ï¿½ 30' 51.9" N                    0ï¿½ 33' 25.8" W   
 3                              NaN                               NaN   
 4                              NaN                               NaN   
 

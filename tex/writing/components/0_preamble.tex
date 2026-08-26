@@ -5,25 +5,27 @@
 \usepackage{parskip}
 \usepackage{enumitem}
 \usepackage{amsmath}
-\usepackage{url}
 
 \setlength {\marginparwidth}{2cm}
 
-\usepackage{todonotes}
 \usepackage[normalem]{ulem}
-\usepackage{import}
 
 % Paragraph text
 \usepackage[a4paper, top=2.54cm, bottom=2.54cm, left=4cm, right=2.54cm]{geometry}
 \usepackage{setspace}
+\usepackage{xurl}
 \setlength{\parindent}{20pt}
 \urlstyle{same}
 \onehalfspacing
+\newcommand{\itx}[1]{{\hyphenpenalty=10000 \textit{#1}}}    % Prevents word-splitting on italic words
 
 % Font
 % \usepackage{mathptmx}
 % \usepackage{helvet}
 \usepackage{lmodern}
+\usepackage{soul}
+\newcommand{\todo}[1]{\hl{(#1)}}
+\newcommand{\commentln}[1]{\sethlcolor{cyan}\hl{(#1)}}
 
 % Sections
 \usepackage{titlesec}
@@ -36,6 +38,12 @@
   {0pt}                                % Left margin offset
   {5ex plus 1ex minus .2ex}          % Vertical space ABOVE (increase 2.5ex to 3ex for more space)
   {1.5ex plus .2ex}                    % Vertical space BELOW
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}
+\titleformat{\subsection}[block]
+  {\normalfont\small}
+  {\thesubsection.}
+  {0.5em}
+  {\MakeUppercase}
 
 
 % Captions
@@ -49,6 +57,7 @@
     format=multiline_title,      % Puts title on line below label
     justification=centering      % Centers both lines
 }
+\newcommand{\tablerefp}[1]{Table~(\ref{#1})}
 
 % Model section
 \usepackage{tabularray}
@@ -76,7 +85,15 @@
 \renewcommand*\l@section[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 \makeatother
 
+% Section commands
 \newcommand{\lblock}[2][c]{%
   \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
 \newcommand{\cblock}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\wraptable}[2]{%
+    \begin{table}[hbtp]
+        \centering
+        \caption{#1}
+        \input{#2}
+    \end{table}%
+}
