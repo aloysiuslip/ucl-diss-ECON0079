@@ -9,7 +9,7 @@ I use lower-case variables to indicate logged terms and bolded variables to indi
     \\
     y_{it} &= c + \alpha l_{it} + \beta k_{it} + \gamma \sum_{j\neq i} \ln f(Z_{jt})
     \\
-    z_{it} &= y_{it} - c + \alpha l_{it} - \beta k_{it}
+    z_{it} &= y_{it} - c - \alpha l_{it} - \beta k_{it}
     \\
     \label{eq:structural-logln}
     f(Z_{jt}) &= Z_{jt}^{w_{ijt}}
@@ -90,8 +90,8 @@ in a single-stage with dynamic variables.
 \begin{align}
     \label{eqn:tfp2factor}
     y_{it} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 l_{it} + \beta_2 k_{it} + \varepsilon_{it}
-    \\ \tag{3}
-    z_{it} &= y_{it} - \beta_1 l_{it} + \beta_2 k_{it}
+    \\ \notag
+    z_{it} &= y_{it} - c - \alpha l_{it} - \beta k_{it}
 \end{align}
 %
 I conduct the reduced-form static panel regression in logs,
@@ -101,8 +101,8 @@ with firm and time fixed effects. I assume exogeneity between the residual and f
     {Baseline TFP calculation from 2-factor production}
     {../../model/output/results_0_tfp}
     {
-        \item All parameters reported with standard errors underneath.
-        \item Significant estimates against an $H_0: \beta=0$ are indicated
+        All parameters reported with standard errors underneath.
+        Significant estimates against an $H_0: \beta=0$ are indicated
         with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
     }
 
@@ -123,49 +123,87 @@ which means we should expect it to be exogenous to capital and labour inputs,
 but correlated to both firm effects and time trends.
 By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
 
-\subsection{LMM group peers}
+\subsection{LMM grouped peers}
 \label{ss:model-lmm}
 
 Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
-non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa}.
+non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa} (largest).
+I conduct a linear regression using the averages of peers belonging to these groups,
+leaving out the target firm. This is known as the 'Linear-in-Means (LMM)' Model
+and is common to the peer effects literature.
 
 \begin{align}
+    \label{eq:lmm-structural1}
     z_{it} &= \alpha_i + \gamma_t + \beta_0
-                + \sum_{g=1}^3 \beta_g
-                  \sum_{j=1}^{n\in g} \mathbb E[z_{jtg}\vert{}g]
-                + \theta w_{it} + \epsilon_{it}
-\end{align}
-
-\begin{align}
-    \notag
-    Y_{it} &= A \cdot L_{it}^\alpha K_{it}^\beta \left[  \prod_{j\neq i}f(Z_{jt}) \right]^\gamma
-    \\
-    f(Z_{jt}) &= Z_{jt}^{w_{ijt}}
+                + \sum_{g=1}^3 \beta_g \mathbb E[z_{jtg}\vert{}g]
+                + \epsilon_{it}
     \\
     \notag
-    y_{it} &= c + \alpha l_{it}+\beta k_{it} + \gamma \sum_{j\neq i} w_{ijt}z_{jt}
-    \\
-    \notag
-    z_{it} &= c + \gamma \sum_{j\neq i} w_{ijt} z_{jt}
-    \\
     \mathbf z_t &= c + \gamma \mathbf \Omega_t \mathbf z_t
     \\
-    \mathbf z_t &= \left(\mathbb I - \gamma \mathbf \Omega_t \right)^{-1} c
+    w_{ij}\in \mathbf \Omega_t &=
+        \begin{cases}
+            1, & \text{if} (i,j)\in g   \\
+            0, & \text{if} i=jt         \\
+            0, & \text{otherwise}
+        \end{cases}
 \end{align}
 
-It is crucial that these groups are non-overlapping, namely the 'doughnut' group identities discussed earlier.
-This allows for the regression to be estimated all at once,
-rather than as 3 separate models. The parameters should be interpreted as cumulative,
-with the total effect of a change in TFP among firms sharing a \itx{pc4} group
-being $\beta_{pc8} + \beta_{pc4}$, and equivalently for \itx{ttwa}.
+It is crucial that I have multiple, non-overlapping groups in a single model,
+where my target firm $z_{it}$ is a member of all groups simultaneously,
+but peers in one group are excluded from all others.
+\par
+The non-overlapping property prevents multicollinearity.
+If I were to use nested, overlapping geographies,
+namely keeping all firms within the \itx{ttwa} area in that group average,
+including the ones I have just counted in the \itx{pc4} and itx{pc8} groups,
+then my group averages mechanically align:
+$z_{jt,pc8}$ is embedded within $z_{jt,pc4}$, and both are within $z_{jt,ttwa}$,
+making $\beta_g$ parameter estimates unstable.
+\par
+The single model approach prevents omitted variable bias (OVB).
+$\mathbb E[z_{jt,ttwa|g}] \propto  \mathbb E[z_{jt,pc8|g}]$,
+so running three models where the former is just my single regressor means
+the latent $\beta_pc8 \in u_{it}$ is correlated with both $z_{itg}$ and $z_{jtg}$.
+We could reasonably argue that the inner rings are causal,
+so this causal factor excluded from the regression influences both
+and creates heavily upward bias on my outer-ring estimations.
+Indeed, this critique extends within further inner rings.
+If I think the causal unit is not peer firms within the \itx{pc8} group at all,
+but a further hyper-local effect - perhaps those on the same street or same building,
+then this latent factor will correlate with both my outcome and regressor and drive the results.
+However, given the small number of peers contained within an \itx{pc8} unit and
+the limits of data availability to identify firms at more local granularities,
+I proceed assuming the effect from \itx{pc8} peers is homogenous.
+\par
+Finally, the approach using multiple groups as regressors at once gives identification
+by breaking transitivity.
+If I were to run the same regression with merely one group, say \itx{pc8},
+then my regression would suffer the reflection  problem outlined in \citep{Manski1993}.
+As I am estimating the expected value of $z_{it}$ and $z_{jt}$ from the same sample,
+they cannot be uniquely identified in reduced form.
+
+\noindent\textit{Reflection problem with a single regressor, $\mathbf\iota$ denotes a column vector of $1$s}
+\\
+\todo{review: maths is a bit tricky here}
+\begin{align*}
+    \mathbb E[z_{itg}|g] &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \mathbb{E}[z_{jtg}|g]
+    \\
+    &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota + \beta_1 \mathbf\Omega_t \mathbb E[\mathbf{z}_{tg}|g]
+    \\
+    &= (\mathbb I - \beta_1 \mathbf\Omega_t)^{-1} (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
+\end{align*}
+%
+This problem is mitigated with having 3 distinct groups to which $z_{it}$ belongs.
+The results of the LMM estimation implementing equation \ref{eq:lmm-structural1} are below:
   
 \wraptable
     {Static panel linear-in-means using spatial-group TFP averages}
     {../../model/output/results_1a_lmm}
     {}
+\todo{Reformat this table: reorder variables, rename, remove no fe}
 
-The parameter results are exactly in-line with the predictions from theory,
-namely that there is a strong correlation between the TFP of a target firm and its peers.
+The parameter results suggest a strong correlation between the TFP of a target firm and its peers.
 Each additional outward group only adds to explain the causal variation
 \par
 Crucially however, these parameter estimates should not be interpreted as causal.
@@ -174,8 +212,6 @@ Crucially however, these parameter estimates should not be interpreted as causal
 
 \subsection{Static distance decay}
 \label{ss:model-dd}
-
-\todo{Reformat this table: reorder variables, rename, remove no fe}
 \begin{align}
     y_{it} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 l_{it} + \theta w_{it} + \epsilon_{it}
     % y_{it} &= \alpha_i + \gamma_t + \theta w_{it} + \beta E[TFP_{-i,g,t}\vert{}g] + \epsilon_{it}

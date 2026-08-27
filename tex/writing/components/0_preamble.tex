@@ -97,8 +97,8 @@
 
 % 1. Redefine tablenotes using standard \renewenvironment to add \footnotesize
 \RenewDocumentEnvironment{tablenotes}{O{}}
-  {\begin{itemize}[#1]\footnotesize}
-  {\end{itemize}}
+  {\par\vspace{1ex}\footnotesize\noindent\ignorespaces}
+  {\par}
 
 % 2. Macro to handle tables with optional notes (#3)
 \newcommand{\wraptable}[3]{%
