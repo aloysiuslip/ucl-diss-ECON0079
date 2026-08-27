@@ -12,8 +12,6 @@
 		"latex-workshop.formatting.latex": "latexindent",
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
-
-		"texWordCount.progressMarkers.interval": 1000,
-  		"texWordCount.progressMarkers.enabled": true
+		"latex-workshop.message.error.show": false
 	}
 }

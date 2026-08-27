@@ -1,47 +1,111 @@
 \section{Model}
 I use a stylised, basic 3-factor production model throughout this analysis.
+$Y$, $L$, $K$ are GVA, labour, and capital as usual. $Z_{jt}$
+is the 2-factor total-factor productivity (TFP) residual.
+I use lower-case variables to indicate logged terms and bolded variables to indicate stacked vectors.
 
 \begin{align}
-    \label{eq:structural1}
-    Y_{it} &= L_{it}^\alpha K_{it}^\beta \left[  \sum_{j}f(Z_{jt}) \right]^\gamma
+    Y_{it} &= A \cdot L_{it}^\alpha K_{it}^\beta \left[  \prod_{j\neq i}f(Z_{jt}) \right]^\gamma
     \\
-    \label{eq:structural2}
-    z_{it} &= \gamma \left[  \sum_{j}f(z_{jt}) \right]
+    y_{it} &= c + \alpha l_{it} + \beta k_{it} + \gamma \sum_{j\neq i} \ln f(Z_{jt})
+    \\
+    z_{it} &= y_{it} - c + \alpha l_{it} - \beta k_{it}
+    \\
+    \label{eq:structural-logln}
+    f(Z_{jt}) &= Z_{jt}^{w_{ijt}}
+    \\
+    z_{it} &= c + \gamma \sum_{j\neq i} w_{ijt} z_{jt}
+    \\
+    \mathbf z_t &= c + \gamma \mathbf \Omega_t \mathbf z_t
 \end{align}
 
-where $Y$, $L$, $K$ are output, labour, and capital as usual. $Z_{jt}$
-is the 2-factor total-factor productivity (TFP) residual.
-Lower case variables indicate logged variables.
 \par
 Theory suggests no restrictions on $\alpha$, $\beta$, and $\gamma$ collectively should be imposed,
-as $\gamma$ is a positive externality.
-\todo{Lucas discusses this}
+as $\gamma$ is a positive externality. \todo{Lucas discusses this}
 \par
-We can show that equation \ref{eq:structural1} implies \ref{eq:structural2},
-permitting us to estimate the structural $\gamma$ parameter flexibly, i.e. both with GVA as the regressand
-or in reduced form via a 2-step process calculating $z_{it}$ via a 2-factor production function first.
-\todo{Show this! Are they equivalent? Show reflection problem}
+In equation \ref{eq:structural-logln} I assume log-linearity for the peer TFP effect on the target,
+namely the $f(\cdot)$ transformation function dictating effects for peers contemperaneously
+is a Cobb-Douglas weighted set of indi+ces, s.t. $\sum_{j\neq i} w_{ijt}=1$.
+This permits me to estimate structural $\gamma$ in two stages should I require,
+namely using $y_{it}$ log GVA as the regressand is equivalent to
+first estimating $z_{it}$ via a 2-factor TFP estimation
+and then secondly regressing $z_{it}$ against its peers.
+\par
+To estimate structural $\gamma$, I use 3 linear models, increasing in complexity,
+each resolving some of the endogeneity and identification issues of the last.
+These are summarised in Table \ref{table:model-summary} below. Given that only the last, Section \ref{ss:model-dynamic-panel}
+should be interpreted as causal, we could have skipped straight to analysis with this model
+and omitted the rest, namely Sections \ref{ss:model-lmm} and \ref{ss:model-dynamic-panel}.
+However, these incremental steps are useful for iteratively understanding the data
+and making choices about parameter selection along the way
+and are computationally easier to calculate, allowing more parameter examinations to be undertaken,
+assuming that the relationships are similar between these parameter choices household
+in both the non-causal and causal specifications.
+Choosing all these parameters once, in a final model, would have required
+a large amount of computation via cross-validation,
+which this investigations limits on time and computation did not permit.
+
+\begin{table}[htbp]
+    \begin{center}
+        \begin{threeparttable}
+            \caption{\todo{Summary of econometric models}}
+            \label{table:model-summary}
+            \begin{tabular}{lcllcl}
+                \toprule\toprule
+                Model
+                & Stages                             
+                & Identification
+                & Endog.
+                & Consistent?
+                & Decisions
+                \\
+                \hline
+                1. \nameref{ss:model-lmm}
+                & 2                                     \\
+                2. \nameref{ss:model-dd}
+                & 2                                     \\
+                3. \nameref{ss:model-dynamic-panel}
+                & 1                                     \\
+                \bottomrule
+            \end{tabular}
+            \begin{tablenotes}
+                \item 'Stages' indicates whether the derived 2-factor TFP value $z_{it}$
+                was used as the regressand, or the model used $y_{it}$ from the \itx{gva1} variable directly.
+            \end{tablenotes}
+        \end{threeparttable}
+    \end{center}
+\end{table}
 
 \subsection{2-factor TFP estimation}
 
-I initially establish a heavily-stylised basic 2-factor production model
-to derive Solow TFP at the firm level.
-Initially, this is static, so the spillover from peer firms via $Z_{jt}$ only occurs in the same $t$-period.
+As established above, it is helpful to conduct a first stage
+derividing the Solow residual, $z_{ijt}$, from a 2-factor production model,
+which I will analyse and decompose further in a second stage.
+This measurement is only helpful for static models,
+so the spillover from peer firms via $Z_{jt}$ only occurs in the same $t$-period.
+As I will show, there may be a dynamic lag from peer TFP $z_{jt}$
+to target TFP $z_{it}$, so for the later model, $z_{it}$ needs to be estimated in full
+in a single-stage with dynamic variables.
 
 \begin{align}
     \label{eqn:tfp2factor}
-    Y_{it} &= L_{it}^{\beta_1} K_{it}^{\beta_2}
-    \\
-    \ln(Y_{it}) &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \ln(L_{it}) + \beta_2 \ln(K_{it}) + \varepsilon_{it}
-    \\
-    z_{it} &= \ln(Y_{it}) - \beta_1\ln(L_{it}) + \beta_2\ln(K_{it})
+    y_{it} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 l_{it} + \beta_2 k_{it} + \varepsilon_{it}
+    \\ \tag{3}
+    z_{it} &= y_{it} - \beta_1 l_{it} + \beta_2 k_{it}
 \end{align}
+%
+I conduct the reduced-form static panel regression in logs,
+with firm and time fixed effects. I assume exogeneity between the residual and factor input levels.
 
-The 2-factor regression is derived from a Cobb-Douglas production function.
-I conduct this in logs, with firm and time fixed effects, with no imposition on returns to scale.
-I assume exogeneity between the residual and factor input levels.
+\wraptable
+    {Baseline TFP calculation from 2-factor production}
+    {../../model/output/results_0_tfp}
+    {
+        \item All parameters reported with standard errors underneath.
+        \item Significant estimates against an $H_0: \beta=0$ are indicated
+        with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+    }
 
-\par
 The parameter estimates give a labour income share exactly in line with ONS analysis of UK industry-level data
 over the same time period, particularly \itx{corporate gross labour share} which is constructed
 from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
@@ -52,15 +116,6 @@ Oddly, running the regression with \itx{fixed\_total} as the capital measure ins
 almost entirely eliminates the capital share of income from the regression.
 For the rest of the analysis, I use \itx{total\_assets} as the primary capital measure
 and leave it for future analysis why this dataset yields this phenomenon.
-\wraptable
-    {Baseline TFP calculation from 2-factor production}
-    {../../model/output/results_0_tfp}
-\begin{center}
-    \small
-    All parameters reported with standard errors underneath.
-    Significant estimates against an $H_0: \beta=0$ are indicated with $p<0.1$ (*),
-    $p<0.05$ (**), and $p<0.01$ (***).
-\end{center}
 
 TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
 Equivalently, it is the sum of fixed effects in this specification with the error term,
@@ -69,15 +124,33 @@ but correlated to both firm effects and time trends.
 By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
 
 \subsection{LMM group peers}
+\label{ss:model-lmm}
 
 Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
 non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa}.
 
 \begin{align}
-    y_{it} &= \alpha_i + \gamma_t + \beta_0
+    z_{it} &= \alpha_i + \gamma_t + \beta_0
                 + \sum_{g=1}^3 \beta_g
-                  \sum_{j=1}^{n\in g} \mathbb E[TFP_{jtg}\vert{}g]
+                  \sum_{j=1}^{n\in g} \mathbb E[z_{jtg}\vert{}g]
                 + \theta w_{it} + \epsilon_{it}
+\end{align}
+
+\begin{align}
+    \notag
+    Y_{it} &= A \cdot L_{it}^\alpha K_{it}^\beta \left[  \prod_{j\neq i}f(Z_{jt}) \right]^\gamma
+    \\
+    f(Z_{jt}) &= Z_{jt}^{w_{ijt}}
+    \\
+    \notag
+    y_{it} &= c + \alpha l_{it}+\beta k_{it} + \gamma \sum_{j\neq i} w_{ijt}z_{jt}
+    \\
+    \notag
+    z_{it} &= c + \gamma \sum_{j\neq i} w_{ijt} z_{jt}
+    \\
+    \mathbf z_t &= c + \gamma \mathbf \Omega_t \mathbf z_t
+    \\
+    \mathbf z_t &= \left(\mathbb I - \gamma \mathbf \Omega_t \right)^{-1} c
 \end{align}
 
 It is crucial that these groups are non-overlapping, namely the 'doughnut' group identities discussed earlier.
@@ -89,6 +162,7 @@ being $\beta_{pc8} + \beta_{pc4}$, and equivalently for \itx{ttwa}.
 \wraptable
     {Static panel linear-in-means using spatial-group TFP averages}
     {../../model/output/results_1a_lmm}
+    {}
 
 The parameter results are exactly in-line with the predictions from theory,
 namely that there is a strong correlation between the TFP of a target firm and its peers.
@@ -98,7 +172,8 @@ Crucially however, these parameter estimates should not be interpreted as causal
 \todo{thinking about non-overlapping groups theory}
 \todo{... reflection problem}
 
-\subsection{Static panel with distance decay}
+\subsection{Static distance decay}
+\label{ss:model-dd}
 
 \todo{Reformat this table: reorder variables, rename, remove no fe}
 \begin{align}
@@ -111,10 +186,13 @@ Crucially however, these parameter estimates should not be interpreted as causal
 \wraptable
     {Static panel using continuous distance-decay weighted TFP average of peers}
     {../../model/output/results_2_dd.tex}
+    {}
 
 \newpage
 \subsection{Dynamic panel}
+\label{ss:model-dynamic-panel}
 
 \wraptable
     {Dynamic panel using instrumented continuous distance-decay weighted TFP}
     {../../model/output/results_3_ivdyn}
+    {}

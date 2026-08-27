@@ -51,17 +51,19 @@ likely due to accounting standard differences.
 
 \begin{table}[htbp]
     \begin{center}
-    \caption{Capital-output ratios in FAME corpus of firms}
-    \label{table:ky}
-    \begin{tabular}{llc}
-        \toprule\toprule
-        Variable        &   Description                                             & Capital-output ratios \\
-        \hline
-        tangibles       &                                                           &   3.53    \\
-        fixed\_other    &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
-        current\_assets &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
-        \bottomrule
-    \end{tabular}
+        \begin{threeparttable}[c]
+            \caption{Capital-output ratios in FAME corpus of firms}
+            \label{table:ky}
+            \begin{tabular}{llc}
+                \toprule\toprule
+                Variable        &   Description                                             & Capital-output ratios \\
+                \hline
+                tangibles       &                                                           &   3.53    \\
+                fixed\_other    &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
+                current\_assets &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
+                \bottomrule
+            \end{tabular}
+        \end{threeparttable}
     \end{center}
 \end{table}
 
@@ -131,3 +133,5 @@ meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 
 \footnote{\todo{Review ONS bulletin on TTWAs data source and describe clearly}},
 the first half of a UK postcode \itx{pc4},
 and the full UK postcode \itx{pc8}.
+
+\todo{Discuss and illustrate different forms of omega, with illustrative block diagonal matrices}

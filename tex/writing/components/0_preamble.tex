@@ -47,6 +47,7 @@
 
 
 % Captions
+\usepackage[hidelinks]{hyperref}
 \usepackage{caption}
 \renewcommand{\thetable}{\Roman{table}}
 \DeclareCaptionLabelFormat{uppercase_table}{TABLE~#2}
@@ -85,15 +86,32 @@
 \renewcommand*\l@section[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
 \makeatother
 
-% Section commands
-\newcommand{\lblock}[2][c]{%
+% Tables
+\newcommand{\lblock}[2][c]{
   \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
-\newcommand{\cblock}[2][c]{%
+\newcommand{\cblock}[2][c]{
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-\newcommand{\wraptable}[2]{%
+
+\usepackage{threeparttable}
+\usepackage{etoolbox} % Ensures \ifblank is available
+
+% 1. Redefine tablenotes using standard \renewenvironment to add \footnotesize
+\RenewDocumentEnvironment{tablenotes}{O{}}
+  {\begin{itemize}[#1]\footnotesize}
+  {\end{itemize}}
+
+% 2. Macro to handle tables with optional notes (#3)
+\newcommand{\wraptable}[3]{%
     \begin{table}[hbtp]
         \centering
-        \caption{#1}
-        \input{#2}
+        \begin{threeparttable}
+            \caption{#1}%
+            \input{#2}% Ensure this inputted file has NO \begin{center} or \end{center}
+            \ifblank{#3}{}{% Only print tablenotes if #3 is non-empty
+                \begin{tablenotes}
+                #3
+                \end{tablenotes}%
+            }%
+        \end{threeparttable}
     \end{table}%
 }
