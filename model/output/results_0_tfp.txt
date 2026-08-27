@@ -12,8 +12,8 @@ include: True
 Dep. Variable:                ln_gva1   R-squared:                        0.3701
 Estimator:                   PanelOLS   R-squared (Between):              0.8079
 No. Observations:             1081520   R-squared (Within):               0.3861
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.8091
-Time:                        13:28:52   Log-likelihood                -4.822e+05
+Date:                Thu, Aug 27 2026   R-squared (Overall):              0.8091
+Time:                        17:03:57   Log-likelihood                -4.822e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   2.765e+05
 Entities:                      140458   P-value                           0.0000
@@ -44,52 +44,6 @@ Included effects: Entity, Time
 =======================================================================================
 
 
-Model 'gva2_ft': GVA = renumeration + pnl + interest + depreciation, K = total assets, firm and time fixed effects
-Model Parameters:
-Y: gva2
-X: ['total_assets', 'employees']
-to_log: ['Y', 'X', 'gva2', 'total_assets', 'employees']
-fe: ['i', 't']
-description: GVA = renumeration + pnl + interest + depreciation, K = total assets, firm and time fixed effects
-include: True
-
-                          PanelOLS Estimation Summary                           
-================================================================================
-Dep. Variable:                ln_gva2   R-squared:                        0.2976
-Estimator:                   PanelOLS   R-squared (Between):              0.7199
-No. Observations:              618588   R-squared (Within):               0.3230
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.7560
-Time:                        13:28:58   Log-likelihood                -3.309e+05
-Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   1.113e+05
-Entities:                       93041   P-value                           0.0000
-Avg Obs:                       6.6486   Distribution:                F(2,525527)
-Min Obs:                       1.0000                                           
-Max Obs:                       76.000   F-statistic (robust):          1.076e+04
-                                        P-value                           0.0000
-Time periods:                      19   Distribution:                F(2,525527)
-Avg Obs:                    3.256e+04                                           
-Min Obs:                    1.129e+04                                           
-Max Obs:                     3.67e+04                                           
-                                                                                
-                                Parameter Estimates                                
-===================================================================================
-                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
------------------------------------------------------------------------------------
-const               3.4448     0.0515     66.934     0.0000      3.3440      3.5457
-ln_total_assets     0.2450     0.0067     36.815     0.0000      0.2319      0.2580
-ln_employees        0.6243     0.0073     85.361     0.0000      0.6100      0.6386
-===================================================================================
-
-F-test for Poolability: 10.679
-P-value: 0.0000
-Distribution: F(93058,525527)
-
-Included effects: Entity, Time
-
-=======================================================================================
-
-
 Model 'k2_ft': GVA = renumeration + EBITDA, K = fixed assets (no current assets), firm and time fixed effects
 Model Parameters:
 Y: gva1
@@ -104,8 +58,8 @@ include: True
 Dep. Variable:                ln_gva1   R-squared:                        0.3226
 Estimator:                   PanelOLS   R-squared (Between):              0.6783
 No. Observations:             1042854   R-squared (Within):               0.3389
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.6950
-Time:                        13:29:08   Log-likelihood                -4.884e+05
+Date:                Thu, Aug 27 2026   R-squared (Overall):              0.6950
+Time:                        17:04:07   Log-likelihood                -4.884e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   2.161e+05
 Entities:                      135428   P-value                           0.0000
@@ -150,8 +104,8 @@ include: True
 Dep. Variable:                ln_gva1   R-squared:                        0.3861
 Estimator:                   PanelOLS   R-squared (Between):              0.8071
 No. Observations:             1081520   R-squared (Within):               0.3861
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.8084
-Time:                        13:29:15   Log-likelihood                -4.831e+05
+Date:                Thu, Aug 27 2026   R-squared (Overall):              0.8084
+Time:                        17:04:14   Log-likelihood                -4.831e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   2.959e+05
 Entities:                      140458   P-value                           0.0000
@@ -196,8 +150,8 @@ include: True
 Dep. Variable:                ln_gva1   R-squared:                        0.8345
 Estimator:                   PanelOLS   R-squared (Between):              0.8354
 No. Observations:             1081520   R-squared (Within):               0.3658
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.8346
-Time:                        13:29:23   Log-likelihood                -1.055e+06
+Date:                Thu, Aug 27 2026   R-squared (Overall):              0.8346
+Time:                        17:04:21   Log-likelihood                -1.055e+06
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   2.726e+06
 Entities:                      140458   P-value                           0.0000
@@ -228,30 +182,29 @@ Included effects: Time
 =======================================================================================
 
 
-Model 'gva1_': GVA = renumeration + EBITDA, K = total assets, firm and time fixed effects
+Model 'gva1_': GVA = renumeration + EBITDA, K = total assets, no fixed effects
 Model Parameters:
 Y: gva1
 X: ['total_assets', 'employees']
 to_log: ['Y', 'X', 'gva1', 'total_assets', 'employees']
-fe: ['i', 't']
-description: GVA = renumeration + EBITDA, K = total assets, firm and time fixed effects
+description: GVA = renumeration + EBITDA, K = total assets, no fixed effects
 include: True
 
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                ln_gva1   R-squared:                        0.3701
-Estimator:                   PanelOLS   R-squared (Between):              0.8079
-No. Observations:             1081520   R-squared (Within):               0.3861
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.8091
-Time:                        13:29:34   Log-likelihood                -4.822e+05
+Dep. Variable:                ln_gva1   R-squared:                        0.8346
+Estimator:                   PanelOLS   R-squared (Between):              0.8354
+No. Observations:             1081520   R-squared (Within):               0.3658
+Date:                Thu, Aug 27 2026   R-squared (Overall):              0.8346
+Time:                        17:04:27   Log-likelihood                -1.055e+06
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   2.765e+05
+                                        F-statistic:                   2.728e+06
 Entities:                      140458   P-value                           0.0000
-Avg Obs:                       7.7000   Distribution:                F(2,941042)
+Avg Obs:                       7.7000   Distribution:               F(2,1081517)
 Min Obs:                       1.0000                                           
-Max Obs:                       76.000   F-statistic (robust):          2.485e+04
+Max Obs:                       76.000   F-statistic (robust):           3.01e+05
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(2,941042)
+Time periods:                      19   Distribution:               F(2,1081517)
 Avg Obs:                    5.692e+04                                           
 Min Obs:                    2.528e+04                                           
 Max Obs:                     6.73e+04                                           
@@ -260,16 +213,12 @@ Max Obs:                     6.73e+04
 ===================================================================================
                  Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 -----------------------------------------------------------------------------------
-const               3.2006     0.0316     101.30     0.0000      3.1387      3.2625
-ln_total_assets     0.2649     0.0042     63.346     0.0000      0.2567      0.2730
-ln_employees        0.6208     0.0047     131.28     0.0000      0.6115      0.6301
+const               1.9958     0.0103     193.41     0.0000      1.9756      2.0160
+ln_total_assets     0.4216     0.0017     241.25     0.0000      0.4182      0.4250
+ln_employees        0.5587     0.0022     255.84     0.0000      0.5544      0.5629
 ===================================================================================
 
-F-test for Poolability: 12.633
-P-value: 0.0000
-Distribution: F(140475,941042)
 
-Included effects: Entity, Time
 
 =======================================================================================
 

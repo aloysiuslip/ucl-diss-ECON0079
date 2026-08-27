@@ -1,7 +1,7 @@
 \section{Model}
-I use a stylised, basic 3-factor production model throughout this analysis.
-$Y$, $L$, $K$ are GVA, labour, and capital as usual. $Z_{jt}$
-is the 2-factor total-factor productivity (TFP) residual.
+I use a stylised 3-factor production model throughout this analysis.
+$Y$, $L$, $K$ are each firm-year observation's total GVA, labour, and capital as usual.
+$Z_{jt}$ is the 2-factor total-factor productivity (TFP) residual.
 I use lower-case variables to indicate logged terms and bolded variables to indicate stacked vectors.
 
 \begin{align}
@@ -33,14 +33,11 @@ and then secondly regressing $z_{it}$ against its peers.
 \par
 To estimate structural $\gamma$, I use 3 linear models, increasing in complexity,
 each resolving some of the endogeneity and identification issues of the last.
-These are summarised in Table \ref{table:model-summary} below. Given that only the last, Section \ref{ss:model-dynamic-panel}
-should be interpreted as causal, we could have skipped straight to analysis with this model
-and omitted the rest, namely Sections \ref{ss:model-lmm} and \ref{ss:model-dynamic-panel}.
-However, these incremental steps are useful for iteratively understanding the data
+Though the final model I present has the most accurate interpretation of parameters,
+earlier models are useful for iteratively understanding the data
 and making choices about parameter selection along the way
-and are computationally easier to calculate, allowing more parameter examinations to be undertaken,
-assuming that the relationships are similar between these parameter choices household
-in both the non-causal and causal specifications.
+since they are computationally easier to calculate and
+assuming that relationships between these parameters are similar.
 Choosing all these parameters once, in a final model, would have required
 a large amount of computation via cross-validation,
 which this investigations limits on time and computation did not permit.
@@ -123,6 +120,8 @@ which means we should expect it to be exogenous to capital and labour inputs,
 but correlated to both firm effects and time trends.
 By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
 
+% ------
+
 \subsection{LMM grouped peers}
 \label{ss:model-lmm}
 
@@ -136,15 +135,15 @@ and is common to the peer effects literature.
     \label{eq:lmm-structural1}
     z_{it} &= \alpha_i + \gamma_t + \beta_0
                 + \sum_{g=1}^3 \beta_g \mathbb E[z_{jtg}\vert{}g]
-                + \epsilon_{it}
+                + \varepsilon_{it}
     \\
     \notag
     \mathbf z_t &= c + \gamma \mathbf \Omega_t \mathbf z_t
     \\
-    w_{ij}\in \mathbf \Omega_t &=
+    w_{ijt}\in \mathbf \Omega_t &=
         \begin{cases}
-            1, & \text{if} (i,j)\in g   \\
-            0, & \text{if} i=jt         \\
+            1, & \text{if} \ (i,j)\in g   \\
+            0, & \text{if} \ i=j         \\
             0, & \text{otherwise}
         \end{cases}
 \end{align}
@@ -201,34 +200,147 @@ The results of the LMM estimation implementing equation \ref{eq:lmm-structural1}
     {Static panel linear-in-means using spatial-group TFP averages}
     {../../model/output/results_1a_lmm}
     {}
-\todo{Reformat this table: reorder variables, rename, remove no fe}
 
 The parameter results suggest a strong correlation between the TFP of a target firm and its peers.
-Each additional outward group only adds to explain the causal variation
-\par
-Crucially however, these parameter estimates should not be interpreted as causal.
-\todo{thinking about non-overlapping groups theory}
-\todo{... reflection problem}
 
+\newpage
 \subsection{Static distance decay}
 \label{ss:model-dd}
+
+To improve on the LMM specification, I make a modification where
+every peer firm is weighted by its influence on the target by the reciprocal of the 
+continuous distance metric calculated in \ref{ss:data-distance}
+$w_{ijt}=f(d)$. This is stylistic of a declining peer influence further away,
+representing a \todo{lower frequency of social collisions, barriers created via transport and time costs,
+and an increased difficulty of observation of management practices}.
+
 \begin{align}
-    y_{it} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 l_{it} + \theta w_{it} + \epsilon_{it}
-    % y_{it} &= \alpha_i + \gamma_t + \theta w_{it} + \beta E[TFP_{-i,g,t}\vert{}g] + \epsilon_{it}
+    \label{eq:dd-structural1}
+    z_{it} &= \alpha_i + \gamma_t + \beta_0
+            + \beta_1 \sum_{j\in-i} w_{ijt}z_{jt} + \varepsilon_{it}
     \\
-    z_{it} &= \alpha_i + \gamma_t + \theta w_{it} + \beta f(z_{jt}) + \epsilon_{it}
+    \mathbf z_{t} &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
+            + \beta_1 \sum_{j\in-i} \Omega_t \mathbf z_{t} + \mathbf \varepsilon_{t}
+    \\
+    w_{ijt}\in \mathbf \Omega_t &=
+        \begin{cases}
+            \frac1{d_{ij}},         &\text{(1) gravity}                                      \\
+            \frac1{d_{ij}^2}        &\text{(2) N.E.G.} \\
+            \exp{-d_{ij}\cdot k}    &\text{(3) exponential decline}
+        \end{cases}
 \end{align}
+
+This represents a likely more accurate declining effect of productivity spillover,
+rather than the special-case group mean where every firm in an enclosed area,
+for example, the target's postcode, has an equal influence on the target's TFP.
+In addition, it allows for better identification following \cite{Bramoulle2009}.
+\todo{explain Bramoulle2009, patterns of }$\Omega_t$
+\par \noindent
+In essence, the LMM specification only contains 3 non-overlapping groups
+from its location tags. The distance-decayed specification
+contains as many non-overlapping groups as firms.
 
 \wraptable
     {Static panel using continuous distance-decay weighted TFP average of peers}
-    {../../model/output/results_2_dd.tex}
+    {../../model/output/results_2_dd}
     {}
 
-\newpage
+This distance-decay specification revises down the estimate from peers to a an elasticity of 0.168,
+lower than the results given by the LMM specification. This is likely due to \todo{...}
+\\
+In addition, I introduce controls \todo{...}
+
 \subsection{Dynamic panel}
 \label{ss:model-dynamic-panel}
 
+To ensure \todo{...}, I introduce a dynamic panel specification,
+exploiting the time series observations available in this data.
+
+\begin{align}
+    y_{i,t} &= \alpha_i + \beta_0
+                + \sum_{k=1}^p \gamma_k y_{i,t-k}
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \beta_3 \sum_{j\in-i} w_{ijt}z_{jt}
+                + \varepsilon_{it}
+    \\
+    \Delta y_{it} &= \beta_0
+                + \sum_{k=1}^p \gamma_k \Delta y_{i,t-k}
+                + \beta_1 \Delta k_{i,t}
+                + \beta_2 \Delta l_{i,t}
+                + \beta_3 \Delta \sum_{j\in-i} w_{ijt}z_{jt}
+                + \Delta\varepsilon_{it}
+    \\
+    \label{eq:dyn-moment-conditions}
+    0 &=
+    \mathbb E \left[
+        \Delta\varepsilon_{it}
+        \cdot
+        \begin{pmatrix}
+            \Delta y_{i,t-p-1}     \\
+            \Delta y_{i,t-p-2}     \\
+            \Delta y_{i,t-p-3}     \\
+            \Delta k_{i,t-p-1}     \\
+            \Delta k_{i,t-p-2}     \\
+            \Delta \Sigma_jw_{ijt}z_{jt}
+        \end{pmatrix}
+    \right]
+\end{align}
+\todo{Why do we have a constant after first differencing?}
+
+I return to a first-stage production function with regressand $y_{it}$.
+I continue to use the scalar weighted distance TFP metric
+as the primary regressor of interest $z_{jt}$.
+\par
+I aim to include lags of $ln(y_{it})$ as regressors,
+using this AR structure to strip out as much endogenous variation of the current observation
+as possible.
+This requires the assumption that lags of $ln(y_{it})$ are predetermined.
+In addition, I assume that capital, $k_{i,t}$ is pre-determined, as investment is chosen
+one period ahead, in line with standard Perpetual Inventory Method approaches\footnote{
+    Noting that this is ordinarily done on a quarterly basis,
+    however, due to data limitations we adopt the same thing here even though Fame
+    provides observations annually}.
+As I am using lags as regressors, I lose strict endogeneity and instead can only claim
+$mathbb E[\varepsilon_{it}|x_{i\tau}]=0\ \forall t\geq \tau$.
+As I result, when I eliminate firm fixed effects via first-differencing, 
+my resulting $\Delta x_{it}$ is correlated with the differenced error time $\Delta\varepsilon_{it}$.
+\par
+To overcome this, I introduce instrumental variables using deeper lags
+as proposed by \citep{Anderson1981},
+namely $y_{i,t-p-1}, y_{i,t-p-2}, y_{i,t-p-3}$ for GVA
+and  $k_{i,t-p-1}, k_{t-p-2}$ for capital.
+I use multiple lags as instrument to increase identification power.
+As the Fame dataset is rich on the time dimension, namely I have up to 19 lags at most for a firm,
+with a mean of 7 lags, I can safely do this for any structure up to AR(4) given 3 lags.
+Results show that the coefficient after 4 lags becomes insignificant,
+with theory suggesting that should continue to decline with additional lags.
+An ideal approach would select the auto-regressive order via information criteria tests.
+I assume that contemperaneous changes in peer TFP $z_{jt}$ are exogenous,
+though this new specification now ensures that only the component of $z_{jt}$
+that does not correlate with lags of output is measured.
+\todo{Even so, this is still a strong assumption.
+I should introduce a control (basically a diff-in-diff?) of peers from the same industry
+across the country (outside the spatial bubble).}
+\todo{Discuss introducing a new weighting method using past firm similarity.}
+\par
+I estimate the equation fulfilling the vector of moment conditions,
+(\ref{eq:dyn-moment-conditions}) via GMM.
+As my regressors are over-identified, I use 2-step GMM to improve efficiency.
+ 
 \wraptable
     {Dynamic panel using instrumented continuous distance-decay weighted TFP}
-    {../../model/output/results_3_ivdyn}
-    {}
+    {../../model/output/results_3_ivdynamic}
+    {\todo{
+        We can add more lags, but 2 lags already suggests AR(1) structure.
+        Interestingly, my laptop crashed executing AR(3)
+    }}
+
+I implement a set of standard tests as safety procedures for this approach.
+For all models, we employ Anderson-Rubin (AR) tests for weak instruments.
+This gives the expected results \todo{...}
+\par 
+Finally, a Sargan-Hansen J-test is implemented to check if these instruments are 
+over-identified, meaning the moment conditions cannot be fulfilled with 95\% confidence.
+In all models, the J-test fails to reject the null hypothesis,
+meaning the model's moment conditions are jointly correct.
