@@ -109,6 +109,7 @@ from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalSt
 Specifications without fixed or time effects offer similar parameter estimates.
 The capital share of income jumps on a specification with only time fixed effects,
 which is to be expected \todo{explain}.
+
 Oddly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
 almost entirely eliminates the capital share of income from the regression.
 For the rest of the analysis, I use \itx{total\_assets} as the primary capital measure
@@ -253,26 +254,88 @@ In addition, I introduce controls \todo{...}
 \subsection{Dynamic panel}
 \label{ss:model-dynamic-panel}
 
-To ensure \todo{...}, I introduce a dynamic panel specification,
-exploiting the time series observations available in this data.
+This analysis rests on the credibility of $\sum_{j\in-i} w_{ijt}z_{jt}$
+being a plausibly exogenous regressor.
+To support this argument, I introduce a dynamic panel specification,
+such that lagged realisations of the regressand are used as additional regressors.
+I can implement these lags exploiting the rich time series observations available in Fame.
+\par
+Autoregressive lags help control for reverse causality: if $y_{i,t-k}$ is causal for $z_{jt}$,
+or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
+$y_{i,t-k}$ as a control helps eliminate that bias.
+Similarly, theory offers us no clear view on where there could be simultaneity,
+where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
+and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
+The autoregressive regressor helps control for that.
+Additionally, the results below suggest the autoregressive parameter coefficient is low,
+with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
+suggesting any concerns about reverse causality or simultaneity driven by an AR process
+are likely minimal.
+The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
+\par
+The autoregressive specification requires a return to the one-stage production function
+with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
+as the primary regressor of interest $z_{jt}$.
 
 \begin{align}
     y_{i,t} &= \alpha_i + \beta_0
                 + \sum_{k=1}^p \gamma_k y_{i,t-k}
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
-                + \beta_3 \sum_{j\in-i} w_{ijt}z_{jt}
-                + \varepsilon_{it}
+                + \beta_3 \sum_{j\in-i} w_{i,j,t}z_{j,t}
+                + \varepsilon_{i,t}
     \\
-    \Delta y_{it} &= \beta_0
-                + \sum_{k=1}^p \gamma_k \Delta y_{i,t-k}
+    \Delta y_{i,t} &= \sum_{k=1}^p \gamma_k \Delta y_{i,t-k}
                 + \beta_1 \Delta k_{i,t}
                 + \beta_2 \Delta l_{i,t}
-                + \beta_3 \Delta \sum_{j\in-i} w_{ijt}z_{jt}
-                + \Delta\varepsilon_{it}
+                + \beta_3 \Delta \sum_{j\in-i} w_{i,j,t}z_{j,t}
+                + \Delta\varepsilon_{i,t}
+\end{align}
+%
+I list an AR(p) specification above,
+however Appendix I shows that for any specification order above an AR(1),
+coefficients become insignificant suggesting multicollinearity.
+I can strongly infer that an AR(1) is the true structure,
+with the coefficient on the $ln(gva_1)_{t-1}$ parameter significant at the 1\% level.
+\todo{An ideal approach} would confirm this via information criteria tests.
+\par
+Since this panel requires taking first differences of my log aggregates to strip out the firm fixed effects,
+I strongly expect $\Delta ln(y_{it})$, my regressand, to be correlated with $\Delta ln(y_{it})$, my AR regressor.
+If run as a naïve OLS, this fails strict exogeneity in the panel setting.
+This is confirmed by the Anderson-Rubin (AR(1)) test in my results,
+which I reject the null hypothesis for all models,
+suggesting that using first-order lags would be a weak instrument
+\todo{Why? I thought it should fail exclusion restriction, not instrument correlation}.
+Instead, exogeneity is more limited in this setting.
+\begin{align}
+    \mathbb E[\varepsilon_{it}|x_{i\tau}] &=0\ \forall t\geq \tau
     \\
+    \notag
+    \delta y_{i,\tau-k}, \delta k_{i,\tau} &\in x_{i,t},\ k\leq p
+\end{align}
+\{This requires the assumption that lags of $ln(y_{it})$ are predetermined.
+In addition, I assume that capital, $k_{i,t}$ is pre-determined, as investment is chosen
+one period ahead, in line with standard Perpetual Inventory Method approaches\footnote{
+    Noting that this is ordinarily done on a quarterly basis,
+    however, due to data limitations we adopt the same thing here even though Fame
+    provides observations annually}.
+\}\todo{Review predetermined material. Additionally, explain the logic of instrumenting for capital}
+\par
+To overcome this endogeneity, I introduce deeper autoregressive lags as instrumental variables,
+as proposed by \citep{Anderson1981}. I use 3 autoregressive instrument lags, $y_{i,t-p-1}, y_{i,t-p-2}, y_{i,t-p-3}$ for GVA,
+and 2 regressor lags $k_{i,t-p-1}, k_{t-p-2}$ for capital. This is an overidentification:
+in this basic AR(1) specification, I have $k=4$ regressors and $l=7$ instruments.
+I could increase this. Fame is rich on the time dimension, with up to 19 lags at most for a firm,
+and a median of 6 lags, so I could safely provide more lags of regressors as instruments.
+However, further lags is likely to have a decreasing marginal effect on explanatory power
+and additionally, \todo{How do we know AR(2) is a good instrument?}
+
+\todo{Discuss introducing a new weighting method using past firm similarity.}
+\par
+I estimate the equation fulfilling the vector of moment conditions,
+(\ref{eq:dyn-moment-conditions}) via GMM.
+\begin{align}
     \label{eq:dyn-moment-conditions}
-    0 &=
     \mathbb E \left[
         \Delta\varepsilon_{it}
         \cdot
@@ -285,56 +348,18 @@ exploiting the time series observations available in this data.
             \Delta \Sigma_jw_{ijt}z_{jt}
         \end{pmatrix}
     \right]
+    &= 0
 \end{align}
-\todo{Why do we have a constant after first differencing?}
-
-I return to a first-stage production function with regressand $y_{it}$.
-I continue to use the scalar weighted distance TFP metric
-as the primary regressor of interest $z_{jt}$.
-\par
-I aim to include lags of $ln(y_{it})$ as regressors,
-using this AR structure to strip out as much endogenous variation of the current observation
-as possible.
-This requires the assumption that lags of $ln(y_{it})$ are predetermined.
-In addition, I assume that capital, $k_{i,t}$ is pre-determined, as investment is chosen
-one period ahead, in line with standard Perpetual Inventory Method approaches\footnote{
-    Noting that this is ordinarily done on a quarterly basis,
-    however, due to data limitations we adopt the same thing here even though Fame
-    provides observations annually}.
-As I am using lags as regressors, I lose strict endogeneity and instead can only claim
-$mathbb E[\varepsilon_{it}|x_{i\tau}]=0\ \forall t\geq \tau$.
-As I result, when I eliminate firm fixed effects via first-differencing, 
-my resulting $\Delta x_{it}$ is correlated with the differenced error time $\Delta\varepsilon_{it}$.
-\par
-To overcome this, I introduce instrumental variables using deeper lags
-as proposed by \citep{Anderson1981},
-namely $y_{i,t-p-1}, y_{i,t-p-2}, y_{i,t-p-3}$ for GVA
-and  $k_{i,t-p-1}, k_{t-p-2}$ for capital.
-I use multiple lags as instrument to increase identification power.
-As the Fame dataset is rich on the time dimension, namely I have up to 19 lags at most for a firm,
-with a mean of 7 lags, I can safely do this for any structure up to AR(4) given 3 lags.
-Results show that the coefficient after 4 lags becomes insignificant,
-with theory suggesting that should continue to decline with additional lags.
-An ideal approach would select the auto-regressive order via information criteria tests.
-I assume that contemperaneous changes in peer TFP $z_{jt}$ are exogenous,
-though this new specification now ensures that only the component of $z_{jt}$
-that does not correlate with lags of output is measured.
-\todo{Even so, this is still a strong assumption.
-I should introduce a control (basically a diff-in-diff?) of peers from the same industry
-across the country (outside the spatial bubble).}
-\todo{Discuss introducing a new weighting method using past firm similarity.}
-\par
-I estimate the equation fulfilling the vector of moment conditions,
-(\ref{eq:dyn-moment-conditions}) via GMM.
 As my regressors are over-identified, I use 2-step GMM to improve efficiency.
+\todo{I should introduce a control (basically a diff-in-diff?) of peers from the same industry
+across the country (outside the spatial bubble).}
  
 \wraptable
     {Dynamic panel using instrumented continuous distance-decay weighted TFP}
     {../../model/output/results_3_ivdynamic}
-    {\todo{
-        We can add more lags, but 2 lags already suggests AR(1) structure.
-        Interestingly, my laptop crashed executing AR(3)
-    }}
+    {
+        Model includes a constant as the baseline for \itx{t} fixed effects.
+    }
 
 I implement a set of standard tests as safety procedures for this approach.
 For all models, we employ Anderson-Rubin (AR) tests for weak instruments.
