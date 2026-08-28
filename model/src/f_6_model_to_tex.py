@@ -1,4 +1,5 @@
 import re
+import pandas as pd
 from pathlib import Path
 
 # Helper to convert a p-value string into significance stars.
@@ -333,3 +334,47 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
     with open(output_filepath, 'w', encoding='utf-8') as f:
         f.write("\n".join(latex_lines))
     print(f"Successfully generated LaTeX table with {len(model_names)} models at {output_filepath}")
+
+# Formats numbers cleanly with commas and 3 decimal places
+def format_number(val: float, format_float: str = ",0.3f") -> str:
+    try:
+        val_float = float(val)
+        # Check if it's practically an integer to avoid .000
+        if val_float.is_integer():
+            return f"{int(val_float):,}"
+        return f"{val_float:{format_float}}"
+    except ValueError:
+        return str(val).replace('_', '\\_')
+    
+def generate_latex_from_generic(df: pd.DataFrame, filepath: str, format_float: str = ",0.3f") -> None:
+    columns = list(df.columns)
+    col_align = "l" + "c" * (len(columns) - 1)
+    
+    latex_lines = []
+    latex_lines.append(f"\\begin{{tabular}}{{{col_align}}}")
+    latex_lines.append("\t\\toprule\\toprule")
+    
+    # Header row
+    header_clean = [str(c).replace('_', '\\_') for c in columns]
+    latex_lines.append("\t" + " & ".join(header_clean) + " \\\\[0.8em]")
+    latex_lines.append("\t\\toprule")
+    
+    # Parameter rows
+    for _, row in df.iterrows():
+        row_vals = []
+        for i, col in enumerate(columns):
+            val = row[col]
+            if i == 0:
+                row_vals.append(format_param(str(val)))
+            else:
+                row_vals.append(format_number(val, format_float))
+        
+        latex_lines.append("\t" + " & ".join(row_vals) + " \\\\[0.9em]")
+        
+    latex_lines.append("\t\\bottomrule")
+    latex_lines.append("\\end{tabular}")
+    
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write("\n".join(latex_lines))
+    
+    print(f"Successfully exported df ({df.shape[0]:,}x{df.shape[1]:,}) to {filepath}")
