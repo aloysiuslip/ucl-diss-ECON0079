@@ -1,13 +1,13 @@
 {
 	"folders": [
-		{
-			"name": "fame_clean",
-			"path": "H:/Other computers/My computer/fame_clean"
-		},
-		{
-			"name": "fame_clean",
-			"path": "D:/FAME - LN dataset/Dropbox/fame_clean"
-		},
+		// {
+		// 	"name": "fame_clean",
+		// 	"path": "H:/Other computers/My computer/fame_clean"
+		// },
+		// {
+		// 	"name": "fame_clean",
+		// 	"path": "D:/FAME - LN dataset/Dropbox/fame_clean"
+		// },
 		{
 			"name": "Dissertation",
 			"path": "."
