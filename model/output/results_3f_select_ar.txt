@@ -1,0 +1,79 @@
+Generated Command String:
+ln_gva1 L(1:?).ln_gva1 ln_total_assets ln_employees tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse
+--------------------------------------------------
+
+The following model(s) did not pass specification tests:
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| model | command str                                                                                                                                                                                                                                       |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   m1  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                                         |
+|   m2  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                             |
+|   m3  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                 |
+|   m4  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  L4.ln_gva1  L5.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                         |
+|   m5  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  L4.ln_gva1  L5.ln_gva1  L6.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse             |
+|   m6  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  L4.ln_gva1  L5.ln_gva1  L6.ln_gva1  L7.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Generated Command String:
+ln_gva1 L1.ln_gva1 ln_total_assets ln_employees L(0:?).tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse
+--------------------------------------------------
+ m2
+ Dynamic panel-data estimation, two-step system GMM
+ Group variable: registered_number                       Number of obs = 713339  
+ Time variable: year                                     Min obs per group: 0    
+ Number of instruments = 52                              Max obs per group: 17   
+ Number of groups = 139162                               Avg obs per group: 5.13 
++-----------------+------------+---------------------+------------+-----------+-----+
+|     ln_gva1     |   coef.    | Corrected Std. Err. |     z      |   P>|z|   |     |
++-----------------+------------+---------------------+------------+-----------+-----+
+|    L1.ln_gva1   | 0.0038903  |      0.0019959      | 1.9491691  | 0.0512752 |     |
+| ln_total_assets | 0.2834803  |      0.0359339      | 7.8889319  | 0.0000000 | *** |
+|   ln_employees  | 0.5994273  |      0.0746875      | 8.0258065  | 0.0000000 | *** |
+|     tfp_wav1    | 1.2514559  |      0.3030892      | 4.1290023  | 0.0000364 | *** |
+|   L1.tfp_wav1   | -0.0167760 |      0.0115953      | -1.4467913 | 0.1479554 |     |
+|    year_2008    | -0.0054533 |      0.0063921      | -0.8531358 | 0.3935840 |     |
+|    year_2009    | -0.0027972 |      0.0054594      | -0.5123595 | 0.6083994 |     |
+|    year_2010    | -0.0190770 |      0.0076491      | -2.4940268 | 0.0126303 |  *  |
+|    year_2011    | -0.0177233 |      0.0091375      | -1.9396211 | 0.0524258 |     |
+|    year_2012    | -0.0041570 |      0.0096495      | -0.4307989 | 0.6666146 |     |
+|    year_2013    | -0.0087266 |      0.0102257      | -0.8533936 | 0.3934411 |     |
+|    year_2014    | -0.0171462 |      0.0070130      | -2.4449145 | 0.0144887 |  *  |
+|    year_2015    | -0.0203980 |      0.0055434      | -3.6797046 | 0.0002335 | *** |
+|    year_2016    | -0.0223335 |      0.0048844      | -4.5723877 | 0.0000048 | *** |
+|    year_2017    | -0.0272579 |      0.0051778      | -5.2644008 | 0.0000001 | *** |
+|    year_2018    | -0.0264346 |      0.0063924      | -4.1353157 | 0.0000354 | *** |
+|    year_2019    | -0.0342251 |      0.0064394      | -5.3149712 | 0.0000001 | *** |
+|    year_2020    | -0.0107344 |      0.0131316      | -0.8174495 | 0.4136716 |     |
+|    year_2021    | -0.0334851 |      0.0114485      | -2.9248500 | 0.0034462 |  ** |
+|    year_2022    | -0.0339169 |      0.0122419      | -2.7705596 | 0.0055960 |  ** |
+|    year_2023    | -0.0236974 |      0.0083043      | -2.8536463 | 0.0043221 |  ** |
+|    year_2024    | -0.0163505 |      0.0125897      | -1.2987212 | 0.1940396 |     |
+|       _con      | -0.6555125 |      0.9703114      | -0.6755692 | 0.4993142 |     |
++-----------------+------------+---------------------+------------+-----------+-----+
+Hansen test of overid. restrictions: chi(29) = 18.154 Prob > Chi2 = 0.941
+Arellano-Bond test for AR(1) in first differences: z = -17.03 Pr > z =0.000
+Arellano-Bond test for AR(2) in first differences: z = 1.57 Pr > z =0.117
+
+
+The following model(s) did not pass specification tests:
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| model | command str                                                                                                                                                                                                                   |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   m1  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                     |
+|   m3  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1  L1.tfp_wav1  L2.tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                           |
+|   m4  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1  L1.tfp_wav1  L2.tfp_wav1  L3.tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse              |
+|   m5  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1  L1.tfp_wav1  L2.tfp_wav1  L3.tfp_wav1  L4.tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+Generated Command String:
+ln_gva1 L(1:?).ln_gva1 ln_total_assets ln_employees L(0:?).tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse
+--------------------------------------------------
+
+The following model(s) did not pass specification tests:
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| model | command str                                                                                                                                                                                                                           |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   m1  |  ln_gva1  L1.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                             |
+|   m2  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                                 |
+|   m3  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse                                     |
+|   m4  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  L4.ln_gva1  L5.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse             |
+|   m5  |  ln_gva1  L1.ln_gva1  L2.ln_gva1  L3.ln_gva1  L4.ln_gva1  L5.ln_gva1  L6.ln_gva1  ln_total_assets  ln_employees  tfp_wav1 | gmm(ln_gva1, 2:5) gmm(ln_total_assets, 2:4) gmm(ln_employees, 2:4) gmm(tfp_wav1, 2:4) | timedumm collapse |
++-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

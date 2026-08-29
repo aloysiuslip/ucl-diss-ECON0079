@@ -1,0 +1,272 @@
+\section{Static model}
+I use a stylised 3-factor production model throughout this analysis.
+$Y$, $A$, $K$, and $L$ are each firm-year observation's structural GVA, TFP, labour, and capital as usual.
+I use lower-case variables to indicate logged terms in reduced form
+and bolded variables to indicate stacked vectors.
+\par
+Log TFP, denoted by $z_{i,t}$, is the reduced-form residual after controlling for the two classical inputs,
+which are assumed to be exogenous and exhibit unit factor substituability in this static model.
+Under this specification, the residual is equivalent to the sum of a constant across all observations,
+firm and time fixed effects, and most crucially, the weighted sum of all peer log TFP $\sum_{j\neq i} w_{ij}z_{j,t}$,
+with a structural $\delta$ parameter to estimate.
+
+\begin{align}
+    Y_{i,t} &= A_{i,t} \cdot
+                K_{i,t}^{\beta_1} \cdot
+                L_{i,t}^{\beta_2}
+                % \cdot \left[  \prod_{j\neq i}Z_{j,t}^{w_{ij}} \right]^\gamma
+    \\
+    \label{eq:static-main-gva}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \delta \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
+    \\
+    z_{i,t} &= y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} = \ln(A_{it}) 
+    \\
+    \label{eq:static-main-reduced}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+\end{align}
+
+Theory suggests no restrictions on $\beta_1$, $\beta_2$, and $\delta$ collectively should be imposed,
+as $\delta$ is an externality. \todo{Lucas discusses this}
+\par
+The reduced-form equation \ref{eq:static-main-gva} is linear in the weights $w_{ij}$
+applied to peer log TFP and its coefficient.
+This permits me to estimate structural $\delta$ through either
+the full GVA specification in one stage, using the log of \itx{gva1} as the dependent variable,
+or in two stages, calculating $z_{i,t}$ as the 2-factor residual
+and then regressing $z_{i,t}$ however desired in reduced form.
+This is convenient for a number of the static models below.
+
+\subsection{2-factor TFP estimation}
+
+For convenience, I initially conduct the 2-factor estimation
+deriviing the residual $z_{ijt}$ to decompose further in a second stage.
+This step is additionally helpful for validating the relationships about
+the derived aggregates from my data.
+
+\begin{align}
+    \label{eqn:tfp2factor}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + u_{i,t}
+    \\ \notag
+    u_{i,t} &= \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    \\
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
+\end{align}
+%
+I conduct the estimation using the log-transformed variables.
+I must include firm and time fixed effects and a constant
+if equation (\ref{eq:static-main-reduced}) is the true specification,
+otherwise the static panel OLS will inaccurately attribute firm and time variation
+to my classical factor inputs \todo{explain more clearly}.
+As outlined above, this analysis assumes factor input exogeneity.
+
+\wraptable
+    {Baseline TFP calculation from 2-factor production}
+    {../../model/output/results_0_tfp}
+    {
+        All parameters reported with standard errors underneath.
+        Significant estimates against an $H_0: \beta=0$ are indicated
+        with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+    }
+
+The parameter coefficients give a labour income share exactly in line with ONS analysis of UK industry-level data
+over the same time period, particularly \itx{corporate gross labour share} which is constructed
+from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+\par
+Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
+almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
+I leave it for future analysis why this dataset yields this phenomenon and
+for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
+\par
+As a demonstration, I include specifications which omit fixed effects.
+The capital share of income jumps on a specification with only time fixed effects,
+which is to be expected \todo{explain}.
+
+TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
+Equivalently, it is the sum of fixed effects in this specification with the error term,
+which means we should expect it to be exogenous to capital and labour inputs,
+but correlated to both firm effects and time trends.
+By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
+
+% ------
+
+\subsection{Static panel identification}
+
+Models in this section are consistent only if
+the regressors are plausibly exogenous from $\varepsilon_{i,t}$.
+Following standard procedure for a wide panel regression,
+meaning many firm observations and far fewer time periods,
+I transform all variables to first differences.
+
+\begin{align}
+    \notag
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    \\
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \delta \sum_{j\neq i} w_{ij} \cdot
+                    (\alpha_i + \gamma_t + \beta_0 + \varepsilon_{j,t})
+                + \varepsilon_{i,t}
+    \\
+    \Delta z_{i,t} &= \Delta\gamma_t
+                + \delta \sum_{j\neq i} w_{ij} \cdot
+                (\Delta\gamma_t + \Delta\varepsilon_{j,t})
+                + \Delta\varepsilon_{i,t}
+\end{align}
+%
+For these models, I make the strong assumption of no structural, cross-sectional correlation
+between error terms. This means that for any productivity shock $\epsilon_{j,t}$
+that hits a peer firm $j$, if it is correlated with a productivity shock $\epsilon_{i,t}$
+occurring in the target firm $i$ within the same period $t$,
+it must be attributable to the peer effect coefficient $\delta$.
+
+\begin{align}
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] = 0
+\end{align}
+
+This is quite a strong assumption. It precludes any contemperaneous, correlated independent TFP shocks,
+which might occur on both the global and local level. \todo{...}
+
+\subsection{LMM grouped peers}
+\label{ss:model-lmm}
+
+\begin{align*}
+    \Delta z_{i,t} &= \Delta \gamma_t + \delta \sum_{j\neq i} w_{ij}\Delta z_{j,t} + \Delta \varepsilon_{i,t}
+    \\
+    \Delta \mathbf z_t &= \Delta \gamma_t \mathbf\iota
+                        + \delta  \mathbf W \Delta \mathbf z_t
+                        + \Delta \mathbf \varepsilon_t
+    \\
+    &= (\mathbb I -\delta \mathbf W)^{-1} 
+        (\Delta \gamma_t\mathbf\iota + \Delta\mathbf \varepsilon_t)
+\end{align*}
+
+Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
+non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa} (largest).
+I conduct a linear regression using the averages of peers belonging to these groups,
+leaving out the target firm. This is known as the 'Linear-in-Means (LMM)' Model
+and is common to the peer effects literature.
+
+\begin{align}
+    \label{eq:lmm-structural1}
+    z_{it} &= \alpha_i + \gamma_t + \beta_0
+                + \sum_{g=1}^3 \beta_g \mathbb E[z_{jtg}\vert{}g]
+                + \varepsilon_{it}
+    \\
+    \notag
+    \mathbf z_t &= \delta \mathbf W \mathbf z_t
+    \\
+    w_{ij}\in \mathbf W &=
+        \begin{cases}
+            1, & \text{if} \ (i,j)\in g   \\
+            0, & \text{if} \ i=j         \\
+            0, & \text{otherwise}
+        \end{cases}
+\end{align}
+
+It is crucial that I have multiple, non-overlapping groups in a single model,
+where my target firm $z_{it}$ is a member of all groups simultaneously,
+but peers in one group are excluded from all others.
+\par
+The non-overlapping property prevents multicollinearity.
+If I were to use nested, overlapping geographies,
+namely keeping all firms within the \itx{ttwa} area in that group average,
+including the ones I have just counted in the \itx{pc4} and itx{pc8} groups,
+then my group averages mechanically align:
+$z_{jt,pc8}$ is embedded within $z_{jt,pc4}$, and both are within $z_{jt,ttwa}$,
+making $\beta_g$ parameter estimates unstable.
+\par
+The single model approach prevents omitted variable bias (OVB).
+$\mathbb E[z_{jt,ttwa|g}] \propto  \mathbb E[z_{jt,pc8|g}]$,
+so running three models where the former is just my single regressor means
+the latent $\beta_pc8 \in u_{it}$ is correlated with both $z_{itg}$ and $z_{jtg}$.
+We could reasonably argue that the inner rings are causal,
+so this causal factor excluded from the regression influences both
+and creates heavily upward bias on my outer-ring estimations.
+Indeed, this critique extends within further inner rings.
+If I think the causal unit is not peer firms within the \itx{pc8} group at all,
+but a further hyper-local effect - perhaps those on the same street or same building,
+then this latent factor will correlate with both my outcome and regressor and drive the results.
+However, given the small number of peers contained within an \itx{pc8} unit and
+the limits of data availability to identify firms at more local granularities,
+I proceed assuming the effect from \itx{pc8} peers is homogenous.
+\par
+Finally, the approach using multiple groups as regressors at once gives identification
+by breaking transitivity.
+If I were to run the same regression with merely one group, say \itx{pc8},
+then my regression would suffer the reflection  problem outlined in \citep{Manski1993}.
+As I am estimating the expected value of $z_{it}$ and $z_{jt}$ from the same sample,
+they cannot be uniquely identified in reduced form.
+
+\noindent\textit{Reflection problem with a single regressor, $\mathbf\iota$ denotes a column vector of $1$s}
+\\
+\todo{review: maths is a bit tricky here}
+\begin{align*}
+    \mathbb E[z_{itg}|g] &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \mathbb{E}[z_{jtg}|g]
+    \\
+    &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota + \beta_1 \mathbf\Omega_t \mathbb E[\mathbf{z}_{tg}|g]
+    \\
+    &= (\mathbb I - \beta_1 \mathbf\Omega_t)^{-1} (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
+\end{align*}
+%
+This problem is mitigated with having 3 distinct groups to which $z_{it}$ belongs.
+The results of the LMM estimation implementing equation \ref{eq:lmm-structural1} are below:
+  
+\wraptable
+    {Static panel linear-in-means using spatial-group TFP averages}
+    {../../model/output/results_1a_lmm}
+    {}
+
+The parameter results suggest a strong correlation between the TFP of a target firm and its peers.
+
+\newpage
+\subsection{Static distance decay}
+\label{ss:model-dd}
+
+To improve on the LMM specification, I make a modification where
+every peer firm is weighted by its influence on the target by the reciprocal of the 
+continuous distance metric calculated in \ref{ss:data-distance}
+$w_{ijt}=f(d)$. This is stylistic of a declining peer influence further away,
+representing a \todo{lower frequency of social collisions, barriers created via transport and time costs,
+and an increased difficulty of observation of management practices}.
+
+\begin{align}
+    \label{eq:dd-structural1}
+    z_{it} &= \alpha_i + \gamma_t + \beta_0
+            + \beta_1 \sum_{j\neq i} w_{ijt}z_{jt} + \varepsilon_{it}
+    \\
+    \mathbf z_{t} &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
+            + \beta_1 \sum_{j\neq i} \Omega_t \mathbf z_{t} + \mathbf \varepsilon_{t}
+    \\
+    w_{ijt}\in \mathbf \Omega_t &=
+        \begin{cases}
+            \frac1{d_{ij}},         &\text{(1) gravity}                                      \\
+            \frac1{d_{ij}^2}        &\text{(2) N.E.G.} \\
+            \exp{-d_{ij}\cdot k}    &\text{(3) exponential decline}
+        \end{cases}
+\end{align}
+
+This represents a likely more accurate declining effect of productivity spillover,
+rather than the special-case group mean where every firm in an enclosed area,
+for example, the target's postcode, has an equal influence on the target's TFP.
+In addition, it allows for better identification following \cite{Bramoulle2009}.
+\todo{explain Bramoulle2009, patterns of }$\Omega_t$
+\par \noindent
+In essence, the LMM specification only contains 3 non-overlapping groups
+from its location tags. The distance-decayed specification
+contains as many non-overlapping groups as firms.
+
+\wraptable
+    {Static panel using continuous distance-decay weighted TFP average of peers}
+    {../../model/output/results_2_dd}
+    {}
+
+This distance-decay specification revises down the estimate from peers to a an elasticity of 0.168,
+lower than the results given by the LMM specification. This is likely due to \todo{...}
+\\
+In addition, I introduce controls \todo{...}

@@ -56,11 +56,11 @@ likely due to accounting standard differences.
             \label{table:ky}
             \begin{tabular}{llc}
                 \toprule\toprule
-                Variable        &   Description                                             & Capital-output ratios \\
+                Variable            &   Description                                             & Capital-output ratios \\
                 \hline
-                tangibles       &                                                           &   3.53    \\
-                fixed\_other    &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
-                current\_assets &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
+                \itx{tangibles}     &                                                           &   3.53    \\
+                \itx{fixed\_total}  &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
+                \itx{total\_assets} &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
                 \bottomrule
             \end{tabular}
         \end{threeparttable}
@@ -77,7 +77,7 @@ in our dataset. It is also possible to reconstruct \itx{ebitda} via the sum of
 providing an alternative measure of GVA.
 We can expect the difference between these two to be accounting differences\footnote{
     An OLS regression between the two, discarding 5\% outliers, has a coefficient of 0.91 with a 0.000 p-value.
-    This means \itx{gva\_2} is slightly lower than \itx{gva\_1}, with that impact mostly driven by top-end outliers.
+    This means \itx{gva2} is slightly lower than \itx{gva1}, with that impact mostly driven by top-end outliers.
 }
 and additionally note that the alternate GVA measure also reduces panel observations from 1,085,520 to 618,588.
 For these reasons, I do not report TFP calculations with this second GVA measure

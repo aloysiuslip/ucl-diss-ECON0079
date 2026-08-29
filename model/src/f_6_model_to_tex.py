@@ -184,7 +184,8 @@ def parse_pydynpd_txt(filepath: str | Path) -> dict:
             model_count += 1
             current_model = f"dyn{model_count}"
             models[current_model] = {
-                'Y': '', 'params': {}, 'obs': '', 'entities_fe': True, 'time_fe': False,
+                'Y': '', 'params': {}, 'obs': '', 'instruments': '',
+                'entities_fe': True, 'time_fe': False,
                 'hansen_stat': '', 'hansen_p': '', 'hansen_reject': None,
                 'ar1_stat': '', 'ar1_p': '', 'ar1_reject': None,
                 'ar2_stat': '', 'ar2_p': '', 'ar2_reject': None
@@ -198,6 +199,10 @@ def parse_pydynpd_txt(filepath: str | Path) -> dict:
         obs_match = re.search(r'Number of obs\s*=\s*(\d+)', line)
         if obs_match:
             models[current_model]['obs'] = f"{int(obs_match.group(1)):,}"
+
+        obs_match = re.search(r'Number of instruments\s*=\s*(\d+)', line)
+        if obs_match:
+            models[current_model]['instruments'] = f"{int(obs_match.group(1)):,}"
             
         if 'timedumm' in line:
             models[current_model]['time_fe'] = True
@@ -312,10 +317,14 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
         latex_lines.append("\t\t\\hline")
 
     # Observations, time, entities
+    instr_row = "\t\tInstruments & " + " & ".join([models[m].get('instruments', '') for m in model_names]) + "\n\t\t\\\\"
     i_row = "\t\t\\textit{i} fixed effects & " + " & ".join([build_fe(models[m].get('entities_fe')) for m in model_names]) + "\n\t\t\\\\"
     t_row = "\t\t\\textit{t} fixed effects & " + " & ".join([build_fe(models[m].get('time_fe')) for m in model_names]) + "\n\t\t\\\\"
     obs_row = "\t\tObservations & " + " & ".join([models[m].get('obs') for m in model_names]) + "\n\t\t\\\\"
     # Only add the i_row if there is at least one model with a non-empty entities_fe
+    
+    if any(models[m].get('instruments') for m in model_names):
+        latex_lines.append(instr_row)
     if any(models[m].get('entities_fe') for m in model_names):
         latex_lines.append(i_row)
     if any(models[m].get('time_fe') for m in model_names):

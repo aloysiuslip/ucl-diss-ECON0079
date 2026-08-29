@@ -1,0 +1,49 @@
+To estimate structural $\gamma$, I use 3 linear models, increasing in complexity,
+each resolving some of the endogeneity and identification issues of the last.
+Though the final model I present has the most accurate interpretation of parameters,
+earlier models are useful for iteratively understanding the data
+and making choices about parameter selection along the way
+since they are computationally easier to calculate and
+assuming that relationships between these parameters are similar.
+Choosing all these parameters once, in a final model, would have required
+a large amount of computation via cross-validation,
+which this investigations limits on time and computation did not permit.
+
+\begin{table}[htbp]
+    \begin{center}
+        \begin{threeparttable}
+            \caption{\todo{Summary of econometric models}}
+            \label{table:model-summary}
+            \begin{tabular}{lcllcl}
+                \toprule\toprule
+                Model
+                & Stages                             
+                & Identification
+                & Endog.
+                & Consistent?
+                & Decisions
+                \\
+                \hline
+                1. \nameref{ss:model-lmm}
+                & 2                                     \\
+                2. \nameref{ss:model-dd}
+                & 2                                     \\
+                3. \nameref{s:model-dynamic-panel}
+                & 1                                     \\
+                \bottomrule
+            \end{tabular}
+            \begin{tablenotes}
+                \item 'Stages' indicates whether the derived 2-factor TFP value $z_{it}$
+                was used as the dependent variable, or the model used $y_{it}$ from the \itx{gva1} variable directly.
+            \end{tablenotes}
+        \end{threeparttable}
+    \end{center}
+\end{table}
+
+A naïve OLS would fail strict exogeneity in this setting, as error exogeneity is more limited.
+\begin{align}
+    \mathbb E[\varepsilon_{it}|x_{i\tau}] &=0\ \forall t\geq \tau
+    \\
+    \notag
+    \delta y_{i,\tau-k}, \delta k_{i,\tau} &\in x_{i,t},\ k\leq p
+\end{align}

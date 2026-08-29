@@ -1,0 +1,262 @@
+\section{Dynamic model}
+\label{s:model-dynamic-panel}
+
+I employ a dynamic model for additional identification
+to help eliminate the static model $\mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] = 0$
+strong assumption.
+
+\begin{align}
+    \label{eq:dyn-panel_structural}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \delta \sum_{j\neq i} w_{i,j,t}z_{j,t}
+                + \varepsilon_{i,t}
+    \\
+    &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \delta \sum_{j\neq i} w_{i,j,t} \cdot
+                    (\alpha_j + \gamma_t + \beta_0 + \varepsilon_{j,t})
+                + \varepsilon_{i,t}
+\end{align}
+
+To support this argument, I introduce a dynamic panel specification,
+such that lagged realisations of the dependent variable are used as additional regressors.
+I can implement these lags exploiting the rich time series observations available in Fame.
+\par
+Autoregressive lags help control for reverse causality: if $y_{i,t-k}$ is causal for $z_{jt}$,
+or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
+$y_{i,t-k}$ as a control helps eliminate that bias.
+Similarly, theory offers us no clear view on where there could be simultaneity,
+where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
+and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
+The autoregressive regressor helps control for that.
+Additionally, the results below suggest the autoregressive parameter coefficient is low,
+with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
+suggesting any concerns about reverse causality or simultaneity driven by an AR process
+are likely minimal.
+The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
+\par
+The autoregressive specification requires a return to the one-stage production function
+with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
+as the primary regressor of interest $z_{jt}$. While introducing dynamic lags of 
+
+\begin{align}
+    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
+                + \sum_{k=1}^p \phi_k y_{i,t-k}
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
+                + \varepsilon_{i,t}
+\end{align}
+%
+I list an AR(p,q) specification above,
+however, my results show that AR(1), or $p=1$, is the true structure.
+Appendix I, which increases the order using a nested model approach,
+shows that for any specification order above an AR(1)
+coefficients become insignificant suggesting multicollinearity \todo{F-test on AR(2)}.
+I also confirm this via information criteria tests, \todo{which show}
+that lags beyond $t-2$ provide no new information for the variation on $ln(y_{i,t}$).
+Noting that the regression coefficient on the $ln(gva_1)_{t-1}$ is significant at the 1\% level
+in my results, I can strongly infer that an AR(1) is the true structure.
+\par
+\todo{(IC test results)}
+
+
+\newpage
+\subsection{Instrumental identification under no error autocorrelation}
+Firstly, I assume that dynamic specification (\ref{eq:dyn-panel_structural})
+is well-specified, crucially that means the error term $\varepsilon_{i,t}$ exhibts no autocorrelation,
+though as discussed I allow for moderate cross-sectional correlation across firms. 
+
+\begin{align}
+    \label{eq:dyn-no-ac}
+    \mathbb E[\epsilon_{i,t}\epsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
+    \\
+    \label{eq:dyn-xs-corr-errors}
+    \mathbb E[\epsilon_{i,t}\varepsilon_{j,t}] &\neq 0   ,\qquad \exists i,j
+\end{align}
+
+As usual, a panel setting requires a transformation to strip out firm fixed effects.
+I continue to use first differences of my log aggregates, however,
+even under the fairly strong assumption (\ref{eq:dyn-no-ac}),
+the first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
+
+\begin{align}
+    \Delta y_{i,t} &= \Delta \gamma_t
+                + \sum_{k=1}^p \phi_k \Delta y_{i,t-k}
+                + \theta_1 \Delta k_{i,t}
+                + \theta_2 \Delta l_{i,t}
+                + \sum_{k=1}^q \delta_q \sum_{j\neq i} \Delta(w_{i,j,t} z_{j,t})
+                + \Delta \varepsilon_{i,t}
+    \\ \notag
+    \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
+    \\ \notag
+    \Delta y_{i,t-1} &= \qquad\dots\qquad + \Delta\varepsilon_{i,t-1}
+    \\ \notag
+    &= \qquad\dots\qquad + \varepsilon_{i,t-1} - \varepsilon_{i,t-2}
+    \\ \notag
+    &\implies \mathbb E[ \Delta y_{i,t-1}\Delta\varepsilon_{i,t}] \neq 0
+    \\ \notag
+    \Delta y_{i,t-2} &= \qquad\dots\qquad + \varepsilon_{i,t-2} - \varepsilon_{i,t-3}
+    \\ \notag
+    &\implies \mathbb E[ \Delta y_{i,t-1}\Delta\varepsilon_{i,t}] = 0
+\end{align}
+
+The treatment of the other standard factors, $\Delta k_{i,t}$ and $\Delta l_{i,t}$
+\begin{align}
+    \label{eq:dyn-k-pim}
+    K_{i,t}     &= \lambda I_{i,t} + (1-\lambda) I_{i,t-1} + dK_{i,t-1}
+    \\
+    \label{eq:dyn-inv-information}
+    I_{i,t}     &= \mathbb E[I_{i,t-1}^* \vert \Omega_{t}]
+    \\
+    \label{eq:dyn-l-information}
+    L_{i,t}     &= \mathbb E[L_{i,t}^* \vert \Omega_t] 
+    \\ \notag
+    \epsilon_t  &\in \Omega_t
+    \\ \notag
+    &\implies K_{i,t} \propto \epsilon_t, \epsilon_{t-1}
+    \\ \notag
+    &\implies L_{i,t} \propto \epsilon_t
+    \\ \notag
+    \Delta k_{i,t} &= k_{i,t} - k_{i,t-1}
+    \\ \notag
+    & \implies \mathbb E[\Delta k_{i,t}, \Delta \epsilon_t] \neq 0
+    \\ \notag
+    & \implies \mathbb E[\Delta k_{i,t-1}, \Delta \epsilon_t] \neq 0
+    \\ \notag
+    & \implies \mathbb E[\Delta k_{i,t-2}, \Delta \epsilon_t] = 0
+\end{align}
+
+This is confirmed by the Anderson-Rubin (AR(1)) test in my results,
+which rejects the null hypothesis at the 1\% level for all models,
+suggesting that first-order lags of log GVA are a weak instrument
+\todo{Why? Shouldn't they fail exclusion restriction, not instrument correlation}.
+In addition, I assume that capital, $k_{i,t}$ is pre-determined, as investment is chosen
+one period ahead, in line with standard Perpetual Inventory Method approaches\footnote{
+    Noting that this is ordinarily done on a quarterly basis,
+    however, due to data limitations we adopt the same thing here even though Fame
+    provides observations annually.
+}\todo{Review predetermined material. Additionally, explain the logic of instrumenting for capital}
+\par
+To overcome this endogeneity, I introduce deeper autoregressive lags as instrumental variables,
+as proposed by \citep{Anderson1981}.
+I use 3 autoregressive instrument lags starting from $t-2$:
+$\ln(y_{i,t-2}), \ln(y_{i,t-2}), \ln(y_{i,t-p-3})$ for log GVA,
+and 2 lags for capital $\ln(k_{i,t-p-1}), ln(k_{t-p-2})$.
+An Anderson-Rubin (AR(2)) test shows that deep lags are a valid instrument for log GVA.
+The test applied to the second lag of of $ln(gva_1)$
+fails to reject the null hypothesis of for any specification,
+so I assume it is a valid instrument.
+\par
+Additionally, using multiple deep lags allows for overidentification:
+in this basic AR(1) specification, I have $k=4$ regressors and $l=7$ instruments.
+I could increase this. Fame is rich on the time dimension, with up to 19 lags at most for a firm,
+and a median of 6 lags, so I could safely provide more lags of regressors as instruments.
+Further lags is likely to have a decreasing marginal effect on explanatory power
+and additionally \todo(...)
+
+\todo{Discuss introducing a new weighting method using past firm similarity.}
+\par
+I estimate the equation fulfilling the vector of moment conditions,
+(\ref{eq:dyn-moment-conditions}) via GMM.
+\begin{align}
+    \label{eq:dyn-moment-conditions}
+    \mathbb E \left[
+        \Delta\varepsilon_{it}
+        \cdot
+        \begin{pmatrix}
+            \Delta \ln(y_{i,t-2})     \\
+            \Delta \ln(y_{i,t-3})     \\
+            \Delta \ln(y_{i,t-4})     \\
+            \Delta \ln(k_{i,t-2})     \\
+            \Delta \ln(k_{i,t-3})     \\
+            \Delta \Sigma_jw_{ijt}z_{jt}
+        \end{pmatrix}
+    \right]
+    &= 0
+\end{align}
+As my regressors are over-identified, I use 2-step GMM to improve efficiency.
+\todo{I should introduce a control (basically a diff-in-diff?) of peers from the same industry
+across the country (outside the spatial bubble).}
+ 
+\wraptable
+    {Dynamic panel: all instrumented variables}
+    {../../model/output/results_3e_2iv}
+    {
+        Model includes a constant as the baseline for \itx{t} fixed effects.
+    }
+
+\wraptable
+    {Dynamic panel using instrumented continuous distance-decay weighted TFP}
+    {../../model/output/results_3_ivdynamic}
+    {
+        Model includes a constant as the baseline for \itx{t} fixed effects.
+    }
+
+\par 
+Finally, a Sargan-Hansen J-test is implemented to check if these instruments are 
+over-identified, meaning the moment conditions cannot be fulfilled with 95\% confidence.
+In all models, the J-test fails to reject the null hypothesis,
+meaning the model's moment conditions are jointly correct.
+
+\subsection{Instrumental identification under error autocorrelation}
+
+I appear to have strong identification given assumptions (\ref{eq:dyn-no-ac}) and (\ref{eq:dyn-xs-corr-errors}).
+The instruments above exhibit strong correlation under Anderson-Rubin tests and exclusion restriction has been derived.
+However, there exists a niche case of diagonally-correlated errors,
+namely despite (\ref{eq:dyn-no-ac}) and (\ref{eq:dyn-xs-corr-errors}),
+I ought to consider the following:
+
+\begin{equation}
+    \mathbb E[\varepsilon_{i,t} \varepsilon_{j,t-k}]\neq 0,\qquad\exists i,j,k
+\end{equation}
+%
+This is not as implausible as it may appear due to this analysis' peer effects setting. 
+There may be some local omitted shock $\nu_t$,
+that impacts peer firm A's TFP via $\varepsilon_t$
+and impacts target firm B's TFP after a lag via $\varepsilon_{t-k}$.
+This could be a price shock with random adjustment \todo{or}
+\par
+Additionally, relaxing (\ref{eq:dyn-no-ac}) to allow for weak error autocorrelation
+between limited $\varepsilon_{i,t}$ and $\varepsilon_{i,t-k}$ for limited $k$
+proves a similar problem.
+\par
+\todo{Firstly, I test for error autocorrelation.}
+
+\subsection{Panel vector autoregression}
+
+Another mechanism offered by this dynamic setting is
+to extremely flexibly introduce additional lags of my peer effect term,
+$\sum_{j\neq i} w_{i,j,t}z_{j,t}$.
+
+\begin{align}
+    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
+                + \sum_{k=1}^p \phi_k y_{i,t-k}
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
+                + \varepsilon_{i,t}
+\end{align}
+
+The model now has the form of a panel VAR(p,q) with internal instruments,
+where $p$ refers to the autoregressive lags on the dependent variable $y_{i,t}$
+and $q$ refers to the regressor lags on $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
+chosen by my specification.
+\par
+Following above reasoning, lags of $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
+of a higher order than 2 are exogenous to my reduced-form specification.
+However, 
+
+\subsection{Alternative weights on peer TFP}
+
+\begin{align}
+    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
+                + \sum_{k=1}^p \phi_k y_{i,t-k}
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
+                + \varepsilon_{i,t}
+\end{align}
