@@ -1,96 +1,176 @@
-\section{Dynamic model}
+\section{Dynamic models}
 \label{s:model-dynamic-panel}
 
-I employ a dynamic model for additional identification
-to help eliminate the static model $\mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] = 0$
-strong assumption.
-
-\begin{align}
-    \label{eq:dyn-panel_structural}
+I have discussed how the static model requires a strong strict exogeneity assumption.
+I showed in subsection \ref{ss-static-identification} that
+cross-sectional orthogonality is a \todo{necessary condition} to meet this assumption
+with a peer-effects regressor.
+\begin{align*}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
-                + \delta \sum_{j\neq i} w_{i,j,t}z_{j,t}
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \varepsilon_{i,t}
     \\
-    &= \alpha_i + \gamma_t + \beta_0
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \delta \sum_{j\neq i} w_{i,j,t} \cdot
-                    (\alpha_j + \gamma_t + \beta_0 + \varepsilon_{j,t})
-                + \varepsilon_{i,t}
-\end{align}
-
-To support this argument, I introduce a dynamic panel specification,
-such that lagged realisations of the dependent variable are used as additional regressors.
-I can implement these lags exploiting the rich time series observations available in Fame.
+    \Delta y_{i,t} &= \Delta \gamma_t
+                + \beta_1\Delta k_{i,t}
+                + \beta_2\Delta l_{i,t}
+                + \delta_0\sum_{j\neq i} w_{ij}\Delta z_{j,t}
+                + \Delta\varepsilon_{i,t}
+    \\
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &= 0, \ \forall t
+    \\
+    \implies 
+    \mathbb E[\varepsilon_{i,t}|x_{i,t}] &= 0, \ \forall t
+    \qquad
+    x_{i,t} =
+    \begin{pmatrix}
+        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
+    \end{pmatrix}
+    \\
+    \implies 
+    \mathbb E[\Delta \varepsilon_{i,t}|\Delta x_{i,t}] &= 0, \ \forall t
+\end{align*}
+In this section, I introduce a dynamic panel specification to relax these assumptions,
+permitting weak cross-sectional correlation between peer errors
+and endogeneity of the contemperaneous regressors.
+Crucially, this specification can still be identified even in its panel reduced form,
+which requires first differences to eliminate fixed effects, by the use of internal instruments.
+This follows econometric theory developed by \citep{Anderson1981} and estimator techniques
+developed in \citep{Arellano1991} and furthered by \citep{Blundell1998} which improve efficiency.
 \par
-Autoregressive lags help control for reverse causality: if $y_{i,t-k}$ is causal for $z_{jt}$,
-or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
-$y_{i,t-k}$ as a control helps eliminate that bias.
-Similarly, theory offers us no clear view on where there could be simultaneity,
-where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
-and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
-The autoregressive regressor helps control for that.
-Additionally, the results below suggest the autoregressive parameter coefficient is low,
-with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
-suggesting any concerns about reverse causality or simultaneity driven by an AR process
-are likely minimal.
-The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
-\par
-The autoregressive specification requires a return to the one-stage production function
-with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
-as the primary regressor of interest $z_{jt}$. While introducing dynamic lags of 
+There are good reasons to think this weak cross-sectional correlation exists.
+A local demand shock \todo{...}
 
-\begin{align}
-    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
-                + \sum_{k=1}^p \phi_k y_{i,t-k}
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
-                + \varepsilon_{i,t}
-\end{align}
-%
-I list an AR(p,q) specification above,
-however, my results show that AR(1), or $p=1$, is the true structure.
-Appendix I, which increases the order using a nested model approach,
-shows that for any specification order above an AR(1)
-coefficients become insignificant suggesting multicollinearity \todo{F-test on AR(2)}.
-I also confirm this via information criteria tests, \todo{which show}
-that lags beyond $t-2$ provide no new information for the variation on $ln(y_{i,t}$).
-Noting that the regression coefficient on the $ln(gva_1)_{t-1}$ is significant at the 1\% level
-in my results, I can strongly infer that an AR(1) is the true structure.
-\par
-\todo{(IC test results)}
-
-
-\newpage
 \subsection{Instrumental identification under no error autocorrelation}
-Firstly, I assume that dynamic specification (\ref{eq:dyn-panel_structural})
-is well-specified, crucially that means the error term $\varepsilon_{i,t}$ exhibts no autocorrelation,
-though as discussed I allow for moderate cross-sectional correlation across firms. 
 
+The estimator given in \citep{Arellano1991} takes the regression equation
+as given above and allows for endogeneity.
+Internal instruments of all the endogenous regressors are found,
+meaning their lagged first differences.
+Identification is improved in the System GMM approach given in \citep{Blundell1998}
+by also including the first logged, not differenced, lag of the endogenous regressors
+which meets the usual instrument condiitons, as an instrument.
+It is this System GMM approach that I follow here,
+so I find the first logged, not differenced, lag of regressor in $x_{it}$
+and its corresponding set of first difference lagged instruments,
+which in practice just start from $\Delta x_{i,\tau-j}$ for any $j$
+if $x_{i,\tau}$ is a valid instrument.
+\par
+I commence finding these valid instruments by assuming the structural specification (\ref{eq:static-main-gva})
+exhibits no autocorrelation in its error term $\varepsilon_{i,t}$,
+though I now allow for moderate cross-sectional correlation across firms.
 \begin{align}
     \label{eq:dyn-no-ac}
-    \mathbb E[\epsilon_{i,t}\epsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
+    \\
+    \label{eq:dyn-contemperaneous-endogeneity}
+    \mathbb E[x_{i,t}\varepsilon_{i,t}] &\neq 0              ,\qquad \exists i
     \\
     \label{eq:dyn-xs-corr-errors}
-    \mathbb E[\epsilon_{i,t}\varepsilon_{j,t}] &\neq 0   ,\qquad \exists i,j
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &\neq 0   ,\qquad \exists i,j
+    \\
+    \label{eq:dyn-error-wn}
+    \mathbb E[\varepsilon_t]    =0,
+    \mathbb E[\varepsilon_t^2]  =\sigma_t^2,
+    \mathbb E[\varepsilon_t|\Omega_{t-1}] &=0                  ,\qquad \forall i
+    \qquad\text{(w.n.)}
+    \\ \notag
+    x_{i,t} &=
+    \begin{pmatrix}
+        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
+    \end{pmatrix}
+    \\ \notag
+    \Delta x_{i,t} &=
+    \begin{pmatrix}
+        \Delta k_{i,t} &   \Delta l_{i,t} &   \Delta \sum_{j\neq i} w_{ij,t}z_{j,t}
+    \end{pmatrix}
 \end{align}
 
-As usual, a panel setting requires a transformation to strip out firm fixed effects.
-I continue to use first differences of my log aggregates, however,
-even under the fairly strong assumption (\ref{eq:dyn-no-ac}),
-the first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
+Taking each regressor in turn, I relax the exogeneity assumption
+of the standard factors in the reduced-form equation, $\Delta k_{i,t}$ and $\Delta l_{i,t}$.
+I assume a new optimal firm decision on capital based on information,
+denoted by $\Omega_t$ which includes $\varepsilon_{i,t}$ for its respective $t$.
+This approach allows the discovery of valid instruments which are exogenous to $\varepsilon_{i,t}$
+and $\Delta\varepsilon_{i,t}$.
+I justify an exclusion restriction for $\Delta k_{i,t-j}\ \forall j>1$, as it is predetermined,
+and $\Delta l_{i,t-k}, k>2$, as it is flexible.
 
 \begin{align}
-    \Delta y_{i,t} &= \Delta \gamma_t
-                + \sum_{k=1}^p \phi_k \Delta y_{i,t-k}
-                + \theta_1 \Delta k_{i,t}
-                + \theta_2 \Delta l_{i,t}
-                + \sum_{k=1}^q \delta_q \sum_{j\neq i} \Delta(w_{i,j,t} z_{j,t})
-                + \Delta \varepsilon_{i,t}
+    \label{eq:dyn-k-pim}
+    K_{i,t} &= I_{i,t} + dK_{i,t-1}
+    \\
+    \label{eq:dyn-inv-information}
+    I_{i,t} &= \mathbb{E}[I_{i,t}^* \mid \Omega_{t-1}]
+    \\
+    \label{eq:dyn-l-information}
+    L_{i,t} &= \mathbb{E}[L_{i,t}^* \mid \Omega_t] 
     \\ \notag
+    \varepsilon_{i,t} &\in \Omega_t
+    \\ \notag
+    &\implies K_{i,t} \propto \epsilon_t, \epsilon_{t-1}
+    \\ \notag
+    &\implies L_{i,t} \propto \epsilon_{t}
+    \\ \notag
+    \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
+    \\ \notag
+    \Delta k_{i,t} &= k_{i,t} - k_{i,t-1}
+        \propto \varepsilon_{i,t}, \varepsilon_{i,t-1}, \varepsilon_{i,t-2}
+    \\ \notag
+    &\implies \mathbb E[\Delta k_{i,t}, \Delta \epsilon_t] \neq 0
+    \\
+    &\implies \mathbb E[\Delta k_{i,t-1}, \Delta \epsilon_t] = 0
+    \\ \notag
+    \Delta l_{i,t} &= l_{i,t} - l_{i,t-1}
+        \propto \varepsilon_{i,t}, \varepsilon_{i,t-1}
+    \\
+    &\implies \mathbb E[\Delta l_{i,t-2}, \Delta \epsilon_t] = 0
+\end{align}
+
+\subsection{Autoregressive specification}
+
+A dynamic specification grants the flexibility to add past realisations of variables
+to the decomposition of TFP, $z_{i,t}$. This increases the number of regressors in reduced form,
+improving the plausibility of its exogeneity with $\varepsilon_{i,t}$.
+
+\begin{align}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \phi_1 y_{i,t-1}
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
+\end{align}
+The above equation is in structural form in the 1-stage regression,
+but I can find an equivalent in the 2-stage regression with $z_{i,t}$ as the dependent variable.
+\begin{align}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \phi_1 y_{i,t-1}
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
+    \\
+            &= \alpha_i + \gamma_t + \beta_0
+                + \phi_1 \cdot (\beta_1 k_{i,t-1}, + \beta_2 l_{i,t-1} + z_{i,t-1})
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
+\end{align}
+For system GMM, I need to show that the reduced-form first difference regressors are exogenous.
+\begin{align}
+    \Delta y_{i,t} &= \Delta \gamma_t
+                + \beta_1 \Delta k_{i,t}
+                + \beta_2 \Delta l_{i,t}
+                + \sum_{k=1}^p \phi_k \Delta y_{i,t-k}
+                + \delta_0 \sum_{j\neq i} w_{ij,t} \Delta z_{j,t}
+                + \Delta \varepsilon_{i,t}
+    \\
+    \Delta z_{i,t} &= \Delta\gamma_t
+                + \phi_1 \cdot (\beta_1 \Delta k_{i,t-1}, + \beta_2 \Delta l_{i,t-1} + \Delta z_{i,t-1})
+                + \delta_0 \sum_{j\neq i} w_{ij}\Delta z_{j,t}
+                + \Delta \varepsilon_{i,t}
+\end{align}
+
+The first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
+\begin{align}
     \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
     \\ \notag
     \Delta y_{i,t-1} &= \qquad\dots\qquad + \Delta\varepsilon_{i,t-1}
@@ -102,32 +182,6 @@ the first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
     \Delta y_{i,t-2} &= \qquad\dots\qquad + \varepsilon_{i,t-2} - \varepsilon_{i,t-3}
     \\ \notag
     &\implies \mathbb E[ \Delta y_{i,t-1}\Delta\varepsilon_{i,t}] = 0
-\end{align}
-
-The treatment of the other standard factors, $\Delta k_{i,t}$ and $\Delta l_{i,t}$
-\begin{align}
-    \label{eq:dyn-k-pim}
-    K_{i,t}     &= \lambda I_{i,t} + (1-\lambda) I_{i,t-1} + dK_{i,t-1}
-    \\
-    \label{eq:dyn-inv-information}
-    I_{i,t}     &= \mathbb E[I_{i,t-1}^* \vert \Omega_{t}]
-    \\
-    \label{eq:dyn-l-information}
-    L_{i,t}     &= \mathbb E[L_{i,t}^* \vert \Omega_t] 
-    \\ \notag
-    \epsilon_t  &\in \Omega_t
-    \\ \notag
-    &\implies K_{i,t} \propto \epsilon_t, \epsilon_{t-1}
-    \\ \notag
-    &\implies L_{i,t} \propto \epsilon_t
-    \\ \notag
-    \Delta k_{i,t} &= k_{i,t} - k_{i,t-1}
-    \\ \notag
-    & \implies \mathbb E[\Delta k_{i,t}, \Delta \epsilon_t] \neq 0
-    \\ \notag
-    & \implies \mathbb E[\Delta k_{i,t-1}, \Delta \epsilon_t] \neq 0
-    \\ \notag
-    & \implies \mathbb E[\Delta k_{i,t-2}, \Delta \epsilon_t] = 0
 \end{align}
 
 This is confirmed by the Anderson-Rubin (AR(1)) test in my results,

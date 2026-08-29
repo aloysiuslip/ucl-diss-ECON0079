@@ -1,4 +1,4 @@
-\section{Static model}
+\section{Static models}
 I use a stylised 3-factor production model throughout this analysis.
 $Y$, $A$, $K$, and $L$ are each firm-year observation's structural GVA, TFP, labour, and capital as usual.
 I use lower-case variables to indicate logged terms in reduced form
@@ -8,7 +8,7 @@ Log TFP, denoted by $z_{i,t}$, is the reduced-form residual after controlling fo
 which are assumed to be exogenous and exhibit unit factor substituability in this static model.
 Under this specification, the residual is equivalent to the sum of a constant across all observations,
 firm and time fixed effects, and most crucially, the weighted sum of all peer log TFP $\sum_{j\neq i} w_{ij}z_{j,t}$,
-with a structural $\delta$ parameter to estimate.
+with a structural $\delta_0$ parameter to estimate.
 
 \begin{align}
     Y_{i,t} &= A_{i,t} \cdot
@@ -20,21 +20,21 @@ with a structural $\delta$ parameter to estimate.
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
-                + \delta \sum_{j\neq i} w_{ij}z_{j,t}
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \varepsilon_{i,t}
     \\
-    z_{i,t} &= y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} = \ln(A_{it}) 
+    z_{i,t} &= \ln(A_{it}) = y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} 
     \\
     \label{eq:static-main-reduced}
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
 \end{align}
 
-Theory suggests no restrictions on $\beta_1$, $\beta_2$, and $\delta$ collectively should be imposed,
-as $\delta$ is an externality. \todo{Lucas discusses this}
+Theory suggests no restrictions on $\beta_1$, $\beta_2$, and $\delta_0$ collectively should be imposed,
+as $\delta_0$ is an externality. \todo{Lucas discusses this}
 \par
 The reduced-form equation \ref{eq:static-main-gva} is linear in the weights $w_{ij}$
 applied to peer log TFP and its coefficient.
-This permits me to estimate structural $\delta$ through either
+This permits me to estimate $\delta_0$ through either
 the full GVA specification in one stage, using the log of \itx{gva1} as the dependent variable,
 or in two stages, calculating $z_{i,t}$ as the 2-factor residual
 and then regressing $z_{i,t}$ however desired in reduced form.
@@ -54,9 +54,11 @@ the derived aggregates from my data.
                 + \beta_2 l_{i,t}
                 + u_{i,t}
     \\ \notag
-    u_{i,t} &= \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    u_{i,t} &= \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
     \\
     z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
+    \\
+    \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
 \end{align}
 %
 I conduct the estimation using the log-transformed variables.
@@ -97,6 +99,7 @@ By extracting this regression residual, I have a TFP measure for all of my 1,081
 % ------
 
 \subsection{Static panel identification}
+\label{ss-static-identification}
 
 Models in this section are consistent only if
 the regressors are plausibly exogenous from $\varepsilon_{i,t}$.
@@ -106,17 +109,24 @@ I transform all variables to first differences.
 
 \begin{align}
     \notag
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
     \\
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \delta \sum_{j\neq i} w_{ij} \cdot
-                    (\alpha_i + \gamma_t + \beta_0 + \varepsilon_{j,t})
-                + \varepsilon_{i,t}
+    &= \alpha_i + \gamma_t + \beta_0
+            + \delta_0 \sum_{j\neq i} w_{ij} \cdot
+                (\alpha_j + \gamma_t + \beta_0 + \delta_0 \sum_{k\neq j} w_{jk}z_{k,t} + \varepsilon_{j,t})
+            + \varepsilon_{i,t}
     \\
     \Delta z_{i,t} &= \Delta\gamma_t
-                + \delta \sum_{j\neq i} w_{ij} \cdot
-                (\Delta\gamma_t + \Delta\varepsilon_{j,t})
+                + \delta_0 \sum_{j\neq i} w_{ij} \cdot
+                (\Delta\gamma_t + \delta_0 \sum_{k\neq j} w_{jk}\Delta z_{k,t} + \Delta\varepsilon_{j,t})
                 + \Delta\varepsilon_{i,t}
+    \\
+    &= \Delta \gamma_t\cdot (1+\delta_0 \sum_{j\neq i}w_{ij})
+                + \delta_0^2\sum_{j\neq i}\sum_{k\neq j} w_{ij} w_{jk} \Delta z_{k,t}
+                + \underbrace{
+                    \delta_0 \sum_{j\neq i} \Delta\epsilon_{j,t}
+                    + \Delta \epsilon_{i,t}
+                }_{\nu_{i,t}}
 \end{align}
 %
 For these models, I make the strong assumption of no structural, cross-sectional correlation
@@ -132,19 +142,31 @@ it must be attributable to the peer effect coefficient $\delta$.
 This is quite a strong assumption. It precludes any contemperaneous, correlated independent TFP shocks,
 which might occur on both the global and local level. \todo{...}
 
+\newpage
 \subsection{LMM grouped peers}
 \label{ss:model-lmm}
 
-\begin{align*}
-    \Delta z_{i,t} &= \Delta \gamma_t + \delta \sum_{j\neq i} w_{ij}\Delta z_{j,t} + \Delta \varepsilon_{i,t}
+\begin{align}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
     \\
-    \Delta \mathbf z_t &= \Delta \gamma_t \mathbf\iota
-                        + \delta  \mathbf W \Delta \mathbf z_t
-                        + \Delta \mathbf \varepsilon_t
+    \mathbf z_t &= \mathbf \alpha
+                + \gamma_t \mathbf\iota
+                + \beta_0 \mathbf\iota
+                + \delta_0 \mathbf W \mathbf z_t
+                + \mathbf \varepsilon_t
     \\
-    &= (\mathbb I -\delta \mathbf W)^{-1} 
-        (\Delta \gamma_t\mathbf\iota + \Delta\mathbf \varepsilon_t)
-\end{align*}
+    &= (\mathbb I - \delta_0 \mathbf W)^{-1}
+                \cdot (\mathbf \alpha
+                + \gamma_t \mathbf\iota
+                + \beta_0 \mathbf\iota
+                + \mathbf \varepsilon_t)
+    \\
+    &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k
+                \cdot (\mathbf \alpha
+                + \gamma_t \mathbf\iota
+                + \beta_0 \mathbf\iota
+                + \mathbf \varepsilon_t)
+\end{align}
 
 Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
 non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa} (largest).
@@ -203,9 +225,9 @@ then my regression would suffer the reflection  problem outlined in \citep{Mansk
 As I am estimating the expected value of $z_{it}$ and $z_{jt}$ from the same sample,
 they cannot be uniquely identified in reduced form.
 
-\noindent\textit{Reflection problem with a single regressor, $\mathbf\iota$ denotes a column vector of $1$s}
-\\
-\todo{review: maths is a bit tricky here}
+\noindent
+\textit{Reflection problem with a single regressor, $\mathbf\iota$ denotes a column vector of $1$s}
+
 \begin{align*}
     \mathbb E[z_{itg}|g] &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \mathbb{E}[z_{jtg}|g]
     \\
@@ -256,7 +278,7 @@ rather than the special-case group mean where every firm in an enclosed area,
 for example, the target's postcode, has an equal influence on the target's TFP.
 In addition, it allows for better identification following \cite{Bramoulle2009}.
 \todo{explain Bramoulle2009, patterns of }$\Omega_t$
-\par \noindent
+\\*
 In essence, the LMM specification only contains 3 non-overlapping groups
 from its location tags. The distance-decayed specification
 contains as many non-overlapping groups as firms.
