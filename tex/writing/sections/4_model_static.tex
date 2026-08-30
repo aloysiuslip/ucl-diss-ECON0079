@@ -1,20 +1,28 @@
 \section{Static models}
+
 I use a stylised 3-factor production model throughout this analysis.
 $Y$, $A$, $K$, and $L$ are each firm-year observation's structural GVA, TFP, labour, and capital as usual.
 I use lower-case variables to indicate logged terms in reduced form
 and bolded variables to indicate stacked vectors.
 \par
-Log TFP, denoted by $z_{i,t}$, is the reduced-form residual after controlling for the two classical inputs,
-which are assumed to be exogenous and exhibit unit factor substituability in this static model.
-Under this specification, the residual is equivalent to the sum of a constant across all observations,
-firm and time fixed effects, and most crucially, the weighted sum of all peer log TFP $\sum_{j\neq i} w_{ij}z_{j,t}$,
-with a structural $\delta_0$ parameter to estimate.
+Log TFP, denoted by $z_{i,t}$, is the residual after controlling for the two classical inputs,
+and is equal to the sum of a constant across all observations,
+firm and time fixed effects, and most crucially,
+the weighted sum of all peer log TFP values, $\sum_{j\neq i} w_{ij}z_{j,t}$.
+Different static weights, $w_{ij}$ are explored throughout this section.
+My objective is to estimate the structural parameter $\delta_0$.
 
 \begin{align}
+    \label{eq:static-production-3-factor}
     Y_{i,t} &= A_{i,t} \cdot
                 K_{i,t}^{\beta_1} \cdot
                 L_{i,t}^{\beta_2}
-                % \cdot \left[  \prod_{j\neq i}Z_{j,t}^{w_{ij}} \right]^\gamma
+    \\
+    \label{eq:static-tfp-identity}
+    z_{i,t} &= \ln(A_{it}) = y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} 
+    \\
+    \label{eq:static-main-reduced}
+            &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
     \\
     \label{eq:static-main-gva}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
@@ -22,123 +30,165 @@ with a structural $\delta_0$ parameter to estimate.
                 + \beta_2 l_{i,t}
                 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \varepsilon_{i,t}
-    \\ \notag
-    z_{i,t} &= \ln(A_{it}) = y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} 
     \\
-    \label{eq:static-main-reduced}
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    \label{eq:static-main-peer-effects}
+            &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t}
+        + \theta_0 \sum_{j\neq i} w_{i,j}y_{i,t} + \xi_0 \sum_{j\neq i} w_{ij}\cdot (\beta_1 k_{j,t} + \beta_2 l_{j,t})
+        + \epsilon_{i,t}
 \end{align}
 
-Theory suggests no restrictions on $\beta_1$, $\beta_2$, and $\delta_0$ collectively should be imposed,
-as $\delta_0$ is an externality. \todo{Lucas discusses this}
 \par
-The reduced-form equation \eqref{eq:static-main-gva} is linear in the weights $w_{ij}$
-applied to peer log TFP and its coefficient.
-This permits me to estimate $\delta_0$ through either
-the full GVA specification in one stage, using the log of \itx{gva1} as the dependent variable,
-or in two stages, calculating $z_{i,t}$ as the 2-factor residual
-and then regressing $z_{i,t}$ however desired in reduced form.
-This is convenient for a number of the static models below.
-
-\subsection{2-factor TFP estimation}
-
-For convenience, I initially conduct the 2-factor estimation
-deriviing the residual $z_{ijt}$ to decompose further in a second stage.
-This step is additionally helpful for validating the relationships about
-the derived aggregates from my data.
-
-\begin{align}
-    \label{eqn:tfp2factor}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + u_{i,t}
-    \\ \notag
-    u_{i,t} &= \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
-    \\
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
-    \\
-    \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
-\end{align}
-%
-I conduct the estimation using the log-transformed variables.
-I must include firm and time fixed effects and a constant
-if equation (\ref{eq:static-main-reduced}) is the true specification,
-otherwise the static panel OLS will inaccurately attribute firm and time variation
-to my classical factor inputs \todo{explain more clearly}.
-As outlined above, this analysis assumes factor input exogeneity.
-
-\wraptable
-    {Baseline TFP calculation from 2-factor production}
-    {../../model/output/results_0_tfp}
-    {
-        All parameters reported with standard errors underneath.
-        Significant estimates against an $H_0: \beta=0$ are indicated
-        with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
-    }
-
-The parameter coefficients give a labour income share exactly in line with ONS analysis of UK industry-level data
-over the same time period, particularly \itx{corporate gross labour share} which is constructed
-from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+Equation \eqref{eq:static-main-peer-effects} is a linear peer effects model as given by \citep{Manski1993}.
+It is helpful to think of
+$\begin{pmatrix}
+    k_{i,t} &   l_{i,t}
+\end{pmatrix}\in x_{i,t}$
+as \itx{exogenous} characteristics of firm ${i}$ causally affecting its outcome $y_{i,t}$.
+There is an \itx{endogenous} effect directly from peer outcomes $y_{j,t}$ with coefficient $\theta_0$.
+Peers also have an \itx{exogenous} characteristics $x_{i,t}$,
+which have a direct impact on on the target's productivity $x_{i,t}$ via $xi_0$.
+I use this peer effects terminology throughout this paper,
+noting to the reader the slight confusion this may cause with the more general but related concepts of endogeneity and exogeneity.
+The use of fixed effects has no effect on econometric interpretation of the peer effects model.
+In a more general peer effects model, peer characteristics could independently affect the outcome of interest.
+We could imagine this as the choice level of capital or labour input in a peer $j$
+influencing the effectiveness, perhaps through management quality or hiring practices, of firm $i$.
+However, in this model I have strictly assumed all peer spillovers to occur through the
+weighted sum of $z_{j,t}$ as given in \eqref{eq:static-main-reduced}, so my true single parameter of interest is $\delta_0$.
+This is an exact linear combination of $\theta_0$ and $\xi_0$ with no other confounding effects.
+\begin{equation}
+    \delta_0 = \theta_0 - \xi_0
+\end{equation}
 \par
-Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
-almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
-I leave it for future analysis why this dataset yields this phenomenon and
-for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
-\par
-As a demonstration, I include specifications which omit fixed effects.
-The capital share of income jumps on a specification with only time fixed effects,
-which is to be expected \todo{explain}.
-
-TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
-Equivalently, it is the sum of fixed effects in this specification with the error term,
-which means we should expect it to be exogenous to capital and labour inputs,
-but correlated to both firm effects and time trends.
-By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
+While the classical production function \eqref{eq:static-main-gva} is limited to constant returns to scale,
+$\beta_1 + \beta_2\leq 0$, a standard assumption across the growth and firm production literature,
+no such restrictions for the firm occur with the endogenous decomposition of TFP.
+A restriction on logged production \eqref{eq:static-main-gva} collectively on $\beta_1$, $\beta_2$, and $\delta_0$
+is difficult to justify. $w_{ij}z_{j,t}$ is an externality, so\dots \todo{Lucas critique}
 
 % ------
 
 \subsection{Static panel identification}
 \label{ss-static-identification}
 
-Models in this section are consistent only if
-the regressors are plausibly exogenous from $\varepsilon_{i,t}$.
-Capital and labour are assumed to be exogenous in this static model;
-we can broadly interpret this as inflexible factor input decisions.
+Consistency requires the plausible exogeneity of regressors
+used in structural equation \eqref{eq:static-main-peer-effects}
+from the error term $\varepsilon_{i,t}$.
+\par
+Capital and labour are assumed to be exogenous in this static model
+and exhibit unit factor substitutability.
+In this section, we can broadly interpret this as meaning
+factor input decisions are predetermined.
+
 \begin{align}
     \notag
     x_{i,t} &=
     \begin{pmatrix}
-        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
+        k_{i,t} &   l_{i,t}
     \end{pmatrix}
+    \\
+    \label{eq:static-k-pim}
+    K_{i,t} &= I_{i,t} + dK_{i,t-1}
+    \\
+    \label{eq:static-inv-information}
+    I_{i,t} &= \mathbb E[I_{i,t}^*|\Omega_{t-1}]
+    \\
+    \label{eq:static-l-information}
+    L_{i,t} &= \mathbb E[L_{i,t}^*|\Omega_{t-1}]
     \\ \notag
-    \mathbb E[\varepsilon_{i,t} \vert k_{i,t}] &= 0,\ 
-    \mathbb E[\varepsilon_{i,t} \vert l_{i,t}] = 0
+    \mathbb E[\epsilon_{i,t}|\Omega_{t-1}] &= 0 
+    \\
+    \implies 
+    \mathbb E[\varepsilon_{i,t} \vert x_{i,t}] &= 0
 \end{align}
 
-This leaves only the argument for the exogeneity of $\sum_{j\neq i} w_{ij,t}z_{j,t} \in x_{i,t}$,
-the peer effect regressor.
-Stacking $w_{ij}$ target-peer weights to an $n\times n$ matrix of firm-firm interactions $\textbf W$
-yields a spatial econometric reflection problem,
-comparable to the MA inversion procedure in autoregressive time series analysis.
-
+The peer effects regressors are endogenous, making valid estimation with the peer effects regressors is more complicated.
+To show this requires stacking $w_{ij}$ target-peer weights to an $n\times n$ interactions matrix, $\textbf W$.
+I invert the \itx{endogenous} component to give a $(\mathbb I-\delta_0\mathbf W)^{-1}$ coefficient on all variables.
+This is permissible because I can expect:
+\begin{equation}
+    \theta_0 < 1 \implies \vert \mathbb I-\theta_0 \mathbf W \vert \neq 0
+\end{equation}
+applying a restriction to rule out exponentially increasing shocks\footnote{
+    $\theta_0>1$ would imply an exogenous TFP shock to firm $k$ would
+    increase TFP in its peer firm $j$ more than 1x,
+    which would increase TFP in that firm's peer $i$ more than 1x,
+    and so on until the effect multiplies to infinity
+}
+. This is directly comparable to the lag polynomial and MA inversion procedure in autoregressive time series analysis.
 \begin{align}
-    \eqreref{eq:static-main-reduced}
-    z_{j,t} &= \alpha_j + \gamma_t + \beta_0 + \delta_0 \sum_{k\neq j} w_{jk}z_{k,t} + \varepsilon_{j,t}
+    \label{eq:static-vector-reduced}
+    \mathbf y_t &= \boldsymbol \alpha
+                    + \gamma_t \boldsymbol\iota
+                    + \beta_0  \boldsymbol \iota
+                    + \beta_1  \mathbf k_t + \beta_2 \mathbf l_t
+                    + \theta_0 \mathbf W \mathbf y_t
+                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \boldsymbol \varepsilon_t
     \\ \notag
-    \mathbf z_t &= \boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \delta_0 \mathbf W \mathbf z_t + \boldsymbol\varepsilon_t
+                &= (\mathbb I-\theta_0 \mathbf W)^{-1}(
+                    \boldsymbol \alpha
+                    + \gamma_t \boldsymbol\iota
+                    + \beta_0  \boldsymbol \iota
+                    + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
+                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \boldsymbol \varepsilon_t
+                )
     \\ \notag
-                &= (\mathbb I-\delta_0 \mathbf W)^{-1}(\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
+                &= \sum_{k=0}^\infty \theta_0^k \mathbf W^k \cdot(
+                    \boldsymbol \alpha
+                    + \gamma_t \boldsymbol\iota
+                    + \beta_0  \boldsymbol \iota
+                    + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
+                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \boldsymbol \varepsilon_t
+                )
     \\
-    \label{eq:static-z-ma-inft}
-                &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
-    \\ \notag
+    \label{eq:static-red-endogenous-effect}
+    y_{j,t}     &= \dots
+                    + \underbrace{
+                        \sum_{k=0}^\infty
+                        [\theta_0^k \mathbf W^k]_{(,j)} \cdot
+                        [\xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)]_{(j,)}
+                    }_{\text{exogenous}_j}
+                    + \underbrace{
+                        \sum_{k=0}^\infty
+                        [\theta_0^k \mathbf W^k]_{(,j)} \cdot
+                        [\boldsymbol \varepsilon_t]_{(j,)}
+                    }_{\text{error transformation}_j}
+\end{align}
+
+The reduced-form equation \eqref{eq:static-red-endogenous-effect} confirms that
+the peer GVA component of the \itx{endogenous} effect $\theta_0 \sum_{j\neq i} \mathbf W y_{j,t}$
+is indeed exogenous, containing a component that is a linear combination
+of all other firms' $\boldsymbol \varepsilon_{t}$, including $\varepsilon_{i,t}$.
+\par
+There are two solutions. I could either proceed with an extremely strong exogeneity assumption,
+$\mathbb E[\varepsilon_{i,t}\vert\boldsymbol W^k\boldsymbol \varepsilon_t] =0,\ \forall k$,
+which in itself implies the already-strong assumption
+of orthogonality between idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}.
+This rules out any structural, cross-sectional correlation between error terms:
+any productivity shock $\epsilon_{j,t}$ occurring in peer firm $j$,
+if it is correlated with a productivity shock $\epsilon_{i,t}$
+occurring in target firm $i$ contemperaneously must be attributable to the peer effect coefficient $\delta_0$.
+This precludes any contemperaneous, correlated independent TFP shocks,
+which might occur on both the global and local level.
+Even then, this is insufficient for $\mathbb E[\epsilon_{i,t}|z_{j,t}]=0$, regressor exogeneity.
+Nevertheless, I take this approach in Model (1) and list the results below.
+We assess these results with the heavy caveat that the exogeneity assumptions required are unlikely to be credible.
+\begin{align}
+    \notag
     \mathbb E[
         \varepsilon_i
         \vert
+        \theta_0^k
         \boldsymbol W^k
         \begin{pmatrix}
-            \boldsymbol\alpha   &   \gamma_t \boldsymbol\iota   &  \beta_0\boldsymbol\iota
+            \boldsymbol\alpha           &
+            \gamma_t \boldsymbol\iota   &
+            \beta_0\boldsymbol\iota     &
+            \boldsymbol k_t             &
+            \boldsymbol l_t             
         \end{pmatrix}
     ] &=0,\  \forall k
     \\
@@ -154,25 +204,18 @@ comparable to the MA inversion procedure in autoregressive time series analysis.
     \label{eq:static-ass-error-orthogonality}
     \implies \mathbb E[\epsilon_{i,t}\epsilon_{j,t}] &= 0,\ \forall k
 \end{align}
-%
-The reflection problem shows that nearly all components of peer effect regressor $\sum_{j\neq i}w_{ij}z_{j,t}$,
-namely the time-invariant weighting $w_{ij}$, fixed effects, and the constant are unconfounded.
-However, the weighted peer TFP term contains its own idiosyncratic error
-which is weighted by the sum of $\mathbf W$ to every power by the spatial autocorrelation inversion.
-A strong exogeneity assumption is required,
-$\mathbb E[\varepsilon_{i,t}\vert\boldsymbol W^k\boldsymbol \varepsilon_t] =0,\ \forall k]$,
-which in itself implies the already-strong assumption
-of orthogonality between idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}
-This rules out any structural, cross-sectional correlation between error terms:
-any productivity shock $\epsilon_{j,t}$ occurring in peer firm $j$,
-if it is correlated with a productivity shock $\epsilon_{i,t}$
-occurring in target firm $i$ contemperaneously must be attributable to the peer effect coefficient $\delta_0$.
-\par
-Assumption \eqref{eq:static-ass-error-orthogonality} is not sufficient for $\mathbb E[\epsilon_{i,t}|z_{j,t}]=0$,
-as I discuss in section \ref{ss:model-dd}.
-Even if were, it is quite a strong assumption. It precludes any contemperaneous, correlated independent TFP shocks,
-which might occur on both the global and local level. \todo{...}
 
+Instead, as recommended in \citep{Bramoulle2009},
+the best approach is to instrument the \itx{endogenous} variable, $y_{j,t}$
+through the \itx{exogenous} parameters.
+$\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots$ are given as valid instruments.
+This is evident through equation \eqref{eq:static-red-endogenous-effect} that as long as \dots
+$\mathbb E[y_{j,t}\cdot [\mathbf W^k \mathbf x_t]_{(,j)}]\neq 0,\ \forall k>2$.
+We can also note that $\mathbf W\mathbf x_t$ is also a valid instrument
+but unhelpful in this estimation as it is also a regressor as the direct \itx{exogenous} effect.
+\par
+I take this approach in Models (2, 3, 4). The instruments to employ are as follows:
+\todo{\dots}
 
 % --- %
 

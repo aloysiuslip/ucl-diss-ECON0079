@@ -1,0 +1,89 @@
+\subsection{2-factor TFP estimation}
+
+I also assume the orthogonality of capital and labour shocks
+on a cross-sectional basis.
+
+\begin{align}
+    \notag
+    x_{i,t} &=
+    \begin{pmatrix}
+        k_{i,t} &   l_{i,t}
+    \end{pmatrix}
+    \\
+    \label{eq:static-k-pim}
+    K_{i,t} &= I_{i,t} + dK_{i,t-1}
+    \\
+    \label{eq:static-inv-information}
+    I_{i,t} &= I_{i,t}^* + e^I_t
+    \\
+    \label{eq:static-l-information}
+    L_{i,t} &= L_{i,t}^* + e^L_t
+    \\
+    \mathbb E[\epsilon_{i,t}|\Omega_{t-1}] &= 0 
+    \\ \notag
+    \varepsilon_{i,t} &\in \Omega_t
+    \\ \notag
+    &\implies K_{i,t} \propto \epsilon_{t-1}
+    \\ \notag
+    &\implies L_{i,t} \propto \epsilon_{t}
+    \\
+    \mathbb E[\varepsilon_{i,t} \vert k_{i,t}] &= 0,\ 
+    \mathbb E[\varepsilon_{i,t} \vert l_{i,t}] = 0
+\end{align}
+\par
+This helpfully means $z_{i,t}$ can actually be calculated directly
+with no further econometric issues as the residual of the panel 
+
+For convenience, I initially conduct the 2-factor estimation
+deriving the residual $z_{i,t}$ to decompose further in a second stage.
+This step is additionally helpful for validating the relationships about
+the derived aggregates from my data.
+
+\begin{align}
+    \label{eqn:tfp2factor}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + u_{i,t}
+    \\ \notag
+    u_{i,t} &= \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    \\
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
+    \\
+    \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
+\end{align}
+%
+I conduct the estimation using the log-transformed variables.
+I must include firm and time fixed effects and a constant
+if equation (\ref{eq:static-main-reduced}) is the true specification,
+otherwise the static panel OLS will inaccurately attribute firm and time variation
+to my classical factor inputs \todo{explain more clearly}.
+As outlined above, this analysis assumes factor input exogeneity.
+
+\wraptable
+    {Baseline TFP calculation from 2-factor production}
+    {../../model/output/results_0_tfp}
+    {
+        All parameters reported with standard errors underneath.
+        Significant estimates against an $H_0: \beta=0$ are indicated
+        with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+    }
+
+The parameter coefficients give a labour income share exactly in line with ONS analysis of UK industry-level data
+over the same time period, particularly \itx{corporate gross labour share} which is constructed
+from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+\par
+Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
+almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
+I leave it for future analysis why this dataset yields this phenomenon and
+for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
+\par
+As a demonstration, I include specifications which omit fixed effects.
+The capital share of income jumps on a specification with only time fixed effects,
+which is to be expected \todo{explain}.
+
+TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
+Equivalently, it is the sum of fixed effects in this specification with the error term,
+which means we should expect it to be exogenous to capital and labour inputs,
+but correlated to both firm effects and time trends.
+By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
