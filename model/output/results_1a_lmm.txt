@@ -1,139 +1,137 @@
-Model 'lmm': Base: 3 donut peer TFP effects, firm time fixed effects, no controls
+Model 'lmm_1': Base: 1 group
 Model Parameters:
-Y: tfp
-X: ['peer_tfp_ttwa_donut', 'peer_tfp_pc4_donut', 'peer_tfp_pc8']
+Y: z_{i,t}
+X: ['pc8.z_{j,t}']
 fe: ['i', 't']
-description: Base: 3 donut peer TFP effects, firm time fixed effects, no controls
+description: Base: 1 group
 include: True
 
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                    tfp   R-squared:                        0.0388
-Estimator:                   PanelOLS   R-squared (Between):              0.1089
-No. Observations:              764537   R-squared (Within):               0.0396
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1285
-Time:                        13:34:36   Log-likelihood                -3.354e+05
+Dep. Variable:                z_{i,t}   R-squared:                        0.0418
+Estimator:                   PanelOLS   R-squared (Between):              0.1091
+No. Observations:              788020   R-squared (Within):               0.0425
+Date:                Sun, Aug 30 2026   R-squared (Overall):              0.1312
+Time:                        04:12:34   Log-likelihood                -3.441e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                      8843.1
-Entities:                      107143   P-value                           0.0000
-Avg Obs:                       7.1357   Distribution:                F(3,657373)
+                                        F-statistic:                   2.966e+04
+Entities:                      107942   P-value                           0.0000
+Avg Obs:                       7.3004   Distribution:                F(1,680059)
 Min Obs:                       1.0000                                           
-Max Obs:                       76.000   F-statistic (robust):             1107.1
+Max Obs:                       152.00   F-statistic (robust):             3172.3
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(3,657373)
-Avg Obs:                    4.024e+04                                           
-Min Obs:                    1.433e+04                                           
-Max Obs:                    4.769e+04                                           
+Time periods:                      19   Distribution:                F(1,680059)
+Avg Obs:                    4.147e+04                                           
+Min Obs:                     1.51e+04                                           
+Max Obs:                     4.89e+04                                           
                                                                                 
-                                  Parameter Estimates                                  
-=======================================================================================
-                     Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
----------------------------------------------------------------------------------------
-const                   2.0747     0.0436     47.539     0.0000      1.9891      2.1602
-peer_tfp_ttwa_donut     0.0332     0.0127     2.6258     0.0086      0.0084      0.0581
-peer_tfp_pc4_donut      0.0148     0.0055     2.7100     0.0067      0.0041      0.0255
-peer_tfp_pc8            0.2799     0.0049     57.220     0.0000      0.2704      0.2895
-=======================================================================================
+                              Parameter Estimates                              
+===============================================================================
+             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-------------------------------------------------------------------------------
+const           2.1870     0.0160     137.09     0.0000      2.1557      2.2183
+pc8.z_{j,t}     0.2913     0.0052     56.324     0.0000      0.2811      0.3014
+===============================================================================
 
-F-test for Poolability: 10.411
+F-test for Poolability: 10.742
 P-value: 0.0000
-Distribution: F(107160,657373)
+Distribution: F(107959,680059)
 
 Included effects: Entity, Time
 
 =======================================================================================
 
 
-Model 'lmm_no_firm_fe': Base - firm FE
+Model 'lmm_3': 3 groups
 Model Parameters:
-Y: tfp
-X: ['peer_tfp_ttwa_donut', 'peer_tfp_pc4_donut', 'peer_tfp_pc8']
-fe: ['t']
-description: Base - firm FE
+Y: z_{i,t}
+X: ['pc8.z_{j,t}', 'pc4_d.z_{j,t}', 'ttwa_d.z_{j,t}']
+fe: ['i', 't']
+description: 3 groups
 include: True
 
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                    tfp   R-squared:                        0.1792
-Estimator:                   PanelOLS   R-squared (Between):              0.1570
-No. Observations:              764537   R-squared (Within):              -0.0001
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1798
-Time:                        13:34:40   Log-likelihood                -7.146e+05
+Dep. Variable:                z_{i,t}   R-squared:                        0.0419
+Estimator:                   PanelOLS   R-squared (Between):              0.1114
+No. Observations:              779651   R-squared (Within):               0.0427
+Date:                Sun, Aug 30 2026   R-squared (Overall):              0.1338
+Time:                        04:12:40   Log-likelihood                -3.398e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   5.562e+04
+                                        F-statistic:                      9814.9
 Entities:                      107143   P-value                           0.0000
-Avg Obs:                       7.1357   Distribution:                F(3,764515)
+Avg Obs:                       7.2767   Distribution:                F(3,672487)
 Min Obs:                       1.0000                                           
-Max Obs:                       76.000   F-statistic (robust):             6300.4
+Max Obs:                       152.00   F-statistic (robust):             1061.7
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(3,764515)
-Avg Obs:                    4.024e+04                                           
-Min Obs:                    1.433e+04                                           
-Max Obs:                    4.769e+04                                           
+Time periods:                      19   Distribution:                F(3,672487)
+Avg Obs:                    4.103e+04                                           
+Min Obs:                    1.481e+04                                           
+Max Obs:                    4.851e+04                                           
                                                                                 
-                                  Parameter Estimates                                  
-=======================================================================================
-                     Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
----------------------------------------------------------------------------------------
-const                   0.3097     0.0377     8.2145     0.0000      0.2358      0.3835
-peer_tfp_ttwa_donut     0.2040     0.0128     15.993     0.0000      0.1790      0.2290
-peer_tfp_pc4_donut      0.1423     0.0077     18.370     0.0000      0.1272      0.1575
-peer_tfp_pc8            0.5589     0.0044     126.40     0.0000      0.5502      0.5675
-=======================================================================================
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+const              2.0543     0.0446     46.028     0.0000      1.9668      2.1418
+pc8.z_{j,t}        0.2908     0.0052     55.985     0.0000      0.2806      0.3010
+pc4_d.z_{j,t}      0.0121     0.0057     2.1330     0.0329      0.0010      0.0232
+ttwa_d.z_{j,t}     0.0321     0.0130     2.4602     0.0139      0.0065      0.0576
+==================================================================================
 
-F-test for Poolability: 7.8972
+F-test for Poolability: 10.575
 P-value: 0.0000
-Distribution: F(18,764515)
+Distribution: F(107160,672487)
 
-Included effects: Time
+Included effects: Entity, Time
 
 =======================================================================================
 
 
-Model 'lmm_employees': Base + employees interaction
+Model 'lmm_employees': 3 groups + employees control + employees interaction
 Model Parameters:
-Y: tfp
-X: ['peer_tfp_ttwa_donut', 'peer_tfp_pc4_donut', 'peer_tfp_pc8']
-W: ['employees', 'peer_tfp_pc8_x_employees']
+Y: z_{i,t}
+X: ['pc8.z_{j,t}', 'pc4_d.z_{j,t}', 'ttwa_d.z_{j,t}']
+W: ['employees', 'pc8.z_{j,t}_x_ln(employees)']
 to_log: ['employees']
 fe: ['i', 't']
-description: Base + employees interaction
+description: 3 groups + employees control + employees interaction
 include: True
 
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                    tfp   R-squared:                        0.0390
-Estimator:                   PanelOLS   R-squared (Between):              0.1134
-No. Observations:              764537   R-squared (Within):               0.0397
-Date:                Tue, Aug 25 2026   R-squared (Overall):              0.1320
-Time:                        13:34:48   Log-likelihood                -3.353e+05
+Dep. Variable:                z_{i,t}   R-squared:                        0.0420
+Estimator:                   PanelOLS   R-squared (Between):              0.1142
+No. Observations:              779651   R-squared (Within):               0.0428
+Date:                Sun, Aug 30 2026   R-squared (Overall):              0.1365
+Time:                        04:12:49   Log-likelihood                -3.398e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                      5332.6
+                                        F-statistic:                      5900.6
 Entities:                      107143   P-value                           0.0000
-Avg Obs:                       7.1357   Distribution:                F(5,657371)
+Avg Obs:                       7.2767   Distribution:                F(5,672485)
 Min Obs:                       1.0000                                           
-Max Obs:                       76.000   F-statistic (robust):             687.06
+Max Obs:                       152.00   F-statistic (robust):             644.76
                                         P-value                           0.0000
-Time periods:                      19   Distribution:                F(5,657371)
-Avg Obs:                    4.024e+04                                           
-Min Obs:                    1.433e+04                                           
-Max Obs:                    4.769e+04                                           
+Time periods:                      19   Distribution:                F(5,672485)
+Avg Obs:                    4.103e+04                                           
+Min Obs:                    1.481e+04                                           
+Max Obs:                    4.851e+04                                           
                                                                                 
-                                    Parameter Estimates                                     
-============================================================================================
-                          Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
---------------------------------------------------------------------------------------------
-const                        1.2019     0.2152     5.5859     0.0000      0.7802      1.6236
-peer_tfp_ttwa_donut          0.3062     0.0712     4.3006     0.0000      0.1667      0.4458
-peer_tfp_pc4_donut           0.0151     0.0055     2.7677     0.0056      0.0044      0.0258
-peer_tfp_pc8                 0.2798     0.0049     57.005     0.0000      0.2702      0.2894
-ln_employees                 0.1845     0.0440     4.1910     0.0000      0.0982      0.2707
-peer_tfp_pc8_x_employees    -0.0577     0.0145    -3.9651     0.0001     -0.0862     -0.0292
-============================================================================================
+                                      Parameter Estimates                                      
+===============================================================================================
+                             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------------------
+const                           1.9868     0.0683     29.097     0.0000      1.8530      2.1206
+pc8.z_{j,t}                     0.2986     0.0173     17.277     0.0000      0.2647      0.3325
+pc4_d.z_{j,t}                   0.0121     0.0057     2.1403     0.0323      0.0010      0.0232
+ttwa_d.z_{j,t}                  0.0320     0.0130     2.4644     0.0137      0.0066      0.0575
+ln_employees                    0.0146     0.0112     1.3024     0.1928     -0.0074      0.0365
+pc8.z_{j,t}_x_ln(employees)    -0.0017     0.0035    -0.4924     0.6224     -0.0085      0.0051
+===============================================================================================
 
-F-test for Poolability: 10.314
+F-test for Poolability: 10.486
 P-value: 0.0000
-Distribution: F(107160,657371)
+Distribution: F(107160,672485)
 
 Included effects: Entity, Time
 

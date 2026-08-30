@@ -3,7 +3,6 @@
 \usepackage{microtype}
 \usepackage{amssymb}
 \usepackage{enumitem}
-\usepackage{amsmath}
 
 \setlength{\marginparwidth}{2cm}
 
@@ -75,6 +74,8 @@
 \NewTableCommand{\tinytableDefineColor}[3]{\definecolor{#1}{#2}{#3}}
 
 % Equations
+\usepackage{amsmath}
+\usepackage{bm}
 \usepackage{calc}
 \usepackage{xparse}
 \newlength\mytemplena
@@ -85,6 +86,10 @@
   \hskip-\mytemplena%
   \hskip\IfBooleanTF#1{-\mytemplenb}{+\mytemplenb}%
 }
+\newcommand{\eqreref}[1]{\tag{from \ref{#1}}}
+\newenvironment{psmallmatrix}
+  {\left(\begin{smallmatrix}\vphantom{\frac{1}{1}}}
+  {\end{smallmatrix}\right)}
 
 % Bibliography, reference
 \usepackage[round,authoryear]{natbib}

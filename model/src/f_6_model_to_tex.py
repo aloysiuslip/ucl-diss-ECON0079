@@ -99,7 +99,7 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
             current_model = model_match.group(1)
             models[current_model] = {'Y': '', 'params': {}, 'obs': '',
                                      'time_nb': '', 'entities_nb': '',
-                                     'time_fe': False, 'entities_fe': False, 'r2': ''}
+                                     'time_fe': False, 'entities_fe': False, 'r2-within': '', 'r2': ''}
             in_params = False
             continue
             
@@ -117,7 +117,10 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
             models[current_model]['entities_nb'] = f"{int(line.split()[1]):,}"
         elif 'Time periods:' in line:
             models[current_model]['time_nb'] = f"{int(line.split()[2]):,}"
-        elif 'R-squared (Within):' in line or 'R-squared:' in line:
+        elif 'R-squared (Within):' in line:
+            parts = line.split()
+            models[current_model]['r2-within'] = parts[-1]
+        elif 'R-squared:' in line:
             parts = line.split()
             models[current_model]['r2'] = parts[-1]
 
@@ -268,7 +271,7 @@ def build_test_cblock(reject: bool | None, p_val: str) -> str:
     return form_block((symbol, f"({p_val}){star_str}"), block_type='c', size=(None, 'footnotesize'))
 
 # Combines models into a final .tex table.
-def generate_latex_table(models: dict, output_filepath: str | Path, show: list[int] | None = None) -> None:
+def generate_latex_table(models: dict, output_filepath: str | Path, show: list[int] | None = None, var_renamer: dict[str, str] | None = None) -> None:
 
     # If the show parameter is provided, filter the models to only include those indices
     if show is not None:
@@ -283,6 +286,9 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
         unique_params.update(mod['params'].keys())
         
     sorted_params = sorted(list(unique_params), key=lambda x: (x != 'const', x))
+    if var_renamer:
+        renamed_params = list(var_renamer.keys())
+        sorted_params = renamed_params + [p for p in sorted_params if p not in renamed_params]
 
     latex_lines = [f"\t\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
     
@@ -295,7 +301,10 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
 
     # Coefficients
     for param in sorted_params:
-        row_lines = [form_block((format_param(param), '~'))]
+        param_display = format_param(param)
+        if var_renamer and param in var_renamer:
+            param_display = var_renamer[param]
+        row_lines = [form_block((param_display, '~'))]
         for mod in model_names:
             mod_data = models[mod]['params'].get(param)
             if mod_data:
@@ -333,6 +342,12 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
         latex_lines.append(obs_row)
     
     # Handle R-squared if it exists (for standard OLS models)
+    has_r2_within = any('r2-within' in m and m['r2-within'] for m in models.values())
+    if has_r2_within:
+        r2_row = "\t\tR$^2$ (Within) & " + " & ".join([models[m].get('r2-within', '') for m in model_names]) + "\n\t\t\\\\"
+        latex_lines.append(r2_row)
+
+    # Handle R-squared if it exists (for standard OLS models)
     has_r2 = any('r2' in m and m['r2'] for m in models.values())
     if has_r2:
         r2_row = "\t\tR$^2$ & " + " & ".join([models[m].get('r2', '') for m in model_names]) + "\n\t\t\\\\"
@@ -355,7 +370,7 @@ def format_number(val: float, format_float: str = ",0.3f") -> str:
     except ValueError:
         return str(val).replace('_', '\\_')
     
-def generate_latex_from_generic(df: pd.DataFrame, filepath: str, format_float: str = ",0.3f") -> None:
+def generate_latex_from_generic(df: pd.DataFrame, filepath: str, format_float: str = ",0.3f", var_renamer: dict[str, str] | None = None) -> None:
     columns = list(df.columns)
     col_align = "l" + "c" * (len(columns) - 1)
     
@@ -374,7 +389,11 @@ def generate_latex_from_generic(df: pd.DataFrame, filepath: str, format_float: s
         for i, col in enumerate(columns):
             val = row[col]
             if i == 0:
-                row_vals.append(format_param(str(val)))
+                if var_renamer and col in var_renamer:
+                    val = var_renamer[col]
+                else:
+                    val = format_param(str(val))
+                row_vals.append(val)
             else:
                 row_vals.append(format_number(val, format_float))
         

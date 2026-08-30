@@ -7,117 +7,109 @@
 		} & 		\cblock{
 			\footnotesize{(1)}
 			\\
-			\small{\itx{tfp}}
+			\small{\itx{z\_{i,t}}}
 		} & 		\cblock{
 			\footnotesize{(2)}
 			\\
-			\small{\itx{tfp}}
+			\small{\itx{z\_{i,t}}}
 		} & 		\cblock{
 			\footnotesize{(3)}
 			\\
-			\small{\itx{tfp}}
+			\small{\itx{z\_{i,t}}}
 		} \\[0.8em]
 		\toprule
 		\lblock{
-			constant
+			const
 			\\
 			~
 		} & 		\cblock{
-			$2.075$
+			$2.187$
 			\\
-			\footnotesize{(0.044)***}
+			\footnotesize{(0.016)***}
 		} & 		\cblock{
-			$0.310$
+			$2.054$
 			\\
-			\footnotesize{(0.038)***}
+			\footnotesize{(0.045)***}
 		} & 		\cblock{
-			$1.202$
+			$1.987$
 			\\
-			\footnotesize{(0.215)***}
+			\footnotesize{(0.068)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			ln(\itx{\itx{employees}})
+			$w_{j,t}^{pc8}z_{j,t}$
+			\\
+			~
+		} & 		\cblock{
+			$0.291$
+			\\
+			\footnotesize{(0.005)***}
+		} & 		\cblock{
+			$0.291$
+			\\
+			\footnotesize{(0.005)***}
+		} & 		\cblock{
+			$0.299$
+			\\
+			\footnotesize{(0.017)***}
+		}
+		\\ [0.9em]
+		\lblock{
+			$w_{j,t}^{pc4}z_{j,t}$
+			\\
+			~
+		} &   & 		\cblock{
+			$0.012$
+			\\
+			\footnotesize{(0.006)**}
+		} & 		\cblock{
+			$0.012$
+			\\
+			\footnotesize{(0.006)**}
+		}
+		\\ [0.9em]
+		\lblock{
+			$w_{j,t}^{ttwa}z_{j,t}$
+			\\
+			~
+		} &   & 		\cblock{
+			$0.032$
+			\\
+			\footnotesize{(0.013)**}
+		} & 		\cblock{
+			$0.032$
+			\\
+			\footnotesize{(0.013)**}
+		}
+		\\ [0.9em]
+		\lblock{
+			$\ln(\itx{employees})$
 			\\
 			~
 		} &   &   & 		\cblock{
-			$0.184$
-			\\
-			\footnotesize{(0.044)***}
-		}
-		\\ [0.9em]
-		\lblock{
-			\itx{peer\_tfp\_pc8}
-			\\
-			~
-		} & 		\cblock{
-			\commentln{$0.280$}
-			\\
-			\footnotesize{(0.005)***}
-		} & 		\cblock{
-			$0.559$
-			\\
-			\footnotesize{(0.004)***}
-		} & 		\cblock{
-			$0.280$
-			\\
-			\footnotesize{(0.005)***}
-		}
-		\\ [0.9em]
-		\lblock{
-			\itx{peer\_tfp\_pc4\_donut}
-			\\
-			~
-		} & 		\cblock{
 			$0.015$
 			\\
-			\footnotesize{(0.005)***}
-		} & 		\cblock{
-			$0.142$
-			\\
-			\footnotesize{(0.008)***}
-		} & 		\cblock{
-			$0.015$
-			\\
-			\footnotesize{(0.005)***}
+			\footnotesize{(0.011)}
 		}
 		\\ [0.9em]
 		\lblock{
-			\itx{peer\_tfp\_ttwa\_donut}
-			\\
-			~
-		} & 		\cblock{
-			$0.033$
-			\\
-			\footnotesize{(0.013)***}
-		} & 		\cblock{
-			$0.204$
-			\\
-			\footnotesize{(0.013)***}
-		} & 		\cblock{
-			$0.306$
-			\\
-			\footnotesize{(0.071)***}
-		}
-		\\ [0.9em]
-		\lblock{
-			\itx{peer\_tfp\_pc8\_x\_employees}
+			$w_{j,t}^{pc8}z_{j,t} \times$ln(\itx{employees})
 			\\
 			~
 		} &   &   & 		\cblock{
-			$-0.058$
+			$-0.002$
 			\\
-			\footnotesize{(0.015)***}
+			\footnotesize{(0.004)}
 		}
 		\\ [0.9em]
 		\hline
-		\textit{i} fixed effects & \checkmark & ~ & \checkmark
+		\textit{i} fixed effects & \checkmark & \checkmark & \checkmark
 		\\
 		\textit{t} fixed effects & \checkmark & \checkmark & \checkmark
 		\\
-		Observations & 764,537 & 764,537 & 764,537
+		Observations & 788,020 & 779,651 & 779,651
 		\\
-		R$^2$ & 0.0388 & 0.1792 & 0.0390
+		R$^2$ & 0.0418 & 0.0419 & 0.0420
 		\\
 		\bottomrule
 	\end{tabular}

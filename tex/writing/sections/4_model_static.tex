@@ -22,7 +22,7 @@ with a structural $\delta_0$ parameter to estimate.
                 + \beta_2 l_{i,t}
                 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \varepsilon_{i,t}
-    \\
+    \\ \notag
     z_{i,t} &= \ln(A_{it}) = y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} 
     \\
     \label{eq:static-main-reduced}
@@ -32,7 +32,7 @@ with a structural $\delta_0$ parameter to estimate.
 Theory suggests no restrictions on $\beta_1$, $\beta_2$, and $\delta_0$ collectively should be imposed,
 as $\delta_0$ is an externality. \todo{Lucas discusses this}
 \par
-The reduced-form equation \ref{eq:static-main-gva} is linear in the weights $w_{ij}$
+The reduced-form equation \eqref{eq:static-main-gva} is linear in the weights $w_{ij}$
 applied to peer log TFP and its coefficient.
 This permits me to estimate $\delta_0$ through either
 the full GVA specification in one stage, using the log of \itx{gva1} as the dependent variable,
@@ -103,148 +103,225 @@ By extracting this regression residual, I have a TFP measure for all of my 1,081
 
 Models in this section are consistent only if
 the regressors are plausibly exogenous from $\varepsilon_{i,t}$.
-Following standard procedure for a wide panel regression,
-meaning many firm observations and far fewer time periods,
-I transform all variables to first differences.
-
+Capital and labour are assumed to be exogenous in this static model;
+we can broadly interpret this as inflexible factor input decisions.
 \begin{align}
     \notag
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    x_{i,t} &=
+    \begin{pmatrix}
+        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
+    \end{pmatrix}
+    \\ \notag
+    \mathbb E[\varepsilon_{i,t} \vert k_{i,t}] &= 0,\ 
+    \mathbb E[\varepsilon_{i,t} \vert l_{i,t}] = 0
+\end{align}
+
+This leaves only the argument for the exogeneity of $\sum_{j\neq i} w_{ij,t}z_{j,t} \in x_{i,t}$,
+the peer effect regressor.
+Stacking $w_{ij}$ target-peer weights to an $n\times n$ matrix of firm-firm interactions $\textbf W$
+yields a spatial econometric reflection problem,
+comparable to the MA inversion procedure in autoregressive time series analysis.
+
+\begin{align}
+    \eqreref{eq:static-main-reduced}
+    z_{j,t} &= \alpha_j + \gamma_t + \beta_0 + \delta_0 \sum_{k\neq j} w_{jk}z_{k,t} + \varepsilon_{j,t}
+    \\ \notag
+    \mathbf z_t &= \boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \delta_0 \mathbf W \mathbf z_t + \boldsymbol\varepsilon_t
+    \\ \notag
+                &= (\mathbb I-\delta_0 \mathbf W)^{-1}(\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
     \\
-    &= \alpha_i + \gamma_t + \beta_0
-            + \delta_0 \sum_{j\neq i} w_{ij} \cdot
-                (\alpha_j + \gamma_t + \beta_0 + \delta_0 \sum_{k\neq j} w_{jk}z_{k,t} + \varepsilon_{j,t})
-            + \varepsilon_{i,t}
+    \label{eq:static-z-ma-inft}
+                &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
+    \\ \notag
+    \mathbb E[
+        \varepsilon_i
+        \vert
+        \boldsymbol W^k
+        \begin{pmatrix}
+            \boldsymbol\alpha   &   \gamma_t \boldsymbol\iota   &  \beta_0\boldsymbol\iota
+        \end{pmatrix}
+    ] &=0,\  \forall k
     \\
-    \Delta z_{i,t} &= \Delta\gamma_t
-                + \delta_0 \sum_{j\neq i} w_{ij} \cdot
-                (\Delta\gamma_t + \delta_0 \sum_{k\neq j} w_{jk}\Delta z_{k,t} + \Delta\varepsilon_{j,t})
-                + \Delta\varepsilon_{i,t}
+    \label{eq:static-ass-ma-exogeneity}
+    \mathbb E[
+        \varepsilon_{i,t}
+        \vert
+        \boldsymbol W^k
+        \boldsymbol \varepsilon_t
+    ] &=0,\  
+    \forall k
     \\
-    &= \Delta \gamma_t\cdot (1+\delta_0 \sum_{j\neq i}w_{ij})
-                + \delta_0^2\sum_{j\neq i}\sum_{k\neq j} w_{ij} w_{jk} \Delta z_{k,t}
-                + \underbrace{
-                    \delta_0 \sum_{j\neq i} \Delta\epsilon_{j,t}
-                    + \Delta \epsilon_{i,t}
-                }_{\nu_{i,t}}
+    \label{eq:static-ass-error-orthogonality}
+    \implies \mathbb E[\epsilon_{i,t}\epsilon_{j,t}] &= 0,\ \forall k
 \end{align}
 %
-For these models, I make the strong assumption of no structural, cross-sectional correlation
-between error terms. This means that for any productivity shock $\epsilon_{j,t}$
-that hits a peer firm $j$, if it is correlated with a productivity shock $\epsilon_{i,t}$
-occurring in the target firm $i$ within the same period $t$,
-it must be attributable to the peer effect coefficient $\delta$.
-
-\begin{align}
-    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] = 0
-\end{align}
-
-This is quite a strong assumption. It precludes any contemperaneous, correlated independent TFP shocks,
+The reflection problem shows that nearly all components of peer effect regressor $\sum_{j\neq i}w_{ij}z_{j,t}$,
+namely the time-invariant weighting $w_{ij}$, fixed effects, and the constant are unconfounded.
+However, the weighted peer TFP term contains its own idiosyncratic error
+which is weighted by the sum of $\mathbf W$ to every power by the spatial autocorrelation inversion.
+A strong exogeneity assumption is required,
+$\mathbb E[\varepsilon_{i,t}\vert\boldsymbol W^k\boldsymbol \varepsilon_t] =0,\ \forall k]$,
+which in itself implies the already-strong assumption
+of orthogonality between idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}
+This rules out any structural, cross-sectional correlation between error terms:
+any productivity shock $\epsilon_{j,t}$ occurring in peer firm $j$,
+if it is correlated with a productivity shock $\epsilon_{i,t}$
+occurring in target firm $i$ contemperaneously must be attributable to the peer effect coefficient $\delta_0$.
+\par
+Assumption \eqref{eq:static-ass-error-orthogonality} is not sufficient for $\mathbb E[\epsilon_{i,t}|z_{j,t}]=0$,
+as I discuss in section \ref{ss:model-dd}.
+Even if were, it is quite a strong assumption. It precludes any contemperaneous, correlated independent TFP shocks,
 which might occur on both the global and local level. \todo{...}
 
-\newpage
-\subsection{LMM grouped peers}
+
+% --- %
+
+\subsection{Linear-in-means grouped peers}
 \label{ss:model-lmm}
 
-\begin{align}
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
-    \\
-    \mathbf z_t &= \mathbf \alpha
-                + \gamma_t \mathbf\iota
-                + \beta_0 \mathbf\iota
-                + \delta_0 \mathbf W \mathbf z_t
-                + \mathbf \varepsilon_t
-    \\
-    &= (\mathbb I - \delta_0 \mathbf W)^{-1}
-                \cdot (\mathbf \alpha
-                + \gamma_t \mathbf\iota
-                + \beta_0 \mathbf\iota
-                + \mathbf \varepsilon_t)
-    \\
-    &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k
-                \cdot (\mathbf \alpha
-                + \gamma_t \mathbf\iota
-                + \beta_0 \mathbf\iota
-                + \mathbf \varepsilon_t)
-\end{align}
-
-Section \ref{ss:data-distance} discusses how firms have been labelled to symmetric, transitive,
-non-overlapping groups by \itx{pc8} (smallest), \itx{pc4}, and \itx{ttwa} (largest).
-I conduct a linear regression using the averages of peers belonging to these groups,
-leaving out the target firm. This is known as the 'Linear-in-Means (LMM)' Model
-and is common to the peer effects literature.
+Assuming exogeneity assumptions \eqref{eq:static-ass-ma-exogeneity} and \eqref{eq:static-ass-error-orthogonality} hold,
+the following reduced-form equation can be estimated with a simple panel OLS.
 
 \begin{align}
-    \label{eq:lmm-structural1}
-    z_{it} &= \alpha_i + \gamma_t + \beta_0
-                + \sum_{g=1}^3 \beta_g \mathbb E[z_{jtg}\vert{}g]
-                + \varepsilon_{it}
-    \\
-    \notag
-    \mathbf z_t &= \delta \mathbf W \mathbf z_t
+    \eqreref{eq:static-main-reduced}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j} w_{ij}z_{j,t} + \varepsilon_{i,t}
     \\
     w_{ij}\in \mathbf W &=
         \begin{cases}
-            1, & \text{if} \ (i,j)\in g   \\
-            0, & \text{if} \ i=j         \\
-            0, & \text{otherwise}
+            0,              & \text{if}         \ i=j           \\
+            \frac1{n_g-1},  & \text{else if}    \ (i,j)\in g    \\
+            0,              & \text{otherwise}
         \end{cases}
+    \\ \notag
+    &\sim
+    \begin{pmatrix}
+        0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
+        0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+        0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
+        0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
+    \end{pmatrix}
 \end{align}
-
-It is crucial that I have multiple, non-overlapping groups in a single model,
-where my target firm $z_{it}$ is a member of all groups simultaneously,
-but peers in one group are excluded from all others.
-\par
-The non-overlapping property prevents multicollinearity.
-If I were to use nested, overlapping geographies,
-namely keeping all firms within the \itx{ttwa} area in that group average,
-including the ones I have just counted in the \itx{pc4} and itx{pc8} groups,
-then my group averages mechanically align:
-$z_{jt,pc8}$ is embedded within $z_{jt,pc4}$, and both are within $z_{jt,ttwa}$,
-making $\beta_g$ parameter estimates unstable.
-\par
-The single model approach prevents omitted variable bias (OVB).
-$\mathbb E[z_{jt,ttwa|g}] \propto  \mathbb E[z_{jt,pc8|g}]$,
-so running three models where the former is just my single regressor means
-the latent $\beta_pc8 \in u_{it}$ is correlated with both $z_{itg}$ and $z_{jtg}$.
-We could reasonably argue that the inner rings are causal,
-so this causal factor excluded from the regression influences both
-and creates heavily upward bias on my outer-ring estimations.
-Indeed, this critique extends within further inner rings.
-If I think the causal unit is not peer firms within the \itx{pc8} group at all,
-but a further hyper-local effect - perhaps those on the same street or same building,
-then this latent factor will correlate with both my outcome and regressor and drive the results.
-However, given the small number of peers contained within an \itx{pc8} unit and
-the limits of data availability to identify firms at more local granularities,
-I proceed assuming the effect from \itx{pc8} peers is homogenous.
-\par
-Finally, the approach using multiple groups as regressors at once gives identification
-by breaking transitivity.
-If I were to run the same regression with merely one group, say \itx{pc8},
-then my regression would suffer the reflection  problem outlined in \citep{Manski1993}.
-As I am estimating the expected value of $z_{it}$ and $z_{jt}$ from the same sample,
-they cannot be uniquely identified in reduced form.
-
-\noindent
-\textit{Reflection problem with a single regressor, $\mathbf\iota$ denotes a column vector of $1$s}
-
-\begin{align*}
-    \mathbb E[z_{itg}|g] &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \mathbb{E}[z_{jtg}|g]
-    \\
-    &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota + \beta_1 \mathbf\Omega_t \mathbb E[\mathbf{z}_{tg}|g]
-    \\
-    &= (\mathbb I - \beta_1 \mathbf\Omega_t)^{-1} (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
-\end{align*}
 %
-This problem is mitigated with having 3 distinct groups to which $z_{it}$ belongs.
-The results of the LMM estimation implementing equation \ref{eq:lmm-structural1} are below:
-  
+The initial static model applies simple time-invariant weights $w_{ij}$
+of the averages of spatial peers.
+As has been indicated by the sum of peers $j\neq i$,
+I adopt a 'leave-one-out' approach, where the resulting $n\times n$ matrix
+is zero on the diagonal and the reciprocal weight applied across peers
+is therefore the number of group members $n_g-1$, which excludes the target firm $i$.
+Intuitively, this is the unweighted average of peer TFP within a spatial ring.
+The specification is known as the 'Linear-in-Means (LMM)' Model
+and is common to the peer effects literature.
+I illustrate an example of a weighted matrix $W$ following this rule for 7 firms,
+categorised by a group of 4 and a group of 3.
+\par
+I discussed group assignment in section \ref{ss:data-distance}.
+Firms have been labelled using their location features to symmetric, transitive,
+non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
+with the latter meaning two firm entries shared a latitude-longitude identifier
+to 5 decimal places.
+Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
+as the group identifier for Model (1).
+This was mostly driven by full data availability, and the consistency of postcode definitions
+with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
+within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
+a move from the average number of peers from 3.1 to 2.9,
+and was a similar number of groups, with non-coheisve definitions.
+\par
+\begin{table}[htbp]
+    \centering
+    \caption{\todo{Placeholder} Summary statistics across spatial groups}
+    \label{tab:spatial_group_summary}
+    \begin{tabular}{lcccc}
+        \toprule
+        Property            & Number of groups & Unclassified & Unclassified (\%) & Avg. peers per group \\
+        \midrule
+        \itx{ttwa}          & 228    & 567 & 0.4\% & 668.3 \\
+        \itx{pc4}           & 2,705  & 0   & 0.0\% & 56.3  \\
+        \itx{pc8}           & 49,963 & 0   & 0.0\% & 3.1   \\
+        \itx{lat\_lon3}     & 48,540 & 507 & 0.3\% & 3.1   \\
+        \itx{lat\_lon4}     & 53,193 & 507 & 0.3\% & 2.9   \\
+        \itx{lat\_lon5}     & 53,246 & 507 & 0.3\% & 2.9   \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\noindent
+The results below show model (1), where peers and targets share a postcode.
 \wraptable
     {Static panel linear-in-means using spatial-group TFP averages}
     {../../model/output/results_1a_lmm}
     {}
 
+\newpage
+\par
+As an extension, I regress the multiple, non-overlapping spatial groups at once.
+Multiple spatial autoregressors do not change the reflection problem:
+the moving average inversion's coefficient merely becomes the weighted sum
+of 3 independent matrices $\delta_g \mathbf W_g$, for a generic set of weights $\mathbf W_g$.
+\begin{align}
+    \label{eq:lmm-structural1}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \sum_{g=1}^3 \delta_g \sum_{j\neq i} w_{ij,g}z_{j,t}
+                + \varepsilon_{it}
+    \\
+    \mathbf z_t &= \sum_{k=0}^\infty (\delta_1 \mathbf W_1 + \delta_2 \mathbf W_2 + \delta_3 \mathbf W_3)^k \cdot
+        (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
+\end{align}
+
+The weighting rules for these multiple, non-overlapping groups is to zero \todo{...}
+These matrices are orthogonal, justifying the result found above that the coefficient on $\delta_0$
+is identical in the 1-regressor model $delta_0$ to the 3-regressor model for $\delta_1$.
+\begin{align}
+  w_{ij}\in \mathbf{W}_g &=
+    \begin{cases}
+      0,             & \text{if } i=j \\
+      0,             & \text{if } w_{ij,k} \neq 0, \exists k<g \\
+      \frac{1}{n_g-1}, & \text{else if } (i,j)\in g \\
+      0,             & \text{otherwise}
+    \end{cases}
+  \\ \notag
+  &\sim
+    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
+            0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+        \end{pmatrix}$}}
+    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
+        \end{pmatrix}$}}
+    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0
+        \end{pmatrix}$}}
+\end{align}
+
 The parameter results suggest a strong correlation between the TFP of a target firm and its peers.
+Peers firms in the local postcode have an elasticity of 0.29,
+significant at the 1\% level, on the target firm's TFP.
+However, since I failed to show exogeneity of $z_{j,t}$ within the regressor,
+we cannot describe this as causal. Consider omitted variable bias from a local demand shock \todo{...}
+
+% ---
 
 \newpage
 \subsection{Static distance decay}
@@ -262,8 +339,8 @@ and an increased difficulty of observation of management practices}.
     z_{it} &= \alpha_i + \gamma_t + \beta_0
             + \beta_1 \sum_{j\neq i} w_{ijt}z_{jt} + \varepsilon_{it}
     \\
-    \mathbf z_{t} &= (\alpha_i + \gamma_t + \beta_0)\mathbf\iota
-            + \beta_1 \sum_{j\neq i} \Omega_t \mathbf z_{t} + \mathbf \varepsilon_{t}
+    \mathbf z_{t} &= (\alpha_i + \gamma_t + \beta_0)\boldsymbol\iota
+            + \beta_1 \sum_{j\neq i} \Omega_t \mathbf z_{t} + \boldsymbol\varepsilon_{t}
     \\
     w_{ijt}\in \mathbf \Omega_t &=
         \begin{cases}

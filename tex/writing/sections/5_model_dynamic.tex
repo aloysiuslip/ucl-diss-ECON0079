@@ -12,11 +12,9 @@ with a peer-effects regressor.
                 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \varepsilon_{i,t}
     \\
-    \Delta y_{i,t} &= \Delta \gamma_t
-                + \beta_1\Delta k_{i,t}
-                + \beta_2\Delta l_{i,t}
-                + \delta_0\sum_{j\neq i} w_{ij}\Delta z_{j,t}
-                + \Delta\varepsilon_{i,t}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
     \\
     \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &= 0, \ \forall t
     \\
@@ -95,8 +93,13 @@ This approach allows the discovery of valid instruments which are exogenous to $
 and $\Delta\varepsilon_{i,t}$.
 I justify an exclusion restriction for $\Delta k_{i,t-j}\ \forall j>1$, as it is predetermined,
 and $\Delta l_{i,t-k}, k>2$, as it is flexible.
-
 \begin{align}
+    \Delta y_{i,t} &= \Delta \gamma_t
+                + \beta_1\Delta k_{i,t}
+                + \beta_2\Delta l_{i,t}
+                + \delta_0\sum_{j\neq i} w_{ij}\Delta z_{j,t}
+                + \Delta\varepsilon_{i,t}
+    \\
     \label{eq:dyn-k-pim}
     K_{i,t} &= I_{i,t} + dK_{i,t-1}
     \\
@@ -108,31 +111,41 @@ and $\Delta l_{i,t-k}, k>2$, as it is flexible.
     \\ \notag
     \varepsilon_{i,t} &\in \Omega_t
     \\ \notag
-    &\implies K_{i,t} \propto \epsilon_t, \epsilon_{t-1}
+    &\implies K_{i,t} \propto \epsilon_{t-1}
     \\ \notag
     &\implies L_{i,t} \propto \epsilon_{t}
     \\ \notag
     \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
     \\ \notag
     \Delta k_{i,t} &= k_{i,t} - k_{i,t-1}
-        \propto \varepsilon_{i,t}, \varepsilon_{i,t-1}, \varepsilon_{i,t-2}
+        \propto \varepsilon_{i,t-1} \varepsilon_{i,t-2}
     \\ \notag
-    &\implies \mathbb E[\Delta k_{i,t}, \Delta \epsilon_t] \neq 0
+    &\implies \mathbb E[\Delta k_{i,t} \Delta \epsilon_t] \neq 0
     \\
-    &\implies \mathbb E[\Delta k_{i,t-1}, \Delta \epsilon_t] = 0
+    &\implies \mathbb E[\Delta k_{i,t-1} \Delta \epsilon_t] = 0, \mathbb E[k_{i,t-1} \varepsilon_t]=0
     \\ \notag
     \Delta l_{i,t} &= l_{i,t} - l_{i,t-1}
         \propto \varepsilon_{i,t}, \varepsilon_{i,t-1}
     \\
-    &\implies \mathbb E[\Delta l_{i,t-2}, \Delta \epsilon_t] = 0
+    &\implies \mathbb E[\Delta l_{i,t-2} \Delta \epsilon_t] = 0, \mathbb E[l_{i,t-2} \varepsilon_t]=0
 \end{align}
 
+Devising an internal instrument for $\Delta \sum_{j\neq i} w_{ij,t}z_{j,t}$ requires
+a similar evaluation of the spatial econometric properties of $z_{j,t}$ as in the static problem.
+$z_{it}$ is a linear combination of 
+Importantly, the deep lag strategy instrumenting via $z_{i,t-2}$ is valid
+even with this section's new cross-sectional correlation in equation \ref{eq:dyn-xs-corr-errors}.
+\begin{align}
+    \eqreref{eq:static-z-ma-inft}
+    \mathbf z_{i,t} &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
+    \\
+    \Delta \mathbf z_t &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\Delta \gamma_t \boldsymbol\iota + \boldsymbol\Delta\varepsilon_t)
+\end{align}
 \subsection{Autoregressive specification}
 
 A dynamic specification grants the flexibility to add past realisations of variables
 to the decomposition of TFP, $z_{i,t}$. This increases the number of regressors in reduced form,
 improving the plausibility of its exogeneity with $\varepsilon_{i,t}$.
-
 \begin{align}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
                 + \beta_1 k_{i,t}

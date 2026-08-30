@@ -48,6 +48,57 @@ A naïve OLS would fail strict exogeneity in this setting, as error exogeneity i
     \delta y_{i,\tau-k}, \delta k_{i,\tau} &\in x_{i,t},\ k\leq p
 \end{align}
 
+% Section 4: static %
+
+
+It is crucial that I have multiple, non-overlapping groups in a single model,
+where my target firm $z_{it}$ is a member of all groups simultaneously,
+but peers in one group are excluded from all others.
+\par
+The non-overlapping property prevents multicollinearity.
+If I were to use nested, overlapping geographies,
+namely keeping all firms within the \itx{ttwa} area in that group average,
+including the ones I have just counted in the \itx{pc4} and itx{pc8} groups,
+then my group averages mechanically align:
+$z_{jt,pc8}$ is embedded within $z_{jt,pc4}$, and both are within $z_{jt,ttwa}$,
+making $\beta_g$ parameter estimates unstable.
+\par
+The single model approach prevents omitted variable bias (OVB).
+$\mathbb E[z_{jt,ttwa|g}] \propto  \mathbb E[z_{jt,pc8|g}]$,
+so running three models where the former is just my single regressor means
+the latent $\beta_pc8 \in u_{it}$ is correlated with both $z_{itg}$ and $z_{jtg}$.
+We could reasonably argue that the inner rings are causal,
+so this causal factor excluded from the regression influences both
+and creates heavily upward bias on my outer-ring estimations.
+Indeed, this critique extends within further inner rings.
+If I think the causal unit is not peer firms within the \itx{pc8} group at all,
+but a further hyper-local effect - perhaps those on the same street or same building,
+then this latent factor will correlate with both my outcome and regressor and drive the results.
+However, given the small number of peers contained within an \itx{pc8} unit and
+the limits of data availability to identify firms at more local granularities,
+I proceed assuming the effect from \itx{pc8} peers is homogenous.
+\par
+Finally, the approach using multiple groups as regressors at once gives identification
+by breaking transitivity.
+If I were to run the same regression with merely one group, say \itx{pc8},
+then my regression would suffer the reflection  problem outlined in \citep{Manski1993}.
+As I am estimating the expected value of $z_{it}$ and $z_{jt}$ from the same sample,
+they cannot be uniquely identified in reduced form.
+
+\noindent
+\textit{Reflection problem with a single regressor, $\boldsymbol\iota$ denotes a column vector of $1$s}
+
+\begin{align*}
+    \mathbb E[z_{itg}|g] &= \alpha_i + \gamma_t + \beta_0 + \beta_1 \mathbb{E}[z_{jtg}|g]
+    \\
+    &= (\alpha_i + \gamma_t + \beta_0)\boldsymbol\iota + \beta_1 \mathbf\Omega_t \mathbb E[\mathbf{z}_{tg}|g]
+    \\
+    &= (\mathbb I - \beta_1 \mathbf\Omega_t)^{-1} (\alpha_i + \gamma_t + \beta_0)\boldsymbol\iota
+\end{align*}
+%
+This problem is mitigated with having 3 distinct groups to which $z_{it}$ belongs.
+The results of the LMM estimation implementing equation \ref{eq:lmm-structural1} are below:
+
 % Section 5 %
 
 \begin{align}
