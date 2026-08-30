@@ -45,11 +45,11 @@ def format_param(param: str) -> str:
         d['index'] = i_match.group(2)
     
     insub_props = ['num']
-    insub_v = [d.get(prop) for prop in insub_props if d.get(prop) is not None]
+    insub_v: list[str] = [d.get(prop) for prop in insub_props if d.get(prop) is not None]       # type: ignore
     insubscript_str = f"\\textsubscript{{${','.join(insub_v)}$}}" if insub_v else ''
 
     outsub_props = ['index', 'lag']
-    outsub_v = [d.get(prop) for prop in outsub_props if d.get(prop) is not None]
+    outsub_v: list[str] = [d.get(prop) for prop in outsub_props if d.get(prop) is not None]     # type: ignore
     outsubscript_str = f"\\textsubscript{{${','.join(outsub_v)}$}}" if outsub_v else ''
     
     final_str = "".join([
@@ -296,7 +296,7 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
     cols = [form_block()]
     for i, mod in enumerate(model_names):
         y_str = format_param(models[mod].get('Y', 'Y'))
-        cols.append(form_block((f"({i + 1})", y_str), block_type='c', size=('footnotesize', 'small')))
+        cols.append(form_block((f"({i + 1}.)", y_str), block_type='c', size=('footnotesize', 'small')))
     latex_lines.extend(["\t\t\\toprule\\toprule", " & ".join(cols) + " \\\\[0.8em]", "\t\t\\toprule"])
 
     # Coefficients
@@ -370,7 +370,7 @@ def format_number(val: float, format_float: str = ",0.3f") -> str:
     except ValueError:
         return str(val).replace('_', '\\_')
     
-def generate_latex_from_generic(df: pd.DataFrame, filepath: str, format_float: str = ",0.3f", var_renamer: dict[str, str] | None = None) -> None:
+def generate_latex_from_generic(df: pd.DataFrame, filepath: str | Path, format_float: str = ",0.3f", var_renamer: dict[str, str] | None = None) -> None:
     columns = list(df.columns)
     col_align = "l" + "c" * (len(columns) - 1)
     
