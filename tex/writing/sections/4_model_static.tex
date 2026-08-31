@@ -1,4 +1,5 @@
 \section{Static models}
+\label{s:models-static}
 
 I use a stylised 3-factor production model throughout this analysis.
 $Y$, $A$, $K$, and $L$ are each firm-year observation's GVA, TFP, labour, and capital in levels.
@@ -37,7 +38,7 @@ The objective is to estimate the structural coefficient $\delta_0$ of spillover 
 \end{align}
 
 \par
-Equation \eqref{eq:static-main-peer-effects} is a linear peer effects specification as given by \citep{Manski1993}.
+Equation \eqref{eq:static-main-peer-effects} is a linear peer effects specification as given by \cite{Manski1993}.
 It is helpful to borrow the terminology from this literature think of
 $\begin{pmatrix}
     k_{i,t} &   l_{i,t}
@@ -173,7 +174,8 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                             \theta_0^k \mathbf W^{k+1}
                         \right]_{(j,)}
                         \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}
-                        \boldsymbol \beta \cdot (\theta_0 + \xi_0)
+                        \begin{pmatrix}\beta_1 \\ \beta_2\end{pmatrix}
+                        \cdot (\theta_0 + \xi_0)
                     }_{\text{exogenous}_j}
                     + \underbrace{
                         \sum_{k=0}^\infty
@@ -181,18 +183,19 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                     \boldsymbol \varepsilon_t
                     }_{\text{error transformation}_j}
 \end{align}
+
 It is the primary econometric challenge of this analysis to overcome this spatial endogeneity.
 The reduced-form equation \eqref{eq:static-red-endogenous-effect} confirms that
 within the \itx{endogenous} effect $\theta_0 \sum_{j\neq i} w_{ij} y_{j,t}$,
 the peer GVA component $y_{j,t}$ is indeed endogenous,
-containing a linear combination of all other firms' $\boldsymbol \varepsilon_{t}$,
-implying:
+containing a linear transformations of all other firms' $\boldsymbol \varepsilon_{t}$,
+including $\varepsilon_{i,t}$. This implies:
 \begin{equation}
     \mathbb E[y_{j,t}\varepsilon_{i,t}]\neq 0
 \end{equation}
 \par
-The `Reflection Problem' poses a second issue as outlined in \citep{Manski1993}.
-Equation \eqref{eq:static-red-endogenous-effect} shows that $\mathbf W \mathbf y_t$,
+The `Reflection Problem' poses a second issue as outlined in \cite{Manski1993}.
+Equation \eqref{eq:static-reflection-problem} shows that $\mathbf W \mathbf y_t$,
 is an exact linear combination of all other regressors
 and variation in $y_{j,t}$ is indistinguishable in reduced-form from variation
 in all other regressors.
@@ -238,29 +241,37 @@ We should assess these results with the heavy caveat that the exogeneity assumpt
     \impliedby \mathbb E[\epsilon_{i,t}\epsilon_{j,t}] &= 0,\ \forall k
 \end{align}
 
-Instead, as recommended in \citep{Bramoulle2009},
+Instead, as recommended in \cite{Bramoulle2009},
 the most defensible approach is to instrument the \itx{endogenous} variable, $y_{j,t}$
 through the \itx{exogenous} parameters \linebreak
 $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots \mathbf W^k \mathbf x_t\ \forall k>2$.
-These are be valid instruments under certain testable properties of $\mathbf W$.
-This is intuitive: we can see through equation \eqref{eq:static-red-endogenous-effect} that
+These are valid instruments under certain testable properties of $\mathbf W$ given in \tablerefp{tab:bdf_identification}.
+Essentially, these reduce to checking that the matrices $I, \mathbf W, \mathbf W^2$ are linearly independent.
+I do so for the models presented in this section.
+I use the instruments
+\todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
+and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$ as feasible instruments for this section's network models
+\todo{Table VII, model}.
+\par
+These instruments and conditions are intuitive:
+we can see through equation \eqref{eq:static-red-endogenous-effect} that
 a linear combination of all firms' contemperaneous capital and labour inputs,
-$\mathbf W^{k+1}\begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}\ \forall k>1$ 
-is an exogenous instrument.
+$\mathbf W^{k+1}\begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}\ \forall k\geq0$ 
+are an exogenous component of $y_{j,t}$.
 It has relevance, meaning $\mathbb E[y_{j,t}\cdot [\mathbf W^k]_{(j,)}\mathbf x_t]\neq 0,\ \forall k>2$
 as long as $\theta_0\neq 0$ and $\beta_0 + \xi_0 = \delta_0 \neq 0$.
-These two conditions are unsurprising and highly intuitive - note that they differ slightly from
-the more complex setup given in \citep{Bramoulle2009},
+The relevance conditions themselves are also unsurprising and highly intuitive
+given this model's setup with the estimation of $\delta_0$.
+Note that the relevance conditions differ slightly from the more complex setup given in \cite{Bramoulle2009},
 this is because I derive the \itx{exogenous} effect in \eqref{eq:static-main-peer-effects}
 as the accounting composition of TFP and so $\mathbf \beta$ is necessarily included as a post-multiplification
 factor for the \itx{exogenous} effect allowing factorisation, which is absent from the general model.
 \par
-The testable conditions are:\footnote{\cite{Bramoulle2009}}
-\par
-We can also note that $\mathbf W\mathbf x_t$ is also a valid instrument
-but unhelpful in this estimation as it is also a regressor as the direct \itx{exogenous} effect.
-\par
-A summary of the identification rules listed in \citep{Bramoulle2009} is as follows:
+Finally, one might observe that $[\mathbf W]_{(j,)}\mathbf x_t$
+is a component of $y_{j,t}$ and so a valid instrument.
+However, it is does not increase the number of instruments I would use in my instrumental specification
+as it is already included as an exogenous regressor in \ref{eq:static-vector-reduced}
+so does not help increase our identification of $y_{j,t}$.
 
 \wraptable
     {Spatial econometric identification rules for weighting matrix $W$}
@@ -278,7 +289,7 @@ I take this approach in Models (2, 3, 4). The instruments to employ are as follo
 
 % --- %
 
-\subsection{Linear-in-means grouped peers}
+\subsection{Linear-in-means grouped model}
 \label{ss:model-lmm}
 
 Assuming exogeneity assumptions \eqref{eq:static-ass-ma-exogeneity} and \eqref{eq:static-ass-error-orthogonality} hold,

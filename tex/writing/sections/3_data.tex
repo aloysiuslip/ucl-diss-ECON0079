@@ -12,7 +12,7 @@ Its international counterpart, Orbis, offers a similar service for international
 This analysis could therefore be extended to offer insights comparing the spillover effects of UK firms to their international counterparts.
 For this investigation, the UK dataset is comprehensive and the most policy-relevant for this investigation.
 \par
-Raw data was accessed from Fame in February 2025 by Professor Lars Nesheim for \citep{Irastorza-Fadrique2026}.
+Raw data was accessed from Fame in February 2025 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026}.
 and reused for this project. Raw data is provided on a series of a financial balance sheet indicators,
 including characteristics that are fixed for each firm, bucketed into $a1\_ID$ and $a5\_misc$ indicator tables,
 and annual data published on a calendar-year basis,
@@ -152,14 +152,14 @@ with an estimated effect on target firm $i$.
 \par
 A first property of $W$ is that it its diagonal elements are all $0$:
 a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
-This is common to peer effets literature such as \citep{Moffitt2001}
-and discussed in \citep{Bramoulle2009}.
+This is common to peer effets literature such as \cite{Moffitt2001}
+and discussed in \cite{Bramoulle2009}.
 \par
 Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
 The resulting $n\times n$ matrix has off-diagonal elements as
 the number of group members $n_g-1$, which excludes the target firm $i$.
 The structure is given below\footnote{
-    Adapted from \citep{Bramoulle2009}
+    Adapted from \cite{Bramoulle2009}
 }:
 
 \begin{align*}
@@ -261,4 +261,26 @@ meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 
 the first half of a UK postcode \itx{pc4},
 and the full UK postcode \itx{pc8}.
 
-\todo{Discuss and illustrate different forms of omega, with illustrative block diagonal matrices}
+\subsection{Iterative weighting matrices}
+
+Intuitively, I apply these weighting matrices $W$ to the aggregate variables vectors
+\itx{gva1}, capital \itx{total\_assets}, and labour \itx{employees}.
+As will be shown in \fullref{s:models-static}, the procedure to generate valid instrumental variables
+also requires me to apply multiples of this transformation matrix,
+exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group matrices,
+$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}\mathbf W_{g3}$ and so on to the aggregates.
+\par
+As a data procedure, I calculate these for my 3 aggregate variable vectors of interest.
+As given below in \todo{Table}, this requires a total of 57 compound weighting matrices,
+or columns of a database, to be calculated and generated.
+\todo{para}
+Matrix products, including taking high indices, of the interactions between 1,045,164 firms
+is not computationally difficult, especially with sophisticated algorithms to handle $W$'s block diagonal structure.
+However, storing the calculation in temporary memory is beyond
+the capacity of any standard machine available as a research tool.
+\par
+Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix
+separately, but rather iteratively applies the last pre-multipled matrix to the aggregate variable,
+and then pre-multiplies the next matrix along to the result.
+Using memory-efficient duckdb, the procedure is as follows:
+\todo{itemize}
