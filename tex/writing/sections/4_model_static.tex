@@ -1,16 +1,15 @@
 \section{Static models}
 
 I use a stylised 3-factor production model throughout this analysis.
-$Y$, $A$, $K$, and $L$ are each firm-year observation's structural GVA, TFP, labour, and capital as usual.
-I use lower-case variables to indicate logged terms in reduced form
-and bolded variables to indicate stacked vectors.
+$Y$, $A$, $K$, and $L$ are each firm-year observation's GVA, TFP, labour, and capital in levels.
+I use lower-case variables to indicate logged terms and bolded variables to indicate $i$-stacked vectors.
 \par
-Log TFP, denoted by $z_{i,t}$, is the residual after controlling for the two classical inputs,
-and is equal to the sum of a constant across all observations,
-firm and time fixed effects, and most crucially,
+Log TFP, denoted by $z_{i,t}$, is the residual after the own-firm contribution of the two classical inputs.
+I decompose it to a constant across all observations,firm and time fixed effects and,
+most crucially for this investigation,
 the weighted sum of all peer log TFP values, $\sum_{j\neq i} w_{ij}z_{j,t}$.
-Different static weights, $w_{ij}$ are explored throughout this section.
-My objective is to estimate the structural parameter $\delta_0$.
+Different static weights, $w_{ij}$, are explored throughout this section.
+The objective is to estimate the structural coefficient $\delta_0$ of spillover from peers to any given target firm.
 
 \begin{align}
     \label{eq:static-production-3-factor}
@@ -19,7 +18,7 @@ My objective is to estimate the structural parameter $\delta_0$.
                 L_{i,t}^{\beta_2}
     \\
     \label{eq:static-tfp-identity}
-    z_{i,t} &= \ln(A_{it}) = y_{i,t} - \alpha l_{i,t} - \beta k_{i,t} 
+    z_{i,t} &= \ln(A_{it}) = y_{i,t} - \beta_1 k_{i,t} - \beta_2 l_{i,t}
     \\
     \label{eq:static-main-reduced}
             &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
@@ -38,18 +37,20 @@ My objective is to estimate the structural parameter $\delta_0$.
 \end{align}
 
 \par
-Equation \eqref{eq:static-main-peer-effects} is a linear peer effects model as given by \citep{Manski1993}.
-It is helpful to think of
+Equation \eqref{eq:static-main-peer-effects} is a linear peer effects specification as given by \citep{Manski1993}.
+It is helpful to borrow the terminology from this literature think of
 $\begin{pmatrix}
     k_{i,t} &   l_{i,t}
 \end{pmatrix}\in x_{i,t}$
 as \itx{exogenous} characteristics of firm ${i}$ causally affecting its outcome $y_{i,t}$.
 There is an \itx{endogenous} effect directly from peer outcomes $y_{j,t}$ with coefficient $\theta_0$.
 Peers also have an \itx{exogenous} characteristics $x_{i,t}$,
-which have a direct impact on on the target's productivity $x_{i,t}$ via $xi_0$.
+which have a direct impact on on the target's productivity $x_{i,t}$ via $\xi_0$.
+For this section of models, I assume there are no \itx{correlated} effects\footnote{\todo{how would that enter the specification?}}.
 I use this peer effects terminology throughout this paper,
 noting to the reader the slight confusion this may cause with the more general but related concepts of endogeneity and exogeneity.
 The use of fixed effects has no effect on econometric interpretation of the peer effects model.
+\par
 In a more general peer effects model, peer characteristics could independently affect the outcome of interest.
 We could imagine this as the choice level of capital or labour input in a peer $j$
 influencing the effectiveness, perhaps through management quality or hiring practices, of firm $i$.
@@ -64,7 +65,12 @@ While the classical production function \eqref{eq:static-main-gva} is limited to
 $\beta_1 + \beta_2\leq 0$, a standard assumption across the growth and firm production literature,
 no such restrictions for the firm occur with the endogenous decomposition of TFP.
 A restriction on logged production \eqref{eq:static-main-gva} collectively on $\beta_1$, $\beta_2$, and $\delta_0$
-is difficult to justify. $w_{ij}z_{j,t}$ is an externality, so\dots \todo{Lucas critique}
+is difficult to justify.
+As with other external effects, there is no reason to believe that market factor prices
+and the firm decision-rule for spatial allocation in view of these spillover effects, $w_{ij}z_{j,t}$, is socially optimal.
+A peer firm $j$ with extremely high and growing TFP has little interest in siting themselves
+in the centre of a cluster that are struggling with TFP growth,
+yet the external impacts of that firm would be significant.
 
 % ------
 
@@ -105,17 +111,15 @@ factor input decisions are predetermined.
 The peer effects regressors are endogenous, making valid estimation with the peer effects regressors is more complicated.
 To show this requires stacking $w_{ij}$ target-peer weights to an $n\times n$ interactions matrix, $\textbf W$.
 I invert the \itx{endogenous} component to give a $(\mathbb I-\delta_0\mathbf W)^{-1}$ coefficient on all variables.
-This is permissible because I can expect:
 \begin{equation}
     \theta_0 < 1 \implies \vert \mathbb I-\theta_0 \mathbf W \vert \neq 0
 \end{equation}
-applying a restriction to rule out exponentially increasing shocks\footnote{
+The inversion is permissible because I can expect a restriction to apply, ruling out iteratively increasing shocks\footnote{
     $\theta_0>1$ would imply an exogenous TFP shock to firm $k$ would
     increase TFP in its peer firm $j$ more than 1x,
     which would increase TFP in that firm's peer $i$ more than 1x,
     and so on until the effect multiplies to infinity
-}
-. This is directly comparable to the lag polynomial and MA inversion procedure in autoregressive time series analysis.
+}. This is directly comparable to the lag polynomial and MA inversion procedure in autoregressive time series analysis.
 \begin{align}
     \label{eq:static-vector-reduced}
     \mathbf y_t &= \boldsymbol \alpha
@@ -134,7 +138,8 @@ applying a restriction to rule out exponentially increasing shocks\footnote{
                     + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
                     + \boldsymbol \varepsilon_t
                 )
-    \\ \notag
+    \\
+    \label{eq:static-reflection-problem}
                 &= \sum_{k=0}^\infty \theta_0^k \mathbf W^k \cdot(
                     \boldsymbol \alpha
                     + \gamma_t \boldsymbol\iota
@@ -147,35 +152,46 @@ applying a restriction to rule out exponentially increasing shocks\footnote{
     \label{eq:static-red-endogenous-effect}
     y_{j,t}     &= \dots
                     + \underbrace{
+                        \xi_0
                         \sum_{k=0}^\infty
-                        [\theta_0^k \mathbf W^k]_{(,j)} \cdot
-                        [\xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)]_{(j,)}
+                        [\theta_0^k \mathbf W^{k+1}]_{(j,)}
+                        \cdot (\mathbf k_t + \mathbf l_t)
                     }_{\text{exogenous}_j}
                     + \underbrace{
                         \sum_{k=0}^\infty
-                        [\theta_0^k \mathbf W^k]_{(,j)} \cdot
-                        [\boldsymbol \varepsilon_t]_{(j,)}
+                        [\theta_0^k \mathbf W^k]_{(j,)} \cdot
+                    \boldsymbol \varepsilon_t
                     }_{\text{error transformation}_j}
 \end{align}
 
+It is the primary econometric challenge of this analysis to overcome this spatial endogeneity.
 The reduced-form equation \eqref{eq:static-red-endogenous-effect} confirms that
-the peer GVA component of the \itx{endogenous} effect $\theta_0 \sum_{j\neq i} \mathbf W y_{j,t}$
-is indeed exogenous, containing a component that is a linear combination
-of all other firms' $\boldsymbol \varepsilon_{t}$, including $\varepsilon_{i,t}$.
+within the \itx{endogenous} effect $\theta_0 \sum_{j\neq i} w_{ij} y_{j,t}$,
+the peer GVA component $y_{j,t}$ is indeed endogenous,
+containing a linear combination of all other firms' $\boldsymbol \varepsilon_{t}$,
+implying:
+\begin{equation}
+    \mathbb E[y_{j,t}\varepsilon_{i,t}]\neq 0
+\end{equation}
+\par
+The `Reflection Problem' poses a second issue as outlined in \citep{Manski1993}.
+Equation \eqref{eq:static-red-endogenous-effect} shows that $\mathbf W \mathbf y_t$,
+is an exact linear combination of all other regressors
+and variation in $y_{j,t}$ is indistinguishable in reduced-form from variation
+in all other regressors.
+This hinders identification of $\theta_0$, and in turn $\delta_0$.
 \par
 There are two solutions. I could either proceed with an extremely strong exogeneity assumption,
-$\mathbb E[\varepsilon_{i,t}\vert\boldsymbol W^k\boldsymbol \varepsilon_t] =0,\ \forall k$,
-which in itself implies the already-strong assumption
-of orthogonality between idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}.
-This rules out any structural, cross-sectional correlation between error terms:
-any productivity shock $\epsilon_{j,t}$ occurring in peer firm $j$,
-if it is correlated with a productivity shock $\epsilon_{i,t}$
-occurring in target firm $i$ contemperaneously must be attributable to the peer effect coefficient $\delta_0$.
+\eqref{eq:static-ass-ma-exogeneity}, which is most likely satisfied by total orthogonality
+between all contemperaneous idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality},
+in turn making the regressor $y_{j,t}$ exogenous allowing direct estimation of \eqref{eq:static-main-gva}.
+Model (1.) takes this assumption and estimates the second-stage \eqref{eq:static-main-reduced}.
+For identification, this implies that any productivity shock $\epsilon_{j,t}$ occurring in peer firm $j$,
+if it is contemperaneously correlated with TFP ${z_i,t}$ in target firm $i$
+must be attributable to the peer effect coefficient $\delta_0$ via $\theta_0$.
 This precludes any contemperaneous, correlated independent TFP shocks,
 which might occur on both the global and local level.
-Even then, this is insufficient for $\mathbb E[\epsilon_{i,t}|z_{j,t}]=0$, regressor exogeneity.
-Nevertheless, I take this approach in Model (1) and list the results below.
-We assess these results with the heavy caveat that the exogeneity assumptions required are unlikely to be credible.
+We should assess these results with the heavy caveat that the exogeneity assumptions required are unlikely to be credible.
 \begin{align}
     \notag
     \mathbb E[
@@ -199,17 +215,19 @@ We assess these results with the heavy caveat that the exogeneity assumptions re
         \boldsymbol W^k
         \boldsymbol \varepsilon_t
     ] &=0,\  
-    \forall k
+    \forall i,j
     \\
     \label{eq:static-ass-error-orthogonality}
-    \implies \mathbb E[\epsilon_{i,t}\epsilon_{j,t}] &= 0,\ \forall k
+    \impliedby \mathbb E[\epsilon_{i,t}\epsilon_{j,t}] &= 0,\ \forall k
 \end{align}
 
 Instead, as recommended in \citep{Bramoulle2009},
-the best approach is to instrument the \itx{endogenous} variable, $y_{j,t}$
+the most defensible approach is to instrument the \itx{endogenous} variable, $y_{j,t}$5
 through the \itx{exogenous} parameters.
-$\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots$ are given as valid instruments.
-This is evident through equation \eqref{eq:static-red-endogenous-effect} that as long as \dots
+$\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots \mathbf W^k \mathbf x_t\ \forall k>2$.
+This paper shows to be valid instruments
+under certain testable peropties of $\mathbf W$.
+This is intuitive: we can see through through equation \eqref{eq:static-red-endogenous-effect} that as long as \dots
 $\mathbb E[y_{j,t}\cdot [\mathbf W^k \mathbf x_t]_{(,j)}]\neq 0,\ \forall k>2$.
 We can also note that $\mathbf W\mathbf x_t$ is also a valid instrument
 but unhelpful in this estimation as it is also a regressor as the direct \itx{exogenous} effect.
@@ -266,7 +284,7 @@ non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
 with the latter meaning two firm entries shared a latitude-longitude identifier
 to 5 decimal places.
 Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
-as the group identifier for Model (1).
+as the group identifier for Table \ref{tab:1a-lmm}.1..
 This was mostly driven by full data availability, and the consistency of postcode definitions
 with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
 within the postcode seemed fruitless, as in many cases it would identify the exact same firms,

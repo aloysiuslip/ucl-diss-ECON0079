@@ -1,115 +1,223 @@
-	\begin{tabular}{lccc}
+	\begin{tabular}{lcccc}
 		\toprule\toprule
 		\lblock{
 			~
 			\\
 			~
 		} & 		\cblock{
-			\footnotesize{(1)}
+			\footnotesize{(1.)}
 			\\
-			\small{\itx{z\_{i,t}}}
+			\small{\itx{gva}\textsubscript{$1$}}
 		} & 		\cblock{
-			\footnotesize{(2)}
+			\footnotesize{(2.)}
 			\\
-			\small{\itx{z\_{i,t}}}
+			\small{\itx{gva}\textsubscript{$1$}}
 		} & 		\cblock{
-			\footnotesize{(3)}
+			\footnotesize{(3.)}
 			\\
-			\small{\itx{z\_{i,t}}}
+			\small{\itx{tfp}}
+		} & 		\cblock{
+			\footnotesize{(4.)}
+			\\
+			\small{\itx{tfp}}
 		} \\[0.8em]
 		\toprule
 		\lblock{
-			const
+			constant
 			\\
 			~
 		} & 		\cblock{
-			$2.187$
+			$2.568$
 			\\
-			\footnotesize{(0.016)***}
+			\footnotesize{(0.038)***}
 		} & 		\cblock{
-			$2.054$
+			$2.573$
 			\\
-			\footnotesize{(0.045)***}
+			\footnotesize{(0.058)***}
 		} & 		\cblock{
-			$1.987$
+			$2.322$
 			\\
-			\footnotesize{(0.068)***}
+			\footnotesize{(0.012)***}
+		} & 		\cblock{
+			$2.289$
+			\\
+			\footnotesize{(0.014)***}
 		}
 		\\ [0.9em]
 		\lblock{
-			$w_{j,t}^{pc8}z_{j,t}$
+			ln(\itx{\itx{total\_assets}})
 			\\
 			~
 		} & 		\cblock{
-			$0.291$
+			$0.238$
 			\\
 			\footnotesize{(0.005)***}
 		} & 		\cblock{
-			$0.291$
+			$0.238$
+			\\
+			\footnotesize{(0.005)***}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{employees}})
+			\\
+			~
+		} & 		\cblock{
+			$0.651$
 			\\
 			\footnotesize{(0.005)***}
 		} & 		\cblock{
-			$0.299$
+			$0.651$
 			\\
-			\footnotesize{(0.017)***}
-		}
+			\footnotesize{(0.005)***}
+		} &   &  
 		\\ [0.9em]
 		\lblock{
-			$w_{j,t}^{pc4}z_{j,t}$
+			ln(\itx{\itx{gva1\_pc}\textsubscript{$8$}})
+			\\
+			~
+		} & 		\cblock{
+			$0.213$
+			\\
+			\footnotesize{(0.004)***}
+		} & 		\cblock{
+			$0.212$
+			\\
+			\footnotesize{(0.004)***}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{total\_assets\_pc}\textsubscript{$8$}})
+			\\
+			~
+		} & 		\cblock{
+			$-0.049$
+			\\
+			\footnotesize{(0.002)***}
+		} & 		\cblock{
+			$-0.049$
+			\\
+			\footnotesize{(0.002)***}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{employees\_pc}\textsubscript{$8$}})
+			\\
+			~
+		} & 		\cblock{
+			$-0.124$
+			\\
+			\footnotesize{(0.004)***}
+		} & 		\cblock{
+			$-0.123$
+			\\
+			\footnotesize{(0.004)***}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{gva1\_pc4\_d}})
 			\\
 			~
 		} &   & 		\cblock{
-			$0.012$
+			$0.010$
 			\\
-			\footnotesize{(0.006)**}
-		} & 		\cblock{
-			$0.012$
-			\\
-			\footnotesize{(0.006)**}
-		}
+			\footnotesize{(0.004)***}
+		} &   &  
 		\\ [0.9em]
 		\lblock{
-			$w_{j,t}^{ttwa}z_{j,t}$
+			ln(\itx{\itx{total\_assets\_pc4\_d}})
 			\\
 			~
 		} &   & 		\cblock{
-			$0.032$
+			$-0.005$
 			\\
-			\footnotesize{(0.013)**}
-		} & 		\cblock{
-			$0.032$
-			\\
-			\footnotesize{(0.013)**}
-		}
+			\footnotesize{(0.002)**}
+		} &   &  
 		\\ [0.9em]
 		\lblock{
-			$\ln(\itx{employees})$
+			ln(\itx{\itx{employees\_pc4\_d}})
 			\\
 			~
-		} &   &   & 		\cblock{
-			$0.015$
-			\\
-			\footnotesize{(0.011)}
-		}
-		\\ [0.9em]
-		\lblock{
-			$w_{j,t}^{pc8}z_{j,t} \times$ln(\itx{employees})
-			\\
-			~
-		} &   &   & 		\cblock{
-			$-0.002$
+		} &   & 		\cblock{
+			$-0.001$
 			\\
 			\footnotesize{(0.004)}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{gva1\_ttwa\_d}})
+			\\
+			~
+		} &   & 		\cblock{
+			$-0.007$
+			\\
+			\footnotesize{(0.004)**}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{total\_assets\_ttwa\_d}})
+			\\
+			~
+		} &   & 		\cblock{
+			$-0.000$
+			\\
+			\footnotesize{(0.003)}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			ln(\itx{\itx{employees\_ttwa\_d}})
+			\\
+			~
+		} &   & 		\cblock{
+			$0.009$
+			\\
+			\footnotesize{(0.007)}
+		} &   &  
+		\\ [0.9em]
+		\lblock{
+			\itx{tfp\_pc}\textsubscript{$8$}
+			\\
+			~
+		} &   &   & 		\cblock{
+			$0.246$
+			\\
+			\footnotesize{(0.004)***}
+		} & 		\cblock{
+			$0.245$
+			\\
+			\footnotesize{(0.004)***}
+		}
+		\\ [0.9em]
+		\lblock{
+			\itx{tfp\_pc4\_d}
+			\\
+			~
+		} &   &   &   & 		\cblock{
+			$0.005$
+			\\
+			\footnotesize{(0.001)***}
+		}
+		\\ [0.9em]
+		\lblock{
+			\itx{tfp\_ttwa\_d}
+			\\
+			~
+		} &   &   &   & 		\cblock{
+			$0.004$
+			\\
+			\footnotesize{(0.002)***}
 		}
 		\\ [0.9em]
 		\hline
-		\textit{i} fixed effects & \checkmark & \checkmark & \checkmark
+		\textit{i} fixed effects & \checkmark & \checkmark & \checkmark & \checkmark
 		\\
-		\textit{t} fixed effects & \checkmark & \checkmark & \checkmark
+		\textit{t} fixed effects & \checkmark & \checkmark & \checkmark & \checkmark
 		\\
-		Observations & 788,020 & 779,651 & 779,651
+		Observations & 732,689 & 724,978 & 732,689 & 725,040
 		\\
-		R$^2$ & 0.0418 & 0.0419 & 0.0420
+		R$^2$ (excl. F.E.) & 0.3994 & 0.3987 & 0.0297 & 0.0300
+		\\
+		R$^2$ (Overall) & 0.8161 & 0.8159 & 0.1071 & 0.1063
 		\\
 		\bottomrule
 	\end{tabular}

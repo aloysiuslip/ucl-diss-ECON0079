@@ -99,7 +99,7 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
             current_model = model_match.group(1)
             models[current_model] = {'Y': '', 'params': {}, 'obs': '',
                                      'time_nb': '', 'entities_nb': '',
-                                     'time_fe': False, 'entities_fe': False, 'r2-within': '', 'r2': ''}
+                                     'time_fe': False, 'entities_fe': False, 'r2-overall': '', 'r2': ''}
             in_params = False
             continue
             
@@ -117,9 +117,9 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
             models[current_model]['entities_nb'] = f"{int(line.split()[1]):,}"
         elif 'Time periods:' in line:
             models[current_model]['time_nb'] = f"{int(line.split()[2]):,}"
-        elif 'R-squared (Within):' in line:
+        elif 'R-squared (Overall):' in line:
             parts = line.split()
-            models[current_model]['r2-within'] = parts[-1]
+            models[current_model]['r2-overall'] = parts[-1]
         elif 'R-squared:' in line:
             parts = line.split()
             models[current_model]['r2'] = parts[-1]
@@ -271,7 +271,12 @@ def build_test_cblock(reject: bool | None, p_val: str) -> str:
     return form_block((symbol, f"({p_val}){star_str}"), block_type='c', size=(None, 'footnotesize'))
 
 # Combines models into a final .tex table.
-def generate_latex_table(models: dict, output_filepath: str | Path, show: list[int] | None = None, var_renamer: dict[str, str] | None = None) -> None:
+def generate_latex_table(
+        models: dict,
+        output_filepath: str | Path, show: list[int] | None = None,
+        var_renamer: dict[str, str] | None = None,
+        var_order: list[str] | None = None
+    ) -> None:
 
     # If the show parameter is provided, filter the models to only include those indices
     if show is not None:
@@ -281,14 +286,21 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
         models = filtered_models
 
     model_names = list(models.keys())
-    unique_params = set()
+    unique_params = []
     for mod in models.values():
-        unique_params.update(mod['params'].keys())
-        
-    sorted_params = sorted(list(unique_params), key=lambda x: (x != 'const', x))
+        to_add = [p for p in mod['params'].keys() if p not in unique_params]
+        unique_params.extend(to_add)
+    sorted_params = unique_params
     if var_renamer:
         renamed_params = list(var_renamer.keys())
         sorted_params = renamed_params + [p for p in sorted_params if p not in renamed_params]
+    if var_order:
+        sorted_params = var_order + [p for p in sorted_params if p not in var_order]
+    sorted_params = [p for p in sorted_params if p in unique_params]
+    sorted_params.remove('const') if 'const' in unique_params else None
+    sorted_params.insert(0, 'const') if 'const' in unique_params else None
+    seen = set()
+    sorted_params = [x for x in sorted_params if not (x in seen or seen.add(x))]
 
     latex_lines = [f"\t\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
     
@@ -341,16 +353,17 @@ def generate_latex_table(models: dict, output_filepath: str | Path, show: list[i
     if any(models[m].get('obs') for m in model_names):
         latex_lines.append(obs_row)
     
+
     # Handle R-squared if it exists (for standard OLS models)
-    has_r2_within = any('r2-within' in m and m['r2-within'] for m in models.values())
-    if has_r2_within:
-        r2_row = "\t\tR$^2$ (Within) & " + " & ".join([models[m].get('r2-within', '') for m in model_names]) + "\n\t\t\\\\"
+    has_r2_overall = any('r2-overall' in m and m['r2-overall'] for m in models.values())
+    has_r2 = any('r2' in m and m['r2'] for m in models.values())
+    if has_r2:
+        r2_row = f"\t\tR$^2${" (excl. F.E.)" if has_r2_overall else ''} & " + " & ".join([models[m].get('r2', '') for m in model_names]) + "\n\t\t\\\\"
         latex_lines.append(r2_row)
 
     # Handle R-squared if it exists (for standard OLS models)
-    has_r2 = any('r2' in m and m['r2'] for m in models.values())
-    if has_r2:
-        r2_row = "\t\tR$^2$ & " + " & ".join([models[m].get('r2', '') for m in model_names]) + "\n\t\t\\\\"
+    if has_r2_overall:
+        r2_row = "\t\tR$^2$ (Overall) & " + " & ".join([models[m].get('r2-overall', '') for m in model_names]) + "\n\t\t\\\\"
         latex_lines.append(r2_row)
 
     latex_lines.extend(["\t\t\\bottomrule", "\t\\end{tabular}"])

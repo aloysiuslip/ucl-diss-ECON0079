@@ -120,13 +120,19 @@
   {\par}
 
 % 2. Macro to handle tables with optional notes (#3)
+\usepackage{xstring}
+\usepackage{ifthen}
 \newcommand{\wraptable}[3]{%
+    \StrBehind{#2}{results_}[\tempA]%
+    \StrSubstitute{\tempA}{_}{-}[\tempB]%
+    \edef\tablelabel{tab:\tempB}%
     \begin{table}[hbtp]
         \centering
         \begin{threeparttable}
             \caption{#1}%
-            \input{#2}% Ensure this inputted file has NO \begin{center} or \end{center}
-            \ifblank{#3}{}{% Only print tablenotes if #3 is non-empty
+            \label{\tablelabel}% Automatically generated label
+            \input{#2}%
+            \ifthenelse{\equal{#3}{}}{}{% Conditionally include notes[cite: 1]
                 \begin{tablenotes}
                 #3
                 \end{tablenotes}%
