@@ -13,6 +13,6 @@
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
 		"latex-workshop.message.error.show": false,
-        "latex-workshop.view.pdf.invert": 0
+        "latex-workshop.view.pdf.invert": 1
 	}
 }

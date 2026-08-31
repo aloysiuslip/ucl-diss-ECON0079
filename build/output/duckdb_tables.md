@@ -74,10 +74,10 @@ ibis.Schema {
 4               NaN               NaN  Manchester        Lancashire   
 
   ro_postcode ro_full_postcode ro_country      ro_latitude    ro_longitude  \
-0        DN20         DN20 8NQ    England   53ï¿½ 33' 3.6" N  0ï¿½ 29' 50.4" W   
+0        DN20         DN20 8NQ    England   53° 33' 3.6" N  0° 29' 50.4" W   
 1        GL15         GL15 5HE    England              NaN             NaN   
-2        GU34         GU34 1HN    England   51ï¿½ 8' 58.6" N  0ï¿½ 58' 39.6" W   
-3        TN13         TN13 2OB    England  51ï¿½ 16' 46.4" N   0ï¿½ 9' 19.9" E   
+2        GU34         GU34 1HN    England   51° 8' 58.6" N  0° 58' 39.6" W   
+3        TN13         TN13 2OB    England  51° 16' 46.4" N   0° 9' 19.9" E   
 4        M  2           M2 4AB    England              NaN             NaN   
 
              ro_nuts_region    ro_postal_region  \
@@ -97,7 +97,7 @@ ibis.Schema {
   primary_trading_address_latitude primary_trading_address_longitude  \
 0                              NaN                               NaN   
 1                              NaN                               NaN   
-2                  51ï¿½ 30' 51.9" N                    0ï¿½ 33' 25.8" W   
+2                  51° 30' 51.9" N                    0° 33' 25.8" W   
 3                              NaN                               NaN   
 4                              NaN                               NaN   
 
@@ -422,6 +422,57 @@ ibis.Schema {
 2 -0.003836 -0.296406  
 3  0.017346 -0.216961  
 4  0.028963 -0.194258  
+```
+
+## working_distance_pc_
+
+### Number of rows: 43,241,404
+
+### Schema:
+
+```
+ibis.Schema {
+  firm_i           string
+  firm_j           string
+  pc4              string
+  distance_meters  float64
+}
+```
+
+### Head of table:
+
+```
+     firm_i    firm_j   pc4  distance_meters
+0  00385769  03438440  EC3A       159.369294
+1  04016287  03438440  EC3A      7435.180266
+2  11219580  10302482  EC3M       340.743458
+3  08333916  10302482  EC3M       172.635144
+4  01264271  10302482  EC3M       148.291974
+```
+
+## working_distance_ttwa_km
+
+### Number of rows: 734,346,954
+
+### Schema:
+
+```
+ibis.Schema {
+  firm_i           string
+  firm_j           string
+  distance_meters  float64
+}
+```
+
+### Head of table:
+
+```
+     firm_i    firm_j  distance_meters
+0  02185448  02838541      1938.809375
+1  02425634  02838541      1802.723825
+2  00541295  02838541      1918.306212
+3  02461547  02838541      1802.723825
+4  04396922  02838541      1938.809375
 ```
 
 ## ref_ons_postcode

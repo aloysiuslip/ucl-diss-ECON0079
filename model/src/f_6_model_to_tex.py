@@ -382,27 +382,59 @@ def format_number(val: float, format_float: str = ",0.3f") -> str:
         return f"{val_float:{format_float}}"
     except ValueError:
         return str(val).replace('_', '\\_')
-    
-def generate_latex_from_generic(df: pd.DataFrame, filepath: str | Path, format_float: str = ",0.3f", var_renamer: dict[str, str] | None = None) -> None:
+
+# Exports a DataFrame to LaTeX, detecting subheader rows with empty tail cells
+def generate_latex_from_generic(
+    df: pd.DataFrame,
+    filepath: str | Path,
+    format_float: str = ",0.3f",
+    var_renamer: dict[str, str] | None | str = None
+) -> None:
     columns = list(df.columns)
-    col_align = "l" + "c" * (len(columns) - 1)
+    num_cols = len(columns)
+    col_align = "l" + "c" * (num_cols - 1)
     
     latex_lines = []
     latex_lines.append(f"\\begin{{tabular}}{{{col_align}}}")
     latex_lines.append("\t\\toprule\\toprule")
     
     # Header row
-    header_clean = [str(c).replace('_', '\\_') for c in columns]
+    header_titles = [str(c).replace('_', '\\_') for c in columns]
+    # Remove any empty headers and replace them with a placeholder
+    header_clean = [h if "Unnamed" not in h else "~" for h in header_titles]
     latex_lines.append("\t" + " & ".join(header_clean) + " \\\\[0.8em]")
     latex_lines.append("\t\\toprule")
     
     # Parameter rows
     for _, row in df.iterrows():
+        val_first = row[columns[0]]
+        first_not_blank = pd.notna(val_first) and str(val_first).strip() not in ("", "nan", "NaN", "None")
+        
+        rest_vals = [row[col] for col in columns[1:]]
+        rest_all_blank = all(pd.isna(v) or str(v).strip() in ("", "nan", "NaN", "None") for v in rest_vals)
+        
+        # Subheader row logic
+        if first_not_blank and rest_all_blank:
+            subheader_text = str(val_first).replace('_', '\\_')
+            latex_lines.append("\t\\addlinespace[0.8em]")
+            latex_lines.append(f"\t\\multicolumn{{{num_cols}}}{{l}}{{\\itx{{{subheader_text}}}}} \\\\[0.4em]")
+            latex_lines.append("\t\\hline")
+            continue
+
         row_vals = []
         for i, col in enumerate(columns):
             val = row[col]
             if i == 0:
-                if var_renamer and col in var_renamer:
+                if isinstance(var_renamer, str):
+                    if var_renamer == 'equation':
+                        sections = str(val).split('_')
+                        if "{" in str(val) and "}" in str(val):
+                            val = f"${val}$"
+                        elif len(sections) > 1:
+                            val = f"${sections[0]}_{{{sections[1]}}}$"
+                        else:
+                            val = f"${val}$"
+                elif isinstance(var_renamer, dict) and col in var_renamer:
                     val = var_renamer[col]
                 else:
                     val = format_param(str(val))

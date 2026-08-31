@@ -261,9 +261,9 @@ meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 
 the first half of a UK postcode \itx{pc4},
 and the full UK postcode \itx{pc8}.
 
-\subsection{Iterative weighting matrices}
+\subsection{Iterative weighting applicatiions}
 
-Intuitively, I apply these weighting matrices $W$ to the aggregate variables vectors
+Intuitively, I take the product of these weighting matrices $\mathbf W$ to the aggregate variables vectors
 \itx{gva1}, capital \itx{total\_assets}, and labour \itx{employees}.
 As will be shown in \fullref{s:models-static}, the procedure to generate valid instrumental variables
 also requires me to apply multiples of this transformation matrix,
@@ -273,7 +273,12 @@ $\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}\mathbf W_{g3}$ and so on to the ag
 As a data procedure, I calculate these for my 3 aggregate variable vectors of interest.
 As given below in \todo{Table}, this requires a total of 57 compound weighting matrices,
 or columns of a database, to be calculated and generated.
-\todo{para}
+
+\wraptable
+    {List of variables to be transformed via weighting matrix $\mathbf W$}
+    {../../calculations/output/3_group_w_prefixes}
+    {Total: 62 new variables to be created, for a total of 64 columns in a linked table.}
+
 Matrix products, including taking high indices, of the interactions between 1,045,164 firms
 is not computationally difficult, especially with sophisticated algorithms to handle $W$'s block diagonal structure.
 However, storing the calculation in temporary memory is beyond
