@@ -119,7 +119,13 @@ The inversion is permissible because I can expect a restriction to apply, ruling
     increase TFP in its peer firm $j$ more than 1x,
     which would increase TFP in that firm's peer $i$ more than 1x,
     and so on until the effect multiplies to infinity
-}. This is directly comparable to the lag polynomial and MA inversion procedure in autoregressive time series analysis.
+}. This is directly comparable to the lag polynomial and MA inversion procedure in autoregressive time series analysis\footnote{
+    Equation \eqref{eq:static-sub-reflection-exogenous} stacks the $x_{i,t}$
+    \itx{exogenous} parameter definition given above and
+    vectorises the coefficients $\boldsymbol\beta = \begin{pmatrix}\beta_1 & \beta_2\end{pmatrix}'$.
+    A full algebraic derivation from lines \eqref{eq:static-reflection-problem} to \eqref{eq:static-sub-reflection-exogenous}
+    is available in \nameref{app-reflection-problem-instr-derivation}
+}.
 \begin{align}
     \label{eq:static-vector-reduced}
     \mathbf y_t &= \boldsymbol \alpha
@@ -127,7 +133,7 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                     + \beta_0  \boldsymbol \iota
                     + \beta_1  \mathbf k_t + \beta_2 \mathbf l_t
                     + \theta_0 \mathbf W \mathbf y_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
                     + \boldsymbol \varepsilon_t
     \\ \notag
                 &= (\mathbb I-\theta_0 \mathbf W)^{-1}(
@@ -135,7 +141,7 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                     + \gamma_t \boldsymbol\iota
                     + \beta_0  \boldsymbol \iota
                     + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
                     + \boldsymbol \varepsilon_t
                 )
     \\
@@ -145,17 +151,29 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                     + \gamma_t \boldsymbol\iota
                     + \beta_0  \boldsymbol \iota
                     + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\mathbf k_t + \mathbf l_t)
+                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
                     + \boldsymbol \varepsilon_t
                 )
+    \\
+    \label{eq:static-sub-reflection-exogenous}
+                &= \frac{\gamma_t + \beta_0}{1-\theta_0}\boldsymbol \iota
+                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^k
+                        \boldsymbol \alpha
+                    + \boldsymbol\beta \mathbf x_t
+                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^{k+1} \mathbf x_t
+                      \boldsymbol \beta \cdot (\theta_0 + \xi_0)
+                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^k
+                        \boldsymbol \varepsilon_t
     \\
     \label{eq:static-red-endogenous-effect}
     y_{j,t}     &= \dots
                     + \underbrace{
-                        \xi_0
                         \sum_{k=0}^\infty
-                        [\theta_0^k \mathbf W^{k+1}]_{(j,)}
-                        \cdot (\mathbf k_t + \mathbf l_t)
+                        \left[
+                            \theta_0^k \mathbf W^{k+1}
+                        \right]_{(j,)}
+                        \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}
+                        \boldsymbol \beta \cdot (\theta_0 + \xi_0)
                     }_{\text{exogenous}_j}
                     + \underbrace{
                         \sum_{k=0}^\infty
@@ -163,7 +181,6 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                     \boldsymbol \varepsilon_t
                     }_{\text{error transformation}_j}
 \end{align}
-
 It is the primary econometric challenge of this analysis to overcome this spatial endogeneity.
 The reduced-form equation \eqref{eq:static-red-endogenous-effect} confirms that
 within the \itx{endogenous} effect $\theta_0 \sum_{j\neq i} w_{ij} y_{j,t}$,
@@ -222,16 +239,40 @@ We should assess these results with the heavy caveat that the exogeneity assumpt
 \end{align}
 
 Instead, as recommended in \citep{Bramoulle2009},
-the most defensible approach is to instrument the \itx{endogenous} variable, $y_{j,t}$5
-through the \itx{exogenous} parameters.
+the most defensible approach is to instrument the \itx{endogenous} variable, $y_{j,t}$
+through the \itx{exogenous} parameters \linebreak
 $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots \mathbf W^k \mathbf x_t\ \forall k>2$.
-This paper shows to be valid instruments
-under certain testable peropties of $\mathbf W$.
-This is intuitive: we can see through through equation \eqref{eq:static-red-endogenous-effect} that as long as \dots
-$\mathbb E[y_{j,t}\cdot [\mathbf W^k \mathbf x_t]_{(,j)}]\neq 0,\ \forall k>2$.
+These are be valid instruments under certain testable properties of $\mathbf W$.
+This is intuitive: we can see through equation \eqref{eq:static-red-endogenous-effect} that
+a linear combination of all firms' contemperaneous capital and labour inputs,
+$\mathbf W^{k+1}\begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}\ \forall k>1$ 
+is an exogenous instrument.
+It has relevance, meaning $\mathbb E[y_{j,t}\cdot [\mathbf W^k]_{(j,)}\mathbf x_t]\neq 0,\ \forall k>2$
+as long as $\theta_0\neq 0$ and $\beta_0 + \xi_0 = \delta_0 \neq 0$.
+These two conditions are unsurprising and highly intuitive - note that they differ slightly from
+the more complex setup given in \citep{Bramoulle2009},
+this is because I derive the \itx{exogenous} effect in \eqref{eq:static-main-peer-effects}
+as the accounting composition of TFP and so $\mathbf \beta$ is necessarily included as a post-multiplification
+factor for the \itx{exogenous} effect allowing factorisation, which is absent from the general model.
+\par
+The testable conditions are:\footnote{\cite{Bramoulle2009}}
+\par
 We can also note that $\mathbf W\mathbf x_t$ is also a valid instrument
 but unhelpful in this estimation as it is also a regressor as the direct \itx{exogenous} effect.
 \par
+A summary of the identification rules listed in \citep{Bramoulle2009} is as follows:
+
+\wraptable
+    {Spatial econometric identification rules for weighting matrix $W$}
+    {./figures/4_tab_bdf_identification}
+    {
+        Adapted from \citepalt{Bramoulle2009}.
+        (a) \citepalt{Manski1993},
+        (b) \citepalt{Moffitt2001},
+        (c) \citepalt{Lee2007}.
+        \todo{Increase row size here; review varying group sizes, $\alpha\neq0$}
+    }
+
 I take this approach in Models (2, 3, 4). The instruments to employ are as follows:
 \todo{\dots}
 
@@ -263,31 +304,13 @@ non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
 with the latter meaning two firm entries shared a latitude-longitude identifier
 to 5 decimal places.
 Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
-as the group identifier for Table \ref{tab:1a-lmm}.1..
+as the group identifier for Table \ref{tab:lmm}.1..
 This was mostly driven by full data availability, and the consistency of postcode definitions
 with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
 within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
 a move from the average number of peers from 3.1 to 2.9,
 and was a similar number of groups, with non-coheisve definitions.
-\par
-\begin{table}[htbp]
-    \centering
-    \caption{\todo{Placeholder} Summary statistics across spatial groups}
-    \label{tab:spatial_group_summary}
-    \begin{tabular}{lcccc}
-        \toprule
-        Property            & Number of groups & Unclassified & Unclassified (\%) & Avg. peers per group \\
-        \midrule
-        \itx{ttwa}          & 228    & 567 & 0.4\% & 668.3 \\
-        \itx{pc4}           & 2,705  & 0   & 0.0\% & 56.3  \\
-        \itx{pc8}           & 49,963 & 0   & 0.0\% & 3.1   \\
-        \itx{lat\_lon3}     & 48,540 & 507 & 0.3\% & 3.1   \\
-        \itx{lat\_lon4}     & 53,193 & 507 & 0.3\% & 2.9   \\
-        \itx{lat\_lon5}     & 53,246 & 507 & 0.3\% & 2.9   \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-\noindent
+\par\noindent
 The results below show model (1), where peers and targets share a postcode.
 \wraptable
     {Static panel linear-in-means using spatial-group TFP averages}

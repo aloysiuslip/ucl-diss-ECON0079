@@ -1,6 +1,41 @@
-\section*{Appendix 1}
-\addcontentsline{toc}{section}{Appendix 1}
+\phantomsection
+\section*{Appendix 1: Solving the reflection problem}
+\addcontentsline{toc}{section}{Appendix 1: Solving the reflection problem}
+\label{app-reflection-problem-instr-derivation}
+
+\begin{align*}
+    &\quad\ 
+    \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k (\mathbf{x}_t\boldsymbol{\beta}
+    + \mathbf{W}\mathbf{x}_t \boldsymbol\beta \cdot \xi_0) 
+    \\
+    &= \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k \mathbf{x}_t\boldsymbol{\beta} 
+        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
+        \\
+    &= \mathbf{x}_t\boldsymbol{\beta} 
+        + \sum_{k=1}^{\infty} \theta_0^k \mathbf{W}^k \mathbf{x}_t\boldsymbol{\beta} 
+        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
+        \\
+    &= \mathbf{x}_t\boldsymbol{\beta} 
+        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t\boldsymbol{\beta} \cdot \theta_0
+        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
+        \\
+    &= \mathbf{x}_t\boldsymbol{\beta} 
+        + \left( \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \right) 
+        \boldsymbol\beta \cdot (\theta_0 + \xi_0)
+        \\[1em]
+    \mathbf{y}_t 
+    &= \frac{\alpha}{1-\theta_0}\boldsymbol{\iota} 
+        + \mathbf{x}_t\boldsymbol{\beta} 
+        + \left( \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \right) 
+        \boldsymbol\beta \cdot (\theta_0 + \xi_0) 
+        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k \boldsymbol{\varepsilon}_t
+\end{align*}
+
+\newpage
+\phantomsection
+\section*{Appendix 2}
 \label{app-dynamic-panel-ho-ar}
+\addcontentsline{toc}{section}{Appendix 2}
 
 \wraptable
     {Dynamic panel: higher-order autoregressive lags}
@@ -23,9 +58,6 @@
     {} 
 
 \newpage
-
-\section*{Appendix 2}
-\addcontentsline{toc}{section}{Appendix 2}
 
 \newpage
 

@@ -17,7 +17,6 @@
 \setlength{\parindent}{20pt}
 \setlength{\parskip}{0pt}
 \urlstyle{same}
-\onehalfspacing
 \newcommand{\itx}[1]{{\hyphenpenalty=10000 \textit{#1}}}    % Prevents word-splitting on italic words
 
 % Font
@@ -59,7 +58,8 @@
     format=multiline_title,      % Puts title on line below label
     justification=centering      % Centers both lines
 }
-\newcommand{\tablerefp}[1]{Table~(\ref{#1})}
+\newcommand\tablerefp[1]{Table~(\ref{#1})}
+\newcommand\fullref[1]{\autoref{#1} \nameref{#1}}
 
 % Model section
 \usepackage{tabularray}
@@ -96,6 +96,7 @@
 \bibliographystyle{plainnat}
 \setcounter{secnumdepth}{2}
 \pagestyle{plain}
+\newcommand{\citepalt}[1]{\citeauthor{#1}, \citeyear{#1}}
 
 % TOC/LOF heading names
 \renewcommand{\contentsname}{Table of Contents}
@@ -122,17 +123,44 @@
 % 2. Macro to handle tables with optional notes (#3)
 \usepackage{xstring}
 \usepackage{ifthen}
+
 \newcommand{\wraptable}[3]{%
-    \StrBehind{#2}{results_}[\tempA]%
+    % 1. Find the first segment (separated by _) containing a number,
+    %    and remove everything up to and including that segment.
+    \noexpandarg%
+    \saveexpandmode%
+    \expandarg%
+    % Check for the first digit occurrence to identify the numbered segment
+    \StrPosition{#2}{0}[\pos0]%
+    \StrPosition{#2}{1}[\pos1]%
+    \StrPosition{#2}{2}[\pos2]%
+    \StrPosition{#2}{3}[\pos3]%
+    \StrPosition{#2}{4}[\pos4]%
+    \StrPosition{#2}{5}[\pos5]%
+    \StrPosition{#2}{6}[\pos6]%
+    \StrPosition{#2}{7}[\pos7]%
+    \StrPosition{#2}{8}[\pos8]%
+    \StrPosition{#2}{9}[\pos9]%
+    % Extract everything after the underscore following the numbered segment
+    \StrBehind{#2}{_}[\tempFirstPass]%
+    \IfSubStr{\tempFirstPass}{_}{%
+        \StrBehind{\tempFirstPass}{_}[\tempA]%
+    }{%
+        \let\tempA\tempFirstPass%
+    }%
+    \restoreexpandmode%
+    %
+    % 2. Replace remaining underscores with hyphens
     \StrSubstitute{\tempA}{_}{-}[\tempB]%
     \edef\tablelabel{tab:\tempB}%
+    %
     \begin{table}[hbtp]
         \centering
         \begin{threeparttable}
             \caption{#1}%
             \label{\tablelabel}% Automatically generated label
             \input{#2}%
-            \ifthenelse{\equal{#3}{}}{}{% Conditionally include notes[cite: 1]
+            \ifblank{#3}{}{% Conditionally include notes[cite: 1, 4]
                 \begin{tablenotes}
                 #3
                 \end{tablenotes}%

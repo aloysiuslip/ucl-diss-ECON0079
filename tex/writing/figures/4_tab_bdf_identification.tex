@@ -1,0 +1,100 @@
+\footnotesize{
+\begin{tabular}{lp{4.8cm}p{2.8cm}l}
+    \toprule\toprule
+    \textbf{Structure}
+    & \textbf{Required condition}
+    & \textbf{Identified}
+    & \textbf{Instruments} \\
+    \midrule
+
+    \addlinespace[0.8em]
+    \multicolumn{4}{l}{\itx{Group structure}} \\
+    \hline
+        \textbf{Proposition 2}
+        & $\beta\theta_0+\xi_0\neq0$
+        & 
+        &  \\
+
+        \hspace{0.3cm}
+        Linear-in-Means (LMM)\textsuperscript{(a)}
+        & Target is own peer
+        & $\times$\newline $W^2=W$
+        & --- \\
+
+        \hspace{0.3cm}
+        Leave-one-out\textsuperscript{(b)}
+        &   Target excluded from peer mean    \newline
+            Same group size
+        & $\times$ \newline $W^2=\frac{1}{s-1}\mathbb I+\frac{s-2}{s-1}W$
+        & --- \\
+
+        \hspace{0.3cm}
+        Varying group sizes\textsuperscript{(c)}
+        & Target excluded from peer mean      \newline
+            $\geq 2$ group sizes
+        & $\checkmark$
+        & $s_g - 1$      \\
+
+    \addlinespace[0.8em]
+    \multicolumn{4}{l}{\itx{Network structure}} \\
+        \hline
+        \textbf{Proposition 1}
+        &   $\mathbb I,W,W^2$ linearly independent    \newline
+            $\beta\theta_0+\xi_0\neq0$
+        & $\checkmark$
+        & $W^2x$ \\
+
+        \hspace{0.3cm}Intransitive triad
+        & $\exists i,j,k:W_{ij}>0,\ W_{jk}>0,\ W_{ik}=0$
+        & $\checkmark$
+        & $W^2x$ \\
+
+        \hspace{0.3cm}Transitive networks
+        & $W^2\neq0$
+        & $\checkmark$
+        & $W^2x$ \\
+
+        \textbf{Proposition 3}
+        & $W^2\neq0$; $\beta\theta_0+\xi_0\neq0$
+        & $\checkmark$
+        & $W^2x$ \\
+
+        \hspace{0.3cm}$W^2=0$
+        & $\boldsymbol\alpha\neq0$
+        & $\checkmark$
+        & $Wx$ \\
+
+    \addlinespace[0.8em]
+    \multicolumn{4}{l}{\itx{Adding correlated effects}} \\
+    \hline
+        \textbf{Proposition 4}
+        & $\mathbb I,W,W^2,W^3$ linearly independent    \newline
+            $\beta\theta_0+\xi_0\neq0$
+        & $\checkmark$
+        & $(\mathbb I-W)W^2x$ \\
+
+        \hspace{0.3cm}Corollary 1: group structure
+        & $\geq 3$ group sizes
+        & $\checkmark$
+        & $(\mathbb I-H)W^2x$ \\
+
+        \hspace{0.3cm}Complete bipartite / star
+        & $W^3=W$
+        & $\times$
+        & --- \\
+
+        \textbf{Proposition 5}
+        & $W^3=\lambda_0\mathbb I+\lambda_1W+\lambda_2W^2$  \newline
+            $\operatorname{rank}(\mathbb I-W)<n-1$          \newline
+            $2\lambda_0+\lambda_1+1\neq0$
+        & $\checkmark$
+        & $(\mathbb I-H)W^2x$ \\
+
+        \hspace{0.3cm} Full rank spatial polynomial
+        & $\operatorname{rank}(\mathbb I-W)=n-1$
+        & $\times$
+        & None \\
+
+    \bottomrule
+\end{tabular}
+}
