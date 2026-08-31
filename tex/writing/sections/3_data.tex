@@ -34,8 +34,6 @@ as these are income-related aggregates with real spending power best captured by
 All balance sheet data are in thousands ('000s) of GBP (£).
 As we estimate log relationships exclusively, this has no effect on parameter interpretation.
 
-\subsection{Location data}
-
 \subsection{Deriving panel aggregates}
 
 Labour input is taken from the number of employees reported on the FAME balance sheet per firm.
@@ -83,7 +81,7 @@ and additionally note that the alternate GVA measure also reduces panel observat
 For these reasons, I do not report TFP calculations with this second GVA measure
 which are regardless near-identical, though I resultingly refer to GVA throughout this paper as \itx{gva\_1}.
 
-\subsection{2-factor TFP estimation}
+\subsection{Deriving 2-factor TFP for metric selection}
 
 To help guide the choice of capital and output (GVA) measure, I initially conduct the 2-factor estimation
 deriving the residual $z_{i,t}$ to decompose further in a second stage.
@@ -144,7 +142,70 @@ which is to be expected \todo{explain}.
 % but correlated to both firm effects and time trends.
 % By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
 
-\subsection{Firm distance measures}
+\subsection{Location group classification}
+
+The structure of the weighting matrix $\mathbf W$ is key to identification.
+$W$ is an $n\times n$ matrix of weights where each column $j$ denotes a weight $w_{ij}$
+applied on the variable of peer firm $j$, summing across rows $i$
+to reach a weighted aggregate regressor
+with an estimated effect on target firm $i$.
+\par
+A first property of $W$ is that it its diagonal elements are all $0$:
+a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
+This is common to peer effets literature such as \citep{Moffitt2001}
+and discussed in \citep{Bramoulle2009}.
+\par
+Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
+The resulting $n\times n$ matrix has off-diagonal elements as
+the number of group members $n_g-1$, which excludes the target firm $i$.
+The structure is given below\footnote{
+    Adapted from \citep{Bramoulle2009}
+}:
+
+\begin{align*}
+    w_{ij}\in \mathbf W^\text{group} &=
+        \begin{cases}
+            0,              & \text{if}         \ i=j           \\
+            \frac1{n_g-1},  & \text{else if}    \ (i,j)\in g    \\
+            0,              & \text{otherwise}
+        \end{cases}
+    \\
+    \mathbf \Gamma_{s_1} \in \mathbf W^\text{group}
+    &=
+    \{ i, j \in g \}, s_1: n_g
+    \\
+    \mathbf W^\text{group}
+    &=
+    \underset{(n\times n)}{
+        \begin{pmatrix}
+            \mathbf \Gamma_{s_1}    &   0                       &   \dots       \\
+            0                       &   \mathbf \Gamma_{s_2}    &   \dots       \\
+            \vdots                  &   \vdots                  &   \ddots
+        \end{pmatrix}
+    }
+\end{align*}
+
+\par\noindent
+An example such matrix is $\mathbf W^\text{group}_1$, a $(7\times 7)$
+set of interactions between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only.
+\begin{align*}
+    \mathbf W^\text{group}_1 &=
+    \begin{pmatrix}
+        0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
+        \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
+        0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+        0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
+        0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
+    \end{pmatrix}
+\end{align*}
+
+As will be shown through discussions of spatial econometric properties,
+construction of a valid instrument requires calculation of
+$\mathbf W^2, \mathbf W^3, \dots, \mathbf W^k$.
+
+\subsection{Location distance calculations}
 \label{ss:data-distance}
 
 Throughout this analysis, I use terminology of a productivity spillover occuring

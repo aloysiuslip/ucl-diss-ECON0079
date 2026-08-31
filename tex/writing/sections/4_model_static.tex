@@ -246,37 +246,16 @@ the following reduced-form equation can be estimated with a simple panel OLS.
 \begin{align}
     \eqreref{eq:static-main-reduced}
     z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \delta_0 \sum_{j} w_{ij}z_{j,t} + \varepsilon_{i,t}
-    \\
-    w_{ij}\in \mathbf W &=
-        \begin{cases}
-            0,              & \text{if}         \ i=j           \\
-            \frac1{n_g-1},  & \text{else if}    \ (i,j)\in g    \\
-            0,              & \text{otherwise}
-        \end{cases}
-    \\ \notag
-    &\sim
-    \begin{pmatrix}
-        0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
-        0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
-        0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
-        0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
-    \end{pmatrix}
 \end{align}
 %
 The initial static model applies simple time-invariant weights $w_{ij}$
-of the averages of spatial peers.
+following the interactions structure of $\mathbf W^\text{group}$.
 As has been indicated by the sum of peers $j\neq i$,
-I adopt a 'leave-one-out' approach, where the resulting $n\times n$ matrix
-is zero on the diagonal and the reciprocal weight applied across peers
-is therefore the number of group members $n_g-1$, which excludes the target firm $i$.
+I adopt a 'leave-one-out' approach in line with
+the zero-diagonal structure of $\mathbf W^\text{group}$ described.
 Intuitively, this is the unweighted average of peer TFP within a spatial ring.
-The specification is known as the 'Linear-in-Means (LMM)' Model
-and is common to the peer effects literature.
-I illustrate an example of a weighted matrix $W$ following this rule for 7 firms,
-categorised by a group of 4 and a group of 3.
+This weighting matrix is the classic set of weights applied for the 'Linear-in-Means (LMM)' Model
+common to the peer effects literature.
 \par
 I discussed group assignment in section \ref{ss:data-distance}.
 Firms have been labelled using their location features to symmetric, transitive,
