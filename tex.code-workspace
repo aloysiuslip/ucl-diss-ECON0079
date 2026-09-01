@@ -14,7 +14,8 @@
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
 		"latex-workshop.message.error.show": false,
-        "latex-workshop.view.pdf.invert": 0,
+        "latex-workshop.view.pdf.invert": 1,// Enables the native LaTeX Workshop status bar counter
+        "latex-workshop.view.outline.status.enabled": true,
 
         "highlight.regexes": {
             "(\\\\todo){": {
@@ -26,6 +27,15 @@
                     }
                 ]
             }
-        }
+        },
+        "statusbar_command.commands": [
+            {
+                "text": "TeX Words: $(pencil)",
+                "command": "workbench.action.tasks.runTask",
+                "arguments": ["Count tex words"],
+                "alignment": "right",
+                "priority": 100
+            }
+        ]
 	}
 }

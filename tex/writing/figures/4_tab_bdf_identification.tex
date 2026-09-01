@@ -1,10 +1,10 @@
-\footnotesize{
-\begin{tabular}{lp{4.8cm}p{2.8cm}l}
+\normalsize{
+\begin{tabular}{lp{5.5cm}cl}
     \toprule\toprule
     \textbf{Structure}
     & \textbf{Required condition}
     & \textbf{Identified}
-    & \textbf{Instruments} \\
+    & \textbf{Instrument} \\
     \midrule
 
     \addlinespace[0.8em]
@@ -16,16 +16,16 @@
         &  \\
 
         \hspace{0.3cm}
-        Linear-in-Means (LMM)\textsuperscript{a}
+        Linear-in-Means\textsuperscript{a}
         & Target is own peer
-        & $\times$\newline $W^2=W$
+        & $\times$
         & --- \\
 
         \hspace{0.3cm}
         Leave-one-out\textsuperscript{b}
         &   Target excluded from peer mean    \newline
             Same group size
-        & $\times$ \newline $W^2=\frac{1}{s-1}\mathbb I+\frac{s-2}{s-1}W$
+        & $\times$
         & --- \\
 
         \hspace{0.3cm}
@@ -54,7 +54,7 @@
         & $\checkmark$
         & $W^2x$ \\
 
-        \hspace{0.3cm}Deep network diameter
+        \hspace{0.3cm}Deep network
         & $s_d\geq 2$ network diameter
         & $\checkmark$
         & $W^2x$ \\
@@ -78,20 +78,15 @@
         & $\checkmark$
         & $(\mathbb I-W)W^2x$ \\
 
-        \hspace{0.3cm}Corollary 1: group structure
+        \hspace{0.3cm}Group structure
         & $s_g\geq 3$ group sizes
         & $\checkmark$
         & $(\mathbb I-H)W^2x$ \\
 
-        \hspace{0.3cm}Corollary 2: network structure
+        \hspace{0.3cm}Network structure
         & $s_d\geq 3$ network diameter
         & $\checkmark$
         & $(\mathbb I-H)W^2x$ \\
-
-        \hspace{0.3cm}Complete bipartite / star
-        & $W^3=W$
-        & $\times$
-        & --- \\
 
         \textbf{Proposition 5}
         & $W^3=\lambda_0\mathbb I+\lambda_1W+\lambda_2W^2$  \newline
@@ -99,12 +94,6 @@
             $2\lambda_0+\lambda_1+1\neq0$
         & $\checkmark$
         & $(\mathbb I-H)W^2x$ \\
-
-        \hspace{0.3cm} Full rank spatial polynomial
-        & $\operatorname{rank}(\mathbb I-W)=n-1$
-        & $\times$
-        & None \\
-
     \bottomrule
 \end{tabular}
 }

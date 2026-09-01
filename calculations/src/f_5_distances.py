@@ -248,7 +248,8 @@ def plot_folium_network(
 
     center_lat = df_networks['lat_dec_target'].mean()
     center_lon = df_networks['lon_dec_target'].mean()
-    m = folium.Map(location=[center_lat, center_lon], zoom_start=11, tiles="CartoDB positron")
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=11)
+    # m = folium.Map(location=[center_lat, center_lon], zoom_start=11, tiles="CartoDB positron")
 
     # ✅ FIX 1: Use the perfectly ordered list from the generator if provided
     if ordered_targets is None:

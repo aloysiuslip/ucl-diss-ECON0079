@@ -34,6 +34,46 @@
             "runOptions": {
                 "runOn": "default" // manual trigger,
             }
+        },
+        {
+            "label": "Count tex words",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/tex/writing"
+            },
+            "windows": {
+                "command": "texcount -inc -sum -merge -dir=. -brief 0_main.tex"
+            },
+            "linux": {
+                "command": "texcount -inc -sum -merge -dir=. -brief 0_main.tex"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Count PDF words",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/tex/writing"
+            },
+            "windows": {
+                "command": "pdftotext 0_main.pdf - | egrep -e '\\w\\w\\w+' | iconv -f ISO-8859-15 -t UTF-8 | wc -w"
+            },
+            "linux": {
+                "command": "pdftotext 0_main.pdf - | egrep -e '\\w\\w\\w+' | iconv -f ISO-8859-15 -t UTF-8 | wc -w"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false
+            },
+            "problemMatcher": []
         }
     ]
 }

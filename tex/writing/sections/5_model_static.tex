@@ -251,23 +251,32 @@ I do so for the models presented in this section.
 I use the instruments
 \todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
 and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$ as feasible instruments for this section's network models
-\todo{Table VII, model}.
-
+\todo{Table VII, model}. Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
+noting that I have chosen to display this in a $l \times 2$ matrix for space and conceptual symmetry,
+as the instruments can be grouped by $k_t$ and $l_t$ regressors.
+The first 2 rows correspond to the exogenous regressors within the reduced-form equation itself,
+the own-firm classical factors effect from $k_{i,t},l_{i,t}$
+and the \itx{exogenous} peer effect from $k_{j,t},l_{j,t}$.
+The remaining rows are instrument linear combinations of all
+firm classical factor inputs $\mathbf k_t, \mathbf l_t$,
+using the higher-order spatial lags of $\mathbf W$ discussed.
 \begin{align}
     \label{eq:static-moment-conditions}
-    \mathbb E \left[
-        \Delta\varepsilon_{it}
-        \cdot
+    \mathbb E[
         \begin{pmatrix}
-            \Delta \ln(y_{i,t-2})     \\
-            \Delta \ln(y_{i,t-3})     \\
-            \Delta \ln(y_{i,t-4})     \\
-            \Delta \ln(k_{i,t-2})     \\
-            \Delta \ln(k_{i,t-3})     \\
-            \Delta \Sigma_jw_{ijt}z_{jt}
+            k_{i,t}                                     & l_{i,t} \\
+            w_{ij}k_{j,t}                               & w_{ij}l_{j,t}   \\
+            \left[\mathbf W^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3\right]_{(j,)} \mathbf l_t\\
+            \vdots & \vdots \\
+            \left[\mathbf W^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k\right]_{(j,)} \mathbf l_t
         \end{pmatrix}
-    \right]
-    &= 0
+        \begin{pmatrix}
+            \varepsilon_{it}    \\
+            \varepsilon_{it}
+        \end{pmatrix}
+    ]
+    &= 0_{l\times 2}
 \end{align}
 
 These instruments and conditions are intuitive:
@@ -295,10 +304,9 @@ so does not help increase our identification of $y_{j,t}$.
     {./figures/4_tab_bdf_identification}
     {
         Adapted from \citepalt{Bramoulle2009}.
-        (a) \citepalt{Manski1993},
-        (b) \citepalt{Moffitt2001},
+        (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
+        (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
         (c) \citepalt{Lee2007}.
-        \todo{Increase row size here; review varying group sizes, $\alpha\neq0$}
     }
 
 % --- %

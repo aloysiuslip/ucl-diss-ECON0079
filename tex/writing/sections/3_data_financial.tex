@@ -1,0 +1,166 @@
+\section{Financial data}
+
+\subsection{Fame}
+
+I have used data from Fame for this investigation.
+Fame is a comprehensive set of financial datapoints from UK firms with useful variables for this analysis,
+in particular, number of employees and balance sheet data from which analysis-relevant aggregates can be derived.
+Fame is provided by Moody's Analytics, an international credit agency,
+and collects its data from UK firms via survey\footnote{\cite{MoodysAnalytics2026}}.
+\par
+Its international counterpart, Orbis, offers a similar service for international counterparts.
+This analysis could therefore be extended to offer insights comparing the spillover effects of UK firms to their international counterparts.
+For this investigation, the UK dataset is comprehensive and the most policy-relevant for this investigation.
+\par
+Raw data was accessed from Fame in February 2025 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026}
+and reused for this project. Raw data is provided on a series of a financial balance sheet indicators,
+including characteristics that are fixed for each firm, bucketed into $a1\_ID$ and $a5\_misc$ indicator tables,
+and annual data published on a calendar-year basis,
+bucketed into \itx{a2\_key\_finance}, \itx{a3\_assets}, and \itx{a4\_profits} tables.
+
+\subsection{\todo{Ingestion and cleaning}}
+
+I designed a series of Python scripts, organised in Jupyter notebooks to ingest this data and manipulate this data.
+Data was stored in \itx{DuckDB}, an open-source, MIT-licensed relational (SQL) database architecture\footnote{\cite{Raasveldt2026}}.
+It operates locally, meaning minimal lag from issuance to execution time
+provided the machine of operation is sufficiently high-compute.
+It stores data in column vectors, which is a significant advantage
+to manipulating whole variables, for instance to apply Matrix transformations
+as is required to calculate spatially-weighted distances.
+Any SQL commands issued from the Python are compiled down to C,
+making execution for column transformation operations extremely fast,
+even for joining tables of several 100s of millions of rows,
+as is calculated in this analysis for target-peer spatial distances.
+I wrote database interaction commands using \itx{Ibis}\footnote{\cite{TheIbisProjectAuthors2026}}, an Apache-2.0 licensed 
+Object-Relational Mapping framework (ORM) which allows SQL commands to be written natively in Python,
+minimising the likelihood of errors when issuing queries loops or changing variable names.
+This architecture choice is extremely well-suited for mass data econometric data analysis
+and critical to solving the compute limitations of iterative large-$n$ dataset manipulations
+required to calculate the valid instruments identified in section \ref{ss:static-identification}.
+
+\todo{\dots}
+
+All data is deflated to real terms, using 2024 as the base year.
+I used the GDP deflator for all balance sheet variables,
+except for \itx{renumeration\_employees} and its composites for which I used CPIH,
+as these are income-related aggregates with real spending power best captured by household purchasing baskets
+\footnote{\cite{OfficeforNationalStatistics2026}}.
+\par
+All balance sheet data are in thousands ('000s) of GBP (£).
+As we estimate log relationships exclusively, this has no effect on parameter interpretation.
+
+\subsection{Deriving panel aggregates}
+
+Labour input is taken from the number of employees reported on the FAME balance sheet per firm.
+This dataset, like all others, does not include hours worked per employee on a firm-level that would offer a more
+granular productivity (GVA per hour worked) measures. An estimation in this setting would likely have to impute the measure
+from industry aggregates, which would likely confound the true firm-level signal.
+\par
+Capital is Fame's \texttt{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
+within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
+The average capital-output ratio is 6x within FAME when filtering for positive values \tablerefp{table:ky},
+which is moderately higher than macroeconomic aggregates typically suggest
+likely due to accounting standard differences.
+
+\begin{table}[htbp]
+    \begin{center}
+        \begin{threeparttable}[c]
+            \caption{Capital-output ratios in FAME corpus of firms}
+            \label{table:ky}
+            \begin{tabular}{llc}
+                \toprule\toprule
+                Variable            &   Description                                             & Capital-output ratios \\
+                \hline
+                \itx{tangibles}     &                                                           &   3.53    \\
+                \itx{fixed\_total}  &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
+                \itx{total\_assets} &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
+                \bottomrule
+            \end{tabular}
+        \end{threeparttable}
+    \end{center}
+\end{table}
+
+GVA is calculated as the sum of \itx{ebitda} and \itx{renumeration\_employees}.
+\itx{renumeration\_employees} is the exact sum of \itx{wages}, \itx{social\_security\_costs},
+and \itx{pensions\_costs} in the balance sheet.
+\itx{ebitda} is in turn \itx{turnover} minus intermediate inputs and is
+given in the Fame balance sheet for the vast majority of panel observations
+in our dataset. It is also possible to reconstruct \itx{ebitda} via the sum of
+\itx{profit\_loss\_pretax}, \itx{interest\_paid}, and \itx{depreciation},
+providing an alternative measure of GVA.
+We can expect the difference between these two to be accounting differences\footnote{
+    An OLS regression between the two, discarding 5\% outliers, has a coefficient of 0.91 with a 0.000 p-value.
+    This means \itx{gva2} is slightly lower than \itx{gva1}, with that impact mostly driven by top-end outliers.
+}
+and additionally note that the alternate GVA measure also reduces panel observations from 1,085,520 to 618,588.
+For these reasons, I do not report TFP calculations with this second GVA measure
+which are regardless near-identical, though I resultingly refer to GVA throughout this paper as \itx{gva\_1}.
+
+\subsection{Deriving 2-factor TFP for metric selection}
+
+To help guide the choice of capital and output (GVA) measure, I initially conduct the 2-factor estimation
+deriving the residual $z_{i,t}$ to decompose further in a second stage.
+This step is additionally helpful for validating the relationships about
+the derived aggregates from my data.
+
+\begin{align}
+    \label{eqn:tfp2factor}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + u_{i,t}
+    \\ \notag
+    u_{i,t} &= \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
+    \\
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
+    \\
+    \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
+\end{align}
+
+\begin{table}[hbtp]
+    \centering
+    \begin{threeparttable}
+        \caption{Baseline 2-factor TFP estimation: varying fixed effects}%
+        \label{tab:tfp_fe}
+        \input{../../model/output/results_0a_tfp_fe}
+    \end{threeparttable}
+    \\~\\
+    \vspace{1em}
+    \begin{threeparttable}
+        \caption{... varying parameter measures}
+        \label{tab:tfp_measures}
+        \input{../../model/output/results_0b_tfp_measure}
+        \begin{tablenotes}
+            All parameters reported with standard errors underneath.
+            Significant estimates against an $H_0: \beta=0$ are indicated
+            with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+I conduct the estimation using the log-transformed variables.
+I must include firm and time fixed effects and a constant
+if equation (\ref{eq:static-main-reduced}) is the true specification,
+otherwise the static panel OLS will inaccurately attribute firm and time variation
+to my classical factor inputs \todo{explain more clearly}.
+As outlined above, this analysis assumes factor input exogeneity.
+\par
+Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share
+exactly in line with ONS analysis of UK industry-level data
+over the same time period, particularly \itx{corporate gross labour share} which is constructed
+from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+\par
+Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
+almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
+I leave it for future analysis why this dataset yields this phenomenon and
+for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
+\par
+As a demonstration, I include specifications which omit fixed effects.
+The capital share of income jumps on a specification with only time fixed effects,
+which is to be expected \todo{explain}.
+
+% TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
+% Equivalently, it is the sum of fixed effects in this specification with the error term,
+% which means we should expect it to be exogenous to capital and labour inputs,
+% but correlated to both firm effects and time trends.
+% By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
