@@ -252,7 +252,24 @@ I use the instruments
 \todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
 and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$ as feasible instruments for this section's network models
 \todo{Table VII, model}.
-\par
+
+\begin{align}
+    \label{eq:static-moment-conditions}
+    \mathbb E \left[
+        \Delta\varepsilon_{it}
+        \cdot
+        \begin{pmatrix}
+            \Delta \ln(y_{i,t-2})     \\
+            \Delta \ln(y_{i,t-3})     \\
+            \Delta \ln(y_{i,t-4})     \\
+            \Delta \ln(k_{i,t-2})     \\
+            \Delta \ln(k_{i,t-3})     \\
+            \Delta \Sigma_jw_{ijt}z_{jt}
+        \end{pmatrix}
+    \right]
+    &= 0
+\end{align}
+
 These instruments and conditions are intuitive:
 we can see through equation \eqref{eq:static-red-endogenous-effect} that
 a linear combination of all firms' contemperaneous capital and labour inputs,
@@ -341,50 +358,9 @@ of 3 independent matrices $\delta_g \mathbf W_g$, for a generic set of weights $
         (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
 \end{align}
 
-The weighting rules for these multiple, non-overlapping groups is to zero \todo{...}
+The weighting rules for these multiple, non-overlapping groups is to zero \todo{... as discussed above}
 These matrices are orthogonal, justifying the result found above that the coefficient on $\delta_0$
 is identical in the 1-regressor model $delta_0$ to the 3-regressor model for $\delta_1$.
-\begin{align}
-  w_{ij}\in \mathbf{W}_g &=
-    \begin{cases}
-      0,             & \text{if } i=j \\
-      0,             & \text{if } w_{ij,k} \neq 0, \exists k<g \\
-      \frac{1}{n_g-1}, & \text{else if } (i,j)\in g \\
-      0,             & \text{otherwise}
-    \end{cases}
-  \\ \notag
-  &\sim
-    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
-            0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
-            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
-            \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-            0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
-        \end{pmatrix}$}}
-    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
-            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
-            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
-            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
-            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4} & 0 & 0 & 0 \\
-            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
-        \end{pmatrix}$}}
-    \vcenter{\hbox{\scriptsize$\begin{pmatrix}
-            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
-            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
-            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
-            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
-            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0
-        \end{pmatrix}$}}
-\end{align}
 
 The parameter results suggest a strong correlation between the TFP of a target firm and its peers.
 Peers firms in the local postcode have an elasticity of 0.29,

@@ -50,6 +50,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{caption}
 \renewcommand{\thetable}{\Roman{table}}
+\DeclareCaptionLabelFormat{uppercase_figure}{FIGURE~#2}
 \DeclareCaptionLabelFormat{uppercase_table}{TABLE~#2}
 \DeclareCaptionFormat{multiline_title}{#1\par#3}
 \captionsetup[table]{
@@ -60,7 +61,7 @@
 }
 \renewcommand{\thefigure}{\Roman{figure}}
 \captionsetup[figure]{
-    labelformat=uppercase_table, % Uses "TABLE" + Roman numeral
+    labelformat=uppercase_figure, % Uses "FIGURE" + Roman numeral
     labelsep=none,               % Removes colon/period after label
     format=multiline_title,      % Puts title on line below label
     justification=centering      % Centers both lines

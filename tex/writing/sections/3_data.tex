@@ -178,18 +178,18 @@ The structure is given below\footnote{
 }:
 
 \begin{align*}
-    w_{ij}\in \mathbf W^\text{group} &=
+    w_{ij}\in \mathbf W_g &=
         \begin{cases}
             0,              & \text{if}         \ i=j           \\
             \frac1{n_g-1},  & \text{else if}    \ (i,j)\in g    \\
             0,              & \text{otherwise}
         \end{cases}
     \\
-    \mathbf \Gamma_{s_1} \in \mathbf W^\text{group}
+    \mathbf \Gamma_{s_1} \in \mathbf W_g
     &=
     \{ i, j \in g \}, s_1: n_g
     \\
-    \mathbf W^\text{group}
+    \mathbf W_g
     &=
     \underset{(n\times n)}{
         \begin{pmatrix}
@@ -201,20 +201,97 @@ The structure is given below\footnote{
 \end{align*}
 
 \par\noindent
-An example such matrix is $\mathbf W^\text{group}_1$, a $(7\times 7)$
+An example such matrix is $\mathbf W_{g^*}$, a $(7\times 7)$
 set of interactions between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only.
+
+\begin{figure}[hbtp]
+    \caption{Illustration of group matrix W}
+    \label{fig:static-groups-W}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \mathbf{W}_{g\sim \ref{fig:static-groups-W}}
+        \begin{pmatrix}
+            0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
+            0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+            0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
+            0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
+        \end{pmatrix}
+    \end{align*}
+    \begin{tablenotes}
+        Weighting matrix $\mathbf W$ illustration for a network of 7 interacting firms in a group \itx{pc8}.
+        Of these, firms 1-4 share their postcode, as do firms 5-7.
+    \end{tablenotes}
+\end{figure}
+
+I can extend this to more complicated set of group rules.
+I calculate non-overlapping group weights $\mathbf W_g$ to $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ at once,
+which represent the successive concentric rings of \itx(pc8) (core), \itx{pc4}, and \itx{ttwa}
+The weighting rules for these multiple, non-overlapping groups is to zero the $i,j$ interaction in
+$W_{gk}$ if a prior matrix in the series, $W_{gl},\ l<k$ has a non-zero entry in that cell.
+I illustrate an example in Figure \ref{fig:static-groups-donut-matrices}.
+These matrices are orthogonal.
 \begin{align*}
-    \mathbf W^\text{group}_1 &=
-    \begin{pmatrix}
-        0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
-        \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
-        0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
-        0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
-        0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
-    \end{pmatrix}
+        w_{ij}\in \mathbf{W}_{gk} &=
+        \begin{cases}
+            0,             & \text{if } i=j \\
+            0,             & \text{if } w_{ij,l} \neq 0, \exists l<k \\
+            \frac{1}{n_g-1}, & \text{else if } (i,j)\in g \\
+            0,             & \text{otherwise}
+        \end{cases}
 \end{align*}
+
+\begin{figure}[hbtp]
+    \caption{Illustration of multiple, non-overlapping groups}
+    \label{fig:static-groups-donut-matrices}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \mathbf{W}_{g\sim \ref{fig:static-groups-donut-matrices}}
+        &\sim
+        \begingroup
+        \setlength\arraycolsep{3.8pt}
+        \begin{pmatrix}
+            0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0
+        \end{pmatrix}
+        \endgroup
+    \end{align*}
+    \begin{tablenotes}
+        Non-overlapping group illustration for a network of 8 interacting firms in a \itx{ttwa}.
+        Of these, firms 1-5 share the first half of a postcode - are in a \itx{pc4} group, as are firms 6-8.
+        Within those, firms 1-3 share a full postcode, as do firms 7-8. Firms 4-6 are isolated in their \itx{pc8} groups.
+    \end{tablenotes}
+\end{figure}
 
 As will be shown through discussions of spatial econometric properties,
 construction of a valid instrument requires calculation of
@@ -330,7 +407,6 @@ The overlapping group network structure lends itself nicely to illustrations.
 \begin{figure}[hbtp]
     \caption{Illustration of overlapping groups from a target firm to its whole network through successive peers}
     \centering
-    \par\noindent
     \graphicspath{ {../../calculations/output/}}
     \includegraphics[width=\textwidth]{distance_peers_nolg3.png}
     \begin{tablenotes}
