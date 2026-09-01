@@ -324,21 +324,14 @@ This weighting matrix is the classic set of weights applied for the 'Linear-in-M
 common to the peer effects literature.
 \par
 I discussed group assignment in section \ref{ss:data-distance}.
-Firms have been labelled using their location features to symmetric, transitive,
-non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
-with the latter meaning two firm entries shared a latitude-longitude identifier
-to 5 decimal places.
-Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
-as the group identifier for Table \ref{tab:lmm}.1..
-This was mostly driven by full data availability, and the consistency of postcode definitions
-with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
-within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
-a move from the average number of peers from 3.1 to 2.9,
-and was a similar number of groups, with non-coheisve definitions.
-\par\noindent
+The initial model (1.) only analyses a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group.
+I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
+for \itx{pc4} and \itx{ttwa} simultaneously.
+Due to the orthogonality of these weighting matrices, these can be run in a single regression.
+\par
 The results below show model (1), where peers and targets share a postcode.
 \wraptable
-    {Static panel linear-in-means using spatial-group TFP averages}
+    {\todo{endogenous} Static panel linear-in-means using spatial-group TFP averages}
     {../../model/output/results_1a_lmm}
     {}
 

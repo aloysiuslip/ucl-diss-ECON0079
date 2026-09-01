@@ -116,29 +116,37 @@ the derived aggregates from my data.
     \\
     \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
 \end{align}
-%
+
+\begin{table}[hbtp]
+    \centering
+    \begin{threeparttable}
+        \caption{Baseline 2-factor TFP estimation: varying fixed effects}%
+        \label{tab:tfp_fe}
+        \input{../../model/output/results_0a_tfp_fe}
+    \end{threeparttable}
+    \\~\\
+    \vspace{1em}
+    \begin{threeparttable}
+        \caption{... varying parameter measures}
+        \label{tab:tfp_measures}
+        \input{../../model/output/results_0b_tfp_measure}
+        \begin{tablenotes}
+            All parameters reported with standard errors underneath.
+            Significant estimates against an $H_0: \beta=0$ are indicated
+            with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
 I conduct the estimation using the log-transformed variables.
 I must include firm and time fixed effects and a constant
 if equation (\ref{eq:static-main-reduced}) is the true specification,
 otherwise the static panel OLS will inaccurately attribute firm and time variation
 to my classical factor inputs \todo{explain more clearly}.
 As outlined above, this analysis assumes factor input exogeneity.
-
-\wraptable
-    {Baseline 2-factor TFP estimation varying fixed effects}
-    {../../model/output/results_0a_tfp_fe}
-    {
-        All parameters reported with standard errors underneath.
-        Significant estimates against an $H_0: \beta=0$ are indicated
-        with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
-    }
-
-\wraptable
-    {Baseline 2-factor TFP estimation varying parameter measures}
-    {../../model/output/results_0b_tfp_measure}
-    {}
-
-The parameter coefficients give a labour income share exactly in line with ONS analysis of UK industry-level data
+\par
+Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share
+exactly in line with ONS analysis of UK industry-level data
 over the same time period, particularly \itx{corporate gross labour share} which is constructed
 from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
 \par
@@ -157,8 +165,58 @@ which is to be expected \todo{explain}.
 % but correlated to both firm effects and time trends.
 % By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.
 
+\section{Location data and interactions}
+\label{s:data-location}
+
+The interactions relationship is irreflexive. For groups it is transitive:
+if firms A and B share a spatial group, such as a travel-to-work area (\itx{ttwa}),
+first-half of a UK postocde (\itx{pc4}), or full postcode (\itx{pc8}),
+then a firm C that is a peer of firm B must also be of firm A.
+For continuous distance measures, this is non-transitive.
+Firm B, a peer of firm A within its 5km radius, can clearly have its own peers
+that are within its own 5km radius that are not shared with A.
+Every firm is then its own overlapping group, or equivalently,
+a sparse, rather than block diagonal, firm-to-firm matrix\footnote{
+    I do actually impose a block diagonal structure for reasons of computation
+    as explained subsequently
+}.
+
+\todo{Cleaning address data}.
+\par
+Throughout this analysis, I use terminology of a productivity spillover occuring
+from a group or average of \itx{peer} firms onto a \itx{target} firm.
+\par
+Fame only reports each company's last-known registered and trading address,
+at the time of compilation of publication of its annual vintage\todo{cite}.
+As a result, final location data is only available at the firm level.
+We can interpret each firm as being static over the entire 20-year sample,
+with no movers. This seems very unlikely \todo{expand}.
+Instead, we must interpret the constructing address, and therefore firm-to-firm distance measures
+as a signal of firm pairs' true distance polluted by movers.
+This has 2 econometric consequences.
+\par
+Firstly, firm fixed effects in all spatial specifications become extremely important.
+For all movers within the sample period, their firm location decision is endogenous to
+the subsequent productivity spillovers they experience and exert,
+for reasons discussed in Section \ref{s:literature} on New Economic Geography.
+\todo{More on firm FEs}
+There is no solution to this for moves occurring out-of-sample, for instance, just before 2009.
+\par
+Secondly, I acknowledge some attenuation to the productivity spillover estimate
+Peer firms who were close to the target firm during the firm-year observation
+who subsequently moved away within-sample will have an extreme distance recorded,
+and so be excluded from tagged address groups and truncated distance calculations.
+Peer firms who are recorded as close to the target firm as they subsequently moved to the location
+\todo{More on direction of bias/positive selection?}
+
 \subsection{Location group classification}
 
+I first consider a model where each target has peers which share a spatial identifier,
+meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 definitions
+\footnote{\todo{Review ONS bulletin on TTWAs data source and describe clearly}},
+the first half of a UK postcode \itx{pc4},
+and the full UK postcode \itx{pc8}.
+\par
 The structure of the weighting matrix $\mathbf W$ is key to identification.
 $W$ is an $n\times n$ matrix of weights where each column $j$ denotes a weight $w_{ij}$
 applied on the variable of peer firm $j$, summing across rows $i$
@@ -293,10 +351,17 @@ These matrices are orthogonal.
     \end{tablenotes}
 \end{figure}
 
-As will be shown through discussions of spatial econometric properties,
-construction of a valid instrument requires calculation of
-$\mathbf W^2, \mathbf W^3, \dots, \mathbf W^k$.
-
+Firms have been labelled using their location features to symmetric, transitive,
+non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
+with the latter meaning two firm entries shared a latitude-longitude identifier
+to 5 decimal places.
+Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
+as the group identifier for Table \ref{tab:lmm}.1..
+This was mostly driven by full data availability, and the consistency of postcode definitions
+with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
+within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
+a move from the average number of peers from 3.1 to 2.9,
+and was a similar number of groups, with non-coheisve definitions.
 \wraptable
     {Summary statistics across location groups}
     {./figures/3_tab_summary_w_groups}
@@ -304,54 +369,6 @@ $\mathbf W^2, \mathbf W^3, \dots, \mathbf W^k$.
 
 \subsection{\todo{Location distance calculations}}
 \label{ss:data-distance}
-
-Throughout this analysis, I use terminology of a productivity spillover occuring
-from a group or average of \itx{peer} firms onto a \itx{target} firm.
-This relationship is irreflexive. For groups it is transitive:
-if firms A and B share a spatial group, such as a travel-to-work area (\itx{ttwa}),
-first-half of a UK postocde (\itx{pc4}), or full postcode (\itx{pc8}),
-then a firm C that is a peer of firm B must also be of firm A.
-For continuous distance measures, this is non-transitive.
-Firm B, a peer of firm A within its 5km radius, can clearly have its own peers
-that are within its own 5km radius that are not shared with A.
-Every firm is then its own overlapping group, or equivalently,
-a sparse, rather than block diagonal, firm-to-firm matrix\footnote{
-    I do actually impose a block diagonal structure for reasons of computation
-    as explained subsequently
-}.
-
-\todo{Cleaning address data}.
-\par
-Fame only reports each company's last-known registered and trading address,
-at the time of compilation of publication of its annual vintage\todo{cite}.
-As a result, final location data is only available at the firm level.
-We can interpret each firm as being static over the entire 20-year sample,
-with no movers. This seems very unlikely \todo{expand}.
-Instead, we must interpret the constructing address, and therefore firm-to-firm distance measures
-as a signal of firm pairs' true distance polluted by movers.
-This has 2 econometric consequences.
-
-Firstly, firm fixed effects in all spatial specifications become extremely important.
-For all movers within the sample period, their firm location decision is endogenous to
-the subsequent productivity spillovers they experience and exert,
-for reasons discussed in Section \ref{s:literature} on New Economic Geography.
-\todo{More on firm FEs}
-There is no solution to this for moves occurring out-of-sample, for instance, just before 2009.
-
-Secondly, I acknowledge some attenuation to the productivity spillover estimate
-Peer firms who were close to the target firm during the firm-year observation
-who subsequently moved away within-sample will have an extreme distance recorded,
-and so be excluded from tagged address groups and truncated distance calculations.
-Peer firms who are recorded as close to the target firm as they subsequently moved to the location
-\todo{More on direction of bias/positive selection?}
-
-% Spatial groups
-
-I first consider a model where each target has peers which share a spatial identifier,
-meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 definitions
-\footnote{\todo{Review ONS bulletin on TTWAs data source and describe clearly}},
-the first half of a UK postcode \itx{pc4},
-and the full UK postcode \itx{pc8}.
 
 \subsection{Iterative weighting applications}
 \label{ss:data-matrix-weights}
@@ -369,10 +386,10 @@ exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group mat
 $\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}\mathbf W_{g3}$ and so on to the aggregates.
 \par
 As a data procedure, I calculate these for my 3 aggregate variable vectors of interest.
-As given below in \todo{Table}, this requires a total of 66 compound weighting matrices,
+As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
 or columns of a database, to be calculated and generated.
-Of course, these 66 column vectors each contain a stacked \itx{firm} ($i$)-\itx{year} ($t$)
-observation, giving a matrix of over 1 million entries.
+Of course, these column vectors each contain a stacked \itx{firm} ($i$)-\itx{year} ($t$)
+observation, giving an additional matrix of over 1 million entries.
 
 Matrix products, including taking high indices, of the interactions between 1,52,379 firms
 is not computationally difficult, especially with sophisticated algorithms to handle $W$'s block diagonal structure.
@@ -403,15 +420,22 @@ It is this mechanism design provides another justification, alongside computatio
 for limiting the max length of a target-firm peer relation to 5km:
 it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a `itx{ttwa}'.
 The overlapping group network structure lends itself nicely to illustrations.
+Figure \ref{fig:map-nolg} selects a random firm $i$ from my sample,
+which happens to be in Stockport, Greater Manchester and draws the distances used to calculate metric $d1$
+between this target and its peers. In typical network diagram fashion, a network with a considerable \itx{diameter}
+is created by taking a subset of $i$'s peers, then successively a set of their peers, then successively some of those
+and so on. 4 iterations in this diagram fails to clearly hit the \itx{ittwa} boundary,
+where peer nodes randomly selected would appear to bunch at an invisible border.
 
 \begin{figure}[hbtp]
     \caption{Illustration of overlapping groups from a target firm to its whole network through successive peers}
+    \label{fig:map-nolg}
     \centering
     \graphicspath{ {../../calculations/output/}}
     \includegraphics[width=\textwidth]{distance_peers_nolg3.png}
     \begin{tablenotes}
         (blue pin): target firm $i$ with a full set of its (blue dot) peers $j$,
-        distances calculated for $d_1$ metric drawn in.
+        distances $d_1$ metric drawn in.
         \newline
         (dark red pin): sample (limit 5) of $j$ peers, then calculated as their own targets
         \newline

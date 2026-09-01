@@ -275,8 +275,11 @@ def generate_latex_table(
         models: dict,
         output_filepath: str | Path, show: list[int] | None = None,
         var_renamer: dict[str, str] | None = None,
-        var_order: list[str] | None = None
+        var_order: list[str] | None = None,
+        start_at: int = 1
     ) -> None:
+
+    start_index = start_at - 1
 
     # If the show parameter is provided, filter the models to only include those indices
     if show is not None:
@@ -308,7 +311,7 @@ def generate_latex_table(
     cols = [form_block()]
     for i, mod in enumerate(model_names):
         y_str = format_param(models[mod].get('Y', 'Y'))
-        cols.append(form_block((f"({i + 1}.)", y_str), block_type='c', size=('footnotesize', 'small')))
+        cols.append(form_block((f"({start_index + i + 1}.)", y_str), block_type='c', size=('footnotesize', 'small')))
     latex_lines.extend(["\t\t\\toprule\\toprule", " & ".join(cols) + " \\\\[0.8em]", "\t\t\\toprule"])
 
     # Coefficients
