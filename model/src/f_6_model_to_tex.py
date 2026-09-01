@@ -384,27 +384,38 @@ def format_number(val: float, format_float: str = ",0.3f") -> str:
         return str(val).replace('_', '\\_')
 
 # Exports a DataFrame to LaTeX, detecting subheader rows with empty tail cells
+import pandas as pd
+from pathlib import Path
+
+# Exports a DataFrame to LaTeX with customizable header rows and columns
 def generate_latex_from_generic(
     df: pd.DataFrame,
     filepath: str | Path,
     format_float: str = ",0.3f",
-    var_renamer: dict[str, str] | None | str = None
+    var_renamer: dict[str, str] | None | str = None,
+    hrows: int = 1,
+    hcols: int = 1
 ) -> None:
     columns = list(df.columns)
     num_cols = len(columns)
-    col_align = "l" + "c" * (num_cols - 1)
+    
+    # Adjust alignment: 'l' for header columns, 'c' for data columns
+    col_align = "l" * hcols + "c" * (num_cols - hcols)
     
     latex_lines = []
     latex_lines.append(f"\\begin{{tabular}}{{{col_align}}}")
     latex_lines.append("\t\\toprule\\toprule")
     
-    # Header row
+    # 1st Header row (DataFrame column names)
     header_titles = [str(c).replace('_', '\\_') for c in columns]
-    # Remove any empty headers and replace them with a placeholder
     header_clean = [h if "Unnamed" not in h else "~" for h in header_titles]
     latex_lines.append("\t" + " & ".join(header_clean) + " \\\\[0.8em]")
-    latex_lines.append("\t\\toprule")
     
+    # If there is only 1 header row, place the rule immediately
+    if hrows == 1:
+        latex_lines.append("\t\\midrule")
+    
+    row_counter = 0
     # Parameter rows
     for _, row in df.iterrows():
         val_first = row[columns[0]]
@@ -424,9 +435,18 @@ def generate_latex_from_generic(
         row_vals = []
         for i, col in enumerate(columns):
             val = row[col]
-            if i == 0:
+            # Print "~" for NaN or None values
+            if pd.isna(val) or str(val).strip().lower() in ("nan", "none"):
+                val = "~"
+                row_vals.append(val)
+                continue
+            # Apply text logic to header columns, and numeric logic to data columns
+            if i < hcols:
                 if isinstance(var_renamer, str):
-                    if var_renamer == 'equation':
+                    if var_renamer == 'none' or str(val).startswith("$") and str(val).endswith("$"):
+                        val = str(val)
+                
+                    elif var_renamer == 'equation':
                         sections = str(val).split('_')
                         if "{" in str(val) and "}" in str(val):
                             val = f"${val}$"
@@ -437,12 +457,31 @@ def generate_latex_from_generic(
                 elif isinstance(var_renamer, dict) and col in var_renamer:
                     val = var_renamer[col]
                 else:
-                    val = format_param(str(val))
+                    # Fallback mapping assuming format_param is in your environment
+                    try:
+                        val = format_param(str(val))
+                    except NameError:
+                        val = str(val).replace('_', '\\_')
                 row_vals.append(val)
             else:
-                row_vals.append(format_number(val, format_float))
+                # Iterate additional header rows without applying float formatting
+                if row_counter < hrows - 1:
+                    clean_val = str(val).replace('_', '\\_') if pd.notna(val) else "~"
+                    row_vals.append(clean_val if clean_val.lower() not in ("nan", "none") else "~")
+                else:
+                    # Format actual numeric data
+                    try:
+                        row_vals.append(format_number(val, format_float))
+                    except NameError:
+                        row_vals.append(str(val))
         
         latex_lines.append("\t" + " & ".join(row_vals) + " \\\\[0.9em]")
+        
+        # Add hline once the final header row is printed
+        if row_counter == hrows - 2:
+            latex_lines.append("\t\\midrule")
+            
+        row_counter += 1
         
     latex_lines.append("\t\\bottomrule")
     latex_lines.append("\\end{tabular}")

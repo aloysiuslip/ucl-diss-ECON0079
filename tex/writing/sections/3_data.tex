@@ -12,16 +12,31 @@ Its international counterpart, Orbis, offers a similar service for international
 This analysis could therefore be extended to offer insights comparing the spillover effects of UK firms to their international counterparts.
 For this investigation, the UK dataset is comprehensive and the most policy-relevant for this investigation.
 \par
-Raw data was accessed from Fame in February 2025 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026}.
+Raw data was accessed from Fame in February 2025 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026}
 and reused for this project. Raw data is provided on a series of a financial balance sheet indicators,
 including characteristics that are fixed for each firm, bucketed into $a1\_ID$ and $a5\_misc$ indicator tables,
 and annual data published on a calendar-year basis,
 bucketed into \itx{a2\_key\_finance}, \itx{a3\_assets}, and \itx{a4\_profits} tables.
-I designed a series of Python scripts to ingest this data and store it in a 'DuckDB' database,
-separated into fixed and yearly datapoint tables. 'DuckDB' is an open-source, local, relational (SQL) architecture,
-designed for processing bulk queries across columns of variables, making it well-suited for econometric data analysis.
 
-\subsection{Ingestion and cleaning}
+\subsection{\todo{Ingestion and cleaning}}
+
+I designed a series of Python scripts, organised in Jupyter notebooks to ingest this data and manipulate this data.
+Data was stored in \itx{DuckDB}, an open-source, MIT-licensed relational (SQL) database architecture\footnote{\cite{Raasveldt2026}}.
+It operates locally, meaning minimal lag from issuance to execution time
+provided the machine of operation is sufficiently high-compute.
+It stores data in column vectors, which is a significant advantage
+to manipulating whole variables, for instance to apply Matrix transformations
+as is required to calculate spatially-weighted distances.
+Any SQL commands issued from the Python are compiled down to C,
+making execution for column transformation operations extremely fast,
+even for joining tables of several 100s of millions of rows,
+as is calculated in this analysis for target-peer spatial distances.
+I wrote database interaction commands using \itx{Ibis}\footnote{\cite{TheIbisProjectAuthors2026}}, an Apache-2.0 licensed 
+Object-Relational Mapping framework (ORM) which allows SQL commands to be written natively in Python,
+minimising the likelihood of errors when issuing queries loops or changing variable names.
+This architecture choice is extremely well-suited for mass data econometric data analysis
+and critical to solving the compute limitations of iterative large-$n$ dataset manipulations
+required to calculate the valid instruments identified in section \ref{ss:static-identification}.
 
 \todo{\dots}
 
@@ -210,7 +225,7 @@ $\mathbf W^2, \mathbf W^3, \dots, \mathbf W^k$.
     {./figures/3_tab_summary_w_groups}
     {}
 
-\subsection{Location distance calculations}
+\subsection{\todo{Location distance calculations}}
 \label{ss:data-distance}
 
 Throughout this analysis, I use terminology of a productivity spillover occuring
@@ -255,13 +270,19 @@ Peer firms who are recorded as close to the target firm as they subsequently mov
 
 % Spatial groups
 
-I first consider a model where each targe has peers which share a spatial identifier,
+I first consider a model where each target has peers which share a spatial identifier,
 meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011 definitions
 \footnote{\todo{Review ONS bulletin on TTWAs data source and describe clearly}},
 the first half of a UK postcode \itx{pc4},
 and the full UK postcode \itx{pc8}.
 
 \subsection{Iterative weighting applications}
+\label{ss:data-matrix-weights}
+
+\wraptable
+    {Variable names from transforming $\mathbf y_t$ and $\mathbf x_t$ regressors via weighting matrix $\mathbf W$} 
+    {../../calculations/output/3_group_w_prefixes}
+    {Total: 51 new variables to be created, for a total of 53 columns in a linked table.}
 
 Intuitively, I take the product of these weighting matrices $\mathbf W$ to the aggregate variables vectors
 \itx{gva1}, capital \itx{total\_assets}, and labour \itx{employees}.
@@ -276,11 +297,6 @@ or columns of a database, to be calculated and generated.
 Of course, these 66 column vectors each contain a stacked \itx{firm} ($i$)-\itx{year} ($t$)
 observation, giving a matrix of over 1 million entries.
 
-\wraptable
-    {List of variables to be transformed via weighting matrix $\mathbf W$} 
-    {../../calculations/output/3_group_w_prefixes}
-    {Total: 66 new variables to be created, for a total of 68 columns in a linked table.}
-
 Matrix products, including taking high indices, of the interactions between 1,52,379 firms
 is not computationally difficult, especially with sophisticated algorithms to handle $W$'s block diagonal structure.
 However, storing the calculation in temporary memory is beyond
@@ -289,5 +305,49 @@ the capacity of any standard machine available as a research tool.
 Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix
 separately, but rather iteratively applies the last pre-multipled matrix to the aggregate variable,
 and then pre-multiplies the next matrix along to the result.
-Using memory-efficient duckdb, the procedure is as follows:
+Using memory-efficient \itx{duckdb}, the procedure is as follows:
 \todo{itemize}
+
+\subsection{Evaluating the linear independence of W matrices}
+
+As will be discussed more heavily in the theory of \ref{ss:static-identification},
+the key condition of these $\mathbf W$ matrices that will permit valid instrumentation of endogenous variables
+is to check the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$, and later $\mathbf W^3$.
+I can trivially say this is true, meeting the alternative sufficient conditions in \ref{tab:bdf_identification}
+of $\geq 3$ group sizes for the group $\mathbf W$ matrices.
+\todo{Histogram of group sizes?}
+\par
+My distance-decay weights, $\mathbf W_{d1}, \mathbf W_{d2}, \mathbf W_{d3}$
+meet the strong alternative $s_d\geq 3$ condition, where $s_d$ is the \itx{diameter} of the network,
+the maximal number of links connecting any target $i$ with another firm through a series of peers $j, k, \dots$.
+In the analysis of this set of firms with distance radius limits,
+the \itx{diameter} is large, potentially spanning the full spatial diameter of a \itx{ttwa}.
+It is this mechanism design provides another justification, alongside computation,
+for limiting the max length of a target-firm peer relation to 5km:
+it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a `itx{ttwa}'.
+The overlapping group network structure lends itself nicely to illustrations.
+
+\begin{figure}[hbtp]
+    \caption{Illustration of overlapping groups from a target firm to its whole network through successive peers}
+    \centering
+    \par\noindent
+    \graphicspath{ {../../calculations/output/}}
+    \includegraphics[width=\textwidth]{distance_peers_nolg3.png}
+    \begin{tablenotes}
+        (blue pin): target firm $i$ with a full set of its (blue dot) peers $j$,
+        distances calculated for $d_1$ metric drawn in.
+        \newline
+        (dark red pin): sample (limit 5) of $j$ peers, then calculated as their own targets
+        \newline
+        (red pin): sample (limit 5) of $k$ peers of firms $j$, some of which are also shared as a peer of $i$.
+        \newline
+        (light red pin): sample (limit 5) of $m$ peers of firms $k$, few of which are also shared as a peer of $i$.
+        \newline
+        (light red dots): set of $n$ peers of firms $m$, few of these are peers of $i,j$,
+        probabilistically creating a network diameter of $s_d\geq 3$.
+    \end{tablenotes}
+\end{figure}
+
+\par
+As additional credibility, I discuss strategies for evaluating the linear independence
+of $\mathbb I, \mathbf W, \mathbf W^2$ \todo{\dots}

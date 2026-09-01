@@ -58,6 +58,13 @@
     format=multiline_title,      % Puts title on line below label
     justification=centering      % Centers both lines
 }
+\renewcommand{\thefigure}{\Roman{figure}}
+\captionsetup[figure]{
+    labelformat=uppercase_table, % Uses "TABLE" + Roman numeral
+    labelsep=none,               % Removes colon/period after label
+    format=multiline_title,      % Puts title on line below label
+    justification=centering      % Centers both lines
+}
 \newcommand\tablerefp[1]{Table~(\ref{#1})}
 \newcommand\fullref[1]{\autoref{#1} \nameref{#1}}
 
@@ -104,6 +111,7 @@
 % Normal-weight (not bold) entries in the TOC
 \makeatletter
 \renewcommand*\l@section[2]{\@dottedtocline{1}{1.5em}{2.3em}{#1}{#2}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{5.3em}{3.2em}}
 \makeatother
 
 % Tables

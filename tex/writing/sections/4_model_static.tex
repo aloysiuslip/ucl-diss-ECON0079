@@ -76,7 +76,7 @@ yet the external impacts of that firm would be significant.
 % ------
 
 \subsection{Static panel identification}
-\label{ss-static-identification}
+\label{ss:static-identification}
 
 Consistency requires the plausible exogeneity of regressors
 used in structural equation \eqref{eq:static-main-peer-effects}
@@ -162,7 +162,7 @@ The inversion is permissible because I can expect a restriction to apply, ruling
                         \boldsymbol \alpha
                     + \boldsymbol\beta \mathbf x_t
                     + \sum_{k=0}^\infty \theta_0^k \mathbf W^{k+1} \mathbf x_t
-                      \boldsymbol \beta \cdot (\theta_0 + \xi_0)
+                        \boldsymbol \beta \cdot (\theta_0 + \xi_0)
                     + \sum_{k=0}^\infty \theta_0^k \mathbf W^k
                         \boldsymbol \varepsilon_t
     \\
@@ -243,10 +243,10 @@ We should assess these results with the heavy caveat that the exogeneity assumpt
 
 Instead, as recommended in \cite{Bramoulle2009},
 the most defensible approach is to instrument the \itx{endogenous} variable, $y_{j,t}$
-through the \itx{exogenous} parameters \linebreak
+through the \itx{exogenous} parameters
 $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots \mathbf W^k \mathbf x_t\ \forall k>2$.
 These are valid instruments under certain testable properties of $\mathbf W$ given in \tablerefp{tab:bdf_identification}.
-Essentially, these reduce to checking that the matrices $I, \mathbf W, \mathbf W^2$ are linearly independent.
+Essentially, these reduce to checking that the matrices $\mathbb I, \mathbf W, \mathbf W^2$ are linearly independent.
 I do so for the models presented in this section.
 I use the instruments
 \todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
@@ -283,9 +283,6 @@ so does not help increase our identification of $y_{j,t}$.
         (c) \citepalt{Lee2007}.
         \todo{Increase row size here; review varying group sizes, $\alpha\neq0$}
     }
-
-I take this approach in Models (2, 3, 4). The instruments to employ are as follows:
-\todo{\dots}
 
 % --- %
 
