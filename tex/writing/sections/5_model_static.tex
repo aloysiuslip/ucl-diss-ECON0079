@@ -29,6 +29,14 @@ The objective is to estimate the structural coefficient $\delta_0$ of spillover 
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
                 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \mu_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \zeta_0 \sum_{j\neq i} w_{ij}z_{j,t}
+                + \varepsilon_{i,t}
+    \\ \notag
+    &= \alpha_i + \gamma_t + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \delta_0 \sum_{j\neq i} w_{ij} \cdot (y_{j,t} - \beta_1 k_{j,t} - \beta_2 l_{j,t})
                 + \varepsilon_{i,t}
     \\
     \label{eq:static-main-peer-effects}
@@ -56,10 +64,10 @@ In a more general peer effects model, peer characteristics could independently a
 We could imagine this as the choice level of capital or labour input in a peer $j$
 influencing the effectiveness, perhaps through management quality or hiring practices, of firm $i$.
 However, in this model I have strictly assumed all peer spillovers to occur through the
-weighted sum of $z_{j,t}$ as given in \eqref{eq:static-main-reduced}, so my true single parameter of interest is $\delta_0$.
-This is an exact linear combination of $\theta_0$ and $\xi_0$ with no other confounding effects.
+weighted sum of $z_{j,t}$ as given in \eqref{eq:static-main-reduced} so my true single parameter of interest is $\delta_0$.
+This has the desirable property of actually being overidentified:
 \begin{equation}
-    \delta_0 = \theta_0 - \xi_0
+    \delta_0 = \theta_0 = - \xi_0
 \end{equation}
 \par
 While the classical production function \eqref{eq:static-main-gva} is limited to constant returns to scale,
@@ -259,6 +267,7 @@ the own-firm classical factors effect from $k_{i,t},l_{i,t}$
 and the \itx{exogenous} peer effect from $k_{j,t},l_{j,t}$.
 The remaining rows are instrument linear combinations of all
 firm classical factor inputs $\mathbf k_t, \mathbf l_t$,
+
 using the higher-order spatial lags of $\mathbf W$ discussed.
 \begin{align}
     \label{eq:static-moment-conditions}
@@ -339,7 +348,7 @@ Due to the orthogonality of these weighting matrices, these can be run in a sing
 \par
 The results below show model (1), where peers and targets share a postcode.
 \wraptable
-    {\todo{endogenous} Static panel linear-in-means using spatial-group TFP averages}
+    {Strict error orthogonality, linear-in-means group-weighted TFP spillover effects}
     {../../model/output/results_1a_lmm}
     {}
 

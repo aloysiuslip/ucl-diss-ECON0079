@@ -95,27 +95,20 @@ We can expect the difference between these two to be accounting differences\foot
 and additionally note that the alternate GVA measure also reduces panel observations from 1,085,520 to 618,588.
 For these reasons, I do not report TFP calculations with this second GVA measure
 which are regardless near-identical, though I resultingly refer to GVA throughout this paper as \itx{gva\_1}.
-
-\subsection{Deriving 2-factor TFP for metric selection}
-
-To help guide the choice of capital and output (GVA) measure, I initially conduct the 2-factor estimation
-deriving the residual $z_{i,t}$ to decompose further in a second stage.
-This step is additionally helpful for validating the relationships about
-the derived aggregates from my data.
-
+\par
+To help guide the choice of capital and output (GVA) measure, I conduct a quick benchmark
+2-factor production estimation to help validate the choice of aggregates against known measurements.
 \begin{align}
     \label{eqn:tfp2factor}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
                 + u_{i,t}
-    \\ \notag
-    u_{i,t} &= \delta_0 \sum_{j\neq i} w_{ij}z_{j,t} + \varepsilon_{i,t}
-    \\
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + u_{i,t}
-    \\
-    \hat z_{i,t} &= y_{i,t} - \hat\beta_1k_{i,t} - \hat\beta_2l_{i,t}
 \end{align}
+This specification is not valid OLS specification by the structural model I give later in \ref{ss:static-identification}.
+$u_{i,t}$ is a non-structural error-residual that is correlated with $k_{i,t}, l_{i,t}$.
+The estimation is a simple panel approach with time and fixed effects, and a constant.
+Regressors are given in log terms to approximate a structural production function similar to \ref{eq:static-production-3-factor}.
 
 \begin{table}[hbtp]
     \centering
@@ -138,14 +131,8 @@ the derived aggregates from my data.
     \end{threeparttable}
 \end{table}
 
-I conduct the estimation using the log-transformed variables.
-I must include firm and time fixed effects and a constant
-if equation (\ref{eq:static-main-reduced}) is the true specification,
-otherwise the static panel OLS will inaccurately attribute firm and time variation
-to my classical factor inputs \todo{explain more clearly}.
-As outlined above, this analysis assumes factor input exogeneity.
 \par
-Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share
+Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share, $\hat\beta_2$,
 exactly in line with ONS analysis of UK industry-level data
 over the same time period, particularly \itx{corporate gross labour share} which is constructed
 from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
