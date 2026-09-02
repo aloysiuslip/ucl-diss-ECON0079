@@ -1,42 +1,93 @@
 \section{Dynamic models}
 \label{s:models-dynamic}
 
-The static model requires an exogeneity assumption of
-$\mathbb E[\varepsilon_{i,t}\cdot \begin{pmatrix}
-    \mathbf k_t & \mathbf l_t
-\end{pmatrix}']$
+The previous section's static model requires a factor exogeneity assumption
+outlined in equation \eqref{eq:static-identification-factor-exogeneity}
 for all firms, including the own-firm effect of the production function.
 In this section, I use a dynamic model to relax this assumption.
-Additionally, I introduce a lagged autoregressor as another component of TFP.
+I also introduce a vector of temporal regressors:
+an autoregressor of own-firm GVA as a component of its TFP,
+and allowing for the past peer TFP components I analysed
+in the static model to influence current-period TFP
+in a lagged fashion.
+The structure of this specification now resembles a vector panel,
+which I will denote with VAR(p,q)\footnote{noting that $q$-lags refers
+to those on the peer spillover effect, rather than those of a moving average component
+as is traditional of a VARMA(p,q) specification}.
 \begin{align}
     \label{eq:dyn-main-reduced}
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \phi_1 y_{i,t-1} + \mathbf z_t^{spill}\theta_0 + \varepsilon_{i,t}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \sum_{k=1}^p\phi_k y_{i,t-k}
+        + \sum_{k=0}^q\mathbf z_{t-k}^{spill}\boldsymbol\theta_k + \varepsilon_{i,t}
     \\
     \label{eq:dyn-main-peer-effects}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                + \phi_1 y_{i,t}
+                + \sum_{k=1}^p\phi_k y_{i,t-k}
+                \\ \notag &\qquad 
+                + \sum_{k=0}^q \left[
+                  \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
+                + (\xi_k-\delta_k\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+                \right]
+\end{align}
+%
+For discussion of the theory of the model, I simplify to display a VAR(1, 0) for now.
+\begin{align}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
+                + \phi_1 y_{i,t-1}
                 \\ \notag &\qquad 
                 + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
                 + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
                 + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
 \end{align}
 
-The dynamic panel specification uses a time-varying error orthogonality assumption to find valid identification.
-This rather than the static model's contemperaneous classical regressor exogeneity,
-and even weak cross-sectional error orthogonality between peer in \ref{ss:model-lmm}.
+There are significant advantages to introducing the $q$-lags of the spatial spillover.
+This specification with both spatial and temporal lags accounts for the possibility
+that the spillover effect from firm $j$'s production factor
+has a lag to impact $i$. Without including the $q$ lags within $z_{i,t}$,
+if $\mathbf z_{t-k}^\text{spill}$ is correlated with $\mathbf z_{t}$,
+then estimating $\delta_0$ in a static model will have omitted variable bias (OVB)
+of the lagged effect from the spillover attributed to the current period.
+\par
+
+Adding the autoregressor of \itx{gva1} to the specification is highly desirable
+to a justified decomposition of TFP when including peer effects in the specification.
+The panel setup with firm fixed effects already accounts for own-firm invariance,
+and we have shown in the results already given that they account for a significant amount of the variation.
+In the peer effects setting, the autoregressive lags help control for reverse causality.
+If $y_{i,t-1}$ is causal for $z_{jt}$,
+or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
+$y_{i,t-k}$ as a control helps eliminate that bias.
+Similarly, theory offers us no clear view on where there could be simultaneity,
+where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
+and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
+The autoregressive regressor helps control for that.
+Additionally, the results below suggest the autoregressive parameter coefficient is low,
+with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
+suggesting any concerns about reverse causality or simultaneity driven by an AR process
+are likely minimal.
+The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
+\par
+The autoregressive specification requires a return to the one-stage production function
+with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
+as the primary regressor of interest $z_{jt}$. While introducing dynamic lags of 
+
+The dynamic panel specification uses a time-varying error orthogonality assumption
+to find valid identification.
+\begin{align}
+    \mathbb E[\epsilon_{i,t}\epsilon_{j,t}]
+\end{align}
+This might generally be more seen as a more credible assumption
+than \eqref{eq:static-identification-factor-exogeneity} 
+\todo{and we can test for it}.
 This specification cann be identified in reduced panel form,
 which requires first differences to eliminate fixed effects,
 allowing me to retain the use of firm fixed effects.
 This follows econometric theory developed by \cite{Anderson1981} and estimator techniques
 developed in \cite{Arellano1991} and furthered by \cite{Blundell1998} which improve efficiency.
-\begin{align}
-    \mathbb E[\epsilon_{i,t}\epsilon_{j,t}]
-\end{align}
 \par
-There are good reasons to think weak cross-sectional correlation exists.
-A local demand shock \todo{...}
 
-\subsection{Instrumental identification under no error autocorrelation}
+
+\subsection{Dynamic panel identification}
 
 The estimator given in \cite{Arellano1991} takes the regression equation
 as given above and allows for endogeneity.
@@ -136,6 +187,87 @@ even with this section's new cross-sectional correlation in equation \ref{eq:dyn
     \\
     \Delta \mathbf z_t &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\Delta \gamma_t \boldsymbol\iota + \boldsymbol\Delta\varepsilon_t)
 \end{align}
+
+There is a dynamic corollary to the static derivation of the endogenous term $y_{i,t}$.
+\begin{align}
+    \mathbf y_t
+    &= \boldsymbol{\alpha} 
+        + \gamma_t \boldsymbol{\iota} 
+        + \beta_0 \boldsymbol{\iota} 
+        + \beta_1 \mathbf{k}_t 
+        + \beta_2 \mathbf{l}_t 
+        + \delta_0 \mathbf{W} \mathbf{y}_t
+        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
+        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t
+        + \varepsilon_t \notag \\
+    &\quad 
+        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} 
+    % \notag \\ &\quad 
+        + \sum_{m=1}^p (\xi_m - \delta_m\beta_1) \mathbf{W} \mathbf{k}_{t-m} 
+        + \sum_{m=1}^p (\zeta_m - \delta_m\beta_2) \mathbf{W} \mathbf{l}_{t-m} 
+        \\[1.5ex]
+    (\mathbb{I} - \delta_0 \mathbf{W})\mathbf{y}_t 
+    &= \boldsymbol{\alpha} 
+        + \gamma_t \boldsymbol{\iota} 
+        + \beta_0 \boldsymbol{\iota} 
+        + \beta_1 \mathbf{k}_t 
+        + \beta_2 \mathbf{l}_t 
+        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
+        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t \notag \\
+    &\quad 
+        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} \notag \\
+    &\quad 
+        + \sum_{m=1}^p \mathbf{W} \Big[ 
+            (\xi_m - \delta_m\beta_1)\mathbf{k}_{t-m} 
+            + (\zeta_m - \delta_m\beta_2)\mathbf{l}_{t-m} 
+        \Big] 
+        + \boldsymbol{\varepsilon}_t \\[2ex]
+    %
+    \mathbf{y}_t 
+    &= \sum_{k=0}^\infty \delta_0^k \mathbf{W}^k \Bigg( 
+        \boldsymbol{\alpha} 
+        + \gamma_t \boldsymbol{\iota} 
+        + \beta_0 \boldsymbol{\iota} 
+        + \beta_1 \mathbf{k}_t 
+        + \beta_2 \mathbf{l}_t 
+        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
+        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t \notag \\
+    &\quad 
+        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} \notag \\
+    &\quad 
+        + \sum_{m=1}^p \mathbf{W} \Big[ 
+            (\xi_m - \delta_m\beta_1)\mathbf{k}_{t-m} 
+            + (\zeta_m - \delta_m\beta_2)\mathbf{l}_{t-m} 
+        \Big] 
+        + \boldsymbol{\varepsilon}_t 
+    \Bigg) \\[2ex]
+    %
+    y_{j,t} 
+    &= \dots 
+        + \underbrace{ 
+            \sum_{k=0}^\infty \left[ \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} 
+            \begin{pmatrix}\mathbf{k}_t & \mathbf{l}_t\end{pmatrix} 
+            \begin{pmatrix} \xi_0 \\ \zeta_0 \end{pmatrix} 
+        }_{\text{contemporaneous exogenous}_j} \notag \\
+    &\quad 
+        + \underbrace{ 
+            \sum_{m=1}^p \sum_{k=0}^\infty \left[ \phi_m \delta_0^k \mathbf{W}^k + \delta_m \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} \mathbf{y}_{t-m} 
+        }_{\text{entangled historical inertia \& peer effects}_j} \notag \\
+    &\quad 
+        + \underbrace{ 
+            \sum_{m=1}^p \sum_{k=0}^\infty \left[ \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} 
+            \begin{pmatrix}\mathbf{k}_{t-m} & \mathbf{l}_{t-m}\end{pmatrix} 
+            \begin{pmatrix} \xi_m - \delta_m\beta_1 \\ \zeta_m - \delta_m\beta_2 \end{pmatrix} 
+        }_{\text{historical exogenous network effects}_j} \notag \\
+    &\quad 
+        + \underbrace{ 
+            \sum_{k=0}^\infty [\delta_0^k \mathbf{W}^k]_{(j,)} \cdot \boldsymbol{\varepsilon}_t 
+        }_{\text{error transformation}_j}
+\end{align}
+
+
+% ---
+\newpage
 \subsection{Autoregressive specification}
 
 A dynamic specification grants the flexibility to add past realisations of variables
@@ -264,6 +396,10 @@ over-identified, meaning the moment conditions cannot be fulfilled with 95\% con
 In all models, the J-test fails to reject the null hypothesis,
 meaning the model's moment conditions are jointly correct.
 
+\todo{!!!!}
+Following above reasoning, lags of $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
+of a higher order than 2 are exogenous to my reduced-form specification.
+However, 
 \subsection{Instrumental identification under error autocorrelation}
 
 I appear to have strong identification given assumptions (\ref{eq:dyn-no-ac}) and (\ref{eq:dyn-xs-corr-errors}).
@@ -288,29 +424,6 @@ proves a similar problem.
 \par
 \todo{Firstly, I test for error autocorrelation.}
 
-\subsection{Panel vector autoregression}
-
-Another mechanism offered by this dynamic setting is
-to extremely flexibly introduce additional lags of my peer effect term,
-$\sum_{j\neq i} w_{i,j,t}z_{j,t}$.
-
-\begin{align}
-    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
-                + \sum_{k=1}^p \phi_k y_{i,t-k}
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
-                + \varepsilon_{i,t}
-\end{align}
-
-The model now has the form of a panel VAR(p,q) with internal instruments,
-where $p$ refers to the autoregressive lags on the dependent variable $y_{i,t}$
-and $q$ refers to the regressor lags on $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
-chosen by my specification.
-\par
-Following above reasoning, lags of $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
-of a higher order than 2 are exogenous to my reduced-form specification.
-However, 
 
 \subsection{Alternative weights on peer TFP}
 

@@ -117,30 +117,6 @@ The results of the LMM estimation implementing equation \ref{eq:lmm-structural1}
                 + \varepsilon_{i,t}
 \end{align}
 
-To support this argument, 
-such that lagged realisations of the dependent variable are used as additional regressors.
-I can implement these lags exploiting the rich time series observations available in Fame.
-I employ a dynamic specification to improve the plausibility of $\sum_{j\neq i}w_{ij}z_{j,t}$
-as an exogenous regressor so that $\delta$ is consistent of the true $\delta_0$.
-to help eliminate 
-\par
-Autoregressive lags help control for reverse causality: if $y_{i,t-k}$ is causal for $z_{jt}$,
-or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
-$y_{i,t-k}$ as a control helps eliminate that bias.
-Similarly, theory offers us no clear view on where there could be simultaneity,
-where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
-and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
-The autoregressive regressor helps control for that.
-Additionally, the results below suggest the autoregressive parameter coefficient is low,
-with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
-suggesting any concerns about reverse causality or simultaneity driven by an AR process
-are likely minimal.
-The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
-\par
-The autoregressive specification requires a return to the one-stage production function
-with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
-as the primary regressor of interest $z_{jt}$. While introducing dynamic lags of 
-
 \begin{align}
     y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
                 + \sum_{k=1}^p \phi_k y_{i,t-k}
