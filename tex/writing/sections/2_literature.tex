@@ -2,6 +2,7 @@
 \label{s:literature}
 
 \subsection{Agglomeration and Marshall}
+\label{ss:lit-marshall}
 My investigation is rooted in \cite{Marshall1920}'s taxonomy,
 which identifies three channels to productivity spillovers: (1) input-output costs, (2) labour pooling, and (3) knowledge spillovers.
 There is no reason to think these are exhaustive. We might theorise that there may be competitive effects and cultural factors.
@@ -39,6 +40,26 @@ A field-starting MIT study from Allen (1977) observed an exponentially declining
 frequency of communication between two individuals against their physical distance in an office.
 
 \subsection{Econometric literature}
-\begin{itemize}
-    \item \citep{Bramoulle2009}
-\end{itemize}
+
+The result that the Manski linear-in-means (LMM) model is not identified is a famous one
+in peer effects economics, hindering the analysis of spatial and group dynamics between mutually
+influencing entities.
+\par
+However, significant progress has been made of improving identification techniques,
+in particularly highlighting identification methods for more complex group and network structures
+in \cite{Bramoulle2009}.
+Fortunately, as stated in the paper, many of these complex network structures are exactly
+what is common to empirical data, this investigation to the pattern and layout of firms
+interacting with estimation of production spillovers included.
+\par
+A summary of the identification rules from \cite{Bramoulle2009} dependent on the structure of
+$\mathbf W$, a `weighting` matrix of interactions between two firms in a matrix, is included below.
+\wraptable
+    {Spatial econometric identification rules for weighting matrix $W$}
+    {./figures/5_tab_bdf_identification}
+    {
+        Adapted from \citepalt{Bramoulle2009}.
+        (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
+        (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
+        (c) \citepalt{Lee2007}.
+    }

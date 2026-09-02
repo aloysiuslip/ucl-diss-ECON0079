@@ -1,44 +1,39 @@
 \section{Dynamic models}
 \label{s:models-dynamic}
 
-The static model requires either a strict  
-I have discussed how the static model requires a strong strict exogeneity assumption.
-I showed in subsection \ref{ss-static-identification} that
-cross-sectional orthogonality is a \todo{necessary condition} to meet this assumption
-with a peer-effects regressor.
-\begin{align*}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
-                + \varepsilon_{i,t}
+The static model requires an exogeneity assumption of
+$\mathbb E[\varepsilon_{i,t}\cdot \begin{pmatrix}
+    \mathbf k_t & \mathbf l_t
+\end{pmatrix}']$
+for all firms, including the own-firm effect of the production function.
+In this section, I use a dynamic model to relax this assumption.
+Additionally, I introduce a lagged autoregressor as another component of TFP.
+\begin{align}
+    \label{eq:dyn-main-reduced}
+    z_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \phi_1 y_{i,t-1} + \mathbf z_t^{spill}\theta_0 + \varepsilon_{i,t}
     \\
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
-                + \varepsilon_{i,t}
-    \\
-    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &= 0, \ \forall t
-    \\
-    \implies 
-    \mathbb E[\varepsilon_{i,t}|x_{i,t}] &= 0, \ \forall t
-    \qquad
-    x_{i,t} =
-    \begin{pmatrix}
-        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
-    \end{pmatrix}
-    \\
-    \implies 
-    \mathbb E[\Delta \varepsilon_{i,t}|\Delta x_{i,t}] &= 0, \ \forall t
-\end{align*}
-In this section, I introduce a dynamic panel specification to relax these assumptions,
-permitting weak cross-sectional correlation between peer errors
-and endogeneity of the contemperaneous regressors.
-Crucially, this specification can still be identified even in its panel reduced form,
-which requires first differences to eliminate fixed effects, by the use of internal instruments.
+    \label{eq:dyn-main-peer-effects}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
+                + \phi_1 y_{i,t}
+                \\ \notag &\qquad 
+                + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
+                + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+\end{align}
+
+The dynamic panel specification uses a time-varying error orthogonality assumption to find valid identification.
+This rather than the static model's contemperaneous classical regressor exogeneity,
+and even weak cross-sectional error orthogonality between peer in \ref{ss:model-lmm}.
+This specification cann be identified in reduced panel form,
+which requires first differences to eliminate fixed effects,
+allowing me to retain the use of firm fixed effects.
 This follows econometric theory developed by \cite{Anderson1981} and estimator techniques
 developed in \cite{Arellano1991} and furthered by \cite{Blundell1998} which improve efficiency.
+\begin{align}
+    \mathbb E[\epsilon_{i,t}\epsilon_{j,t}]
+\end{align}
 \par
-There are good reasons to think this weak cross-sectional correlation exists.
+There are good reasons to think weak cross-sectional correlation exists.
 A local demand shock \todo{...}
 
 \subsection{Instrumental identification under no error autocorrelation}
