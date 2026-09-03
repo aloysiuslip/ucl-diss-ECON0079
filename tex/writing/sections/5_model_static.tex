@@ -511,17 +511,31 @@ The results below show model (1), where peers and targets share a postcode.
 Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
 in line with the moment conditions in \eqref{eq:static-moment-conditions}.
 
-\wraptable
-    {Static panel: error orthogonality model vs instrumented}
-    {../../model/output/results_1a_lmm_exog}
-    {}
+\begin{table}[hbtp]
+    \centering
+    \begin{threeparttable}
+        \caption{LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}%
+        \label{tab:lmm-pc8}
+        \input{../../model/output/results_1a_lmm_pc8}
+    \end{threeparttable}
+    \\~\\
+    \vspace{1em}
+    \begin{threeparttable}
+        \caption{LMM: 3 non-overlapping groups, error orthogonality vs instrumented specification}
+        \label{tab:lmm-3r}
+        \input{../../model/output/results_1b_lmm_3r}
+        \begin{tablenotes}
+            All parameters reported with standard errors underneath.
+            Significant estimates against an $H_0: \beta=0$ are indicated
+            with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
 
-\par 
-
-\vspace{2cm}
-\todo{Instrument equations and regression table}
-\vspace{2cm}
-
+% \wraptable
+%     {LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}
+%     {../../model/output/results_1a_lmm_pc8}
+%     {}
 \par
 As an extension, I regress the multiple, non-overlapping spatial groups at once.
 I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
@@ -535,8 +549,8 @@ The weighting rules for these multiple, non-overlapping groups is to zero \todo{
 These matrices are orthogonal, justifying the result found above that the coefficient on $\delta_0$
 is identical in the 1-regressor model $delta_0$ to the 3-regressor model for $\delta_1$.
 % \wraptable
-%     {Strict error orthogonality, linear-in-means group-weighted TFP spillover effects}
-%     {../../model/output/results_1a_lmm}
+%     {LMM: 3 non-overlapping groups, error orthogonality vs instrumented specification}
+%     {../../model/output/results_1b_lmm_3r}
 %     {}
 
 % ---

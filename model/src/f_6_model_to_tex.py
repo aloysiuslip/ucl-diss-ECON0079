@@ -129,7 +129,7 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
             in_params = True
             continue
             
-        # FIXED: Terminate on empty line (end of table) or F-test
+        # Terminate on empty line (end of table) or F-test
         if in_params and (not line or line.startswith('F-test')):
             in_params = False
             continue
@@ -141,7 +141,7 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
                 models[current_model]['time_fe'] = True
             continue
             
-        # FIXED: Skip formatting dividers and table headers while inside the block
+        # Skip formatting dividers and table headers while inside the block
         if in_params and (line.startswith('===') or line.startswith('---') or line.startswith('Parameter')):
             continue
             
