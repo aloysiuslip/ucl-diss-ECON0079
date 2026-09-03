@@ -16,7 +16,7 @@ Dep. Variable:                      y   R-squared:                        0.3543
 Estimator:                   PanelOLS   R-squared (Between):              0.7908
 No. Observations:              718743   R-squared (Within):               0.3684
 Date:                Thu, Sep 03 2026   R-squared (Overall):              0.7970
-Time:                        23:15:23   Log-likelihood                -4.016e+05
+Time:                        23:50:53   Log-likelihood                -4.016e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                   3.052e+04
 Entities:                      106818   P-value                           0.0000
@@ -52,6 +52,53 @@ P-value: 0.0000
 Distribution: F(106835,611896)
 
 Included effects: Entity, Time
+
+=======================================================================================
+
+
+Model 'lmm_3_rings_instr': 3-level regressors, squared instruments
+Model Parameters:
+Y: y
+X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l', 'wg2_y', 'wg2_k', 'wg2_l', 'wg3_y', 'wg3_k', 'wg3_l']
+Z: {'wg1_y': ['w2g1_k', 'w2g1_l'], 'wg2_y': ['w2g2_k', 'w2g2_l'], 'wg3_y': ['w2g3_k', 'w2g3_l']}
+fe: ['i', 'c']
+description: 3-level regressors, squared instruments
+include: True
+use_linearmodels: True
+differencing: mean
+
+                          IV-GMM Estimation Summary                           
+==============================================================================
+Dep. Variable:                      y   R-squared:                     -0.2217
+Estimator:                     IV-GMM   Adj. R-squared:                -0.2217
+No. Observations:              581185   F-statistic:                  1.04e+04
+Date:                Thu, Sep 03 2026   P-value (F-stat)                0.0000
+Time:                        23:52:33   Distribution:                 chi2(11)
+Cov. Estimator:             clustered                                         
+                                                                              
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+k              0.2360     0.0079     29.795     0.0000      0.2204      0.2515
+l              0.5571     0.0076     73.582     0.0000      0.5422      0.5719
+wg1_k          0.1165     0.0545     2.1377     0.0325      0.0097      0.2232
+wg1_l          0.2428     0.1125     2.1581     0.0309      0.0223      0.4633
+wg2_k         -0.7077     0.2371    -2.9851     0.0028     -1.1723     -0.2430
+wg2_l         -1.2097     0.4176    -2.8969     0.0038     -2.0282     -0.3912
+wg3_k          0.4728     0.3030     1.5606     0.1186     -0.1210      1.0666
+wg3_l          0.6301     0.4391     1.4351     0.1513     -0.2305      1.4906
+wg1_y         -0.3722     0.1782    -2.0883     0.0368     -0.7214     -0.0229
+wg2_y          1.9187     0.6523     2.9412     0.0033      0.6401      3.1972
+wg3_y         -1.1319     0.7448    -1.5198     0.1285     -2.5917      0.3278
+==============================================================================
+
+Endogenous: wg1_y, wg2_y, wg3_y
+Instruments: w2g1_k, w2g1_l, w2g2_k, w2g2_l, w2g3_k, w2g3_l
+GMM Covariance
+Debiased: False
+Clustered (One-way)
+Num Clusters: 87511
 
 =======================================================================================
 

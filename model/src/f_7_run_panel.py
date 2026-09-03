@@ -55,12 +55,11 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
             .pivot_wider(
                 names_from='year_clone',
                 values_from='t_val',
-                names_prefix='year_',
+                names_prefix='year',
                 values_fill=ibis.literal(0, type="int64")
             )
         )
         t_panel = t_panel_tdumm
-        print(t_panel.columns)
 
     if 'i' in fe:
         diff_exprs = {}
@@ -69,7 +68,6 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
             if dtype.is_numeric() and col not in ['registered_number', 'year']
         ]
         w = ibis.window(group_by="registered_number", order_by="year")
-        print(numeric_cols)
         for col in numeric_cols:
             diff_exprs[col] = ibis.ifelse(
 
@@ -89,6 +87,7 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
             t_panel_filtered = t_panel_1diff.filter(_.year > min_year)
             if null_col in t_panel_filtered.columns:
                 t_panel_filtered = t_panel_filtered.drop(null_col)
+            print(min_year, null_col, t_panel_filtered.columns)
             t_panel = t_panel_filtered
         else:
             t_panel = t_panel_1diff
@@ -97,8 +96,8 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
         t_panel = t_panel.mutate(
             const=ibis.literal(1, type="int64")
         )
-
-    return t_panel
+    t_panel_final_filter = t_panel.drop_null(how='any')
+    return t_panel_final_filter
 
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
@@ -188,6 +187,11 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                             ']'
                         ])
             print(f"Running model '{model_name}' as linearmodels panel IV, formula: {formula_str}")
+            if 't' in mod.fe:
+                print(df_model.columns)
+                df_model = df_model[[c for c in df_model.columns if c.startswith('year_')]]
+                with pd.ExcelWriter(dirs.tmp_dir / f"{model_name}_year_dummies.xlsx", engine='openpyxl') as f:
+                    df_model.sample(n=1000).to_excel(f, index=False)
             mod_iv = IVGMMCUE.from_formula(
                 formula=formula_str,
                 data=(df_model)
