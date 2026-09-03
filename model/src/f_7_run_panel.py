@@ -8,12 +8,16 @@ from dataclasses import dataclass, field, asdict
 import statsmodels.api as sm
 from linearmodels.panel import PanelOLS
 from linearmodels.panel.results import PanelEffectsResults
+from linearmodels.iv import IVGMMCUE
+from linearmodels.iv.results import IVGMMResults
 
 from panelbox.models.iv import PanelIV
 from panelbox.core.results import PanelResults
 
 from utils.f_0_dirs import get_data_dirs
 dirs = get_data_dirs(segment="model")
+
+use_linearmodels = True
 
 @dataclass
 class ModelSpec():
@@ -25,9 +29,18 @@ class ModelSpec():
     fe: list[str] = field(default_factory=list)
     description: str = ""
     include: bool = True
+    use_linearmodels: bool = True
+    differencing: str = 'mean'
+
+def reindex_entity(df: pd.DataFrame) -> pd.DataFrame:
+    min_year, max_year = df.index.get_level_values('year').min(), df.index.get_level_values('year').max()
+    full_years = range(min_year, max_year + 1)
+    full_idx = pd.MultiIndex.from_product([[df.index.get_level_values('registered_number').unique()[0]], full_years], names=['registered_number', 'year'])
+    return df.reindex(full_idx)
 
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
+
     try:
 
         params_raw = {
@@ -60,8 +73,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 })
                 .drop_null(params_full)
                 .select(params_full)
-                .execute()
-                .set_index(['registered_number', 'year'])
+                .execute()          # type: ignore
             )
         elif isinstance(table_indicator, pd.DataFrame):
             df_raw = table_indicator
@@ -77,6 +89,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
         else:
             raise ValueError(f"Invalid table_indicator type: {type(table_indicator)}. Must be str or pd.DataFrame.")
 
+        res: PanelEffectsResults | IVGMMResults | PanelResults | None = None
         if not is_iv:
             df_ols = df_model.set_index(['registered_number', 'year'])
             print(f"Running model '{model_name}' as panel OLS")
@@ -85,16 +98,75 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             
             # 2. Estimate the model with Firm and Year Fixed Effects
             mod_panel = PanelOLS(Y, X, entity_effects='i' in mod.fe, time_effects='t' in mod.fe)
-            res = mod_panel.fit(cov_type='clustered', cluster_entity=True)
+            res_panel: PanelEffectsResults = mod_panel.fit(cov_type='clustered', cluster_entity=True)
             
             # Extract \beta results iterating through full_params
             effects_dict: dict[str, pd.Series | None] = {
-                'i': res.estimated_effects.xs('entity_effects', level=1) if 'entity_effects' in res.estimated_effects.index.names else None,
-                't': res.estimated_effects.xs('time_effects', level=1) if 'time_effects' in res.estimated_effects.index.names else None
+                'i': res_panel.estimated_effects.xs('entity_effects', level=1) if 'entity_effects' in res_panel.estimated_effects.index.names else None,
+                't': res_panel.estimated_effects.xs('time_effects', level=1) if 'time_effects' in res_panel.estimated_effects.index.names else None
             }
-        else:
+            res = res_panel
 
-            print(df_model.columns)
+        elif mod.use_linearmodels:
+
+            # If time fixed effects, create dummies for years and add them to the dataframe
+            tdumm_cols = []
+            if 't' in mod.fe:
+                df_model = df_model.join(pd.get_dummies(df_model['year'], prefix='year'))
+                tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
+
+            # If entity fixed effects, first difference the data for every colum in params_transformed_names
+            # Set the resulting columns in df_diff
+            df_use = df_model.copy()
+            if 'i' in mod.fe:
+                # 1. Set the MultiIndex and ensure chronological sorting
+                df_sorted = (
+                    df_model
+                    .set_index(['registered_number', 'year'])
+                    .sort_index()
+                )
+                df_balanced = (
+                    df_sorted
+                    .groupby(level='registered_number', group_keys=False)
+                    .apply(reindex_entity)
+                )
+                df_diff = df_balanced.copy()
+                for col in df_balanced.columns:
+                    df_diff[col] = df_balanced.groupby(level='registered_number')[col].diff(1)
+
+                # 3. Drop rows with missing differences (the first year for each firm)
+                df_diff = df_diff.dropna(subset=params_transformed_names)
+                df_use = df_diff
+            else:
+                df_iv = df_model.copy().set_index(['registered_number', 'year'])
+                df_use = df_iv
+
+            formula_str = "".join([
+                            params_transformed['dep'][0],
+                            ' ~ ',
+                            ' + '.join(params_transformed['exog'] + tdumm_cols),
+                            ' + [',
+                            ' + '.join(params_transformed['endog']),
+                            ' ~ ',
+                            " + ".join(params_transformed['instr']),
+                            ']'
+                        ])
+            print(f"Running model '{model_name}' as linearmodels panel IV, formula: {formula_str}")
+            mod_iv = IVGMMCUE.from_formula(
+                formula=formula_str,
+                data=(df_use)
+            )
+            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered')        # type: ignore
+
+            # If property j_stat exists, print the J-statistic and p-value
+            if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
+                print(f"J-statistic (rej if overidentified): {res_gmm.j_stat.stat:.2f}, p-value: {res_gmm.j_stat.pval:.3f}")
+                    
+            # Extract \beta results iterating through full_params
+            effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
+            res = res_gmm
+
+        else:
             formula_str = "".join([
                 params_transformed['dep'][0],
                 ' ~ ',
@@ -102,7 +174,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 ' | ',
                 ' + '.join(params_transformed['exog'] + params_transformed['instr'])
             ])
-            print(f"Running model '{model_name}' as panel IV, formula: {formula_str}")
+            print(f"Running model '{model_name}' as PanelBox panel IV, formula: {formula_str}")
             mod_iv = PanelIV(
                 formula=formula_str,
                 data=df_model,
@@ -114,16 +186,17 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                     'pooled'
                 )
             )
-            res = mod_iv.fit(cov_type='clustered')
+            res_ivpbox: PanelResults = mod_iv.fit(cov_type='clustered')
             effects_dict = { 'i': None, 't': None }
-            if res.first_stage_results is not None:
-                for var, fs in res.first_stage_results.items():
-                    print(f"{var}: F-stat = {fs.f_stat:.3f}, p-value = {fs.pval:.3f}")
+            if res_ivpbox.first_stage_results is not None:
+                for var, fs in res_ivpbox.first_stage_results.items():
+                    print(f"{var}: F-stat = {fs['f_statistic']:.2f}, p-value = {fs.pval:.3f}")
+            res = res_ivpbox
 
         beta: dict[str, float] = { p: res.params[p] for p in params_transformed['regressors'] }
 
         print(f"✅ Model '{model_name}' estimated: {", ".join([f'{k}={v:.3f}' for k, v in beta.items()])}")
-        return res, beta, effects_dict
+        return res, beta, effects_dict  # type: ignore
     
     except Exception as e:
         print(f"❌ Model '{model_name}' failed. {type(e).__name__}: {e}")

@@ -12,14 +12,14 @@ include: True
 Dep. Variable:                    gva   R-squared:                        0.0031
 Estimator:                   PanelOLS   R-squared (Between):              0.1422
 No. Observations:              726283   R-squared (Within):               0.0031
-Date:                Thu, Sep 03 2026   R-squared (Overall):              0.0991
-Time:                        14:20:28   Log-likelihood                -1.087e+07
+Date:                Thu, Sep 03 2026   R-squared (Overall):              0.0990
+Time:                        15:20:43   Log-likelihood                -1.087e+07
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                      384.81
+                                        F-statistic:                      383.40
 Entities:                      107615   P-value                           0.0000
 Avg Obs:                       6.7489   Distribution:                F(5,618645)
 Min Obs:                       1.0000                                           
-Max Obs:                       19.000   F-statistic (robust):             23.720
+Max Obs:                       19.000   F-statistic (robust):             17.009
                                         P-value                           0.0000
 Time periods:                      19   Distribution:                F(5,618645)
 Avg Obs:                    3.823e+04                                           
@@ -30,15 +30,15 @@ Max Obs:                    4.536e+04
 ================================================================================
               Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 --------------------------------------------------------------------------------
-const         2.795e+04     2698.1     10.361     0.0000   2.267e+04   3.324e+04
-total_assets     0.0059     0.0010     5.7092     0.0000      0.0039      0.0080
-employees        22.077     5.3871     4.0982     0.0000      11.519      32.636
-wg1_y            0.0067     0.0037     1.8193     0.0689     -0.0005      0.0139
-wg1_k           -0.0003     0.0003    -1.2022     0.2293     -0.0009      0.0002
-wg1_l            1.2405     1.1716     1.0588     0.2897     -1.0558      3.5368
+const         1.133e+04  1.374e+04     0.8245     0.4097   -1.56e+04   3.826e+04
+total_assets     0.0059     0.0010     5.8285     0.0000      0.0039      0.0079
+employees        22.096     5.3737     4.1118     0.0000      11.563      32.628
+wg1_y            4182.0     2728.3     1.5328     0.1253     -1165.4      9529.3
+wg1_k           -360.93     1071.6    -0.3368     0.7363     -2461.3      1739.4
+wg1_l           -3345.5     2696.7    -1.2406     0.2147     -8630.9      1939.8
 ================================================================================
 
-F-test for Poolability: 2.5282
+F-test for Poolability: 2.5243
 P-value: 0.0000
 Distribution: F(107632,618645)
 
