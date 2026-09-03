@@ -152,6 +152,9 @@ def parse_linearmodels_txt(filepath: str | Path) -> dict:
                 coef = parts[1]
                 se = parts[2]
                 pval = parts[4]
+
+                if not var_name or var_name.startswith('year_'):
+                    continue
                 
                 if var_name == '_con':
                     var_name = 'const'
@@ -230,7 +233,7 @@ def parse_pydynpd_txt(filepath: str | Path) -> dict:
             models[current_model]['ar2_p'] = f"{p_val:.3f}"
             models[current_model]['ar2_reject'] = p_val < 0.05
 
-        # Parameter Table[cite: 1]
+        # Parameter Table
         if line.startswith('|'):
             if 'coef.' in line:
                 models[current_model]['Y'] = line.split('|')[1].strip()

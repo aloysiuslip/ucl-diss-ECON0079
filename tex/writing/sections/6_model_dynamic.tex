@@ -29,18 +29,8 @@ as is traditional of a VARMA(p,q) specification}.
                 + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
                 \right]
 \end{align}
-%
-For discussion of the theory of the model, I simplify to display a VAR(1, 0) for now.
-\begin{align}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                + \phi_1 y_{i,t-1}
-                \\ \notag &\qquad 
-                + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
-                + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
-                + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
-\end{align}
 
-There are significant advantages to introducing the $q$-lags of the spatial spillover.
+There are significant theoretical advantages to introducing the $q$-lags of the spatial spillover.
 This specification with both spatial and temporal lags accounts for the possibility
 that the spillover effect from firm $j$'s production factor
 has a lag to impact $i$. Without including the $q$ lags within $z_{i,t}$,
@@ -177,17 +167,7 @@ and $\Delta l_{i,t-k}, k>2$, as it is flexible.
     &\implies \mathbb E[\Delta l_{i,t-2} \Delta \epsilon_t] = 0, \mathbb E[l_{i,t-2} \varepsilon_t]=0
 \end{align}
 
-Devising an internal instrument for $\Delta \sum_{j\neq i} w_{ij,t}z_{j,t}$ requires
-a similar evaluation of the spatial econometric properties of $z_{j,t}$ as in the static problem.
-$z_{it}$ is a linear combination of 
-Importantly, the deep lag strategy instrumenting via $z_{i,t-2}$ is valid
-even with this section's new cross-sectional correlation in equation \ref{eq:dyn-xs-corr-errors}.
-\begin{align}
-    \mathbf z_{i,t} &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\boldsymbol\alpha + \gamma_t \boldsymbol\iota + \beta_0\boldsymbol\iota + \boldsymbol\varepsilon_t)
-    \\
-    \Delta \mathbf z_t &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \cdot (\Delta \gamma_t \boldsymbol\iota + \boldsymbol\Delta\varepsilon_t)
-\end{align}
-
+Devising an internal instrument requires a similar evaluation of thecomponents of $y_{j,t}$ as in the static problem.
 There is a dynamic corollary to the static derivation of the endogenous term $y_{i,t}$.
 \begin{align}
     \mathbf y_t
@@ -266,35 +246,8 @@ There is a dynamic corollary to the static derivation of the endogenous term $y_
 \end{align}
 
 
-% ---
-\newpage
-\subsection{Autoregressive specification}
-
-A dynamic specification grants the flexibility to add past realisations of variables
-to the decomposition of TFP, $z_{i,t}$. This increases the number of regressors in reduced form,
-improving the plausibility of its exogeneity with $\varepsilon_{i,t}$.
-\begin{align}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \phi_1 y_{i,t-1}
-                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
-                + \varepsilon_{i,t}
-\end{align}
-The above equation is in structural form in the 1-stage regression,
-but I can find an equivalent in the 2-stage regression with $z_{i,t}$ as the dependent variable.
-\begin{align}
-    z_{i,t} &= \alpha_i + \gamma_t + \beta_0
-                + \phi_1 y_{i,t-1}
-                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
-                + \varepsilon_{i,t}
-    \\
-            &= \alpha_i + \gamma_t + \beta_0
-                + \phi_1 \cdot (\beta_1 k_{i,t-1}, + \beta_2 l_{i,t-1} + z_{i,t-1})
-                + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
-                + \varepsilon_{i,t}
-\end{align}
 For system GMM, I need to show that the reduced-form first difference regressors are exogenous.
+The first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
 \begin{align}
     \Delta y_{i,t} &= \Delta \gamma_t
                 + \beta_1 \Delta k_{i,t}
@@ -303,14 +256,6 @@ For system GMM, I need to show that the reduced-form first difference regressors
                 + \delta_0 \sum_{j\neq i} w_{ij,t} \Delta z_{j,t}
                 + \Delta \varepsilon_{i,t}
     \\
-    \Delta z_{i,t} &= \Delta\gamma_t
-                + \phi_1 \cdot (\beta_1 \Delta k_{i,t-1}, + \beta_2 \Delta l_{i,t-1} + \Delta z_{i,t-1})
-                + \delta_0 \sum_{j\neq i} w_{ij}\Delta z_{j,t}
-                + \Delta \varepsilon_{i,t}
-\end{align}
-
-The first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
-\begin{align}
     \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
     \\ \notag
     \Delta y_{i,t-1} &= \qquad\dots\qquad + \Delta\varepsilon_{i,t-1}
@@ -372,20 +317,36 @@ I estimate the equation fulfilling the vector of moment conditions,
     \right]
     &= 0
 \end{align}
-As my regressors are over-identified, I use 2-step GMM to improve efficiency.
 \todo{I should introduce a control (basically a diff-in-diff?) of peers from the same industry
 across the country (outside the spatial bubble).}
+
  
 \wraptable
-    {Dynamic panel: all instrumented variables}
-    {../../model/output/results_3e_2iv}
-    {
+    {Dynamic panel: baseline instrumental specification}
+    {../../model/output/instr_3a_identif}
+    {\begin{itemize}
+        \item[] Hansen J-test for over-identification: `\text{\sffamily X}' indicates insuficient evidence
+                at the 95\% level to reject the null-hypothesis that the model is identified.
+        \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
+                as expected from a first-differencing SystemGMM approach.
+        \item[] Anderson-Rubin AR(2) test: `\text{\sffamily X}' indicates insufficient evidence to
+                reject the use of second-order lags due to their being a weak instrument,
+                as expected from the first-differencing with lags greater than 2nd-order to overcome contemperaneous endogeneity.
+                `checkmark' indicates some instruments used were weak.
+    \end{itemize}
+    }
+\wraptable
+    {Dynamic panel: deeper vector regressor lags}
+    {../../model/output/instr_3b_Jover}
+    {Hansen J-test for over-identification: `\text{\sffamily X}' indicates insuficient evidence
+    at the 95\% level to reject the null-hypothesis that the model is identified.
+    Anderson-Rubin AR(1) test: 
         Model includes a constant as the baseline for \itx{t} fixed effects.
     }
 
 \wraptable
-    {Dynamic panel using instrumented continuous distance-decay weighted TFP}
-    {../../model/output/results_3_ivdynamic}
+    {Dynamic panel: deeper autoregressive lags}
+    {../../model/output/instr_3c_ar}
     {
         Model includes a constant as the baseline for \itx{t} fixed effects.
     }
@@ -423,15 +384,3 @@ between limited $\varepsilon_{i,t}$ and $\varepsilon_{i,t-k}$ for limited $k$
 proves a similar problem.
 \par
 \todo{Firstly, I test for error autocorrelation.}
-
-
-\subsection{Alternative weights on peer TFP}
-
-\begin{align}
-    y_{i,t} &= \beta_0 + \alpha_i + \gamma_t
-                + \sum_{k=1}^p \phi_k y_{i,t-k}
-                + \beta_1 k_{i,t}
-                + \beta_2 l_{i,t}
-                + \sum_{k=1}^q \delta_q \sum_{j\neq i} w_{i,j,t}z_{j,t}
-                + \varepsilon_{i,t}
-\end{align}

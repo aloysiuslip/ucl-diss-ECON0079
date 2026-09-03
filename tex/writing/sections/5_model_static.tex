@@ -508,18 +508,15 @@ I discussed group assignment in section \ref{ss:data-distance}.
 The initial model (1.) only analyses a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group.
 \par
 The results below show model (1), where peers and targets share a postcode.
-
-\vspace{3cm}
-\todo{First set of assumed-exogenous eestimations}
-\vspace{3cm}
-
-\todo{separate this out into 2 tables: single model, and 3 rings model}
-\par
-The second model instruments these groups via $\mathbf W^2\mathbf x$,
+Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
 in line with the moment conditions in \eqref{eq:static-moment-conditions}.
 
-\par
+\wraptable
+    {Static panel: error orthogonality model vs instrumented}
+    {../../model/output/results_1a_lmm_exog}
+    {}
 
+\par 
 
 \vspace{2cm}
 \todo{Instrument equations and regression table}
@@ -537,10 +534,10 @@ of 3 independent matrices $\delta_g \mathbf W_g$, for a generic set of weights $
 The weighting rules for these multiple, non-overlapping groups is to zero \todo{... as discussed above}
 These matrices are orthogonal, justifying the result found above that the coefficient on $\delta_0$
 is identical in the 1-regressor model $delta_0$ to the 3-regressor model for $\delta_1$.
-\wraptable
-    {Strict error orthogonality, linear-in-means group-weighted TFP spillover effects}
-    {../../model/output/results_1a_lmm}
-    {}
+% \wraptable
+%     {Strict error orthogonality, linear-in-means group-weighted TFP spillover effects}
+%     {../../model/output/results_1a_lmm}
+%     {}
 
 % ---
 \newpage

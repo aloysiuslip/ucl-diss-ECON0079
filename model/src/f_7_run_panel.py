@@ -156,7 +156,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 formula=formula_str,
                 data=(df_use)
             )
-            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered')        # type: ignore
+            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered', clusters=df_use.index.get_level_values('registered_number'))        # type: ignore
 
             # If property j_stat exists, print the J-statistic and p-value
             if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
@@ -186,11 +186,15 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                     'pooled'
                 )
             )
-            res_ivpbox: PanelResults = mod_iv.fit(cov_type='clustered')
-            effects_dict = { 'i': None, 't': None }
-            if res_ivpbox.first_stage_results is not None:
-                for var, fs in res_ivpbox.first_stage_results.items():
-                    print(f"{var}: F-stat = {fs['f_statistic']:.2f}, p-value = {fs.pval:.3f}")
+            res_ivpbox: PanelResults = mod_iv.fit(cov_type='clustered', cluster_entity=True)
+            try:
+                effects_dict = { 'i': None, 't': None }
+                if res_ivpbox.first_stage_results is not None:
+                    for var, fs in res_ivpbox.first_stage_results.items():
+                        print(f"{var}: F-stat = {fs['f_statistic']:.2f}")
+            except Exception as e:
+                print(f"Warning: Could not extract first stage results. {type(e).__name__}: {e}")
+                traceback.print_exc()  # Print the full traceback for debugging
             res = res_ivpbox
 
         beta: dict[str, float] = { p: res.params[p] for p in params_transformed['regressors'] }
