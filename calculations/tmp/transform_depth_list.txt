@@ -1,0 +1,13 @@
+Transformation tree built successfully.
+
+g-type transformations by depth:
+Depth 1: ['gva -> wg1_y', 'gva -> wg2_y', 'gva -> wg3_y', 'total_assets -> wg1_k', 'total_assets -> wg2_k', 'total_assets -> wg3_k', 'employees -> wg1_l', 'employees -> wg2_l', 'employees -> wg3_l']
+Depth 2: ['wg1_k -> w2g1_k', 'wg1_k -> wg2wg1_k', 'wg1_k -> wg3wg1_k', 'wg1_l -> w2g1_l', 'wg1_l -> wg2wg1_l', 'wg1_l -> wg3wg1_l', 'wg2_k -> wg1wg2_k', 'wg2_k -> w2g2_k', 'wg2_k -> wg3wg2_k', 'wg2_l -> wg1wg2_l', 'wg2_l -> w2g2_l', 'wg2_l -> wg3wg2_l', 'wg3_k -> wg1wg3_k', 'wg3_k -> wg2wg3_k', 'wg3_k -> w2g3_k', 'wg3_l -> wg1wg3_l', 'wg3_l -> wg2wg3_l', 'wg3_l -> w2g3_l']
+Depth 3: ['w2g1_k -> w3g1_k', 'w2g1_l -> w3g1_l', 'w2g1_k -> (i-wg1)w2g1_k', 'w2g1_k -> (i-vg1)w2g1_k', 'w2g1_l -> (i-wg1)w2g1_l', 'w2g1_l -> (i-vg1)w2g1_l']
+Depth 4: ['w3g1_k -> w4g1_k', 'w3g1_l -> w4g1_l', 'w3g1_k -> (i-wg1)w3g1_k', 'w3g1_k -> (i-vg1)w3g1_k', 'w3g1_l -> (i-wg1)w3g1_l', 'w3g1_l -> (i-vg1)w3g1_l']
+
+n-type transformations by depth:
+Depth 1: ['gva -> wd1_y', 'gva -> wd1_y', 'gva -> wd2_y', 'gva -> wd3_y', 'total_assets -> wd1_k', 'total_assets -> wd2_k', 'total_assets -> wd3_k', 'employees -> wd1_l', 'employees -> wd2_l', 'employees -> wd3_l']
+Depth 2: ['wd1_k -> w2d1_k', 'wd1_l -> w2d1_l', 'wd2_k -> w2d2_k', 'wd2_l -> w2d2_l', 'wd3_k -> w2d3_k', 'wd3_l -> w2d3_l']
+Depth 3: ['w2d1_k -> w3d1_k', 'w2d1_l -> w3d1_l', 'w2d1_k -> (i-wd1)w2d1_k', 'w2d1_l -> (i-wd1)w2d1_l', 'w2d1_k -> (i-vd1)w2d1_k', 'w2d1_l -> (i-vd1)w2d1_l']
+Depth 4: ['w3d1_k -> w4d1_k', 'w3d1_l -> w4d1_l', 'w3d1_k -> (i-wd1)w3d1_k', 'w3d1_l -> (i-wd1)w3d1_l', 'w3d1_k -> (i-vd1)w3d1_k', 'w3d1_l -> (i-vd1)w3d1_l']

@@ -327,7 +327,7 @@
         {
             "input_col": "w2g1_k",
             "group_col": "pc8",
-            "out_col": "w(i-wg1)w2g1_k",
+            "out_col": "(i-wg1)w2g1_k",
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
@@ -336,7 +336,7 @@
         {
             "input_col": "w2g1_k",
             "group_col": "pc8",
-            "out_col": "w(i-vg1)w2g1_k",
+            "out_col": "(i-vg1)w2g1_k",
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
@@ -345,7 +345,7 @@
         {
             "input_col": "w2g1_l",
             "group_col": "pc8",
-            "out_col": "w(i-wg1)w2g1_l",
+            "out_col": "(i-wg1)w2g1_l",
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
@@ -354,7 +354,7 @@
         {
             "input_col": "w2g1_l",
             "group_col": "pc8",
-            "out_col": "w(i-vg1)w2g1_l",
+            "out_col": "(i-vg1)w2g1_l",
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
@@ -363,7 +363,7 @@
         {
             "input_col": "w3g1_k",
             "group_col": "pc8",
-            "out_col": "w(i-wg1)w3g1_k",
+            "out_col": "(i-wg1)w3g1_k",
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
@@ -372,7 +372,7 @@
         {
             "input_col": "w3g1_k",
             "group_col": "pc8",
-            "out_col": "w(i-vg1)w3g1_k",
+            "out_col": "(i-vg1)w3g1_k",
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
@@ -381,7 +381,7 @@
         {
             "input_col": "w3g1_l",
             "group_col": "pc8",
-            "out_col": "w(i-wg1)w3g1_l",
+            "out_col": "(i-wg1)w3g1_l",
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
@@ -390,7 +390,7 @@
         {
             "input_col": "w3g1_l",
             "group_col": "pc8",
-            "out_col": "w(i-vg1)w3g1_l",
+            "out_col": "(i-vg1)w3g1_l",
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
@@ -561,7 +561,7 @@
         {
             "input_col": "w2d1_k",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)w2d1_k",
+            "out_col": "(i-wd1)w2d1_k",
             "leave_one_out": true,
             "i_minus": true,
             "depth": 3
@@ -569,7 +569,7 @@
         {
             "input_col": "w2d1_l",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)w2d1_l",
+            "out_col": "(i-wd1)w2d1_l",
             "leave_one_out": true,
             "i_minus": true,
             "depth": 3
@@ -577,7 +577,7 @@
         {
             "input_col": "w3d1_k",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)w3d1_k",
+            "out_col": "(i-wd1)w3d1_k",
             "leave_one_out": true,
             "i_minus": true,
             "depth": 4
@@ -585,7 +585,7 @@
         {
             "input_col": "w3d1_l",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)w3d1_l",
+            "out_col": "(i-wd1)w3d1_l",
             "leave_one_out": true,
             "i_minus": true,
             "depth": 4
@@ -593,7 +593,7 @@
         {
             "input_col": "w2d1_k",
             "weight_col": "d1",
-            "out_col": "w(i-vd1)w2d1_k",
+            "out_col": "(i-vd1)w2d1_k",
             "leave_one_out": false,
             "i_minus": true,
             "depth": 3
@@ -601,7 +601,7 @@
         {
             "input_col": "w2d1_l",
             "weight_col": "d1",
-            "out_col": "w(i-vd1)w2d1_l",
+            "out_col": "(i-vd1)w2d1_l",
             "leave_one_out": false,
             "i_minus": true,
             "depth": 3
@@ -609,7 +609,7 @@
         {
             "input_col": "w3d1_k",
             "weight_col": "d1",
-            "out_col": "w(i-vd1)w3d1_k",
+            "out_col": "(i-vd1)w3d1_k",
             "leave_one_out": false,
             "i_minus": true,
             "depth": 4
@@ -617,7 +617,7 @@
         {
             "input_col": "w3d1_l",
             "weight_col": "d1",
-            "out_col": "w(i-vd1)w3d1_l",
+            "out_col": "(i-vd1)w3d1_l",
             "leave_one_out": false,
             "i_minus": true,
             "depth": 4
