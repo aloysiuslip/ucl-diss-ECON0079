@@ -3,7 +3,7 @@ Model Parameters:
 Y: y
 X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l']
 Z: {}
-fe: ['t']
+fe: ['t', 'i', 'c']
 description: Strict exogeneity, structural form
 include: True
 use_linearmodels: True
@@ -11,40 +11,40 @@ differencing: mean
 
                           PanelOLS Estimation Summary                           
 ================================================================================
-Dep. Variable:                      y   R-squared:                        0.1336
-Estimator:                   PanelOLS   R-squared (Between):              0.1638
-No. Observations:              587772   R-squared (Within):               0.1166
-Date:                Thu, Sep 03 2026   R-squared (Overall):              0.1350
-Time:                        21:25:28   Log-likelihood                -4.356e+05
+Dep. Variable:                      y   R-squared:                        0.3550
+Estimator:                   PanelOLS   R-squared (Between):              0.7907
+No. Observations:              726283   R-squared (Within):               0.3688
+Date:                Thu, Sep 03 2026   R-squared (Overall):              0.7966
+Time:                        23:14:09   Log-likelihood                -4.064e+05
 Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   1.813e+04
-Entities:                       88215   P-value                           0.0000
-Avg Obs:                       6.6629   Distribution:                F(5,587749)
+                                        F-statistic:                    6.81e+04
+Entities:                      107615   P-value                           0.0000
+Avg Obs:                       6.7489   Distribution:                F(5,618645)
 Min Obs:                       1.0000                                           
-Max Obs:                       18.000   F-statistic (robust):             2693.8
+Max Obs:                       19.000   F-statistic (robust):             8584.9
                                         P-value                           0.0000
-Time periods:                      18   Distribution:                F(5,587749)
-Avg Obs:                    3.265e+04                                           
-Min Obs:                    1.173e+04                                           
-Max Obs:                    3.881e+04                                           
+Time periods:                      19   Distribution:                F(5,618645)
+Avg Obs:                    3.823e+04                                           
+Min Obs:                    1.346e+04                                           
+Max Obs:                    4.536e+04                                           
                                                                                 
                              Parameter Estimates                              
 ==============================================================================
             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------
-const          0.0057     0.0005     11.070     0.0000      0.0047      0.0067
-k              0.2382     0.0073     32.781     0.0000      0.2240      0.2524
-l              0.5520     0.0071     78.081     0.0000      0.5381      0.5658
-wg1_y          0.1707     0.0037     45.587     0.0000      0.1633      0.1780
-wg1_k         -0.0502     0.0026    -19.127     0.0000     -0.0554     -0.0451
-wg1_l         -0.1005     0.0039    -25.977     0.0000     -0.1081     -0.0929
+const          2.5332     0.0436     58.102     0.0000      2.4478      2.6187
+k              0.2611     0.0054     48.386     0.0000      0.2505      0.2717
+l              0.6500     0.0055     118.13     0.0000      0.6392      0.6608
+wg1_y          0.1988     0.0040     49.844     0.0000      0.1910      0.2066
+wg1_k         -0.0573     0.0026    -21.755     0.0000     -0.0625     -0.0522
+wg1_l         -0.1179     0.0039    -30.071     0.0000     -0.1256     -0.1102
 ==============================================================================
 
-F-test for Poolability: 67.375
+F-test for Poolability: 8.6590
 P-value: 0.0000
-Distribution: F(17,587749)
+Distribution: F(107632,618645)
 
-Included effects: Time
+Included effects: Entity, Time
 
 =======================================================================================
 
@@ -54,7 +54,6 @@ Model Parameters:
 Y: y
 X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l']
 Z: {'wg1_y': ['w2g1_k', 'w2g1_l', 'w3g1_k', 'w3g1_l']}
-fe: ['t']
 description: Instrument endogenous effect, LMM
 include: True
 use_linearmodels: True
@@ -62,40 +61,22 @@ differencing: mean
 
                           IV-GMM Estimation Summary                           
 ==============================================================================
-Dep. Variable:                      y   R-squared:                      0.0012
-Estimator:                     IV-GMM   Adj. R-squared:                 0.0012
-No. Observations:              587772   F-statistic:                  1.57e+04
+Dep. Variable:                      y   R-squared:                      0.9934
+Estimator:                     IV-GMM   Adj. R-squared:                 0.9934
+No. Observations:              726283   F-statistic:                 2.518e+07
 Date:                Thu, Sep 03 2026   P-value (F-stat)                0.0000
-Time:                        21:30:09   Distribution:                 chi2(23)
+Time:                        23:14:27   Distribution:                  chi2(5)
 Cov. Estimator:             clustered                                         
                                                                               
                              Parameter Estimates                              
 ==============================================================================
             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
 ------------------------------------------------------------------------------
-k              0.2334     0.0078     29.844     0.0000      0.2181      0.2488
-l              0.5550     0.0074     74.624     0.0000      0.5404      0.5695
-wg1_k          0.1183     0.0540     2.1910     0.0285      0.0125      0.2242
-wg1_l          0.2486     0.1118     2.2243     0.0261      0.0296      0.4677
-year_2007      0.0355     0.0044     8.1432     0.0000      0.0269      0.0440
-year_2008     -0.0183     0.0039    -4.7212     0.0000     -0.0259     -0.0107
-year_2009     -0.0263     0.0045    -5.8695     0.0000     -0.0351     -0.0175
-year_2010      0.0450     0.0050     8.9183     0.0000      0.0351      0.0548
-year_2011     -0.0081     0.0034    -2.3583     0.0184     -0.0149     -0.0014
-year_2012     -0.0176     0.0034    -5.2048     0.0000     -0.0242     -0.0110
-year_2013   1.175e-05     0.0028     0.0042     0.9966     -0.0054      0.0055
-year_2014      0.0293     0.0038     7.7303     0.0000      0.0219      0.0368
-year_2015      0.0252     0.0032     7.9044     0.0000      0.0190      0.0315
-year_2016      0.0211     0.0032     6.6839     0.0000      0.0149      0.0273
-year_2017     -0.0012     0.0032    -0.3830     0.7017     -0.0075      0.0050
-year_2018     -0.0096     0.0034    -2.8568     0.0043     -0.0162     -0.0030
-year_2019      0.0066     0.0030     2.1826     0.0291      0.0007      0.0126
-year_2020     -0.0699     0.0096    -7.2505     0.0000     -0.0888     -0.0510
-year_2021      0.0953     0.0121     7.8943     0.0000      0.0716      0.1190
-year_2022      0.0117     0.0032     3.6382     0.0003      0.0054      0.0180
-year_2023     -0.0280     0.0046    -6.0453     0.0000     -0.0370     -0.0189
-year_2024      0.0231     0.0049     4.7444     0.0000      0.0135      0.0326
-wg1_y         -0.3843     0.1772    -2.1684     0.0301     -0.7317     -0.0369
+k              0.3532     0.0032     111.81     0.0000      0.3470      0.3593
+l              0.5928     0.0028     213.15     0.0000      0.5873      0.5982
+wg1_k         -0.3452     0.0167    -20.714     0.0000     -0.3778     -0.3125
+wg1_l         -0.5928     0.0163    -36.450     0.0000     -0.6246     -0.5609
+wg1_y          0.9910     0.0290     34.161     0.0000      0.9342      1.0479
 ==============================================================================
 
 Endogenous: wg1_y
@@ -103,7 +84,7 @@ Instruments: w2g1_k, w2g1_l, w3g1_k, w3g1_l
 GMM Covariance
 Debiased: False
 Clustered (One-way)
-Num Clusters: 88215
+Num Clusters: 107615
 
 =======================================================================================
 

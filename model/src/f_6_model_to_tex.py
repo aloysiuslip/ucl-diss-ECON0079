@@ -282,6 +282,8 @@ def generate_latex_table(
         start_at: int = 1
     ) -> None:
 
+    if start_at == None or start_at < 1:
+        start_at = 1
     start_index = start_at - 1
 
     # If the show parameter is provided, filter the models to only include those indices

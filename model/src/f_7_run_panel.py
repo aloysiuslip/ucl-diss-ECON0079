@@ -38,11 +38,74 @@ def reindex_entity(df: pd.DataFrame) -> pd.DataFrame:
     full_idx = pd.MultiIndex.from_product([[df.index.get_level_values('registered_number').unique()[0]], full_years], names=['registered_number', 'year'])
     return df.reindex(full_idx)
 
+def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Table:
+
+    if isinstance(table_indicator, pd.DataFrame):
+        t_panel = ibis.memtable(table_indicator)
+    else:
+        t_panel = table_indicator
+
+    if 't' in fe:
+        t_panel_tdumm = (
+            t_panel
+            .mutate(
+                t_val=ibis.literal(1, type="int64"),
+                year_clone=_.year.cast("string")
+            )
+            .pivot_wider(
+                names_from='year_clone',
+                values_from='t_val',
+                names_prefix='year_',
+                values_fill=ibis.literal(0, type="int64")
+            )
+        )
+        t_panel = t_panel_tdumm
+        print(t_panel.columns)
+
+    if 'i' in fe:
+        diff_exprs = {}
+        numeric_cols = [
+            col for col, dtype in t_panel.schema().items() 
+            if dtype.is_numeric() and col not in ['registered_number', 'year']
+        ]
+        w = ibis.window(group_by="registered_number", order_by="year")
+        print(numeric_cols)
+        for col in numeric_cols:
+            diff_exprs[col] = ibis.ifelse(
+
+                # CONDITION: Is the previous row exactly one year ago?
+                _.year == _.year.lag(1).over(w) + 1,
+
+                # TRUE: Calculate the first difference
+                _[col] - _[col].lag(1).over(w),
+                
+                # FALSE: Force a NULL (safe fallback for gaps and first-years)
+                ibis.literal(None, type="float64")
+            )
+        t_panel_1diff = t_panel.mutate(**diff_exprs)
+        if 't' in fe:
+            min_year = t_panel['year'].min().execute()
+            null_col = f'year_{min_year}'
+            t_panel_filtered = t_panel_1diff.filter(_.year > min_year)
+            if null_col in t_panel_filtered.columns:
+                t_panel_filtered = t_panel_filtered.drop(null_col)
+            t_panel = t_panel_filtered
+        else:
+            t_panel = t_panel_1diff
+
+    if 'c' in fe:
+        t_panel = t_panel.mutate(
+            const=ibis.literal(1, type="int64")
+        )
+
+    return t_panel
+
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
 
     try:
 
+        # 1. Get the parameters for this regression
         params_raw = {
             "dep": [mod.Y],
             "regressors": mod.X + mod.W,
@@ -61,20 +124,19 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
         params_transformed_names = list({ prop: True for values in params_transformed.values() for prop in values }.keys())
         params_full = ['registered_number', 'year'] + params_transformed_names
 
-        # 1. Execute into a Pandas DataFrame and set the MultiIndex for linearmodels
+        # 2. Get the data. We need to understand if it is a table or a DataFrame and get them both to a model form.
         if isinstance(table_indicator, str):
             con = ibis.duckdb.connect(dirs.db_path, read_only=True)
-            t_panel: ibis.Table = con.table(table_indicator)
-            df_model: pd.DataFrame = (
-                t_panel
+            t_model: ibis.Table = (
+                con.table(table_indicator)
                 .distinct(on=['registered_number', 'year'])
                 .mutate(**{
                     f'ln_{p}': _[p].log() for p in params_raw_names if p in mod.to_log
                 })
                 .drop_null(params_full)
                 .select(params_full)
-                .execute()          # type: ignore
             )
+            df_model = pd.DataFrame()
         elif isinstance(table_indicator, pd.DataFrame):
             df_raw = table_indicator
             df_model: pd.DataFrame = (
@@ -86,17 +148,22 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 .dropna(subset=params_full)
                 .filter(items=params_full)
             )
+            t_model = ibis.memtable(df_model)
         else:
             raise ValueError(f"Invalid table_indicator type: {type(table_indicator)}. Must be str or pd.DataFrame.")
 
+        # 3. Handle the regression based on whether it is IV or not.
         res: PanelEffectsResults | IVGMMResults | PanelResults | None = None
         if not is_iv:
-            df_ols = df_model.set_index(['registered_number', 'year'])
+            if df_model is None or df_model.empty:                                        # type: ignore
+                df_model = t_model.execute()                            # type: ignore
+            df_ols = df_model.set_index(['registered_number', 'year'])  # type: ignore
+
             print(f"Running model '{model_name}' as panel OLS")
             Y = df_ols[params_transformed['dep'][0]]
             X = sm.add_constant(df_ols[params_transformed['regressors']])
             
-            # 2. Estimate the model with Firm and Year Fixed Effects
+            # PanelOLS handles fixed effects
             mod_panel = PanelOLS(Y, X, entity_effects='i' in mod.fe, time_effects='t' in mod.fe)
             res_panel: PanelEffectsResults = mod_panel.fit(cov_type='clustered', cluster_entity=True)
             
@@ -108,39 +175,8 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             res = res_panel
 
         elif mod.use_linearmodels:
-
-            # If time fixed effects, create dummies for years and add them to the dataframe
-            tdumm_cols = []
-            if 't' in mod.fe:
-                df_model = df_model.join(pd.get_dummies(df_model['year'], prefix='year'))
-                tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
-
-            # If entity fixed effects, first difference the data for every colum in params_transformed_names
-            # Set the resulting columns in df_diff
-            df_use = df_model.copy()
-            if 'i' in mod.fe:
-                # 1. Set the MultiIndex and ensure chronological sorting
-                df_sorted = (
-                    df_model
-                    .set_index(['registered_number', 'year'])
-                    .sort_index()
-                )
-                df_balanced = (
-                    df_sorted
-                    .groupby(level='registered_number', group_keys=False)
-                    .apply(reindex_entity)
-                )
-                df_diff = df_balanced.copy()
-                for col in df_balanced.columns:
-                    df_diff[col] = df_balanced.groupby(level='registered_number')[col].diff(1)
-
-                # 3. Drop rows with missing differences (the first year for each firm)
-                df_diff = df_diff.dropna(subset=params_transformed_names)
-                df_use = df_diff
-            else:
-                df_iv = df_model.copy().set_index(['registered_number', 'year'])
-                df_use = df_iv
-
+            df_model = add_fe(t_model, mod.fe).execute()                          # type: ignore
+            tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
             formula_str = "".join([
                             params_transformed['dep'][0],
                             ' ~ ',
@@ -154,19 +190,18 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             print(f"Running model '{model_name}' as linearmodels panel IV, formula: {formula_str}")
             mod_iv = IVGMMCUE.from_formula(
                 formula=formula_str,
-                data=(df_use)
+                data=(df_model)
             )
-            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered', clusters=df_use.index.get_level_values('registered_number'))        # type: ignore
+            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered', clusters=df_model['registered_number'])        # type: ignore
 
-            # If property j_stat exists, print the J-statistic and p-value
+            # Extract \beta results, j-statistic, and first stage results
             if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
                 print(f"J-statistic (rej if overidentified): {res_gmm.j_stat.stat:.2f}, p-value: {res_gmm.j_stat.pval:.3f}")
-                    
-            # Extract \beta results iterating through full_params
             effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
             res = res_gmm
 
         else:
+            df_model = t_model.execute()    # type: ignore
             formula_str = "".join([
                 params_transformed['dep'][0],
                 ' ~ ',
@@ -198,7 +233,6 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             res = res_ivpbox
 
         beta: dict[str, float] = { p: res.params[p] for p in params_transformed['regressors'] }
-
         print(f"✅ Model '{model_name}' estimated: {", ".join([f'{k}={v:.3f}' for k, v in beta.items()])}")
         return res, beta, effects_dict  # type: ignore
     

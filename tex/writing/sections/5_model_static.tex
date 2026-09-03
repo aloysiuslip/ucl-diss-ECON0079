@@ -462,7 +462,7 @@ assumptions. Estimation has the following reduced form:
                     + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
                     + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
                     + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
-    \\
+    \\ \label{eq:static-lmm-reduced-estimated}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
                     + \beta_3 \sum_{j\neq i} w_{ij}y_{i,t}
                     + \beta_4 \sum_{j\neq i} w_{ij}k_{j,t}
@@ -505,11 +505,38 @@ Intuitively, this is the unweighted average of peer TFP within a spatial ring.
 This weighting matrix is comparable to many sets of weights applied for the 'Linear-in-Means (LMM)' Model
 common to the peer effects literature, for instance \cite{Moffitt2001}.
 I discussed group assignment in section \ref{ss:data-distance}.
-The initial model (1.) only analyses a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group.
-\par
-The results below show model (1), where peers and targets share a postcode.
+The initial Model (1.) estimates \eqref{eq:static-lmm-reduced-estimated},
+meaning a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group,
+assumeing the full vector of error orthogonality implying regressor exogeneity.
+
+\begin{align}
+    \label{eq:static-lmm-iv-fd-reduced-estimated}
+    \Delta y_{i,t} &= \Delta\gamma_t + \beta_1 \Delta k_{i,t} + \beta_2 \Delta l_{i,t} + \Delta \varepsilon_{i,t}
+                    + \beta_3 \Delta \sum_{j\neq i} w_{ij}y_{i,t}
+                    + \beta_4 \Delta \sum_{j\neq i} w_{ij}k_{j,t}
+                    + \beta_5 \Delta \sum_{j\neq i} w_{ij}l_{j,t}
+    \\
+    \eqreref{eq:static-moment-conditions}
+    \mathbb E &[
+        \epsilon_{i,t}\ 
+        \vert
+        \begin{pmatrix}
+            k_{i,t}                                     & l_{i,t} \\
+            w_{ij}k_{j,t}                               & w_{ij}l_{j,t}   \\
+            \left[\mathbf W^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3\right]_{(j,)} \mathbf l_t\\
+            \vdots & \vdots \\
+            \left[\mathbf W^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k\right]_{(j,)} \mathbf l_t
+        \end{pmatrix}
+    ]
+    = 0_{l\times 2}
+\end{align}
+
 Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
 in line with the moment conditions in \eqref{eq:static-moment-conditions}.
+As an extension in \ref{tab:lmm-3r}, I regress the multiple, non-overlapping spatial groups at once.
+I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
+for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously.
 
 \begin{table}[hbtp]
     \centering
@@ -532,26 +559,20 @@ in line with the moment conditions in \eqref{eq:static-moment-conditions}.
     \end{threeparttable}
 \end{table}
 
-% \wraptable
-%     {LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}
-%     {../../model/output/results_1a_lmm_pc8}
-%     {}
 \par
-As an extension, I regress the multiple, non-overlapping spatial groups at once.
-I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
-for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously.
-Multiple spatial autoregressors do not change the reflection problem:
+I can show algebraically that multiple spatial autoregressors do not change the reflection problem:
 the moving average inversion's coefficient merely becomes the weighted sum
-of 3 independent matrices $\delta_g \mathbf W_g$, for a generic set of weights $\mathbf W_g$.
+of 3 independent matrices $\theta_g \mathbf W_g$.
+As long as there is sufficient heterogeneity between the weighting matrices,
+which in these cases is guaranteed by the orthogonality of $\mathbf W_g$
+matrices to each other, then there is no risk of multicollinearity.
+Coefficients in the results $\boldsymbol \hat\theta_1$ for the closest spatial group \itx{pc8}
+are identical to $\boldsymbol \hat\theta_0$ in the one-group model.
+This is an unsurprising result justified by the orthogonality, since the additional regressors
+do not affect the variation attributable to the $\mathbf W_1$-lagged variables
+as the regressors with $\mathbf W_2, \mathbf W_3$ are orthogonal.
 \todo{Modify equation 18 to include $\sum W^3$ in the inversion term}
 
-The weighting rules for these multiple, non-overlapping groups is to zero \todo{... as discussed above}
-These matrices are orthogonal, justifying the result found above that the coefficient on $\delta_0$
-is identical in the 1-regressor model $delta_0$ to the 3-regressor model for $\delta_1$.
-% \wraptable
-%     {LMM: 3 non-overlapping groups, error orthogonality vs instrumented specification}
-%     {../../model/output/results_1b_lmm_3r}
-%     {}
 
 % ---
 \newpage
