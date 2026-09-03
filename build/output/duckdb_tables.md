@@ -350,104 +350,218 @@ ibis.Schema {
 4        59.227515  3.114184  
 ```
 
-## working_yearly_with_tfp_wave
+## working_yearly_g
 
-### Number of rows: 1,096,814
+### Number of rows: 1,045,164
 
 ### Schema:
 
 ```
 ibis.Schema {
-  registered_number    string
-  year                 int64
-  employees            int64
-  fixed_total          float64
-  total_assets         float64
-  average_wage         float64
-  gva1                 float64
-  gva2                 float64
-  gva1_per_worker      float64
-  gva2_per_worker      float64
-  tfp                  float64
-  peer_tfp_pc8         float64
-  peer_tfp_pc4_donut   float64
-  peer_tfp_ttwa_donut  float64
-  tfp_wav1             float64
-  tfp_wav2             float64
-  tfp_wav3             float64
-  nb_peers             int64
-  sim_pc1              float64
-  sim_pc2              float64
-  sim_pc3              float64
-  sim_pc4              float64
-  sim_pc5              float64
-  sim_pc6              float64
+  registered_number  string
+  year               int64
+  gva                float64
+  total_assets       float64
+  employees          int64
+  pc8                string
+  pc4                string
+  ttwa               string
+  wg1_y              float64
+  wg2_y              float64
+  wg3_y              float64
+  wg1_k              float64
+  wg2_k              float64
+  wg3_k              float64
+  wg1_l              float64
+  wg2_l              float64
+  wg3_l              float64
+  w2g1_k             float64
+  wg2wg1_k           float64
+  wg3wg1_k           float64
+  w2g1_l             float64
+  wg2wg1_l           float64
+  wg3wg1_l           float64
+  wg1wg2_k           float64
+  w2g2_k             float64
+  wg3wg2_k           float64
+  wg1wg2_l           float64
+  w2g2_l             float64
+  wg3wg2_l           float64
+  wg1wg3_k           float64
+  wg2wg3_k           float64
+  w2g3_k             float64
+  wg1wg3_l           float64
+  wg2wg3_l           float64
+  w2g3_l             float64
+  w3g1_k             float64
+  w3g1_l             float64
+  (i-wg1)w2g1_k      float64
+  (i-vg1)w2g1_k      float64
+  (i-wg1)w2g1_l      float64
+  (i-vg1)w2g1_l      float64
+  w4g1_k             float64
+  w4g1_l             float64
+  (i-wg1)w3g1_k      float64
+  (i-vg1)w3g1_k      float64
+  (i-wg1)w3g1_l      float64
+  (i-vg1)w3g1_l      float64
 }
 ```
 
 ### Head of table:
 
 ```
-  registered_number  year  employees   fixed_total  total_assets  \
-0          NI044811  2021         71    661.323500   8254.856167   
-1          NI054912  2017         52   8856.693497  20497.115191   
-2          SC023206  2006        327  24963.088102  48128.353038   
-3          07135945  2022         16   5379.048902   6463.960544   
-4          07330611  2014         93   3563.211671  11941.496122   
+  registered_number  year          gva  total_assets  employees       pc8  \
+0          07433621  2015   716.712815    462.619739         37  MK40 2QT   
+1          07433621  2023   813.859830    514.439031         38  MK40 2QT   
+2          01702871  2008  3978.988412   4587.171545        122  MK40 2RU   
+3          04749130  2024   260.330000    458.283000         12  MK40 3HD   
+4          01270747  2014  1908.323624   2561.469729         43  MK40 3JJ   
 
-   average_wage          gva1          gva2  gva1_per_worker  gva2_per_worker  \
-0     38.343804   3523.441699   3354.333585        49.625939        47.244135   
-1     44.486593   7425.226586   7109.498435       142.792819       136.721124   
-2     37.487403  16916.157981  23725.424711        51.731370        72.554816   
-3     22.732035    770.234572           NaN        48.139661              NaN   
-4     21.538988   3824.227804   3608.993655        41.120729        38.806383   
+    pc4       ttwa  wg1_y        wg2_y        wg3_y  wg1_k         wg2_k  \
+0  MK40  E30000166    NaN  2281.877435  6892.553648    NaN   4755.011504   
+1  MK40  E30000166    NaN  2865.080106  9144.556605    NaN   8593.948235   
+2  MK40  E30000166    NaN  4852.254853  8349.959437    NaN  14084.552692   
+3  MK40  E30000166    NaN  2456.193909  7938.729718    NaN   6732.103818   
+4  MK40  E30000166    NaN  3197.469028  7165.813173    NaN   5909.054386   
 
-        tfp  peer_tfp_pc8  peer_tfp_pc4_donut  peer_tfp_ttwa_donut  tfp_wav1  \
-0  2.954811           NaN            2.880356             2.953783  2.776443   
-1  3.631917      2.767808            2.636775             2.903767  2.678653   
-2  3.076560      2.996573            2.773346             2.922956  2.996107   
-3  2.423576           NaN            2.773894             2.831035  2.816255   
-4  2.764480      2.638131            2.685648             2.812639  2.638874   
+          wg3_k  wg1_l       wg2_l       wg3_l  w2g1_k      wg2wg1_k  \
+0  24599.793029    NaN   49.700000  127.923077     NaN   7232.663031   
+1  35145.498416    NaN   49.166667  170.362745     NaN   5497.568749   
+2  24619.379339    NaN  185.666667  146.927273     NaN  29545.114627   
+3  30545.259634    NaN   60.727273  152.183099     NaN   8665.523750   
+4  22491.508253    NaN   73.166667  125.280702     NaN  13009.818416   
 
-   tfp_wav2  tfp_wav3  nb_peers   sim_pc1   sim_pc2   sim_pc3   sim_pc4  \
-0  2.716846  2.738847        10 -0.062090  0.073961  1.882041 -0.046577   
-1  2.677659  2.746761        18 -0.060159  0.076322  2.004135 -0.049690   
-2  2.996572  2.918669         6 -0.046119  0.035605  2.027395 -0.078492   
-3  2.739396  2.728552        11 -0.067212  0.078236  2.015701 -0.054537   
-4  2.638131  2.693827        14 -0.069149  0.077660  1.918361 -0.039834   
+       wg3wg1_k  w2g1_l    wg2wg1_l    wg3wg1_l  wg1wg2_k        w2g2_k  \
+0  31550.843548     NaN   43.166667  135.351852       NaN   4495.926331   
+1  44474.098329     NaN   41.625000  181.307087       NaN   8188.823557   
+2  30884.717836     NaN  448.000000  148.468750       NaN  11193.641227   
+3  52776.155424     NaN   18.000000  173.909091       NaN   5796.365645   
+4  29166.051512     NaN  103.666667  116.062500       NaN   5572.465150   
 
-    sim_pc5   sim_pc6  
-0  0.012526  0.038465  
-1  0.017989 -0.141442  
-2 -0.003836 -0.296406  
-3  0.017346 -0.216961  
-4  0.028963 -0.194258  
+       wg3wg2_k  wg1wg2_l      w2g2_l    wg3wg2_l  wg1wg3_k      wg2wg3_k  \
+0  24291.042573       NaN   49.163289  127.678290       NaN  24599.793029   
+1  34257.526110       NaN   49.701162  167.114640       NaN  35145.498416   
+2  25027.189668       NaN  153.944444  151.065255       NaN  24619.379339   
+3  29485.436917       NaN   62.049587  146.429378       NaN  30545.259634   
+4  22276.786984       NaN   70.826616  126.902540       NaN  22491.508253   
+
+         w2g3_k  wg1wg3_l    wg2wg3_l      w2g3_l  w3g1_k  w3g1_l  \
+0  21844.220326       NaN  127.923077  117.121086     NaN     NaN   
+1  31867.445974       NaN  170.362745  156.759936     NaN     NaN   
+2  23787.130301       NaN  146.927273  146.312563     NaN     NaN   
+3  26570.999396       NaN  152.183099  135.997393     NaN     NaN   
+4  20283.405789       NaN  125.280702  117.439060     NaN     NaN   
+
+   (i-wg1)w2g1_k  (i-vg1)w2g1_k  (i-wg1)w2g1_l  (i-vg1)w2g1_l  w4g1_k  w4g1_l  \
+0            NaN            NaN            NaN            NaN     NaN     NaN   
+1            NaN            NaN            NaN            NaN     NaN     NaN   
+2            NaN            NaN            NaN            NaN     NaN     NaN   
+3            NaN            NaN            NaN            NaN     NaN     NaN   
+4            NaN            NaN            NaN            NaN     NaN     NaN   
+
+   (i-wg1)w3g1_k  (i-vg1)w3g1_k  (i-wg1)w3g1_l  (i-vg1)w3g1_l  
+0            NaN            NaN            NaN            NaN  
+1            NaN            NaN            NaN            NaN  
+2            NaN            NaN            NaN            NaN  
+3            NaN            NaN            NaN            NaN  
+4            NaN            NaN            NaN            NaN  
 ```
 
-## working_distance_pc_
+## working_yearly_n
 
-### Number of rows: 43,241,404
+### Number of rows: 1,045,164
 
 ### Schema:
 
 ```
 ibis.Schema {
-  firm_i           string
-  firm_j           string
-  pc4              string
-  distance_meters  float64
+  registered_number  string
+  year               int64
+  gva                float64
+  total_assets       float64
+  employees          int64
+  wd1_y              float64
+  wd2_y              float64
+  wd3_y              float64
+  wd1_k              float64
+  wd2_k              float64
+  wd3_k              float64
+  wd1_l              float64
+  wd2_l              float64
+  wd3_l              float64
+  w2d1_k             float64
+  w2d1_l             float64
+  w2d2_k             float64
+  w2d2_l             float64
+  w2d3_k             float64
+  w2d3_l             float64
+  w3d1_k             float64
+  w3d1_l             float64
+  (i-wd1)w2d1_k      float64
+  (i-wd1)w2d1_l      float64
+  (i-vd1)w2d1_k      float64
+  (i-vd1)w2d1_l      float64
+  w4d1_k             float64
+  w4d1_l             float64
+  (i-wd1)w3d1_k      float64
+  (i-wd1)w3d1_l      float64
+  (i-vd1)w3d1_k      float64
+  (i-vd1)w3d1_l      float64
 }
 ```
 
 ### Head of table:
 
 ```
-     firm_i    firm_j   pc4  distance_meters
-0  00385769  03438440  EC3A       159.369294
-1  04016287  03438440  EC3A      7435.180266
-2  11219580  10302482  EC3M       340.743458
-3  08333916  10302482  EC3M       172.635144
-4  01264271  10302482  EC3M       148.291974
+  registered_number  year           gva   total_assets  employees  \
+0          14172083  2022  28364.492116  528581.217018        132   
+1          12481595  2023   1156.863472   19678.503111         59   
+2          02425634  2012   4340.412570    6417.752783        100   
+3          02863356  2012    284.375457    7680.100229         16   
+4          02796201  2007   2113.558249    2063.751960         34   
+
+           wd1_y         wd2_y          wd3_y         wd1_k          wd2_k  \
+0   35218.041366  19237.940354  119801.090514  2.503386e+05   57595.578605   
+1   81823.324184  78200.479574  114637.427340  3.185941e+05  192066.614734   
+2  112436.254716   6968.982694  156467.542858  1.145691e+06   57317.681511   
+3   69663.379359   1600.583733  102480.934062  9.803319e+05    7387.445263   
+4   11467.501273   8092.738834  105133.705103  4.410169e+04   17181.405295   
+
+          wd3_k        wd1_l        wd2_l        wd3_l        w2d1_k  \
+0  1.177067e+06   541.231832   478.056246   894.584977  4.274595e+05   
+1  1.088138e+06  1281.147531  1344.817308   923.859700  4.328494e+05   
+2  1.331286e+06   877.208994    35.851964  1118.720581  1.404325e+06   
+3  1.271436e+06   673.834432    55.734257   962.193987  1.326670e+06   
+4  6.539416e+05   218.947503   190.291955   945.475960  6.693554e+04   
+
+        w2d1_l         w2d2_k       w2d2_l        w2d3_k       w2d3_l  \
+0   593.879156   75877.877065   464.783775  1.370346e+06   940.831231   
+1  1206.944845  187771.889460  1308.332734  1.293302e+06   973.534047   
+2  1097.147983   14699.663765   107.081488  1.519380e+06  1224.587964   
+3   898.073843   10851.800519    38.677085  1.692346e+06  1042.848431   
+4   244.823600   17020.940244   188.511208  8.446735e+05  1104.232798   
+
+         w3d1_k       w3d1_l  (i-wd1)w2d1_k  (i-wd1)w2d1_l  (i-vd1)w2d1_k  \
+0  5.632555e+05   650.431656 -135796.014937     -56.552500 -842189.534928   
+1  5.378725e+05  1174.154790 -105023.126894      32.790054 -921695.628736   
+2  1.467504e+06  1162.838025  -63179.633822     -65.690042 -235900.255185   
+3  1.441415e+06   987.383152 -114745.014341     -89.309309 -417132.364677   
+4  8.722434e+04   271.421124  -20288.806915     -26.597524 -626478.727559   
+
+   (i-vd1)w2d1_l        w4d1_k       w4d1_l  (i-wd1)w3d1_k  (i-wd1)w3d1_l  \
+0    -309.447636  6.760943e+05   697.697822 -112838.758338     -47.266165   
+1     251.994884  6.298813e+05  1146.230491  -92008.802348      27.924299   
+2     -59.824854  1.474539e+06  1179.015340   -7034.542101     -16.177315   
+3    -199.153246  1.487953e+06  1021.819596  -46537.642819     -34.436445   
+4    -814.244279  1.051914e+05   296.476412  -17967.024082     -25.055288   
+
+   (i-vd1)w3d1_k  (i-vd1)w3d1_l  
+0 -697273.209633    -256.916623  
+1 -805006.205116     214.201229  
+2 -145604.636818       9.210586  
+3 -271887.527329    -111.418310  
+4 -541806.757621    -760.834175  
 ```
 
 ## working_distance_ttwa_km
