@@ -1,0 +1,626 @@
+{
+    "g": [
+        {
+            "input_col": "gva",
+            "group_col": "pc8",
+            "out_col": "wg1_y",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "gva",
+            "group_col": "pc4",
+            "out_col": "wg2_y",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "gva",
+            "group_col": "ttwa",
+            "out_col": "wg3_y",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "group_col": "pc8",
+            "out_col": "wg1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "group_col": "pc4",
+            "out_col": "wg2_k",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "group_col": "ttwa",
+            "out_col": "wg3_k",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "group_col": "pc8",
+            "out_col": "wg1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "group_col": "pc4",
+            "out_col": "wg2_l",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "group_col": "ttwa",
+            "out_col": "wg3_l",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "wg1_k",
+            "group_col": "pc8",
+            "out_col": "w2g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_k",
+            "group_col": "pc4",
+            "out_col": "wg2wg1_k",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_k",
+            "group_col": "ttwa",
+            "out_col": "wg3wg1_k",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_l",
+            "group_col": "pc8",
+            "out_col": "w2g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_l",
+            "group_col": "pc4",
+            "out_col": "wg2wg1_l",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_l",
+            "group_col": "ttwa",
+            "out_col": "wg3wg1_l",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_k",
+            "group_col": "pc8",
+            "out_col": "wg1wg2_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_k",
+            "group_col": "pc4",
+            "out_col": "w2g2_k",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_k",
+            "group_col": "ttwa",
+            "out_col": "wg3wg2_k",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_l",
+            "group_col": "pc8",
+            "out_col": "wg1wg2_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_l",
+            "group_col": "pc4",
+            "out_col": "w2g2_l",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg2_l",
+            "group_col": "ttwa",
+            "out_col": "wg3wg2_l",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_k",
+            "group_col": "pc8",
+            "out_col": "wg1wg3_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_k",
+            "group_col": "pc4",
+            "out_col": "wg2wg3_k",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_k",
+            "group_col": "ttwa",
+            "out_col": "w2g3_k",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_l",
+            "group_col": "pc8",
+            "out_col": "wg1wg3_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_l",
+            "group_col": "pc4",
+            "out_col": "wg2wg3_l",
+            "inner_cols": [
+                "pc8"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wg3_l",
+            "group_col": "ttwa",
+            "out_col": "w2g3_l",
+            "inner_cols": [
+                "pc8",
+                "pc4"
+            ],
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "w2g1_k",
+            "group_col": "pc8",
+            "out_col": "w3g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_l",
+            "group_col": "pc8",
+            "out_col": "w3g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 3
+        },
+        {
+            "input_col": "w3g1_k",
+            "group_col": "pc8",
+            "out_col": "w4g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_l",
+            "group_col": "pc8",
+            "out_col": "w4g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 4
+        },
+        {
+            "input_col": "w2g1_k",
+            "group_col": "pc8",
+            "out_col": "w(i-wg1)w2g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_k",
+            "group_col": "pc8",
+            "out_col": "w(i-vg1)w2g1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_l",
+            "group_col": "pc8",
+            "out_col": "w(i-wg1)w2g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_l",
+            "group_col": "pc8",
+            "out_col": "w(i-vg1)w2g1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w3g1_k",
+            "group_col": "pc8",
+            "out_col": "w(i-wg1)w3g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_k",
+            "group_col": "pc8",
+            "out_col": "w(i-vg1)w3g1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_l",
+            "group_col": "pc8",
+            "out_col": "w(i-wg1)w3g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_l",
+            "group_col": "pc8",
+            "out_col": "w(i-vg1)w3g1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 4
+        }
+    ],
+    "n": [
+        {
+            "input_col": "gva",
+            "weight_col": "d1",
+            "out_col": "wd1_y",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "gva",
+            "weight_col": "d1",
+            "out_col": "wd1_y",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "gva",
+            "weight_col": "d2",
+            "out_col": "wd2_y",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "gva",
+            "weight_col": "d3",
+            "out_col": "wd3_y",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "weight_col": "d1",
+            "out_col": "wd1_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "weight_col": "d2",
+            "out_col": "wd2_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "total_assets",
+            "weight_col": "d3",
+            "out_col": "wd3_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "weight_col": "d1",
+            "out_col": "wd1_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "weight_col": "d2",
+            "out_col": "wd2_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "employees",
+            "weight_col": "d3",
+            "out_col": "wd3_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 1
+        },
+        {
+            "input_col": "wd1_k",
+            "weight_col": "d1",
+            "out_col": "w2d1_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wd1_l",
+            "weight_col": "d1",
+            "out_col": "w2d1_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "w2d1_k",
+            "weight_col": "d1",
+            "out_col": "w3d1_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 3
+        },
+        {
+            "input_col": "w2d1_l",
+            "weight_col": "d1",
+            "out_col": "w3d1_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 3
+        },
+        {
+            "input_col": "w3d1_k",
+            "weight_col": "d1",
+            "out_col": "w4d1_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 4
+        },
+        {
+            "input_col": "w3d1_l",
+            "weight_col": "d1",
+            "out_col": "w4d1_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 4
+        },
+        {
+            "input_col": "wd2_k",
+            "weight_col": "d2",
+            "out_col": "w2d2_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wd2_l",
+            "weight_col": "d2",
+            "out_col": "w2d2_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wd3_k",
+            "weight_col": "d3",
+            "out_col": "w2d3_k",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "wd3_l",
+            "weight_col": "d3",
+            "out_col": "w2d3_l",
+            "leave_one_out": true,
+            "i_minus": false,
+            "depth": 2
+        },
+        {
+            "input_col": "w2d1_k",
+            "weight_col": "d1",
+            "out_col": "w(i-wd1)w2d1_k",
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w2d1_l",
+            "weight_col": "d1",
+            "out_col": "w(i-wd1)w2d1_l",
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w3d1_k",
+            "weight_col": "d1",
+            "out_col": "w(i-wd1)w3d1_k",
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w3d1_l",
+            "weight_col": "d1",
+            "out_col": "w(i-wd1)w3d1_l",
+            "leave_one_out": true,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w2d1_k",
+            "weight_col": "d1",
+            "out_col": "w(i-vd1)w2d1_k",
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w2d1_l",
+            "weight_col": "d1",
+            "out_col": "w(i-vd1)w2d1_l",
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 3
+        },
+        {
+            "input_col": "w3d1_k",
+            "weight_col": "d1",
+            "out_col": "w(i-vd1)w3d1_k",
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 4
+        },
+        {
+            "input_col": "w3d1_l",
+            "weight_col": "d1",
+            "out_col": "w(i-vd1)w3d1_l",
+            "leave_one_out": false,
+            "i_minus": true,
+            "depth": 4
+        }
+    ]
+}
