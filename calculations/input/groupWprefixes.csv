@@ -25,4 +25,3 @@ instruments,$W^2_{d1}$,w2d1,,w2d1_k,w2d1_l
 ,$W^4_{d1}$,w4d1,,w3d2_k,w3d2_l
 local network FE,$(I-W_{d1})W^4_{d1}$,(i-wd1)w4d1,,w3d3_k,w3d3_l
 global network FE,$(I-V_{d1})W^4_{d1}$,(i-vd1)w4d1,,w4d1_k,w4d1_l
-,,,,,
