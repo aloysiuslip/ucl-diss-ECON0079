@@ -1,60 +1,3 @@
-Model 'lmm_3_rings': Strict exogeneity, structural form
-Model Parameters:
-Y: y
-X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l']
-W: ['wg2_y', 'wg2_k', 'wg2_l', 'wg3_l', 'wg3_k', 'wg3_y']
-Z: {}
-fe: ['t', 'i', 'c']
-description: Strict exogeneity, structural form
-include: True
-use_linearmodels: True
-differencing: mean
-
-                          PanelOLS Estimation Summary                           
-================================================================================
-Dep. Variable:                      y   R-squared:                        0.3543
-Estimator:                   PanelOLS   R-squared (Between):              0.7908
-No. Observations:              718743   R-squared (Within):               0.3684
-Date:                Fri, Sep 04 2026   R-squared (Overall):              0.7970
-Time:                        01:01:25   Log-likelihood                -4.016e+05
-Cov. Estimator:             Clustered                                           
-                                        F-statistic:                   3.052e+04
-Entities:                      106818   P-value                           0.0000
-Avg Obs:                       6.7287   Distribution:               F(11,611896)
-Min Obs:                       1.0000                                           
-Max Obs:                       19.000   F-statistic (robust):             3879.6
-                                        P-value                           0.0000
-Time periods:                      19   Distribution:               F(11,611896)
-Avg Obs:                    3.783e+04                                           
-Min Obs:                    1.321e+04                                           
-Max Obs:                    4.501e+04                                           
-                                                                                
-                             Parameter Estimates                              
-==============================================================================
-            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
-------------------------------------------------------------------------------
-const          2.3423     0.0946     24.767     0.0000      2.1569      2.5276
-k              0.2613     0.0054     48.239     0.0000      0.2507      0.2719
-l              0.6494     0.0055     117.99     0.0000      0.6386      0.6602
-wg1_y          0.1984     0.0040     49.557     0.0000      0.1905      0.2062
-wg1_k         -0.0576     0.0027    -21.748     0.0000     -0.0628     -0.0524
-wg1_l         -0.1175     0.0039    -29.898     0.0000     -0.1252     -0.1098
-wg2_y          0.0189     0.0058     3.2467     0.0012      0.0075      0.0302
-wg2_k         -0.0118     0.0043    -2.7623     0.0057     -0.0201     -0.0034
-wg2_l         -0.0012     0.0069    -0.1708     0.8644     -0.0147      0.0123
-wg3_l         -0.0120     0.0194    -0.6214     0.5343     -0.0500      0.0259
-wg3_k         -0.0214     0.0123    -1.7323     0.0832     -0.0455      0.0028
-wg3_y          0.0481     0.0174     2.7565     0.0058      0.0139      0.0823
-==============================================================================
-
-F-test for Poolability: 8.5634
-P-value: 0.0000
-Distribution: F(106835,611896)
-
-Included effects: Entity, Time
-
-=======================================================================================
-
 Model 'lmm_3_rings_instr': 3-level regressors, squared instruments
 Model Parameters:
 Y: y
@@ -118,3 +61,4 @@ Clustered (One-way)
 Num Clusters: 87511
 
 =======================================================================================
+

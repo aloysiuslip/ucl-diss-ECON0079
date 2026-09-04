@@ -1,11 +1,72 @@
-\section{\todo{Introduction}}
+\section{Introduction}
 
 % Section 2: literature
-Interest in a spatial productivity spillover has been a significant object of interest
-for several fields across both micro- and macro-economics.
-In section 2, I give an overview of contributions in New Economic Geography (NEG),
-urban econometric approaches, and econometrics \todo{\dots}.
-%% Background: NEG
+Estimating the strength of a spatial productivity spillover
+is crucial to economic discussions on growth, production,
+and sophisticated specialised fields such as the movement of households
+and firms across urban clusters.
+In particular, productivity spillovers can be discussed as a pure supply-side effect.
+it is notoriously tricky\footnote{Qualitative discussions in \cite{Krugman1998}, \cite{Fujita2004}}
+to isolate this effect from demand-side factors in general equilibrium from the movement
+and colocation of firms and people;
+even more so to isolate the pure spillover effect occurring through and on
+Total Factor Productivity (TFP) the residual to a firm's input factors.
+\par
+The purpose of this paper is to demonstrate that modern advances in computing,
+theory, and econometric techniques mean that
+it is possible to make significant progress in this decades-long problem
+with credible estimates of the supply-side spatial spillover factors influencing TFP,
+even spanning from a stylised, classical model.
+In section 2, I give an overview of contributions from
+spatial and urban economics and economic geography,
+New Economic Geography (NEG) revisions and how the findings in this paper
+might substantiate the assumptions underlying NEG,
+and modern econometric literature.
+\par
+In sections 3 and 4, I discuss the handling of data from Fame,
+a database of publicly-available, balance-sheet data from UK companies,
+unified and designed to be comprehensive for research.
+Fame offers the realisation of 100,000's of firms' data across
+over 1 million firm-yearly observations.
+This is a blessing for robust econometric analysis,
+but a curse for scalable, recreatable data handling to handle both
+the computation of millions of datapoints and their transformations,
+and safely manage its memory flow.
+In particular, I highlight two significant data challenges for this setting:
+the architecture design around spatial data, including calculating distance-to-distance peers
+and forming the spatial weighting matrix $\mathbf W$,
+and the iterated application and evaluation of high indices of $\mathbf W$,
+ex: $\mathbf W^2, \mathbf W^k, (\mathbb I-\mathbf W)$
+as both transformations in reduced form and to calculate valid instruments.
+The use of a high-performance, column vector-based data system, \itx{DuckDB}
+was critical in this analysis for these purposes.
+All code for this analysis is available publicly\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}.
+\par
+In section 5, I give the econometric analysis of a static model with spatial peer effects,
+conceptualisable as `spatial lags' of the classical regressors in a 3-factor production function.
+This is an immediately gruelling application of \cite{Manski1993}'s `Reflection Problem',
+meaning the identification of \itx{endogenous} regressors in a peer effects setting.
+I show that modern econometric theory on the `Reflection Problem' in a network setting,
+as given in \cite{Bramoulle2009}, cleanly and intuitively apply to this firm productivity spillover problem.
+I estimate a reduced-form peer effects model under competing exogeneity assumption
+and internal instrumental variable approaches.
+I undertake this for both a `groups' model, which argues that the strength of a productivity spillover
+is the average of nearby neighbours, and a `networks' model,
+which applies a individualised weight for each target-peer firm connection
+proportionate to the reciprocal of the physical distance between them.
+\todo{The distance model performs better under standard tests.}
+\par
+In section 6, I expand the use of internal instruments to use deep lags to identify
+exogenous variation in the otherwise-endogenous peer effects regressors.
+This builds on modern `System GMM' methods from \cite{Blundell1998}.
+These are popular approaches to efficiently estimate coefficients
+from endogenous variables in a dynamic system exploiting the time variation of the panel structure.
+These models are likely the most robust given in this analysis.
+They suggest a more limited effect of peer-target productivity spillover.
+All specifications so a zero effect of a lagged TFP-spillover,
+and autoregressive term with a very narrow confidence interval,
+suggesting a robust result that if any productivity spillover does occur between firms,
+it happens in the contemperaneous period.
 
 \subsection{Contributions from spatial productivity analysis to political economy}
 

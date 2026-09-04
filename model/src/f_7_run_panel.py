@@ -87,7 +87,6 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
             t_panel_filtered = t_panel_1diff.filter(_.year > min_year)
             if null_col in t_panel_filtered.columns:
                 t_panel_filtered = t_panel_filtered.drop(null_col)
-            print(min_year, null_col, t_panel_filtered.columns)
             t_panel = t_panel_filtered
         else:
             t_panel = t_panel_1diff
@@ -176,10 +175,11 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
         elif mod.use_linearmodels:
             df_model = add_fe(t_model, mod.fe).execute()                          # type: ignore
             tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
+            const_col = ['const'] if 'c' in mod.fe else []
             formula_str = "".join([
                             params_transformed['dep'][0],
                             ' ~ ',
-                            ' + '.join(params_transformed['exog'] + tdumm_cols),
+                            ' + '.join(params_transformed['exog'] + tdumm_cols + const_col),
                             ' + [',
                             ' + '.join(params_transformed['endog']),
                             ' ~ ',
@@ -187,22 +187,22 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                             ']'
                         ])
             print(f"Running model '{model_name}' as linearmodels panel IV, formula: {formula_str}")
-            if 't' in mod.fe:
-                print(df_model.columns)
-                df_model = df_model[[c for c in df_model.columns if c.startswith('year_')]]
-                with pd.ExcelWriter(dirs.tmp_dir / f"{model_name}_year_dummies.xlsx", engine='openpyxl') as f:
-                    df_model.sample(n=1000).to_excel(f, index=False)
-            mod_iv = IVGMMCUE.from_formula(
-                formula=formula_str,
-                data=(df_model)
-            )
-            res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered', clusters=df_model['registered_number'])        # type: ignore
-
-            # Extract \beta results, j-statistic, and first stage results
-            if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
-                print(f"J-statistic (rej if overidentified): {res_gmm.j_stat.stat:.2f}, p-value: {res_gmm.j_stat.pval:.3f}")
-            effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
-            res = res_gmm
+            try:
+                mod_iv = IVGMMCUE.from_formula(
+                    formula=formula_str,
+                    data=(df_model)
+                )
+                res_gmm: IVGMMResults = mod_iv.fit(cov_type='clustered', clusters=df_model['registered_number'])        # type: ignore
+                # Extract \beta results, j-statistic, and first stage results
+                if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
+                    print(f"J-statistic (rej if overidentified): {res_gmm.j_stat.stat:.2f}, p-value: {res_gmm.j_stat.pval:.3f}")
+                effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
+                res = res_gmm
+            except Exception as e:
+                with pd.ExcelWriter(dirs.tmp_dir / f"error_{model_name}.xlsx") as writer:
+                    df_model.to_excel(writer, sheet_name='model_data', index=False)
+                print(f"Wrote model data to {dirs.tmp_dir / f'error_{model_name}.xlsx'} for debugging.")
+                raise e
 
         else:
             df_model = t_model.execute()    # type: ignore
@@ -248,7 +248,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             traceback.print_exc(file=f)
         return None, None, None     #type: ignore
 
-def format_str(res_serie: tuple[PanelEffectsResults, ModelSpec, str]) -> str:
+def format_str(res_serie: tuple[PanelEffectsResults | IVGMMResults, ModelSpec, str]) -> str:
     res, mod, model_name = res_serie
     
     # 5. Store the results and parameters
@@ -266,5 +266,9 @@ def format_str(res_serie: tuple[PanelEffectsResults, ModelSpec, str]) -> str:
     output_str += param_str + "\n"
     output_str += f"{res.summary}\n\n"
     output_str += "=" * 87 + "\n\n"
+    if hasattr(res, 'j_stat') and res.j_stat is not None:       # type: ignore
+        output_str += "Hansen J-statistic:\n"
+        output_str += res.j_stat.__str__()                      # type: ignore
+        output_str += '\n'
 
     return output_str
