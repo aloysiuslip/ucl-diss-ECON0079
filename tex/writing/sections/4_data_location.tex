@@ -195,7 +195,7 @@ non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
 with the latter meaning two firm entries shared a latitude-longitude identifier
 to 5 decimal places.
 Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
-as the group identifier for Table \ref{tab:lmm}.1..
+as the group identifier for initial 1-group models in Table \ref{tab:lmm-pc8}.
 This was mostly driven by full data availability, and the consistency of postcode definitions
 with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
 within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
@@ -208,6 +208,23 @@ and was a similar number of groups, with non-coheisve definitions.
 
 \subsection{\todo{Location distance calculations}}
 \label{ss:data-distance}
+
+\begin{figure}[hbtp]
+    \caption{Histogram of distances between any target-firm pairing}
+    \label{fig:hist-distances-20km}
+    \centering
+    \graphicspath{ {../../calculations/output/}}
+    \includegraphics[width=\textwidth]{histogram_distances_20km.png}
+    \begin{tablenotes}
+        Plotted into bins of 100m distance measures. Using the \itx{d1} distance measure,
+        which is hard-bounded that no firm can have a firm-peer spillover relation past a \itx{ttwa} boundary,
+        truncated at 20km.
+        Colours indicate differing levels of data quality for addresses within Fame.
+        \\
+        \todo{This must be an old chart, I think we truncated at 5km in the end.
+        Also, to produce without colours as this adds confusion}
+    \end{tablenotes}
+\end{figure}
 
 \subsection{Iterative weighting applications}
 \label{ss:data-matrix-weights}
@@ -259,35 +276,13 @@ It is this mechanism design provides another justification, alongside computatio
 for limiting the max length of a target-firm peer relation to 5km:
 it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a `itx{ttwa}'.
 The overlapping group network structure lends itself nicely to illustrations.
-Figure \ref{fig:map-nolg-bham} selects a random firm $i$ from my sample,
-which happens to be in Acocks Green, Birmingham and draws the distances used to calculate metric $d1$
+Figure \ref{fig:map-nolg-manc} selects a random firm $i$ from my sample,
+which happens to be in Stockport, Greater Manchester, and draws the distances used to calculate metric $d1$
 between this target and its peers. In typical network diagram fashion, a network with a considerable \itx{diameter}
 is created by taking a subset of $i$'s peers, then successively a set of their peers, then successively some of those
 and so on. 4 iterations in this diagram fails to clearly hit the \itx{ittwa} boundary,
 on the south side, with more argument for this behaviour on the north side
 where peer nodes randomly selected may be starting to bunch at an `invisible' border of the \itx{ttwa} boundary.
-
-\begin{figure}[hbtp]
-    \caption{Illustration of overlapping groups from a target firm to its whole network through successive peers}
-    \label{fig:map-nolg-bham}
-    \centering
-    \graphicspath{ {../../calculations/output/}}
-    \includegraphics[width=\textwidth]{distance_peers_nolg4.png}
-    \begin{tablenotes}
-        (blue pin): target firm $i$ with a full set of its (blue dot) peers $j$,
-        distances $d_1$ metric drawn in.
-        \newline
-        (dark red pins): sample (limit 5) of $j$ peers, then calculated as their own targets
-        \newline
-        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also shared as a peer of $i$.
-        \newline
-        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also shared as a peer of $i$.
-        \newline
-        (light red dots): set of $n$ peers of firms $m$, few of these are peers of $i,j$,
-        probabilistically creating a network diameter of $s_d\geq 3$.
-        Plotting software from \cite{Folium2012}. Map tiles from \cite{OpenStreetMap2017}.
-    \end{tablenotes}
-\end{figure}
 
 \begin{figure}[hbtp]
     \caption{Illustration (2) of overlapping groups from a target firm to its whole network through successive peers}
