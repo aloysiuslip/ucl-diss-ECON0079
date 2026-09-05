@@ -7,6 +7,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -18,6 +19,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -30,6 +32,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -39,6 +42,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -50,6 +54,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -62,6 +67,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -71,6 +77,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -82,6 +89,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -94,6 +102,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 1
         },
         {
@@ -103,6 +112,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -114,6 +124,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -126,6 +137,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -135,6 +147,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -146,6 +159,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -158,6 +172,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -167,6 +182,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -178,6 +194,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -190,6 +207,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -199,6 +217,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -210,6 +229,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -222,6 +242,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -231,6 +252,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -242,6 +264,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -254,6 +277,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -263,6 +287,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -274,6 +299,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -286,6 +312,7 @@
             ],
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 2
         },
         {
@@ -295,6 +322,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 3
         },
         {
@@ -304,6 +332,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 3
         },
         {
@@ -313,6 +342,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 4
         },
         {
@@ -322,6 +352,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": false,
+            "type": "g",
             "depth": 4
         },
         {
@@ -331,6 +362,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
@@ -340,6 +372,7 @@
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
@@ -349,6 +382,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
@@ -358,6 +392,7 @@
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
@@ -367,6 +402,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
+            "type": "g",
             "depth": 4
         },
         {
@@ -376,6 +412,7 @@
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 4
         },
         {
@@ -385,6 +422,7 @@
             "inner_cols": null,
             "leave_one_out": true,
             "i_minus": true,
+            "type": "g",
             "depth": 4
         },
         {
@@ -394,7 +432,248 @@
             "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 4
+        },
+        {
+            "input_col": "y",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)_y",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "y",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)_y",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "k",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "k",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "l",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "l",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 1
+        },
+        {
+            "input_col": "wg1_y",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)wg1_y",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_y",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)wg1_y",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_k",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)wg1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_k",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)wg1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_l",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)wg1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "wg1_l",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)wg1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 2
+        },
+        {
+            "input_col": "w2g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w2g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w2g1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w2g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 3
+        },
+        {
+            "input_col": "w2g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w2g1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 3
+        },
+        {
+            "input_col": "w3g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w3g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w3g1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w3g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 4
+        },
+        {
+            "input_col": "w3g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w3g1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 4
+        },
+        {
+            "input_col": "w4g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w4g1_k",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
+        },
+        {
+            "input_col": "w4g1_k",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w4g1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
+        },
+        {
+            "input_col": "w4g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-wg1)w4g1_l",
+            "inner_cols": null,
+            "leave_one_out": true,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
+        },
+        {
+            "input_col": "w4g1_l",
+            "group_col": "pc8",
+            "out_col": "(i-vg1)w4g1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
         }
     ],
     "n": [
@@ -404,6 +683,7 @@
             "out_col": "wd1_y",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -412,6 +692,7 @@
             "out_col": "wd2_y",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -420,6 +701,7 @@
             "out_col": "wd3_y",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -428,6 +710,7 @@
             "out_col": "wd1_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -436,6 +719,7 @@
             "out_col": "wd2_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -444,6 +728,7 @@
             "out_col": "wd3_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -452,6 +737,7 @@
             "out_col": "wd1_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -460,6 +746,7 @@
             "out_col": "wd2_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -468,6 +755,7 @@
             "out_col": "wd3_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 1
         },
         {
@@ -476,6 +764,7 @@
             "out_col": "w2d1_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
@@ -484,6 +773,7 @@
             "out_col": "w2d1_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
@@ -492,6 +782,7 @@
             "out_col": "w3d1_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 3
         },
         {
@@ -500,6 +791,7 @@
             "out_col": "w3d1_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 3
         },
         {
@@ -508,6 +800,7 @@
             "out_col": "w4d1_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 4
         },
         {
@@ -516,6 +809,7 @@
             "out_col": "w4d1_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 4
         },
         {
@@ -524,6 +818,7 @@
             "out_col": "w2d2_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
@@ -532,6 +827,7 @@
             "out_col": "w2d2_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
@@ -540,6 +836,7 @@
             "out_col": "w2d3_k",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
@@ -548,30 +845,34 @@
             "out_col": "w2d3_l",
             "leave_one_out": true,
             "i_minus": false,
+            "type": "n",
             "depth": 2
         },
         {
             "input_col": "y",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)_y",
+            "out_col": "(i-wd1)_y",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 1
         },
         {
             "input_col": "k",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)_k",
+            "out_col": "(i-wd1)_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 1
         },
         {
             "input_col": "l",
             "weight_col": "d1",
-            "out_col": "w(i-wd1)_l",
+            "out_col": "(i-wd1)_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 1
         },
         {
@@ -580,6 +881,7 @@
             "out_col": "(i-wd1)wd1_y",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -588,6 +890,7 @@
             "out_col": "(i-wd1)wd1_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -596,6 +899,7 @@
             "out_col": "(i-wd1)wd1_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -604,6 +908,7 @@
             "out_col": "(i-wd1)w2d1_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 3
         },
         {
@@ -612,6 +917,7 @@
             "out_col": "(i-wd1)w2d1_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 3
         },
         {
@@ -620,6 +926,7 @@
             "out_col": "(i-wd1)wd2_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -628,6 +935,7 @@
             "out_col": "(i-wd1)wd2_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -636,6 +944,7 @@
             "out_col": "(i-wd1)wd3_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -644,6 +953,7 @@
             "out_col": "(i-wd1)wd3_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 2
         },
         {
@@ -652,6 +962,7 @@
             "out_col": "(i-wd1)w3d1_k",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 4
         },
         {
@@ -660,119 +971,128 @@
             "out_col": "(i-wd1)w3d1_l",
             "leave_one_out": true,
             "i_minus": true,
+            "type": "n",
             "depth": 4
         },
         {
             "input_col": "y",
-            "weight_col": "d1",
-            "out_col": "w(i-vd1)_y",
+            "group_col": "ttwa",
+            "out_col": "(i-vd1)_y",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 1
         },
         {
             "input_col": "k",
-            "weight_col": "d1",
-            "out_col": "w(i-vd1)_k",
+            "group_col": "ttwa",
+            "out_col": "(i-vd1)_k",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 1
         },
         {
             "input_col": "l",
-            "weight_col": "d1",
-            "out_col": "w(i-vd1)_l",
+            "group_col": "ttwa",
+            "out_col": "(i-vd1)_l",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 1
         },
         {
             "input_col": "wd1_y",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)wd1_y",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 2
         },
         {
             "input_col": "wd1_k",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)wd1_k",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 2
         },
         {
             "input_col": "wd1_l",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)wd1_l",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 2
         },
         {
             "input_col": "w2d1_k",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)w2d1_k",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
             "input_col": "w2d1_l",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)w2d1_l",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 3
         },
         {
-            "input_col": "wd2_k",
-            "weight_col": "d1",
-            "out_col": "(i-vd1)wd2_k",
-            "leave_one_out": false,
-            "i_minus": true,
-            "depth": 2
-        },
-        {
-            "input_col": "wd2_l",
-            "weight_col": "d1",
-            "out_col": "(i-vd1)wd2_l",
-            "leave_one_out": false,
-            "i_minus": true,
-            "depth": 2
-        },
-        {
-            "input_col": "wd3_k",
-            "weight_col": "d1",
-            "out_col": "(i-vd1)wd3_k",
-            "leave_one_out": false,
-            "i_minus": true,
-            "depth": 2
-        },
-        {
-            "input_col": "wd3_l",
-            "weight_col": "d1",
-            "out_col": "(i-vd1)wd3_l",
-            "leave_one_out": false,
-            "i_minus": true,
-            "depth": 2
-        },
-        {
             "input_col": "w3d1_k",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)w3d1_k",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 4
         },
         {
             "input_col": "w3d1_l",
-            "weight_col": "d1",
+            "group_col": "ttwa",
             "out_col": "(i-vd1)w3d1_l",
+            "inner_cols": null,
             "leave_one_out": false,
             "i_minus": true,
+            "type": "g",
             "depth": 4
+        },
+        {
+            "input_col": "w4d1_k",
+            "group_col": "ttwa",
+            "out_col": "(i-vd1)w4d1_k",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
+        },
+        {
+            "input_col": "w4d1_l",
+            "group_col": "ttwa",
+            "out_col": "(i-vd1)w4d1_l",
+            "inner_cols": null,
+            "leave_one_out": false,
+            "i_minus": true,
+            "type": "g",
+            "depth": 5
         }
     ]
 }

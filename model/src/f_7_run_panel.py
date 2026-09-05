@@ -28,6 +28,7 @@ class ModelSpec():
     to_log: list[str] = field(default_factory=list)
     fe: list[str] = field(default_factory=list)
     description: str = ""
+    panel_name: str | None = None
     include: bool = True
     use_linearmodels: bool = True
     differencing: str = 'mean'
@@ -98,6 +99,14 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
     t_panel_final_filter = t_panel.drop_null(how='any')
     return t_panel_final_filter
 
+def transform_nfe(values: list[str], fe: list[str]) -> list[str]:
+    if 'lnfe' in fe:
+        return [f"(i-wd1){'_' if len(p) == 1 else ''}{p}" for p in values]
+    elif 'gnfe' in fe:
+        return [f"(i-vd1){'_' if len(p) == 1 else ''}{p}" for p in values]
+    else:
+        return values
+
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
 
@@ -111,13 +120,14 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             "endog": [p for p in (mod.X + mod.W) if p in mod.Z.keys()],
             "instr": [p for values in mod.Z.values() for p in values]
         }
-        params_raw_names = list({ prop: True for values in params_raw.values() for prop in values }.keys())
+        params_raw_names = list({ prop: True for values in params_raw.values() for prop in transform_nfe(values, mod.fe) }.keys())
         params_transformed = {}
         for k, v in params_raw.items():
+            values = transform_nfe(v, mod.fe)
             if k in mod.to_log:
-                params_transformed[k] = [f'ln_{p}' for p in v]
+                params_transformed[k] = [f'ln_{p}' for p in values]
             else:
-                params_transformed[k] = v
+                params_transformed[k] = values
         is_iv = len(params_transformed['endog']) > 0
         params_transformed_names = list({ prop: True for values in params_transformed.values() for prop in values }.keys())
         params_full = ['registered_number', 'year'] + params_transformed_names
@@ -131,8 +141,8 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 .mutate(**{
                     f'ln_{p}': _[p].log() for p in params_raw_names if p in mod.to_log
                 })
-                .drop_null(params_full)
                 .select(params_full)
+                .drop_null(params_full)
             )
             df_model = pd.DataFrame()
         elif isinstance(table_indicator, pd.DataFrame):
@@ -143,8 +153,8 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 .assign(**{
                     f'ln_{p}': df_raw[p].apply(lambda x: np.log(x) if x > 0 else None) for p in params_raw_names if p in mod.to_log
                 })
-                .dropna(subset=params_full)
                 .filter(items=params_full)
+                .dropna(subset=params_full)
             )
             t_model = ibis.memtable(df_model)
         else:
@@ -176,14 +186,18 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             df_model = add_fe(t_model, mod.fe).execute()                          # type: ignore
             tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
             const_col = ['const'] if 'c' in mod.fe else []
+            # Change the values of every value in the params_transformed dictionary
+            # To have backticks around them, so that they can be used in the formula string
+            params_ticked = {k: [f"`{p}`" for p in v] for k, v in params_transformed.items()}
             formula_str = "".join([
-                            params_transformed['dep'][0],
+
+                            params_ticked['dep'][0],
                             ' ~ ',
-                            ' + '.join(params_transformed['exog'] + tdumm_cols + const_col),
+                            ' + '.join(params_ticked['exog'] + tdumm_cols + const_col),
                             ' + [',
-                            ' + '.join(params_transformed['endog']),
+                            ' + '.join(params_ticked['endog']),
                             ' ~ ',
-                            " + ".join(params_transformed['instr']),
+                            " + ".join(params_ticked['instr']),
                             ']'
                         ])
             print(f"Running model '{model_name}' as linearmodels panel IV, formula: {formula_str}")
@@ -206,12 +220,13 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
 
         else:
             df_model = t_model.execute()    # type: ignore
+            params_ticked = {k: [f"`{p}`" for p in v] for k, v in params_transformed.items()}
             formula_str = "".join([
-                params_transformed['dep'][0],
+                params_ticked['dep'][0],
                 ' ~ ',
-                ' + '.join(params_transformed['regressors']),
+                ' + '.join(params_ticked['regressors']),
                 ' | ',
-                ' + '.join(params_transformed['exog'] + params_transformed['instr'])
+                ' + '.join(params_ticked['exog'] + params_ticked['instr'])
             ])
             print(f"Running model '{model_name}' as PanelBox panel IV, formula: {formula_str}")
             mod_iv = PanelIV(
