@@ -3,8 +3,9 @@
 \subsection{Fame}
 
 I have used data from Fame for this investigation.
-Fame is a comprehensive set of financial datapoints from UK firms with useful variables for this analysis,
-in particular, number of employees and balance sheet data from which analysis-relevant aggregates can be derived.
+Fame is a comprehensive database of the financial balance sheet from UK firms.
+It contains useful variables for this analysis, in particular,
+number of employees and aggregates which can be summed to calculate \itx{GVA}.
 Fame is provided by Moody's Analytics, an international credit agency,
 and collects its data from UK firms via survey\footnote{\cite{MoodysAnalytics2026}}.
 \par
@@ -12,129 +13,136 @@ Its international counterpart, Orbis, offers a similar service for international
 This analysis could therefore be extended to offer insights comparing the spillover effects of UK firms to their international counterparts.
 For this investigation, the UK dataset is comprehensive and the most policy-relevant for this investigation.
 
-\subsection{\todo{Ingestion and cleaning}}
+\subsection{Ingestion and cleaning}
 
-I wrote a series of Python scripts\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}, organised in Jupyter notebooks to ingest this data and manipulate this data.
+I wrote a series of Python scripts\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079},
+organised in Jupyter notebooks, to ingest and manipulate Fame data.
 Data was stored in \itx{DuckDB}, an open-source, MIT-licensed relational (SQL) database architecture\footnote{\cite{Raasveldt2026}}.
 It operates locally, meaning minimal lag from issuance to execution time
-provided the operating machine is sufficiently high-compute.
-It stores data in column vectors, which is a significant advantage
+provided the operating machine is sufficiently high-compute,
+and stores data in column vectors, which is a significant advantage
 to manipulating whole variables.
 A notable use-case is the application of $(n\times n)$ Matrix transformations
 to a variable $n$-length column vector,
 as is required to calculate distance-weighted averages.
 Any SQL commands issued from the Python are compiled down to C,
 making execution for column transformation operations extremely fast,
-even for joining tables of several 100s of millions of rows\footnote{explanatory
+even for joining tables of several 100s of millions of rows\footnote{Explanatory
 numbers given in this section are rounded to 3 significant figures for ease},
 as is calculated in this analysis for target-peer spatial distances.
-I wrote database interaction commands using \itx{Ibis}\footnote{\cite{TheIbisProjectAuthors2026}},
+I wrote database interaction commands using \itx{Ibis},
 an Apache-2.0 licensed Object-Relational Mapping (ORM) framework
-which allows SQL commands to be written natively in Python,
+which allows SQL commands to be written natively in Python\footnote{\cite{TheIbisProjectAuthors2026}},
 minimising the likelihood of errors when issuing queries loops or changing variable names.
 This architecture choice is extremely well-suited for mass data econometric analysis
 and critical to solving the compute limitations of iterative large-$n$ dataset manipulations
 required to calculate the valid instruments identified in section \ref{ss:static-identification}.
 \par
-Over 100Gb of raw data was accessed and donwloaded from Fame in February 2025
+Over 100 Gb of raw data was accessed and donwloaded from Fame in February 2025
 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026} and reused for this project.
-Raw data are stored in a series of Excel files on a series of a financial balance sheet indicators,
-including characteristics that are time-invariant for each firm, bucketed into $a1\_ID$ and $a5\_misc$ files,
+Raw data are distributed across a series of Excel files on balance sheet indicators,
+including time-invariant characteristics for each firm, bucketed into $a1\_ID$ and $a5\_misc$ files,
 and annual data published on a calendar-year basis,
 bucketed into \itx{a2\_key\_finance}, \itx{a3\_assets}, and \itx{a4\_profits} tables.
 \par
 I traversed the file structure to build a dictionary to the filepaths organised in their subfolders,
 which are named by the 2-digit industry SIC division,
 and batch-imported data belonging to the firms in that industry.
-Some industries have very many firms, requiring further batching of their files,
+Some industries have prodigious registered firms,
 such as SIC division 47 (Retail Trade, 1090 files)
 and 82 (Office administrative, office support and other business support activities,
-1065 files)\footnote{\todo{ref: ONS}}.
-I limited a batch to 200 files for stable memory handling,
-and used Python's multithreaded asynchronous \itx{concurrent.futures} package
-to efficiently compute the data flow.
+1065 files)\footnote{\cite{ons2026:sic}}.
+I imposed a batch limit of 200 for stable memory handling, splitting up these large industries,
+and used used Python's asynchronous \itx{concurrent.futures} package
+to execute the ingestion of each batch, exploiting multithreaded processing.
 In total, 12,800 files were processed across the 88 available SIC divisions.
 Time-invariant firm characteristics were saved to a table named \itx{fixed},
 annual firm data to a table named \itx{yearly} within \itx{DuckDB}.
 \par
 All firm data are tagged with a `registered number' property corresponding to a Companies House ID.
 I deduplicated 896,000 \itx{fixed} firm entries using a `registered number' match,
-of which the vast majority, 772,000 were exact duplicate entries,
+of which the vast majority were exact duplicate entries
 and the remainder had some mismatch of 1 or more firm characteristics,
 such as the listed company name, global operating owner,
 and in rare cases, location.
-Duplicate entries are a sustained feature of the Fame dataset,
-worsened by Fame ingesting different snapshots of firm data
-at different points of time, where fixed characteristics may not sync
-across snapshots, or change over time. There may also be data ingestion errors,
-meaning slight variations in names referring to the same entity,
-and failures to update evolving factors such as `number of datapoints available' for a firm.
+Duplicate entries are an undesirable feature of the Fame dataset,
+worsened by Fame's construction from snapshots of reported firm data
+across timepoints, where resolution of conflicting \itx{fixed} data may be imperfect.
+Fame also contains data impute errors, meaning variations in names referring to the same entity.
 When duplicates occurred, I effectively randomly chose an entry to keep.
-A more robust analysis could devise further data science methods
-to review differences between entries, such an acceptable Levenshtein distance
-between name entries, or creating a proceducre to store and separately treat
-firms with multiple listed addresses.
-Further data cleaning procedures with this exact dataset are discussed in \cite{Irastorza-Fadrique2026}.
-Significant recommended procedures include
+A more robust analysis could devise further data science methods,
+such a deployment of an acceptable Levenshtein distance to resolve differing name entries,
+or separately treating firms with multiple listed addresses.
+Further data cleaning procedures are discussed in \cite{Irastorza-Fadrique2026}, notably these include
 avoiding double-counting of firms through both their parent company and subsidiaries,
 truncation of data to at earliest 2010 due to changes in reporting standads,
 and reclassification of firm SIC codes using NLP on firm business activity descriptions.
 \par
-As the main analysis presented here only uses location data as the \itx{fixed} characteristic of analysis,
+As the main analysis here only uses location data as the \itx{fixed} characteristic of analysis,
 due to its time constraints, and due to the low number of duplicates
 and other cleaning errors listed above relative to the size of the dataset,
-I treat those errors as random effects and deem the random selection strategy suitable.
+I treat those errors as random effects and deem the impact of the random selection strategy minimal.
 I similarly removed duplicate firm-year entries in the \itx{yearly} data,
 and merged the two tables based on ensuring every \itx{fixed} firm identity
 had a corresponding \itx{yearly} set of rows, and vice versa.
-Due to the method of ingestion handling each raw data file industry
-as a bulk addition of rows for efficiency,
-rather than merging panel observation rows by firm-year identifier at the point of ingestion
-which would be a significant computation hassle,
-I adopted a `max-merge' column strategy, which means that any panel observation duplicates
-where one row has `0s' and the next has a value, the value is kept.
-This however means that if two observations have conflicting values for a firm-year observation
-and it is a random assignment which of those two values is the `true' one,
-the larger one is kept, which has the potential to bias all financial data entries upwards.
-This is unlikely to be correlated with any of the variables of interest investigated in this analysis.
+For efficiency, I adopted a `max-merge' column strategy,
+which is effective for resolving entries which are zero and non-zero in conflicting duplicates.
+This however means that any two observations with conflicting non-zero values keep the large value.
+If it is random errors causing Fame to have these conflicting, duplicate values,
+this strategy has the potential to bias all financial data entries upwards,
+however this bias is unlikely to be correlated with any of this investigation's variables of interest.
 I further removed a small minority (<200) firm entries not based in the UK,
 which can be identified through their `registered number' format.
 In total, deduplication reduced the number of firms from 9,280,000 to 8,220,000,
 and the number of panel observations from 44,900,000 to 42,900,000.
 \par
 I restrict the sample to observations with fewer than 10 employees,
-and drop any observation from the \itx{yearly} data which doesn't include
-both \itx{renumeration\_employees} and \itx{ebitda} which are required to calculate firm GVA.
-This follows the recommendation of \cite{Irastorza-Fadrique2026}
-as low-employee observations are more likely to be SMEs weakly-defined trading purposes,
-or shell companies, that would mechanically yield an upwardly-biased TFP-residual calculation
-with few employees for GVA.
-However, doing this at the observation-level, rather than the firm-level, likely also could induce
-a bias to the variables measured as then firms included the sample whose
-employees temporarily dipped below the threshold but then returned above would have their years of
-low employee numbers excluded.
-There is fortunately a buffer of one year either side due to first-differencing in panel regressions.
-Nevertheless, I adopted the former, filtering on the observation level.
+and drop any observation from the \itx{yearly} data missing \itx{renumeration\_employees} and \itx{ebitda}
+properties which are required to calculate firm GVA.
+This follows \cite{Irastorza-Fadrique2026}: low-employee firms, additionally more likely to be shell companies,
+are likely to mechanically yield an inaccurately high TFP-residual calculation.
+Doing this at the observation rather than firm, has the risk of inducing bias to the variables measured
+as there may remain firms in the sample straddling the employees threshold
+which endogenously have their observation years of low-employees excluded.
+First-differencing in panel regressions with this data provides some mitigation to this issue
+by providing a buffer of one year either side to excluded obbservations.
+Nevertheless, this analysis adopts the observation-level threshold strategy.
 This set of filters reduced the number of valid firms in this analysis to 152,000
 with 1,130,000 panel observations.
-\todo{Figure X shows the distribution of active firms per year observation}.
-The distribution of active firms per year follows expected trends and
-macroeconomic business population statistics\footnote{\todo{cite}}, with an observable small dip
-post-Bredxit and during the Covid-19 pandemic.
+\begin{figure}[hbtp]
+    \caption{Panel observation availability by year}
+    \label{fig:data-obvs-per-year}
+    \centering
+    \graphicspath{{../../descriptives/output/}}
+    \includegraphics[width=\textwidth]{fig_panel_obvs_by_year.png}
+    \caption{Distribution of years of data available per firm}
+    \label{fig:data-years-per-firm}
+    \centering
+    \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
+\end{figure}
+Figure \ref{fig:data-obvs-per-year} shows the distribution of active firms across years,
+which follows expected trends from macroeconomic business population
+surveys\footnote{\cite{dbt2025:businesspop}}.
+We can note an observable dip after the 2016 Brexit refendum and during the Covid-19 pandemic.
 We can also observe that 2024 is an incomplete sample set as not all firms
 had submitted their financial accounts for that year,
 but this is treated as a random effect and no further firms are filtering as a result of this.
 \par
-All data is deflated to real terms, using 2024 as the base year.
-I used the GDP deflator for all balance sheet variables,
-except for \itx{renumeration\_employees} and its composites for which I used CPIH,
-as these are income-related aggregates with real spending power best captured by household purchasing baskets
-\footnote{\cite{OfficeforNationalStatistics2026}}.
-\par
-All balance sheet data are in thousands ('000s) of GBP (£).
-As we estimate log relationships exclusively, this has no effect on parameter interpretation.
+The lifespan of a firm, and the corresponding number of \itx{yearly} observations within the dataset
+follows a geometric distribution as given in figure \ref{fig:data-years-per-firm}.
+With each passing year, a firm has a binary survival-remain decision,
+with an increasing discrete probability of survival for older firms.
 
 \subsection{Deriving panel aggregates}
+
+All finaical data are deflated to real terms, using 2024 as the base year.
+I used macroeconomic data of the GDP deflator\footnote{\cite{ons2026:qna}} for all balance sheet variables,
+except for \itx{renumeration\_employees} and its composites for which I used CPIH\footnote{\cite{ons2026:cpih}},
+as these are income-related aggregates with real spending power best captured by household purchasing baskets
+\footnote{\cite{ons2026:cpih-technical}}.
+All financial data are in thousands ('000s) of GBP (£);
+as I estimate log relationships exclusively, this has no effect on parameter interpretation.
+\par
 
 Labour input is taken from the number of employees reported on the FAME balance sheet per firm.
 This dataset, like all others, does not include hours worked per employee on a firm-level that would offer a more
@@ -154,7 +162,7 @@ likely due to accounting standard differences.
             \label{table:ky}
             \begin{tabular}{llc}
                 \toprule\toprule
-                Variable            &   Description                                             & Capital-output ratios \\
+                Variable            &   Description                                             & Capital-output ratio \\
                 \hline
                 \itx{tangibles}     &                                                           &   3.53    \\
                 \itx{fixed\_total}  &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
@@ -220,7 +228,7 @@ Regressors are given in log terms to approximate a structural production functio
 Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share, $\hat\beta_2$,
 exactly in line with ONS analysis of UK industry-level data
 over the same time period, particularly \itx{corporate gross labour share} which is constructed
-from a similar sample to the coverage in Fame\footnote{\cite{OfficeforNationalStatistics2024}}.
+from a similar sample to the coverage in Fame\footnote{\cite{ons2024:labour-share-uk}}.
 \par
 Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
 almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
@@ -230,9 +238,3 @@ for the rest of the analysis, I use \itx{total\_assets} as the primary capital m
 As a demonstration, I include specifications which omit fixed effects.
 The capital share of income jumps on a specification with only time fixed effects,
 which is to be expected \todo{explain}.
-
-% TFP is the residual on GVA after extracting the proportion that can be accounted by capital and labour inputs.
-% Equivalently, it is the sum of fixed effects in this specification with the error term,
-% which means we should expect it to be exogenous to capital and labour inputs,
-% but correlated to both firm effects and time trends.
-% By extracting this regression residual, I have a TFP measure for all of my 1,081,520 panel observations.

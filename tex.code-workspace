@@ -15,6 +15,65 @@
 		"latex-workshop.message.warning.show": false,
 		"latex-workshop.message.error.show": false,
         "latex-workshop.view.pdf.invert": 0,
+        "latex-workshop.latex.recipe.default": "pdflatex",
+        "latex-workshop.latex.tools": [
+            {
+                "name": "latexmk",
+                "command": "latexmk",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "-pdf",
+                    "-outdir=%OUTDIR%",
+                    "-auxdir=%AUXDIR%",
+                    "%DOC%"
+                ]
+            },
+            {
+                "name": "pdflatex",
+                "command": "pdflatex",
+                "args": [
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    "-file-line-error",
+                    "%DOC%"
+                ]
+            },
+            {
+                "name": "bibtex",
+                "command": "bibtex",
+                "args": [
+                    "%DOCFILE%"
+                ]
+            },
+            {
+                "name": "fixauthors",
+                "command": "python",
+                "args": [
+                    "${workspaceFolder}/../../../utils/f_1_fix_authors.py",
+                    "${file}"
+                ]
+            }
+        ],
+        "latex-workshop.latex.recipes": [
+            {
+                "name": "fixauthors -> pdflatex -> bibtex -> pdflatex*2",
+                "tools": [
+                    "fixauthors",
+                    "pdflatex",
+                    "bibtex",
+                    "pdflatex",
+                    "pdflatex"
+                ]
+            },
+            {
+                "name": "pdflatex",
+                "tools": [
+                "pdflatex"
+                ]
+            }
+        ],
 
         "highlight.regexes": {
             "(\\\\todo){": {
