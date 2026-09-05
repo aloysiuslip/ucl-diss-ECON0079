@@ -7,19 +7,40 @@ from a group or average of \itx{peer} firms onto a \itx{target} firm.
 The influence of the vector of all firms $j$ on the vector of all firms $i$
 can be summarised in an $(n \times n)$ interactions matrix, $\mathbf W$.
 \par
-\todo{This can be explained better: in a table with 4 columns}
-The interactions relationship is irreflexive. For groups it is transitive:
-if firms A and B share a spatial group, such as a travel-to-work area (\itx{ttwa}),
+This interactions matrix is symmetric: any firm with a peer weight
+calculated by the distance between the two firms naturally is a peer in return
+with an identical distance and weight.
+Extensions to this analysis could devise asymmetric relations,
+for example, with bigger firms having more influence.
+The interactions relationship is irreflexive - no target can be a peer of itself.
+For groups it is transitive: if firms A and B share a spatial group, namely travel-to-work area (\itx{ttwa}),
 first-half of a UK postocde (\itx{pc4}), or full postcode (\itx{pc8}),
 then a firm C that is a peer of firm B must also be of firm A.
 For continuous distance measures, this is non-transitive.
 Firm B, a peer of firm A within its 5km radius, can clearly have its own peers
-that are within its own 5km radius that are not shared with A.
-Every firm is then its own overlapping group, or equivalently,
-a sparse, rather than block diagonal, firm-to-firm matrix\footnote{
-    I do actually impose a block diagonal structure for reasons of computation
-    as explained subsequently
-}.
+that are within its own 5km radius that are beyond that radius for firm A.
+This matrix resembles a sparse matrix with a `thick' diagonal,
+rather than a matrix with distinct large blocks.
+It should be noted that, as discussed in \ref{ss:data-distance},
+the 5km-distance calculations for the network weighting matrices
+were limited to only firms within a TTWA, sowhen viewed as a whole,
+$\mathbf W_d$ does have a block diagonal group similar to $\mathbf W_{g3}$,
+though with hterogenous weights internally within each group rather than a simple average.
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}[c]
+        \caption{Weighting matrices $i,j$-relation properties}
+        \label{tab:location-set-properties}
+        \begin{tabular}{lccccc}
+            \toprule\toprule
+            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping groups & Block diagonal   \\
+            \midrule
+            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}         & $g$-level        \\
+            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark         & \itx{ttwa}-level \\
+            \bottomrule
+        \end{tabular}
+    \end{threeparttable}
+\end{table}
 
 \subsection{Location data limitations}
 \label{ss:data-location-limits}

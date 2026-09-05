@@ -77,6 +77,17 @@ Further data cleaning procedures are discussed in \cite{Irastorza-Fadrique2026},
 avoiding double-counting of firms through both their parent company and subsidiaries,
 truncation of data to at earliest 2010 due to changes in reporting standads,
 and reclassification of firm SIC codes using NLP on firm business activity descriptions.
+\begin{figure}[b!]
+    \caption{Panel observation availability by year}
+    \label{fig:data-obvs-per-year}
+    \centering
+    \graphicspath{{../../descriptives/output/}}
+    \includegraphics[width=\textwidth]{fig_panel_obvs_by_year.png}
+    \caption{Distribution of years of data available per firm}
+    \label{fig:data-years-per-firm}
+    \centering
+    \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
+\end{figure}
 \par
 As the main analysis here only uses location data as the \itx{fixed} characteristic of analysis,
 due to its time constraints, and due to the low number of duplicates
@@ -95,6 +106,7 @@ I further removed a small minority (<200) firm entries not based in the UK,
 which can be identified through their `registered number' format.
 In total, deduplication reduced the number of firms from 9,280,000 to 8,220,000,
 and the number of panel observations from 44,900,000 to 42,900,000.
+
 \par
 I restrict the sample to observations with fewer than 10 employees,
 and drop any observation from the \itx{yearly} data missing \itx{renumeration\_employees} and \itx{ebitda}
@@ -109,17 +121,7 @@ by providing a buffer of one year either side to excluded obbservations.
 Nevertheless, this analysis adopts the observation-level threshold strategy.
 This set of filters reduced the number of valid firms in this analysis to 152,000
 with 1,130,000 panel observations.
-\begin{figure}[hbtp]
-    \caption{Panel observation availability by year}
-    \label{fig:data-obvs-per-year}
-    \centering
-    \graphicspath{{../../descriptives/output/}}
-    \includegraphics[width=\textwidth]{fig_panel_obvs_by_year.png}
-    \caption{Distribution of years of data available per firm}
-    \label{fig:data-years-per-firm}
-    \centering
-    \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
-\end{figure}
+\par
 Figure \ref{fig:data-obvs-per-year} shows the distribution of active firms across years,
 which follows expected trends from macroeconomic business population
 surveys\footnote{\cite{dbt2025:businesspop}}.
@@ -129,7 +131,7 @@ had submitted their financial accounts for that year,
 but this is treated as a random effect and no further firms are filtering as a result of this.
 \par
 The lifespan of a firm, and the corresponding number of \itx{yearly} observations within the dataset
-follows a geometric distribution as given in figure \ref{fig:data-years-per-firm}.
+follows a geometric distribution as given in Figure \ref{fig:data-years-per-firm}.
 With each passing year, a firm has a binary survival-remain decision,
 with an increasing discrete probability of survival for older firms.
 
@@ -138,8 +140,8 @@ with an increasing discrete probability of survival for older firms.
 All finaical data are deflated to real terms, using 2024 as the base year.
 I used macroeconomic data of the GDP deflator\footnote{\cite{ons2026:qna}} for all balance sheet variables,
 except for \itx{renumeration\_employees} and its composites for which I used CPIH\footnote{\cite{ons2026:cpih}},
-as these are income-related aggregates with real spending power best captured by household purchasing baskets
-\footnote{\cite{ons2026:cpih-technical}}.
+as these are income-related aggregates with real spending power best captured by household purchasing
+baskets\footnote{\cite{ons2026:cpih-technical}}.
 All financial data are in thousands ('000s) of GBP (£);
 as I estimate log relationships exclusively, this has no effect on parameter interpretation.
 \par
@@ -149,28 +151,26 @@ This dataset, like all others, does not include hours worked per employee on a f
 granular productivity (GVA per hour worked) measures. An estimation in this setting would likely have to impute the measure
 from industry aggregates, which would likely confound the true firm-level signal.
 \par
-Capital is Fame's \texttt{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
+Capital is Fame's \itx{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
 within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
-The average capital-output ratio is 6x within FAME when filtering for positive values \tablerefp{table:ky},
+The average capital-output ratio is 6x within FAME when filtering for positive values \tablerefp{tab:data-financial-ky},
 which is moderately higher than macroeconomic aggregates typically suggest
 likely due to accounting standard differences.
-
 \begin{table}[htbp]
-    \begin{center}
-        \begin{threeparttable}[c]
-            \caption{Capital-output ratios in FAME corpus of firms}
-            \label{table:ky}
-            \begin{tabular}{llc}
-                \toprule\toprule
-                Variable            &   Description                                             & Capital-output ratio \\
-                \hline
-                \itx{tangibles}     &                                                           &   3.53    \\
-                \itx{fixed\_total}  &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
-                \itx{total\_assets} &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
-                \bottomrule
-            \end{tabular}
-        \end{threeparttable}
-    \end{center}
+    \centering
+    \begin{threeparttable}[c]
+        \caption{Capital-output ratios in FAME corpus of firms}
+        \label{tab:data-financial-ky}
+        \begin{tabular}{llc}
+            \toprule\toprule
+            Variable            &   Description                                             & Capital-output ratio \\
+            \midrule
+            \itx{tangibles}     &                                                           &   3.53    \\
+            \itx{fixed\_total}  &   \footnotesize{tangibles + intangibles + inv.\_other}    &   6.00    \\
+            \itx{total\_assets} &   \footnotesize {fixed\_total + current\_assets}          &   11.56   \\
+            \bottomrule
+        \end{tabular}
+    \end{threeparttable}
 \end{table}
 
 GVA is calculated as the sum of \itx{ebitda} and \itx{renumeration\_employees}.
