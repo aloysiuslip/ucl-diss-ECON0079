@@ -44,36 +44,69 @@ though with hterogenous weights internally within each group rather than a simpl
 
 \subsection{Location data limitations}
 \label{ss:data-location-limits}
+
+This analysis amalgamted multisite firms to their primary trading address, as an assumption.
 In the dataset prepared for \cite{Irastorza-Fadrique2026},
-each firm is only tagged with their last-known 
-Fame only reports each company's last-known registered and trading address,
-at the time of compilation of publication of its annual vintage\todo{cite}.
-As a result, final location data is only available at the firm level.
-We can interpret each firm as being static over the entire 20-year sample,
-with no movers. This seems very unlikely \todo{expand}.
-Instead, we must interpret the constructing address, and therefore firm-to-firm distance measures
-as a signal of firm pairs' true distance polluted by movers.
-This has 2 econometric consequences.
+each firm is only tagged with their last-known registered address and primary trading address.
+Fame includes further trading addresses for multisite firms available for download through their data portal,
+however the only useful site-level datapoint provided is number of employees per trading address,
+and even then coverage is sparse\footnote{\cite{MoodysAnalytics2026}, platform accessed August 2026.}.
+This analysis simply took the financial aggregates listed for each firm
+and assumed it to be located at the listed primary trading address.
+There are clear flaws to this method: large retail firms, such as consumer retailer \itx{Tesco},
+have several hundred listed trading addresses on Fame,
+and generate much less than the full amount of \itx{GVA}
+at their listed primary trading location, such as in \itx{Welwyn Garden City}.
+Nevertheless, difficult algorithm allocation decisions,
+or the pursuit of more sophisticated data sources
+would have been required to address this issue;
+these are discussed in section \ref{ss:ext-alt-location}.
+The amalgamation assumption provides ease of computation 
+while contributing to attenuation bias of the estimated spillover parameters
+due to imperfect target-peer spatial connections.
+\par
+Additionally, the location data that is available is time-invariant,
+a characteristic of the \itx{fixed} table, rather than updated on a yearly basis
+to reflect firm-movers.
+This is a reflection of using a comprehensive dataset of financial datapoints,
+that was not optimised for spatial analysis; instead Fame provides an in-built feature
+suggesting peers via balance sheet and industry similarity, which I ignore for this analysis.
+One interpretation of this analysis' use of this characteristics
+is that each firm is over the entire 20-year sample with no movers.
+This seems very unlikely: \fullref{}{ss:lit-neg} tells us to expect
+the endogenous location of firm movement and colocation
+to optimise for taking advantage of firm spillovers.
+Using the location characteristics as I do,
+as a noisy signal of the firm's true location, has 2 econometric consequencesj.
 \par
 Firstly, firm fixed effects in all spatial specifications become extremely important.
-For all movers within the sample period, their firm location decision is endogenous to
-the subsequent productivity spillovers they experience and exert,
-for reasons discussed in Section \ref{s:literature} on New Economic Geography.
-\todo{More on firm FEs}
-There is no solution to this for moves occurring out-of-sample, for instance, just before 2009.
+For all movers within the sample period, an endogenous firm location decision
+can only be modelled as correlated with the spillover regressors of interest.
+This justifies my use of fixed effects over random effects throughout this analysis.
+Firm fixed effects are time invariant, and can additionally help to eliminate
+some of the endogeneity induced by movers who undertook their move
+just before the sample period, 2006-, to maximise their spillover effect.
 \par
 Secondly, I acknowledge some attenuation to the productivity spillover estimate
 Peer firms who were close to the target firm during the firm-year observation
 who subsequently moved away within-sample will have an extreme distance recorded,
 and so be excluded from tagged address groups and truncated distance calculations.
-Peer firms who are recorded as close to the target firm as they subsequently moved to the location
-\todo{More on direction of bias/positive selection?}
+Peer firms who are recorded as close to the target firm as they subsequently moved to the location.
+This reduces down the strength of the spillover coefficient $\theta_0$ estimated.
 
 \subsection{Location group classification}
 
-I first consider a model where each target has peers which share a spatial identifier,
+Spillover effects from neighbouring firms are summarised in a weighting matrix $\mathbf W$,
+where a non-zero weight implies some use of the peer firm's attributes
+in the regression to estimate the target firm's TFP.
+I construct initial weights by peers which share a spatial identifier,
 meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011
-definitions\footnote{\todo{Review ONS bulletin on TTWAs data source and describe clearly}},
+definitions\footnote{Travel-to-work area definitions from 2011 are broadly still considered
+the mostly reliable for current analytical research,
+due to the pollution in travel and working patterns occurring as a result of the Covid-19 pandemic during the 2021 Census.
+Travel-to-work-area area coverages, meaning maps from the location data availble particularly postcode
+tend to be time-invariant following the pattern of the 2001 to 2021 changes,
+which mostly occurred in border areas of the UK's large cities.},
 the first half of a UK postcode \itx{pc4},
 and the full UK postcode \itx{pc8}.
 \par
