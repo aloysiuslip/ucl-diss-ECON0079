@@ -30,6 +30,7 @@ class ModelSpec():
     description: str = ""
     panel_name: str | None = None
     include: bool = True
+    category: str | None = None
     use_linearmodels: bool = True
     differencing: str = 'mean'
 
