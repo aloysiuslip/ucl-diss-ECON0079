@@ -48,7 +48,7 @@
                 ]
             },
             {
-                "name": "fixauthors",
+                "name": "authortex",
                 "command": "python",
                 "args": [
                     "${workspaceFolder}/../../../utils/f_1_fix_authors.py",
@@ -58,7 +58,7 @@
         ],
         "latex-workshop.latex.recipes": [
             {
-                "name": "fixauthors -> pdflatex -> bibtex -> pdflatex*2",
+                "name": "authortex -> pdflatex -> bibtex -> pdflatex*2",
                 "tools": [
                     "fixauthors",
                     "pdflatex",

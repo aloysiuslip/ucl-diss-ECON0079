@@ -33,10 +33,10 @@ though with hterogenous weights internally within each group rather than a simpl
         \label{tab:location-set-properties}
         \begin{tabular}{lccccc}
             \toprule\toprule
-            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping groups & Block diagonal   \\
+            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping groups & Blocks     \\
             \midrule
-            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}         & $g$-level        \\
-            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark         & \itx{ttwa}-level \\
+            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}         & $g$        \\
+            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark         & \itx{ttwa} \\
             \bottomrule
         \end{tabular}
     \end{threeparttable}
@@ -44,6 +44,8 @@ though with hterogenous weights internally within each group rather than a simpl
 
 \subsection{Location data limitations}
 \label{ss:data-location-limits}
+In the dataset prepared for \cite{Irastorza-Fadrique2026},
+each firm is only tagged with their last-known 
 Fame only reports each company's last-known registered and trading address,
 at the time of compilation of publication of its annual vintage\todo{cite}.
 As a result, final location data is only available at the firm level.
@@ -81,11 +83,10 @@ applied on the variable of peer firm $j$, summing across rows $i$
 to reach a weighted aggregate regressor
 with an estimated effect on target firm $i$.
 \par
-A first property of $W$ is that it its diagonal elements are all $0$:
-a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
-This is common to peer effets literature such as \cite{Moffitt2001}
+$W$ retains the irreflexivity property discussed: its diagonal elements are all $0$,
+meaning a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
+This is common to peer effects literature such as \cite{Moffitt2001}
 and discussed in \cite{Bramoulle2009}.
-\par
 Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
 The resulting $n\times n$ matrix has off-diagonal elements as
 the number of group members $n_g-1$, which excludes the target firm $i$.
@@ -126,7 +127,7 @@ set of interactions between firms which have group classifiers of size $s_1=4$ a
     \centering
     \par\noindent
     \begin{align*}
-        \mathbf{W}_{g\sim \ref{fig:static-groups-W}}
+        \mathbf{W}_{g1:3}
         \begin{pmatrix}
             0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
             \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
@@ -145,7 +146,7 @@ set of interactions between firms which have group classifiers of size $s_1=4$ a
 
 I can extend this to more complicated set of group rules.
 I calculate non-overlapping group weights $\mathbf W_g$ to $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ at once,
-which represent the successive concentric rings of \itx(pc8) (core), \itx{pc4}, and \itx{ttwa}
+which represent the successive concentric rings of \itx{pc8} (core), \itx{pc4}, and \itx{ttwa}.
 The weighting rules for these multiple, non-overlapping groups is to zero the $i,j$ interaction in
 $W_{gk}$ if a prior matrix in the series, $W_{gl},\ l<k$ has a non-zero entry in that cell.
 I illustrate an example in Figure \ref{fig:static-groups-donut-matrices}.
@@ -170,7 +171,7 @@ These matrices are orthogonal.
         &\sim
         \begingroup
         \setlength\arraycolsep{3.8pt}
-        \begin{pmatrix}
+        \begin{bmatrix}
             0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
             \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
             \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 \\
@@ -179,8 +180,8 @@ These matrices are orthogonal.
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
             0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{bmatrix}\ 
+        \begin{bmatrix}
             0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
             0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
             0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
@@ -189,8 +190,8 @@ These matrices are orthogonal.
             0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
-        \end{pmatrix}
-        \begin{pmatrix}
+        \end{bmatrix}\ 
+        \begin{bmatrix}
             0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
@@ -199,7 +200,7 @@ These matrices are orthogonal.
             \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
             \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
             \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0
-        \end{pmatrix}
+        \end{bmatrix}
         \endgroup
     \end{align*}
     \begin{tablenotes}
@@ -219,7 +220,7 @@ This was mostly driven by full data availability, and the consistency of postcod
 with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
 within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
 a move from the average number of peers from 3.1 to 2.9,
-and was a similar number of groups, with non-coheisve definitions.
+and was a similar number of groups, with non-cohesive definitions.
 \wraptable
     {Summary statistics across location groups}
     {./figures/3_tab_summary_w_groups}
@@ -242,6 +243,36 @@ and was a similar number of groups, with non-coheisve definitions.
         \\
         \todo{This must be an old chart, I think we truncated at 5km in the end.
         Also, to produce without colours as this adds confusion}
+    \end{tablenotes}
+\end{figure}
+
+\begin{figure}[hbtp]
+    \caption{Illustration of distance-weighted matrix}
+    \label{fig:static-network-4x5-Wd}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \begin{bmatrix}
+            0 & 0.42 & 0.29 & 0.28 & 0 & 0 & 0 & 0 & 0 \\
+            0.31 & 0 & 0.38 & 0.32 & 0 & 0 & 0 & 0 & 0 \\
+            0.09 & 0.17 & 0 & 0.74 & 0 & 0 & 0 & 0 & 0 \\
+            0.09 & 0.14 & 0.76 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0.36 & 0.27 & 0.36 & 0.27 \\
+            0 & 0 & 0 & 0 & 0.02 & 0 & 0.02 & 0.96 & 0.02 \\
+            0 & 0 & 0 & 0 & 0.24 & 0.38 & 0 & 0.38 & 0 \\
+            0 & 0 & 0 & 0 & 0.02 & 0.96 & 0.02 & 0 & 0.02 \\
+            0 & 0 & 0 & 0 & 0.24 & 0.38 & 0 & 0.38 & 0 \\
+        \end{bmatrix}
+    \end{align*}
+    \begin{tablenotes}
+        Illustrative $9\times 9$ $\mathbf W$ network structure
+        generated by taking a random block of 4 firms sharing a \itx{ttwa}
+        from the cleaned Fame data and a random block of 5 firms.
+        True $\mathbf W_d$ matrices have \itx{ttwa} have much larger blocks
+        within the block diagonal structure.
+        Weights use the \itx{d1} algorithm,
+        which is the reciprocal of \itx{distance\_meters} row-normalised.
+        Values rounded to 2 decimal places.
     \end{tablenotes}
 \end{figure}
 

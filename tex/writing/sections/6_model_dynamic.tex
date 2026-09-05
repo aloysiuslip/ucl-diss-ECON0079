@@ -1,7 +1,7 @@
 \section{Dynamic models}
 \label{s:models-dynamic}
 
-The previous section's static model requires a factor exogeneity assumption
+The previous section's static model requires a strict factor exogeneity assumption
 outlined in equation \eqref{eq:static-identification-factor-exogeneity}
 for all firms, including the own-firm effect of the production function.
 In this section, I use a dynamic model to relax this assumption.
@@ -38,7 +38,6 @@ if $\mathbf z_{t-k}^\text{spill}$ is correlated with $\mathbf z_{t}$,
 then estimating $\delta_0$ in a static model will have omitted variable bias (OVB)
 of the lagged effect from the spillover attributed to the current period.
 \par
-
 Adding the autoregressor of \itx{gva1} to the specification is highly desirable
 to a justified decomposition of TFP when including peer effects in the specification.
 The panel setup with firm fixed effects already accounts for own-firm invariance,
@@ -122,14 +121,54 @@ though I now allow for moderate cross-sectional correlation across firms.
     \end{pmatrix}
 \end{align}
 
-Taking each regressor in turn, I relax the exogeneity assumption
-of the standard factors in the reduced-form equation, $\Delta k_{i,t}$ and $\Delta l_{i,t}$.
+I firstly relax the strict exogeneity assumption of the standard factors to weak exogeneity.
+There are two approaches to this: capital and labour could be fully flexible inputs,
+meaning they are optimised as part of the decision set at time $t$,
+of which the TFP error shock is a component.
+Or, capital and labour can be assumed to be predetermined:
+capital faces some time-to-build constraint
+where each firm allocates investment in the previous period
+based on the limited information available then, $\Omega_{t-1}$.
+A similar sticky decision pattern is assumed of labour,
+perhaps through job searching and hiring frictions.
 I assume a new optimal firm decision on capital based on information,
 denoted by $\Omega_t$ which includes $\varepsilon_{i,t}$ for its respective $t$.
 This approach allows the discovery of valid instruments which are exogenous to $\varepsilon_{i,t}$
 and $\Delta\varepsilon_{i,t}$.
 I justify an exclusion restriction for $\Delta k_{i,t-j}\ \forall j>1$, as it is predetermined,
 and $\Delta l_{i,t-k}, k>2$, as it is flexible.
+
+\begin{align}
+    % \notag
+    % x_{i,t} &=
+    % \begin{pmatrix}
+    %     k_{i,t} &   l_{i,t}
+    % \end{pmatrix}
+    % \\
+    \label{eq:static-k-pim}
+    K_{i,t} &= I_{i,t} + dK_{i,t-1}
+    \\
+    \label{eq:static-inv-information}
+    I_{i,t} &= \mathbb E[I_{i,t}^*|\Omega_{t-1}]
+    \\
+    \label{eq:static-l-information}
+    L_{i,t} &= \mathbb E[L_{i,t}^*|\Omega_{t-1}]
+    \\
+    \label{eq:static-predetermined-factors}
+    K_{i,t}, L_{i,t} &\in \Omega_{t-1}
+    \\ \notag
+    \mathbb E[\varepsilon_{i,t}|\Omega_{t-1}] &= 0 
+    \\
+    \label{eq:static-identification-factor-exogeneity}
+    \mathbb E[
+        \varepsilon_{i,t}
+        \vert
+        \begin{pmatrix}
+            \mathbf k_t \\ \mathbf l_t
+        \end{pmatrix}
+    ] &= 0_{(2\times 1)}
+    ,\ \forall i
+\end{align}
 \begin{align}
     \Delta y_{i,t} &= \Delta \gamma_t
                 + \beta_1\Delta k_{i,t}

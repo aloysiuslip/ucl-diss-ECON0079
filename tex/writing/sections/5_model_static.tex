@@ -161,52 +161,25 @@ yet the external impacts of that firm would be significant.
 Consistency requires the plausible exogeneity of regressors
 used in structural equation \eqref{eq:static-main-peer-effects}
 from the error term $\varepsilon_{i,t}$.
-Capital and labour inputs in every firm $i,j$ are assumed to be exogenous to every
-other firm's TFP error shock in this static model.
+Capital and labour inputs in every firm $i,j$ are assumed to be strictly exogenous
+to every other firm's TFP error shock, for every period in this static model.
 This is crucial for consistency with the direct own-firm $k_{i,t}, l_{i,t}$
 inputs, but also the use of $\mathbf w_{ij} k_t, \mathbf W^k l_t$
 as an \itx{exogenous} effect and, as we will later see,
-our ability to leverage higher-order spatial lags of the \itx{exogenous} effect
+the ability to leverage higher-order spatial lags of the \itx{exogenous} effect
 as an unconfounded instrument for $w_{ij}y_{j,t}$.
-Broadly, we can interpret this as meaning
-factor input decisions are predetermined for this section;
-capital faces some time-to-build constraint
-where each firm allocates investment in the previous period
-based on the limited information available then, $\Omega_{t-1}$.
-A similar pattern is assumed of sticky labour decisions,
-perhaps through job searching and hiring frictions.
-These restrictive assumptions are relaxed in \nameref{s:models-dynamic}.
-
+This is a restrictive assumption, but standard in the practice of
+constructing static panel models. It is relaxed in Section \ref{s:models-dynamic}.
 \begin{align}
-    % \notag
-    % x_{i,t} &=
-    % \begin{pmatrix}
-    %     k_{i,t} &   l_{i,t}
-    % \end{pmatrix}
-    % \\
-    \label{eq:static-k-pim}
-    K_{i,t} &= I_{i,t} + dK_{i,t-1}
-    \\
-    \label{eq:static-inv-information}
-    I_{i,t} &= \mathbb E[I_{i,t}^*|\Omega_{t-1}]
-    \\
-    \label{eq:static-l-information}
-    L_{i,t} &= \mathbb E[L_{i,t}^*|\Omega_{t-1}]
-    \\
-    \label{eq:static-predetermined-factors}
-    K_{i,t}, L_{i,t} &\in \Omega_{t-1}
-    \\ \notag
-    \mathbb E[\varepsilon_{i,t}|\Omega_{t-1}] &= 0 
-    \\
     \label{eq:static-identification-factor-exogeneity}
     \mathbb E[
         \varepsilon_{i,t}
         \vert
         \begin{pmatrix}
-            \mathbf k_t \\ \mathbf l_t
+            k_{i,t} & l_{i,t}
         \end{pmatrix}
-    ] &= 0_{(2\times 1)}
-    ,\ \forall i
+    ] &= 0_{(1\times 2)}
+    ,\ \forall i, \forall t,\tau
 \end{align}
 
 The \itx{endgenous} effect regressor $\sum_{j\neq i} w_{ij} y_{j,t}$ is, unsurprisingly, endogenous,
