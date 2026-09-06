@@ -11,7 +11,7 @@ and allowing for the past peer TFP components I analysed
 in the static model to influence current-period TFP
 in a lagged fashion.
 The structure of this specification now resembles a vector panel,
-which I will denote with VAR(p,q)\footnote{noting that $q$-lags refers
+which I will denote with VAR(p,q)\footnote{$q$-lags refers
 to those on the peer spillover effect, rather than those of a moving average component
 as is traditional of a VARMA(p,q) specification}.
 \begin{align}
@@ -68,7 +68,7 @@ to find valid identification.
 This might generally be more seen as a more credible assumption
 than \eqref{eq:static-identification-factor-exogeneity} 
 \todo{and we can test for it}.
-This specification cann be identified in reduced panel form,
+This specification can be identified in reduced panel form,
 which requires first differences to eliminate fixed effects,
 allowing me to retain the use of firm fixed effects.
 This follows econometric theory developed by \cite{Anderson1981} and estimator techniques
@@ -84,7 +84,7 @@ Internal instruments of all the endogenous regressors are found,
 meaning their lagged first differences.
 Identification is improved in the System GMM approach given in \cite{Blundell1998}
 by also including the first logged, not differenced, lag of the endogenous regressors
-which meets the usual instrument condiitons, as an instrument.
+which meets the usual instrument conditons, as an instrument.
 It is this System GMM approach that I follow here,
 so I find the first logged, not differenced, lag of regressor in $x_{it}$
 and its corresponding set of first difference lagged instruments,
@@ -98,7 +98,7 @@ though I now allow for moderate cross-sectional correlation across firms.
     \label{eq:dyn-no-ac}
     \mathbb E[\varepsilon_{i,t}\varepsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
     \\
-    \label{eq:dyn-contemperaneous-endogeneity}
+    \label{eq:dyn-contemporaneous-endogeneity}
     \mathbb E[x_{i,t}\varepsilon_{i,t}] &\neq 0              ,\qquad \exists i
     \\
     \label{eq:dyn-xs-corr-errors}
@@ -325,7 +325,7 @@ I use 3 autoregressive instrument lags starting from $t-2$:
 $\ln(y_{i,t-2}), \ln(y_{i,t-2}), \ln(y_{i,t-p-3})$ for log GVA,
 and 2 lags for capital $\ln(k_{i,t-p-1}), ln(k_{t-p-2})$.
 An Anderson-Rubin (AR(2)) test shows that deep lags are a valid instrument for log GVA.
-The test applied to the second lag of of $ln(gva_1)$
+The test applied to the second lag of $ln(gva_1)$
 fails to reject the null hypothesis of for any specification,
 so I assume it is a valid instrument.
 \par
@@ -370,14 +370,14 @@ across the country (outside the spatial bubble).}
                 as expected from a first-differencing SystemGMM approach.
         \item[] Anderson-Rubin AR(2) test: `\textsf{X}' indicates insufficient evidence to
                 reject the use of second-order lags due to their being a weak instrument,
-                as expected from the first-differencing with lags greater than 2nd-order to overcome contemperaneous endogeneity.
+                as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.
                 `checkmark' indicates some instruments used were weak.
     \end{itemize}
     }
 \wraptable
     {Dynamic panel: deeper vector regressor lags}
     {../../model/output/instr_3b_Jover}
-    {Hansen J-test for over-identification: `\textsf{X}' indicates insuficient evidence
+    {Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
     at the 95\% level to reject the null-hypothesis that the model is identified.
     Anderson-Rubin AR(1) test: 
         Model includes a constant as the baseline for \itx{t} fixed effects.

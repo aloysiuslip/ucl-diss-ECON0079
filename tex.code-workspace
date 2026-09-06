@@ -10,6 +10,41 @@
 		"editor.insertSpaces": true,
 		"files.autoSave": "onFocusChange",
 
+        "ltex.language": "en-GB",
+        "ltex.disabledRules": {
+            "en-GB": [
+                "PASSIVE_VOICE",
+                "OXFORD_SPELLING_Z_NOT_S",
+                "EN_UNPAIRED_QUOTES"
+            ]
+        },
+
+        "ltex.dictionary": {
+            "en-GB": [
+                "endogeneity",
+                "heteroskedasticity",
+                "heteroskedastic",
+                "homoskedasticity",
+                "homoskedastic",
+                "heteroscedasticity",
+                "exogeneity",
+                "multicollinearity",
+                "multicollinear",
+                "multicollinearities",
+                "conceptualisable",
+                "recreatable",
+                "datapoints",
+                "VARMA",
+                "VAR",
+                "autoregressor",
+
+                // # Names
+                "Marshallian",
+                "Nesheim",
+                "unconfounded"
+            ]
+        },
+
 		"latex-workshop.formatting.latex": "latexindent",
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
