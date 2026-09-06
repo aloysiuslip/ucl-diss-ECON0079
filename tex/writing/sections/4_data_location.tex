@@ -155,7 +155,7 @@ An example such matrix is $\mathbf W_{g^*}$, a $(7\times 7)$
 set of interactions between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only.
 
 \begin{figure}[hbtp]
-    \caption{Illustration of group matrix W}
+    \caption{Illustration of group matrix $\mathbf W_g$}
     \label{fig:static-groups-W}
     \centering
     \par\noindent
@@ -336,7 +336,8 @@ and then pre-multiplies the next matrix along to the result.
 Using memory-efficient \itx{duckdb}, the procedure is as follows:
 \todo{itemize}
 
-\subsection{Evaluating the linear independence of W matrices}
+\subsection{Evaluating the linear independence of $\mathbf W$ matrices}
+% Could fold this into previous sections
 
 As will be discussed more heavily in the theory of \ref{ss:static-identification},
 the key condition of these $\mathbf W$ matrices that will permit valid instrumentation of endogenous variables
