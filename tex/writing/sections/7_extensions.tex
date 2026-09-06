@@ -3,3 +3,70 @@
 
 \subsection{Alternative data sources for location data}
 \label{ss:ext-alt-location}
+
+\subsection{Network fixed effects}
+\label{ss:ext-nfe}
+
+Firm and time fixed effects in a panel setting may be considered insufficient,
+in the presence of local demand shocks, that might hit a firm in the local area
+or a wider network and simultaneously lift the recorded profit, and so \itx{GVA}
+of both a target and its peers simultaneously.
+\par
+It may be considered an arbitary choice what is a sufficiently `local' region
+to capture these effects and model them as a variable correlated with regressors.
+Fortunately, econometric theory through \cite{Bramoulle2009}, discusses the use of local network fixed effects
+which can be applied to the existing $\mathbf{W}$ weighting matrices.
+These require taking $(\mathbb I-\mathbf W)$ transformations of the entire reduced-form regression,
+for the existing applied weighting matrices $\mathbf W_g, \mathbf W_d\dots$.
+A corollary for so-called \itx{global} network fixed effects,
+which should be interpreted as choosing a large area spatial fixed effect
+$(\mathbb I-\mathbf W)$, which follows the assignment rule:
+\begin{equation*}
+    w_{ij}\in \mathbf{V} &=
+    \begin{cases}
+        0,             & \text{if } w_{ij,l} \neq 0, \exists l<k \\
+        \frac{1}{n_g}, & \text{else if } (i,j)\in g \\
+        0,             & \text{otherwise}
+    \end{cases}
+\end{equation*}
+%
+i.e. a `leave-one-in' group transformation. In this analysis, it is applied at the \itx{ttwa} level.
+\par
+As briefly laid out in section \ref{s:data-location},
+identification holds through instruments $(\mathbb I-\mathbf W)\mathbf W^2x$
+on the endogenous $(\mathbb I-\mathbf W)\mathbf Wy$ regressor
+under certain conditions of $\mathbf W$.
+The formal test for this is linear independence of the $\mathbf I, \mathbf W, \mathbf W^2, \mathbf W^3$
+and the same limits to computational feasibility apply to this higher-order $(n\times n)$ set of matrices evaluation.
+Nevertheless, \cite{Bramoulle2009} suggests that more than $s_g\geq 3$ distinct group sizes
+assumed to be exogenous, or $s_d \geq 3$ network diameter
+should be sufficient conditions to the linear independence of the high-order matrices.
+Group network fixed effects overcome the `Reflection Problem' again via the instrument $(\mathbb I-\mathbf V)\mathbf W^2x$
+and its higher-order equivalents.
+
+\begin{align}
+    \label{eq:ext-lnfe-reduced}
+    (\mathbb I-\mathbf W)y_{i,t} &= \gamma_t
+                    + \beta_0
+                    + \beta_1 (\mathbb I-\mathbf W)k_{i,t}
+                    + \beta_2 (\mathbb I-\mathbf W)l_{i,t}
+                    + \beta_3 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}y_{i,t}
+                    + \beta_4 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}k_{j,t}
+                    + \beta_5 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}l_{j,t}
+                    + \varepsilon_{i,t}
+    \\
+    (\mathbb I-\mathbf V)y_{i,t} &= \gamma_t
+                    + \beta_0
+                    + \beta_1 (\mathbb I-\mathbf W)k_{i,t}
+                    + \beta_2 (\mathbb I-\mathbf W)l_{i,t}
+                    + \beta_3 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}y_{i,t}
+                    + \beta_4 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}k_{j,t}
+                    + \beta_5 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}l_{j,t}
+                    + \varepsilon_{i,t}
+    \\
+\end{align}
+Nonetheless, I run the reduced-form \eqref{eq:ext-lnfe-reduced} and its global network fixed effects corollary
+as an extension, and find that all specifications run during the time scope of this analysis
+failed the Sargan-Hansen J test, which implies over-identifying restrictions on instruments
+such that the GMM-CuE estimator could not converge to the required zero moment conditions.
+This gives 

@@ -31,6 +31,7 @@ class ModelSpec():
     panel_name: str | None = None
     include: bool = True
     category: str | None = None
+    fe_type: str = 'd'
     use_linearmodels: bool = True
     differencing: str = 'mean'
 
@@ -100,11 +101,11 @@ def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Ta
     t_panel_final_filter = t_panel.drop_null(how='any')
     return t_panel_final_filter
 
-def transform_nfe(values: list[str], fe: list[str]) -> list[str]:
+def transform_nfe(values: list[str], fe: list[str], fe_type: str) -> list[str]:
     if 'lnfe' in fe:
-        return [f"(i-wd1){'_' if len(p) == 1 else ''}{p}" for p in values]
+        return [f"(i-w{fe_type}1){'_' if len(p) == 1 else ''}{p}" for p in values]
     elif 'gnfe' in fe:
-        return [f"(i-vd1){'_' if len(p) == 1 else ''}{p}" for p in values]
+        return [f"(i-v{fe_type}1){'_' if len(p) == 1 else ''}{p}" for p in values]
     else:
         return values
 
@@ -121,10 +122,10 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             "endog": [p for p in (mod.X + mod.W) if p in mod.Z.keys()],
             "instr": [p for values in mod.Z.values() for p in values]
         }
-        params_raw_names = list({ prop: True for values in params_raw.values() for prop in transform_nfe(values, mod.fe) }.keys())
+        params_raw_names = list({ prop: True for values in params_raw.values() for prop in transform_nfe(values, mod.fe, mod.fe_type) }.keys())
         params_transformed = {}
         for k, v in params_raw.items():
-            values = transform_nfe(v, mod.fe)
+            values = transform_nfe(v, mod.fe, mod.fe_type)
             if k in mod.to_log:
                 params_transformed[k] = [f'ln_{p}' for p in values]
             else:
