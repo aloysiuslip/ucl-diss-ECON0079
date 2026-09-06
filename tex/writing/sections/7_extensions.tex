@@ -76,16 +76,17 @@ and its higher-order equivalents.
 
 \begin{align}
     \label{eq:ext-lnfe-reduced}
-    (\mathbb I-\mathbf W)\mathbf y_{t} &= \gamma_t \boldsymbol\iota
+    (\mathbb I-\mathbf W)\mathbf y_{t} &=
+                      \gamma_t (\mathbb I-\mathbf W)\boldsymbol\iota
                     + \beta_0
                     + \beta_1 (\mathbb I-\mathbf W)\mathbf W \mathbf k_{t}
                     + \beta_2 (\mathbb I-\mathbf W)\mathbf W \mathbf l_{t}
-                    + \beta_3 (\mathbb I-\mathbf W)\mathbf W \mathbf y_{t}
                     \\&\qquad \notag
+                    + \beta_3 (\mathbb I-\mathbf W)\mathbf W \mathbf y_{t}
                     + \beta_4 (\mathbb I-\mathbf W)\mathbf W \mathbf k_{t}
                     + \beta_5 (\mathbb I-\mathbf W)\mathbf W \mathbf l_{t}
                     + (\mathbb I-\mathbf W) \boldsymbol \varepsilon_{t}
-    \\ \notag
+    \\[1em] \notag
     0_{1\times 2} &= \mathbb E[
         \varepsilon_{i,t}
         \begin{pmatrix}
@@ -93,18 +94,19 @@ and its higher-order equivalents.
             (\mathbb I-\mathbf W)\mathbf W \mathbf l_t
         \end{pmatrix}
     ]
-    \\[0.9em]
+    \\[1em]
     \label{eq:ext-gnfe-reduced}
-    (\mathbb I-\mathbf V) \mathbf y_{t} &= \gamma_t \boldsymbol\iota
+    (\mathbb I-\mathbf V) \mathbf y_{t} &=
+                      \gamma_t (\mathbb I-\mathbf V)\boldsymbol\iota
                     + \beta_0
                     + \beta_1 (\mathbb I-\mathbf V)\mathbf W \mathbf k_{t}
                     + \beta_2 (\mathbb I-\mathbf V)\mathbf W \mathbf l_{t}
-                    + \beta_3 (\mathbb I-\mathbf V)\mathbf W \mathbf y_{t}
                     \\&\qquad \notag
+                    + \beta_3 (\mathbb I-\mathbf V)\mathbf W \mathbf y_{t}
                     + \beta_4 (\mathbb I-\mathbf V)\mathbf W \mathbf k_{t}
                     + \beta_5 (\mathbb I-\mathbf V)\mathbf W \mathbf l_{t}
                     + (\mathbb I-\mathbf V) \boldsymbol \varepsilon_{t}
-    \\ \notag
+    \\[1em] \notag
     0_{1\times 2} &= \mathbb E[
         \varepsilon_{i,t}
         \begin{pmatrix}
@@ -113,9 +115,10 @@ and its higher-order equivalents.
         \end{pmatrix}
     ]
 \end{align}
-Notice the absence of a firm fixed effect component $\alpha_i$ in equations
-\eqref{eq:ext-lnfe-reduced} and \eqref{eq:ext-gnfe-reduced}
-and the corresponding lack of need to first-difference the reduced form equation.
+
+This specification omits a firm fixed effect component $\alpha_i$ in equations
+\eqref{eq:ext-lnfe-reduced} and \eqref{eq:ext-gnfe-reduced},
+and accordingly has no need to first-difference the reduced form equation.
 This is due to the risk of applying of both firm and network fixed effects
 simultaneously to be multicollinear.
 I run the extension models

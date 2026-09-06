@@ -96,7 +96,6 @@ to spillover to a target firm's production heterogenously,
 and not be proportionate to the contribution of these factors to their own-firm GVA.
 I have no \itx{a priori} arguments for the sign of the $\boldsymbol\theta_0$ coefficients
 and their relative magnitudes compared to their contributions to own-firm GVA in $\beta_1, \beta_2$.
-
 \begin{align}
     \label{eq:static-alt-gva-yspill}
     y_{i,t}^{(y)} &= \alpha_i + \gamma_t + \beta_0
@@ -214,11 +213,12 @@ to the lag polynomial and MA inversion procedure in autoregressive time series a
                     + \beta_0 \boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
+                    \\ & \qquad\quad \notag
                     + \delta_0 \mathbf W \mathbf y_t
                     + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
-    \\ \notag
+    \\[1em] \notag
             &= (\mathbb I - \delta_0 \mathbf W)^{-1} (
                     \boldsymbol \alpha
                     + \gamma_t \boldsymbol \iota
@@ -229,32 +229,31 @@ to the lag polynomial and MA inversion procedure in autoregressive time series a
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
                 )
-    \\
-            &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k (
+    \\[1em]
+            &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \big(
                     \boldsymbol \alpha
                     + \gamma_t \boldsymbol \iota
                     + \beta_0 \boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
+                    \\ & \qquad\quad \notag
                     + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
-                )
-    \\[1.5ex]
+                \big)
+    \\[1em]
     \label{eq:static-reflection-problem}
-            & \begin{aligned}
-                =   \sum_{k=0}^\infty \delta_0^k \mathbf W^k
+            &=   \sum_{k=0}^\infty \delta_0^k \mathbf W^k
                         \boldsymbol \alpha
-                    &+\frac{\gamma_t + \beta_0}{1-\delta_0}\boldsymbol \iota
+                    +\frac{\gamma_t + \beta_0}{1-\delta_0}\boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
-                    \\ &
+                    \\ & \qquad\quad \notag
                     + \xi_0\sum_{k=0}^\infty \delta_0^k \mathbf W^{k+1} \mathbf k_t
                     + \zeta_0\sum_{k=0}^\infty \delta_0^k \mathbf W^{k+1} \mathbf l_t                    
                     + \sum_{k=0}^\infty \delta_0^k \mathbf W^k
                         \boldsymbol \varepsilon_{t}
-            \end{aligned}
-    \\[1.5ex]
+    \\[1em]
     \label{eq:static-red-endogenous-effect}
     y_{j,t}     &= \dots
                     + \underbrace{
@@ -362,12 +361,13 @@ as well as the numerous, plausibly exogenous reasons why a firm might choose
 to set up in a location with path dependency, rather than to fully maximise
 its peer spillover benefits.
 On the balance of arguments, I take the assumption of network exogeneity
-and identification approach for models in Tables \todo{XII and IX}.
+and identification approach for models in Tables \ref{tab:lmm-pc8} and \ref{tab:lmm-pc8}.
 \par
-I use the instruments
-\todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
-and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$ as feasible instruments for this section's network models
-\todo{Table VII, model}. Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
+I use the instruments $\mathbf W^2\mathbf x_t$ and other second-order variants
+for this section's group models \todo{Table VI, models (5-8)}
+and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$
+as feasible instruments for this section's network models in \tablerefp{tab:dd}.
+Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
 noting that I have chosen to display this in a $l \times 2$ matrix for space and conceptual symmetry,
 as the instruments can be grouped by $k_t$ and $l_t$ regressors.
 The first 2 rows correspond to the exogenous regressors within the reduced-form equation itself,
@@ -535,15 +535,15 @@ for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously
 \par
 I can show algebraically that multiple spatial autoregressors do not change the reflection problem:
 the moving average inversion's coefficient merely becomes the weighted sum
-of 3 independent matrices $\theta_g \mathbf W_g$.
+of 3 independent matrices $\theta_k \mathbf W_{gk}$.
 As long as there is sufficient heterogeneity between the weighting matrices,
 which in these cases is guaranteed by the orthogonality of $\mathbf W_g$
 matrices to each other, then there is no risk of multicollinearity.
 Coefficients in the results $\boldsymbol \hat\theta_1$ for the closest spatial group \itx{pc8}
 are identical to $\boldsymbol \hat\theta_0$ in the one-group model.
 This is an unsurprising result justified by the orthogonality, since the additional regressors
-do not affect the variation attributable to the $\mathbf W_1$-lagged variables
-as the regressors with $\mathbf W_2, \mathbf W_3$ are orthogonal.
+do not affect the variation attributable to the $\mathbf W_{g1}$-lagged variables
+as the regressors with $\mathbf W_{g2}, \mathbf W_{g3}$ are orthogonal.
 \todo{Modify equation 18 to include $\sum W^3$ in the inversion term}
 
 
@@ -551,7 +551,6 @@ as the regressors with $\mathbf W_2, \mathbf W_3$ are orthogonal.
 \newpage
 \subsection{Static distance decay}
 \label{ss:model-dd}
-
 To improve on the LMM specification, I make a modification where
 every peer firm is weighted by its influence on the target by the reciprocal of the 
 continuous distance metric calculated in \ref{ss:data-distance}

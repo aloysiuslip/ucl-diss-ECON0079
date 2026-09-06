@@ -160,7 +160,7 @@ set of interactions between firms which have group classifiers of size $s_1=4$ a
     \centering
     \par\noindent
     \begin{align*}
-        \mathbf{W}_{g1:3}
+        \mathbf{W}_{g^*}
         \begin{pmatrix}
             0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
             \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
@@ -200,7 +200,7 @@ These matrices are orthogonal.
     \centering
     \par\noindent
     \begin{align*}
-        \mathbf{W}_{g\sim \ref{fig:static-groups-donut-matrices}}
+        \mathbf{W}_{g1:3^*}
         &\sim
         \begingroup
         \setlength\arraycolsep{3.8pt}
@@ -285,6 +285,8 @@ and was a similar number of groups, with non-cohesive definitions.
     \centering
     \par\noindent
     \begin{align*}
+        \mathbf W_{d^*}
+        &=
         \begin{bmatrix}
             0 & 0.42 & 0.29 & 0.28 & 0 & 0 & 0 & 0 & 0 \\
             0.31 & 0 & 0.38 & 0.32 & 0 & 0 & 0 & 0 & 0 \\
@@ -333,7 +335,7 @@ the capacity of any standard machine available as a research tool.
 Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix
 separately, but rather iteratively applies the last pre-multipled matrix to the aggregate variable,
 and then pre-multiplies the next matrix along to the result.
-Using memory-efficient \itx{duckdb}, the procedure is as follows:
+Using memory-efficient \itx{DuckDB}, the procedure is as follows:
 \todo{itemize}
 
 \subsection{Evaluating the linear independence of $\mathbf W$ matrices}
@@ -375,9 +377,9 @@ where peer nodes randomly selected may be starting to bunch at an `invisible' bo
         \newline
         (dark red pins): sample (limit 5) of $j$ peers, then calculated as their own targets
         \newline
-        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also shared as a peer of $i$.
+        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also a peer of $i$.
         \newline
-        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also shared as a peer of $i$.
+        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also a peer of $i$.
         \newline
         (light red dots): set of $n$ peers of firms $m$, few of these are peers of $i,j$,
         probabilistically creating a network diameter of $s_d\geq 3$.
