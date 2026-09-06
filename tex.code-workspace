@@ -61,7 +61,7 @@
             {
                 "name": "authortex -> pdflatex -> bibtex -> pdflatex*2",
                 "tools": [
-                    "fixauthors",
+                    "authortex",
                     "pdflatex",
                     "bibtex",
                     "pdflatex",

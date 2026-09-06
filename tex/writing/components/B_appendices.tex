@@ -1,7 +1,26 @@
-\section{Appendix 1: identification under differing spillover assumptions}
+\section{Data science behind the creation and calculation of the W interactions matrix}
+\label{app:data-w-transformations}
+
+\begin{table}[hbt!]
+    \centering
+    \begin{threeparttable}
+        \caption{Variable names from transforming $\mathbf y_t$ and $\mathbf x_t$ regressors via weighting matrix $\mathbf W$}%
+        \label{tab:w_prefixes}% Automatically generated label#
+        \footnotesize{
+            \input{../../calculations/output/3_group_w_prefixes}%
+        }
+        \begin{tablenotes}
+            Total: 51 new variables to be created, for a total of 53 columns in a linked table.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}%
+
+% # --- #
+\newpage
+\section{Identification under differing spillover assumptions}
 \label{app:model-zspill-reflection}
 
-\subsection{Identification full derivation under the 3-factor spillover model}
+\subsection{Full derivation under the 3-factor spillover model}
 \begin{align*}
     \boldsymbol{y}_t 
     &= \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k \Big(
@@ -166,8 +185,9 @@
         + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k \boldsymbol{\varepsilon}_t
 \end{align*}
 
+% # --- #
 \newpage
-\section{Appendix 2}
+\section{Dynamic panel: alternative specifications}
 \label{app-dynamic-panel-ho-ar}
 
 \wraptable
@@ -189,6 +209,3 @@
     {Dynamic panel: higher-order VAR(2,4) structures}
     {../../model/output/results_3d_supp_var(p,q)3}
     {} 
-
-\section*{Appendix 3}
-\addcontentsline{toc}{section}{Appendix 3}

@@ -1,8 +1,16 @@
-\section{\todo{Literature}}
+\section{Literature}
 \label{s:literature}
 
-\subsection{Agglomeration and Marshall}
+\subsection{\todo{Agglomeration and Marshall}}
 \label{ss:lit-marshall}
+It has been common to analyses of economic growth since \cite{Marshall1920}
+to assume and qualitatively discuss some effect on firm-to-firm spillover of productivity.
+A productivity spillover underpins well-established economic phenomena
+such as the colocation of firms in urban clusters described in New Economic Geography literature
+such as \cite{Krugman1991}.
+It has been heavily analysed through industry and spatial density approaches
+in spatial and urban econometric literature such as \cite{Glaeser1992}.
+
 My investigation is rooted in \cite{Marshall1920}'s taxonomy,
 which identifies three channels to productivity spillovers: (1) input-output costs, (2) labour pooling, and (3) knowledge spillovers.
 There is no reason to think these are exhaustive. We might theorise that there may be competitive effects and cultural factors.
@@ -22,7 +30,7 @@ identifying knowledge spillovers are. That need to estimate them well only grows
 "knowledge workers in particular become more productive when located near to one another.
 Information may be more available thanever, but the evidence suggests that it still tends to flow largely through in-person networks".
 
-\subsection{New Economic Geography}
+\subsection{\todo{New Economic Geography}}
 \label{ss:lit-neg}
 
 However, \cite{Krugman1991} prefers not to assume this effect
@@ -32,49 +40,165 @@ or firms are frequently assumed, with `forward and backward linkages' driving co
 endogenously from there. This paper helpfully tests the presence of spillovers,
 providing another centrifugal force directly incentivising firms to colocate. 
 
-\subsection{Modern approaches}
+\subsection{\todo{Modern approaches}}
 Specific approaches to investigating knowledge spillovers via innovation, instrumenting via patent publications comes from US evidence,
-including (Jaffe, 1993), (Berkes and Ruben, 2021) and more recently (Bloom, Schankerman and Van Reenen, 2013).
+including (Jaffe, 1993), (Berkes and Ruben, 2021) and more recently \cite{Bloom2013}.
 \par
-Knowledge spillovers have been a well-evidence factor of within-firm managerial-derived productivity gains.
+Knowledge spillovers have been a well-evidence factor of within-firm managerial-derived
+productivity gains.
 A field-starting MIT study from Allen (1977) observed an exponentially declining curve depicting the
 frequency of communication between two individuals against their physical distance in an office.
 
-\subsection{Econometric literature}
+\subsection{Peer effects econometrics}
 
-\subsection{Econometric contributions}
-A key contribution by \cite{Manski1993} is to argue that there is not just a direct, endogenous effect
-of the outcome of interest among peers, but also an exogenous effect of the characteristics of peers.
-However, Manski's group model famously \dots but also a set of exogenous characteristics 
+The \cite{Manski1993} model is a common baseline in literature on peer effects.
+It provides helpful structure to the study of joint behaviour of individuals
+who are members of a group or network, and can be applied to any examination
+of units with peers such as individuals, not merely firms.
+\begin{align*}
+    y_i \quad
+        &=\quad c \quad
+        + \underbrace{\alpha_g}         _{\substack{correlated \\\text{effect}}}
+        + \quad\beta x_{i,g}\quad
+        + \underbrace{\delta\bar y_{-i,g}}_{\substack{endogenous \\\text{effect}}}
+        + \underbrace{\xi\bar x_{-i,g}}   _{\substack{exogenous  \\\text{effect}}}
+        + \quad \varepsilon_i
+\end{align*}
+The model firstly decomposes spillovers to a direct behavioural, or \itx{endogenous} effect,
+$y_{j}\to y_{i}$, where the outcome of interest among peers
+affects that of the target individual.
+The regressor can represent the co-movement of a group mean, such as all firms in a nearby
+area simultaneously acting in a similar, coordinated or non-coordinated, fashion,
+such as if all peer firms choose to simultaneously adopt a new technology available.
+The target member of the group or network may then observe peers
+and choose to mimic that behaviour.
+It may also represent a `disruptor' effect,
+such that one peer within the group instigates a new pattern of behaviour differing from all others,
+which is then emulated by the target firms which hold it as a peer.
+This is mechanically observed as a small shift to the peer group average
+and interpreted as a diluted effect on any one target member of the cohort.
+Robust applications of the Manski model demonstrate credible approaches to measuring the \itx{endogenous effect}.
+\cite{dustmann-damm2024:neighbourhoods} analyses movers to new neighbourhoods among individuals through
+the `Danish Dispersal Policy' of refugee arrivals (1986-1998).
+\cite{Chetty2016} measures a similar effect among high-poverty children through the US 1990's `Moving to Opportunity' scheme.
+These studies exploit quasi-randomness in the location assignment of individuals and peers
+for robust identification. As discussed in section \ref{ss:data-location-limits},
+the dataset used for this analysis unfortunately offers no such granularity of features
+to identify movers, let alone evaluating the exogeneity of their colocation.
+Nevertheless, the use of firm data for analysis allows for the use of firm fixed effects
+and a more rich set dataset of firm characteristics to control for endogenous variation
+to a firm's location decision, which additionally tends to be reasonably sticky.
 \par
-It has been common to analyses of economic growth since \cite{Marshall1920}
-to assume and qualitatively discuss some effect on firm-to-firm spillover of productivity.
-A productivity spillover underpins well-established economic phenomena
-such as the colocation of firms in urban clusters described in New Economic Geography literature
-such as \cite{Krugman1991}.
-It has been heavily analysed through industry and spatial density approaches
-in spatial and urban econometric literature such as \cite{Glaeser1992}.
+Additionally, the \cite{Manski1993} model requires contextual or \itx{exogenous} effects,
+of which the variation of non-outcome of interest variables among peers
+also directly affects that of the target individual, $x_j \to y_i$.
+This brings sophistication to the nature of peer spillovers.
+A simplified model only allowing endogenous effects through the variable of interest, $y_j \to y_i$
+is nested within this structural model, but not identified due to the `Reflection Problem'
+and as described in this analysis in section \ref{ss:static-identification}.
+In this analysis' firm productivity model, the \itx{exgenous effect}
+allows for an additional level of input factor capital and labour
+to induce higher target TFP, better management practices or
+more efficient combination of factor inputs, perhaps from observing
+the mere high level of these factors in their peers,
+without the peers themselves necessarily experiencing a productivity increase.
+It is additionally a common specification requirement for every individual
+to have an own-effect of exogenous characteristics, $x_i \to y_i$,
+which corresponds to the standard production function model in this analysis of
+$k_{i,t}, l_{i,t}\to y_{i,t}$.
+\begin{align*}
+    y_{i,g} &= c + \alpha_g + \beta x_{i,g} + \delta\bar y_{-i,g} + \xi\bar x_{-i,g} + \varepsilon_i
+    \\
+    \bar y_g &= c + \alpha_g + \beta\bar x_g + \delta\bar y_g + \xi\bar x_g + \bar\varepsilon_g
+    \\
+    (1-\delta)\bar y_g &= c + \alpha_g + (\beta+\xi)\bar x_g + \bar\varepsilon_g
+    \\ \tag{large g assumption}
+    \bar y_g &= \frac{c + \alpha_g}{1-\delta} +\frac{\beta+\xi}{1-\delta}\bar x_g+\frac{\bar\varepsilon_g}{1-\delta}
+        \quad = \bar y_{-i,g}
+    \\ \tag{substituting}
+    y_{i,g} &= \frac {c + \alpha_g}{1-\delta} +\beta x_i + \frac{\xi+\delta\beta}{1-\delta}\bar x_{-i}
+    + \frac\delta{1-\delta}\bar\varepsilon_g + \varepsilon_i 
+    \\
+    y_{i,g} &= \alpha_g + \pi_0 + \pi_1x_i + \pi_2 \bar x_{-i} + v_g
+\end{align*}
+
+The focus of \cite{Manski1993}'s linear-in-means (LMM) contribution is to highlight the `Reflection Problem',
+an econometric trap.
+The derivation give above shows that the initial structural equation
+cannot be estimated directly with OLS due to the endogeneity of $\bar y_{-i,g}: \mathbb E[\bar y_{-i,g}\varepsilon_i]\neq 0$.
+Transforming the equation to reduced form and omitting the endogenous regressor
+leads to underidentification: 3 parameter estimates yielded for 4 structural parameters.
+Causal variation in $y_{i,g}$ is unidentifiable as it is exactly collinear with all the other regressors.
+This underidentification is a famous one, hindering analysis of peer dynamics including via spatial interaction.
 \par
-The result that the Manski linear-in-means (LMM) model is not identified is a famous one
-in peer effects economics, hindering the analysis of spatial and group dynamics between mutually
-influencing entities.
-\todo{\dots}
+A key solution to this is the deployment of instruments, $z_{-i}\propto \bar y_{-i}\ \cap\ z_{-i} \not\propto y_{i}$.
+An application employing credibly exogenous instruments for a peer effects measure in an individual crime setting
+is given in \cite{dustmann-landerso2024:gangs-babyfathers}.
+This study uses the sex-identity at birth of newborns as a valid instrument
+for the criminal behaviour of their babyfather gang-leaders,
+who serve as an influential peer on the target members of their gangs respectively.
+The equivalent valid instrument in this analysis which is correlated with the peer effect
+but has no direct effect on the target outcome of interest
+is an additional spatial lag of \itx{exogenous} regressors in the static model.
+This means the capital and labour of a firm $k$ who is a `peers of peers': a peer of firm $j$,
+but not of firm $i$, the last of which is the target firm of interest.
+In this analysis' dynamic model, deep temporal lags $y_{-i,t-2}\propto y_{-i,t}\ \cap\ y_{-i,t-2}\not\propto y_{i, t}$
+are also as a valid instrument under an assumption of weak exogeneity of predetermined regressors.
 \par
-However, significant progress has been made of improving identification techniques,
-in particularly highlighting identification methods for more complex group and network structures
-in \cite{Bramoulle2009}.
-Fortunately, as stated in the paper, many of these complex network structures are exactly
-what is common to empirical data, this investigation to the pattern and layout of firms
-interacting with estimation of production spillovers included.
-\par
-A summary of the identification rules from \cite{Bramoulle2009} dependent on the structure of
-$\mathbf W$, a `weighting` matrix of interactions between two firms in a matrix, is included below.
+A modern paper, \cite{Bramoulle2009}, explores of different identification techniques and their rules for validity
+for group and network structures. These structures are more complex than the \cite{Manski1993} model,
+which by using the analysis of means $\bar y_{-i,g}$, implicitly assumes simple, `leave-on-in' group averages
+as the peer \itx{endogenous} regressor.
+An immediate realistic fix for spatial peer effects, to exclude the target observation $y_{i,g}$
+from calculation of the group mean $y_g$ is helpful as given in \cite{Moffitt2001}.
+This should be conceptualised less as a `neighbourhood effect', for which the target is still a contributor,
+but more as a collection of influencing peers. Nevertheless, this alone does not offer identification.
 \wraptable
     {Spatial econometric identification rules for weighting matrix $W$}
-    {./figures/5_tab_bdf_identification}
+    {./figures/2_tab_bdf_identification}
     {
-        Adapted from \citepalt{Bramoulle2009}.
+        Adapted from \citepalt{Bramoulle2009} with notation
+        revised and omissions to improve relevance to this analysis.
         (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
         (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
         (c) \citepalt{Lee2007}.
+        Structures under a \textbf{Proposition} header must follow the \textbf{Proposition}'s required conditions.
     }
+
+The paper exploits many complex interaction structures summarised by the weightiing matrix $\mathbf W$,
+the more complex $n$-dimensional matrix of interactions between firms
+rather than a simple average weight approach.
+In short, it continues to assume exogenous assignment of spatial assignments
+and so target-peer interactions;
+and finds that properties of varying group sizes ($s_g$) and network diameters ($s_d$)
+are key to discovering valid spatial lag instruments.
+Fortunately, these complex structures resemble realistic interactions common to empirical data,
+and are applicable to this analysis' pattern and layout of firm interactions.
+The definition of group is intuitive: peers interact in a fixed limit of nearby firms,
+where each peer within the group is treated as homogenous, offering an equal weighted value,
+here $1/(s_g-1)$.
+A network is a more complex set of interactions where each individual $i$ has their own set
+of peers by whom they are influenced. \cite{Bramoulle2009} tends to assume
+that the influence of each individual's peer set is still the simple `leave-on-out' average
+of their heterogenous peers, but differing weights applied within the peer set
+are also equivalently permissible, as I apply in this analysis in seciton \ref{ss:model-dd}.
+A network is then the total set of individuals who have at least one interaction
+within the network:
+\begin{equation*}
+    j \in N_d\ \iff \mathbf W_{ij}\neq 0,\ \exists i \in N_d
+\end{equation*}
+There can exist several networks within a $\mathbf W$ interactions matrix,
+as certain individuals within a peer set may have these complex interactions,
+but all inside the set have nothing with those outside.
+Organising these networks in a $\mathbf W_d$ gives an outer block-diagonal structure,
+but with far larger blocks than $\mathbf W_g$.
+In section \ref{ss:data-distance}, this analysis uses Travel-to-Work-Areas (\itx{ttwa})
+to define the limits of a network, and spatial distance between two firms
+as the key to an interaction weight within a network.
+\par
+The identification rules from \cite{Bramoulle2009} are included in \tablerefp{tab:bdf_identification}.
+In short, once certain necessary conditions for the group and network structures are met,
+an additional spatial lag on the \itx{exogenous} regressors, $\mathbf W^2x$,
+tends to be a valid instrument.
+This analysis uses \tablerefp{tab:bdf_identification}'s approaches to instruments
+to strip out the endogeneity of a spatial peer effects model.

@@ -4,15 +4,24 @@
 \subsection{Alternative data sources for location data}
 \label{ss:ext-alt-location}
 
+\subsection{Selection of parameters}
+\label{ss:param-select_xvalidate}
+
 \subsection{Network fixed effects}
 \label{ss:ext-nfe}
 
 Firm and time fixed effects in a network setting may be considered insufficient,
-A local demand shocks, which can be thought of as a correlated shock
+A local demand shocks, which can be thought of as a \itx{correlated} shock
 $\mathbb E[\varepsilon_{i,t,g}\varepsilon_{i,t,h}]\neq 0$,
 where $(g,h)$ are some close memberes of a network or group within the interactions matrix $\mathbf W$.
-A shock is some omitted variable that hits both error terms, such as a demand shock in the local area
-and simultaneously lift the recorded profit and \itx{GVA},
+This is a phenomenon specific to peer effects analysis and differs from the usual omitted variable bias (OVB)
+that impacts all firms discussed in standard econometric theory;
+here, specific identity of a group or network exposes members to a certain third-party common shock,
+for which a researcher should introduce controls.
+\cite{Manski1993} labels these \itx{correlated effects}.
+Econometrically, a \itx{correlated} shock is some omitted variable that hits both error terms,
+such as a demand shock in the local area $v_{i,t}\to \varepsilon_{i,t},\varepsilon_{j,t}$.
+This would simultaneously lift the recorded profit and \itx{GVA},
 of both a target and its peers.
 Another instance could be an exogenous change in the mutual supply chain of a firm and its peer,
 which is most likely to occur when $i,j$ share an industry.
@@ -123,3 +132,6 @@ so I do not report them here.
 Further analysis could investigate this issue more thoroughly
 and successfully implement these network fixed effects as the key to stripping out
 local demand effects or supply shocks.
+
+\subsection{Drivers of the strength of spillover}
+\label{ss:ext-agglomeration-neg-land}
