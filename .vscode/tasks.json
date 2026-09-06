@@ -36,7 +36,32 @@
             }
         },
         {
-            "label": "Count tex words",
+            "label": "Count tex countable",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/tex/writing",
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+                }
+            },
+            "windows": {
+                "command": "$raw = (texcount -inc -sum -merge -q -dir=. -template='{sum}' 1_countable.tex 2>$null | Out-String); $num = [regex]::Match($raw, '\\d+').Value; $formatted = '{0:N0}' -f [int]$num; Set-Content -Path components/wordcount.tex -Value $formatted -Encoding Ascii; $formatted"
+            },
+            "linux": {
+                "command": "raw=$(texcount -inc -sum -merge -q -dir=. -template='{sum}' 1_countable.tex 2>/dev/null | grep -o '[0-9]\\+'); formatted=$(printf \"%'d\" $raw); echo $formatted > components/wordcount.tex; echo $formatted"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Count tex all",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}/tex/writing"

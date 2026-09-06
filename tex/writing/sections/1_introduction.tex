@@ -2,28 +2,54 @@
 
 % Section 2: literature
 Estimating the strength of a spatial productivity spillover
-is crucial to economic discussions on growth, production,
-and sophisticated specialised fields such as the movement of households
-and firms across urban clusters.
-In particular, a productivity spillover, as defined as an input to production,
-can be conceptualised as a pure supply-side effect.
-it is notoriously tricky\footnote{Qualitative discussions in \cite{Krugman1998}, \cite{Fujita2004}}
-to isolate this from demand-side factors in general equilibrium from the colocation of firms and people,
-local demand shocks, and
-even more so to isolate the pure spillover effect occurring through and on
-Total Factor Productivity (TFP) the residual to a firm's input factors.
+is crucial to policy and economic discussions on growth, production,
+and the formation of urban clusters.
+The purpose of this paper is to demonstrate that modern advances in
+rich microdata collection, computing, econometric techniques, and economic theory
+mean that it is possible to make significant progress in the decades-long
+empirical problem of estimating spatial spillovers from a stylised, classical model,
+even with a minimally sophisticated model of urban development
+and the selection of firms to their location.
+This allows us to provide underlying evidence for a spatial productivity spillover
+between firms that drives the motivation for colocation, urban development,
+and ultimately regional economic policy.
 \par
-The purpose of this paper is to demonstrate that modern advances in computing,
-theory, and econometric techniques mean that
-it is possible to make significant progress in this decades-long problem
-even spanning from a stylised, classical model.
-I produce credible estimates of the supply-side spatial spillover factors influencing TFP,
-employing internal instruments in a static and dynamic setting.
-In section 2, I give an overview of contributions from
-spatial and urban economics and economic geography,
-New Economic Geography (NEG) revisions and how the findings in this paper
-might substantiate the assumptions underlying NEG,
-and modern econometric literature.
+This analysis sits on top of a large body of work,
+rooted historically in \cite{Marshall1920} on agglomeration,
+elucidating the importance of colocation and urban development on firm productivity.
+In section 2, I give an overview of the substantive contributions from
+spatial and urban economics and New Economic Geography (NEG)
+to our body of knowledge behind the theoretical driver channels behind agglomeration,
+and the sophisticated approaches to modelling to household and firm dynamic location choices.
+This analysis does not attempt to recreate that whole body of work.
+It abstracts away from the usual components of urban density,
+stylised decision-making about the siting decision of household and firms,
+and accessibility of urban resources such as transport accessibility.
+Indeed, despite being a spatial production analysis,
+location is barely a feature in the analysis of firm productivity
+except as the component to draw each firm on a (2-dimensional, curved to the True Earth map)
+network graph and find its nearby peers.
+From mere spatial proximity,
+this analysis looks for evidence of a productivity spillover
+from peers to a target firm.
+It deploysa simple classical production function model of only firms
+with minimal modification to include a spatial spillover component.
+A productivity spillover, as defined as an input to production,
+can be conceptualised as a pure supply-side effect.
+The above-discussed literature notes it as notoriously
+tricky\footnote{Qualitative discussions in \cite{Krugman1998}, \cite{Fujita2004}}
+to isolate this effect from demand, coloation effects, and third-party factors of urbanisation
+such as the additional supply of public capital via infrastructure.
+This analysis' empirical evidence solating the pure spillover effect occurring on
+a firm's Total Factor Productivity may provide further empirical support
+for the centrifugal, pro-urbanisation force underlying the more sophisticated analyses
+on New Economic Geography and policy discussions of agglomeration.
+\par
+Section 2 also gives a brief overview of the econometric literature
+on peer effects model, from \cite{Manski1993}'s `Reflection Problem'
+to finding valid instruments in a more complex graph and network setting in \cite{Bramoulle2009}.
+This analysis leans heavily on that econometric theory
+to develop a model of peer effects for the productivity spillover between firms.
 \par
 In sections 3 and 4, I discuss the handling of data from Fame,
 a database of publicly-available, balance-sheet data from UK companies,
@@ -71,14 +97,16 @@ and autoregressive term with a very narrow confidence interval,
 suggesting a robust result that if any productivity spillover does occur between firms,
 it happens in the contemperaneous period.
 
-\subsection{Spatial productivity to political economy}
+\subsection{\todo{Productivity in the United Kingdom}}
+
+\subsection{\todo{Spatial productivity to political economy}}
 
 %% Background policy
 A revival of interest in regional, pro-second city policy
 has also taken place in the policies of the 2024 and 2026 governments in the United Kingdom.
 Regional economic policy declined strongly in the UK under the 1980s Thatcher government\dots
 This consensus was maintained throughout the 1990s-2000s New Labour period,
-where rapid economic growth known as `The Great Moderation' provided no impetus for change.
+where rapid economic growth known as `The Great Moderation' satiated impetus for change.
 The consensus was broken in 2017, with the seeds of a regional-industrial strategy in 2017,
 emerging under the Conservative May government.
 Under the background of a UK-EU Referendum result (``Brexit'')
@@ -86,8 +114,11 @@ which emphasised the sentiment of disaffection among `left-behind' places across
 which did not seen the benefits of national aggregates of economic growth
 primarily concentrated in the UK's capital, London.
 The national government launched `Local Industrial Strategies' which sought to
-identify action to "boost productivity, earning power, and competitiveness" on a regional basis\footnote{
-    https://researchbriefings.files.parliament.uk/documents/CBP-7682/CBP-7682.pdf
-}. However, fewer of these strategies were fully developed and implemented by 2021.
-In 2026, the newly appointed Burnham government made the pledge for ``good growth in every postcode''
-\todo{\dots}
+identify action to "boost productivity, earning power, and competitiveness" on a regional
+basis\footnote{\cite{Mahmood2025}}.
+However, fewer of these strategies were fully developed and implemented by 2021.
+\par
+In 2026, the newly appointed Burnham government made the pledge for ``good growth in every
+postcode''\footnote{\cite{GOVUK2026}} with immediate speculation and interpretation from
+economic commentators\footnote{\cite{Gill2026}, \cite{DeSilva2026}} on what this might mean
+for the direction of regional and urban policy in the United Kingdom in the absence of further details.
