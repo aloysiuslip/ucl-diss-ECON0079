@@ -122,7 +122,7 @@ This is common to peer effects literature such as \cite{Moffitt2001}
 and discussed in \cite{Bramoulle2009}.
 Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
 The resulting $n\times n$ matrix has off-diagonal elements as
-the number of group members $n_g-1$, which excludes the target firm $i$.
+the size of group members (blocks) within the matrix, $s_g-1$, which excludes the target firm $i$.
 The structure is given below\footnote{
     Adapted from \cite{Bramoulle2009}
 }:
@@ -131,7 +131,7 @@ The structure is given below\footnote{
     w_{ij}\in \mathbf W_g &=
         \begin{cases}
             0,              & \text{if}         \ i=j           \\
-            \frac1{n_g-1},  & \text{else if}    \ (i,j)\in g    \\
+            \frac1{s_g-1},  & \text{else if}    \ (i,j)\in g    \\
             0,              & \text{otherwise}
         \end{cases}
     \\
@@ -189,7 +189,7 @@ These matrices are orthogonal.
         \begin{cases}
             0,             & \text{if } i=j \\
             0,             & \text{if } w_{ij,l} \neq 0, \exists l<k \\
-            \frac{1}{n_g-1}, & \text{else if } (i,j)\in g \\
+            \frac{1}{s_g-1}, & \text{else if } (i,j)\in g \\
             0,             & \text{otherwise}
         \end{cases}
 \end{align*}
