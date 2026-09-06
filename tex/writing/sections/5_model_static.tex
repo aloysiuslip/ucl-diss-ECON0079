@@ -3,7 +3,7 @@
 
 I use a stylised 3-factor production model throughout this analysis.
 $Y$, $A$, $K$, and $L$ are each firm-year observation's GVA, TFP, labour, and capital in levels.
-I use lower-case variables to indicate logged terms and bolded variables to indicate $i$-stacked vectors.
+I denote logged terms with lower-case notation and vectors in bold.
 \par
 Log TFP, denoted by $z_{i,t}$, is the residual after the own-firm contribution of the two classical inputs.
 I decompose it to a constant across all observations, firm and time fixed effects and,
@@ -33,51 +33,61 @@ of spillover from peers to any given target firm.
     \\
     \label{eq:static-main-reduced}
             &= \alpha_i + \gamma_t + \beta_0 + \mathbf z_t^{spill}\boldsymbol\theta_0 + \varepsilon_{i,t}
-    \\
+    \\[0.8em]
     \label{eq:static-main-gva}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
                 + \beta_1 k_{i,t}
                 + \beta_2 l_{i,t}
+                \\ &\qquad \notag
                 + \delta_0 \sum_{j\neq i} w_{ij}z_{j,t}
                 + \xi_0 \sum_{j\neq i} w_{ij}k_{j,t}
                 + \zeta_0 \sum_{j\neq i} w_{ij}l_{j,t}
                 + \varepsilon_{i,t}
-    \\ \notag
-            &
-            \begin{aligned}
-                =
-                \alpha_i + \gamma_t &+ \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                \\ &
-                    + \delta_0 \sum_{j\neq i} w_{ij} \cdot (y_{j,t} - \beta_1 k_{j,t} - \beta_2 l_{j,t})
-                    + \xi_0\sum_{j\neq i} w_{ij}k_{j,t}
-                    + \zeta_0\cdot \sum_{j\neq i} w_{ij}l_{j,t}                    
-            \end{aligned}
-    \\
+    \\[0.8em] \notag
+            &=
+                \alpha_i
+                + \gamma_t
+                + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \varepsilon_{i,t}
+                \\ &\qquad \notag
+                + \delta_0 \sum_{j\neq i} w_{ij} \cdot (y_{j,t}
+                - \beta_1 k_{j,t}
+                - \beta_2 l_{j,t})
+                + \xi_0\sum_{j\neq i} w_{ij}k_{j,t}
+                + \zeta_0\cdot \sum_{j\neq i} w_{ij}l_{j,t}
+    \\[0.8em]
     \label{eq:static-main-peer-effects}
-            &
-            \begin{aligned}
-                =
-                \alpha_i + \gamma_t &+ \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                \\ &
-                    + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
-                    + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
-                    + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}                    
-            \end{aligned}
+            &=
+                \alpha_i
+                + \gamma_t
+                + \beta_0
+                + \beta_1 k_{i,t}
+                + \beta_2 l_{i,t}
+                + \varepsilon_{i,t}
+                \\ &\qquad \notag
+                + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
+                + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}  
 \end{align}
 \par
 Equation \eqref{eq:static-main-peer-effects} is a linear peer effects specification as given by \cite{Manski1993}.
-It is helpful to borrow the terminology from this literature think of
+It is helpful to borrow the terminology from this discussed in section \ref{ss:lit-peer-effects-metrics}
+and keep in mind the conceptual distinction between these
+and the more general and related concepts of endogeneity, exogeneity, and correlation.
+Variables
 $\begin{pmatrix}
     k_{i,t} &   l_{i,t}
 \end{pmatrix}\in x_{i,t}$
-as \itx{exogenous} characteristics of firm ${i}$ causally affecting its outcome $y_{i,t}$.
+can be thought of as \itx{exogenous} characteristics of firm ${i}$ causally affecting its outcome $y_{i,t}$.
 There is an \itx{endogenous} effect directly from peer outcomes $y_{j,t}$ with coefficient $\delta_0$.
-Peers also have an \itx{exogenous} characteristics $x_{i,t}$,
-which have a direct impact on on the target's productivity $x_{i,t}$ via $\xi_0$ and $\zeta_0$.
-For this section of models, I assume there are no \itx{correlated} effects\footnote{Though this would be achieved via network fixed effects}.
-I use this peer effects terminology throughout this paper italicising \itx{endogenous}, \itx{exogenous}, and \itx{correlated},
-noting to the reader the confusion this may cause with the more general and related concepts of endogeneity and exogeneity.
-The use of fixed effects has no effect on econometric interpretation of the peer effects model.
+Peers also have \itx{exogenous} characteristics $x_{i,t}$,
+which have a direct \itx{exogenous effect} on the target's productivity $x_{i,t}$ via $\xi_0$ and $\zeta_0$.
+For this section of models, I assume there are no \itx{correlated} effects
+and leave further discussion of the implementation of these to \fullref{ss:ext-nfe}.
+The use of panel fixed effects has no effect on econometrics
+discussed in section \ref{ss:lit-peer-effects-metrics}.
 \par
 It is important to note that I do not impose restrictions on $\boldsymbol\theta_0$.
 I allow each of the 3 factors of production to independently exert a spillover effect in general form.
@@ -89,14 +99,13 @@ to a Marshallian channel, but broadly we might consider $\zeta_0$,
 the coefficient on an increase in a peer firm's labour inputs affecting a target's TFP to resemble \cite{Marshall1920}'s
 labour pooling, with some interaction to knowledge spillovers,
 and $\delta_0$, the coefficient from a peer firm's TFP to target TFP to be the remainder of knowledge spillover effects.
-A TFP spillover occuring from peer firm's capital $\xi_0$ would be a novel channel to \cite{Marshall1920}'s discussion
-and could reflect the idea of more capital-intensive peers .
+A TFP spillover occurring from peer firm's capital $\xi_0$ would be a novel channel to \cite{Marshall1920}'s discussion
+and could reflect the idea of more capital-intensive peers.
 Regardless, it is strongly justifiable that we would expect the coefficient on each peer production factor
-to spillover to a target firm's production heterogenously,
+to spillover to a target firm's production heterogeneously,
 and not be proportionate to the contribution of these factors to their own-firm GVA.
 I have no \itx{a priori} arguments for the sign of the $\boldsymbol\theta_0$ coefficients
 and their relative magnitudes compared to their contributions to own-firm GVA in $\beta_1, \beta_2$.
-
 \begin{align}
     \label{eq:static-alt-gva-yspill}
     y_{i,t}^{(y)} &= \alpha_i + \gamma_t + \beta_0
@@ -122,7 +131,7 @@ and their relative magnitudes compared to their contributions to own-firm GVA in
 %
 Two alternative specifications may be proposed: equation \eqref{eq:static-alt-gva-yspill}
 modifies \eqref{eq:static-main-gva} to argue that it is the whole of GVA which matters the peer-target spillover,
-not each component heterogenously. It is trivial to see that this implies the coefficient on the \itx{exogenous effect}
+not each component heterogeneously. It is trivial to see that this implies the coefficient on the \itx{exogenous effect}
 is zero, such that $\xi-\delta_0\beta_1=\zeta-\delta_0\beta_2=0$.
 This has the interpretation alluded to above,
 that the peer effect of any classical factor, capital and labour,
@@ -136,7 +145,7 @@ without strict assumptions on the orthogonality of peer errors.
 The alternative in equation \eqref{eq:static-alt-gva-zspill} argues that only the TFP component of production
 matters for the spillover to influence a target firm's TFP.
 This is also a restriction on the more general \eqref{eq:static-main-gva} such that $\xi_0=\zeta_0=0$.
-On first glance, it may appear that this model follows the structure of the peer effect class of models too
+At first glance, it may appear that this model follows the structure of the peer effect class of models too
 and is in fact over-identified, with both the coefficients of the peer classical factors and $\sum_{j\neq i}w_{ij}y_{j,t}$
 identifying $\delta_0$. However, because of the specific set-up of the reflection problem
 where $w_{ij}y_{j,t}$ is endogenous and we instrument it through $k_{j,t},l_{j,t}$ higher-order spatial lags,
@@ -182,7 +191,7 @@ constructing static panel models. It is relaxed in Section \ref{s:models-dynamic
     ,\ \forall i, \forall t,\tau
 \end{align}
 
-The \itx{endgenous} effect regressor $\sum_{j\neq i} w_{ij} y_{j,t}$ is, unsurprisingly, endogenous,
+The \itx{endogenous} effect regressor $\sum_{j\neq i} w_{ij} y_{j,t}$ is, unsurprisingly, endogenous,
 making valid estimation in this setting more complicated.
 To show the endogeneity requires stacking $w_{ij}$ target-peer weights to an $n\times n$ interactions matrix, $\textbf W$.
 I invert the \itx{endogenous} component to give a $(\mathbb I-\delta_0\mathbf W)^{-1}$ coefficient on all variables.
@@ -197,6 +206,8 @@ The inversion is permissible because I can expect a restriction to apply, ruling
     or at least on the knife-edge $\delta_0=1$ case,
     any TFP shock occurring in one firm applies equally
     and consistently to every firm in a network.
+    Estimating $\delta_0$ is a helpful indicator of a multicollinear model
+    with unstable coefficient estimates.
 }. We can interpret this as a `spatial lag polynomial', directly comparable
 to the lag polynomial and MA inversion procedure in autoregressive time series analysis\footnote{
     A full algebraic derivation from lines \eqref{eq:static-reflection-problem} to \eqref{eq:static-red-endogenous-effect}
@@ -214,47 +225,48 @@ to the lag polynomial and MA inversion procedure in autoregressive time series a
                     + \beta_0 \boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
+                    \\ & \qquad\quad \notag
                     + \delta_0 \mathbf W \mathbf y_t
                     + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
-    \\ \notag
-            &= (\mathbb I - \delta_0 \mathbf W)^{-1} (
+    \\[1em] \notag
+            &= (\mathbb I - \delta_0 \mathbf W)^{-1} \big(
                     \boldsymbol \alpha
                     + \gamma_t \boldsymbol \iota
                     + \beta_0 \boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
+                    \\ & \qquad\quad \notag
                     + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
-                )
-    \\
-            &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k (
+                \big)
+    \\[1em]
+            &= \sum_{k=0}^\infty \delta_0^k \mathbf W^k \big(
                     \boldsymbol \alpha
                     + \gamma_t \boldsymbol \iota
                     + \beta_0 \boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
+                    \\ & \qquad\quad \notag
                     + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
                     + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
                     + \boldsymbol \varepsilon_{t}
-                )
-    \\[1.5ex]
+                \big)
+    \\[1em]
     \label{eq:static-reflection-problem}
-            & \begin{aligned}
-                =   \sum_{k=0}^\infty \delta_0^k \mathbf W^k
+            &=   \sum_{k=0}^\infty \delta_0^k \mathbf W^k
                         \boldsymbol \alpha
-                    &+\frac{\gamma_t + \beta_0}{1-\delta_0}\boldsymbol \iota
+                    +\frac{\gamma_t + \beta_0}{1-\delta_0}\boldsymbol \iota
                     + \beta_1 \mathbf k_{t}
                     + \beta_2 \mathbf l_{t}
-                    \\ &
+                    \\ & \qquad\quad \notag
                     + \xi_0\sum_{k=0}^\infty \delta_0^k \mathbf W^{k+1} \mathbf k_t
                     + \zeta_0\sum_{k=0}^\infty \delta_0^k \mathbf W^{k+1} \mathbf l_t                    
                     + \sum_{k=0}^\infty \delta_0^k \mathbf W^k
                         \boldsymbol \varepsilon_{t}
-            \end{aligned}
-    \\[1.5ex]
+    \\[1em]
     \label{eq:static-red-endogenous-effect}
     y_{j,t}     &= \dots
                     + \underbrace{
@@ -277,7 +289,7 @@ to the lag polynomial and MA inversion procedure in autoregressive time series a
 
 It is the primary econometric challenge of this section to overcome the endogeneity of $y_{j,t}$,
 which is clearly demonstrated in reduced-form equation \eqref{eq:static-red-endogenous-effect}.
-It contains a linear transformations of all firms' error shocks $\boldsymbol \varepsilon_{t}$,
+It contains a linear transformation of all firms' error shocks $\boldsymbol \varepsilon_{t}$,
 including $\varepsilon_{i,t}$. This implies:
 \begin{equation}
     \mathbb E[y_{j,t}\varepsilon_{i,t}]\neq 0
@@ -294,14 +306,14 @@ to that of all other regressors.
 \par
 There are two solutions. I could either proceed with an extremely strong exogeneity assumption,
 \eqref{eq:static-ass-ma-exogeneity}, which is most likely satisfied by total orthogonality
-between all contemperaneous idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}.
+between all contemporaneous idiosyncratic errors hitting peer firms \eqref{eq:static-ass-error-orthogonality}.
 This in turn makes the regressor $y_{j,t}$ exogenous,
 allowing direct estimation of \eqref{eq:static-main-gva}, sidestepping the `Reflection Problem'
 by assuming away \itx{endogenous} regressors, and having each regressor exogenously identified in itself.
 For identification, this implies that any productivity shock $\varepsilon_{j,t}$ occurring in peer firm $j$,
-if it is contemperaneously correlated with TFP ${z_i,t}$ in target firm $i$
+if it is contemporaneously correlated with TFP ${z_i,t}$ in target firm $i$
 must be attributable to the peer effect coefficient via  $\delta_0$.
-This precludes any contemperaneous, correlated independent TFP shocks,
+This precludes any contemporaneous, correlated independent TFP shocks,
 which might occur on both the global and local level.
 Model (1.) takes this assumption in \ref{ss:model-lmm}.
 We should assess these results with the heavy caveat that this strict error orthogonality
@@ -335,7 +347,7 @@ assumption is unlikely to be credible.
 \end{align}
 
 Instead, as recommended in \cite{Bramoulle2009},
-the most defensible approach is to internall instrument the \itx{endogenous} variable, $y_{j,t}$
+the most defensible approach is to internal instrument the \itx{endogenous} variable, $y_{j,t}$
 through deeper spatial lags of the \itx{exogenous} parameters
 $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t \dots \mathbf W^k \mathbf x_t\ \forall k>2$.
 These are valid instruments under certain testable properties of $\mathbf W$ given in \tablerefp{tab:bdf_identification}.
@@ -346,7 +358,7 @@ having 2 or more differently-sized groups, or a network diameter of at least 2.
 This identification strategy is not a `free lunch'.
 It requires the underlying assumption that the group size, or network diameter,
 is in itself exogenously determined. This would be intuitively violated,
-if firms colate based on the expected productivity benefits of moving to an area,
+if firms colocate based on the expected productivity benefits of moving to an area,
 namely to benefit from the supply-side spillovers we aim to investigate.
 Unfortunately, it is highly likely that firm location decisions are endogenous,
 this is the whole principle of the \nameref{ss:lit-neg} literature whose
@@ -362,12 +374,13 @@ as well as the numerous, plausibly exogenous reasons why a firm might choose
 to set up in a location with path dependency, rather than to fully maximise
 its peer spillover benefits.
 On the balance of arguments, I take the assumption of network exogeneity
-and identification approach for models in Tables \todo{XII and IX}.
+and identification approach for models in Tables \ref{tab:lmm-pc8} and \ref{tab:lmm-pc8}.
 \par
-I use the instruments
-\todo{$\mathbf W^2\mathbf x_t$ and other second-order variants} for this section's group models \todo{Table VI, models (5-8)}
-and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$ as feasible instruments for this section's network models
-\todo{Table VII, model}. Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
+I use the instruments $\mathbf W^2\mathbf x_t$ and other second-order variants
+for this section's group models \todo{Table VI, models (5-8)}
+and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$
+as feasible instruments for this section's network models in \tablerefp{tab:dd}.
+Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
 noting that I have chosen to display this in a $l \times 2$ matrix for space and conceptual symmetry,
 as the instruments can be grouped by $k_t$ and $l_t$ regressors.
 The first 2 rows correspond to the exogenous regressors within the reduced-form equation itself,
@@ -395,7 +408,7 @@ using the higher-order spatial lags of $\mathbf W$ discussed.
 
 These instruments and conditions are intuitive:
 we can see through equation \eqref{eq:static-red-endogenous-effect} that
-a linear combination of all firms' contemperaneous capital and labour inputs,
+a linear combination of all firms' contemporaneous capital and labour inputs,
 $\mathbf W^{k+1}\begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}\ \forall k\geq0$ 
 are an exogenous component of $y_{j,t}$ with the coefficients $\xi_0$ and $\zeta_0$ respectively.
 It has relevance, meaning $\mathbb E[y_{j,t}\cdot [\mathbf W^k]_{(j,)}\mathbf x_t]\neq 0,\ \forall k>2$
@@ -409,8 +422,8 @@ This also allows clear understanding of why the TFP-only spillover model \eqref{
 as setting both $\xi_0=\zeta_0=0$ means the higher order spatial lags of $\mathbf k_t$ and $\mathbf l_t$
 disappears from the composition of the $y_{j,t}$ term.
 An Anderson-Rubin test for weak instruments in my nested 3-factor spillover setup
-can test for the the strength of instrument of $\mathbf k_t$ and $\mathbf l_t$.
-If I find that they the higher-order spatial lags are jointly weak instruments,
+can test for the strength of instrument of $\mathbf k_t$ and $\mathbf l_t$.
+If I find that the higher-order spatial lags are jointly weak instruments,
 that would validate the TFP-only spillover model and suggest $\xi_0=\zeta_0=0$.
 \par
 Finally, one might observe that $[\mathbf W]_{(j,)}\mathbf x_t$
@@ -480,7 +493,7 @@ common to the peer effects literature, for instance \cite{Moffitt2001}.
 I discussed group assignment in section \ref{ss:data-distance}.
 The initial Model (1.) estimates \eqref{eq:static-lmm-reduced-estimated},
 meaning a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group,
-assumeing the full vector of error orthogonality implying regressor exogeneity.
+assuming the full vector of error orthogonality implying regressor exogeneity.
 
 \begin{align}
     \label{eq:static-lmm-iv-fd-reduced-estimated}
@@ -535,15 +548,15 @@ for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously
 \par
 I can show algebraically that multiple spatial autoregressors do not change the reflection problem:
 the moving average inversion's coefficient merely becomes the weighted sum
-of 3 independent matrices $\theta_g \mathbf W_g$.
+of 3 independent matrices $\theta_k \mathbf W_{gk}$.
 As long as there is sufficient heterogeneity between the weighting matrices,
 which in these cases is guaranteed by the orthogonality of $\mathbf W_g$
 matrices to each other, then there is no risk of multicollinearity.
 Coefficients in the results $\boldsymbol \hat\theta_1$ for the closest spatial group \itx{pc8}
 are identical to $\boldsymbol \hat\theta_0$ in the one-group model.
 This is an unsurprising result justified by the orthogonality, since the additional regressors
-do not affect the variation attributable to the $\mathbf W_1$-lagged variables
-as the regressors with $\mathbf W_2, \mathbf W_3$ are orthogonal.
+do not affect the variation attributable to the $\mathbf W_{g1}$-lagged variables
+as the regressors with $\mathbf W_{g2}, \mathbf W_{g3}$ are orthogonal.
 \todo{Modify equation 18 to include $\sum W^3$ in the inversion term}
 
 
@@ -551,7 +564,6 @@ as the regressors with $\mathbf W_2, \mathbf W_3$ are orthogonal.
 \newpage
 \subsection{Static distance decay}
 \label{ss:model-dd}
-
 To improve on the LMM specification, I make a modification where
 every peer firm is weighted by its influence on the target by the reciprocal of the 
 continuous distance metric calculated in \ref{ss:data-distance}
@@ -615,8 +627,8 @@ contains as many non-overlapping groups as firms.
 %     \end{threeparttable}
 % \end{table}
 
-This distance-decay specification revises down the estimate from peers to a an elasticity of 0.168,
+This distance-decay specification revises down the estimate from peers to an elasticity of 0.168,
 lower than the results given by the LMM specification. This is likely due to \todo{...}
 \\
 In addition, I introduce controls \todo{...}
-\todo{I run a variant where firms which share a location, meaning distance is mechanially 0, are excluded}.
+\todo{I run a variant where firms which share a location, meaning distance is mechanically 0, are excluded}.

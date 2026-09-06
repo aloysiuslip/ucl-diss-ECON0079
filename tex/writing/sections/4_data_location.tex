@@ -2,19 +2,111 @@
 \section{Location data and interactions}
 \label{s:data-location}
 
-Throughout this analysis, I use terminology of a productivity spillover occuring
+Every firm in the cleaned Fame database is tagged with 7 location properties.
+I constructed a hierarchy of favourability of that data, in order:
+\itx{latitude/longitude}, \itx{full address}, \itx{address} (split over multiple fields),
+and \itx{postcode} only. I additionally constructed a hierarchy favouring
+data listed for the firm's \itx{primary trading address} over its \itx{registered office} address.
+Using differentiated, appropriate techniques for each, I compiled these down
+to an \itx{amalgamated address} property with 4 key column names: \itx{longitude\_decimal}, \itx{latitude\_decimal},
+and 2 supporting columns indicating the data quality.
+Parsing postcodes and address data required matching the postcode
+to the ONS' postcode lookup database\footnote{\cite{ons2025:nspl}},
+yielding a generic longitude-latitude value for the centre of a postcode area.
+\par
+There is some miscoding in Fame's location data.
+Despite it being my favoured \itx{amalgmated address} selection choice,
+Fame's native \itx{longitude} and \itx{latitude} data contained some errors,
+such as giving either one of those $0.000$ coordinates, swapping them,
+or placing them outside the UK for a UK address.
+I employed several techniques to search for outliers:
+for instance, by using distance libraries to calculate the centre-point of all firms sharing a postcode
+and then filtering for firms further than a threshold,
+I evaluated that 1.8\% of all firms in the current sample
+were more than 5km away from their postcode's centre-point.
+Due to the time and data processing constraints of this analysis,
+I simply dropped these rows from the sample, rather than employ ever-more sophisticated
+data-cleaning strategies to handle these cases.
+\par
+Though I recorded the location data quality property,
+I undertook no further analysis using it as its incorporation
+to a distance-weighting technique requires complex data science approaches,
+which are discussed in section \ref{ss:param-select_xvalidate}.
+The resulting corpus of firms has exactly 152,379 rows
+and 5 key location properties: its membership of 3 spatial location groups:
+travel-to-work area (\itx{ttwa}), the first-half of a UK postcode (\itx{pc4}), or full postcode (\itx{pc8}),
+and 2 point distance decimals for longitude + latitude.
+
+\subsection{Location data limitations}
+\label{ss:data-location-limits}
+
+This analysis amalgamated multisite firms to their primary trading address, as an assumption.
+In the dataset prepared for \cite{Irastorza-Fadrique2026},
+each firm is only tagged with their last-known registered address and primary trading address.
+Fame includes further trading addresses for multisite firms available for download through their data portal,
+however the only useful site-level datapoint provided is \itx{number\_of\_employees} per trading address,
+and even then coverage is sparse\footnote{\cite{MoodysAnalytics2026}, platform accessed August 2026.}.
+This analysis simply took the financial aggregates listed for each firm
+and assumed it to be located at the listed primary trading address.
+There are clear flaws to this method: large retail firms, such as consumer retailer `Tesco',
+have several hundred listed trading addresses on Fame,
+and generate much less than the full amount of GVA
+at their listed primary trading location, such as in `Welwyn Garden City'.
+Nevertheless, difficult algorithm allocation decisions,
+or the pursuit of more sophisticated data sources
+would have been required to address this issue;
+these are discussed in section \ref{ss:ext-alt-location}.
+The amalgamation assumption provides ease of computation 
+while contributing to attenuation bias of the estimated spillover parameters
+due to imperfect target-peer spatial connections.
+\par
+Additionally, the location data that is available is time-invariant,
+a characteristic of the \itx{fixed} table, rather than updated on a yearly basis
+to reflect firm-movers.
+This is a reflection of using a comprehensive dataset of financial datapoints,
+that was not optimised for spatial analysis; instead Fame provides an in-built feature
+suggesting peers via balance sheet and industry similarity, which I ignore for this analysis.
+One interpretation of this analysis' use of these characteristics
+is that each firm is over the entire 20-year sample with no movers.
+This seems very unlikely: \fullref{ss:lit-neg} tells us to expect
+the endogenous location of firm movement and colocation
+to optimise for taking advantage of firm spillovers.
+\par
+Using the location characteristics as I do,
+as a noisy signal of the firm's true location, has 2 econometric consequences.
+Firstly, firm fixed effects in all spatial specifications become extremely important.
+For all movers within the sample period, an endogenous firm location decision
+can only be modelled as correlated with the spillover regressors of interest.
+This justifies my use of fixed effects over random effects throughout this analysis.
+Firm fixed effects are time invariant, and can additionally help to eliminate
+some of the endogeneity induced by movers who undertook their move
+just before the sample period, 2006-, to maximise their spillover effect.
+\par
+Secondly, I acknowledge some attenuation to the productivity spillover estimate.
+Incorrect location data due to any of the above-discussed issues
+causes the assignment of spatial peers to any target to be miscalculated,
+and vice versa.
+Peer firms who were close to the target firm during the firm-year observation
+who subsequently moved away within-sample will have an extreme distance recorded,
+and so be excluded from tagged address groups and truncated distance calculations.
+Peer firms who are recorded as close to the target firm as they subsequently moved to the location.
+This reduces down the strength of the spillover coefficient $\theta_0$ estimated.
+
+\subsection{Location group classification}
+
+Throughout this analysis, I use terminology of a productivity spillover occurring
 from a group or average of \itx{peer} firms onto a \itx{target} firm.
+\par
 The influence of the vector of all firms $j$ on the vector of all firms $i$
 can be summarised in an $(n \times n)$ interactions matrix, $\mathbf W$.
-\par
 This interactions matrix is symmetric: any firm with a peer weight
 calculated by the distance between the two firms naturally is a peer in return
 with an identical distance and weight.
 Extensions to this analysis could devise asymmetric relations,
 for example, with bigger firms having more influence.
 The interactions relationship is irreflexive - no target can be a peer of itself.
-For groups it is transitive: if firms A and B share a spatial group, namely travel-to-work area (\itx{ttwa}),
-first-half of a UK postocde (\itx{pc4}), or full postcode (\itx{pc8}),
+For groups, it is transitive: if firms A and B share a spatial group,
+\itx{ttwa}, \itx{pc4}, or \itx{pc8},
 then a firm C that is a peer of firm B must also be of firm A.
 For continuous distance measures, this is non-transitive.
 Firm B, a peer of firm A within its 5km radius, can clearly have its own peers
@@ -23,9 +115,9 @@ This matrix resembles a sparse matrix with a `thick' diagonal,
 rather than a matrix with distinct large blocks.
 It should be noted that, as discussed in \ref{ss:data-distance},
 the 5km-distance calculations for the network weighting matrices
-were limited to only firms within a TTWA, sowhen viewed as a whole,
+were limited to only firms within a TTWA, so when viewed as a whole,
 $\mathbf W_d$ does have a block diagonal group similar to $\mathbf W_{g3}$,
-though with hterogenous weights internally within each group rather than a simple average.
+though with heterogenous weights internally within each group rather than a simple average.
 \begin{table}[htbp]
     \centering
     \begin{threeparttable}[c]
@@ -42,69 +134,15 @@ though with hterogenous weights internally within each group rather than a simpl
     \end{threeparttable}
 \end{table}
 
-\subsection{Location data limitations}
-\label{ss:data-location-limits}
-
-This analysis amalgamted multisite firms to their primary trading address, as an assumption.
-In the dataset prepared for \cite{Irastorza-Fadrique2026},
-each firm is only tagged with their last-known registered address and primary trading address.
-Fame includes further trading addresses for multisite firms available for download through their data portal,
-however the only useful site-level datapoint provided is number of employees per trading address,
-and even then coverage is sparse\footnote{\cite{MoodysAnalytics2026}, platform accessed August 2026.}.
-This analysis simply took the financial aggregates listed for each firm
-and assumed it to be located at the listed primary trading address.
-There are clear flaws to this method: large retail firms, such as consumer retailer \itx{Tesco},
-have several hundred listed trading addresses on Fame,
-and generate much less than the full amount of \itx{GVA}
-at their listed primary trading location, such as in \itx{Welwyn Garden City}.
-Nevertheless, difficult algorithm allocation decisions,
-or the pursuit of more sophisticated data sources
-would have been required to address this issue;
-these are discussed in section \ref{ss:ext-alt-location}.
-The amalgamation assumption provides ease of computation 
-while contributing to attenuation bias of the estimated spillover parameters
-due to imperfect target-peer spatial connections.
-\par
-Additionally, the location data that is available is time-invariant,
-a characteristic of the \itx{fixed} table, rather than updated on a yearly basis
-to reflect firm-movers.
-This is a reflection of using a comprehensive dataset of financial datapoints,
-that was not optimised for spatial analysis; instead Fame provides an in-built feature
-suggesting peers via balance sheet and industry similarity, which I ignore for this analysis.
-One interpretation of this analysis' use of this characteristics
-is that each firm is over the entire 20-year sample with no movers.
-This seems very unlikely: \fullref{ss:lit-neg} tells us to expect
-the endogenous location of firm movement and colocation
-to optimise for taking advantage of firm spillovers.
-Using the location characteristics as I do,
-as a noisy signal of the firm's true location, has 2 econometric consequencesj.
-\par
-Firstly, firm fixed effects in all spatial specifications become extremely important.
-For all movers within the sample period, an endogenous firm location decision
-can only be modelled as correlated with the spillover regressors of interest.
-This justifies my use of fixed effects over random effects throughout this analysis.
-Firm fixed effects are time invariant, and can additionally help to eliminate
-some of the endogeneity induced by movers who undertook their move
-just before the sample period, 2006-, to maximise their spillover effect.
-\par
-Secondly, I acknowledge some attenuation to the productivity spillover estimate
-Peer firms who were close to the target firm during the firm-year observation
-who subsequently moved away within-sample will have an extreme distance recorded,
-and so be excluded from tagged address groups and truncated distance calculations.
-Peer firms who are recorded as close to the target firm as they subsequently moved to the location.
-This reduces down the strength of the spillover coefficient $\theta_0$ estimated.
-
-\subsection{Location group classification}
-
-Spillover effects from neighbouring firms are summarised in a weighting matrix $\mathbf W$,
-where a non-zero weight implies some use of the peer firm's attributes
+A non-zero weight in $\mathbf W$ implies some use of the peer firm's attributes
 in the regression to estimate the target firm's TFP.
+For a group classification $\mathbf W_g$, all weights among peers are equal.
 I construct initial weights by peers which share a spatial identifier,
 meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011
 definitions\footnote{Travel-to-work area definitions from 2011 are broadly still considered
 the mostly reliable for current analytical research,
-due to the pollution in travel and working patterns occurring as a result of the Covid-19 pandemic during the 2021 Census.
-Travel-to-work-area area coverages, meaning maps from the location data availble particularly postcode
+due to the pollution in travel and working patterns occurring as a result of the COVID-19 pandemic during the 2021 Census.
+Travel-to-work-area area coverages, meaning maps from the location data available particularly postcode
 tend to be time-invariant following the pattern of the 2001 to 2021 changes,
 which mostly occurred in border areas of the UK's large cities.},
 the first half of a UK postcode \itx{pc4},
@@ -116,30 +154,31 @@ applied on the variable of peer firm $j$, summing across rows $i$
 to reach a weighted aggregate regressor
 with an estimated effect on target firm $i$.
 \par
-$W$ retains the irreflexivity property discussed: its diagonal elements are all $0$,
+$\mathbf W$ retains the irreflexivity property discussed: its diagonal elements are all $0$,
 meaning a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
 This is common to peer effects literature such as \cite{Moffitt2001}
 and discussed in \cite{Bramoulle2009}.
 Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
 The resulting $n\times n$ matrix has off-diagonal elements as
 the size of group members (blocks) within the matrix, $s_g-1$, which excludes the target firm $i$.
-The structure is given below\footnote{
-    Adapted from \cite{Bramoulle2009}
-}:
+The structure is given
+below\footnote{Adapted from \cite{Bramoulle2009}},
+with an example $\mathbf W_{g^*}$, a $(7\times 7)$ set of interactions
+between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only.
 
 \begin{align*}
-    w_{ij}\in \mathbf W_g &=
+    w_{ij}\in \mathbf W_{g^*} &=
         \begin{cases}
             0,              & \text{if}         \ i=j           \\
             \frac1{s_g-1},  & \text{else if}    \ (i,j)\in g    \\
             0,              & \text{otherwise}
         \end{cases}
     \\
-    \mathbf \Gamma_{s_1} \in \mathbf W_g
+    \mathbf \Gamma_{s_1} \in \mathbf W_{g^*}
     &=
     \{ i, j \in g \}, s_1: n_g
     \\
-    \mathbf W_g
+    \mathbf W_{g^*}
     &=
     \underset{(n\times n)}{
         \begin{pmatrix}
@@ -150,17 +189,13 @@ The structure is given below\footnote{
     }
 \end{align*}
 
-\par\noindent
-An example such matrix is $\mathbf W_{g^*}$, a $(7\times 7)$
-set of interactions between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only.
-
 \begin{figure}[hbtp]
     \caption{Illustration of group matrix $\mathbf W_g$}
     \label{fig:static-groups-W}
     \centering
     \par\noindent
     \begin{align*}
-        \mathbf{W}_{g1:3}
+        \mathbf{W}_{g^*}
         \begin{pmatrix}
             0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
             \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
@@ -200,7 +235,7 @@ These matrices are orthogonal.
     \centering
     \par\noindent
     \begin{align*}
-        \mathbf{W}_{g\sim \ref{fig:static-groups-donut-matrices}}
+        \mathbf{W}_{g1:3^*}
         &\sim
         \begingroup
         \setlength\arraycolsep{3.8pt}
@@ -213,7 +248,7 @@ These matrices are orthogonal.
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
             0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
             0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
-        \end{bmatrix}\ 
+        \end{bmatrix}
         \begin{bmatrix}
             0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
             0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
@@ -223,7 +258,7 @@ These matrices are orthogonal.
             0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
-        \end{bmatrix}\ 
+        \end{bmatrix}
         \begin{bmatrix}
             0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
             0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
@@ -285,6 +320,8 @@ and was a similar number of groups, with non-cohesive definitions.
     \centering
     \par\noindent
     \begin{align*}
+        \mathbf W_{d^*}
+        &=
         \begin{bmatrix}
             0 & 0.42 & 0.29 & 0.28 & 0 & 0 & 0 & 0 & 0 \\
             0.31 & 0 & 0.38 & 0.32 & 0 & 0 & 0 & 0 & 0 \\
@@ -320,7 +357,7 @@ also requires me to apply multiples of this transformation matrix,
 exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group matrices,
 $\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}\mathbf W_{g3}$ and so on to the aggregates.
 \par
-As a data procedure, I calculate these for my 3 aggregate variable vectors of interest.
+I calculate these for my 3 aggregate variable vectors of interest.
 As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
 or columns of a database, to be calculated and generated.
 Of course, these column vectors each contain a stacked \itx{firm} ($i$)-\itx{year} ($t$)
@@ -332,9 +369,9 @@ However, storing the calculation in temporary memory is beyond
 the capacity of any standard machine available as a research tool.
 \par
 Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix
-separately, but rather iteratively applies the last pre-multipled matrix to the aggregate variable,
+separately, but rather iteratively applies the last pre-multiplied matrix to the aggregate variable,
 and then pre-multiplies the next matrix along to the result.
-Using memory-efficient \itx{duckdb}, the procedure is as follows:
+Using memory-efficient \itx{DuckDB}, the procedure is as follows:
 \todo{itemize}
 
 \subsection{Evaluating the linear independence of $\mathbf W$ matrices}
@@ -354,7 +391,7 @@ In the analysis of this set of firms with distance radius limits,
 the \itx{diameter} is large, potentially spanning the full spatial diameter of a \itx{ttwa}.
 It is this mechanism design provides another justification, alongside computation,
 for limiting the max length of a target-firm peer relation to 5km:
-it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a `itx{ttwa}'.
+it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a \itx{ttwa}.
 The overlapping group network structure lends itself nicely to illustrations.
 Figure \ref{fig:map-nolg-manc} selects a random firm $i$ from my sample,
 which happens to be in Stockport, Greater Manchester, and draws the distances used to calculate metric $d1$
@@ -376,9 +413,9 @@ where peer nodes randomly selected may be starting to bunch at an `invisible' bo
         \newline
         (dark red pins): sample (limit 5) of $j$ peers, then calculated as their own targets
         \newline
-        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also shared as a peer of $i$.
+        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also a peer of $i$.
         \newline
-        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also shared as a peer of $i$.
+        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also a peer of $i$.
         \newline
         (light red dots): set of $n$ peers of firms $m$, few of these are peers of $i,j$,
         probabilistically creating a network diameter of $s_d\geq 3$.
