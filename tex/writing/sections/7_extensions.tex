@@ -7,13 +7,16 @@
 \subsection{Selection of parameters}
 \label{ss:param-select_xvalidate}
 
+In section \ref{s:data-location}, I recorded quality of location data
+for each firm, but discussed limitations of applications of that data.
+
 \subsection{Network fixed effects}
 \label{ss:ext-nfe}
 
 Firm and time fixed effects in a network setting may be considered insufficient,
 A local demand shocks, which can be thought of as a \itx{correlated} shock
 $\mathbb E[\varepsilon_{i,t,g}\varepsilon_{i,t,h}]\neq 0$,
-where $(g,h)$ are some close memberes of a network or group within the interactions matrix $\mathbf W$.
+where $(g,h)$ are some close members of a network or group within the interactions matrix $\mathbf W$.
 This is a phenomenon specific to peer effects analysis and differs from the usual omitted variable bias (OVB)
 that impacts all firms discussed in standard econometric theory;
 here, specific identity of a group or network exposes members to a certain third-party common shock,
@@ -21,7 +24,7 @@ for which a researcher should introduce controls.
 \cite{Manski1993} labels these \itx{correlated effects}.
 Econometrically, a \itx{correlated} shock is some omitted variable that hits both error terms,
 such as a demand shock in the local area $v_{i,t}\to \varepsilon_{i,t},\varepsilon_{j,t}$.
-This would simultaneously lift the recorded profit and \itx{GVA},
+This would simultaneously lift the recorded profit and GVA,
 of both a target and its peers.
 Another instance could be an exogenous change in the mutual supply chain of a firm and its peer,
 which is most likely to occur when $i,j$ share an industry.
@@ -29,7 +32,7 @@ A negative price cost shock, for instance, would lower the cost of inputs for bo
 and be accounted for in the short run by increased GVA
 for the value of inputs indexed using macroeconomic data.
 \par
-It may be considered an arbitary choice what is a sufficiently `local' region
+It may be considered an arbitrary choice what is a sufficiently `local' region
 to capture these effects and model them as a variable correlated with regressors.
 Fortunately, econometric theory through \cite{Bramoulle2009},
 discusses the use of \itx{local} network fixed effects
@@ -123,13 +126,13 @@ This is due to the risk of applying of both firm and network fixed effects
 simultaneously to be multicollinear.
 I run the extension models
 \eqref{eq:ext-lnfe-reduced} and \eqref{eq:ext-gnfe-reduced}
-for the static group and nework weights $\mathbf W\in \mathbf W_{g1}, \mathbf W_{d1}$.
+for the static group and network weights $\mathbf W\in \mathbf W_{g1}, \mathbf W_{d1}$.
 Despite efforts with the above, I find that all specifications failed the Sargan-Hansen J test,
 which implies over-identifying restrictions on instruments
-such that the GMM-CuE estimator could not converge to the required zero moment conditions.
+such that the GMM-CUE estimator could not converge to the required zero moment conditions.
 Estimates also suffer from multicollinearity anyway, giving parameter coefficients
 which fall far out of the expected range of $|\delta_0|, |\xi_0|, |\zeta_0|<1$.
-Unstable estimates such as these should not be considered consistent
+Unstable estimates such as these should not be considered consistent,
 so I do not report them here.
 \par
 Further analysis could investigate this issue more thoroughly

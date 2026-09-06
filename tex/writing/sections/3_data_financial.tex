@@ -5,7 +5,7 @@
 I have used data from Fame for this investigation.
 Fame is a comprehensive database of the financial balance sheet from UK firms.
 It contains useful variables for this analysis, in particular,
-number of employees and aggregates which can be summed to calculate \itx{GVA}.
+number of employees and aggregates which can be summed to calculate GVA.
 Fame is provided by Moody's Analytics, an international credit agency,
 and collects its data from UK firms via survey\footnote{\cite{MoodysAnalytics2026}}.
 \par
@@ -38,7 +38,7 @@ This architecture choice is extremely well-suited for mass data econometric anal
 and critical to solving the compute limitations of iterative large-$n$ dataset manipulations
 required to calculate the valid instruments identified in section \ref{ss:static-identification}.
 \par
-Over 100 Gb of raw data was accessed and donwloaded from Fame in February 2025
+Over 100 Gb of raw data was accessed and downloaded from Fame in February 2025
 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026} and reused for this project.
 Raw data are distributed across a series of Excel files on balance sheet indicators,
 including time-invariant characteristics for each firm, bucketed into $a1\_ID$ and $a5\_misc$ files,
@@ -53,7 +53,7 @@ such as SIC division 47 (Retail Trade, 1090 files)
 and 82 (Office administrative, office support and other business support activities,
 1065 files)\footnote{\cite{ons2026:sic}}.
 I imposed a batch limit of 200 for stable memory handling, splitting up these large industries,
-and used used Python's asynchronous \itx{concurrent.futures} package
+and used Python's asynchronous \itx{concurrent.futures} package
 to execute the ingestion of each batch, exploiting multithreaded processing.
 In total, 12,800 files were processed across the 88 available SIC divisions.
 Time-invariant firm characteristics were saved to a table named \itx{fixed},
@@ -75,7 +75,7 @@ such a deployment of an acceptable Levenshtein distance to resolve differing nam
 or separately treating firms with multiple listed addresses.
 Further data cleaning procedures are discussed in \cite{Irastorza-Fadrique2026}, notably these include
 avoiding double-counting of firms through both their parent company and subsidiaries,
-truncation of data to at earliest 2010 due to changes in reporting standads,
+truncation of data to at earliest 2010 due to changes in reporting standards,
 and reclassification of firm SIC codes using NLP on firm business activity descriptions.
 \begin{figure}[b!]
     \caption{Panel observation availability by year}
@@ -117,7 +117,7 @@ Doing this at the observation rather than firm, has the risk of inducing bias to
 as there may remain firms in the sample straddling the employees threshold
 which endogenously have their observation years of low-employees excluded.
 First-differencing in panel regressions with this data provides some mitigation to this issue
-by providing a buffer of one year either side to excluded obbservations.
+by providing a buffer of one year either side to excluded observations.
 Nevertheless, this analysis adopts the observation-level threshold strategy.
 This set of filters reduced the number of valid firms in this analysis to 152,000
 with 1,130,000 panel observations.
@@ -125,7 +125,7 @@ with 1,130,000 panel observations.
 Figure \ref{fig:data-obvs-per-year} shows the distribution of active firms across years,
 which follows expected trends from macroeconomic business population
 surveys\footnote{\cite{dbt2025:businesspop}}.
-We can note an observable dip after the 2016 Brexit refendum and during the Covid-19 pandemic.
+We can note an observable dip after the 2016 Brexit referendum and during the COVID-19 pandemic.
 We can also observe that 2024 is an incomplete sample set as not all firms
 had submitted their financial accounts for that year,
 but this is treated as a random effect and no further firms are filtering as a result of this.
@@ -137,7 +137,7 @@ with an increasing discrete probability of survival for older firms.
 
 \subsection{Deriving panel aggregates}
 
-All finaical data are deflated to real terms, using 2024 as the base year.
+All financial data are deflated to real terms, using 2024 as the base year.
 I used macroeconomic data of the GDP deflator\footnote{\cite{ons2026:qna}} for all balance sheet variables,
 except for \itx{renumeration\_employees} and its composites for which I used CPIH\footnote{\cite{ons2026:cpih}},
 as these are income-related aggregates with real spending power best captured by household purchasing

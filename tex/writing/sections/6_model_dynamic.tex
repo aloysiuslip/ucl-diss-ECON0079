@@ -84,7 +84,7 @@ Internal instruments of all the endogenous regressors are found,
 meaning their lagged first differences.
 Identification is improved in the System GMM approach given in \cite{Blundell1998}
 by also including the first logged, not differenced, lag of the endogenous regressors
-which meets the usual instrument conditons, as an instrument.
+which meets the usual instrument conditions, as an instrument.
 It is this System GMM approach that I follow here,
 so I find the first logged, not differenced, lag of regressor in $x_{it}$
 and its corresponding set of first difference lagged instruments,
@@ -206,7 +206,7 @@ and $\Delta l_{i,t-k}, k>2$, as it is flexible.
     &\implies \mathbb E[\Delta l_{i,t-2} \Delta \epsilon_t] = 0, \mathbb E[l_{i,t-2} \varepsilon_t]=0
 \end{align}
 
-Devising an internal instrument requires a similar evaluation of thecomponents of $y_{j,t}$ as in the static problem.
+Devising an internal instrument requires a similar evaluation of the components of $y_{j,t}$ as in the static problem.
 There is a dynamic corollary to the static derivation of the endogenous term $y_{i,t}$.
 \begin{align}
     \mathbf y_t
@@ -364,7 +364,7 @@ across the country (outside the spatial bubble).}
     {Dynamic panel: baseline instrumental specification}
     {../../model/output/instr_3a_identif}
     {\begin{itemize}
-        \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insuficient evidence
+        \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
                 at the 95\% level to reject the null-hypothesis that the model is identified.
         \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
                 as expected from a first-differencing SystemGMM approach.

@@ -10,6 +10,7 @@
 		"editor.insertSpaces": true,
 		"files.autoSave": "onFocusChange",
 
+        "ltex.enabled": ["latex"],
         "ltex.language": "en-GB",
         "ltex.disabledRules": {
             "en-GB": [
@@ -18,9 +19,24 @@
                 "EN_UNPAIRED_QUOTES"
             ]
         },
-
+        "ltex.latex.commands": {
+            "\\itx{}": "dummy",
+            "\\wraptable{}{}{}": "ignore"
+        },
+        "ltex.latex.environments": {
+            "align*": "ignore"
+        },
         "ltex.dictionary": {
             "en-GB": [
+                // Theory
+                "conceptualisable",
+                "recreatable",
+                "TFP-only",
+                "TFP-spillover",
+                "babyfather",
+                "babymother",
+
+                // Econometrics
                 "endogeneity",
                 "heteroskedasticity",
                 "heteroskedastic",
@@ -31,17 +47,32 @@
                 "multicollinearity",
                 "multicollinear",
                 "multicollinearities",
-                "conceptualisable",
-                "recreatable",
-                "datapoints",
                 "VARMA",
                 "VAR",
                 "autoregressor",
+                "autoregressors",
+                "unconfounded",
+                "pre-multiplied",
+                "overidentification",
+                "underidentification",
+                "GMM-CUE",
+
+                // Set theory
+                "irreflexive",
+                "irreflexivity",
+
+                // Data science
+                "datapoint",             
+                "datapoints",
+                "timepoint",
+                "timepoints",
+                "filepaths",
+                "DuckDB",
+                "microdata",
 
                 // # Names
                 "Marshallian",
-                "Nesheim",
-                "unconfounded"
+                "Nesheim"
             ]
         },
 
