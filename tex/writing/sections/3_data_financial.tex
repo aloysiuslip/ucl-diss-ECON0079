@@ -59,8 +59,8 @@ In total, 12,800 files were processed across the 88 available SIC divisions.
 Time-invariant firm characteristics were saved to a table named \itx{fixed},
 annual firm data to a table named \itx{yearly} within \itx{DuckDB}.
 \par
-All firm data are tagged with a `registered number' property corresponding to a Companies House ID.
-I deduplicated 896,000 \itx{fixed} firm entries using a `registered number' match,
+All firm data are tagged with a \itx{registered\_number} property corresponding to a Companies House ID.
+I deduplicated 896,000 \itx{fixed} firm entries using a \itx{registered\_number} match,
 of which the vast majority were exact duplicate entries
 and the remainder had some mismatch of 1 or more firm characteristics,
 such as the listed company name, global operating owner,
@@ -103,7 +103,7 @@ If it is random errors causing Fame to have these conflicting, duplicate values,
 this strategy has the potential to bias all financial data entries upwards,
 however this bias is unlikely to be correlated with any of this investigation's variables of interest.
 I further removed a small minority (<200) firm entries not based in the UK,
-which can be identified through their `registered number' format.
+which can be identified through their \itx{registered\_number} format.
 In total, deduplication reduced the number of firms from 9,280,000 to 8,220,000,
 and the number of panel observations from 44,900,000 to 42,900,000.
 

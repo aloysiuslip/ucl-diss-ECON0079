@@ -23,8 +23,8 @@
 % Font
 % \usepackage{mathptmx}
 % \usepackage{helvet}
-\usepackage{newtxtext, newtxmath}
-% \usepackage{lmodern}
+% \usepackage{newtxtext, newtxmath}
+\usepackage{lmodern}
 \usepackage{soul}
 \newcommand{\todo}[1]{\hl{(#1)}}
 \newcommand{\commentln}[1]{\sethlcolor{cyan}\hl{#1}}
@@ -68,7 +68,7 @@
     format=multiline_title,      % Puts title on line below label
     justification=centering      % Centers both lines
 }
-\newcommand\tablerefp[1]{Table~(\ref{#1})}
+\newcommand\tablerefp[1]{Table~\ref{#1}}
 \newcommand\fullref[1]{\autoref{#1} \nameref{#1}}
 
 % Model section

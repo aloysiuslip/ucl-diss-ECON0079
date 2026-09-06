@@ -4,69 +4,134 @@
 \subsection{Alternative data sources for location data}
 \label{ss:ext-alt-location}
 
+\subsection{Selection of parameters}
+\label{ss:param-select_xvalidate}
+
 \subsection{Network fixed effects}
 \label{ss:ext-nfe}
 
-Firm and time fixed effects in a panel setting may be considered insufficient,
-in the presence of local demand shocks, that might hit a firm in the local area
-or a wider network and simultaneously lift the recorded profit, and so \itx{GVA}
-of both a target and its peers simultaneously.
+Firm and time fixed effects in a network setting may be considered insufficient,
+A local demand shocks, which can be thought of as a \itx{correlated} shock
+$\mathbb E[\varepsilon_{i,t,g}\varepsilon_{i,t,h}]\neq 0$,
+where $(g,h)$ are some close memberes of a network or group within the interactions matrix $\mathbf W$.
+This is a phenomenon specific to peer effects analysis and differs from the usual omitted variable bias (OVB)
+that impacts all firms discussed in standard econometric theory;
+here, specific identity of a group or network exposes members to a certain third-party common shock,
+for which a researcher should introduce controls.
+\cite{Manski1993} labels these \itx{correlated effects}.
+Econometrically, a \itx{correlated} shock is some omitted variable that hits both error terms,
+such as a demand shock in the local area $v_{i,t}\to \varepsilon_{i,t},\varepsilon_{j,t}$.
+This would simultaneously lift the recorded profit and \itx{GVA},
+of both a target and its peers.
+Another instance could be an exogenous change in the mutual supply chain of a firm and its peer,
+which is most likely to occur when $i,j$ share an industry.
+A negative price cost shock, for instance, would lower the cost of inputs for both firms
+and be accounted for in the short run by increased GVA
+for the value of inputs indexed using macroeconomic data.
 \par
 It may be considered an arbitary choice what is a sufficiently `local' region
 to capture these effects and model them as a variable correlated with regressors.
-Fortunately, econometric theory through \cite{Bramoulle2009}, discusses the use of local network fixed effects
-which can be applied to the existing $\mathbf{W}$ weighting matrices.
-These require taking $(\mathbb I-\mathbf W)$ transformations of the entire reduced-form regression,
-for the existing applied weighting matrices $\mathbf W_g, \mathbf W_d\dots$.
-A corollary for so-called \itx{global} network fixed effects,
-which should be interpreted as choosing a large area spatial fixed effect
-$(\mathbb I-\mathbf W)$, which follows the assignment rule:
-\begin{equation*}
+Fortunately, econometric theory through \cite{Bramoulle2009},
+discusses the use of \itx{local} network fixed effects
+which can be applied to existing $\mathbf{W}$ weighting matrices.
+Network-fixed effect reduced-form regressions are estimated
+by taking $(\mathbb I-\mathbf W)$ transformations of all parameters:
+dependent variable, regressors, and instruments.
+In my analysis, this means the existing applied weighting matrices $\mathbf W_g, \mathbf W_d\dots$
+for static network and group approaches respectively.
+A corollary for \itx{global} network fixed effects
+is the use of a similar transformation $(\mathbb I - \mathbf V)$ which follows the assignment rule:
+\begin{align*}
     w_{ij}\in \mathbf{V} &=
     \begin{cases}
         0,             & \text{if } w_{ij,l} \neq 0, \exists l<k \\
-        \frac{1}{n_g}, & \text{else if } (i,j)\in g \\
+        \frac{1}{s_g}, & \text{else if } (i,j)\in g \\
         0,             & \text{otherwise}
     \end{cases}
-\end{equation*}
+\end{align*}
 %
-i.e. a `leave-one-in' group transformation. In this analysis, it is applied at the \itx{ttwa} level.
+This shares notable similarities with the group matrix $\mathbf W_g$:
+it is a `leave-on-in', average of peers group transformation, demeaned.
+For application to the group model, $\mathbf V$ and $\mathbf W_g$
+are near-identical, except for the use of $s_g$ instead of $s_{g-1}$
+as the denominator for $\mathbf V$, and a target's firm variable of interest
+is taken as part of the weighted average of its own peers.
+In extensions on section \ref{ss:data-distance},
+it is $n_g$ is calculated at the \itx{ttwa} level
+to align with all firms within the mathematical `network' of the set of
+distance-weighted firms.
 \par
 As briefly laid out in section \ref{s:data-location},
 identification holds through instruments $(\mathbb I-\mathbf W)\mathbf W^2x$
 on the endogenous $(\mathbb I-\mathbf W)\mathbf Wy$ regressor
 under certain conditions of $\mathbf W$.
-The formal test for this is linear independence of the $\mathbf I, \mathbf W, \mathbf W^2, \mathbf W^3$
+The formal test is linear independence of the $\mathbf I, \mathbf W, \mathbf W^2, \mathbf W^3$
 and the same limits to computational feasibility apply to this higher-order $(n\times n)$ set of matrices evaluation.
 Nevertheless, \cite{Bramoulle2009} suggests that more than $s_g\geq 3$ distinct group sizes
 assumed to be exogenous, or $s_d \geq 3$ network diameter
 should be sufficient conditions to the linear independence of the high-order matrices.
-Group network fixed effects overcome the `Reflection Problem' again via the instrument $(\mathbb I-\mathbf V)\mathbf W^2x$
+The equivalent argument applies for \itx{global} network fixed effects:
+they overcome the `Reflection Problem' via the instrument $(\mathbb I-\mathbf V)\mathbf W^2x$
 and its higher-order equivalents.
 
 \begin{align}
     \label{eq:ext-lnfe-reduced}
-    (\mathbb I-\mathbf W)y_{i,t} &= \gamma_t
+    (\mathbb I-\mathbf W)\mathbf y_{t} &= \gamma_t \boldsymbol\iota
                     + \beta_0
-                    + \beta_1 (\mathbb I-\mathbf W)k_{i,t}
-                    + \beta_2 (\mathbb I-\mathbf W)l_{i,t}
-                    + \beta_3 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}y_{i,t}
-                    + \beta_4 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}k_{j,t}
-                    + \beta_5 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}l_{j,t}
-                    + \varepsilon_{i,t}
-    \\
-    (\mathbb I-\mathbf V)y_{i,t} &= \gamma_t
+                    + \beta_1 (\mathbb I-\mathbf W)\mathbf W \mathbf k_{t}
+                    + \beta_2 (\mathbb I-\mathbf W)\mathbf W \mathbf l_{t}
+                    + \beta_3 (\mathbb I-\mathbf W)\mathbf W \mathbf y_{t}
+                    \\&\qquad \notag
+                    + \beta_4 (\mathbb I-\mathbf W)\mathbf W \mathbf k_{t}
+                    + \beta_5 (\mathbb I-\mathbf W)\mathbf W \mathbf l_{t}
+                    + (\mathbb I-\mathbf W) \boldsymbol \varepsilon_{t}
+    \\ \notag
+    0_{1\times 2} &= \mathbb E[
+        \varepsilon_{i,t}
+        \begin{pmatrix}
+            (\mathbb I-\mathbf W)\mathbf W \mathbf k_t &
+            (\mathbb I-\mathbf W)\mathbf W \mathbf l_t
+        \end{pmatrix}
+    ]
+    \\[0.9em]
+    \label{eq:ext-gnfe-reduced}
+    (\mathbb I-\mathbf V) \mathbf y_{t} &= \gamma_t \boldsymbol\iota
                     + \beta_0
-                    + \beta_1 (\mathbb I-\mathbf W)k_{i,t}
-                    + \beta_2 (\mathbb I-\mathbf W)l_{i,t}
-                    + \beta_3 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}y_{i,t}
-                    + \beta_4 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}k_{j,t}
-                    + \beta_5 (\mathbb I-\mathbf W)\sum_{j\neq i} w_{ij}l_{j,t}
-                    + \varepsilon_{i,t}
-    \\
+                    + \beta_1 (\mathbb I-\mathbf V)\mathbf W \mathbf k_{t}
+                    + \beta_2 (\mathbb I-\mathbf V)\mathbf W \mathbf l_{t}
+                    + \beta_3 (\mathbb I-\mathbf V)\mathbf W \mathbf y_{t}
+                    \\&\qquad \notag
+                    + \beta_4 (\mathbb I-\mathbf V)\mathbf W \mathbf k_{t}
+                    + \beta_5 (\mathbb I-\mathbf V)\mathbf W \mathbf l_{t}
+                    + (\mathbb I-\mathbf V) \boldsymbol \varepsilon_{t}
+    \\ \notag
+    0_{1\times 2} &= \mathbb E[
+        \varepsilon_{i,t}
+        \begin{pmatrix}
+            (\mathbb I-\mathbf V)\mathbf W \mathbf k_t &
+            (\mathbb I-\mathbf V)\mathbf W \mathbf l_t
+        \end{pmatrix}
+    ]
 \end{align}
-Nonetheless, I run the reduced-form \eqref{eq:ext-lnfe-reduced} and its global network fixed effects corollary
-as an extension, and find that all specifications run during the time scope of this analysis
-failed the Sargan-Hansen J test, which implies over-identifying restrictions on instruments
+Notice the absence of a firm fixed effect component $\alpha_i$ in equations
+\eqref{eq:ext-lnfe-reduced} and \eqref{eq:ext-gnfe-reduced}
+and the corresponding lack of need to first-difference the reduced form equation.
+This is due to the risk of applying of both firm and network fixed effects
+simultaneously to be multicollinear.
+I run the extension models
+\eqref{eq:ext-lnfe-reduced} and \eqref{eq:ext-gnfe-reduced}
+for the static group and nework weights $\mathbf W\in \mathbf W_{g1}, \mathbf W_{d1}$.
+Despite efforts with the above, I find that all specifications failed the Sargan-Hansen J test,
+which implies over-identifying restrictions on instruments
 such that the GMM-CuE estimator could not converge to the required zero moment conditions.
-This gives 
+Estimates also suffer from multicollinearity anyway, giving parameter coefficients
+which fall far out of the expected range of $|\delta_0|, |\xi_0|, |\zeta_0|<1$.
+Unstable estimates such as these should not be considered consistent
+so I do not report them here.
+\par
+Further analysis could investigate this issue more thoroughly
+and successfully implement these network fixed effects as the key to stripping out
+local demand effects or supply shocks.
+
+\subsection{Drivers of the strength of spillover}
+\label{ss:ext-agglomeration-neg-land}

@@ -1,0 +1,79 @@
+\newcommand{\hs}{\hspace{0.2cm}}
+\newcommand{\vs}{\addlinespace[0.8em]}
+\footnotesize{
+\begin{tabular}{lp{5.6cm}cl}
+    \toprule\toprule
+    \textbf{Structure}
+    & \textbf{Required condition}
+    & \textbf{Identified}
+    & \textbf{Instrument} \\
+    \midrule
+
+    \vs
+    \multicolumn{4}{l}{\itx{Group structure}} \\
+    \hline
+        \textbf{Proposition 2}
+        & $\xi_0-\delta_0\beta_1\neq0$ and $\zeta_0-\delta_0\beta_2\neq0 $
+        & 
+        &  \\
+
+        \hs 
+        Linear-in-Means\textsuperscript{a}
+        & Target is own peer
+        & \textsf{X}
+        & --- \\
+
+        \hs 
+        Leave-one-out\textsuperscript{b}
+        &   Target excluded from peer mean    \newline
+            Same group size
+        & \textsf{X}
+        & --- \\
+
+        \hs 
+        Varying group sizes\textsuperscript{c}
+        & Target excluded from peer mean      \newline
+            $\geq 2$ group sizes
+        & $\checkmark$
+        & $\mathbf W^2x$      \\
+
+    \vs
+    \multicolumn{4}{l}{\itx{Network structure}} \\
+        \hline
+        \textbf{Proposition 1}
+        &   $\mathbb I, \mathbf W, \mathbf W^2$ linearly independent    \newline
+            $\beta\theta_0+\xi_0\neq0$
+        & $\checkmark$
+        & $\mathbf W^2 x$ \\
+
+        \hs Intransitive triad
+        & $\exists i,j,k: \mathbf W_{ij}\neq0,\mathbf W_{jk}\neq0,\mathbf W_{ik}=0$
+        & $\checkmark$
+        & $\mathbf W^2 x$ \\
+
+        \hs Deep network
+        & $s_d\geq 2$ network diameter
+        & $\checkmark$
+        & $\mathbf W^2 x$ \\
+
+    \vs
+    \multicolumn{4}{l}{\itx{Adding correlated effects}} \\
+    \hline
+        \textbf{Proposition 4}
+        & $\mathbb I, \mathbf W, \mathbf W^2, \mathbf W^3$ linearly independent    \newline
+          $\xi_0-\delta_0\beta_1\neq0$ and $\zeta_0-\delta_0\beta_2\neq0 $
+        & $\checkmark$
+        & $(\mathbb I-\mathbf W)\mathbf W^2 x$ \\
+
+        \hs Group structure
+        & $s_g\geq 3$ group sizes
+        & $\checkmark$
+        & $(\mathbb I-\mathbf V)\mathbf W^2 x$ \\
+
+        \hs Network structure
+        & $s_d\geq 3$ network diameter
+        & $\checkmark$
+        & $(\mathbb I-\mathbf V)\mathbf W^2 x$ \\
+    \bottomrule
+\end{tabular}
+}
