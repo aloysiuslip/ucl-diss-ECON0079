@@ -14,7 +14,7 @@
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
 		"latex-workshop.message.error.show": false,
-        "latex-workshop.view.pdf.invert": 1,
+        "latex-workshop.view.pdf.invert": 0,
         
         "latex-workshop.latex.recipe.default": "pdflatex",
         "latex-workshop.latex.tools": [
@@ -55,12 +55,24 @@
                     "${workspaceFolder}/../../../utils/f_1_fix_authors.py",
                     "${file}"
                 ]
+            },
+            {
+                "name": "wordcount",
+                "command": "powershell",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "${workspaceFolder}/../../../utils/f_2_wordcount.ps1"
+                ]
             }
         ],
         "latex-workshop.latex.recipes": [
             {
-                "name": "authortex -> pdflatex -> bibtex -> pdflatex*2",
+                "name": "wordcount -> authortex -> pdflatex -> bibtex -> pdflatex*2",
                 "tools": [
+                    "wordcount",
                     "authortex",
                     "pdflatex",
                     "bibtex",

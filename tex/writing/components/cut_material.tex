@@ -1,3 +1,18 @@
+\section{2. Literature}
+
+The regressor can represent the co-movement of a group mean, such as all firms in a nearby
+area simultaneously acting in a similar, coordinated or non-coordinated, fashion,
+such as if all peer firms choose to simultaneously adopt a new technology available.
+The target member of the group or network may then observe peers
+and choose to mimic that behaviour.
+It may also represent a `disruptor' effect,
+such that one peer within the group instigates a new pattern of behaviour differing from all others,
+which is then emulated by the target firms which hold it as a peer.
+This is mechanically observed as a small shift to the peer group average
+and interpreted as a diluted effect on any one target member of the cohort.
+
+\section{5. Modelling}
+
 To estimate structural $\gamma$, I use 3 linear models, increasing in complexity,
 each resolving some of the endogeneity and identification issues of the last.
 Though the final model I present has the most accurate interpretation of parameters,
@@ -7,7 +22,7 @@ since they are computationally easier to calculate and
 assuming that relationships between these parameters are similar.
 Choosing all these parameters once, in a final model, would have required
 a large amount of computation via cross-validation,
-which this investigations limits on time and computation did not permit.
+which this investigation's limits on time and computation did not permit.
 
 \begin{table}[htbp]
     \begin{center}
@@ -132,7 +147,7 @@ Appendix I, which increases the order using a nested model approach,
 shows that for any specification order above an AR(1)
 coefficients become insignificant suggesting multicollinearity \todo{F-test on AR(2)}.
 I also confirm this via information criteria tests, \todo{which show}
-that lags beyond $t-2$ provide no new information for the variation on $ln(y_{i,t}$).
+that lags beyond $t-2$ provide no new information for the variation on $ln(y_{i,t})$.
 Noting that the regression coefficient on the $ln(gva_1)_{t-1}$ is significant at the 1\% level
 in my results, I can strongly infer that an AR(1) is the true structure.
 \par

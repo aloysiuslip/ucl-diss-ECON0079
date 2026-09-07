@@ -68,16 +68,6 @@ of units with peers such as individuals, not merely firms.
 The model firstly decomposes spillovers to a direct behavioural, or \itx{endogenous} effect,
 $y_{j}\to y_{i}$, where the outcome of interest among peers
 affects that of the target individual.
-The regressor can represent the co-movement of a group mean, such as all firms in a nearby
-area simultaneously acting in a similar, coordinated or non-coordinated, fashion,
-such as if all peer firms choose to simultaneously adopt a new technology available.
-The target member of the group or network may then observe peers
-and choose to mimic that behaviour.
-It may also represent a `disruptor' effect,
-such that one peer within the group instigates a new pattern of behaviour differing from all others,
-which is then emulated by the target firms which hold it as a peer.
-This is mechanically observed as a small shift to the peer group average
-and interpreted as a diluted effect on any one target member of the cohort.
 Robust applications of the Manski model demonstrate credible approaches to measuring the \itx{endogenous effect}.
 \cite{dustmann-damm2024:neighbourhoods} analyses movers to new neighbourhoods among individuals through
 the `Danish Dispersal Policy' of refugee arrivals (1986-1998).
@@ -86,9 +76,8 @@ These studies exploit quasi-randomness in the location assignment of individuals
 for robust identification. As discussed in section \ref{ss:data-location-limits},
 the dataset used for this analysis unfortunately offers no such granularity of features
 to identify movers, let alone evaluating the exogeneity of their colocation.
-Nevertheless, the use of firm data for analysis allows for the use of firm fixed effects
-and a more rich set dataset of firm characteristics to control for endogenous variation
-to a firm's location decision, which additionally tends to be reasonably sticky.
+The use of firm fixed effects and reasonable assumptions of location stickiness
+are employed to compensate for this risk of location endogeneity.
 \par
 Additionally, the \cite{Manski1993} model requires contextual or \itx{exogenous} effects,
 of which the variation of non-outcome of interest variables among peers
@@ -97,7 +86,7 @@ This brings sophistication to the nature of peer spillovers.
 A simplified model only allowing endogenous effects through the variable of interest, $y_j \to y_i$
 is nested within this structural model, but not identified due to the `Reflection Problem'
 and as described in this analysis in section \ref{ss:static-identification}.
-In this analysis' firm productivity model, the \itx{exgenous effect}
+In this analysis' firm productivity model, the \itx{exogenous effect}
 allows for an additional level of input factor capital and labour
 to induce higher target TFP, better management practices or
 more efficient combination of factor inputs, perhaps from observing
@@ -154,18 +143,7 @@ An immediate realistic fix for spatial peer effects, to exclude the target obser
 from calculation of the group mean $y_g$ is helpful as given in \cite{Moffitt2001}.
 This should be conceptualised less as a `neighbourhood effect', for which the target is still a contributor,
 but more as a collection of influencing peers. Nevertheless, this alone does not offer identification.
-\wraptable
-    {Spatial econometric identification rules for weighting matrix $\mathbf W$}
-    {./figures/2_tab_bdf_identification}
-    {
-        Adapted from \citepalt{Bramoulle2009} with notation
-        revised and omissions to improve relevance to this analysis.
-        (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
-        (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
-        (c) \citepalt{Lee2007}.
-        Structures under a \textbf{Proposition} header must follow the \textbf{Proposition}'s required conditions.
-    }
-
+\par
 The paper exploits many complex interaction structures summarised by the weighting matrix $\mathbf W$,
 the more complex $n$-dimensional matrix of interactions between firms
 rather than a simple average weight approach.
@@ -196,7 +174,18 @@ but with far larger blocks than $\mathbf W_g$.
 In section \ref{ss:data-distance}, this analysis uses Travel-to-Work-Areas (\itx{ttwa})
 to define the limits of a network, and spatial distance between two firms
 as the key to an interaction weight within a network.
-\par
+\wraptable
+    {Spatial econometric identification rules for weighting matrix $\mathbf W$}
+    {./figures/2_tab_bdf_identification}
+    {
+        Adapted from \citepalt{Bramoulle2009} with notation
+        revised and omissions to improve relevance to this analysis.
+        (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
+        (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
+        (c) \citepalt{Lee2007}.
+        Structures under a \textbf{Proposition} header must follow the \textbf{Proposition}'s required conditions.
+    }
+
 The identification rules from \cite{Bramoulle2009} are included in \tablerefp{tab:bdf_identification}.
 In short, once certain necessary conditions for the group and network structures are met,
 an additional spatial lag on the \itx{exogenous} regressors, $\mathbf W^2x$,
