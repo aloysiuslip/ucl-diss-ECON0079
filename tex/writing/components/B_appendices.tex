@@ -1,3 +1,128 @@
+\section{Fame data ingestion and cleaning}
+\label{app:data-cleaning}
+
+The following provides guidance for recreating the data cleaning procedure undertaken to produce these results.
+This analysis emphasises reproducibility
+as I establish a baseline scalable data science techniques and econometric methods in section \ref{s:data-location},
+and leave it for future analysis to carry out the more sophisticated extensions in section \ref{s:extensions}.
+All scripts are publicly available
+online\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079},
+written in Python and Jupyter notebooks.
+\par
+\itx{DuckDB} operates locally, meaning minimal lag from issuance to execution time
+provided the operating machine is sufficiently high-compute,
+and stores data in column vectors, which is a significant advantage
+to manipulating whole variables.
+Any SQL commands issued from the Python are compiled down to C,
+making execution for column transformation operations extremely fast,
+even for joining tables of several 100s of millions of rows\footnote{Explanatory
+numbers given in this section are rounded to 3 significant figures for ease},
+as is calculated in this analysis for target-peer spatial distances.
+I wrote database interaction commands using \itx{Ibis},
+an Apache-2.0 licensed Object-Relational Mapping (ORM) framework
+which allows SQL commands to be written natively in Python\footnote{\cite{TheIbisProjectAuthors2026}},
+minimising the likelihood of errors when issuing queries loops or changing variable names.
+This architecture choice is extremely well-suited for mass data econometric analysis
+and critical to solving the compute limitations of iterative large-$n$ dataset manipulations
+required to calculate the valid instruments identified in section \ref{ss:static-identification}.
+\par
+Raw data are distributed across a series of Excel files on balance sheet indicators,
+including time-invariant characteristics for each firm, bucketed into $a1\_ID$ and $a5\_misc$ files,
+and annual data published on a calendar-year basis,
+bucketed into \itx{a2\_key\_finance}, \itx{a3\_assets}, and \itx{a4\_profits} tables.
+\par
+I traversed the file structure to build a dictionary to the filepaths organised in their subfolders,
+which are named by the 2-digit industry SIC division,
+and batch-imported data belonging to the firms in that industry.
+Some industries have prodigious registered firms,
+such as SIC division 47 (Retail Trade, 1090 files)
+and 82 (Office administrative, office support and other business support activities,
+1065 files)\footnote{\cite{ons2026:sic}}.
+I imposed a batch limit of 200 for stable memory handling, splitting up these large industries,
+and used Python's asynchronous \itx{concurrent.futures} package
+to execute the ingestion of each batch, exploiting multithreaded processing.
+In total, 12,800 files were processed across the 88 available SIC divisions.
+Time-invariant firm characteristics were saved to a table named \itx{fixed},
+annual firm data to a table named \itx{yearly} within \itx{DuckDB}.
+\par
+All firm data are tagged with a \itx{registered\_number} property corresponding to a Companies House ID.
+I deduplicated 896,000 \itx{fixed} firm entries using a \itx{registered\_number} match,
+of which the vast majority were exact duplicate entries
+and the remainder had some mismatch of 1 or more firm characteristics,
+such as the listed company name, global operating owner,
+and in rare cases, location.
+Duplicate entries are an undesirable feature of the Fame dataset,
+worsened by Fame's construction from snapshots of reported firm data
+across timepoints, where resolution of conflicting \itx{fixed} data may be imperfect.
+Fame also contains data impute errors, meaning variations in names referring to the same entity.
+When duplicates occurred, I effectively randomly chose an entry to keep.
+A more robust analysis could devise further data science methods,
+such a deployment of an acceptable Levenshtein distance to resolve differing name entries,
+or separately treating firms with multiple listed addresses.
+Further data cleaning procedures are discussed in \cite{Irastorza-Fadrique2026}, notably these include
+avoiding double-counting of firms through both their parent company and subsidiaries,
+truncation of data to at earliest 2010 due to changes in reporting standards,
+and reclassification of firm SIC codes using NLP on firm business activity descriptions.
+\begin{figure}[b!]
+    \caption{Panel observation availability by year}
+    \label{fig:data-obvs-per-year}
+    \centering
+    \graphicspath{{../../descriptives/output/}}
+    \includegraphics[width=\textwidth]{fig_panel_obvs_by_year.png}
+    \caption{Distribution of years of data available per firm}
+    \label{fig:data-years-per-firm}
+    \centering
+    \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
+\end{figure}
+
+As the main analysis here only uses location data as the \itx{fixed} characteristic of analysis,
+due to its time constraints, and due to the low number of duplicates
+and other cleaning errors listed above relative to the size of the dataset,
+I treat those errors as random effects and deem the impact of the random selection strategy minimal.
+I similarly removed duplicate firm-year entries in the \itx{yearly} data,
+and merged the two tables based on ensuring every \itx{fixed} firm identity
+had a corresponding \itx{yearly} set of rows, and vice versa.
+For efficiency, I adopted a `max-merge' column strategy,
+which is effective for resolving entries which are zero and non-zero in conflicting duplicates.
+This however means that any two observations with conflicting non-zero values keep the large value.
+If it is random errors causing Fame to have these conflicting, duplicate values,
+this strategy has the potential to bias all financial data entries upwards,
+however this bias is unlikely to be correlated with any of this investigation's variables of interest.
+I further removed a small minority (<200) firm entries not based in the UK,
+which can be identified through their \itx{registered\_number} format.
+In total, deduplication reduced the number of firms from 9,280,000 to 8,220,000,
+and the number of panel observations from 44,900,000 to 42,900,000.
+
+\par
+I restrict the sample to observations with more than 10 employees,
+and drop any observation from the \itx{yearly} data missing \itx{renumeration\_employees} and \itx{ebitda}
+properties which are required to calculate firm GVA.
+This follows \cite{Irastorza-Fadrique2026}: low-employee firms, additionally more likely to be shell companies,
+are likely to mechanically yield an inaccurately high TFP-residual calculation.
+Doing this at the observation rather than firm, has the risk of inducing bias to the variables measured
+as there may remain firms in the sample straddling the employees threshold
+which endogenously have their observation years of low-employees excluded.
+First-differencing in panel regressions with this data provides some mitigation to this issue
+by providing a buffer of one year either side to excluded observations.
+Nevertheless, this analysis adopts the observation-level threshold strategy.
+This set of filters reduced the number of valid firms in this analysis to 152,000
+with 1,130,000 panel observations.
+\par
+Figure \ref{fig:data-obvs-per-year} shows the distribution of active firms across years,
+which follows expected trends from macroeconomic business population
+surveys\footnote{\cite{dbt2025:businesspop}}.
+We can note an observable dip after the 2016 Brexit referendum and during the COVID-19 pandemic.
+We can also observe that 2024 is an incomplete sample set as not all firms
+had submitted their financial accounts for that year,
+but this is treated as a random effect and no further firms are filtering as a result of this.
+\par
+The lifespan of a firm, and the corresponding number of \itx{yearly} observations within the dataset
+follows a geometric distribution as given in Figure \ref{fig:data-years-per-firm}.
+With each passing year, a firm has a binary survival-remain decision,
+with an increasing discrete probability of survival for older firms.
+
+% --- 
+
 \section{Data science behind the creation and calculation of the W interactions matrix}
 \label{app:data-w-transformations}
 
