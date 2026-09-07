@@ -433,16 +433,15 @@ I show a histogram of distances calculated between firms in Figure \ref{fig:hist
     \caption{Histogram of distances between any target-firm pairing}
     \label{fig:hist-distances-20km}
     \centering
-    \graphicspath{ {../../calculations/output/}}
-    \includegraphics[width=\textwidth]{histogram_distances_20km.png}
+    \graphicspath{ {../../descriptives/output/}}
+    \includegraphics[width=\textwidth]{fig_panel_distance_distr.png}
     \begin{tablenotes}
-        Plotted into bins of 100m distance measures. Using the \itx{d1} distance measure,
+        Plotted 0.1\% sample of one-to-one relational table of distance calculations, into bins of 100m.
+        Using the \itx{d1} distance measure,
         which is hard-bounded that no firm can have a firm-peer spillover relation past a \itx{ttwa} boundary,
-        truncated at 20km.
+        truncated at 5m.
         Colours indicate differing levels of data quality for addresses within Fame.
-        \\
-        \todo{This must be an old chart, I think we truncated at 5km in the end.
-        Also, to produce without colours as this adds confusion}
+        Frequency in millions of target-firm connections.
     \end{tablenotes}
 \end{figure}
 
