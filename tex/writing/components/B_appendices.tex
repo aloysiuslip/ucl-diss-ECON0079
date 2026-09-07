@@ -1,10 +1,10 @@
 \section{Fame data computational methods}
 \label{app:data-cleaning}
 
-The following provides guidance for recreating the data cleaning procedure undertaken to produce these results.
-This analysis emphasises reproducibility
-as I establish a baseline scalable data science techniques and econometric methods in section \ref{s:data-location},
-and leave it for future analysis to carry out the more sophisticated extensions in section \ref{s:extensions}.
+The following section provides detailed guidance for the data manipulation undertaken in this analysis.
+I emphasise reproducibility due to the discussion on \fullref{s:intro}:
+this analysis offers a substantive baseline with advanced data science techniques and econometric methods,
+on top of which I leave it for future analysis to carry out the more sophisticated extensions of section \ref{s:extensions}.
 All scripts are publicly available
 online\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079},
 written in Python and Jupyter notebooks.
@@ -76,6 +76,11 @@ and reclassification of firm SIC codes using NLP on firm business activity descr
     \label{fig:data-years-per-firm}
     \centering
     \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
+    \begin{tablenotes}
+        Fame panel sample downloaded from calendar years 2006 to 2024 inclusive.
+        Firms with zero years of data available filtered out.
+        Sample downloaded February 2025, resulting in incomplete reporting for 2024.
+    \end{tablenotes}
 \end{figure}
 
 As the main analysis here only uses location data as the \itx{fixed} characteristic of analysis,

@@ -1,8 +1,8 @@
-\section{Financial data}
+\section{Data analysis}
 
 \subsection{Fame}
 
-I have used data from Fame for this investigation.
+I use data from Fame for this investigation.
 Fame is a comprehensive database of UK firms with  balance sheet variables,
 which can be summed to useful aggregates
 for economic analysis: GVA, capital, and labour inputs.
@@ -14,52 +14,58 @@ of UK firms to their international counterparts.
 For this investigation, given the background discussion laid out,
 the UK dataset is sufficiently comprehensive and policy-relevant.
 \par
-Over 100 Gb of raw data were accessed and downloaded from Fame in February 2025
+Over 100 GB of raw data were accessed and downloaded from Fame in February 2025
 by Professor Lars Nesheim for \cite{Irastorza-Fadrique2026} and reused for this project.
-Raw data was ingested to \itx{DuckDB}, an open-source, MIT-licensed relational (SQL)
+Raw data were ingested to \itx{DuckDB}, an open-source, MIT-licensed relational (SQL)
 database architecture\footnote{\cite{Raasveldt2026}} optimised for high-compute variable manipulation.
-This is crucial for the applications of $(n\times n)$ Matrix transformations
+This is crucial for the applications of $(n\times n)$ matrix transformations
 to a variable $n$-length column vector, as I detail heavily for calculating peer weights
 and high-order transformations.
 \par
-Fame data has several limitations: impute errors means there are frequently
-duplicate firm and financial observation entries, sometimes conflicting.
-Fame has rich microdata observations with granular detail about each firm in the UK,
-but it is not designed for spatial analysis. 
-\par
-Following data cleaning procedures discussed in \cite{Irastorza-Fadrique2026},
-I removed duplicate entries to leave a single entry at random,
-limited observations to those with more than 10 employees,
-and observations with the required balance sheet properties, \itx{renumeration\_employees} and \itx{ebitda}
-required to calculate firm GVA.
-I detail the full ingestion and cleaning procedure in Appendix \ref{app:data-cleaning}.
-The resulting sample of observations comprises exactly
-152,379 firms and 1,128,490 panel observations.
-Each of these has features of the relevant annual economic data of GVA, capital, and labour,
-and 5 key location properties. The first set of these indicate membership of 3 spatial location groups:
-travel-to-work area (\itx{ttwa})\footnote{Travel-to-work area definitions from 2011 are still considered
+Every firm is tagged with raw, textual location properties.
+I construct a hierarchy of favourability to parse these, in order:
+\itx{latitude/longitude}, \itx{full address}, \itx{address} (split over multiple fields),
+and \itx{postcode} only.
+I additionally favour data listed for the firm's \itx{primary trading address}
+over its \itx{registered office address} (headquarters).
+When only postcode data was available, I matched postcodes
+to the ONS' postcode lookup database\footnote{\cite{ons2025:nspl}},
+yielding a decimal longitude-latitude value for the centre of its area.
+I compiled these heterogeneous features to 7 location identifier columns.
+The first set of these indicate membership of 3 spatial location groups:
+travel-to-work area (\itx{ttwa}) using the 2011
+definitions\footnote{Travel-to-work area definitions from 2011 are still considered
 the mostly reliable for current analytical research,
 due to the pollution in travel and working patterns resulting from the COVID-19 pandemic during the 2021 Census.
 Travel-to-work-area area coverages are mostly time-invariant; changes between 2001 and 2011
-were reasonably limited, \citep{OfficeforNationalStatistics2015}.},
+were reasonably limited, see: \cite{ons2015:ttwa}.},
 the first-half of a UK postcode (\itx{pc4}), or a full UK postcode (\itx{pc8}).
 The latter 2 are point distance decimals for longitude + latitude.
+\itx{longitude\_decimal}, \itx{latitude\_decimal},
+and 2 supporting columns indicating the data quality.
+\par
+The resulting time-invariant table has exactly 152,379 firms
+with unique Companies House \itx{registered\_number} identifiers.
 
 \subsection{Deriving panel aggregates}
 
 All financial data are deflated to real terms, using 2024 as the base year.
-I used macroeconomic data of the GDP deflator\footnote{\cite{ons2026:qna}} for all balance sheet variables,
-except for \itx{renumeration\_employees} for which,
-as income-related aggregates capturing household spending
-pattern\footnote{\cite{ons2026:cpih-technical}},
-I used CPIH\footnote{\cite{ons2026:cpih}}.
-All financial data are in thousands of GBP (£'000s);
-as I estimate log relationships exclusively, this has no effect on parameter interpretation.
+I use CPIH\footnote{\cite{ons2026:cpih}, CPIH is the ONS' preferred price index
+for household consumption \cite{ons2026:cpih-technical}} to deflate \itx{renumeration\_employees}
+and other income-related aggregates capturing household spending patterns.
+I use the GDP deflator\footnote{\cite{ons2026:qna}} for all other balance sheet variables.
+Financial data are in thousands of GBP (£'000s);
+as I estimate log relationships exclusively, this has no effect on regression coefficients.
+I compute these variables for the exactly 1,128,490 panel observations.
+Firms have a mean of 7 years of observations per firm.
+Further detail on the cleaning procedure and derivation of variables
+is available in Appendix \ref{app-ss:financial-data}.
 \par
-Labour input is taken from the number of employees reported on the FAME balance sheet per firm.
-This dataset, like all others, does not include hours worked per employee on a firm-level that would offer a more
-granular productivity (GVA per hour worked) measures. An estimation in this setting would likely have to impute the measure
-from industry aggregates, which would likely confound the true firm-level signal.
+Labour input is the number of employees reported on the FAME balance sheet per firm.
+This dataset does not include firm-level hours worked per employee that would offer
+granular productivity (GVA per hour worked) measures.
+An estimation in this setting would require imputing the measure from industry aggregates,
+which would likely confound the true firm-level signal.
 \par
 Capital is Fame's \itx{fixed\_total} variable, which represents the sum of tangibles, intangibles, and other investments
 within the balance sheet, namely an extremely comprehensive measure of the firm's fixed capital.
@@ -88,19 +94,14 @@ GVA is calculated as the sum of \itx{ebitda} and \itx{renumeration\_employees}.
 and \itx{pensions\_costs} in the balance sheet.
 \itx{ebitda} is in turn \itx{turnover} minus intermediate inputs and is
 given in the Fame balance sheet for the vast majority of panel observations
-in our dataset. It is also possible to reconstruct \itx{ebitda} via the sum of
-\itx{profit\_loss\_pretax}, \itx{interest\_paid}, and \itx{depreciation},
-providing an alternative measure of GVA.
-We can expect the difference between these two to be accounting differences\footnote{
-    An OLS regression between the two, discarding 5\% outliers, has a coefficient of 0.91 with a 0.000 p-value.
-    This means \itx{gva2} is slightly lower than \itx{gva1}, with that impact mostly driven by top-end outliers.
-}
-and additionally note that the alternate GVA measure also reduces panel observations from 1,085,520 to 618,588.
-For these reasons, I do not report TFP calculations with this second GVA measure
-which are regardless near-identical, though I resultingly refer to GVA throughout this paper as \itx{gva\_1}.
-\par
-To help guide the choice of capital and output (GVA) measure, I conduct a quick benchmark
-2-factor production estimation to help validate the choice of aggregates against known measurements.
+in our dataset. It is also possible to reconstruct \itx{ebitda}
+via other balance sheet metrics,
+but these sub-fields are actually available for fewer observations than \itx{ebitda}.
+
+\pagebreak
+To help guide the choice of aggregate measures and understand the observation structure,
+I conduct a benchmark 2-factor production estimation in panel structure
+to help validate the choice of aggregates against known measurements.
 \begin{align}
     \label{eqn:tfp2factor}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0
@@ -110,43 +111,25 @@ To help guide the choice of capital and output (GVA) measure, I conduct a quick 
 \end{align}
 This specification does not yield consistent estimates when estimated with OLS,
 according to the structural model I give in section \ref{ss:static-identification}.
-$u_{i,t}$ is a non-structural error-residual correlated with $k_{i,t}, l_{i,t}$.
-The estimation is a simple panel approach with time and fixed effects, and a constant.
-Regressors are given in log terms to approximate a structural production function similar
-to \eqref{eq:static-production-3-factor}.
-Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share, $\hat\beta_2$,
+$u_{i,t}$ is a non-structural error-residual correlated with $k_{i,t}$ and $l_{i,t}$.
+Nevertheless, it is a helpful exploration tool to observe if derived coefficients
+match macroeconomic estimates
+\wraptable
+    {Benchmark 2-factor TFP estimation}
+    {../../model/output/final/results_0_tfp_combined}
+    {}
+
+Coefficients derived in \tablerefp{tab:tfp_combined} give a labour income share, $\hat\beta_2$,
 exactly in line with ONS analysis of UK industry-level data
 over the same time period, particularly \itx{corporate gross labour share} which is constructed
-from a similar sample to the coverage in Fame\footnote{\cite{ons2024:labour-share-uk}}.
-% \begin{center}
-%     (\tablerefp{tab:tfp_fe})
-% \end{center}
-\begin{table}[hbtp]
-    \centering
-    \begin{threeparttable}
-        \caption{Baseline 2-factor TFP estimation: varying fixed effects}%
-        \label{tab:tfp_fe}
-        \input{../../model/output/results_0a_tfp_fe}
-    \end{threeparttable}
-    \\~\\
-    \vspace{1em}
-    \begin{threeparttable}
-        \caption{... varying parameter measures}
-        \label{tab:tfp_measures}
-        \input{../../model/output/results_0b_tfp_measure}
-        \begin{tablenotes}
-            All parameters reported with standard errors underneath.
-            Significant estimates against an $H_0: \beta=0$ are indicated
-            with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
-        \end{tablenotes}
-    \end{threeparttable}
-\end{table}
+from a similar sample to Fame\footnote{\cite{ons2024:labour-share-uk}}.
 \par
-As a demonstration, I include specifications which omit fixed effects.
-The capital share of income jumps on a specification on the omission of firm fixed effects,
-as all within-firm variation that we would model as the component $\alpha_i\in \varepsilon_{i,t}$,
-the regression attributes to capital instead, which is reasonably consistent
-in levels within a firm over time as it is a stock measure.
+I explore specifications which omit fixed effects.
+In Model (2.), the capital share of income jumps on the omission of firm fixed effects
+as all within-firm variation that we would decompose as $\alpha_i\in \varepsilon_{i,t}$
+is instead attributed to capital.
+This gives us some insight that in this panel setting,
+the measure of capital as a stock variable is reasonably consistent within a firm over time.
 \par
 When varying regressor measures, surprisingly,
 running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
@@ -154,3 +137,464 @@ almost entirely eliminates the capital share of income, or explanatory power of 
 Similar results are shown for a further decomposition of \itx{fixed\_total} to its asset components.
 I leave it for future analysis why this dataset yields this phenomenon and
 for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
+
+% # --- #
+
+\subsection{Financial and location data limitations}
+\label{ss:data-limitations}
+
+Following data cleaning procedures discussed in \cite{Irastorza-Fadrique2026},
+I removed duplicate entries, limited observations to those with more than 10 employees,
+and observations with the required balance sheet properties,
+\itx{renumeration\_employees} and \itx{ebitda} required to calculate firm GVA.
+\par
+Fame has rich microdata observations with granular detail about each firm in the UK,
+but it is not designed for spatial analysis without advanced data science techniques,
+improving even beyond the sophistication demonstrated here.
+There is some miscoding in Fame's location data.
+Despite it being my favoured \itx{amalgmated address} selection choice,
+Fame's native \itx{longitude} and \itx{latitude} data contained some errors,
+such as recording either one of those $0.000$ coordinates, swapping them,
+or placing them outside the UK.
+I employed several techniques to search for outliers.
+One instances is calculating the centre-point of all firms sharing a postcode
+and then filtering for firms further than a threshold:
+I evaluated that 1.8\% of all firms in the cleaned sample
+are more than 5km away from their postcode's centre-point.
+Due to the time and data processing constraints of this analysis,
+I dropped these firms and observations.
+\par
+Though I recorded the quality of location data,
+I undertake no further analysis using it as its incorporation.
+I discuss further uses in section \ref{ss:param-select-xvalidate}
+to control and investigate the effects of miscoded location data
+and heterogenous treatment effects.
+These requires complex data science and Machine Learning approaches,
+which I leave for future analysis.
+\par
+I amalgmate multisite firms to their primary trading address, as an assumption.
+In the dataset prepared for \cite{Irastorza-Fadrique2026},
+each firm is only tagged with their last-known registered address and primary trading address.
+Fame includes further trading addresses for multisite firms available for download through their data portal,
+however the only site-level datapoint provided is \itx{number\_of\_employees} per trading address,
+with sparse and inconsistent coverage\footnote{\cite{MoodysAnalytics2026}, platform accessed August 2026.}.
+This analysis simply takes financial aggregates listed for each firm
+and assumed it to be located at the listed primary trading address.
+There are clear flaws to this method: large retail firms, such as consumer retailer `Tesco',
+have several hundred listed trading addresses on Fame,
+and generate much less than the full amount of GVA
+at their listed primary trading location in `Welwyn Garden City'.
+Nevertheless, difficult algorithm allocation decisions,
+or the pursuit of more sophisticated data sources
+are required to address this issue,
+as discussed in section \ref{ss:ext-alt-location}.
+The amalgamation assumption provides ease of computation 
+while contributing to attenuation bias of the estimated spillover parameters
+due to imperfect peer assignment.
+\par
+Additionally, the location data that is available is time-invariant,
+a characteristic of the \itx{fixed} table, rather than updated on a yearly basis
+to reflect firm-movers.
+This is a reflection of using a comprehensive dataset of financial datapoints,
+that was not optimised for spatial analysis; instead Fame provides an in-built feature
+suggesting peers via balance sheet and industry similarity, which I ignore for this analysis.
+One interpretation of this analysis' use of these characteristics
+is that each firm is over the entire 20-year sample with no movers.
+This seems very unlikely: \fullref{ss:lit-neg} tells us to expect
+the endogenous location of firm movement and colocation
+to optimise for taking advantage of firm spillovers.
+\par
+Using the location characteristics as I do,
+as a noisy signal of the firm's true location, has 2 econometric consequences.
+Firstly, firm fixed effects in all spatial specifications become extremely important.
+For all movers within the sample period, an endogenous firm location decision
+can only be modelled as correlated with the spillover regressors of interest.
+This justifies my use of fixed effects over random effects throughout this analysis.
+Firm fixed effects are time invariant, and can additionally help to eliminate
+some of the endogeneity induced by movers who undertook their move
+just before the sample period, 2006-, to maximise their spillover effect.
+\par
+Secondly, I acknowledge some attenuation to the productivity spillover estimate.
+Incorrect location data due to any of the above-discussed issues
+causes the assignment of spatial peers to any target to be miscalculated,
+and vice versa.
+Peer firms who were close to the target firm during the firm-year observation
+who subsequently moved away within-sample will have an extreme distance recorded,
+and so be excluded from tagged address groups and truncated distance calculations.
+Peer firms who are recorded as close to the target firm as they subsequently moved to the location.
+This reduces down the strength of the spillover coefficient $\theta_0$ estimated.
+
+\subsection{Location group classification}
+\label{ss:data-w-groups}
+
+Throughout this analysis, I use terminology of a productivity spillover occurring
+from a group or average of \itx{peer} firms onto a \itx{target} firm.
+The influence of the vector of all firms $j$ on the vector of all firms $i$
+can be summarised in an $(n \times n)$ interactions matrix, $\mathbf W$.
+A weight $w_{ij}\in\mathbf W\neq 0$ implies a firm-to-firm interaction,
+namely some use of the peer firm's attributes in the regression to estimate the target firm's TFP.
+\par
+This interactions matrix is symmetric: any firm with a peer weight
+calculated by the distance between the two firms naturally is a peer in return
+with an identical distance and weight.
+Extensions to this analysis could devise asymmetric relations,
+for example, with bigger firms having more influence.
+The interactions relationship is irreflexive - no target can be a peer of itself.
+This means the diagonal elements of $w_{ii}\in \mathbf W=0$.
+I summarise the properties for $\mathbf W$ in Table \ref{tab:location-set-properties},
+with further discussion for $\mathbf W_g$ and $\mathbf W_d$ to follow.
+\begin{table}[htbp]
+    \centering
+    \begin{threeparttable}[c]
+        \caption{Weighting matrices $i,j$-relation properties}
+        \label{tab:location-set-properties}
+        \begin{tabular}{lccccc}
+            \toprule\toprule
+            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping & Blocks     \\
+            \midrule
+            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}  & $g$        \\
+            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark  & \itx{ttwa} \\
+            \bottomrule
+        \end{tabular}
+    \end{threeparttable}
+\end{table}
+
+% ---
+
+The definition of a group within $\mathbf W_g$ is intuitive:
+peers interact in a fixed limit of nearby firms,
+where each peer within the group is treated as homogenous, offering an equal weighted value,
+here $1/(s_g-1)$.
+The group matrix $\mathbf W_g$ is transitive: if firms A and B share a spatial group,
+\itx{ttwa}, \itx{pc4}, or \itx{pc8},
+then a firm C that is a peer of firm B must also be of firm A.
+Apart from its irreflexivity, $W_g$ is block diagonal.
+I construct initial weights by peers which share the spatial group \itx{pc8},
+so each firm has peers of all the firms in its postcode,
+each weighted with the reciprocal of the number of firms in the postcode (leaving-one-out).
+\par
+Formal rules for construction of the group matrix are summarised
+below\footnote{Adapted from \cite{Bramoulle2009}}.
+I illustrate an example $\mathbf W_{g^*}$, a $(7\times 7)$ set of interactions
+between firms which have group classifiers of size $s_1=4$ and $s_2=3$ only in Figure \ref{fig:static-groups-W}.
+
+\begin{align*}
+    w_{ij}\in \mathbf W_{g^*} &=
+        \begin{cases}
+            0,              & \text{if}         \ i=j           \\
+            \frac1{s_g-1},  & \text{else if}    \ (i,j)\in g    \\
+            0,              & \text{otherwise}
+        \end{cases}
+    \\
+    \mathbf \Gamma_{s_1} \in \mathbf W_{g^*}
+    &=
+    \{ i, j \in g \}, s_1: n_g
+    \\
+    \mathbf W_{g^*}
+    &=
+    \underset{(n\times n)}{
+        \begin{pmatrix}
+            \mathbf \Gamma_{s_1}    &   0                       &   \dots       \\
+            0                       &   \mathbf \Gamma_{s_2}    &   \dots       \\
+            \vdots                  &   \vdots                  &   \ddots
+        \end{pmatrix}
+    }
+\end{align*}
+
+\begin{figure}[hbtp]
+    \caption{Illustration of group matrix $\mathbf W_g$}
+    \label{fig:static-groups-W}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \mathbf{W}_{g^*}
+        \begin{pmatrix}
+            0           & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & 0           & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & \frac{1}{3} & 0           & \frac{1}{3} & 0           & 0           & 0           \\
+            \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0           & 0           & 0           \\
+            0           & 0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+            0           & 0           & 0           & 0           & \frac{1}{2} & 0           & \frac{1}{2} \\
+            0           & 0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} & 0           
+        \end{pmatrix}
+    \end{align*}
+    \begin{tablenotes}
+        Weighting matrix $\mathbf W$ illustration for a network of 7 interacting firms in a group \itx{pc8}.
+        Of these, firms 1-4 share their postcode, as do firms 5-7.
+    \end{tablenotes}
+\end{figure}
+
+I can extend this to more complicated set of group rules.
+I calculate non-overlapping group weights $\mathbf W_g$ to $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ at once,
+which represent the successive concentric rings of \itx{pc8} (core), \itx{pc4}, and \itx{ttwa}.
+The weighting rules for these multiple, non-overlapping groups is to zero the $i,j$ interaction in
+$W_{gk}$ if a prior matrix in the series, $W_{gl},\ l<k$ has a non-zero entry in that cell.
+I illustrate an example in Figure \ref{fig:static-groups-donut-matrices}.
+These matrices are orthogonal.
+\begin{align*}
+        w_{ij}\in \mathbf{W}_{gk} &=
+        \begin{cases}
+            0,             & \text{if } i=j \\
+            0,             & \text{if } w_{ij,l} \neq 0, \exists l<k \\
+            \frac{1}{s_g-1}, & \text{else if } (i,j)\in g \\
+            0,             & \text{otherwise}
+        \end{cases}
+\end{align*}
+
+\wraptable
+    {Summary statistics across location groups}
+    {./figures/3_tab_summary_w_groups}
+    {}
+\begin{figure}[hbtp]
+    \caption{Illustration of multiple, non-overlapping groups}
+    \label{fig:static-groups-donut-matrices}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \mathbf{W}_{g1:3^*}
+        &\sim
+        \begingroup
+        \setlength\arraycolsep{3.8pt}
+        \begin{bmatrix}
+            0 & \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+            \frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+        \end{bmatrix}
+        \begin{bmatrix}
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            0 & 0 & 0 & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4} & 0 & 0 & 0 \\
+            \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & \frac{1}{2} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0
+        \end{bmatrix}
+        \begin{bmatrix}
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            0 & 0 & 0 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0 \\
+            \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & 0 & 0 & 0
+        \end{bmatrix}
+        \endgroup
+    \end{align*}
+    \begin{tablenotes}
+        Non-overlapping group illustration for a network of 8 interacting firms in a \itx{ttwa}.
+        Of these, firms 1-5 share the first half of a postcode - are in a \itx{pc4} group, as are firms 6-8.
+        Within those, firms 1-3 share a full postcode, as do firms 7-8. Firms 4-6 are isolated in their \itx{pc8} groups.
+    \end{tablenotes}
+\end{figure}
+
+Firms have been labelled using their location features to symmetric, transitive,
+non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
+with the latter meaning two firm entries shared a latitude-longitude identifier
+to 5 decimal places.
+Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
+as the group identifier for initial 1-group models in Table \ref{tab:lmm-pc8}.
+This was mostly driven by full data availability, and the consistency of postcode definitions
+with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
+within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
+a move from the average number of peers from 3.1 to 2.9,
+and was a similar number of groups, with non-cohesive definitions.
+
+\subsection{Location distance calculations}
+\label{ss:data-distance}
+
+A network matrix is a more complex set of interactions where each individual $i$ has their own set
+of peers by whom they are influenced.
+In the general definition \citep{Bramoulle2009},
+the influence of each individual's peer set is still the simple `leave-one-out' average
+of their heterogenous peers, however, differing weights applied within the peer set are equally permissible.
+I use variants on the reciprocal of the spatial distance between the two firms
+to construct my weights in $\mathbf W_d$ in this analysis.
+\begin{align*}
+    w_{ij,d1} &= \frac1{d_{ij}}                \\
+    w_{ij,d2} &= \frac1{d_{ij}^2}            \\
+    w_{ij,d1} &= \exp(-\frac {d_{ij}}{1000})
+\end{align*}
+
+Distances are calculated as the Haversine distance
+between any 2 firms. This represents the straight-line, `as-the-crow-flies',
+fastest path between the longitude and latitude pairs given,
+which has a slight adjustment from a standard straight-line distance
+due to the (great-circle) curvature of the Earth, for which the effects are minimal
+due to the small distances calculated.
+I show a histogram of distances calculated between firms in Figure \ref{fig:hist-distances-20km}. 
+\begin{figure}[hbtp]
+    \caption{Histogram of distances between any target-firm pairing}
+    \label{fig:hist-distances-20km}
+    \centering
+    \graphicspath{ {../../calculations/output/}}
+    \includegraphics[width=\textwidth]{histogram_distances_20km.png}
+    \begin{tablenotes}
+        Plotted into bins of 100m distance measures. Using the \itx{d1} distance measure,
+        which is hard-bounded that no firm can have a firm-peer spillover relation past a \itx{ttwa} boundary,
+        truncated at 20km.
+        Colours indicate differing levels of data quality for addresses within Fame.
+        \\
+        \todo{This must be an old chart, I think we truncated at 5km in the end.
+        Also, to produce without colours as this adds confusion}
+    \end{tablenotes}
+\end{figure}
+
+To reduce computational complexity,
+I disregard any possible matches which don't share a Travel-to-Work-Areas (\itx{ttwa}).
+Not only are these firms more likely to be further apart,
+eliminating the need to calculate distances between, say,
+London and Glasgow,
+the \itx{ttwa} boundaries also a useful proxy for the functional boundaries
+of interacting economic agents, so it is a reasonable
+restriction to limit the peer effects of firms across those borders.
+Additionally, I disregard any spatial connection over a 5km limit,
+saving on memory and storage. The threshold provides a plausible limit
+for the practical boundaries of one firm's peer effects on another,
+aligning helpfully with when contributions to a weighted average aggregate
+start to become too infinitesimal to matter using a reciprocal function for weights.
+\par
+One final helpful property within the $\mathbf W_d$ matrix
+is the definition of a network itself.
+A network is the total set of individuals who have at least one interaction
+within the network:
+\begin{equation*}
+    j \in N_d\ \iff \mathbf W_{ij}\neq 0,\ \exists i \in N_d
+\end{equation*}
+There can exist several networks within a $\mathbf W$ interactions matrix,
+as certain individuals within a peer set may have these complex interactions,
+but all inside the set have nothing with those outside.
+Organising these networks in a $\mathbf W_d$ gives an outer block-diagonal structure,
+though with far larger blocks than $\mathbf W_g$.
+By disregarding all firm pairs which don't share a \itx{ttwa},
+I set the limits of a network to the \itx{ttwa} level.
+Networks offer further calculation opportunities for network fixed effects
+as discussed in section \ref{ss:ext-nfe}.
+\par
+$\mathbf W_d$ is non-transitive.
+Firm B, a peer of firm A within its 5km radius, can clearly have its own peers
+that are within its own 5km radius that are beyond that radius for firm A.
+This matrix resembles a sparse matrix with a `thick' diagonal,
+rather than a matrix with distinct large blocks.
+I illustrate a network matrix using real sampled data
+from the cleaned dataset in Figure \ref{fig:static-network-4x5-Wd}.
+\begin{figure}[hbtp]
+    \caption{Illustration of distance-weighted network matrix $\mathbf W_d$}
+    \label{fig:static-network-4x5-Wd}
+    \centering
+    \par\noindent
+    \begin{align*}
+        \mathbf W_{d^*}
+        &=
+        \begin{bmatrix}
+            0 & 0.42 & 0.29 & 0.28 & 0 & 0 & 0 & 0 & 0 \\
+            0.31 & 0 & 0.38 & 0.32 & 0 & 0 & 0 & 0 & 0 \\
+            0.09 & 0.17 & 0 & 0.74 & 0 & 0 & 0 & 0 & 0 \\
+            0.09 & 0.14 & 0.76 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 0.36 & 0.27 & 0.36 & 0.27 \\
+            0 & 0 & 0 & 0 & 0.02 & 0 & 0.02 & 0.96 & 0.02 \\
+            0 & 0 & 0 & 0 & 0.24 & 0.38 & 0 & 0.38 & 0 \\
+            0 & 0 & 0 & 0 & 0.02 & 0.96 & 0.02 & 0 & 0.02 \\
+            0 & 0 & 0 & 0 & 0.24 & 0.38 & 0 & 0.38 & 0 \\
+        \end{bmatrix}
+    \end{align*}
+    \begin{tablenotes}
+        Illustrative $9\times 9$ $\mathbf W$ network structure
+        generated by taking a sample from the cleaned Fame data
+        of a random block of 4 firms sharing a \itx{ttwa},
+        and a random block of 5 firms.
+        True $\mathbf W_d$ matrices have \itx{ttwa} have much larger blocks
+        within the block diagonal structure.
+        Weights use the \itx{d1} algorithm,
+        which is the reciprocal of \itx{distance\_meters} row-normalised.
+        Values rounded to 2 decimal places.
+    \end{tablenotes}
+\end{figure}
+
+To calculate $\mathbf W_d$, I store distances $d_{ij}$ in a one-to-one relational table,
+and compile rows on an efficient as-needed for calculations.
+The distance table has 734 million target-peer pairs;
+paradoxically, this implies both an incredibly
+rich, high-identification, interactions table due to a mean of 4,820 peers per target firm
+and also that the $\mathbf W_d$ matrix is mostly (over 96\%) sparse.
+The \itx{ttwa} and 5km boundaries are ultimately an arbitrary choice;
+stricter restrictions to create networks only within \itx{pc8} boundaries
+would have resulted in a $\mathbf W_d$ matrix that is 99.8\% sparse.
+While these could be considered reasonable restrictions,
+they matter a lot to the econometrics as firms disqualified as peers are not merely
+excluded from the weighted average calculations,
+but considered valid candidates for instruments, as they are non-transitive peers-of-peers.
+Errors in the specification of this parameter could lead to Incorrect
+specification of the peer group of the target firm.
+I discuss in section \ref{ss:param-select-xvalidate} how the most appropriate approach
+would be to cross-validate these non-linear parameter selections
+in a choice regression specification, minimising mean-squared-error (or adjusted R$^2$).
+
+\subsection{Higher-order $\mathbf W$ transformations}
+\label{ss:data-matrix-weights}
+
+Intuitively, I take the product of these weighting matrices $\mathbf W$ to the aggregate variables vectors
+\itx{gva1}, capital \itx{total\_assets}, and labour \itx{employees}.
+As will be shown in \fullref{s:models-static}, the procedure to generate valid instrumental variables
+also requires me to apply multiples of this transformation matrix,
+exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group matrices,
+$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}, \mathbf W_{g3}$ and so on to the aggregates.
+\par
+I calculate these for my 3 aggregate variable vectors of interest.
+As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
+or columns of a database, to be calculated and generated.
+Of course, these column vectors each contain a stacked firm ($i$)-year ($t$)
+observation, giving an additional matrix of over 1 million entries.
+\par
+As reviewed in \ref{ss:lit-peer-effects-metrics}, the key condition
+for discovery of valid instruments in this peer effects context is the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$.
+With the additional step of application of network fixed effects (section \ref{eq:ext-lnfe-reduced}),
+this is additionally evaluated with $\mathbf W^3$.
+I can trivially say this is true, meeting the alternative sufficient conditions in \ref{tab:bdf_identification}
+of $\geq 3$ group sizes for the group $\mathbf W$ matrices.
+\todo{Histogram of group sizes?}
+\par
+My distance-decay weights, $\mathbf W_{d1}, \mathbf W_{d2}, \mathbf W_{d3}$
+meet the strong alternative $s_d\geq 3$ condition, where $s_d$ is the \itx{diameter} of the network,
+the maximal number of links connecting any target $i$ with another firm through a series of peers $j, k, \dots$.
+In the analysis of this set of firms with distance radius limits,
+the \itx{diameter} is large, potentially spanning the full spatial diameter of a \itx{ttwa}.
+It is this mechanism design provides another justification, alongside computation,
+for limiting the max length of a target-firm peer relation to 5km:
+it vastly increases the probability of `overlapping groups', i.e. a high diameter network within a \itx{ttwa}.
+The overlapping group network structure lends itself nicely to illustrations.
+Figure \ref{fig:map-nolg-manc} selects a random firm $i$ from my sample,
+which happens to be in Stockport, Greater Manchester, and draws the distances used to calculate metric $d1$
+between this target and its peers. In typical network diagram fashion, a network with a considerable \itx{diameter}
+is created by taking a subset of $i$'s peers, then successively a set of their peers, then successively some of those
+and so on. 4 iterations in this diagram fails to clearly hit the \itx{ittwa} boundary,
+on the south side, with more argument for this behaviour on the north side
+where peer nodes randomly selected may be starting to bunch at an `invisible' border of the \itx{ttwa} boundary.
+
+\begin{figure}[hbtp]
+    \caption{Illustration (2) of overlapping groups from a target firm to its whole network through successive peers}
+    \label{fig:map-nolg-manc}
+    \centering
+    \graphicspath{ {../../calculations/output/}}
+    \includegraphics[width=\textwidth]{distance_peers_nolg3.png}
+    \begin{tablenotes}
+        (blue pin): target firm $i$ with a full set of its (blue dot) peers $j$,
+        distances $d_1$ metric drawn in.
+        \newline
+        (dark red pins): sample (limit 5) of $j$ peers, then calculated as their own targets
+        \newline
+        (red pins): sample (limit 5) of $k$ peers of firms $j$, some of which are also a peer of $i$.
+        \newline
+        (light red pins): sample (limit 5) of $m$ peers of firms $k$, few of which are also a peer of $i$.
+        \newline
+        (light red dots): set of $n$ peers of firms $m$, few of these are peers of $i,j$,
+        probabilistically creating a network diameter of $s_d\geq 3$.
+        Plotting software from \cite{Folium2012}. Map tiles from \cite{CARTO2026}.
+    \end{tablenotes}
+\end{figure}

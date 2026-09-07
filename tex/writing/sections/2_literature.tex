@@ -148,34 +148,16 @@ Nevertheless, this is still insufficient to offer identification.
 \par
 The paper subsequently explores many complex interaction structures summarised by the weighting matrix $\mathbf W$,
 the $n$-dimensional interactions matrix between firms.
-In short, it finds that properties of varying group sizes ($s_g$) and network diameters ($s_d$)
-are key to discovering valid spatial lag instruments.
-Fortunately, these complex structures resemble realistic interactions common to empirical data,
+I discuss and illustrate structures of $\mathbf W$ in detail in section \ref{ss:data-w-groups}.
+The structures of $\mathbf W$ are key to identification.
+The contributions from this paper are, in short, that complex $\mathbf W$ matrices which vary group sizes ($s_g$)
+and network diameters ($s_d$) are key to discovering valid spatial lag instruments.
+Fortunately, these structures resemble realistic interactions common to empirical data,
 and are applicable to this analysis' pattern and layout of firm interactions.
 We should note in application that this strategy
 continues to assume exogenous assignment of spatial assignments
 and so target-peer interactions.
-The definition of group is intuitive: peers interact in a fixed limit of nearby firms,
-where each peer within the group is treated as homogenous, offering an equal weighted value,
-here $1/(s_g-1)$.
-A network is a more complex set of interactions where each individual $i$ has their own set
-of peers by whom they are influenced. \cite{Bramoulle2009} tends to assume
-that the influence of each individual's peer set is still the simple `leave-on-out' average
-of their heterogenous peers, but differing weights applied within the peer set
-are also equivalently permissible, as I apply in this analysis in section \ref{ss:model-dd}.
-A network is then the total set of individuals who have at least one interaction
-within the network:
-\begin{equation*}
-    j \in N_d\ \iff \mathbf W_{ij}\neq 0,\ \exists i \in N_d
-\end{equation*}
-There can exist several networks within a $\mathbf W$ interactions matrix,
-as certain individuals within a peer set may have these complex interactions,
-but all inside the set have nothing with those outside.
-Organising these networks in a $\mathbf W_d$ gives an outer block-diagonal structure,
-but with far larger blocks than $\mathbf W_g$.
-In section \ref{ss:data-distance}, this analysis uses Travel-to-Work-Areas (\itx{ttwa})
-to define the limits of a network, and spatial distance between two firms
-as the key to an interaction weight within a network.
+
 \wraptable
     {Spatial econometric identification rules for weighting matrix $\mathbf W$}
     {./figures/2_tab_bdf_identification}
@@ -191,8 +173,8 @@ as the key to an interaction weight within a network.
         the vector of both of them.
     }
 
-The identification rules from \cite{Bramoulle2009} are included in \tablerefp{tab:bdf_identification}.
-In short, once certain necessary conditions for the group and network structures are met,
+The identification rules from \cite{Bramoulle2009} are summarised in \tablerefp{tab:bdf_identification}.
+Critically, once certain necessary conditions for the group and network structures are met,
 an additional spatial lag on the \itx{exogenous} regressors, $\mathbf W^2x$,
 tends to be a valid instrument.
 This analysis uses \tablerefp{tab:bdf_identification}'s approaches to instruments

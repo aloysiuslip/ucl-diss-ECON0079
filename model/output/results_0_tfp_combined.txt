@@ -1,0 +1,270 @@
+Model 'gva_ft': 
+Model Parameters:
+Y: gva
+X: ['total_assets', 'employees']
+to_log: ['Y', 'X', 'gva', 'total_assets', 'employees']
+fe: ['i', 't']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.3313
+Estimator:                   PanelOLS   R-squared (Between):              0.7897
+No. Observations:             1045164   R-squared (Within):               0.3453
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.7912
+Time:                        00:52:11   Log-likelihood                -5.761e+05
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                    2.24e+05
+Entities:                      140938   P-value                           0.0000
+Avg Obs:                       7.4158   Distribution:                F(2,904206)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):          2.596e+04
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:                F(2,904206)
+Avg Obs:                    5.501e+04                                           
+Min Obs:                    2.447e+04                                           
+Max Obs:                    6.522e+04                                           
+                                                                                
+                                Parameter Estimates                                
+===================================================================================
+                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------
+const               2.9947     0.0365     82.075     0.0000      2.9232      3.0663
+ln_total_assets     0.2864     0.0049     58.427     0.0000      0.2768      0.2960
+ln_employees        0.6169     0.0047     131.20     0.0000      0.6077      0.6261
+===================================================================================
+
+F-test for Poolability: 10.875
+P-value: 0.0000
+Distribution: F(140955,904206)
+
+Included effects: Entity, Time
+
+=======================================================================================
+
+
+Model 'gva_f': 
+Model Parameters:
+Y: gva
+X: ['total_assets', 'employees']
+to_log: ['Y', 'X', 'gva', 'total_assets', 'employees']
+fe: ['i']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.3453
+Estimator:                   PanelOLS   R-squared (Between):              0.7883
+No. Observations:             1045164   R-squared (Within):               0.3453
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.7900
+Time:                        00:52:19   Log-likelihood                 -5.77e+05
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                   2.385e+05
+Entities:                      140938   P-value                           0.0000
+Avg Obs:                       7.4158   Distribution:                F(2,904224)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):          3.431e+04
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:                F(2,904224)
+Avg Obs:                    5.501e+04                                           
+Min Obs:                    2.447e+04                                           
+Max Obs:                    6.522e+04                                           
+                                                                                
+                                Parameter Estimates                                
+===================================================================================
+                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------
+const               3.0364     0.0310     98.060     0.0000      2.9757      3.0970
+ln_total_assets     0.2836     0.0043     65.493     0.0000      0.2751      0.2921
+ln_employees        0.6135     0.0044     140.29     0.0000      0.6049      0.6220
+===================================================================================
+
+F-test for Poolability: 10.847
+P-value: 0.0000
+Distribution: F(140937,904224)
+
+Included effects: Entity
+
+=======================================================================================
+
+
+Model 'gva_t': 
+Model Parameters:
+Y: gva
+X: ['total_assets', 'employees']
+to_log: ['Y', 'X', 'gva', 'total_assets', 'employees']
+fe: ['t']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.8094
+Estimator:                   PanelOLS   R-squared (Between):              0.8104
+No. Observations:             1045164   R-squared (Within):               0.3316
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.8096
+Time:                        00:52:27   Log-likelihood                -1.094e+06
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                   2.219e+06
+Entities:                      140938   P-value                           0.0000
+Avg Obs:                       7.4158   Distribution:               F(2,1045143)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):          3.349e+05
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:               F(2,1045143)
+Avg Obs:                    5.501e+04                                           
+Min Obs:                    2.447e+04                                           
+Max Obs:                    6.522e+04                                           
+                                                                                
+                                Parameter Estimates                                
+===================================================================================
+                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------
+const               1.9702     0.0100     197.04     0.0000      1.9506      1.9898
+ln_total_assets     0.4213     0.0018     239.12     0.0000      0.4178      0.4247
+ln_employees        0.5615     0.0022     251.21     0.0000      0.5571      0.5659
+===================================================================================
+
+F-test for Poolability: 64.318
+P-value: 0.0000
+Distribution: F(18,1045143)
+
+Included effects: Time
+
+=======================================================================================
+
+
+Model 'gva_n': 
+Model Parameters:
+Y: gva
+X: ['total_assets', 'employees']
+to_log: ['Y', 'X', 'gva', 'total_assets', 'employees']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.8096
+Estimator:                   PanelOLS   R-squared (Between):              0.8104
+No. Observations:             1045164   R-squared (Within):               0.3316
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.8096
+Time:                        00:52:33   Log-likelihood                -1.094e+06
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                   2.222e+06
+Entities:                      140938   P-value                           0.0000
+Avg Obs:                       7.4158   Distribution:               F(2,1045161)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):          3.361e+05
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:               F(2,1045161)
+Avg Obs:                    5.501e+04                                           
+Min Obs:                    2.447e+04                                           
+Max Obs:                    6.522e+04                                           
+                                                                                
+                                Parameter Estimates                                
+===================================================================================
+                 Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------
+const               1.9726     0.0100     197.69     0.0000      1.9530      1.9921
+ln_total_assets     0.4212     0.0018     239.49     0.0000      0.4177      0.4246
+ln_employees        0.5612     0.0022     251.27     0.0000      0.5568      0.5655
+===================================================================================
+
+
+=======================================================================================
+
+
+Model 'k1': 
+Model Parameters:
+Y: gva
+X: ['fixed_total', 'employees']
+to_log: ['Y', 'X', 'gva', 'fixed_total', 'employees']
+fe: ['i', 't']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.2830
+Estimator:                   PanelOLS   R-squared (Between):              0.6597
+No. Observations:             1006904   R-squared (Within):               0.2976
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.6751
+Time:                        00:54:34   Log-likelihood                 -5.75e+05
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                   1.719e+05
+Entities:                      135883   P-value                           0.0000
+Avg Obs:                       7.4101   Distribution:                F(2,871001)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):          2.055e+04
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:                F(2,871001)
+Avg Obs:                    5.299e+04                                           
+Min Obs:                    2.334e+04                                           
+Max Obs:                    6.284e+04                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+const              4.7513     0.0185     256.23     0.0000      4.7149      4.7876
+ln_fixed_total     0.0651     0.0015     42.406     0.0000      0.0621      0.0681
+ln_employees       0.7197     0.0044     164.04     0.0000      0.7111      0.7283
+==================================================================================
+
+F-test for Poolability: 19.209
+P-value: 0.0000
+Distribution: F(135900,871001)
+
+Included effects: Entity, Time
+
+=======================================================================================
+
+
+Model 'k2': 
+Model Parameters:
+Y: gva
+X: ['tangibles', 'intangibles', 'investments_other', 'employees']
+to_log: ['Y', 'X', 'gva', 'tangibles', 'intangibles', 'investments_other', 'employees']
+fe: ['i', 't']
+description: 
+include: True
+
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                ln_gva   R-squared:                        0.2699
+Estimator:                   PanelOLS   R-squared (Between):              0.7094
+No. Observations:              152444   R-squared (Within):               0.2813
+Date:                Mon, Aug 31 2026   R-squared (Overall):              0.7403
+Time:                        00:54:37   Log-likelihood                -8.128e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                   1.122e+04
+Entities:                       31027   P-value                           0.0000
+Avg Obs:                       4.9133   Distribution:                F(4,121395)
+Min Obs:                       1.0000                                           
+Max Obs:                       19.000   F-statistic (robust):             1024.7
+                                        P-value                           0.0000
+Time periods:                      19   Distribution:                F(4,121395)
+Avg Obs:                       8023.4                                           
+Min Obs:                       3625.0                                           
+Max Obs:                    1.188e+04                                           
+                                                                                
+                                  Parameter Estimates                                   
+========================================================================================
+                      Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------------
+const                    5.2679     0.0696     75.696     0.0000      5.1315      5.4043
+ln_tangibles             0.0897     0.0060     15.082     0.0000      0.0781      0.1014
+ln_intangibles           0.0248     0.0022     11.387     0.0000      0.0205      0.0290
+ln_investments_other     0.0066     0.0014     4.8062     0.0000      0.0039      0.0093
+ln_employees             0.6283     0.0149     42.286     0.0000      0.5991      0.6574
+========================================================================================
+
+F-test for Poolability: 11.472
+P-value: 0.0000
+Distribution: F(31044,121395)
+
+Included effects: Entity, Time
+
+=======================================================================================

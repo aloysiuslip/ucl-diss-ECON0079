@@ -148,6 +148,10 @@
                 "DuckDB",
                 "microdata",
 
+                // Data
+                "CPIH",
+                "GVA",
+
                 // # Names
                 "Marshallian",
                 "Nesheim"
