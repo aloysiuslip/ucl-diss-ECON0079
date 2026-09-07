@@ -291,8 +291,49 @@ and was a similar number of groups, with non-cohesive definitions.
     {./figures/3_tab_summary_w_groups}
     {}
 
-\subsection{\todo{Location distance calculations}}
+\subsection{Location distance calculations}
 \label{ss:data-distance}
+
+Distances are calculated as the Haversine distance
+between any 2 firms. This represents the straight-line, `as-the-crow-flies',
+fastest path between the longitude and latitude pairs given,
+which has a slight adjustment from a standard straight-line distance
+due to the (great-circle) curvature of the Earth, for which the effects are minimal
+due to the small distances calculated.
+\par
+To reduce computational complexity,
+I disregard any possible matches which don't share a \itx{ttwa}.
+Not only are these firms more likely to be further apart,
+eliminating the need to calculate distances between, say,
+London and Glasgow,
+the \itx{ttwa} boundaries also a useful proxy for the functional boundaries
+of interacting economic agents, so it is a reasonable
+restriction to limit the peer effects of firms across those borders.
+In the terminology of \cite{Bramoulle2009},
+this means the $\mathbf W_d$ matrix is composed of several separate `network'
+blocks for each \itx{ttwa}.
+Additionally, I disregard any spatial connection over a 5km limit,
+saving on memory and storage. The threshold provides a plausible limit
+for the practical boundaries of one firm's peer effects on another,
+aligning helpfully with when contributions to a weighted average aggregate
+start to become too infinitesimal to matter using a reciprocal function for weights.
+\par
+Distances are stored in a one-to-one relational table, resulting in 734 million target-peer pairs.
+Paradoxically, this implies both an incredibly
+rich, high-identification, interactions table due to a mean of 4,820 peers per target firm
+and also that the $\mathbf W_d$ matrix is mostly (over 96\%) sparse.
+The \itx{ttwa} and 5km boundaries are ultimately an arbitrary choice;
+stricter restrictions to create networks only within \itx{pc8} boundaries
+would have resulted in a $\mathbf W_d$ matrix that is 99.8\% sparse.
+While these could be considered reasonable restrictions,
+they matter a lot to the econometrics as firms disqualified as peers are not merely
+excluded from the weighted average calculations,
+but considered valid candidates for instruments, as they are non-transitive peers-of-peers.
+Errors in the specification of this parameter could lead to Incorrect
+specification of the peer group of the target firm.
+I discuss in section \label{ss:param-select-xvalidate} how the most appropriate approach
+would be to cross-validate these non-linear parameter selections
+in a choice regression specification, minimising mean-squared-error (or adjusted R$^2$).
 
 \begin{figure}[hbtp]
     \caption{Histogram of distances between any target-firm pairing}
@@ -359,65 +400,6 @@ As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compou
 or columns of a database, to be calculated and generated.
 Of course, these column vectors each contain a stacked firm ($i$)-year ($t$)
 observation, giving an additional matrix of over 1 million entries.
-
-Computation of a matrix product, including taking higher indices,
-of the interactions between 1,520,000 firms is not computationally difficult,
-especially with sophisticated algorithms to handle $\mathbf W$'s block diagonal structure.
-However, storing the calculation in temporary memory is beyond
-the capacity of any standard machine available as a research tool.
-\par
-Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix separately,
-but rather iteratively applies the last pre-multiplied matrix $(n\times n)$ to the aggregate variable $(n\times 1)$.
-This allows repeated use of the transformation matrices $\mathbf W_g1, \mathbf W_d1, \dots$
-without having to compute a new transformation matrix $\mathbf W^2\dots$.
-Additionally, the `native' matrices $\mathbf W$ are easier to apply as transformations
-as their weight values can be computed on-demand using the group-network structure procedures,
-whereas each entry of an entirely new matrix $\mathbf W^2$ would have to be stored in its own table.
-\par
-Using memory-efficient \itx{DuckDB}, I designed the following procedure:
-\begin{enumerate}
-
-    \item Establish a set of transforms that could be applied many-to-many to a set of vectors.
-    \begin{description}
-        \item[Ex 1:] $\{ \text{variables}: y,k,l, \text{transforms}: g1, g2, g3 \}$
-        \item[Ex 2:] $\{ \text{variables}: wg1\_k, wg1\_l, \text{transforms}: g1 \}$
-    \end{description}
-
-    \item Parse this many-to-many relation to a one-to-one relation,
-            that maps onto the new column vector post-transform.
-            This requires a function with a consistent set of rules to apply
-            to a transformation-vector combination. Map each entry in the one-to-one relation
-            to a `depth' level, corresponding to number of new vectors
-            that need to be created first before the right vector exists
-            to apply the latest transformation.
-    \begin{description}
-\footnotesize{
-\begin{lstlisting}
-Depth 1 (15): ['y -> wg1_y', 'y -> wg2_y', 'y -> wg3_y', ...]
-Depth 2 (24): ['wg1_k -> w2g1_k', 'wg1_k -> wg2wg1_k', ...]
-Depth 3 (10): ['w2g1_k -> w3g1_k', 'w2g1_l -> w3g1_l', ...]
-Depth 4 (10): ['w3g1_k -> w4g1_k', 'w3g1_l -> w4g1_l', ...]
-Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
-\end{lstlisting}
-}
-    \item []~
-    \end{description}
-
-    \item Execute the transformations at each depth level in parallel,
-            calculating the table of vectors after each depth
-            as an input to the new depth set of transformations.
-    \begin{description}
-        \item[Group $\mathbf W_g$:] sum the target vector over $i$ firms in the panel database,
-            adopting a `leave-one-out' approach as necessary by subtracting the current row.
-            Row-normalise by counting the summed rows and taking it as the quotient denominator.
-        \item[Group $\mathbf W_d$:] Pre-calculate the distance transformation measures $d_1, d_2, d_3$
-            on the distance table and join the panel table to it twice:
-            once for the target $firm_i$ and once for the peer $firm_j$.
-            Take the specified weight column for the transformation (ex: $d_1$)
-            and multiply it with the specified variable vector.
-            Row-normalise by summing the transformed-distance (weight) column and using as a denominator.
-    \end{description}
-\end{enumerate}
 
 \subsection{Evaluating the linear independence of $\mathbf W$ matrices}
 % Could fold this into previous sections

@@ -53,8 +53,9 @@ to develop a model of peer effects for the productivity spillover between firms.
 In sections 3 and 4, I discuss the handling of data from Fame,
 a database of publicly-available, balance-sheet data from UK companies,
 unified and designed to be comprehensive for research.
-The cleaned Fame dataset provides 100,000's of firms' data.
-This is a blessing for deriving precise econometric estimates,
+The cleaned Fame dataset provides more than 100,000 firms' data
+across many years.
+This is extremely useful for deriving precise econometric estimates,
 but a significant data science challenge to compute
 and manage the memory for vectors of millions of observations and their transformations.
 In these sections, I highlight my use of data science techniques
@@ -63,8 +64,9 @@ and the iterated evaluation of its higher-order spatial lags of $\mathbf W$,
 such as $\mathbf W^2, \mathbf W^k, (\mathbb I-\mathbf W)$,
 on over 1 million observations.
 This offers a reusable method to calculate valid instruments
-and conduct transformations that are helpful for eliminating endogeneity. 
-All code for this analysis is available publicly\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}.
+and conduct transformations that are helpful for eliminating endogeneity.
+I provide a detailed guide to reproducing data methods in Appendix \ref{app:data-cleaning}
+and all code for this analysis is available publicly\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}.
 \par
 In section 5, I give the econometric analysis of a static model with spatial peer effects,
 conceptualisable as `spatial lags' of the classical regressors in a 3-factor production function.
@@ -92,7 +94,9 @@ validating the use of static models which restrict effects to the contemporaneou
 %% Background policy
 A revival of interest in regional, pro-second city policy
 has also taken place in the policies of the 2024 and 2026 governments in the United Kingdom.
-Regional economic policy declined strongly in the UK under the 1980s Thatcher government\dots
+Regional economic policy declined strongly in the UK under the 1980s Thatcher government
+\todo{\dots}
+\par
 This consensus was maintained throughout the 1990s-2000s New Labour period,
 where rapid economic growth known as `The Great Moderation' satiated impetus for change.
 The consensus was broken in 2017, with the seeds of a regional-industrial strategy in 2017,

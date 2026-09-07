@@ -1,4 +1,4 @@
-\section{Fame data ingestion and cleaning}
+\section{Fame data computational methods}
 \label{app:data-cleaning}
 
 The following provides guidance for recreating the data cleaning procedure undertaken to produce these results.
@@ -8,7 +8,10 @@ and leave it for future analysis to carry out the more sophisticated extensions 
 All scripts are publicly available
 online\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079},
 written in Python and Jupyter notebooks.
-\par
+
+\subsection{Data cleaning procedure}
+\label{app-ss:financial-data}
+
 \itx{DuckDB} operates locally, meaning minimal lag from issuance to execution time
 provided the operating machine is sufficiently high-compute,
 and stores data in column vectors, which is a significant advantage
@@ -120,6 +123,68 @@ The lifespan of a firm, and the corresponding number of \itx{yearly} observation
 follows a geometric distribution as given in Figure \ref{fig:data-years-per-firm}.
 With each passing year, a firm has a binary survival-remain decision,
 with an increasing discrete probability of survival for older firms.
+
+\subsection{Vector transformations procedure}
+\label{app-ss:w-transformations}
+
+Computation of a matrix product, including taking higher indices,
+of the interactions between 1,520,000 firms is not computationally difficult,
+especially with sophisticated algorithms to handle $\mathbf W$'s block diagonal structure.
+However, storing the calculation in temporary memory is beyond
+the capacity of any standard machine available as a research tool.
+\par
+Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix separately,
+but rather iteratively applies the last pre-multiplied matrix $(n\times n)$ to the aggregate variable $(n\times 1)$.
+This allows repeated use of the transformation matrices $\mathbf W_g1, \mathbf W_d1, \dots$
+without having to compute a new transformation matrix $\mathbf W^2\dots$.
+Additionally, the `native' matrices $\mathbf W$ are easier to apply as transformations
+as their weight values can be computed on-demand using the group-network structure procedures,
+whereas each entry of an entirely new matrix $\mathbf W^2$ would have to be stored in its own table.
+\par
+Using memory-efficient \itx{DuckDB}, I designed the following procedure:
+\begin{enumerate}
+
+    \item Establish a set of transforms that could be applied many-to-many to a set of vectors.
+    \begin{description}
+        \item[Ex 1:] $\{ \text{variables}: y,k,l, \text{transforms}: g1, g2, g3 \}$
+        \item[Ex 2:] $\{ \text{variables}: wg1\_k, wg1\_l, \text{transforms}: g1 \}$
+    \end{description}
+
+    \item Parse this many-to-many relation to a one-to-one relation,
+            that maps onto the new column vector post-transform.
+            This requires a function with a consistent set of rules to apply
+            to a transformation-vector combination. Map each entry in the one-to-one relation
+            to a `depth' level, corresponding to number of new vectors
+            that need to be created first before the right vector exists
+            to apply the latest transformation.
+    \begin{description}
+\footnotesize{
+\begin{lstlisting}
+Depth 1 (15): ['y -> wg1_y', 'y -> wg2_y', 'y -> wg3_y', ...]
+Depth 2 (24): ['wg1_k -> w2g1_k', 'wg1_k -> wg2wg1_k', ...]
+Depth 3 (10): ['w2g1_k -> w3g1_k', 'w2g1_l -> w3g1_l', ...]
+Depth 4 (10): ['w3g1_k -> w4g1_k', 'w3g1_l -> w4g1_l', ...]
+Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
+\end{lstlisting}
+}
+    \item []~
+    \end{description}
+
+    \item Execute the transformations at each depth level in parallel,
+            calculating the table of vectors after each depth
+            as an input to the new depth set of transformations.
+    \begin{description}
+        \item[Group $\mathbf W_g$:] sum the target vector over $i$ firms in the panel database,
+            adopting a `leave-one-out' approach as necessary by subtracting the current row.
+            Row-normalise by counting the summed rows and taking it as the quotient denominator.
+        \item[Group $\mathbf W_d$:] Pre-calculate the distance transformation measures $d_1, d_2, d_3$
+            on the distance table and join the panel table to it twice:
+            once for the target $firm_i$ and once for the peer $firm_j$.
+            Take the specified weight column for the transformation (ex: $d_1$)
+            and multiply it with the specified variable vector.
+            Row-normalise by summing the transformed-distance (weight) column and using as a denominator.
+    \end{description}
+\end{enumerate}
 
 % --- 
 
