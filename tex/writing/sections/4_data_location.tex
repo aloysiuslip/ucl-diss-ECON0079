@@ -33,9 +33,16 @@ I undertook no further analysis using it as its incorporation
 to a distance-weighting technique requires complex data science approaches,
 which are discussed in section \ref{ss:param-select_xvalidate}.
 The resulting corpus of firms has exactly 152,379 rows
-and 5 key location properties: its membership of 3 spatial location groups:
-travel-to-work area (\itx{ttwa}), the first-half of a UK postcode (\itx{pc4}), or full postcode (\itx{pc8}),
-and 2 point distance decimals for longitude + latitude.
+and 5 key location properties. The first set of these indicate membership of 3 spatial location groups:
+travel-to-work area (\itx{ttwa}) using the 2011
+definitions\footnote{Travel-to-work area definitions from 2011 are broadly still considered
+the mostly reliable for current analytical research,
+due to the pollution in travel and working patterns occurring as a result of the COVID-19 pandemic during the 2021 Census.
+Travel-to-work-area area coverages, meaning maps from the location data available particularly postcode
+tend to be time-invariant following the pattern of the 2001 to 2021 changes,
+which mostly occurred in border areas of the UK's large cities.},
+the first-half of a UK postcode (\itx{pc4}), or a full UK postcode (\itx{pc8}).
+The latter 2 are point distance decimals for longitude + latitude.
 
 \subsection{Location data limitations}
 \label{ss:data-location-limits}
@@ -125,10 +132,10 @@ though with heterogenous weights internally within each group rather than a simp
         \label{tab:location-set-properties}
         \begin{tabular}{lccccc}
             \toprule\toprule
-            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping groups & Blocks     \\
+            Matrix type            & Symmetric  & Reflexive   & Transitive & Overlapping & Blocks     \\
             \midrule
-            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}         & $g$        \\
-            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark         & \itx{ttwa} \\
+            Group, $\mathbf W_g$   & \checkmark & \textsf{X}  & \checkmark & \textsf{X}  & $g$        \\
+            Network, $\mathbf W_d$ & \checkmark & \textsf{X}  & \textsf{X} & \checkmark  & \itx{ttwa} \\
             \bottomrule
         \end{tabular}
     \end{threeparttable}
@@ -137,27 +144,17 @@ though with heterogenous weights internally within each group rather than a simp
 A non-zero weight in $\mathbf W$ implies some use of the peer firm's attributes
 in the regression to estimate the target firm's TFP.
 For a group classification $\mathbf W_g$, all weights among peers are equal.
-I construct initial weights by peers which share a spatial identifier,
-meaning they belong to the same travel-to-work-area (\itx{ttwa}) using the 2011
-definitions\footnote{Travel-to-work area definitions from 2011 are broadly still considered
-the mostly reliable for current analytical research,
-due to the pollution in travel and working patterns occurring as a result of the COVID-19 pandemic during the 2021 Census.
-Travel-to-work-area area coverages, meaning maps from the location data available particularly postcode
-tend to be time-invariant following the pattern of the 2001 to 2021 changes,
-which mostly occurred in border areas of the UK's large cities.},
-the first half of a UK postcode \itx{pc4},
-and the full UK postcode \itx{pc8}.
+I construct initial weights by peers which share a spatial group,
+as given by the definitions above.
 \par
 The structure of the weighting matrix $\mathbf W$ is key to identification.
-$W$ is an $n\times n$ matrix of weights where each column $j$ denotes a weight $w_{ij}$
+$\mathbf W$ is an $n\times n$ matrix of weights where each column $j$ denotes a weight $w_{ij}$
 applied on the variable of peer firm $j$, summing across rows $i$
 to reach a weighted aggregate regressor
 with an estimated effect on target firm $i$.
 \par
 $\mathbf W$ retains the irreflexivity property discussed: its diagonal elements are all $0$,
-meaning a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
-This is common to peer effects literature such as \cite{Moffitt2001}
-and discussed in \cite{Bramoulle2009}.
+interpreted a firm's TFP aggregate cannot be part of a weighted sum to an effect on its own TFP or GVA.
 Group classifiers impose an otherwise block diagonal structure on $\mathbf W$.
 The resulting $n\times n$ matrix has off-diagonal elements as
 the size of group members (blocks) within the matrix, $s_g-1$, which excludes the target firm $i$.
@@ -355,31 +352,80 @@ Intuitively, I take the product of these weighting matrices $\mathbf W$ to the a
 As will be shown in \fullref{s:models-static}, the procedure to generate valid instrumental variables
 also requires me to apply multiples of this transformation matrix,
 exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group matrices,
-$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}\mathbf W_{g3}$ and so on to the aggregates.
+$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}, \mathbf W_{g3}$ and so on to the aggregates.
 \par
 I calculate these for my 3 aggregate variable vectors of interest.
 As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
 or columns of a database, to be calculated and generated.
-Of course, these column vectors each contain a stacked \itx{firm} ($i$)-\itx{year} ($t$)
+Of course, these column vectors each contain a stacked firm ($i$)-year ($t$)
 observation, giving an additional matrix of over 1 million entries.
 
-Matrix products, including taking high indices, of the interactions between 1,52,379 firms
-is not computationally difficult, especially with sophisticated algorithms to handle $W$'s block diagonal structure.
+Computation of a matrix product, including taking higher indices,
+of the interactions between 1,520,000 firms is not computationally difficult,
+especially with sophisticated algorithms to handle $\mathbf W$'s block diagonal structure.
 However, storing the calculation in temporary memory is beyond
 the capacity of any standard machine available as a research tool.
 \par
-Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix
-separately, but rather iteratively applies the last pre-multiplied matrix to the aggregate variable,
-and then pre-multiplies the next matrix along to the result.
-Using memory-efficient \itx{DuckDB}, the procedure is as follows:
-\todo{itemize}
+Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix separately,
+but rather iteratively applies the last pre-multiplied matrix $(n\times n)$ to the aggregate variable $(n\times 1)$.
+This allows repeated use of the transformation matrices $\mathbf W_g1, \mathbf W_d1, \dots$
+without having to compute a new transformation matrix $\mathbf W^2\dots$.
+Additionally, the `native' matrices $\mathbf W$ are easier to apply as transformations
+as their weight values can be computed on-demand using the group-network structure procedures,
+whereas each entry of an entirely new matrix $\mathbf W^2$ would have to be stored in its own table.
+\par
+Using memory-efficient \itx{DuckDB}, I designed the following procedure:
+\begin{enumerate}
+
+    \item Establish a set of transforms that could be applied many-to-many to a set of vectors.
+    \begin{description}
+        \item[Ex 1:] $\{ \text{variables}: y,k,l, \text{transforms}: g1, g2, g3 \}$
+        \item[Ex 2:] $\{ \text{variables}: wg1\_k, wg1\_l, \text{transforms}: g1 \}$
+    \end{description}
+
+    \item Parse this many-to-many relation to a one-to-one relation,
+            that maps onto the new column vector post-transform.
+            This requires a function with a consistent set of rules to apply
+            to a transformation-vector combination. Map each entry in the one-to-one relation
+            to a `depth' level, corresponding to number of new vectors
+            that need to be created first before the right vector exists
+            to apply the latest transformation.
+    \begin{description}
+\footnotesize{
+\begin{lstlisting}
+Depth 1 (15): ['y -> wg1_y', 'y -> wg2_y', 'y -> wg3_y', ...]
+Depth 2 (24): ['wg1_k -> w2g1_k', 'wg1_k -> wg2wg1_k', ...]
+Depth 3 (10): ['w2g1_k -> w3g1_k', 'w2g1_l -> w3g1_l', ...]
+Depth 4 (10): ['w3g1_k -> w4g1_k', 'w3g1_l -> w4g1_l', ...]
+Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
+\end{lstlisting}
+}
+    \item []~
+    \end{description}
+
+    \item Execute the transformations at each depth level in parallel,
+            calculating the table of vectors after each depth
+            as an input to the new depth set of transformations.
+    \begin{description}
+        \item[Group $\mathbf W_g$:] sum the target vector over $i$ firms in the panel database,
+            adopting a `leave-one-out' approach as necessary by subtracting the current row.
+            Row-normalise by counting the summed rows and taking it as the quotient denominator.
+        \item[Group $\mathbf W_n$:] Pre-calculate the distance transformation measures $d_1, d_2, d_3$
+            on the distance table and join the panel table to it twice:
+            once for the target $firm_i$ and once for the peer $firm_j$.
+            Take the specified weight column for the transformation (ex: $d_1$)
+            and multiply it with the specified variable vector.
+            Row-normalise by summing the transformed-distance (weight) column and using as a denominator.
+    \end{description}
+\end{enumerate}
 
 \subsection{Evaluating the linear independence of $\mathbf W$ matrices}
 % Could fold this into previous sections
 
-As will be discussed more heavily in the theory of \ref{ss:static-identification},
-the key condition of these $\mathbf W$ matrices that will permit valid instrumentation of endogenous variables
-is to check the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$, and later $\mathbf W^3$.
+As reviewed in \ref{ss:lit-peer-effects-metrics}, the key condition
+for discovery of valid instruments in this peer effects context is the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$.
+With the additional step of application of network fixed effects (section \ref{eq:ext-lnfe-reduced}),
+this is additionally evaluated with $\mathbf W^3$.
 I can trivially say this is true, meeting the alternative sufficient conditions in \ref{tab:bdf_identification}
 of $\geq 3$ group sizes for the group $\mathbf W$ matrices.
 \todo{Histogram of group sizes?}
@@ -422,7 +468,3 @@ where peer nodes randomly selected may be starting to bunch at an `invisible' bo
         Plotting software from \cite{Folium2012}. Map tiles from \cite{CARTO2026}.
     \end{tablenotes}
 \end{figure}
-
-\par
-As additional credibility, I discuss strategies for evaluating the linear independence
-of $\mathbb I, \mathbf W, \mathbf W^2$ \todo{\dots}

@@ -5,12 +5,13 @@
 I have used data from Fame for this investigation.
 Fame is a comprehensive database of the financial balance sheet from UK firms.
 It contains useful variables for this analysis, in particular,
-number of employees and aggregates which can be summed to calculate GVA.
+number of employees and aggregates which can be summed to calculate gross value added, GVA.
 Fame is provided by Moody's Analytics, an international credit agency,
 and collects its data from UK firms via survey\footnote{\cite{MoodysAnalytics2026}}.
 \par
 Its international counterpart, Orbis, offers a similar service for international counterparts.
-This analysis could therefore be extended to offer insights comparing the spillover effects of UK firms to their international counterparts.
+This analysis could therefore be extended to offer insights comparing the spillover effects
+of UK firms to their international counterparts.
 For this investigation, the UK dataset is comprehensive and the most policy-relevant for this investigation.
 
 \subsection{Ingestion and cleaning}
@@ -88,7 +89,7 @@ and reclassification of firm SIC codes using NLP on firm business activity descr
     \centering
     \includegraphics[width=\textwidth]{fig_panel_years_avail.png}
 \end{figure}
-\par
+
 As the main analysis here only uses location data as the \itx{fixed} characteristic of analysis,
 due to its time constraints, and due to the low number of duplicates
 and other cleaning errors listed above relative to the size of the dataset,
@@ -142,7 +143,7 @@ I used macroeconomic data of the GDP deflator\footnote{\cite{ons2026:qna}} for a
 except for \itx{renumeration\_employees} and its composites for which I used CPIH\footnote{\cite{ons2026:cpih}},
 as these are income-related aggregates with real spending power best captured by household purchasing
 baskets\footnote{\cite{ons2026:cpih-technical}}.
-All financial data are in thousands ('000s) of GBP (£);
+All financial data are in thousands of GBP (£'000s);
 as I estimate log relationships exclusively, this has no effect on parameter interpretation.
 \par
 
@@ -198,11 +199,19 @@ To help guide the choice of capital and output (GVA) measure, I conduct a quick 
                 + \beta_2 l_{i,t}
                 + u_{i,t}
 \end{align}
-This specification is not valid OLS specification by the structural model I give later in \ref{ss:static-identification}.
-$u_{i,t}$ is a non-structural error-residual that is correlated with $k_{i,t}, l_{i,t}$.
+This specification does not yield consistent estimates when estimated with OLS,
+according to the structural model I give in section \ref{ss:static-identification}.
+$u_{i,t}$ is a non-structural error-residual correlated with $k_{i,t}, l_{i,t}$.
 The estimation is a simple panel approach with time and fixed effects, and a constant.
-Regressors are given in log terms to approximate a structural production function similar to \ref{eq:static-production-3-factor}.
-
+Regressors are given in log terms to approximate a structural production function similar
+to \eqref{eq:static-production-3-factor}.
+Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share, $\hat\beta_2$,
+exactly in line with ONS analysis of UK industry-level data
+over the same time period, particularly \itx{corporate gross labour share} which is constructed
+from a similar sample to the coverage in Fame\footnote{\cite{ons2024:labour-share-uk}}.
+\begin{center}
+    (\tablerefp{tab:tfp_fe})
+\end{center}
 \begin{table}[hbtp]
     \centering
     \begin{threeparttable}
@@ -223,18 +232,16 @@ Regressors are given in log terms to approximate a structural production functio
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
-
-\par
-Coefficients derived in \tablerefp{tab:tfp_fe} give a labour income share, $\hat\beta_2$,
-exactly in line with ONS analysis of UK industry-level data
-over the same time period, particularly \itx{corporate gross labour share} which is constructed
-from a similar sample to the coverage in Fame\footnote{\cite{ons2024:labour-share-uk}}.
-\par
-Surprisingly, running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
-almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
-I leave it for future analysis why this dataset yields this phenomenon and
-for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
 \par
 As a demonstration, I include specifications which omit fixed effects.
-The capital share of income jumps on a specification with only time fixed effects,
-which is to be expected \todo{explain}.
+The capital share of income jumps on a specification on the omission of firm fixed effects,
+as all within-firm variation that we would model as the component $\alpha_i\in \varepsilon_{i,t}$,
+the regression attributes to capital instead, which is reasonably consistent
+in levels within a firm over time as it is a stock measure.
+\par
+When varying regressor measures, surprisingly,
+running the regression with \itx{fixed\_total} as the capital measure instead of \itx{total\_assets}
+almost entirely eliminates the capital share of income, or explanatory power of capital on variation in GVA.
+Similar results are shown for a further decomposition of \itx{fixed\_total} to its asset components.
+I leave it for future analysis why this dataset yields this phenomenon and
+for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
