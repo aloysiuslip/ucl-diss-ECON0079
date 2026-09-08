@@ -1,10 +1,14 @@
-\begin{tabular}{lc}
+\begin{tabular}{lcc}
 		\toprule\toprule
 \makecell[tl]{
 		} & \makecell[tc]{
 			\small{(1.)} 
 			\\
 			\footnotesize{dyn1} 
+		} & \makecell[tc]{
+			\small{(2.)} 
+			\\
+			\footnotesize{dyn2} 
 		} \\[0.8em]
 		\toprule
 \makecell[tl]{
@@ -15,6 +19,10 @@
 			$0.341$ 
 			\\
 			\footnotesize{(0.123)} 
+		} & \makecell[tc]{
+			$0.352$ 
+			\\
+			\footnotesize{(0.145)} 
 		}
 		\\ [0.9em]
 \makecell[tl]{
@@ -25,16 +33,10 @@
 			$0.700$ 
 			\\
 			\footnotesize{(0.249)} 
-		}
-		\\ [0.9em]
-\makecell[tl]{
-			$\delta_0$ 
-			\\
-			~ 
 		} & \makecell[tc]{
-			$-0.076$ 
+			$0.510$ 
 			\\
-			\footnotesize{(0.390)} 
+			\footnotesize{(0.237)} 
 		}
 		\\ [0.9em]
 \makecell[tl]{
@@ -45,6 +47,24 @@
 			$-0.001$ 
 			\\
 			\footnotesize{(0.001)} 
+		} & \makecell[tc]{
+			$-0.001$ 
+			\\
+			\footnotesize{(0.001)} 
+		}
+		\\ [0.9em]
+\makecell[tl]{
+			$\delta_0$ 
+			\\
+			~ 
+		} & \makecell[tc]{
+			$-0.076$ 
+			\\
+			\footnotesize{(0.390)} 
+		} & \makecell[tc]{
+			$0.195$ 
+			\\
+			\footnotesize{(0.390)} 
 		}
 		\\ [0.9em]
 \makecell[tl]{
@@ -55,6 +75,10 @@
 			$-0.193$ 
 			\\
 			\footnotesize{(0.239)} 
+		} & \makecell[tc]{
+			$-0.043$ 
+			\\
+			\footnotesize{(0.278)} 
 		}
 		\\ [0.9em]
 \makecell[tl]{
@@ -65,6 +89,10 @@
 			$0.511$ 
 			\\
 			\footnotesize{(0.489)} 
+		} & \makecell[tc]{
+			$0.493$ 
+			\\
+			\footnotesize{(0.391)} 
 		}
 		\\ [0.9em]
 		\hline
@@ -74,10 +102,18 @@
 			\text{\sffamily X} 
 			\\
 			\footnotesize{(0.834)} 
+		} & \makecell[tc]{
+			\text{\sffamily X} 
+			\\
+			\footnotesize{(0.913)} 
 		}
 		\\ [0.9em]
 		\makecell[tl]{
 			AR(1) test 
+		} & \makecell[tc]{
+			\checkmark 
+			\\
+			\footnotesize{(0.000)***} 
 		} & \makecell[tc]{
 			\checkmark 
 			\\
@@ -90,6 +126,10 @@
 			\text{\sffamily X} 
 			\\
 			\footnotesize{(0.129)} 
+		} & \makecell[tc]{
+			\text{\sffamily X} 
+			\\
+			\footnotesize{(0.294)} 
 		}
 		\\ [0.9em]
 		\hline
@@ -99,9 +139,15 @@
 			\footnotesize{$\mathbf{l}_{t-2:3}$, $\mathbf{W}_{d1}\mathbf{y}_{t-2:3}$} 
 			\\
 			\footnotesize{$\mathbf{W}_{d1}\mathbf{k}_{t-1:2}$, $\mathbf{W}_{d1}\mathbf{l}_{t-2:3}$} 
+		} & \makecell[tc]{
+			\footnotesize{$\mathbf{y}_{t-2:3}$, $\mathbf{k}_{t-2:3}$} 
+			\\
+			\footnotesize{$\mathbf{l}_{t-2:3}$, $\mathbf{W}_{d1}\mathbf{y}_{t-2:3}$} 
+			\\
+			\footnotesize{$\mathbf{W}_{d1}\mathbf{k}_{t-2:3}$, $\mathbf{W}_{d1}\mathbf{l}_{t-2:3}$} 
 		}
 		\\
-		Obs. & 717,300
+		Obs. & 717,300 & 717,300
 		\\
 		\bottomrule
 	\end{tabular}
