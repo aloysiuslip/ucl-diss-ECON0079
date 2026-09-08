@@ -2,7 +2,6 @@ import ibis
 from ibis import _
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass, field, asdict
 
 from scipy import stats
 from linearmodels.iv.results import IVGMMResults
@@ -26,6 +25,7 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
     struct_calc = mod.struct_calc if mod.struct_calc is not None else ['xi_0', 'zeta_0']
     delta_0_name = None
 
+    # Easy handling: these are exactly listed, just rename them
     for red_name, struct_name in mod.struct_map.items():
         if red_name not in res.params.index:
             continue
@@ -44,27 +44,37 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
             delta_0_name = red_name
         print(out_str)
 
-    inbuilt_structur = [
-        ('xi_0', ['wg1_k', 'wd1_k', 'wg2_k', 'wd2_k', 'wg3_k', 'wd3_k'], 'k'),
-        ('zeta_0', ['wg1_l', 'wd1_l', 'wg2_l', 'wd2_l', 'wg3_l', 'wd3_l'], 'l')
-    ]
-    for name, param_list, x in inbuilt_structur:
-        if name not in struct_calc:
+    # These are non-linear mappings that require calculation
+    inbuilt_structur_red = {
+        'xi_1': { 'name_wxs': ['wg1_k'], 'name_beta': 'k'},
+        'zeta_1': { 'name_wxs': ['wg1_l'], 'name_beta': 'l'},
+        'xi_2': { 'name_wxs': ['wg2_k'], 'name_beta': 'k'},
+        'zeta_2': { 'name_wxs': ['wg2_l'], 'name_beta': 'l'},
+        'xi_3': { 'name_wxs': ['wg3_k'], 'name_beta': 'k'},
+        'zeta_3': { 'name_wxs': ['wg3_l'], 'name_beta': 'l'},
+        'xi_0': { 'name_wxs': ['wg1_k', 'wd1_k', 'wd2_k', 'wd3_k'], 'name_beta': 'k'},
+        'zeta_0': { 'name_wxs': ['wg1_l', 'wd1_l', 'wd2_l', 'wd3_l'], 'name_beta': 'l'}
+    }
+    for param in struct_calc:
+        if param not in inbuilt_structur_red:
+            print(f"Severe warning: Structural parameter '{param}' is not in the output dictionary. Skipping.")
             continue
-        name_wx = None
-        for param in param_list:
-            if param in res.params.index:
-                name_wx = param
-                break
-        if name_wx is None:
-            print(f"Warning: Could not find any of {param_list} in the model parameters. Skipping structural parameter '{name}'.")
+        struct_info = inbuilt_structur_red[param]
+
+        name_wx_arr = [wx for wx in struct_info['name_wxs'] if wx in res.params.index]
+        if len(name_wx_arr) == 0:
+            print(f"Warning: calculating structural parameter '{param}', could not find any of {struct_info['name_wxs']} in model parameters. Skipping.")
             continue
-        if x not in res.params.index:
-            print(f"Warning: Could not find '{x}' in the model parameters. Skipping structural parameter '{name}'.")
+        else:
+            name_wx = name_wx_arr[0] 
+        x = struct_info['name_beta']
+        delta_0_val = 'delta_' + param.split('_')[1] if len(param.split('_')) > 1 else None
+        delta_0_name_arr = [k for k,v in mod.struct_map.items() if v == delta_0_val]
+        if len(delta_0_name_arr) == 0 or delta_0_name_arr[0] not in res.params.index:
+            print(f"Warning: calculating structural parameter '{param}', could not find '{delta_0_val}' in the structural map. Skipping.")
             continue
-        if delta_0_name is None or delta_0_name not in res.params.index:
-            print(f"Warning: Could not find '{delta_0_name}' in the model parameters. Skipping structural parameter '{name}'.")
-            continue
+        else:
+            delta_0_name = delta_0_name_arr[0]
         coef_wx = res.params[name_wx]
         beta = res.params[x]
         delta_0 = res.params[delta_0_name]
@@ -84,9 +94,9 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
         lower_ci = structural_xi - crit_val * structural_se
         upper_ci = structural_xi + crit_val * structural_se
 
-        structural_out_dict[name] = (structural_xi, structural_se, structural_t_stat, structural_p_val, lower_ci, upper_ci)
-        out_str = f"{name}: {structural_xi:.4f}"
-        out_str += ", ".join([f"{label}: {value:.4f}" for label, value in zip(display_names, list(structural_out_dict[name][1:]))])
+        structural_out_dict[param] = (structural_xi, structural_se, structural_t_stat, structural_p_val, lower_ci, upper_ci)
+        out_str = f"{param}: {structural_xi:.4f}"
+        out_str += ", ".join([f"{label}: {value:.4f}" for label, value in zip(display_names, list(structural_out_dict[param][1:]))])
         print(out_str)
 
     print(f"✅ Structural parameters extracted: {', '.join(structural_out_dict.keys())}")

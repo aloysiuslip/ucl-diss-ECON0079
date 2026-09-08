@@ -551,17 +551,21 @@ in a choice regression specification, minimising mean-squared-error (or adjusted
 \label{ss:data-matrix-weights}
 
 Intuitively, I take the product of these weighting matrices $\mathbf W$ to the aggregate variables vectors
-\itx{gva1}, capital \itx{total\_assets}, and labour \itx{employees}.
+\itx{gva}, capital \itx{total\_assets}, and labour \itx{employees}.
 As will be shown in \fullref{s:models-static}, the procedure to generate valid instrumental variables
 also requires me to apply multiples of this transformation matrix,
-exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and for interacting group matrices,
-$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g2}, \mathbf W_{g3}$ and so on to the aggregates.
+exponents $\mathbf W^2, \mathbf W^3, \mathbf W^4$, and as an extension,
+the higher-order cross-transformation for group matrices,
+$\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g1}\mathbf W_{g3}$ and so on to the aggregates.
 \par
 I calculate these for my 3 aggregate variable vectors of interest.
 As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
 or columns of a database, to be calculated and generated.
 Of course, these column vectors each contain a stacked firm ($i$)-year ($t$)
-observation, giving an additional matrix of over 1 million entries.
+observation, so the total computation is an additional matrix of 71 million entries.
+This applies similarly for distance matrices $\mathbf W_d$,
+and other modifications to any other procedures to generate weights that may be desired,
+as I discuss with in section \ref{ss:param-select-xvalidate} and Appendix \ref{app:static-dd}.
 \par
 As reviewed in \ref{ss:lit-peer-effects-metrics}, the key condition
 for discovery of valid instruments in this peer effects context is the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$.
@@ -569,7 +573,6 @@ With the additional step of application of network fixed effects (section \ref{e
 this is additionally evaluated with $\mathbf W^3$.
 I can trivially say this is true, meeting the alternative sufficient conditions in \ref{tab:bdf_identification}
 of $\geq 3$ group sizes for the group $\mathbf W$ matrices.
-\todo{Histogram of group sizes?}
 \par
 My distance-decay weights, $\mathbf W_{d1}, \mathbf W_{d2}, \mathbf W_{d3}$
 meet the strong alternative $s_d\geq 3$ condition, where $s_d$ is the \itx{diameter} of the network,

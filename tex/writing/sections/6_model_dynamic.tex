@@ -51,10 +51,9 @@ if $\mathbf z_{t-k}^\text{spill}$ is correlated with $\mathbf z_{t}$,
 then estimating $\delta_0$ in a static model when the true effect is dynamic
 exposes estimation to omitted variable bias (OVB) by attribution of the lagged to the current period's regressor.
 \par
-In practice however, due to the limitations of this analysis using Fame's annual frequency observations,
-it is unlikely that more-than-one period spillover lag is relevant.
-\todo{I test this briefly in appendix}
-I show the structural equations in an AR(1,0) structure
+In practice for this dataset however, it is unlikely that more-than-one period spillover lag is relevant.
+This is due to this analysis using Fame's annual frequency observations.
+As a result, I show the structural equations in an AR(1,0) structure
 so that the primary advancement on the static models
 are purely the use of the weak exogeneity assumption, and first-order autoregressor.
 \todo{Additional tests}
@@ -70,31 +69,30 @@ are purely the use of the weak exogeneity assumption, and first-order autoregres
 
 \subsection{Dynamic panel identification}
 
-The dynamic panel specification uses a time-varying error orthogonality assumption
+The dynamic panel specification uses a autocorrelation error orthogonality assumption
 to find valid identification.
 \begin{align}
     \mathbb E[\epsilon_{i,t}\epsilon_{j,t}]
 \end{align}
 This might generally be more seen as a more credible assumption
-than \eqref{eq:static-identification-factor-exogeneity} 
-\todo{and we can test for it}.
+than \eqref{eq:static-identification-factor-exogeneity}.
+In further econometric model, we would plot patterns of errors
+and check for autocorrelation, which could come from moving average
+or omitted latent variable structures to the specification missing here.
 This specification can be identified in reduced panel form,
 which requires first differences to eliminate fixed effects,
 allowing me to retain the use of firm fixed effects.
 \par
 Estimation under these dynamic panel conditions are developed by \cite{Anderson1981},
 with further techniques expanded in \cite{Arellano1991} and \cite{Blundell1998} which improve efficiency.
-The estimator given in \cite{Arellano1991} takes the regression equation
-as given above and allows for endogeneity.
-Internal instruments of all the endogenous regressors are found,
-meaning their lagged first differences.
+The estimator given in \cite{Arellano1991} is designed to allow for
+endogeneity, limiting only to weak exogeneity as I do here.
+Internal instruments of the endogenous regressors are found using their lagged first differences of the log variables.
 Identification is improved in the System GMM approach given in \cite{Blundell1998}
 by also including the first logged, not differenced, lag of the endogenous regressors
 which meets the usual instrument conditions, as an instrument.
-It is this System GMM approach that I follow here,
-so I find the first logged, not differenced, lag of regressor in $x_{it}$
-and its corresponding set of first difference lagged instruments,
-which in practice just start from $\Delta x_{i,\tau-j}$ for any $j$
+It estimate this section's results with System GMM.
+Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
 \par
 I commence finding these valid instruments by assuming the structural specification (\ref{eq:static-main-gva})

@@ -291,7 +291,9 @@ def generate_latex_table(
     model_names = list(models.keys())
     unique_params = []
     for mod in models.values():
-        param_list = mod['struct_params'] if mod['use_struct'] else list(mod['params'].keys())
+        param_list = list(mod['params'].keys())
+        if mod['use_struct']:
+            param_list = [p for p in mod['struct_params'] if p in param_list]
         to_add = [p for p in param_list if p not in unique_params]
         unique_params.extend(to_add)
     sorted_params = unique_params
@@ -316,9 +318,18 @@ def generate_latex_table(
         cols.append(form_block((f"({start_index + i + 1}.)", display_name), block_type='c', size=('small', 'footnotesize')))
     latex_lines.extend(["\t\t\\toprule\\toprule", " & ".join(cols) + " \\\\[0.8em]", "\t\t\\toprule"])
 
+    # We need to create a combined_mod that has all the struct_params from all the models
+    combined_sp = []
+    for mod in models.values():
+        if not mod['use_struct']:
+            continue
+        combined_sp.extend(mod['struct_params'])
+    mod_combined = models[model_names[0]].copy()
+    mod_combined['struct_params'] = list({ k: True for k in combined_sp }.keys())
+
     # Coefficients
     for param in sorted_params:
-        param_display = format_latex_column(param, rename_strat, models[model_names[0]])
+        param_display = format_latex_column(param, rename_strat, mod_combined)
         row_lines = [form_block((param_display, '~'))]
         for mod in model_names:
             param_list = models[mod]['struct_params'] if models[mod]['use_struct'] else list(models[mod]['params'].keys())
