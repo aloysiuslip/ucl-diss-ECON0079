@@ -575,46 +575,49 @@ as the regressors with $\mathbf W_{g2}, \mathbf W_{g3}$ are orthogonal.
 \newpage
 \subsection{Static distance decay}
 \label{ss:model-dd}
-To improve on the LMM specification, I make a modification where
-every peer firm is weighted by its influence on the target by the reciprocal of the 
-continuous distance metric calculated in \ref{ss:data-distance}
-$w_{ijt}=f(d)$. This is stylistic of a declining peer influence further away,
-representing a \todo{lower frequency of social collisions, barriers created via transport and time costs,
-and an increased difficulty of observation of management practices}.
 
+I employ a similar static specification strategy,
+but employing $\mathbf W_d$ distance-decayed weights in a network structure,
+rather than group weights.
+The reciprocal distance weights are stylistic of a declining peer influence further away,
+representing a lower frequency of social collisions that might inspire knowledge spillovers,
+barriers created via transport and time costs,
+and decreased ease of peer observation.
+Similarly, if this analysis' hypothesis is that spatial proximity
+is key to determination of a peer group,
+it is intuitive that increasing distance, as a continuous measure,
+would imply a decline in influence, rather than equal influence of all peers in an arbitrary cut-off.
+\par
+I estimate this model in panel IV reduced-form only.
 \begin{align}
-    \label{eq:dd-structural1}
-    z_{it} &= \alpha_i + \gamma_t + \beta_0
-            + \beta_1 \sum_{j\neq i} w_{ijt}z_{jt} + \varepsilon_{it}
+    \Delta y_{i,t} &= \Delta\gamma_t
+                    + \beta_1 \Delta k_{i,t}
+                    + \beta_2 \Delta l_{i,t}
+                    \\ &\qquad \notag
+                    + \beta_3 \Delta \sum_{j\neq i} w_{ij}y_{i,t}
+                    + \beta_4 \Delta \sum_{j\neq i} w_{ij}k_{j,t}
+                    + \beta_5 \Delta \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \Delta \varepsilon_{i,t}
     \\
-    \mathbf z_{t} &= (\alpha_i + \gamma_t + \beta_0)\boldsymbol\iota
-            + \beta_1 \sum_{j\neq i} \Omega_t \mathbf z_{t} + \boldsymbol\varepsilon_{t}
-    \\
-    w_{ijt}\in \mathbf \Omega_t &=
-        \begin{cases}
-            \frac1{d_{ij}},         &\text{(1) gravity}                                      \\
-            \frac1{d_{ij}^2}        &\text{(2) N.E.G.} \\
-            \exp{-d_{ij}\cdot k}    &\text{(3) exponential decline}
-        \end{cases}
+    \eqreref{eq:static-dd-moment-conditions}
+    \mathbb E &[
+        \epsilon_{i,t}\ 
+        \vert
+        \begin{pmatrix}
+            k_{i,t}                                     & l_{i,t} \\
+            w_{ij}k_{j,t}                               & w_{ij}l_{j,t}   \\
+            \left[\mathbf W^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3\right]_{(j,)} \mathbf l_t\\
+            \vdots & \vdots \\
+            \left[\mathbf W^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k\right]_{(j,)} \mathbf l_t
+        \end{pmatrix}
+    ]
+    = 0_{l\times 2}
 \end{align}
 
-This represents a likely more accurate declining effect of productivity spillover,
-rather than the special-case group mean where every firm in an enclosed area,
-for example, the target's postcode, has an equal influence on the target's TFP.
-In addition, it allows for better identification following \cite{Bramoulle2009}.
-\\*
-In essence, the LMM specification only contains 3 non-overlapping groups
-from its location tags. The distance-decayed specification
-contains as many non-overlapping groups as firms.
-
-% \wraptable 
-%     {Static panel IV using continuous distance-decay $\mathbf W_d$}
-%     {../../model/output/results_2a_dd_basic_str}
-%     {}
-% \wraptable
-%     {Static panel IV using continuous distance-decay $\mathbf W_d$, zero distances excluded}
-%     {../../model/output/results_2b_dd_noz_str}
-%     {}
+Results for the 3 respective reciprocal distance measures are given in \tablerefp{tab:dd-basic-str}.
+In addition, I include a specification exploring employing more lags
+for overidentification.
 \begin{table}[hbtp]
     \centering
     \begin{threeparttable}
@@ -623,20 +626,32 @@ contains as many non-overlapping groups as firms.
         \input{../../model/output/results_2a_dd_basic_str}
     \end{threeparttable}
     \\~\\
-    \vspace{1em}
+    \vspace{0.5em}
     \begin{threeparttable}
         \caption{Static panel IV $\mathbf W_d$, zero distances excluded}
         \label{tab:dd-noz-str}
         \input{../../model/output/results_2b_dd_noz_str}
         \begin{tablenotes}
-            Starts denote significance against an $H_0: \beta=0$,
-            $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***)
-            but these are not meaningful for this analysis.
-            All models run with time and fixed effects.
+            \centering
+            \begin{footnotesize}
+                Starts denote significance against an $H_0$
+                with the usual confidence levels, \\*
+                but these are not meaningful for this analysis. \\*
+                All models run with time and fixed effects.            
+            \end{footnotesize}
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
 
+Model (4.) includes more lags which improves significance.
+The inclusion of more lags continues to pass the Hansen J-test,
+avoiding over-specification which would be tested by a rejection of the null hypothesis.
+I include an additional table in Appendix \ref{app-static-dd}
+which shows the first-stage Panel OLS estimates of the endogenous regressor $\mathbf W_y$
+against the instruments employed.
+This shows improvements in adjusted $R^2$ for the model up to 3 lags,
+but barely any improvement for including an additional 4th-order lag.
+\\
 This distance-decay specification revises down the estimate from peers to an elasticity of 0.168,
 lower than the results given by the LMM specification. This is likely due to \todo{...}
 \\

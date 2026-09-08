@@ -303,7 +303,7 @@ def generate_latex_table(
     seen = set()
     sorted_params = [x for x in sorted_params if not (x in seen or seen.add(x))]
 
-    latex_lines = [f"\\normalsize{{\n\t\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
+    latex_lines = [f"\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
     
     # Header row
     cols = [form_block()]
@@ -426,7 +426,6 @@ def generate_latex_table(
         latex_lines.append(r2o_row)
 
     latex_lines.extend(["\t\t\\bottomrule", "\t\\end{tabular}"])
-    latex_lines.append("}")
 
     with open(output_filepath, 'w', encoding='utf-8') as f:
         f.write("\n".join(latex_lines))
