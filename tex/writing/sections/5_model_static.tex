@@ -367,7 +367,7 @@ I am helped here, however, by the use of time-invariant weights.
 Plausibly, over the observations of a panel dataset up to 20 years,
 if firm weights apply to each firm on a fixed basis,
 the temporal variation despite these constant location effects provide credible exogenous variation.
-On this however, the strategy runs into the limitations of Fame location data discussed in \ref{ss:data-location-limits}
+On this however, the strategy runs into the limitations of Fame location data discussed in \ref{ss:data-limitations}
 The analysis is also helped by the relatively higher number of panel observations
 to relatively low ratio of confounding movers in the dataset,
 as well as the numerous, plausibly exogenous reasons why a firm might choose 
@@ -497,10 +497,14 @@ assuming the full vector of error orthogonality implying regressor exogeneity.
 
 \begin{align}
     \label{eq:static-lmm-iv-fd-reduced-estimated}
-    \Delta y_{i,t} &= \Delta\gamma_t + \beta_1 \Delta k_{i,t} + \beta_2 \Delta l_{i,t} + \Delta \varepsilon_{i,t}
+    \Delta y_{i,t} &= \Delta\gamma_t
+                    + \beta_1 \Delta k_{i,t}
+                    + \beta_2 \Delta l_{i,t}
+                    \\ &\qquad \notag
                     + \beta_3 \Delta \sum_{j\neq i} w_{ij}y_{i,t}
                     + \beta_4 \Delta \sum_{j\neq i} w_{ij}k_{j,t}
                     + \beta_5 \Delta \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \Delta \varepsilon_{i,t}
     \\
     \eqreref{eq:static-moment-conditions}
     \mathbb E &[

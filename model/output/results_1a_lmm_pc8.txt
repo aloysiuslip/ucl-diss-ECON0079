@@ -1,21 +1,25 @@
-Model 'lmm_exog': Strict exogeneity, structural form
+Model 'lmm1:exog': 
 Model Parameters:
 Y: y
 X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l']
 Z: {}
 fe: ['t', 'i', 'c']
-description: Strict exogeneity, structural form
+fe_type: d
+description: 
 include: True
 use_linearmodels: True
 differencing: mean
+struct_map: {'k': 'beta_1', 'l': 'beta_2', 'wg1_y': 'delta_0'}
+struct_calc: ['xi_0', 'zeta_0']
 
+Structural Parameters: {beta_1: 0.2611, beta_2: 0.6500, delta_0: 0.1988, xi_0: -0.0055, zeta_0: 0.0113}
                           PanelOLS Estimation Summary                           
 ================================================================================
 Dep. Variable:                      y   R-squared:                        0.3550
 Estimator:                   PanelOLS   R-squared (Between):              0.7907
 No. Observations:              726283   R-squared (Within):               0.3688
-Date:                Fri, Sep 04 2026   R-squared (Overall):              0.7966
-Time:                        01:10:06   Log-likelihood                -4.064e+05
+Date:                Tue, Sep 08 2026   R-squared (Overall):              0.7966
+Time:                        02:15:15   Log-likelihood                -4.064e+05
 Cov. Estimator:             Clustered                                           
                                         F-statistic:                    6.81e+04
 Entities:                      107615   P-value                           0.0000
@@ -38,6 +42,11 @@ l              0.6500     0.0055     118.13     0.0000      0.6392      0.6608
 wg1_y          0.1988     0.0040     49.844     0.0000      0.1910      0.2066
 wg1_k         -0.0573     0.0026    -21.755     0.0000     -0.0625     -0.0522
 wg1_l         -0.1179     0.0039    -30.071     0.0000     -0.1256     -0.1102
+beta_1            0.2611      0.0054     48.3858      0.0000      0.2505      0.2717
+beta_2            0.6500      0.0055    118.1310      0.0000      0.6392      0.6608
+delta_0           0.1988      0.0040     49.8437      0.0000      0.1910      0.2066
+xi_0             -0.0055      0.0024     -2.2866      0.0222     -0.0101     -0.0008
+zeta_0            0.0113      0.0030      3.8091      0.0001      0.0055      0.0172
 ==============================================================================
 
 F-test for Poolability: 8.6590
@@ -49,66 +58,5 @@ Included effects: Entity, Time
 =======================================================================================
 
 
-Model 'lmm_instr': Instrument endogenous effect, LMM
-Model Parameters:
-Y: y
-X: ['k', 'l', 'wg1_y', 'wg1_k', 'wg1_l']
-Z: {'wg1_y': ['w2g1_k', 'w2g1_l', 'w3g1_k', 'w3g1_l']}
-fe: ['t', 'i']
-description: Instrument endogenous effect, LMM
-include: True
-use_linearmodels: True
-differencing: mean
-
-                          IV-GMM Estimation Summary                           
-==============================================================================
-Dep. Variable:                      y   R-squared:                      0.0012
-Estimator:                     IV-GMM   Adj. R-squared:                 0.0012
-No. Observations:              587772   F-statistic:                  1.57e+04
-Date:                Fri, Sep 04 2026   P-value (F-stat)                0.0000
-Time:                        01:13:07   Distribution:                 chi2(23)
-Cov. Estimator:             clustered                                         
-                                                                              
-                             Parameter Estimates                              
-==============================================================================
-            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
-------------------------------------------------------------------------------
-k              0.2334     0.0078     29.844     0.0000      0.2181      0.2488
-l              0.5550     0.0074     74.624     0.0000      0.5404      0.5695
-wg1_k          0.1183     0.0540     2.1910     0.0285      0.0125      0.2242
-wg1_l          0.2486     0.1118     2.2243     0.0261      0.0296      0.4677
-year_2011      0.0277     0.0056     4.9359     0.0000      0.0167      0.0387
-year_2008      0.0172     0.0043     3.9560     0.0001      0.0087      0.0257
-year_2015      0.0646     0.0070     9.1864     0.0000      0.0508      0.0784
-year_2014      0.0394     0.0065     6.0387     0.0000      0.0266      0.0522
-year_2013      0.0101     0.0069     1.4658     0.1427     -0.0034      0.0236
-year_2021      0.1069     0.0095     11.209     0.0000      0.0882      0.1256
-year_2023      0.0906     0.0095     9.5100     0.0000      0.0720      0.1093
-year_2024      0.1137     0.0104     10.926     0.0000      0.0933      0.1341
-year_2017      0.0845     0.0078     10.877     0.0000      0.0693      0.0997
-year_2022      0.1186     0.0099     12.006     0.0000      0.0993      0.1380
-year_2007      0.0355     0.0044     8.1432     0.0000      0.0269      0.0440
-year_2010      0.0358     0.0057     6.3153     0.0000      0.0247      0.0469
-year_2009     -0.0092     0.0052    -1.7569     0.0789     -0.0194      0.0011
-year_2016      0.0857     0.0079     10.911     0.0000      0.0703      0.1011
-year_2018      0.0749     0.0080     9.3466     0.0000      0.0592      0.0906
-year_2019      0.0815     0.0084     9.7257     0.0000      0.0651      0.0979
-year_2020      0.0116     0.0124     0.9376     0.3484     -0.0127      0.0359
-year_2012      0.0101     0.0064     1.5856     0.1128     -0.0024      0.0225
-wg1_y         -0.3843     0.1772    -2.1684     0.0301     -0.7317     -0.0369
-==============================================================================
-
-Endogenous: wg1_y
-Instruments: w2g1_k, w2g1_l, w3g1_k, w3g1_l
-GMM Covariance
-Debiased: False
-Clustered (One-way)
-Num Clusters: 88215
-
-=======================================================================================
-
-Hansen J-statistic:
-H0: Expected moment conditions are equal to 0
-Statistic: 3.4304
-P-value: 0.3299
-Distributed: chi2(3)
+================================================================================
+================================================================================

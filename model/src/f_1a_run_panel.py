@@ -27,87 +27,19 @@ class ModelSpec():
     Z: dict[str, list[str]] = field(default_factory=dict)
     to_log: list[str] = field(default_factory=list)
     fe: list[str] = field(default_factory=list)
+    fe_type: str = 'd'
     description: str = ""
     panel_name: str | None = None
     include: bool = True
     category: str | None = None
-    fe_type: str = 'd'
     use_linearmodels: bool = True
     differencing: str = 'mean'
 
-def reindex_entity(df: pd.DataFrame) -> pd.DataFrame:
-    min_year, max_year = df.index.get_level_values('year').min(), df.index.get_level_values('year').max()
-    full_years = range(min_year, max_year + 1)
-    full_idx = pd.MultiIndex.from_product([[df.index.get_level_values('registered_number').unique()[0]], full_years], names=['registered_number', 'year'])
-    return df.reindex(full_idx)
+    # Structural params map
+    struct_map: dict[str, str] = field(default_factory=dict)
+    struct_calc: list[str] | None = None
 
-def add_fe(table_indicator: ibis.Table | pd.DataFrame, fe: list[str]) -> ibis.Table:
-
-    if isinstance(table_indicator, pd.DataFrame):
-        t_panel = ibis.memtable(table_indicator)
-    else:
-        t_panel = table_indicator
-
-    if 't' in fe:
-        t_panel_tdumm = (
-            t_panel
-            .mutate(
-                t_val=ibis.literal(1, type="int64"),
-                year_clone=_.year.cast("string")
-            )
-            .pivot_wider(
-                names_from='year_clone',
-                values_from='t_val',
-                names_prefix='year',
-                values_fill=ibis.literal(0, type="int64")
-            )
-        )
-        t_panel = t_panel_tdumm
-
-    if 'i' in fe:
-        diff_exprs = {}
-        numeric_cols = [
-            col for col, dtype in t_panel.schema().items() 
-            if dtype.is_numeric() and col not in ['registered_number', 'year']
-        ]
-        w = ibis.window(group_by="registered_number", order_by="year")
-        for col in numeric_cols:
-            diff_exprs[col] = ibis.ifelse(
-
-                # CONDITION: Is the previous row exactly one year ago?
-                _.year == _.year.lag(1).over(w) + 1,
-
-                # TRUE: Calculate the first difference
-                _[col] - _[col].lag(1).over(w),
-                
-                # FALSE: Force a NULL (safe fallback for gaps and first-years)
-                ibis.literal(None, type="float64")
-            )
-        t_panel_1diff = t_panel.mutate(**diff_exprs)
-        if 't' in fe:
-            min_year = t_panel['year'].min().execute()
-            null_col = f'year_{min_year}'
-            t_panel_filtered = t_panel_1diff.filter(_.year > min_year)
-            if null_col in t_panel_filtered.columns:
-                t_panel_filtered = t_panel_filtered.drop(null_col)
-            t_panel = t_panel_filtered
-        else:
-            t_panel = t_panel_1diff
-
-    if 'c' in fe:
-        t_panel = t_panel.mutate(
-            const=ibis.literal(1, type="int64")
-        )
-    t_panel_final_filter = t_panel.drop_null(how='any')
-    return t_panel_final_filter
-
-def transform_nfe(values: list[str], fe: list[str], fe_type: str) -> list[str]:
-    if 'lnfe' in fe:
-        return [f"(i-w{fe_type}1){'_' if len(p) == 1 else ''}{p}" for p in values]
-    elif 'gnfe' in fe:
-        return [f"(i-v{fe_type}1){'_' if len(p) == 1 else ''}{p}" for p in values]
-    else:
-        return values
+from model.src.f_1b_panel_helpers import add_fe, transform_nfe, extract_structural
 
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
@@ -178,6 +110,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             res_panel: PanelEffectsResults = mod_panel.fit(cov_type='clustered', cluster_entity=True)
             
             # Extract \beta results iterating through full_params
+            object.__setattr__(res_panel, 'structural_params', extract_structural(res_panel, mod))
             effects_dict: dict[str, pd.Series | None] = {
                 'i': res_panel.estimated_effects.xs('entity_effects', level=1) if 'entity_effects' in res_panel.estimated_effects.index.names else None,
                 't': res_panel.estimated_effects.xs('time_effects', level=1) if 'time_effects' in res_panel.estimated_effects.index.names else None
@@ -213,6 +146,10 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 if hasattr(res_gmm, 'j_stat') and res_gmm.j_stat is not None:       # type: ignore
                     print(f"J-statistic (rej if overidentified): {res_gmm.j_stat.stat:.2f}, p-value: {res_gmm.j_stat.pval:.3f}")
                 effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
+                # Set property formula_str in res_gmm,
+                # Knowing res_gmm is an immutable object, we can use object.__setattr__ to set the property
+                object.__setattr__(res_gmm, 'formula_str', formula_str)
+                object.__setattr__(res_gmm, 'structural_params', extract_structural(res_gmm, mod))
                 res = res_gmm
             except Exception as e:
                 with pd.ExcelWriter(dirs.tmp_dir / f"error_{model_name}.xlsx") as writer:
@@ -243,6 +180,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                 )
             )
             res_ivpbox: PanelResults = mod_iv.fit(cov_type='clustered', cluster_entity=True)
+            object.__setattr__(res_ivpbox, 'structural_params', extract_structural(res_ivpbox, mod))
             try:
                 effects_dict = { 'i': None, 't': None }
                 if res_ivpbox.first_stage_results is not None:
@@ -278,10 +216,39 @@ def format_str(res_serie: tuple[PanelEffectsResults | IVGMMResults, ModelSpec, s
             continue
         param_str += f"{key}: {value}\n"
 
+    # Modify res.summary. Split it by line and find the end of the parameters table (the line that starts with "===" after all the params).
+    # If res.structural_params is not None, add the structural params in there
+    summary_lines = str(res.summary).split('\n')
+    i = 0
+    for i, line in enumerate(summary_lines):
+        if any([
+            not line,
+            line.startswith('F-test'),
+            line.startswith('Endogenous:')
+        ]):
+            break
+    if hasattr(res, 'structural_params') and res.structural_params is not None:     # type: ignore
+        # Add parameter estimates to the table of the form:
+        #             Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+        # year_2020      0.0116     0.0124     0.9376     0.3484     -0.0127      0.0359
+        # year_2012      0.0101     0.0064     1.5856     0.1128     -0.0024      0.0225
+        # wg1_y         -0.3843     0.1772    -2.1684     0.0301     -0.7317     -0.0369
+        for k, v_tup in reversed(res.structural_params.items()):
+            line = ""
+            for v in v_tup:
+                line += f"{v:>12.4f}"
+            summary_lines.insert(i - 1, f"{k:<12}{line}")
+
+    modified_summary = '\n'.join(summary_lines)
+
     output_str = ""
     output_str += f"Model '{model_name}': {mod.description}\n"
+    if hasattr(res, 'formula_str') and res.formula_str is not None:      # type: ignore
+        output_str += f"Formula: {res.formula_str}\n"       # type: ignore
     output_str += param_str + "\n"
-    output_str += f"{res.summary}\n\n"
+    if hasattr(res, 'structural_params') and res.structural_params is not None:     # type: ignore
+        output_str += "Structural Parameters: {" + ", ".join([f"{k}: {v[0]:.4f}" for k, v in res.structural_params.items()]) + "}\n"    # type: ignore
+    output_str += f"{modified_summary}\n\n"
     output_str += "=" * 87 + "\n\n"
     if hasattr(res, 'j_stat') and res.j_stat is not None:       # type: ignore
         output_str += "Hansen J-statistic:\n"
