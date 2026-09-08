@@ -138,9 +138,9 @@ especially with sophisticated algorithms to handle $\mathbf W$'s block diagonal 
 However, storing the calculation in temporary memory is beyond
 the capacity of any standard machine available as a research tool.
 \par
-Instead, I use a computational approach that avoids calculating the $\mathbf W^2, W^3...$ matrix separately,
+Instead, I use a computational approach that avoids calculating the $\mathbf W^2, \mathbf W^3...$ matrix separately,
 but rather iteratively applies the last pre-multiplied matrix $(n\times n)$ to the aggregate variable $(n\times 1)$.
-This allows repeated use of the transformation matrices $\mathbf W_g1, \mathbf W_d1, \dots$
+This allows repeated use of the transformation matrices $\mathbf W_{g1}, \mathbf W_{d1}, \dots$
 without having to compute a new transformation matrix $\mathbf W^2\dots$.
 Additionally, the `native' matrices $\mathbf W$ are easier to apply as transformations
 as their weight values can be computed on-demand using the group-network structure procedures,
@@ -191,9 +191,7 @@ Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
     \end{description}
 \end{enumerate}
 
-% --- 
-
-\section{Data science behind the creation and calculation of the W interactions matrix}
+\subsection{$\mathbf W$ transformations summary statistics}
 \label{app:data-w-transformations}
 
 \begin{table}[hbt!]

@@ -259,6 +259,7 @@ def generate_latex_table(
         output_filepath: str | Path,
         show: list[int] | None = None,
         rename_strat: str | dict[str, str] | None = None,
+        hide_fe: bool | None = False,
         var_order: list[str] | None = None,
         use_colnames: bool = True,
         start_at: int | None = 1,
@@ -266,6 +267,8 @@ def generate_latex_table(
         r2_type: list[str] = ['r2', 'r2-overall'],
     ) -> None:
 
+    if hide_fe is None:
+        hide_fe = False
     if start_at == None or start_at < 1:
         start_at = 1
     if stars is None:
@@ -373,9 +376,9 @@ def generate_latex_table(
             instr_row += instr_str + " & "
         instr_row = instr_row.rstrip(" & ") + "\n\t\t\\\\"
         latex_lines.append(instr_row)
-    if any(models[m].get('entities_fe') for m in model_names):
+    if hide_fe != False and any(models[m].get('entities_fe') for m in model_names):
         latex_lines.append(i_row)
-    if any(models[m].get('time_fe') for m in model_names):
+    if hide_fe != False and any(models[m].get('time_fe') for m in model_names):
         latex_lines.append(t_row)
     if any(models[m].get('obs') for m in model_names):
         latex_lines.append(obs_row)
@@ -391,12 +394,16 @@ def generate_latex_table(
         for m in model_names:
             mod = models[m]
             raw_val = float(mod.get('r2', ''))
+            try:
+                float_val = float(raw_val)
+            except ValueError:
+                float_val = 0.0
             nobs = int(mod.get('obs', 0).replace(',', ''))
             nparams = len(mod.get('params', {}))
             if should_adj:
-                r2_vals.append(calc_r2_adj(raw_val, nobs, nparams))
+                r2_vals.append(calc_r2_adj(float_val, nobs, nparams))
             else:
-                r2_vals.append(raw_val)
+                r2_vals.append(float_val)
         r2_formatted = [f"{v:.4f}" for v in r2_vals]
         r2_row = "".join([
             f"\t\tR$^2${"-adj" if should_adj else ''}{" (excl. F.E.)" if has_r2_overall else ''} & ",
@@ -410,7 +417,10 @@ def generate_latex_table(
         should_adj = 'r2-overall-adj' in r2_type
         for m in model_names:
             mod = models[m]
-            raw_val = float(mod.get('r2-overall', ''))
+            try:
+                raw_val = float(mod.get('r2-overall', ''))
+            except ValueError:
+                raw_val = 0.0
             nobs = int(mod.get('obs', 0).replace(',', ''))
             nparams = len(mod.get('params', {}))
             if should_adj:

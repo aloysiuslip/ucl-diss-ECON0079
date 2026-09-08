@@ -417,11 +417,22 @@ the influence of each individual's peer set is still the simple `leave-one-out' 
 of their heterogenous peers, however, differing weights applied within the peer set are equally permissible.
 I use variants on the reciprocal of the spatial distance between the two firms
 to construct my weights in $\mathbf W_d$ in this analysis.
-\begin{align*}
-    w_{ij,d1} &= \frac1{d_{ij}}                \\
-    w_{ij,d2} &= \frac1{d_{ij}^2}            \\
-    w_{ij,d1} &= \exp(-\frac {d_{ij}}{1000})
-\end{align*}
+Intuitively, these distance reciprocal weights are pretty similar.
+I explore 3 models just to demonstrate that findings are robust to small modifications in the weights,
+and that differing weighting strategies are permissible.
+A simple reciprocal weight is common to the gravity models used in the urban economics literature
+discussed\footnote{\todo{Gravity}}.
+A harsher penalty for distance, $\frac1{\delta^2}$, has been employed
+by the New Economic Geography literature, emphasising a more crucial role
+for close proximity\footnote{\todo{NEG}}.
+\begin{align}
+    w_{ijt}\in \mathbf \Omega_t &=
+        \begin{cases}
+            \frac1{d_{ij}},         &\text{(1) gravity}                     \\
+            \frac1{d_{ij}^2}        &\text{(2) N.E.G.}                      \\
+            \exp{-d_{ij}\cdot k}    &\text{(3) exponential decline}
+        \end{cases}
+\end{align}
 
 Distances are calculated as the Haversine distance
 between any 2 firms. This represents the straight-line, `as-the-crow-flies',

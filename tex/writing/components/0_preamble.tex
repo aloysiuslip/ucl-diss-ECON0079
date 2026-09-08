@@ -169,7 +169,8 @@
     %
     % 2. Replace remaining underscores with hyphens
     \StrSubstitute{\tempA}{_}{-}[\tempB]%
-    \edef\tablelabel{tab:\tempB}%
+    \StrSubstitute{\tempB}{_}{-}[\tempC]%
+    \edef\tablelabel{tab:\tempC}%
     %
     \begin{table}[hbtp]
         \centering

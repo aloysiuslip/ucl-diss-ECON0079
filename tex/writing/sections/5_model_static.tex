@@ -367,19 +367,19 @@ I am helped here, however, by the use of time-invariant weights.
 Plausibly, over the observations of a panel dataset up to 20 years,
 if firm weights apply to each firm on a fixed basis,
 the temporal variation despite these constant location effects provide credible exogenous variation.
-On this however, the strategy runs into the limitations of Fame location data discussed in \ref{ss:data-limitations}
+On this however, the strategy runs into the limitations of Fame location data discussed in \ref{ss:data-limitations}.
 The analysis is also helped by the relatively higher number of panel observations
 to relatively low ratio of confounding movers in the dataset,
 as well as the numerous, plausibly exogenous reasons why a firm might choose 
 to set up in a location with path dependency, rather than to fully maximise
 its peer spillover benefits.
 On the balance of arguments, I take the assumption of network exogeneity
-and identification approach for models in Tables \ref{tab:lmm-pc8} and \ref{tab:lmm-pc8}.
+and identification approach for the group models in Table \ref{tab:lmm_pc8}.
 \par
 I use the instruments $\mathbf W^2\mathbf x_t$ and other second-order variants
-for this section's group models \todo{Table VI, models (5-8)}
+for this section's group models \ref{tab:lmm_pc8}
 and $\mathbf W^2\mathbf x_t, \mathbf W^3\mathbf x_t, \mathbf W^4$
-as feasible instruments for this section's network models in \tablerefp{tab:dd}.
+as feasible instruments for this section's network models in \tablerefp{tab:dd-basic-str}.
 Equation \eqref{eq:static-moment-conditions} illustrates the valid $2l$ moment conditions,
 noting that I have chosen to display this in a $l \times 2$ matrix for space and conceptual symmetry,
 as the instruments can be grouped by $k_t$ and $l_t$ regressors.
@@ -437,17 +437,20 @@ so does not help increase our identification of $y_{j,t}$.
 \subsection{Linear-in-means grouped model}
 \label{ss:model-lmm}
 
-The first model proceeds with the strict error orthogonality
+The initial model proceeds with the strict error orthogonality
 \eqref{eq:static-ass-ma-exogeneity} and \eqref{eq:static-ass-error-orthogonality}
-assumptions. Estimation has the following reduced form:
+assumptions. This is helpful as a benchmark to compare the IV strategy,
+with more credible assumptions, that I then adopt.
+Model (1.) estimates \eqref{eq:static-lmm-reduced-estimated},
+noting that the single group interactions matrix $\mathbf W_{g}$ corresponds to the \itx{pc8} group.
 \begin{align}
     \eqreref{eq:static-main-peer-effects}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
         \\ \notag
             &\qquad
                     + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
-                    + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
-                    + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+                    + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij,g}k_{j,t}
+                    + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij,g}l_{j,t}
     \\ \label{eq:static-lmm-reduced-estimated}
     y_{i,t} &= \alpha_i
                     + \gamma_t
@@ -455,9 +458,9 @@ assumptions. Estimation has the following reduced form:
                     + \pi_1 k_{i,t}
                     + \pi_2 l_{i,t}
                     \\ &\qquad \notag
-                    + \pi_3 \sum_{j\neq i} w_{ij}y_{i,t}
-                    + \pi_4 \sum_{j\neq i} w_{ij}k_{j,t}
-                    + \pi_5 \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \pi_3 \sum_{j\neq i} w_{ij,g}y_{i,t}
+                    + \pi_4 \sum_{j\neq i} w_{ij,g}k_{j,t}
+                    + \pi_5 \sum_{j\neq i} w_{ij,g}l_{j,t}
                     + \varepsilon_{i,t}
     \\
     \mathbb E[ &\varepsilon_{i,t} \cdot
@@ -492,26 +495,28 @@ assumptions. Estimation has the following reduced form:
 With 5 structural and 5 reduced-form parameters, this model is identified.
 The initial static model applies simple time-invariant weights $w_{ij}$
 in a group structure, $\mathbf W_{g1}$
-As has been indicated by the sum of peers $j\neq i$,
-I adopt a 'leave-one-out' approach in line with
-the zero-diagonal structure of $\mathbf W_{g1}$ described.
-Intuitively, this is the unweighted average of peer TFP within a spatial ring.
-This weighting matrix is comparable to many sets of weights applied for the 'Linear-in-Means (LMM)' Model
-common to the peer effects literature, for instance \cite{Moffitt2001}.
 I discussed group assignment in section \ref{ss:data-distance}.
-The initial Model (1.) estimates \eqref{eq:static-lmm-reduced-estimated},
-meaning a single group $\mathbf W_{g1}$ corresponding to the \itx{pc8} group,
-assuming the full vector of error orthogonality implying regressor exogeneity.
-
+\par
+Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
+The reduced-form equation is given in \eqref{eq:static-lmm-iv-fd-reduced-estimated}.
+The IV strategy has the moment conditions in \eqref{eq:static-moment-conditions}.
 \begin{align}
+    \eqreref{eq:static-main-peer-effects}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
+        \\ \notag
+            &\qquad
+                    + \delta_0 \sum_{j\neq i} w_{ij,g}y_{j,t}
+                    + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij,g}k_{j,t}
+                    + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij,g}l_{j,t}
+    \\
     \label{eq:static-lmm-iv-fd-reduced-estimated}
     \Delta y_{i,t} &= \Delta\gamma_t
                     + \beta_1 \Delta k_{i,t}
                     + \beta_2 \Delta l_{i,t}
                     \\ &\qquad \notag
-                    + \beta_3 \Delta \sum_{j\neq i} w_{ij}y_{i,t}
-                    + \beta_4 \Delta \sum_{j\neq i} w_{ij}k_{j,t}
-                    + \beta_5 \Delta \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \beta_3 \Delta \sum_{j\neq i} w_{ij,g}y_{i,t}
+                    + \beta_4 \Delta \sum_{j\neq i} w_{ij,g}k_{j,t}
+                    + \beta_5 \Delta \sum_{j\neq i} w_{ij,g}l_{j,t}
                     + \Delta \varepsilon_{i,t}
     \\
     \eqreref{eq:static-moment-conditions}
@@ -521,25 +526,139 @@ assuming the full vector of error orthogonality implying regressor exogeneity.
         \begin{pmatrix}
             k_{i,t}                                     & l_{i,t} \\
             w_{ij}k_{j,t}                               & w_{ij}l_{j,t}   \\
-            \left[\mathbf W^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2\right]_{(j,)} \mathbf l_t\\
-            \left[\mathbf W^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W^2_g\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2_g\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W^3_g\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3_g\right]_{(j,)} \mathbf l_t\\
             \vdots & \vdots \\
-            \left[\mathbf W^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k\right]_{(j,)} \mathbf l_t
+            \left[\mathbf W^k_g\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k_g\right]_{(j,)} \mathbf l_t
         \end{pmatrix}
     ]
     = 0_{l\times 2}
 \end{align}
 
-Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
-in line with the moment conditions in \eqref{eq:static-moment-conditions}.
-As an extension in \ref{tab:lmm-3r}, I regress the multiple, non-overlapping spatial groups at once.
-I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
-for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously.
+\noindent
+Results for Model (1.) and (2.) are given in Table \ref{tab:lmm_pc8}.
 
 \wraptable
         {LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}
         {../../model/output/final/results_1a_lmm_pc8}
         {}
+
+As an extension in \ref{tab:lmm-3r}, I regress the multiple, non-overlapping spatial groups at once.
+I apply the $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ concentric doughnut group transformations
+for \itx{pc8}, \itx{pc4} and \itx{ttwa} to run all in the panel IV model at once.
+The algebraic derivation of endogeneity and valid instruments
+is very similar to those in the single-regressor problem,
+however the use of multiple orthogonal $\mathbf W_g$ matrices
+opens up 
+Algebraically, multiple spatial autoregressors do not change
+the peer effects endogeneity and and valid instrument problem,
+where the inversion term is the sum matrices weighted by their coefficient $\delta_s$.
+As long as there is sufficient heterogeneity between the weighting matrices,
+which here is guaranteed by the mutual orthogonality of $\mathbf W_g$,
+then there is no risk of multicollinearity.
+\begin{align}
+    \mathbf y_t &= \boldsymbol \alpha
+                    + \gamma_t \boldsymbol \iota
+                    + \beta_0 \boldsymbol \iota
+                    + \beta_1 \mathbf k_{t}
+                    + \beta_2 \mathbf l_{t}
+                    \\ & \quad \notag
+                    + \sum_{s=1}^3 \delta_s \mathbf W_{gs} \mathbf y_t
+                    + \sum_{s=1}^3 (\xi_s-\delta_s\beta_1) \mathbf W_{gs} \mathbf k_t
+                    + \sum_{s=1}^3 (\zeta_s-\delta_s\beta_2) \mathbf W_{gs} \mathbf l_t 
+                    + \boldsymbol \varepsilon_{t}
+    \\[1em] \notag
+            &= (\mathbb I - \sum_{s=1}^3\delta_s \mathbf W_{gs})^{-1} \big(
+                    \boldsymbol \alpha
+                    + \gamma_t \boldsymbol \iota
+                    + \beta_0 \boldsymbol \iota
+                    + \beta_1 \mathbf k_{t}
+                    + \beta_2 \mathbf l_{t}
+                    + \boldsymbol \varepsilon_{t}
+                    \\ & \quad \notag
+                    + (\xi_0-\delta_0\beta_1) \mathbf W \mathbf k_t
+                    + (\zeta_0-\delta_0\beta_2) \mathbf W \mathbf l_t 
+                \big)
+    \\[1em]
+            &=   \sum_{k=0}^\infty(\sum_{s=1}^3\delta_s \mathbf W_{gs})^k
+                        \boldsymbol \alpha
+                    +\frac{\gamma_t + \beta_0}{1-\sum_{s=1}^3\delta_s}\boldsymbol \iota
+                    + \sum_{k=0}^\infty (\sum_{s=1}^3\delta_s \mathbf W_{gs})^k
+                       (\beta_1 \mathbf k_{t} + \beta_2 \mathbf l_{t})
+                    \\ & \quad \notag
+                    + \sum_{k=0}^\infty
+                        (\sum_{s=1}^3 \delta_s \mathbf W_{gs})^k
+                        \sum_{s=1}^3 \mathbf W_{gs}
+                        \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}
+                        \begin{pmatrix}
+                            \xi_s-\delta_s\beta_1       \\
+                            \zeta_s-\delta_s\beta_2
+                        \end{pmatrix}
+                    + \sum_{k=0}^\infty (\sum_{s=1}^3\delta_s \mathbf W_{gs})^k
+                        \boldsymbol \varepsilon_{t}
+    \\[1em]
+    \label{eq:static-3r-endogenous-effect}
+    y_{j,t}     &= \dots
+                    + \underbrace{
+                        \sum_{k=0}^\infty
+                            \left[
+                            (\sum_{s=1}^3 \delta_s \mathbf W_{gs})^k
+                            \sum_{s=1}^3 \mathbf W_{gs}
+                            \right]_{(j,)}
+                            \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}
+                            \begin{pmatrix}
+                                \xi_s-\delta_s\beta_1       \\
+                                \zeta_s-\delta_s\beta_2
+                            \end{pmatrix}
+                    }_{\text{exogenous}_j}
+                    \\ & \quad\ \ \quad \notag
+                    + \sum_{k=0}^\infty
+                        [
+                            (\sum_{s=1}^3\delta_s \mathbf W_{gs})^k
+                        ]_{(j,)} \cdot
+                    \boldsymbol \varepsilon_t
+\end{align}
+
+This strategy of multiple weighting groups at once
+opens up interesting additional cross-transformation instruments.
+Either any combination of higher-order $\mathbf W_{gs}$ group transformations
+can be employed as instruments \eqref{eq:static-3r-x-instr},
+or the linear composite of the 3 group transformation matrices,
+which intuitively represents all firms in a \itx{ttwa} can be used in higher orders \eqref{eq:static-3r-sum-instr}.
+\begin{align}
+    \label{eq:static-3r-x-instr}
+    \mathbb E &[
+        \epsilon_{i,t}\ 
+        \vert
+        \begin{pmatrix}
+            \left[\mathbf W_{g1}\mathbf W_{g2}\right]_{(j,)} \mathbf k_t & \left[\mathbf W_{g1}\mathbf W_{g2}\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W_{g2}\mathbf W_{g3}\right]_{(j,)} \mathbf k_t & \left[\mathbf W_{g2}\mathbf W_{g3}\right]_{(j,)} \mathbf l_t\\
+            \vdots & \vdots \\
+        \end{pmatrix}
+    ]
+    = 0
+    \\
+    \label{eq:static-3r-sum-instr}
+    \mathbb E &[
+        \epsilon_{i,t}\ 
+        \vert
+        \begin{pmatrix}
+            \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g1}\right]_{(j,)} \mathbf k_t
+            & \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g1}\right]_{(j,)} \mathbf l_t
+            \\
+            \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g2}\right]_{(j,)} \mathbf k_t
+            & \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g2}\right]_{(j,)} \mathbf l_t
+            \\
+            \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g3}\right]_{(j,)} \mathbf k_t
+            & \left[\sum_{s=1}^3\mathbf W_{gs}\mathbf W_{g3}\right]_{(j,)} \mathbf l_t
+        \end{pmatrix}
+    ]
+    = 0_{3\times 2}
+\end{align}
+
+Coefficients in Table \ref{tab:lmm-3r} show that
+$\hat\delta_1$ estimates match those of $\hat\delta_0$ in Table \ref{tab:lmm_pc8},
+this is an intuitive result due to the orthogonality of $\mathbf W_{g}\mathbf x$ regressors.
 
 \begin{table}[hbtp]
     \centering
@@ -555,20 +674,6 @@ for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
-
-\par
-I can show algebraically that multiple spatial autoregressors do not change the reflection problem:
-the moving average inversion's coefficient merely becomes the weighted sum
-of 3 independent matrices $\theta_k \mathbf W_{gk}$.
-As long as there is sufficient heterogeneity between the weighting matrices,
-which in these cases is guaranteed by the orthogonality of $\mathbf W_g$
-matrices to each other, then there is no risk of multicollinearity.
-Coefficients in the results $\boldsymbol \hat\theta_1$ for the closest spatial group \itx{pc8}
-are identical to $\boldsymbol \hat\theta_0$ in the one-group model.
-This is an unsurprising result justified by the orthogonality, since the additional regressors
-do not affect the variation attributable to the $\mathbf W_{g1}$-lagged variables
-as the regressors with $\mathbf W_{g2}, \mathbf W_{g3}$ are orthogonal.
-\todo{Modify equation 18 to include $\sum W^3$ in the inversion term}
 
 
 % ---
@@ -588,15 +693,19 @@ is key to determination of a peer group,
 it is intuitive that increasing distance, as a continuous measure,
 would imply a decline in influence, rather than equal influence of all peers in an arbitrary cut-off.
 \par
-I estimate this model in panel IV reduced-form only.
+I estimate this model employing the spatial lag instruments only,
+dropping the error orthogonality variant.
+The reduced-form equation and moment conditions of these models
+are identical to those of the group setting, except for the use of
+different weights which show up in $w_{ij,d}$ and $\mathbf W_d$.
 \begin{align}
     \Delta y_{i,t} &= \Delta\gamma_t
                     + \beta_1 \Delta k_{i,t}
                     + \beta_2 \Delta l_{i,t}
                     \\ &\qquad \notag
-                    + \beta_3 \Delta \sum_{j\neq i} w_{ij}y_{i,t}
-                    + \beta_4 \Delta \sum_{j\neq i} w_{ij}k_{j,t}
-                    + \beta_5 \Delta \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \beta_3 \Delta \sum_{j\neq i} w_{ij,d}y_{i,t}
+                    + \beta_4 \Delta \sum_{j\neq i} w_{ij,d}k_{j,t}
+                    + \beta_5 \Delta \sum_{j\neq i} w_{ij},dl_{j,t}
                     + \Delta \varepsilon_{i,t}
     \\
     \eqreref{eq:static-dd-moment-conditions}
@@ -605,17 +714,20 @@ I estimate this model in panel IV reduced-form only.
         \vert
         \begin{pmatrix}
             k_{i,t}                                     & l_{i,t} \\
-            w_{ij}k_{j,t}                               & w_{ij}l_{j,t}   \\
-            \left[\mathbf W^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W^2\right]_{(j,)} \mathbf l_t\\
-            \left[\mathbf W^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W^3\right]_{(j,)} \mathbf l_t\\
+            w_{ij}k_{j,t}                               & w_{ij,d}l_{j,t}   \\
+            \left[\mathbf W_d^2\right]_{(j,)} \mathbf k_t & \left[\mathbf W_d^2\right]_{(j,)} \mathbf l_t\\
+            \left[\mathbf W_d^3\right]_{(j,)} \mathbf k_t & \left[\mathbf W_d^3\right]_{(j,)} \mathbf l_t\\
             \vdots & \vdots \\
-            \left[\mathbf W^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W^k\right]_{(j,)} \mathbf l_t
+            \left[\mathbf W_d^k\right]_{(j,)} \mathbf k_t & \left[\mathbf W_d^k\right]_{(j,)} \mathbf l_t
         \end{pmatrix}
     ]
     = 0_{l\times 2}
 \end{align}
 
 Results for the 3 respective reciprocal distance measures are given in \tablerefp{tab:dd-basic-str}.
+Note that each of the distance $d_1, d_2, d_3$ measures are non-orthogonal, distinct transformations
+and so the properties discussed for the $W_{gs}$ matrices allowing them to be regressed at once
+do not here apply.
 In addition, I include a specification exploring employing more lags
 for overidentification.
 \begin{table}[hbtp]
@@ -652,8 +764,5 @@ against the instruments employed.
 This shows improvements in adjusted $R^2$ for the model up to 3 lags,
 but barely any improvement for including an additional 4th-order lag.
 \\
-This distance-decay specification revises down the estimate from peers to an elasticity of 0.168,
-lower than the results given by the LMM specification. This is likely due to \todo{...}
-\\
-In addition, I introduce controls \todo{...}
-\todo{I run a variant where firms which share a location, meaning distance is mechanically 0, are excluded}.
+\pagebreak
+To investigate this issue, I run an extension where firms which share a location, meaning distance is mechanically 0, are excluded.
