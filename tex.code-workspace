@@ -14,7 +14,7 @@
 		"latex-workshop.latex.autoBuild.run": "onSave",
 		"latex-workshop.message.warning.show": false,
 		"latex-workshop.message.error.show": false,
-        "latex-workshop.view.pdf.invert": 0,
+        "latex-workshop.view.pdf.invert": 1,
         
         "latex-workshop.latex.recipe.default": "pdflatex",
         "latex-workshop.latex.tools": [
@@ -99,10 +99,11 @@
         },
         "ltex.latex.commands": {
             "\\itx{}": "dummy",
-            "\\wraptable{}{}{}": "ignore"
+            "\\wraptable{}{}{}": "ignore",
         },
         "ltex.latex.environments": {
-            "align*": "ignore"
+            "align*": "ignore",
+            "tabular": "ignore"
         },
         "ltex.dictionary": {
             "en-GB": [

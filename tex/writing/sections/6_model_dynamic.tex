@@ -295,7 +295,6 @@ There is a dynamic corollary to the static derivation of the endogenous term $y_
         }_{\text{error transformation}_j}
 \end{align}
 
-
 For system GMM, I need to show that the reduced-form first difference regressors are exogenous.
 The first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
 \begin{align}
@@ -346,8 +345,6 @@ I could increase this. Fame is rich on the time dimension, with up to 19 lags at
 and a median of 6 lags, so I could safely provide more lags of regressors as instruments.
 Further lags is likely to have a decreasing marginal effect on explanatory power
 and additionally \todo(...)
-
-\todo{Discuss introducing a new weighting method using past firm similarity.}
 \par
 I estimate the equation fulfilling the vector of moment conditions,
 (\ref{eq:dyn-moment-conditions}) via GMM.
@@ -367,13 +364,10 @@ I estimate the equation fulfilling the vector of moment conditions,
     \right]
     &= 0
 \end{align}
-\todo{I should introduce a control (basically a diff-in-diff?) of peers from the same industry
-across the country (outside the spatial bubble).}
 
- 
 \wraptable
     {Dynamic panel: baseline instrumental specification}
-    {../../model/output/instr_3a_identif}
+    {../../model/output/results_3a_basic_str}
     {\begin{itemize}
         \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
                 at the 95\% level to reject the null-hypothesis that the model is identified.
@@ -385,24 +379,24 @@ across the country (outside the spatial bubble).}
                 `checkmark' indicates some instruments used were weak.
     \end{itemize}
     }
-\wraptable
-    {Dynamic panel: deeper vector regressor lags}
-    {../../model/output/instr_3b_Jover}
-    {Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
-    at the 95\% level to reject the null-hypothesis that the model is identified.
-    Anderson-Rubin AR(1) test: 
-        Model includes a constant as the baseline for \itx{t} fixed effects.
-    }
+% \wraptable
+%     {Dynamic panel: deeper vector regressor lags}
+%     {../../model/output/instr_3b_Jover}
+%     {Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
+%     at the 95\% level to reject the null-hypothesis that the model is identified.
+%     Anderson-Rubin AR(1) test: 
+%         Model includes a constant as the baseline for \itx{t} fixed effects.
+%     }
 
-\wraptable
-    {Dynamic panel: deeper autoregressive lags}
-    {../../model/output/instr_3c_ar}
-    {
-        Model includes a constant as the baseline for \itx{t} fixed effects.
-    }
+% \wraptable
+%     {Dynamic panel: deeper autoregressive lags}
+%     {../../model/output/instr_3c_ar}
+%     {
+%         Model includes a constant as the baseline for \itx{t} fixed effects.
+%     }
 
 \par 
-Finally, a Sargan-Hansen J-test is implemented to check if these instruments are 
+Finally, a Sargan-Hansen J-test is implemented to check if these instruments are
 over-identified, meaning the moment conditions cannot be fulfilled with 95\% confidence.
 In all models, the J-test fails to reject the null hypothesis,
 meaning the model's moment conditions are jointly correct.

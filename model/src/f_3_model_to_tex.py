@@ -46,13 +46,20 @@ def calc_r2_adj(r2: float, nobs: int, nparams: int) -> float:
 def format_transf(var_name: str) -> str:
     # Fallback if the variable doesn't match the expected underscore pattern
     if '_' not in var_name:
-        return var_name 
+        if '|' in var_name:
+            vector_arr = var_name.split('|')
+            vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
+            vec_latex = "_".join(vector_arr)
+            return f"${vec_latex}$"
+        return var_name
         
     # 1. Split the string at the last underscore
     matrix_part, vector_part = var_name.rsplit('_', 1)
     
     # 2. Format the vector part (lowercase, bold)
-    vec_latex = f"\\mathbf{{{vector_part}}}"
+    vector_arr = vector_part.split('|')
+    vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
+    vec_latex = "_".join(vector_arr)
     
     # 3. Define the regex replacement logic for the matrix part
     def matrix_replacer(match):
@@ -81,14 +88,6 @@ def format_transf(var_name: str) -> str:
     
     # 4. Combine into final LaTeX string
     return f"${mat_latex}{vec_latex}$"
-
-# ==========================================
-# Example Usage Tests
-# ==========================================
-# print(format_transf("wg3_y"))          -> $\mathbf{W}_{g3}\mathbf{y}$
-# print(format_transf("w2g1_k"))         -> $\mathbf{W}^2_{g1}\mathbf{k}$
-# print(format_transf("wg1wg2_k"))       -> $\mathbf{W}_{g1}\mathbf{W}_{g2}\mathbf{k}$
-# print(format_transf("(i-wg1)w2g1_k"))  -> $(\mathbf{I} - \mathbf{W}_{g1})\mathbf{W}^2_{g1}\mathbf{k}$
 
 if __name__ == "__main__":
     test_vars = [
@@ -319,11 +318,16 @@ def generate_latex_table(
     latex_lines.extend(["\t\t\\toprule\\toprule", " & ".join(cols) + " \\\\[0.8em]", "\t\t\\toprule"])
 
     # We need to create a combined_mod that has all the struct_params from all the models
-    combined_sp = []
+    combined_sp: list[str] = []
     for mod in models.values():
         if not mod['use_struct']:
             continue
-        combined_sp.extend(mod['struct_params'])
+        if isinstance(mod['struct_params'], list):
+            combined_sp.extend(mod['struct_params'])
+        elif isinstance(mod['struct_params'], dict):
+            combined_sp.extend(mod['struct_params'].keys())
+        else:
+            raise ValueError(f"Unexpected type for struct_params: {type(mod['struct_params'])}")
     mod_combined = models[model_names[0]].copy()
     mod_combined['struct_params'] = list({ k: True for k in combined_sp }.keys())
 
@@ -372,13 +376,16 @@ def generate_latex_table(
     # Only add the i_row if there is at least one model with a non-empty entities_fe
     
     if any(models[m].get('instruments') for m in model_names):
-        # instr_row = "\t\tInstruments & " + " & ".join([models[m].get('instruments', []) for m in model_names]) + "\n\t\t\\\\"
-        # Construct instr_row model by model
         instr_row = "\t\t\\footnotesize{Instr.} & "
         for m in model_names:
             instr_list = models[m].get('instruments', [])
             if instr_list:
-                instr_transf = [format_transf(x) for x in instr_list]
+                instr_transf = []
+                for x in instr_list:
+                    if isinstance(x, str):
+                        instr_transf.append(format_transf(x))
+                    elif isinstance(x, dict):
+                        instr_transf.append(format_transf(f"{x['name']}|{{t-{x['from']}:{x['to']}}}"))
                 instr_mod_tup = tuple([", ".join(instr_transf[i:i + 2]) for i in range(0, len(instr_transf), 2)])
                 instr_mod_block = form_block(instr_mod_tup, block_type='c', size='footnotesize')
                 instr_str = instr_mod_block

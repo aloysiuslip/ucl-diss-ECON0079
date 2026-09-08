@@ -34,7 +34,8 @@ def parse_linear(filepath: str | Path) -> dict:
         if model_match:
             current_model = model_match.group(1)
             models[current_model] = {
-                'Y': '', 'params': {}, 'struct_params': [], 'instruments': [],
+                'Y': '', 'params': {},
+                'struct_params': [], 'instruments': [],
                 'obs': '',
                 'time_nb': '', 'entities_nb': '',
                 'time_fe': False, 'entities_fe': False, 'network_fe': False,
