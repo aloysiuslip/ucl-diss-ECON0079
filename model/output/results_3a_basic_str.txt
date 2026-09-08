@@ -1,4 +1,4 @@
- Dynamic panel-data estimation, two-step system GMM
+ Dynamic panel-data estimation, two-step system GMM. Model 'k-pred':
  Group variable: registered_number                       Number of obs = 717300  
  Time variable: year                                     Min obs per group: 0    
  Number of instruments = 36                              Max obs per group: 17   
@@ -45,8 +45,56 @@ Arellano-Bond test for AR(1) in first differences: z = -8.31 Pr > z =0.000
 Arellano-Bond test for AR(2) in first differences: z = -1.52 Pr > z =0.129
 
 ================================================================================
+ Dynamic panel-data estimation, two-step system GMM. Model 'l-pred':
+ Group variable: registered_number                       Number of obs = 717300  
+ Time variable: year                                     Min obs per group: 0    
+ Number of instruments = 36                              Max obs per group: 17   
+ Number of groups = 139638                               Avg obs per group: 5.14 
+struct_map: {"k": "beta_1", "l": "beta_2", "wd1_y": "delta_0", "L1.wd1_y": "delta_1", "L2.wd1_y": "delta_2", "L3.wd1_y": "delta_3", "L4.wd1_y": "delta_4", "L5.wd1_y": "delta_5", "L1.y": "phi_1", "L2.y": "phi_2", "L3.y": "phi_3", "L4.y": "phi_4", "L5.y": "phi_5"}
+struct_calc: ["xi_0", "zeta_0", "xi_1", "zeta_1", "xi_2", "zeta_2", "xi_3", "zeta_3", "xi_4", "zeta_4", "xi_5", "zeta_5"]
+instruments: [{"name": "y", "from": 2, "to": 3}, {"name": "k", "from": 2, "to": 3}, {"name": "l", "from": 1, "to": 2}, {"name": "wd1_y", "from": 2, "to": 3}, {"name": "wd1_k", "from": 1, "to": 2}, {"name": "wd1_l", "from": 2, "to": 3}]
+Generated Command String:
+y L1.y k l wd1_y wd1_k wd1_l | gmm(y, 2:3) gmm(k, 2:3) gmm(l, 1:2) gmm(wd1_y, 2:3) gmm(wd1_k, 1:2) gmm(wd1_l, 2:3) | timedumm collapse| gmm(y, 2:3) gmm(k, 2:3) gmm(l, 1:2) gmm(wd1_y, 2:3) gmm(wd1_k, 1:2) gmm(wd1_l, 2:3) | timedumm collapse
+| y         |   coefficient |     std_err |   z_value |     p_value | sig   |
+|:----------|--------------:|------------:|----------:|------------:|:------|
+| L1.y      |   -0.00057651 | 0.000928218 | -0.621093 | 0.534538    |       |
+| k         |    0.30006    | 0.15017     |  1.99814  | 0.0457018   | *     |
+| l         |    0.645379   | 0.15115     |  4.26978  | 1.95663e-05 | ***   |
+| wd1_y     |   -0.150252   | 0.334737    | -0.448866 | 0.653528    |       |
+| wd1_k     |    0.0698848  | 0.234853    |  0.297568 | 0.766033    |       |
+| wd1_l     |    0.259163   | 0.488636    |  0.530379 | 0.595849    |       |
+| year_2008 |    0.01112    | 0.00611486  |  1.81852  | 0.0689848   |       |
+| year_2009 |   -0.0168503  | 0.00644865  | -2.613    | 0.00897526  | **    |
+| year_2010 |   -0.0129526  | 0.0130259   | -0.994371 | 0.320042    |       |
+| year_2011 |   -0.0238689  | 0.0111486   | -2.14097  | 0.0322765   | *     |
+| year_2012 |   -0.0277692  | 0.0098004   | -2.83348  | 0.00460443  | **    |
+| year_2013 |   -0.0391912  | 0.0103825   | -3.77473  | 0.000160182 | ***   |
+| year_2014 |   -0.0267579  | 0.00881814  | -3.03441  | 0.00241004  | **    |
+| year_2015 |   -0.0204916  | 0.00893572  | -2.29323  | 0.0218348   | *     |
+| year_2016 |   -0.0316913  | 0.00782298  | -4.05106  | 5.09866e-05 | ***   |
+| year_2017 |   -0.0542653  | 0.010005    | -5.4238   | 5.83444e-08 | ***   |
+| year_2018 |   -0.0689391  | 0.0122737   | -5.6168   | 1.94522e-08 | ***   |
+| year_2019 |   -0.0628381  | 0.0104857   | -5.99274  | 2.06334e-09 | ***   |
+| year_2020 |   -0.105615   | 0.0237076   | -4.45491  | 8.39288e-06 | ***   |
+| year_2021 |   -0.0275634  | 0.0211719   | -1.30189  | 0.192955    |       |
+| year_2022 |   -0.0385741  | 0.0169926   | -2.27005  | 0.0232045   | *     |
+| year_2023 |   -0.0615729  | 0.01118     | -5.50739  | 3.64187e-08 | ***   |
+| year_2024 |   -0.117177   | 0.0409071   | -2.86447  | 0.0041771   | **    |
+| _con      |    2.2159     | 0.61459     |  3.60548  | 0.000311571 | ***   |
+| beta_1    |    0.30006    | 0.15017     |  1.99814  | 0.0457022   |       |
+| beta_2    |    0.645379   | 0.15115     |  4.26978  | 1.95688e-05 |       |
+| delta_0   |   -0.150252   | 0.334737    | -0.448866 | 0.653528    |       |
+| phi_1     |   -0.00057651 | 0.000928218 | -0.621093 | 0.534538    |       |
+| xi_0      |    0.0248002  | 0.236997    |  0.104643 | 0.916659    |       |
+| zeta_0    |    0.162193   | 0.41835     |  0.387697 | 0.69824     |       |
+Hansen test of overid. restrictions: chi(12) = 9.150 Prob > Chi2 = 0.690
+Arellano-Bond test for AR(1) in first differences: z = -15.23 Pr > z =0.000
+Arellano-Bond test for AR(2) in first differences: z = -1.43 Pr > z =0.154
 
- Dynamic panel-data estimation, two-step system GMM
+================================================================================
+
+
+ Dynamic panel-data estimation, two-step system GMM. Model 'both-endog':
  Group variable: registered_number                       Number of obs = 717300  
  Time variable: year                                     Min obs per group: 0    
  Number of instruments = 36                              Max obs per group: 17   

@@ -114,24 +114,6 @@ It estimate this section's results with System GMM.
 Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
 \par
-I commence finding these valid instruments by assuming the structural specification (\ref{eq:static-main-gva})
-exhibits no autocorrelation in its error term $\varepsilon_{i,t}$,
-though I now allow for moderate cross-sectional correlation across firms.
-\begin{align}
-    \label{eq:dyn-contemporaneous-endogeneity}
-    \mathbb E[x_{i,t}\varepsilon_{i,t}] &\neq 0              ,\qquad \exists i
-    \\
-    x_{i,t} &=
-    \begin{pmatrix}
-        k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}
-    \end{pmatrix}
-    \\ \notag
-    \Delta x_{i,t} &=
-    \begin{pmatrix}
-        \Delta k_{i,t} &   \Delta l_{i,t} &   \Delta \sum_{j\neq i} w_{ij,t}z_{j,t}
-    \end{pmatrix}
-\end{align}
-
 I firstly relax the strict exogeneity assumption of the standard factors to weak exogeneity.
 There are two approaches to this: capital and labour could be fully flexible inputs,
 meaning they are optimised as part of the decision set at time $t$,
@@ -405,26 +387,3 @@ meaning the model's moment conditions are jointly correct.
 Following above reasoning, lags of $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
 of a higher order than 2 are exogenous to my reduced-form specification.
 However, 
-\subsection{Instrumental identification under error autocorrelation}
-
-I appear to have strong identification given assumptions (\ref{eq:dyn-no-ac}) and (\ref{eq:dyn-xs-corr-errors}).
-The instruments above exhibit strong correlation under Anderson-Rubin tests and exclusion restriction has been derived.
-However, there exists a niche case of diagonally-correlated errors,
-namely despite (\ref{eq:dyn-no-ac}) and (\ref{eq:dyn-xs-corr-errors}),
-I ought to consider the following:
-
-\begin{equation}
-    \mathbb E[\varepsilon_{i,t} \varepsilon_{j,t-k}]\neq 0,\qquad\exists i,j,k
-\end{equation}
-%
-This is not as implausible as it may appear due to this analysis' peer effects setting. 
-There may be some local omitted shock $\nu_t$,
-that impacts peer firm A's TFP via $\varepsilon_t$
-and impacts target firm B's TFP after a lag via $\varepsilon_{t-k}$.
-This could be a price shock with random adjustment \todo{or}
-\par
-Additionally, relaxing (\ref{eq:dyn-no-ac}) to allow for weak error autocorrelation
-between limited $\varepsilon_{i,t}$ and $\varepsilon_{i,t-k}$ for limited $k$
-proves a similar problem.
-\par
-\todo{Firstly, I test for error autocorrelation.}

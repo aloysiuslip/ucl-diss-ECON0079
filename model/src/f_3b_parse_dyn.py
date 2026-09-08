@@ -16,7 +16,11 @@ def parse_dyn(filepath: str | Path) -> dict:
         
         if 'Dynamic panel-data estimation' in line:
             model_count += 1
-            current_model = f"dyn{model_count}"
+            model_match = re.search(r"Model '([^']+)':", line)
+            if model_match:
+                current_model = model_match.group(1)
+            else:
+                raise ValueError(f"Could not extract model name from line: {line}")
             models[current_model] = {
                 'Y': '', 'params': {}, 'obs': '',
                 'struct_params': [],

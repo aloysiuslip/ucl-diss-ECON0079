@@ -1,14 +1,18 @@
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 		\toprule\toprule
 \makecell[tl]{
 		} & \makecell[tc]{
 			\small{(1.)} 
 			\\
-			\footnotesize{dyn1} 
+			\footnotesize{k-pred} 
 		} & \makecell[tc]{
 			\small{(2.)} 
 			\\
-			\footnotesize{dyn2} 
+			\footnotesize{l-pred} 
+		} & \makecell[tc]{
+			\small{(3.)} 
+			\\
+			\footnotesize{both-endog} 
 		} \\[0.8em]
 		\toprule
 \makecell[tl]{
@@ -19,6 +23,10 @@
 			$0.341$ 
 			\\
 			\footnotesize{(0.123)} 
+		} & \makecell[tc]{
+			$0.300$ 
+			\\
+			\footnotesize{(0.150)} 
 		} & \makecell[tc]{
 			$0.352$ 
 			\\
@@ -34,6 +42,10 @@
 			\\
 			\footnotesize{(0.249)} 
 		} & \makecell[tc]{
+			$0.645$ 
+			\\
+			\footnotesize{(0.151)} 
+		} & \makecell[tc]{
 			$0.510$ 
 			\\
 			\footnotesize{(0.237)} 
@@ -43,6 +55,10 @@
 			$\phi_1$ 
 			\\
 			~ 
+		} & \makecell[tc]{
+			$-0.001$ 
+			\\
+			\footnotesize{(0.001)} 
 		} & \makecell[tc]{
 			$-0.001$ 
 			\\
@@ -62,6 +78,10 @@
 			\\
 			\footnotesize{(0.390)} 
 		} & \makecell[tc]{
+			$-0.150$ 
+			\\
+			\footnotesize{(0.335)} 
+		} & \makecell[tc]{
 			$0.195$ 
 			\\
 			\footnotesize{(0.390)} 
@@ -76,6 +96,10 @@
 			\\
 			\footnotesize{(0.239)} 
 		} & \makecell[tc]{
+			$0.025$ 
+			\\
+			\footnotesize{(0.237)} 
+		} & \makecell[tc]{
 			$-0.043$ 
 			\\
 			\footnotesize{(0.278)} 
@@ -89,6 +113,10 @@
 			$0.511$ 
 			\\
 			\footnotesize{(0.489)} 
+		} & \makecell[tc]{
+			$0.162$ 
+			\\
+			\footnotesize{(0.418)} 
 		} & \makecell[tc]{
 			$0.493$ 
 			\\
@@ -105,11 +133,19 @@
 		} & \makecell[tc]{
 			\text{\sffamily X} 
 			\\
+			\footnotesize{(0.690)} 
+		} & \makecell[tc]{
+			\text{\sffamily X} 
+			\\
 			\footnotesize{(0.913)} 
 		}
 		\\ [0.9em]
 		\makecell[tl]{
 			AR(1) test 
+		} & \makecell[tc]{
+			\checkmark 
+			\\
+			\footnotesize{(0.000)***} 
 		} & \makecell[tc]{
 			\checkmark 
 			\\
@@ -129,6 +165,10 @@
 		} & \makecell[tc]{
 			\text{\sffamily X} 
 			\\
+			\footnotesize{(0.154)} 
+		} & \makecell[tc]{
+			\text{\sffamily X} 
+			\\
 			\footnotesize{(0.294)} 
 		}
 		\\ [0.9em]
@@ -142,12 +182,18 @@
 		} & \makecell[tc]{
 			\footnotesize{$\mathbf{y}_{t-2:3}$, $\mathbf{k}_{t-2:3}$} 
 			\\
+			\footnotesize{$\mathbf{l}_{t-1:2}$, $\mathbf{W}_{d1}\mathbf{y}_{t-2:3}$} 
+			\\
+			\footnotesize{$\mathbf{W}_{d1}\mathbf{k}_{t-1:2}$, $\mathbf{W}_{d1}\mathbf{l}_{t-2:3}$} 
+		} & \makecell[tc]{
+			\footnotesize{$\mathbf{y}_{t-2:3}$, $\mathbf{k}_{t-2:3}$} 
+			\\
 			\footnotesize{$\mathbf{l}_{t-2:3}$, $\mathbf{W}_{d1}\mathbf{y}_{t-2:3}$} 
 			\\
 			\footnotesize{$\mathbf{W}_{d1}\mathbf{k}_{t-2:3}$, $\mathbf{W}_{d1}\mathbf{l}_{t-2:3}$} 
 		}
 		\\
-		Obs. & 717,300 & 717,300
+		Obs. & 717,300 & 717,300 & 717,300
 		\\
 		\bottomrule
 	\end{tabular}
