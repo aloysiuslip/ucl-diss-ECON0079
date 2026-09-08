@@ -70,13 +70,32 @@ are purely the use of the weak exogeneity assumption, and first-order autoregres
 \subsection{Dynamic panel identification}
 
 The dynamic panel specification uses a autocorrelation error orthogonality assumption
-to find valid identification.
+to find valid identification \eqref{eq:dyn-no-ac}.
+This replaces \eqref{eq:static-identification-factor-exogeneity} and instead allows
+for some moderate level of cross-sectional error correlation \eqref{eq:dyn-xs-corr-errors}.
 \begin{align}
-    \mathbb E[\epsilon_{i,t}\epsilon_{j,t}]
+    \label{eq:dyn-no-ac}
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
+    \\
+    \label{eq:dyn-xs-corr-errors}
+    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &\neq 0   ,\qquad \exists i,j
+    \\
+    \label{eq:dyn-error-wn}
+    \mathbb E[\varepsilon_t]    =0,
+    \mathbb E[\varepsilon_t^2]  =\sigma_t^2,
+    \mathbb E[\varepsilon_t|\Omega_{t-1}] &=0                  ,\qquad \forall i
+    \qquad\text{(w.n.)}
+    \\ \notag
 \end{align}
-This might generally be more seen as a more credible assumption
-than \eqref{eq:static-identification-factor-exogeneity}.
-In further econometric model, we would plot patterns of errors
+No autocorrelation of errors may generally be seen as a more credible assumption,
+as in a dynamic, correctly-specified model with the correct autoregressive properties,
+time autocorrelation as component of the error term are modelled out.
+Conceptually, we could also argue that firms make efficient decisions,
+so if there is a shock observed in this period, firms ensure that in the next,
+any expected factor inputs that are realised by that period fully take advantage of the shock
+so its effect is then captured by the input regressors.
+Any remaining residual must have been expected and so mean zero (formally a Martingale sequence).
+Further econometric analyses could guarantee this assumption by plotting patterns of errors
 and check for autocorrelation, which could come from moving average
 or omitted latent variable structures to the specification missing here.
 This specification can be identified in reduced panel form,
@@ -99,21 +118,9 @@ I commence finding these valid instruments by assuming the structural specificat
 exhibits no autocorrelation in its error term $\varepsilon_{i,t}$,
 though I now allow for moderate cross-sectional correlation across firms.
 \begin{align}
-    \label{eq:dyn-no-ac}
-    \mathbb E[\varepsilon_{i,t}\varepsilon_{i,t-1}] &= 0       ,\qquad \forall t,t-1
-    \\
     \label{eq:dyn-contemporaneous-endogeneity}
     \mathbb E[x_{i,t}\varepsilon_{i,t}] &\neq 0              ,\qquad \exists i
     \\
-    \label{eq:dyn-xs-corr-errors}
-    \mathbb E[\varepsilon_{i,t}\varepsilon_{j,t}] &\neq 0   ,\qquad \exists i,j
-    \\
-    \label{eq:dyn-error-wn}
-    \mathbb E[\varepsilon_t]    =0,
-    \mathbb E[\varepsilon_t^2]  =\sigma_t^2,
-    \mathbb E[\varepsilon_t|\Omega_{t-1}] &=0                  ,\qquad \forall i
-    \qquad\text{(w.n.)}
-    \\ \notag
     x_{i,t} &=
     \begin{pmatrix}
         k_{i,t} &   l_{i,t} &   \sum_{j\neq i} w_{ij,t}z_{j,t}

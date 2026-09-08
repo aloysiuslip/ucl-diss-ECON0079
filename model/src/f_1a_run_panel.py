@@ -3,7 +3,7 @@ from ibis import _
 import traceback
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict
 
 import statsmodels.api as sm
 from linearmodels import OLS
@@ -16,32 +16,10 @@ from panelbox.models.iv import PanelIV
 from panelbox.core.results import PanelResults
 
 from utils.f_0_dirs import get_data_dirs
+from f_2_extract import ModelSpec, extract_structural
 dirs = get_data_dirs(segment="model")
 
 use_linearmodels = True
-
-@dataclass
-class ModelSpec():
-    Y: str
-    X: list[str]
-    W: list[str] = field(default_factory=list)
-    Z: dict[str, list[str]] = field(default_factory=dict)
-    to_log: list[str] = field(default_factory=list)
-    fe: list[str] = field(default_factory=list)
-    fe_type: str = 'd'
-    description: str = ""
-    panel_name: str | None = None
-    include: bool = True
-    category: str | None = None
-    differencing: str = 'mean'
-
-    # Model options
-    use_linearmodels: bool = True
-    run_ols_test: bool = False
-
-    # Structural params map
-    struct_map: dict[str, str] = field(default_factory=dict)
-    struct_calc: list[str] | None = None
 
 from model.src.f_1b_panel_helpers import add_fe, transform_nfe, extract_structural
 
