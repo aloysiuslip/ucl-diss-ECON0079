@@ -449,10 +449,16 @@ assumptions. Estimation has the following reduced form:
                     + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
                     + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
     \\ \label{eq:static-lmm-reduced-estimated}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                    + \beta_3 \sum_{j\neq i} w_{ij}y_{i,t}
-                    + \beta_4 \sum_{j\neq i} w_{ij}k_{j,t}
-                    + \beta_5 \sum_{j\neq i} w_{ij}l_{j,t}
+    y_{i,t} &= \alpha_i
+                    + \gamma_t
+                    + \pi_0
+                    + \pi_1 k_{i,t}
+                    + \pi_2 l_{i,t}
+                    \\ &\qquad \notag
+                    + \pi_3 \sum_{j\neq i} w_{ij}y_{i,t}
+                    + \pi_4 \sum_{j\neq i} w_{ij}k_{j,t}
+                    + \pi_5 \sum_{j\neq i} w_{ij}l_{j,t}
+                    + \varepsilon_{i,t}
     \\
     \mathbb E[ &\varepsilon_{i,t} \cdot
         \begin{pmatrix}
@@ -465,14 +471,16 @@ assumptions. Estimation has the following reduced form:
     ] = 0_{(5\times 1)}
     \\ &\qquad
     \begin{pmatrix}
-        \hat\beta_1     \\
-        \hat\beta_2     \\
-        \hat\beta_3     \\
-        \hat\beta_4     \\
-        \hat\beta_5
+        \hat\pi_0     \\
+        \hat\pi_1     \\
+        \hat\pi_2     \\
+        \hat\pi_3     \\
+        \hat\pi_4     \\
+        \hat\pi_5
     \end{pmatrix}
     =
     \begin{pmatrix}
+        \beta_0     \\
         \beta_1     \\
         \beta_2     \\
         \delta_0     \\
@@ -528,14 +536,13 @@ As an extension in \ref{tab:lmm-3r}, I regress the multiple, non-overlapping spa
 I add $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$, concentric doughnut groups
 for \itx{pc4} and \itx{ttwa} to run all in a panel OLS regression simultaneously.
 
+\wraptable
+        {LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}
+        {../../model/output/final/results_1a_lmm_pc8}
+        {}
+
 \begin{table}[hbtp]
     \centering
-    \begin{threeparttable}
-        \caption{LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}%
-        \label{tab:lmm-pc8}
-        \input{../../model/output/results_1a_lmm_pc8}
-    \end{threeparttable}
-    \\~\\
     \vspace{1em}
     \begin{threeparttable}
         \caption{LMM: 3 non-overlapping groups, error orthogonality vs instrumented specification}
@@ -595,41 +602,40 @@ This represents a likely more accurate declining effect of productivity spillove
 rather than the special-case group mean where every firm in an enclosed area,
 for example, the target's postcode, has an equal influence on the target's TFP.
 In addition, it allows for better identification following \cite{Bramoulle2009}.
-\todo{explain Bramoulle2009, patterns of }$\Omega_t$
 \\*
 In essence, the LMM specification only contains 3 non-overlapping groups
 from its location tags. The distance-decayed specification
 contains as many non-overlapping groups as firms.
 
-\wraptable
-    {Static panel IV estimation using continuous distance-decay weighted TFP average of peers}
-    {../../model/output/results_2a_dd}
-    {}
-\wraptable
-    {Static panel IV performance with deeper lags}
-    {../../model/output/results_2b_dd_deeper}
-    {}
-
-% \begin{table}[hbtp]
-%     \centering
-%     \begin{threeparttable}
-%         \caption{Static panel IV estimation using continuous distance-decay weighted TFP average of peers}%
-%         \label{tab:dd}
-%         \input{../../model/output/results_2a_dd}
-%     \end{threeparttable}
-%     \\~\\
-%     \vspace{1em}
-%     \begin{threeparttable}
-%         \caption{Static panel IV performance with deeper lags}
-%         \label{tab:dd_deeper}
-%         \input{../../model/output/results_2b_dd_deeper}
-%         \begin{tablenotes}
-%             All parameters reported with standard errors underneath.
-%             Significant estimates against an $H_0: \beta=0$ are indicated
-%             with $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***).
-%         \end{tablenotes}
-%     \end{threeparttable}
-% \end{table}
+% \wraptable 
+%     {Static panel IV using continuous distance-decay $\mathbf W_d$}
+%     {../../model/output/results_2a_dd_basic_str}
+%     {}
+% \wraptable
+%     {Static panel IV using continuous distance-decay $\mathbf W_d$, zero distances excluded}
+%     {../../model/output/results_2b_dd_noz_str}
+%     {}
+\begin{table}[hbtp]
+    \centering
+    \begin{threeparttable}
+        \caption{Static panel IV using continuous distance-decay $\mathbf W_d$}
+        \label{tab:dd-basic-str}
+        \input{../../model/output/results_2a_dd_basic_str}
+    \end{threeparttable}
+    \\~\\
+    \vspace{1em}
+    \begin{threeparttable}
+        \caption{Static panel IV $\mathbf W_d$, zero distances excluded}
+        \label{tab:dd-noz-str}
+        \input{../../model/output/results_2b_dd_noz_str}
+        \begin{tablenotes}
+            Starts denote significance against an $H_0: \beta=0$,
+            $p<0.1$ (*), $p<0.05$ (**), and $p<0.01$ (***)
+            but these are not meaningful for this analysis.
+            All models run with time and fixed effects.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
 
 This distance-decay specification revises down the estimate from peers to an elasticity of 0.168,
 lower than the results given by the LMM specification. This is likely due to \todo{...}

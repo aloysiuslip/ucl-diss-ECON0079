@@ -6,10 +6,11 @@ import numpy as np
 from dataclasses import dataclass, field, asdict
 
 import statsmodels.api as sm
+from linearmodels import OLS
 from linearmodels.panel import PanelOLS
 from linearmodels.panel.results import PanelEffectsResults
 from linearmodels.iv import IVGMMCUE
-from linearmodels.iv.results import IVGMMResults
+from linearmodels.iv.results import IVGMMResults, OLSResults
 
 from panelbox.models.iv import PanelIV
 from panelbox.core.results import PanelResults
@@ -32,8 +33,11 @@ class ModelSpec():
     panel_name: str | None = None
     include: bool = True
     category: str | None = None
-    use_linearmodels: bool = True
     differencing: str = 'mean'
+
+    # Model options
+    use_linearmodels: bool = True
+    run_ols_test: bool = False
 
     # Structural params map
     struct_map: dict[str, str] = field(default_factory=dict)
@@ -117,6 +121,36 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             }
             res = res_panel
 
+        # IV model, but we run an endogenous OLS test first to see R^2
+        elif mod.run_ols_test:
+            df_model = add_fe(t_model, mod.fe).execute()                          # type: ignore
+            tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
+            const_col = ['const'] if 'c' in mod.fe else []
+            params_ticked = {k: [f"`{p}`" for p in v] for k, v in params_transformed.items()}
+            formula_str = "".join([
+                            params_ticked['dep'][0],
+                            ' ~ ',
+                            ' + '.join(params_ticked['exog'] + tdumm_cols + const_col),
+                            ' + ',
+                            ' + '.join(params_ticked['endog'])
+                        ])
+            print(f"Running model '{model_name}' as linearmodels panel endogenous OLS, formula: {formula_str}")
+            try:
+                mod_ols = OLS.from_formula(
+                    formula=formula_str,
+                    data=(df_model)
+                )
+                res_ols: OLSResults = mod_ols.fit(cov_type='clustered', clusters=df_model['registered_number'])
+                effects_dict: dict[str, pd.Series | None] = { 'i': None, 't': None }
+                object.__setattr__(res_ols, 'formula_str', formula_str)
+                object.__setattr__(res_ols, 'structural_params', extract_structural(res_ols, mod))
+                res = res_ols
+            except Exception as e:
+                with pd.ExcelWriter(dirs.tmp_dir / f"error_{model_name}.xlsx") as writer:
+                    df_model.to_excel(writer, sheet_name='model_data', index=False)
+                print(f"Wrote model data to {dirs.tmp_dir / f'error_{model_name}.xlsx'} for debugging.")
+                raise e
+
         elif mod.use_linearmodels:
             df_model = add_fe(t_model, mod.fe).execute()                          # type: ignore
             tdumm_cols = [col for col in df_model.columns if col.startswith('year_')]
@@ -125,7 +159,6 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
             # To have backticks around them, so that they can be used in the formula string
             params_ticked = {k: [f"`{p}`" for p in v] for k, v in params_transformed.items()}
             formula_str = "".join([
-
                             params_ticked['dep'][0],
                             ' ~ ',
                             ' + '.join(params_ticked['exog'] + tdumm_cols + const_col),
@@ -156,7 +189,7 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
                     df_model.to_excel(writer, sheet_name='model_data', index=False)
                 print(f"Wrote model data to {dirs.tmp_dir / f'error_{model_name}.xlsx'} for debugging.")
                 raise e
-
+            
         else:
             df_model = t_model.execute()    # type: ignore
             params_ticked = {k: [f"`{p}`" for p in v] for k, v in params_transformed.items()}
@@ -251,6 +284,9 @@ def format_str(res_serie: tuple[PanelEffectsResults | IVGMMResults, ModelSpec, s
     output_str += f"{modified_summary}\n\n"
     output_str += "=" * 87 + "\n\n"
     if hasattr(res, 'j_stat') and res.j_stat is not None:       # type: ignore
+        # Add to output_str in following pattern:
+        # Hansen test of overid. restrictions: chi(5) = 4.990 Prob > Chi2 = 0.417
+        output_str += f"Hansen test of overid. restrictions: chi({res.j_stat.df}) = {res.j_stat.stat:.3f} Prob > Chi2 = {res.j_stat.pval:.3f}\n"    # type: ignore  
         output_str += "Hansen J-statistic:\n"
         output_str += res.j_stat.__str__()                      # type: ignore
         output_str += '\n'

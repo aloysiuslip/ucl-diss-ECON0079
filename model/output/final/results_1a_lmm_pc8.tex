@@ -1,105 +1,108 @@
+\normalsize{
 	\begin{tabular}{lcc}
 		\toprule\toprule
-		\lblock{
-			~
+\makecell[tl]{
+		} & \makecell[tc]{
+			\footnotesize{(1.)} 
 			\\
-			~
-		} & 		\cblock{
-			\footnotesize{(1.)}
+			\small{exog} 
+		} & \makecell[tc]{
+			\footnotesize{(2.)} 
 			\\
-			\small{\itx{y}}
-		} & 		\cblock{
-			\footnotesize{(2.)}
-			\\
-			\small{\itx{y}}
+			\small{reduced-iv} 
 		} \\[0.8em]
 		\toprule
-		\lblock{
-			constant
+\makecell[tl]{
+			$\beta_1$ 
 			\\
-			~
-		} & 		\cblock{
-			$2.533$
+			~ 
+		} & \makecell[tc]{
+			$0.261$ 
 			\\
-			\footnotesize{(0.044)***}
-		} &  
-		\\ [0.9em]
-		\lblock{
-			\itx{k}
+			\footnotesize{(0.005)***} 
+		} & \makecell[tc]{
+			$0.233$ 
 			\\
-			~
-		} & 		\cblock{
-			$0.261$
-			\\
-			\footnotesize{(0.005)***}
-		} & 		\cblock{
-			$0.233$
-			\\
-			\footnotesize{(0.008)***}
+			\footnotesize{(0.008)***} 
 		}
 		\\ [0.9em]
-		\lblock{
-			\itx{l}
+\makecell[tl]{
+			$\beta_2$ 
 			\\
-			~
-		} & 		\cblock{
-			$0.650$
+			~ 
+		} & \makecell[tc]{
+			$0.650$ 
 			\\
-			\footnotesize{(0.005)***}
-		} & 		\cblock{
-			$0.555$
+			\footnotesize{(0.005)***} 
+		} & \makecell[tc]{
+			$0.555$ 
 			\\
-			\footnotesize{(0.007)***}
+			\footnotesize{(0.007)***} 
 		}
 		\\ [0.9em]
-		\lblock{
-			\itx{wg1\_y}
+\makecell[tl]{
+			$\delta_0$ 
 			\\
-			~
-		} & 		\cblock{
-			$0.199$
+			~ 
+		} & \makecell[tc]{
+			$0.199$ 
 			\\
-			\footnotesize{(0.004)***}
-		} & 		\cblock{
-			$-0.384$
+			\footnotesize{(0.004)***} 
+		} & \makecell[tc]{
+			$-0.384$ 
 			\\
-			\footnotesize{(0.177)**}
+			\footnotesize{(0.177)**} 
 		}
 		\\ [0.9em]
-		\lblock{
-			\itx{wg1}\textsubscript{$k$}
+\makecell[tl]{
+			$\xi_0$ 
 			\\
-			~
-		} & 		\cblock{
-			$-0.057$
+			~ 
+		} & \makecell[tc]{
+			$-0.005$ 
 			\\
-			\footnotesize{(0.003)***}
-		} & 		\cblock{
-			$0.118$
+			\footnotesize{(0.002)**} 
+		} & \makecell[tc]{
+			$0.029$ 
 			\\
-			\footnotesize{(0.054)**}
+			\footnotesize{(0.014)**} 
 		}
 		\\ [0.9em]
-		\lblock{
-			\itx{wg1\_l}
+\makecell[tl]{
+			$\zeta_0$ 
 			\\
-			~
-		} & 		\cblock{
-			$-0.118$
+			~ 
+		} & \makecell[tc]{
+			$0.011$ 
 			\\
-			\footnotesize{(0.004)***}
-		} & 		\cblock{
-			$0.249$
+			\footnotesize{(0.003)***} 
+		} & \makecell[tc]{
+			$0.035$ 
 			\\
-			\footnotesize{(0.112)**}
+			\footnotesize{(0.013)***} 
 		}
 		\\ [0.9em]
 		\hline
-		\textit{i} fixed effects & \checkmark & ~
+		\makecell[tl]{
+			J-test 
+		} &   & \makecell[tc]{
+			\text{\sffamily X} 
+			\\
+			\footnotesize{(0.330)} 
+		}
+		\\ [0.9em]
+		\hline
+		\footnotesize{Instruments} & ~ & \makecell[tc]{
+			\footnotesize{$\mathbf{W}^{2}_{g1}\mathbf{k}$, $\mathbf{W}^{2}_{g1}\mathbf{l}$} 
+			\\
+			\footnotesize{$\mathbf{W}^{3}_{g1}\mathbf{k}$, $\mathbf{W}^{3}_{g1}\mathbf{l}$} 
+		}
 		\\
-		\textit{t} fixed effects & \checkmark & ~
+		\textit{i} F.E. & \checkmark & \checkmark
 		\\
-		Observations & 726,283 & 587,772
+		\textit{t} F.E. & \checkmark & \checkmark
+		\\
+		Obs. & 726,283 & 587,772
 		\\
 		R$^2$ (excl. F.E.) & 0.3550 & 0.0012
 		\\
@@ -107,3 +110,4 @@
 		\\
 		\bottomrule
 	\end{tabular}
+}

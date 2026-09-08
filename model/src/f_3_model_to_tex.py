@@ -1,9 +1,11 @@
 import re
 import pandas as pd
 from pathlib import Path
-import json
 
 from typing import TypedDict
+
+from pytest import param
+from f_3a_parse_linear import get_stars
 
 class ParamEstimate(TypedDict):
     coef: str
@@ -23,32 +25,149 @@ class ModelResult(TypedDict):
     use_struct: bool
     # "r2-overall": str
 
-# Helper to convert a p-value string into significance stars.
-def get_stars(p_val_str: str) -> str:
-    try:
-        p_val = float(p_val_str)
-        if p_val < 0.01:
-            return "***"
-        elif p_val < 0.05:
-            return "**"
-        elif p_val < 0.1:
-            return "*"
-    except ValueError:
-        pass
-    return ""
+# Calculate the adjusted R-squared value.
 
-# Formats parameter names for LaTeX with subscripts and text italics
-def format_param(param: str, mod: ModelResult) -> str:
+# Parameters:
+# - r2: The original R-squared value.
+# - nobs: The number of observations.
+# - nparams: The number of parameters in the model.
 
-    if mod['use_struct'] and param in mod['struct_params']:
-        return f"$\\{param}$"
+# Returns:
+# - The adjusted R-squared value.
+def calc_r2_adj(r2: float, nobs: int, nparams: int) -> float:
+    if nobs <= nparams + 1:
+        raise ValueError("Number of observations must be greater than number of parameters + 1 for adjusted R-squared calculation.")
     
-    if param == 'const':
+    r2_adj = 1 - (1 - r2) * (nobs - 1) / (nobs - nparams - 1)
+    return r2_adj
+
+# Parses lowercase string variable names into LaTeX formatted matrix transformations
+# Handles compound matrices, exponents, subscripts, and trailing vectors
+def format_transf(var_name: str) -> str:
+    # Fallback if the variable doesn't match the expected underscore pattern
+    if '_' not in var_name:
+        return var_name 
+        
+    # 1. Split the string at the last underscore
+    matrix_part, vector_part = var_name.rsplit('_', 1)
+    
+    # 2. Format the vector part (lowercase, bold)
+    vec_latex = f"\\mathbf{{{vector_part}}}"
+    
+    # 3. Define the regex replacement logic for the matrix part
+    def matrix_replacer(match):
+        base = match.group(1).upper()
+        exponent = match.group(2)
+        subscript = match.group(3)
+        
+        latex = f"\\mathbf{{{base}}}"
+        if exponent:
+            latex += f"^{{{exponent}}}"
+        if subscript:
+            latex += f"_{{{subscript}}}"
+        return latex
+        
+    # Regex explanation:
+    # Group 1: ([wvi]) captures specific base matrix letters (w, v, i)
+    # Group 2: (\d+)? optionally captures an exponent number (e.g., '2', '3')
+    # Group 3: ([gd]\d+)? optionally captures a subscript pattern (e.g., 'g1', 'd3')
+    matrix_pattern = re.compile(r"([wvi])(\d+)?([gd]\d+)?", re.IGNORECASE)
+    
+    # Apply the regex to the matrix part
+    mat_latex = matrix_pattern.sub(matrix_replacer, matrix_part)
+    
+    # Clean up formatting for subtraction operations (adds proper mathematical spacing)
+    mat_latex = mat_latex.replace('-', ' - ')
+    
+    # 4. Combine into final LaTeX string
+    return f"${mat_latex}{vec_latex}$"
+
+# ==========================================
+# Example Usage Tests
+# ==========================================
+# print(format_transf("wg3_y"))          -> $\mathbf{W}_{g3}\mathbf{y}$
+# print(format_transf("w2g1_k"))         -> $\mathbf{W}^2_{g1}\mathbf{k}$
+# print(format_transf("wg1wg2_k"))       -> $\mathbf{W}_{g1}\mathbf{W}_{g2}\mathbf{k}$
+# print(format_transf("(i-wg1)w2g1_k"))  -> $(\mathbf{I} - \mathbf{W}_{g1})\mathbf{W}^2_{g1}\mathbf{k}$
+
+if __name__ == "__main__":
+    test_vars = [
+        "wg3_y", "w2g1_k", "wg1wg2_k", "(i-wg1)w2g1_k",
+        "v3d2_l", "i_wg1wg2_y", "w3g1wg2_k"
+    ]
+    should_vars = [
+        "$\\mathbf{W}_{g3}\\mathbf{y}$",
+        "$\\mathbf{W}^2_{g1}\\mathbf{k}$",
+        "$\\mathbf{W}_{g1}\\mathbf{W}_{g2}\\mathbf{k}$",
+        "$(\\mathbf{I} - \\mathbf{W}_{g1})\\mathbf{W}^2_{g1}\\mathbf{k}$",
+        "$\\mathbf{V}^3_{d2}\\mathbf{l}$",
+        "$\\mathbf{I}\\mathbf{W}_{g1}\\mathbf{W}_{g2}\\mathbf{y}$",
+        "$\\mathbf{W}^3_{g1}\\mathbf{W}_{g2}\\mathbf{k}$"
+    ]
+    out_vars = [format_transf(v) for v in test_vars]
+    for v, o, s in zip(test_vars, out_vars, should_vars):
+        try:
+            assert o == s, f"Expected {s}, got {o}"
+            print(f"PASSED: {v} -> {o}")
+        except AssertionError as e:
+            print(f"FAILED: {v} -> {o}, expected {s}")
+            print(e)
+
+# Formats a parameter string for LaTeX based on a renaming strategy
+# Merges explicit dictionary/string instructions with automated regex parsing
+# Safely escapes underscores in plaintext to prevent LaTeX compilation errors
+def format_latex_column(col: str, rename_strat: dict | str | None = None, mod: ModelResult | None = None) -> str:
+    val = str(col)
+    
+    # 1. Dictionary mapping strategy
+    if isinstance(rename_strat, dict) and col in rename_strat:
+        return rename_strat[col]
+        
+    # 2. String instruction strategy
+    if isinstance(rename_strat, str):
+        if rename_strat == 'none' or (val.startswith("$") and val.endswith("$")):
+            # Leave pre-formatted math mode alone, safely escape others
+            return val if val.startswith("$") else val.replace('_', '\\_')
+
+        elif rename_strat == 'itx':
+            return f"$\\itx{{{val.replace('_', '\\_')}}}$"
+
+        elif rename_strat == 'struct':
+            if (
+                mod is not None and 'struct_params' in mod and
+                len(mod['struct_params']) > 0 and
+                col not in mod['struct_params']
+            ):
+                return format_latex_column(col, rename_strat='none')
+            else:
+                return f"$\\{val}$"
+            
+        elif rename_strat == 'matrix':
+            if (
+                mod is not None and 'struct_params' in mod and
+                len(mod['struct_params']) > 0 and
+                col not in mod['struct_params']
+            ):
+                return format_latex_column(col, rename_strat='none')
+            else:
+                return format_transf(val) 
+            
+        elif rename_strat == 'equation':
+            sections = val.split('_')
+            if "{" in val and "}" in val:
+                return f"${val}$"
+            elif len(sections) > 1:
+                return f"${sections[0]}_{{{sections[1]}}}$"
+            else:
+                return f"${val}$"
+                
+    # 3. Automated regex parsing (Fallback)
+    if val == 'const':
         return 'constant'
 
-    d: dict[str, str] = {'core': param}
+    d: dict[str, str] = {'core': val}
     
-    if 'ln_' in param:
+    if 'ln_' in val:
         d['ln_start'] = 'ln(\\itx{'
         d['ln_end'] = '})'
         d['core'] = d['core'].replace('ln_', '')
@@ -70,11 +189,11 @@ def format_param(param: str, mod: ModelResult) -> str:
         d['index'] = i_match.group(2)
     
     insub_props = ['num']
-    insub_v: list[str] = [d.get(prop) for prop in insub_props if d.get(prop) is not None]       # type: ignore
+    insub_v = [d.get(prop) for prop in insub_props if d.get(prop) is not None]
     insubscript_str = f"\\textsubscript{{${','.join(insub_v)}$}}" if insub_v else ''
 
     outsub_props = ['index', 'lag']
-    outsub_v: list[str] = [d.get(prop) for prop in outsub_props if d.get(prop) is not None]     # type: ignore
+    outsub_v = [d.get(prop) for prop in outsub_props if d.get(prop) is not None]
     outsubscript_str = f"\\textsubscript{{${','.join(outsub_v)}$}}" if outsub_v else ''
     
     final_str = "".join([
@@ -84,227 +203,35 @@ def format_param(param: str, mod: ModelResult) -> str:
         d.get('ln_end', ''),
         outsubscript_str
     ])
+    
+    # Apply a final sweep to escape any remaining underscores outside of math mode
     return final_str.replace('_', '\\_')
 
 # Generates the \lblock or \cblock LaTeX macros for the table
-def form_block(args: tuple[str | None, str | None] | None = None, block_type: str = 'l', size: tuple[str | None, str | None] = (None, None)) -> str:
-    
-    param_str, value_str = args if args else (None, None)
-    if not param_str:
-        param_str = '~'
-    if not value_str:
-        value_str = '~'
-    if size[0]:
-        param_str = f"\\{size[0]}{{{param_str}}}"
-    if size[1]:
-        value_str = f"\\{size[1]}{{{value_str}}}"
-    return (
-        f"\t\t\\{block_type}block{{\n"
-        f"\t\t\t{param_str}\n"
-        f"\t\t\t\\\\\n"
-        f"\t\t\t{value_str}\n"
+def form_block(
+        args: tuple | None = None,
+        block_type: str = 'l',
+        size: tuple | str | None = None
+    ) -> str:
+    # Make the block an arbitrary size. Add a row for every entry in the tuple
+    arg_list = list(args) if args else []
+    size_list = [None] * len(arg_list)
+    if isinstance(size, str):
+        size_list = [size] * len(arg_list)
+    elif isinstance(size, tuple):
+        size_list = list(size) + [None] * (len(arg_list) - len(size))
+    content_arr =  []
+
+    for line, s in zip(arg_list, size_list):
+        if line:
+            content_arr.append(f"\t\t\t\\{s}{{{line}}} \n" if s else f"\t\t\t{line} \n")
+    content_str = "\t\t\t\\\\\n".join(content_arr) if content_arr else ""
+
+    return "".join([
+        f"\\makecell[t{block_type}]{{\n"
+        f"{content_str}",
         f"\t\t}}"
-    )
-
-# Parses a .txt file containing linearmodels PanelOLS outputs
-def parse_linearmodels_txt(filepath: str | Path) -> dict:
-    with open(filepath, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-
-    models = {}
-    current_model = None
-    in_params = False
-
-    for line in lines:
-        line = line.strip()
-        
-        # Detect model header
-        model_match = re.search(r"Model '([^']+)':", line)
-        if model_match:
-            current_model = model_match.group(1)
-            models[current_model] = {
-                'Y': '', 'params': {}, 'struct_params': [],
-                'obs': '',
-                'time_nb': '', 'entities_nb': '',
-                'time_fe': False, 'entities_fe': False, 'r2-overall': '', 'r2': ''
-            }
-            in_params = False
-            continue
-            
-        if not current_model:
-            continue
-            
-        # Extract metadata
-        if line.startswith('Y:'):
-            models[current_model]['Y'] = line.split(':')[1].strip()
-        elif 'No. Observations:' in line:
-            parts = line.split()
-            idx = parts.index('Observations:')
-            models[current_model]['obs'] = f"{int(parts[idx+1]):,}"
-        elif 'Entities:' in line:
-            models[current_model]['entities_nb'] = f"{int(line.split()[1]):,}"
-        elif 'Time periods:' in line:
-            models[current_model]['time_nb'] = f"{int(line.split()[2]):,}"
-        elif 'R-squared (Overall):' in line:
-            parts = line.split()
-            models[current_model]['r2-overall'] = parts[-1]
-        elif 'R-squared:' in line:
-            parts = line.split()
-            models[current_model]['r2'] = parts[-1]
-        elif 'struct_map' in line or 'struct_calc' in line:
-            line_val = (
-                line
-                .replace('struct_map: ', '')
-                .replace('struct_calc: ', '')
-                .strip()
-                .replace('\'', '\"')
-            )
-            obj = json.loads(line_val) if line_val != '' else {}
-            # obj could be a dict or list, handle both cases
-            if isinstance(obj, dict):
-                models[current_model]['struct_params'].extend(obj.values())
-            elif isinstance(obj, list):
-                models[current_model]['struct_params'].extend(obj)
-
-        # Extract parameters
-        if 'Parameter Estimates' in line:
-            in_params = True
-            continue
-            
-        # Terminate on empty line (end of table) or F-test
-        if in_params:
-            if any([
-                not line,
-                line.startswith('F-test'),
-                line.startswith('Endogenous:')
-            ]):
-                in_params = False
-                continue
-
-
-        if 'Included effects' in line:
-            if 'Entity' in line:
-                models[current_model]['entities_fe'] = True
-            if 'Time' in line:
-                models[current_model]['time_fe'] = True
-            continue
-            
-        # Skip formatting dividers and table headers while inside the block
-        if in_params and (line.startswith('===') or line.startswith('---') or line.startswith('Parameter')):
-            continue
-            
-        if in_params:
-            parts = line.split()
-            if len(parts) >= 6:
-                var_name = parts[0]
-                coef = parts[1]
-                se = parts[2]
-                pval = parts[4]
-
-                if not var_name or var_name.startswith('year_'):
-                    continue
-                
-                if var_name == '_con':
-                    var_name = 'const'
-                
-                try:
-                    coef_fmt = f"{float(coef):.3f}"
-                    se_fmt = f"{float(se):.3f}"
-                except ValueError:
-                    coef_fmt = coef
-                    se_fmt = se
-
-                models[current_model]['params'][var_name] = {
-                    'coef': coef_fmt,
-                    'se': se_fmt,
-                    'stars': get_stars(pval)
-                }
-                
-    return models
-
-# Parses a .txt file containing pydynpd outputs."""
-def parse_pydynpd_txt(filepath: str | Path) -> dict:
-    with open(filepath, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-
-    models = {}
-    current_model = None
-    model_count = 0
-
-    for line in lines:
-        line = line.strip()
-        
-        if 'Generated Command String:' in line:
-            model_count += 1
-            current_model = f"dyn{model_count}"
-            models[current_model] = {
-                'Y': '', 'params': {}, 'obs': '', 'instruments': '',
-                'entities_fe': True, 'time_fe': False,
-                'hansen_stat': '', 'hansen_p': '', 'hansen_reject': None,
-                'ar1_stat': '', 'ar1_p': '', 'ar1_reject': None,
-                'ar2_stat': '', 'ar2_p': '', 'ar2_reject': None
-            }
-            continue
-            
-        if not current_model:
-            continue
-            
-        # Summary Statistics
-        obs_match = re.search(r'Number of obs\s*=\s*(\d+)', line)
-        if obs_match:
-            models[current_model]['obs'] = f"{int(obs_match.group(1)):,}"
-
-        obs_match = re.search(r'Number of instruments\s*=\s*(\d+)', line)
-        if obs_match:
-            models[current_model]['instruments'] = f"{int(obs_match.group(1)):,}"
-            
-        if 'timedumm' in line:
-            models[current_model]['time_fe'] = True
-            continue
-
-        # Test Results
-        hansen_match = re.search(r'Hansen test.*Prob > Chi2\s*=\s*([\d\.]+)', line)
-        if hansen_match:
-            p_val = float(hansen_match.group(1))
-            models[current_model]['hansen_p'] = f"{p_val:.3f}"
-            models[current_model]['hansen_reject'] = p_val < 0.05
-
-        ar1_match = re.search(r'AR\(1\).*Pr > z\s*=\s*([\d\.]+)', line)
-        if ar1_match:
-            p_val = float(ar1_match.group(1))
-            models[current_model]['ar1_p'] = f"{p_val:.3f}"
-            models[current_model]['ar1_reject'] = p_val < 0.05
-
-        ar2_match = re.search(r'AR\(2\).*Pr > z\s*=\s*([\d\.]+)', line)
-        if ar2_match:
-            p_val = float(ar2_match.group(1))
-            models[current_model]['ar2_p'] = f"{p_val:.3f}"
-            models[current_model]['ar2_reject'] = p_val < 0.05
-
-        # Parameter Table
-        if line.startswith('|'):
-            if 'coef.' in line:
-                models[current_model]['Y'] = line.split('|')[1].strip()
-                continue
-            parts = [p.strip() for p in line.split('|')]
-            if len(parts) >= 7:
-                var_name = parts[1]
-                if not var_name or var_name.startswith('year_'):
-                    continue
-                if var_name == '_con':
-                    var_name = 'const'
-                    
-                coef, se, stars = parts[2], parts[3], parts[6]
-                try:
-                    models[current_model]['params'][var_name] = {
-                        'coef': f"{float(coef):.3f}", 
-                        'se': f"{float(se):.3f}", 
-                        'stars': stars
-                    }
-                except ValueError:
-                    models[current_model]['params'][var_name] = {'coef': coef, 'se': se, 'stars': stars}
-
-    return models
+    ])
 
 # Constructs the test result block for pydynpd models.
 def build_fe(is_present: bool | None) -> str:
@@ -319,7 +246,11 @@ def build_test_cblock(reject: bool | None, p_val: str) -> str:
         return " "
     symbol = "\\checkmark" if reject else "\\text{\\sffamily X}"
     star_str = get_stars(p_val)
-    return form_block((symbol, f"({p_val}){star_str}"), block_type='c', size=(None, 'footnotesize'))
+    return form_block(
+        (symbol, f"({p_val}){star_str}"),
+        block_type='c',
+        size=(None, 'footnotesize')
+    )
 
 
 # Combines models into a final .tex table.
@@ -327,15 +258,20 @@ def generate_latex_table(
         models: dict[str, ModelResult],
         output_filepath: str | Path,
         show: list[int] | None = None,
-        var_renamer: dict[str, str] | None = None,
+        rename_strat: str | dict[str, str] | None = None,
         var_order: list[str] | None = None,
-        use_names: bool = True,
-        start_at: int = 1,
-        stars: bool = True
+        use_colnames: bool = True,
+        start_at: int | None = 1,
+        stars: bool = True,
+        r2_type: list[str] = ['r2', 'r2-overall'],
     ) -> None:
 
     if start_at == None or start_at < 1:
         start_at = 1
+    if stars is None:
+        stars = True
+    if r2_type is None:
+        r2_type = ['r2', 'r2-overall']
     start_index = start_at - 1
 
     # If the show parameter is provided, filter the models to only include those indices
@@ -356,8 +292,8 @@ def generate_latex_table(
         to_add = [p for p in param_list if p not in unique_params]
         unique_params.extend(to_add)
     sorted_params = unique_params
-    if var_renamer:
-        renamed_params = list(var_renamer.keys())
+    if isinstance(rename_strat, dict):
+        renamed_params = list(rename_strat.keys())
         sorted_params = renamed_params + [p for p in sorted_params if p not in renamed_params]
     if var_order:
         sorted_params = var_order + [p for p in sorted_params if p not in var_order]
@@ -367,21 +303,19 @@ def generate_latex_table(
     seen = set()
     sorted_params = [x for x in sorted_params if not (x in seen or seen.add(x))]
 
-    latex_lines = [f"\t\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
+    latex_lines = [f"\\normalsize{{\n\t\\begin{{tabular}}{{l{'c' * len(model_names)}}}"]
     
     # Header row
     cols = [form_block()]
     for i, mod in enumerate(model_names):
-        y_str = format_param(models[mod].get('Y', 'Y'), models[mod])
-        display_name = mod if use_names else y_str
-        cols.append(form_block((f"({start_index + i + 1}.)", display_name), block_type='c', size=('footnotesize', 'small')))
+        y_str = format_latex_column(models[mod].get('Y', 'Y'), None, models[mod])
+        display_name = mod if use_colnames else y_str
+        cols.append(form_block((f"({start_index + i + 1}.)", display_name), block_type='c', size=('small', 'footnotesize')))
     latex_lines.extend(["\t\t\\toprule\\toprule", " & ".join(cols) + " \\\\[0.8em]", "\t\t\\toprule"])
 
     # Coefficients
     for param in sorted_params:
-        param_display = format_param(param, models[model_names[0]])
-        if var_renamer and param in var_renamer:
-            param_display = var_renamer[param]
+        param_display = format_latex_column(param, rename_strat, models[model_names[0]])
         row_lines = [form_block((param_display, '~'))]
         for mod in model_names:
             param_list = models[mod]['struct_params'] if models[mod]['use_struct'] else list(models[mod]['params'].keys())
@@ -409,19 +343,35 @@ def generate_latex_table(
     # Handle GMM Test rows if they exist in the model dictionary
     has_gmm_tests = any('hansen_p' in m and m['hansen_p'] for m in models.values())
     if has_gmm_tests:
-        for test_key, test_name in [('hansen', 'Hansen Test'), ('ar1', 'AR(1) Test'), ('ar2', 'AR(2) Test')]:
+        for test_key, test_name in [('hansen', 'J-test'), ('ar1', 'AR(1) test'), ('ar2', 'AR(2) test')]:
+            # Only display the test row if at least one model has the test results
+            if all(models[m].get(f'{test_key}_reject') is None for m in model_names):
+                continue
             cells = [build_test_cblock(models[m].get(f'{test_key}_reject'), models[m].get(f'{test_key}_p', '')) for m in model_names]
             latex_lines.append(f"\t\t{form_block((test_name, None))} & " + " & ".join(cells) + "\n\t\t\\\\ [0.9em]")
         latex_lines.append("\t\t\\hline")
 
     # Observations, time, entities
-    instr_row = "\t\tInstruments & " + " & ".join([models[m].get('instruments', '') for m in model_names]) + "\n\t\t\\\\"
-    i_row = "\t\t\\textit{i} fixed effects & " + " & ".join([build_fe(models[m].get('entities_fe')) for m in model_names]) + "\n\t\t\\\\"
-    t_row = "\t\t\\textit{t} fixed effects & " + " & ".join([build_fe(models[m].get('time_fe')) for m in model_names]) + "\n\t\t\\\\"
-    obs_row = "\t\tObservations & " + " & ".join([models[m].get('obs') for m in model_names]) + "\n\t\t\\\\"
+    i_row = "\t\t\\textit{i} F.E. & " + " & ".join([build_fe(models[m].get('entities_fe')) for m in model_names]) + "\n\t\t\\\\"
+    t_row = "\t\t\\textit{t} F.E. & " + " & ".join([build_fe(models[m].get('time_fe')) for m in model_names]) + "\n\t\t\\\\"
+    obs_row = "\t\tObs. & " + " & ".join([models[m].get('obs') for m in model_names]) + "\n\t\t\\\\"
     # Only add the i_row if there is at least one model with a non-empty entities_fe
     
     if any(models[m].get('instruments') for m in model_names):
+        # instr_row = "\t\tInstruments & " + " & ".join([models[m].get('instruments', []) for m in model_names]) + "\n\t\t\\\\"
+        # Construct instr_row model by model
+        instr_row = "\t\t\\footnotesize{Instr.} & "
+        for m in model_names:
+            instr_list = models[m].get('instruments', [])
+            if instr_list:
+                instr_transf = [format_transf(x) for x in instr_list]
+                instr_mod_tup = tuple([", ".join(instr_transf[i:i + 2]) for i in range(0, len(instr_transf), 2)])
+                instr_mod_block = form_block(instr_mod_tup, block_type='c', size='footnotesize')
+                instr_str = instr_mod_block
+            else:
+                instr_str = "~"
+            instr_row += instr_str + " & "
+        instr_row = instr_row.rstrip(" & ") + "\n\t\t\\\\"
         latex_lines.append(instr_row)
     if any(models[m].get('entities_fe') for m in model_names):
         latex_lines.append(i_row)
@@ -432,18 +382,51 @@ def generate_latex_table(
     
 
     # Handle R-squared if it exists (for standard OLS models)
-    has_r2_overall = any('r2-overall' in m and m['r2-overall'] for m in models.values())
-    has_r2 = any('r2' in m and m['r2'] for m in models.values())
+    r2_type_list = [t.replace('-adj', '') for t in r2_type]
+    has_r2 = 'r2' in r2_type_list and any('r2' in m and m['r2'] for m in models.values())
+    has_r2_overall = 'r2-overall' in r2_type_list and any('r2-overall' in m and m['r2-overall'] for m in models.values())
     if has_r2:
-        r2_row = f"\t\tR$^2${" (excl. F.E.)" if has_r2_overall else ''} & " + " & ".join([models[m].get('r2', '') for m in model_names]) + "\n\t\t\\\\"
+        r2_vals = []
+        should_adj = 'r2-adj' in r2_type
+        for m in model_names:
+            mod = models[m]
+            raw_val = float(mod.get('r2', ''))
+            nobs = int(mod.get('obs', 0).replace(',', ''))
+            nparams = len(mod.get('params', {}))
+            if should_adj:
+                r2_vals.append(calc_r2_adj(raw_val, nobs, nparams))
+            else:
+                r2_vals.append(raw_val)
+        r2_formatted = [f"{v:.4f}" for v in r2_vals]
+        r2_row = "".join([
+            f"\t\tR$^2${"-adj" if should_adj else ''}{" (excl. F.E.)" if has_r2_overall else ''} & ",
+            " & ".join(r2_formatted),
+            "\n\t\t\\\\"
+        ])
         latex_lines.append(r2_row)
-
-    # Handle R-squared if it exists (for standard OLS models)
+        
     if has_r2_overall:
-        r2_row = "\t\tR$^2$ (Overall) & " + " & ".join([models[m].get('r2-overall', '') for m in model_names]) + "\n\t\t\\\\"
-        latex_lines.append(r2_row)
+        r2o_vals = []
+        should_adj = 'r2-overall-adj' in r2_type
+        for m in model_names:
+            mod = models[m]
+            raw_val = float(mod.get('r2-overall', ''))
+            nobs = int(mod.get('obs', 0).replace(',', ''))
+            nparams = len(mod.get('params', {}))
+            if should_adj:
+                r2o_vals.append(calc_r2_adj(raw_val, nobs, nparams))
+            else:
+                r2o_vals.append(raw_val)
+        r2o_formatted = [f"{v:.4f}" for v in r2o_vals]
+        r2o_row = "".join([
+            f"\t\tR$^2${"-adj" if should_adj else ''} (Overall) & ",
+            " & ".join(r2o_formatted),
+            "\n\t\t\\\\"
+        ])
+        latex_lines.append(r2o_row)
 
     latex_lines.extend(["\t\t\\bottomrule", "\t\\end{tabular}"])
+    latex_lines.append("}")
 
     with open(output_filepath, 'w', encoding='utf-8') as f:
         f.write("\n".join(latex_lines))
@@ -461,15 +444,13 @@ def format_number(val: float, format_float: str = ",0.3f") -> str:
         return str(val).replace('_', '\\_')
 
 # Exports a DataFrame to LaTeX, detecting subheader rows with empty tail cells
-import pandas as pd
-from pathlib import Path
 
 # Exports a DataFrame to LaTeX with customizable header rows and columns
 def generate_latex_from_generic(
     df: pd.DataFrame,
     filepath: str | Path,
     format_float: str = ",0.3f",
-    var_renamer: dict[str, str] | None | str = None,
+    rename_strat: dict[str, str] | None | str = None,
     hrows: int = 1,
     hcols: int = 1
 ) -> None:
@@ -520,26 +501,7 @@ def generate_latex_from_generic(
                 continue
             # Apply text logic to header columns, and numeric logic to data columns
             if i < hcols:
-                if isinstance(var_renamer, str):
-                    if var_renamer == 'none' or str(val).startswith("$") and str(val).endswith("$"):
-                        val = str(val)
-                
-                    elif var_renamer == 'equation':
-                        sections = str(val).split('_')
-                        if "{" in str(val) and "}" in str(val):
-                            val = f"${val}$"
-                        elif len(sections) > 1:
-                            val = f"${sections[0]}_{{{sections[1]}}}$"
-                        else:
-                            val = f"${val}$"
-                elif isinstance(var_renamer, dict) and col in var_renamer:
-                    val = var_renamer[col]
-                else:
-                    # Fallback mapping assuming format_param is in your environment
-                    try:
-                        val = format_param(str(val), models[model_names[0]])
-                    except NameError:
-                        val = str(val).replace('_', '\\_')
+                format_latex_column(val, rename_strat)
                 row_vals.append(val)
             else:
                 # Iterate additional header rows without applying float formatting

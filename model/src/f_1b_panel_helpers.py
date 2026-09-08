@@ -24,13 +24,13 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
     display_names = ("SE", "t-stat", "p-value", "Lower CI", "Upper CI")
 
     struct_calc = mod.struct_calc if mod.struct_calc is not None else ['xi_0', 'zeta_0']
+    delta_0_name = None
 
     for red_name, struct_name in mod.struct_map.items():
         if red_name not in res.params.index:
-            print(f"Warning: Could not find '{red_name}' in the model parameters. Skipping structural parameter '{struct_name}'.")
             continue
         coef = res.params[red_name]
-        se = np.sqrt(res.cov.loc[red_name, red_name])
+        se = np.sqrt(res.cov.loc[red_name, red_name]) # type: ignore
         t_stat = coef / se
         p_val = 2 * (1 - stats.t.cdf(np.abs(t_stat), df=res.nobs - len(res.params)))
         crit_val = stats.t.ppf(1 - alpha / 2, df=res.nobs - len(res.params))
@@ -40,11 +40,13 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
         structural_out_dict[struct_name] = (coef, se, t_stat, p_val, lower_ci, upper_ci)
         out_str = f"{struct_name}: {coef:.4f}"
         out_str += ",".join([f"{label}: {value:.4f}" for label, value in zip(display_names, list(structural_out_dict[struct_name][1:]))])
+        if struct_name == 'delta_0':
+            delta_0_name = red_name
         print(out_str)
 
     inbuilt_structur = [
-        ('xi_0', ['wg1_k', 'wd1_k'], 'k'),
-        ('zeta_0', ['wg1_l', 'wd1_l'], 'l')
+        ('xi_0', ['wg1_k', 'wd1_k', 'wg2_k', 'wd2_k', 'wg3_k', 'wd3_k'], 'k'),
+        ('zeta_0', ['wg1_l', 'wd1_l', 'wg2_l', 'wd2_l', 'wg3_l', 'wd3_l'], 'l')
     ]
     for name, param_list, x in inbuilt_structur:
         if name not in struct_calc:
@@ -60,19 +62,19 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
         if x not in res.params.index:
             print(f"Warning: Could not find '{x}' in the model parameters. Skipping structural parameter '{name}'.")
             continue
-        if 'wg1_y' not in res.params.index:
-            print(f"Warning: Could not find 'wg1_y' in the model parameters. Skipping structural parameter '{name}'.")
+        if delta_0_name is None or delta_0_name not in res.params.index:
+            print(f"Warning: Could not find '{delta_0_name}' in the model parameters. Skipping structural parameter '{name}'.")
             continue
         coef_wx = res.params[name_wx]
         beta = res.params[x]
-        delta_0 = res.params['wg1_y']
+        delta_0 = res.params[delta_0_name]
 
         # Mean
         structural_xi = coef_wx + (beta * delta_0)
 
         # Variance: Delta method
         gradient = np.array([1, delta_0, beta])
-        vars_of_interest = [name_wx, x, 'wg1_y']
+        vars_of_interest = [name_wx, x, delta_0_name]
         var_cov_matrix = res.cov.loc[vars_of_interest, vars_of_interest].values
         structural_variance = gradient.T @ var_cov_matrix @ gradient
         structural_se = np.sqrt(structural_variance)
