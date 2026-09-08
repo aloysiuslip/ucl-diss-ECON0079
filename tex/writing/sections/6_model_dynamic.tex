@@ -1,7 +1,7 @@
 \section{Dynamic models}
 \label{s:models-dynamic}
 
-The previous section's static model requires a strict factor exogeneity assumption
+The previous section's static models requires a strict factor exogeneity assumption
 outlined in equation \eqref{eq:static-identification-factor-exogeneity}
 for all firms, including the own-firm effect of the production function.
 In this section, I use a dynamic model to relax this assumption.
@@ -20,8 +20,8 @@ as is traditional of a VARMA(p,q) specification}.
         + \sum_{k=0}^q\mathbf z_{t-k}^{spill}\boldsymbol\theta_k + \varepsilon_{i,t}
     \\
     \label{eq:dyn-main-peer-effects}
-    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
-                + \sum_{k=1}^p\phi_k y_{i,t-k}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} 
+                + \sum_{k=1}^p\phi_k y_{i,t-k} + \varepsilon_{i,t}
                 \\ \notag &\qquad 
                 + \sum_{k=0}^q \left[
                   \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
@@ -30,35 +30,45 @@ as is traditional of a VARMA(p,q) specification}.
                 \right]
 \end{align}
 
-There are significant theoretical advantages to introducing the $q$-lags of the spatial spillover.
+Adding the autoregressor $y_{i,t}$ is also highly desirable.
+The panel setup with firm fixed effects already accounts for own-firm factors,
+and the presentation of $R^2$ including and excluding variation accounted for by the fixed effects
+throughout this paper demonstrates this.
+In the peer effects setting, autoregressive lags may also help control for reverse causality.
+If $y_{i,t-1}$ is causal for $z_{jt}$,
+or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$,
+then the inclusion of $y_{i,t-k}$ eliminates that bias.
+I offer no \itx{a priori} view on the strength of $\phi_1$, the autoregressor coefficient.
+A significant estimate would imply heavy bias to the static models, validating the use in this dynamic setting.
+\par
+There are also significant theoretical advantages to introducing the $q$-lags of the spatial spillover.
 This specification with both spatial and temporal lags accounts for the possibility
 that the spillover effect from firm $j$'s production factor
-has a lag to impact $i$. Without including the $q$ lags within $z_{i,t}$,
+has a lagged impact on $i$, conceptualisable as the formation of clusters
+from firms seeing the benefits of colocation over some time after a productivity shock.
+Without including the $q$ lags within $z_{i,t}$,
 if $\mathbf z_{t-k}^\text{spill}$ is correlated with $\mathbf z_{t}$,
-then estimating $\delta_0$ in a static model will have omitted variable bias (OVB)
-of the lagged effect from the spillover attributed to the current period.
+then estimating $\delta_0$ in a static model when the true effect is dynamic
+exposes estimation to omitted variable bias (OVB) by attribution of the lagged to the current period's regressor.
 \par
-Adding the autoregressor of \itx{gva1} to the specification is highly desirable
-to a justified decomposition of TFP when including peer effects in the specification.
-The panel setup with firm fixed effects already accounts for own-firm invariance,
-and we have shown in the results already given that they account for a significant amount of the variation.
-In the peer effects setting, the autoregressive lags help control for reverse causality.
-If $y_{i,t-1}$ is causal for $z_{jt}$,
-or feasibly $z_{j,t-1}$ and $\mathbb E[z_{j,t-1}, z_{j,t}]\neq0$, then the presence of
-$y_{i,t-k}$ as a control helps eliminate that bias.
-Similarly, theory offers us no clear view on where there could be simultaneity,
-where variation in $\Delta y_{i,t}$ is driven causally by $\Delta y_{i,t-1}$
-and that change in $\Delta y_{i,t}$ in turn drives $\Delta z_{j,t}$.
-The autoregressive regressor helps control for that.
-Additionally, the results below suggest the autoregressive parameter coefficient is low,
-with a log elasticity of 0.005 (significant at the 1\% level) in all specifications,
-suggesting any concerns about reverse causality or simultaneity driven by an AR process
-are likely minimal.
-The use of this dynamic regressor improves the plausible exogeneity of $z_{i,j,t}$.
-\par
-The autoregressive specification requires a return to the one-stage production function
-with an outcome of GVA, $y_{it}$. I continue to use the scalar weighted distance TFP metric
-as the primary regressor of interest $z_{jt}$. While introducing dynamic lags of 
+In practice however, due to the limitations of this analysis using Fame's annual frequency observations,
+it is unlikely that more-than-one period spillover lag is relevant.
+\todo{I test this briefly in appendix}
+I show the structural equations in an AR(1,0) structure
+so that the primary advancement on the static models
+are purely the use of the weak exogeneity assumption, and first-order autoregressor.
+\todo{Additional tests}
+\begin{align}
+    \label{eq:dyn-main-ar10}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} 
+                + \phi_1 y_{i,t-k} + \varepsilon_{i,t}
+                \\ \notag &\qquad 
+                + \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
+                + (\xi_k-\delta_k\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+\end{align}
+
+\subsection{Dynamic panel identification}
 
 The dynamic panel specification uses a time-varying error orthogonality assumption
 to find valid identification.
@@ -71,13 +81,9 @@ than \eqref{eq:static-identification-factor-exogeneity}
 This specification can be identified in reduced panel form,
 which requires first differences to eliminate fixed effects,
 allowing me to retain the use of firm fixed effects.
-This follows econometric theory developed by \cite{Anderson1981} and estimator techniques
-developed in \cite{Arellano1991} and furthered by \cite{Blundell1998} which improve efficiency.
 \par
-
-
-\subsection{Dynamic panel identification}
-
+Estimation under these dynamic panel conditions are developed by \cite{Anderson1981},
+with further techniques expanded in \cite{Arellano1991} and \cite{Blundell1998} which improve efficiency.
 The estimator given in \cite{Arellano1991} takes the regression equation
 as given above and allows for endogeneity.
 Internal instruments of all the endogenous regressors are found,

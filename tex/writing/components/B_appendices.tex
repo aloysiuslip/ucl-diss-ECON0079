@@ -208,176 +208,7 @@ Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
     \end{threeparttable}
 \end{table}%
 
-% # --- #
-\newpage
-\section{Identification under differing spillover assumptions}
-\label{app:model-zspill-reflection}
-
-\subsection{Full derivation under the 3-factor spillover model}
-\begin{align*}
-    \boldsymbol{y}_t 
-    &= \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k \Big(
-        \boldsymbol{\alpha} 
-        + (\gamma_t + \beta_0)\boldsymbol{\iota} 
-        + \beta_1 \mathbf{k}_t 
-        + \beta_2 \mathbf{l}_t \notag \\
-    &\quad 
-        + (\xi_0 - \delta_0\beta_1) \mathbf{W}\mathbf{k}_t 
-        + (\zeta_0 - \delta_0\beta_2) \mathbf{W}\mathbf{l}_t 
-        + \boldsymbol{\varepsilon}_t 
-    \Big) \\[0.8em]
-    %
-    &= \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-        (\gamma_t + \beta_0)\boldsymbol{\iota} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\alpha} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\varepsilon}_t \notag \\
-    &\quad 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \beta_1 \mathbf{k}_t 
-        + (\xi_0 - \delta_0\beta_1) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{k}_t \notag \\
-    &\quad 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \beta_2 \mathbf{l}_t 
-        + (\zeta_0 - \delta_0\beta_2) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{l}_t 
-            \\[0.8em]
-    %
-    &= \frac{\gamma_t + \beta_0}{1 - \theta_0}\boldsymbol{\iota} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\alpha} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\varepsilon}_t \notag \\
-    &\quad 
-        + \beta_1 \mathbf{k}_t 
-        + \sum_{k=1}^\infty \theta_0^k \mathbf{W}^k 
-            \beta_1 \mathbf{k}_t 
-        + (\xi_0 - \delta_0\beta_1) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{k}_t \notag \\
-    &\quad 
-        + \beta_2 \mathbf{l}_t 
-        + \sum_{k=1}^\infty \theta_0^k \mathbf{W}^k 
-            \beta_2 \mathbf{l}_t 
-        + (\zeta_0 - \delta_0\beta_2) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{l}_t 
-            \\[0.8em]
-    %
-    &= \frac{\gamma_t + \beta_0}{1 - \theta_0}\boldsymbol{\iota} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\alpha} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\varepsilon}_t \notag \\
-    &\quad 
-        + \beta_1 \mathbf{k}_t 
-        + \theta_0\beta_1 \sum_{k=0}^\infty \theta_0^k 
-            \mathbf{W}^{k+1} \mathbf{k}_t 
-        + (\xi_0 - \delta_0\beta_1) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{k}_t \notag \\
-    &\quad 
-        + \beta_2 \mathbf{l}_t 
-        + \theta_0\beta_2 \sum_{k=0}^\infty \theta_0^k 
-            \mathbf{W}^{k+1} \mathbf{l}_t 
-        + (\zeta_0 - \delta_0\beta_2) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{l}_t 
-            \\[0.8em]
-    %
-    &= \frac{\gamma_t + \beta_0}{1 - \theta_0}\boldsymbol{\iota} 
-        + \beta_1 \mathbf{k}_t 
-        + \beta_2 \mathbf{l}_t 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\alpha} 
-        + \sum_{k=0}^\infty \theta_0^k \mathbf{W}^k 
-            \boldsymbol{\varepsilon}_t \notag \\
-    &\quad 
-        + (\xi_0 - \delta_0\beta_1 + \theta_0\beta_1) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{k}_t \notag \\
-    &\quad 
-        + (\zeta_0 - \delta_0\beta_2 + \theta_0\beta_2) 
-            \sum_{k=0}^\infty \theta_0^k \mathbf{W}^{k+1} \mathbf{l}_t 
-\end{align*}
-
-\subsection{Non-identification under the TFP-only spillover model}
-\begin{align*}
-    \mathbf y_t &= \boldsymbol \alpha
-                    + \gamma_t \boldsymbol\iota
-                    + \beta_0  \boldsymbol \iota
-                    + \beta_1  \mathbf k_t + \beta_2 \mathbf l_t
-                    + \theta_0 \mathbf W \mathbf y_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
-                    + \boldsymbol \varepsilon_t
-    \\
-                &= (\mathbb I-\theta_0 \mathbf W)^{-1}(
-                    \boldsymbol \alpha
-                    + \gamma_t \boldsymbol\iota
-                    + \beta_0  \boldsymbol \iota
-                    + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
-                    + \boldsymbol \varepsilon_t
-                )
-    \\
-                &= \sum_{k=0}^\infty \theta_0^k \mathbf W^k \cdot(
-                    \boldsymbol \alpha
-                    + \gamma_t \boldsymbol\iota
-                    + \beta_0  \boldsymbol \iota
-                    + \beta_1 \mathbf k_t + \beta_2 \mathbf l_t
-                    + \xi_0 \mathbf W \mathbf \cdot (\beta_1\mathbf k_t + \beta_2\mathbf l_t)
-                    + \boldsymbol \varepsilon_t
-                )
-    \\
-                &= \frac{\gamma_t + \beta_0}{1-\theta_0}\boldsymbol \iota
-                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^k
-                        \boldsymbol \alpha
-                    + \boldsymbol\beta \mathbf x_t
-                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^{k+1} \mathbf x_t
-                        \boldsymbol \beta \cdot (\theta_0 + \xi_0)
-                    + \sum_{k=0}^\infty \theta_0^k \mathbf W^k
-                        \boldsymbol \varepsilon_t
-    \\
-    y_{j,t}     &= \dots
-                    + \underbrace{
-                        \sum_{k=0}^\infty
-                        \left[
-                            \theta_0^k \mathbf W^{k+1}
-                        \right]_{(j,)}
-                        \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}
-                        \begin{pmatrix}\beta_1 \\ \beta_2\end{pmatrix}
-                        \cdot (\theta_0 + \xi_0)
-                    }_{\text{exogenous}_j}
-                    + \underbrace{
-                        \sum_{k=0}^\infty
-                        [\theta_0^k \mathbf W^k]_{(j,)} \cdot
-                    \boldsymbol \varepsilon_t
-                    }_{\text{error transformation}_j}
-    \\
-    &\quad\ 
-    \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k (\mathbf{x}_t\boldsymbol{\beta}
-    + \mathbf{W}\mathbf{x}_t \boldsymbol\beta \cdot \xi_0) 
-    \\
-    &= \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k \mathbf{x}_t\boldsymbol{\beta} 
-        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
-        \\
-    &= \mathbf{x}_t\boldsymbol{\beta} 
-        + \sum_{k=1}^{\infty} \theta_0^k \mathbf{W}^k \mathbf{x}_t\boldsymbol{\beta} 
-        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
-        \\
-    &= \mathbf{x}_t\boldsymbol{\beta} 
-        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t\boldsymbol{\beta} \cdot \theta_0
-        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \boldsymbol\beta \cdot \xi_0
-        \\
-    &= \mathbf{x}_t\boldsymbol{\beta} 
-        + \left( \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \right) 
-        \boldsymbol\beta \cdot (\theta_0 + \xi_0)
-        \\[1em]
-    \mathbf{y}_t 
-    &= \frac{\alpha}{1-\theta_0}\boldsymbol{\iota} 
-        + \mathbf{x}_t\boldsymbol{\beta} 
-        + \left( \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^{k+1} \mathbf{x}_t \right) 
-        \boldsymbol\beta \cdot (\theta_0 + \xi_0) 
-        + \sum_{k=0}^{\infty} \theta_0^k \mathbf{W}^k \boldsymbol{\varepsilon}_t
-\end{align*}
-
+% # --- #\
 \newpage
 \section{Static distance-decay: additional results}
 \label{app-static-dd}
@@ -385,6 +216,11 @@ Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
 \wraptable
     {First-stage OLS results}
     {../../model/output/results_2c_dd_ols_str}
+    {}
+
+\wraptable
+    {Static panel IV using continuous distance-decay $\mathbf W_d$, zero distances excluded}
+    {../../model/output/results_2b_dd_noz_str}
     {}
 
 % # --- #

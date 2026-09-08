@@ -149,7 +149,7 @@ At first glance, it may appear that this model follows the structure of the peer
 and is in fact over-identified, with both the coefficients of the peer classical factors and $\sum_{j\neq i}w_{ij}y_{j,t}$
 identifying $\delta_0$. However, because of the specific set-up of the reflection problem
 where $w_{ij}y_{j,t}$ is endogenous and we instrument it through $k_{j,t},l_{j,t}$ higher-order spatial lags,
-this model is actually non-identified. I demonstrate this in \nameref{app:model-zspill-reflection}.
+this model is actually non-identified. I demonstrate this in the next section \ref{ss:static-identification}.
 \par
 While the classical production function \eqref{eq:static-main-gva} is limited to constant returns to scale,
 $\beta_1 + \beta_2\leq 0$, a standard assumption across the growth and firm production literature,
@@ -210,10 +210,8 @@ The inversion is permissible because I can expect a restriction to apply, ruling
     with unstable coefficient estimates.
 }. We can interpret this as a `spatial lag polynomial', directly comparable
 to the lag polynomial and MA inversion procedure in autoregressive time series analysis\footnote{
-    A full algebraic derivation from lines \eqref{eq:static-reflection-problem} to \eqref{eq:static-red-endogenous-effect}
-    is available in Appendix \ref{app:model-zspill-reflection}.
-    Note that since the vectors $\mathbf k_t, \mathbf l_t$ appear twice in \eqref{eq:static-reflection-problem},
-    as components of $\mathbf y_t$ the coefficients can be grouped
+    Note that vectors $\mathbf k_t, \mathbf l_t$ appear twice in \eqref{eq:static-reflection-problem},
+    as components of $\mathbf y_t$ so coefficients can be grouped
     but it is clearer to separate this into an 'own-firm'
     effect of $\mathbf k_t, \mathbf l_t$ and a spillover effect of
     $\mathbf W^{k+1}k_t, \mathbf W^{k+1}l_t\ \forall k\geq 0$
@@ -412,7 +410,8 @@ a linear combination of all firms' contemporaneous capital and labour inputs,
 $\mathbf W^{k+1}\begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}\ \forall k\geq0$ 
 are an exogenous component of $y_{j,t}$ with the coefficients $\xi_0$ and $\zeta_0$ respectively.
 It has relevance, meaning $\mathbb E[y_{j,t}\cdot [\mathbf W^k]_{(j,)}\mathbf x_t]\neq 0,\ \forall k>2$
-as long as $\xi_0\neq 0$ and $\zeta_0 \neq 0$.
+as long as $\xi_0\neq 0$ and $\zeta_0 \neq 0$,
+which occurs in all unrestricted cases distinct from \eqref{eq:static-alt-gva-zspill}.
 The relevance conditions themselves are also unsurprising and highly intuitive
 given the model's setup with GVA equation \eqref{eq:static-main-gva}.
 Note that the relevance conditions are more complex setup in \cite{Bramoulle2009},
@@ -499,7 +498,10 @@ I discussed group assignment in section \ref{ss:data-distance}.
 \par
 Model (2) instruments these groups via $\mathbf W^2\mathbf x$,
 The reduced-form equation is given in \eqref{eq:static-lmm-iv-fd-reduced-estimated}.
-The IV strategy has the moment conditions in \eqref{eq:static-moment-conditions}.
+The IV strategy has the moment conditions in \eqref{eq:static-moment-conditions},
+and estimates parameters using continuously-updating Generalised Method of Moments (GMM-CUE),
+of calculating an efficient transformation matrix to weigh moment conditions \eqref{eq:static-moment-conditions}
+to improve the estimator's efficiency.
 \begin{align}
     \eqreref{eq:static-main-peer-effects}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
@@ -540,8 +542,16 @@ Results for Model (1.) and (2.) are given in Table \ref{tab:lmm_pc8}.
 
 \wraptable
         {LMM: 1 peer regressor with group weights, error orthogonality model vs instrumented}
-        {../../model/output/final/results_1a_lmm_pc8}
-        {}
+        {../../model/output/results_1a_lmm_pc8}
+        {
+            Regression tables given structural parameters
+            calculated using transformations of the
+            reduced-form parameters.
+            Stars denote significance against an $H_0$
+            with the usual confidence levels,
+            but these are not meaningful for this analysis
+            due to causal interpretations discussed.
+        }
 
 As an extension in \ref{tab:lmm-3r}, I regress the multiple, non-overlapping spatial groups at once.
 I apply the $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ concentric doughnut group transformations
@@ -737,22 +747,6 @@ for overidentification.
         \label{tab:dd-basic-str}
         \input{../../model/output/results_2a_dd_basic_str}
     \end{threeparttable}
-    \\~\\
-    \vspace{0.5em}
-    \begin{threeparttable}
-        \caption{Static panel IV $\mathbf W_d$, zero distances excluded}
-        \label{tab:dd-noz-str}
-        \input{../../model/output/results_2b_dd_noz_str}
-        \begin{tablenotes}
-            \centering
-            \begin{footnotesize}
-                Starts denote significance against an $H_0$
-                with the usual confidence levels, \\*
-                but these are not meaningful for this analysis. \\*
-                All models run with time and fixed effects.            
-            \end{footnotesize}
-        \end{tablenotes}
-    \end{threeparttable}
 \end{table}
 
 Model (4.) includes more lags which improves significance.
@@ -760,9 +754,21 @@ The inclusion of more lags continues to pass the Hansen J-test,
 avoiding over-specification which would be tested by a rejection of the null hypothesis.
 I include an additional table in Appendix \ref{app-static-dd}
 which shows the first-stage Panel OLS estimates of the endogenous regressor $\mathbf W_y$
-against the instruments employed.
+using the instruments employed,
+were this specification to be ran through 2SLS\footnote{Noting that in practice,
+I use GMM-CUE for efficiency of estimates}.
 This shows improvements in adjusted $R^2$ for the model up to 3 lags,
 but barely any improvement for including an additional 4th-order lag.
-\\
+\par
 \pagebreak
-To investigate this issue, I run an extension where firms which share a location, meaning distance is mechanically 0, are excluded.
+To investigate this issue, in Appendix \ref{app-static-dd} Table \ref{tab:dd_noz_str}
+I run an extension where firms which share a location,
+meaning distance is mechanically 0, are excluded.
+Results are reported in \ref{tab:dd-noz-str}.
+On evaluation by $R^2$ thes models perform slightly worse.
+An odd phenomenon is that the signs flip on the spillover parameters.
+These specifications reveal an emerging feature of these models,
+which is that $\delta_0<0 \implies \xi_0>0 \cap \zeta_0>0$ and vice-versa.
+The sign flipping in these sets of models suggests some joint parameter
+exists as a linear combination of the parameters I have estimated,
+which these models are trying to fit. 
