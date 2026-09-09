@@ -1,6 +1,5 @@
 
 import numpy as np
-from rpds import List
 from scipy import stats
 from linearmodels.iv.results import IVGMMResults
 from dataclasses import dataclass, field, asdict
@@ -46,7 +45,15 @@ def extract_structural(res: IVGMMResults, mod: ModelSpec) -> dict[str, tuple[flo
         t_stat = coef / se
         p_val = 2 * (1 - stats.t.cdf(np.abs(t_stat), df=res.nobs - len(res.params)))
         crit_val = stats.t.ppf(1 - alpha / 2, df=res.nobs - len(res.params))
-        if has_attr(res, 'table'):
+
+        has_table = False
+        try:
+            has_table = has_attr(res, 'table')
+        except Exception as e:
+            print(e)
+            # Older python versions
+            has_table = hasattr(res, 'table')
+        if has_table:
             table_row: dict[str, float] = res.table.loc[red_name]     # type: ignore
             se = table_row['std_err']
             t_stat = table_row['z_value']

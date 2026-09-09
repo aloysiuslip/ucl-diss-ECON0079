@@ -43,23 +43,29 @@ def calc_r2_adj(r2: float, nobs: int, nparams: int) -> float:
 
 # Parses lowercase string variable names into LaTeX formatted matrix transformations
 # Handles compound matrices, exponents, subscripts, and trailing vectors
-def format_transf(var_name: str) -> str:
-    # Fallback if the variable doesn't match the expected underscore pattern
-    if '_' not in var_name:
-        if '|' in var_name:
-            vector_arr = var_name.split('|')
-            vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
-            vec_latex = "_".join(vector_arr)
-            return f"${vec_latex}$"
-        return var_name
+def format_transf(var_name: str, force: bool = False) -> str:
+
+    if not force:
+        # Fallback if the variable doesn't match the expected underscore pattern
+        if '_' not in var_name:
+            if '|' in var_name:
+                vector_arr = var_name.split('|')
+                vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
+                vec_latex = "_".join(vector_arr)
+                return f"${vec_latex}$"
+            return var_name
+            
+        # 1. Split the string at the last underscore
+        matrix_part, vector_part = var_name.rsplit('_', 1)
         
-    # 1. Split the string at the last underscore
-    matrix_part, vector_part = var_name.rsplit('_', 1)
-    
-    # 2. Format the vector part (lowercase, bold)
-    vector_arr = vector_part.split('|')
-    vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
-    vec_latex = "_".join(vector_arr)
+        # 2. Format the vector part (lowercase, bold)
+        vector_arr = vector_part.split('|')
+        vector_arr[0] = f"\\mathbf{{{vector_arr[0]}}}"
+        vec_latex = "_".join(vector_arr)
+
+    else:
+        matrix_part = var_name
+        vec_latex = ""
     
     # 3. Define the regex replacement logic for the matrix part
     def matrix_replacer(match):
@@ -141,7 +147,7 @@ def format_latex_column(col: str, rename_strat: dict | str | None = None, mod: M
             else:
                 return f"$\\{val}$"
             
-        elif rename_strat == 'matrix':
+        elif rename_strat == 'matrix' or rename_strat == 'matrix-force':
             if (
                 mod is not None and 'struct_params' in mod and
                 len(mod['struct_params']) > 0 and
@@ -149,7 +155,7 @@ def format_latex_column(col: str, rename_strat: dict | str | None = None, mod: M
             ):
                 return format_latex_column(col, rename_strat='none')
             else:
-                return format_transf(val) 
+                return format_transf(val, force=(rename_strat == 'matrix-force'))
             
         elif rename_strat == 'equation':
             sections = val.split('_')
