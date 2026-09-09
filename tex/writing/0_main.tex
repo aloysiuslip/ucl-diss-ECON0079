@@ -1,29 +1,23 @@
 \documentclass[12pt,a4paper]{article}
 \input{components/0_preamble}
 \onehalfspacing
-
 \begin{document}
-
-% Front matter: Roman page numbers
 \pagenumbering{roman}
-
 \input{components/1_title.tex}
 \newpage
 \input{components/2_declaration}
+\newpage
+\input{sections/0_acknowledgements}
 \newpage
 \input{components/3_toc}
 \newpage
 \input{components/4_lof}
 \newpage
-
 \input{1_countable}
-
-% End section
 \newpage
 \input{components/A_bibliography}
 \newpage
 \appendix
 \addcontentsline{toc}{section}{Appendix}
 \input{components/B_appendices}
-
 \end{document}

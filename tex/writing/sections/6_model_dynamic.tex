@@ -56,7 +56,6 @@ This is due to this analysis using Fame's annual frequency observations.
 As a result, I show the structural equations in an AR(1,0) structure
 so that the primary advancement on the static models
 are purely the use of the weak exogeneity assumption, and first-order autoregressor.
-\todo{Additional tests}
 \begin{align}
     \label{eq:dyn-main-ar10}
     y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} 
@@ -85,8 +84,8 @@ for some moderate level of cross-sectional error correlation \eqref{eq:dyn-xs-co
     \mathbb E[\varepsilon_t^2]  =\sigma_t^2,
     \mathbb E[\varepsilon_t|\Omega_{t-1}] &=0                  ,\qquad \forall i
     \qquad\text{(w.n.)}
-    \\ \notag
 \end{align}
+
 No autocorrelation of errors may generally be seen as a more credible assumption,
 as in a dynamic, correctly-specified model with the correct autoregressive properties,
 time autocorrelation as component of the error term are modelled out.
@@ -113,91 +112,124 @@ which meets the usual instrument conditions, as an instrument.
 It estimate this section's results with System GMM.
 Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
-\par
+
+\subsection{Testing AR structure}
+\label{ss:dyn-ar}
+
 I firstly relax the strict exogeneity assumption of the standard factors to weak exogeneity.
-There are two approaches to this: capital and labour could be fully flexible inputs,
-meaning they are optimised as part of the decision set at time $t$,
-of which the TFP error shock is a component.
-Or, capital and labour can be assumed to be predetermined:
+There are two approaches to this:
+capital and labour can be assumed to be predetermined:
 capital faces some time-to-build constraint
 where each firm allocates investment in the previous period
 based on the limited information available then, $\Omega_{t-1}$.
+The predetermined nature of capital is a common modelling choice of
+firm production in a dynamic system, though usually with quarterly observations.
 A similar sticky decision pattern is assumed of labour,
 perhaps through job searching and hiring frictions.
-I assume a new optimal firm decision on capital based on information,
-denoted by $\Omega_t$ which includes $\varepsilon_{i,t}$ for its respective $t$.
-This approach allows the discovery of valid instruments which are exogenous to $\varepsilon_{i,t}$
-and $\Delta\varepsilon_{i,t}$.
-I justify an exclusion restriction for $\Delta k_{i,t-j}\ \forall j>1$, as it is predetermined,
-and $\Delta l_{i,t-k}, k>2$, as it is flexible.
-
+For handling panel data in an autoregressive setting,
+first-differencing will lead to the reduced-form error term $\Delta\varepsilon_t$
+spanning 2 periods.
+As a result, weak exogeneity of the transformed factors
+requires lags of $t-2$.
+These deep lags are valid instruments which defensible exclusion restriction.
+Since the zero autocorrelation property applies to any firm $i$,
+the full vector of deep lag factor regressors and their transformations
+are plausibly exogenous.
 \begin{align}
-    % \notag
-    % x_{i,t} &=
-    % \begin{pmatrix}
-    %     k_{i,t} &   l_{i,t}
-    % \end{pmatrix}
-    % \\
-    \label{eq:static-k-pim}
+    \notag
+    \text{Pre-determined factors:}
+    \\ \notag
     K_{i,t} &= I_{i,t} + dK_{i,t-1}
-    \\
-    \label{eq:static-inv-information}
+    \\ \notag
     I_{i,t} &= \mathbb E[I_{i,t}^*|\Omega_{t-1}]
-    \\
-    \label{eq:static-l-information}
+    \\ \notag
     L_{i,t} &= \mathbb E[L_{i,t}^*|\Omega_{t-1}]
-    \\
-    \label{eq:static-predetermined-factors}
+    \\ \notag
     K_{i,t}, L_{i,t} &\in \Omega_{t-1}
     \\ \notag
     \mathbb E[\varepsilon_{i,t}|\Omega_{t-1}] &= 0 
     \\
-    \label{eq:dyn-identification-factor-exogeneity}
+    \label{eq:dyn-weak-exog-pred}
     \mathbb E[
         \varepsilon_{i,t}
         \vert
         \begin{pmatrix}
-            \mathbf k_t \\ \mathbf l_t
+            k_{i,\tau} & l_{\tau}
         \end{pmatrix}
-    ] &= 0_{(2\times 1)}
-    ,\ \forall i
+    ] &= 0_{(1\times t)}
+    ,\ \forall i\ \forall \tau\leq t\leq 1
+    \\
+    \label{eq:dyn-weak-exog-pred-diff}
+    \mathbb E[
+        \Delta\varepsilon_{i,t}
+        \vert
+        \begin{pmatrix}
+            \Delta \mathbf W^k\mathbf k_{\tau-1} & \Delta \mathbf W^k \mathbf l_{\tau-1}
+        \end{pmatrix}
+    ] &= 0_{(1\times t)}
+    ,\ \forall k\ \forall \tau\leq t\leq 2
 \end{align}
+
+Alternatively, capital and labour may be flexible inputs:
+at least partially able to react to shocks
+as part of the decision set at time $t$.
+This may be a more realistic assumption when handling annual data, such as Fame:
+shocks occurring at the beginning of a calendar year would have no arguable
+reason why the firm's input choices later in that year hadn't reacted to knowledge of the shock,
+anymore than it had occurred at the end of the previous year.
+It is therefore much harder to argue the plausibly exogeneity of contemperaneous factors to the error term.
+In practice, as with any dynamic panel model, the procedure laid out in this paper
+is not bound by the features of this particular dataset, which happens to be annual.
+Future analysis repeating this question with quarterly observations may well
+exploit the plausible predetermined nature of some production factors.
 \begin{align}
-    \Delta y_{i,t} &= \Delta \gamma_t
-                + \beta_1\Delta k_{i,t}
-                + \beta_2\Delta l_{i,t}
-                + \delta_0\sum_{j\neq i} w_{ij}\Delta z_{j,t}
-                + \Delta\varepsilon_{i,t}
+    \notag
+    \text{Flexible factors:}
+    \\ \notag
+    K_{i,t}, L_{i,t} &\in \Omega_{t}
+    \\ \notag
+    \mathbb E[\varepsilon_{i,t}|\Omega_{t}] &= 0 
     \\
-    \label{eq:dyn-k-pim}
-    K_{i,t} &= I_{i,t} + dK_{i,t-1}
+    \label{eq:dyn-weak-exog-flex}
+    \mathbb E[
+        \varepsilon_{i,t}
+        \vert
+        \begin{pmatrix}
+            k_{i,\tau-1} & l_{\tau-1}
+        \end{pmatrix}
+    ] &= 0_{(1\times t)}
+    ,\ \forall i\ \forall \tau\leq t\leq 1
     \\
-    \label{eq:dyn-inv-information}
-    I_{i,t} &= \mathbb{E}[I_{i,t}^* \mid \Omega_{t-1}]
-    \\
-    \label{eq:dyn-l-information}
-    L_{i,t} &= \mathbb{E}[L_{i,t}^* \mid \Omega_t] 
-    \\ \notag
-    \varepsilon_{i,t} &\in \Omega_t
-    \\ \notag
-    &\implies K_{i,t} \propto \epsilon_{t-1}
-    \\ \notag
-    &\implies L_{i,t} \propto \epsilon_{t}
-    \\ \notag
-    \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
-    \\ \notag
-    \Delta k_{i,t} &= k_{i,t} - k_{i,t-1}
-        \propto \varepsilon_{i,t-1} \varepsilon_{i,t-2}
-    \\ \notag
-    &\implies \mathbb E[\Delta k_{i,t} \Delta \epsilon_t] \neq 0
-    \\
-    &\implies \mathbb E[\Delta k_{i,t-1} \Delta \epsilon_t] = 0, \mathbb E[k_{i,t-1} \varepsilon_t]=0
-    \\ \notag
-    \Delta l_{i,t} &= l_{i,t} - l_{i,t-1}
-        \propto \varepsilon_{i,t}, \varepsilon_{i,t-1}
-    \\
-    &\implies \mathbb E[\Delta l_{i,t-2} \Delta \epsilon_t] = 0, \mathbb E[l_{i,t-2} \varepsilon_t]=0
+    \label{eq:dyn-weak-exog-flex-diff}
+    \mathbb E[
+        \Delta\varepsilon_{i,t}
+        \vert
+        \begin{pmatrix}
+            \Delta \mathbf W^k\mathbf k_{\tau-2} & \Delta \mathbf W^k \mathbf l_{\tau-2}
+        \end{pmatrix}
+    ] &= 0_{(1\times t)}
+    ,\ \forall k\ \forall \tau\leq t\leq 2
 \end{align}
+
+In this dataset, the empirical experiments run suggest that the decision
+over whether the classical factors should be predetermined or not
+makes no difference for this dataset.
+I present estimations of the 
+\wraptable
+    {Dynamic panel: baseline instrumental specification}
+    {../../model/output/results_3a_basic_str}
+    {
+        \begin{itemize}
+        \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
+                at the 95\% level to reject the null-hypothesis that the model is identified.
+        \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
+                as expected from a first-differencing SystemGMM approach.
+        \item[] Anderson-Rubin AR(2) test: `\textsf{X}' indicates insufficient evidence to
+                reject the use of second-order lags due to their being a weak instrument,
+                as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.
+                `checkmark' indicates some instruments used were weak.
+        \end{itemize}
+    }
 
 Devising an internal instrument requires a similar evaluation of the components of $y_{j,t}$ as in the static problem.
 There is a dynamic corollary to the static derivation of the endogenous term $y_{i,t}$.
@@ -348,9 +380,10 @@ I estimate the equation fulfilling the vector of moment conditions,
 \end{align}
 
 \wraptable
-    {Dynamic panel: baseline instrumental specification}
-    {../../model/output/results_3a_basic_str}
-    {\begin{itemize}
+    {Dynamic panel: deeper instrumental lags}
+    {../../model/output/results_3b_dyn_instruments_str}
+    {
+        \begin{itemize}
         \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
                 at the 95\% level to reject the null-hypothesis that the model is identified.
         \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
@@ -359,8 +392,10 @@ I estimate the equation fulfilling the vector of moment conditions,
                 reject the use of second-order lags due to their being a weak instrument,
                 as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.
                 `checkmark' indicates some instruments used were weak.
-    \end{itemize}
+        \end{itemize}
     }
+
+
 % \wraptable
 %     {Dynamic panel: deeper vector regressor lags}
 %     {../../model/output/instr_3b_Jover}

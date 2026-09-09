@@ -559,13 +559,8 @@ the higher-order cross-transformation for group matrices,
 $\mathbf W_{g1}\mathbf W_{g2}, \mathbf W_{g1}\mathbf W_{g3}$ and so on to the aggregates.
 \par
 I calculate these for my 3 aggregate variable vectors of interest.
-As given below in Table \ref{tab:w_prefixes}, this requires a total of 51 compound weighting matrices,
-or columns of a database, to be calculated and generated.
-Of course, these column vectors each contain a stacked firm ($i$)-year ($t$)
-observation, so the total computation is an additional matrix of 71 million entries.
-This applies similarly for distance matrices $\mathbf W_d$,
-and other modifications to any other procedures to generate weights that may be desired,
-as I discuss with in section \ref{ss:param-select-xvalidate} and Appendix \ref{app:static-dd}.
+Summary statistics offering a sense of the shape of transformed data
+are available in Appendix \ref{app-ss:w-transformations}.
 \par
 As reviewed in \ref{ss:lit-peer-effects-metrics}, the key condition
 for discovery of valid instruments in this peer effects context is the linear independence of $\mathbb I, \mathbf W, \mathbf W^2$.
