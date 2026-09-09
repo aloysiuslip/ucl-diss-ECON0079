@@ -24,9 +24,9 @@ as is traditional of a VARMA(p,q) specification}.
                 + \sum_{k=1}^p\phi_k y_{i,t-k} + \varepsilon_{i,t}
                 \\ \notag &\qquad 
                 + \sum_{k=0}^q \left[
-                  \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
-                + (\xi_k-\delta_k\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
-                + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+                    \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
+                    + (\xi_k-\delta_k\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                    + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
                 \right]
 \end{align}
 
@@ -92,7 +92,7 @@ time autocorrelation as component of the error term are modelled out.
 Conceptually, we could also argue that firms make efficient decisions,
 so if there is a shock observed in this period, firms ensure that in the next,
 any expected factor inputs that are realised by that period fully take advantage of the shock
-so its effect is then captured by the input regressors.
+and its effect is then captured by the input regressors.
 Any remaining residual must have been expected and so mean zero (formally a Martingale sequence).
 Further econometric analyses could guarantee this assumption by plotting patterns of errors
 and check for autocorrelation, which could come from moving average
@@ -109,7 +109,8 @@ Internal instruments of the endogenous regressors are found using their lagged f
 Identification is improved in the System GMM approach given in \cite{Blundell1998}
 by also including the first logged, not differenced, lag of the endogenous regressors
 which meets the usual instrument conditions, as an instrument.
-It estimate this section's results with System GMM.
+I estimate this section's results with
+System GMM\footnote{Implemented with \cite{Wu2023}, with heavy modifications in \cite{Lip2026}}.
 Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
 
@@ -176,8 +177,8 @@ as part of the decision set at time $t$.
 This may be a more realistic assumption when handling annual data, such as Fame:
 shocks occurring at the beginning of a calendar year would have no arguable
 reason why the firm's input choices later in that year hadn't reacted to knowledge of the shock,
-anymore than it had occurred at the end of the previous year.
-It is therefore much harder to argue the plausibly exogeneity of contemperaneous factors to the error term.
+any more than it had occurred at the end of the previous year.
+It is therefore much harder to argue the plausibly exogeneity of contemporaneous factors to the error term.
 In practice, as with any dynamic panel model, the procedure laid out in this paper
 is not bound by the features of this particular dataset, which happens to be annual.
 Future analysis repeating this question with quarterly observations may well
@@ -223,7 +224,7 @@ I present estimations of the
         \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
                 at the 95\% level to reject the null-hypothesis that the model is identified.
         \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
-                as expected from a first-differencing SystemGMM approach.
+                as expected from a first-differencing System GMM approach.
         \item[] Anderson-Rubin AR(2) test: `\textsf{X}' indicates insufficient evidence to
                 reject the use of second-order lags due to their being a weak instrument,
                 as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.
@@ -387,7 +388,7 @@ I estimate the equation fulfilling the vector of moment conditions,
         \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
                 at the 95\% level to reject the null-hypothesis that the model is identified.
         \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
-                as expected from a first-differencing SystemGMM approach.
+                as expected from a first-differencing System GMM approach.
         \item[] Anderson-Rubin AR(2) test: `\textsf{X}' indicates insufficient evidence to
                 reject the use of second-order lags due to their being a weak instrument,
                 as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.

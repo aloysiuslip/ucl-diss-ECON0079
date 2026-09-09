@@ -1,4 +1,5 @@
 \section{Data analysis}
+\label{s:data}
 
 \subsection{Fame}
 
@@ -173,7 +174,7 @@ and heterogenous treatment effects.
 These requires complex data science and Machine Learning approaches,
 which I leave for future analysis.
 \par
-I amalgmate multisite firms to their primary trading address, as an assumption.
+I amalgamate multisite firms to their primary trading address, as an assumption.
 In the dataset prepared for \cite{Irastorza-Fadrique2026},
 each firm is only tagged with their last-known registered address and primary trading address.
 Fame includes further trading addresses for multisite firms available for download through their data portal,
@@ -400,7 +401,7 @@ non-overlapping groups by \itx{ttwa} (largest) to \itx{lat\_lon5} (smallest),
 with the latter meaning two firm entries shared a latitude-longitude identifier
 to 5 decimal places.
 Reviewing the summary statistics, I opted for full postcodes, \itx{pc8}
-as the group identifier for initial 1-group models in Table \ref{tab:lmm-pc8}.
+as the group identifier for initial 1-group models in Table \ref{tab:lmm_basic_str}.
 This was mostly driven by full data availability, and the consistency of postcode definitions
 with the larger group $pc4$. Deriving a subgroup by latitude-longitude match
 within the postcode seemed fruitless, as in many cases it would identify the exact same firms,
@@ -587,7 +588,7 @@ on the south side, with more argument for this behaviour on the north side
 where peer nodes randomly selected may be starting to bunch at an `invisible' border of the \itx{ttwa} boundary.
 
 \begin{figure}[hbtp]
-    \caption{Illustration (2) of overlapping groups from a target firm to its whole network through successive peers}
+    \caption{Illustration of overlapping groups from a target firm to its whole network through successive peers}
     \label{fig:map-nolg-manc}
     \centering
     \graphicspath{ {../../calculations/output/}}

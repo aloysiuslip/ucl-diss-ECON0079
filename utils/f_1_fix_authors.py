@@ -18,7 +18,7 @@ if "fix_authors" in tasks:
         re.DOTALL
     )
 
-    human_types = {"article", "book", "inproceedings", "inbook", "incollection"}
+    human_types = {"article", "book", "inproceedings", "inbook", "incollection", "techReport"}
 
     def fix_authors(match):
         entry_type = match.group("type").lower()

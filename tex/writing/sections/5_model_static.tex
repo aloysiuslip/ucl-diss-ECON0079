@@ -137,22 +137,28 @@ This has the interpretation alluded to above,
 that the peer effect of any classical factor, capital and labour,
 is exactly in the ratio to its own factor income,
 which is a strong restriction to impose.
-We might expect this to be a nested specification of \eqref{eq:static-main-peer-effects},
-that we can merely Wald-test the joint hypothesis as given above,
-but actually this specification cannot be identified due to the endogeneity of $y_{j,t}$,
-without strict assumptions on the orthogonality of peer errors.
+We might expect this to be merely a nested specification of \eqref{eq:static-main-peer-effects},
+for which the hypothesis of the zero coefficients can be tested via Wald-test as a joint hypothesis.
+In actual fact, without strict assumptions on the orthogonality of peer errors,
+this specification's regressors are fully endogenous, and it falls into
+the `Reflection Problem' of identification outlined in section \ref{ss:lit-peer-effects-metrics}.
 \par
 The alternative in equation \eqref{eq:static-alt-gva-zspill} argues that only the TFP component of production
 matters for the spillover to influence a target firm's TFP.
 This is also a restriction on the more general \eqref{eq:static-main-gva} such that $\xi_0=\zeta_0=0$.
-At first glance, it may appear that this model follows the structure of the peer effect class of models too
-and is in fact over-identified, with both the coefficients of the peer classical factors and $\sum_{j\neq i}w_{ij}y_{j,t}$
-identifying $\delta_0$. However, because of the specific set-up of the reflection problem
-where $w_{ij}y_{j,t}$ is endogenous and we instrument it through $k_{j,t},l_{j,t}$ higher-order spatial lags,
-this model is actually non-identified. I demonstrate this in the next section \ref{ss:static-identification}.
+At first glance, this may appear a feasible restriction,
+since it appears this model also follows the structure of the peer effect class of models
+and is in fact over-identified,
+with both the coefficients of the peer classical factors and $\sum_{j\neq i}w_{ij}y_{j,t}$
+identifying $\delta_0$.
+However, the next section \ref{ss:static-identification} demonstrates
+that the reduced form of this approach yields the need for an \itx{exogeneous effect}
+set of restrictions, which coincides with $\xi_0,\zeta_0\neq 0$.
+The specification with this TFP-only spillover restriction cannot be identified.
 \par
-While the classical production function \eqref{eq:static-main-gva} is limited to constant returns to scale,
-$\beta_1 + \beta_2\leq 0$, a standard assumption across the growth and firm production literature,
+While the classical production function \eqref{eq:static-main-gva}
+frequently takes the assumption of constant returns to scale,
+$\beta_1 + \beta_2\leq 0$,
 no such restrictions for the firm occur with the endogenous decomposition of TFP.
 A restriction on logged production \eqref{eq:static-main-gva} collectively on $\beta_1$, $\beta_2$, and $\boldsymbol\theta_0$
 is difficult to justify.
@@ -558,7 +564,7 @@ Results for Model (1.) and (2.) are given in Table \ref{tab:lmm_basic_str}.
             due to causal interpretations discussed.
         }
 
-As a brief extension, I explore the possibility of regressing multiple, non-overlapping spatial groups at once.
+As a brief extension, I explore regressing multiple, non-overlapping spatial groups at once.
 This is a natural examination of the specification as
 I already have the $\mathbf W_{g1}, \mathbf W_{g2}, \mathbf W_{g3}$ concentric doughnut group transformations
 for \itx{pc8}, \itx{pc4} and \itx{ttwa} to run all in the panel IV model at once.
@@ -634,11 +640,12 @@ opens up interesting additional cross-transformation instruments.
 These cross-transformations are possible
 and create new, linearly independent regressors
 as long as there is sufficient heterogeneity between the weighting matrices,
-which here is theroetically guaranteed by the mutual orthogonality of $\mathbf W_g$.
+which here is theoretically guaranteed by the mutual orthogonality of $\mathbf W_g$.
 Any combination of higher-order $\mathbf W_{gs}$ group transformations
 can be employed as instruments \eqref{eq:static-3r-x-instr},
 or the linear composite of the 3 group transformation matrices,
-which intuitively represents all firms in a \itx{ttwa} can be used in higher orders \eqref{eq:static-3r-sum-instr}.
+which intuitively represents all firms in a \itx{ttwa}
+can be used in higher orders \eqref{eq:static-3r-sum-instr}.
 \begin{align}
     \label{eq:static-3r-x-instr}
     \mathbb E &[
@@ -670,8 +677,15 @@ which intuitively represents all firms in a \itx{ttwa} can be used in higher ord
     = 0_{3\times 2}
 \end{align}
 
-However, in practice with this dataset,
-regressing more groups has proved unlikely to offer more insights
+Importantly, the reduced form in \eqref{eq:static-3r-endogenous-effect}
+shows that the coefficients on the \itx{exogenous effect} regressors
+are no longer merely $\xi_0, \zeta_0$, but the linear combination given.
+This model therefore provides a theoretical route to identifying
+and testing \eqref{eq:static-alt-gva-zspill}, the z-spillover model,
+should that be the researcher's preferred specification.
+\par
+However, in practice, regressing more groups
+proves unlikely to offer more insights with this dataset and holistic approach
 without additional diagnosis.
 Coefficients reported in Appendix \ref{app:static-groups} Table \ref{tab:lmm_3r_str}
 appear unstable, though this is slightly alleviated by omitting the outer \itx{ttwa}
@@ -683,12 +697,14 @@ discussed is theoretically sound, but led to multicollinearity in this dataset
 through any approach. This could be due to the fact that each $\mathbf W_{gs}$
 is not truly independent and orthogonal, the identities of \itx{pc8} and \itx{pc4} are linked.
 \par
-This extension is interesting and useful, because the assignment of groups,
+This extension is interesting and useful because the assignment of multiple groups,
 especially through more sophisticated dimensions as discussed in section \ref{ss:param-select-xvalidate}
-could lead to better understanding of firm's heterogenous peer groups,
-for example, through industry or regional cuts.
-Perhaps these will have more success by producing independent, orthogonal matrices
-than the multiple orthogonal groups extension run here.
+through industry and regional cuts,
+could lead to better understanding of firm's heterogenous peer groups.
+Perhaps these alternative group choices will have more success
+by producing independent, orthogonal matrices
+though they run beyond the scope of the simple spatial group identities
+selected here.
 
 % ---
 \newpage
@@ -722,7 +738,7 @@ different weights which show up in $w_{ij,d}$ and $\mathbf W_d$.
                     + \beta_5 \Delta \sum_{j\neq i} w_{ij},dl_{j,t}
                     + \Delta \varepsilon_{i,t}
     \\
-    \eqreref{eq:static-dd-moment-conditions}
+    \eqreref{eq:static-moment-conditions}
     \mathbb E &[
         \epsilon_{i,t}\ 
         \vert
@@ -756,20 +772,20 @@ for overidentification.
 Model (4.) includes more lags which improves significance.
 The inclusion of more lags continues to pass the Hansen J-test,
 avoiding over-specification which would be tested by a rejection of the null hypothesis.
-I include an additional table in Appendix \ref{app-static-dd}
+I include an additional table in Appendix \ref{app:static-dd}
 which shows the first-stage Panel OLS estimates of the endogenous regressor $\mathbf W_y$
 using the instruments employed,
-were this specification to be ran through 2SLS\footnote{Noting that in practice,
+were this specification to be estimated with 2SLS\footnote{Noting that in practice,
 I use GMM-CUE for efficiency of estimates}.
 This shows improvements in adjusted $R^2$ for the model up to 3 lags,
 but barely any improvement for including an additional 4th-order lag.
 \par
 \pagebreak
-To investigate this issue, in Appendix \ref{app-static-dd} Table \ref{tab:dd_noz_str}
+To investigate this issue, in Appendix \ref{app:static-dd} Table \ref{tab:dd_noz_str}
 I run an extension where firms which share a location,
 meaning distance is mechanically 0, are excluded.
-Results are reported in \ref{tab:dd-noz-str}.
-On evaluation by $R^2$ thes models perform slightly worse.
+Results are reported in \ref{tab:dd_noz_str}.
+On evaluation by $R^2$ these models perform slightly worse.
 An odd phenomenon is that the signs flip on the spillover parameters.
 These specifications reveal an emerging feature of these models,
 which is that $\delta_0<0 \implies \xi_0>0 \cap \zeta_0>0$ and vice-versa.
