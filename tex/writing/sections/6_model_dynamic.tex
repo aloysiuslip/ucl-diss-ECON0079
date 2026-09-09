@@ -30,7 +30,7 @@ as is traditional of a VARMA(p,q) specification}.
                 \right]
 \end{align}
 
-Adding the autoregressor $y_{i,t}$ is also highly desirable.
+Adding the autoregressor $y_{i,t}$ is highly desirable.
 The panel setup with firm fixed effects already accounts for own-firm factors,
 and the presentation of $R^2$ including and excluding variation accounted for by the fixed effects
 throughout this paper demonstrates this.
@@ -70,7 +70,8 @@ Estimation of this model is near-identical in reduced form
 to the coefficients described in the static problem,
 requiring only that I estimate one additional parameter $\hat\phi_1$.
 Instead, the crucial change comes in the choice of instruments.
-The dynamic specification allows me to employ and contrast the use
+The dynamic specification allows the investigation to
+employ and contrast the use
 of temporal higher-order lags, rather than spatial ones.
 
 \subsection{Dynamic panel identification}
@@ -122,7 +123,7 @@ System GMM\footnote{Implemented with \cite{Wu2023}, with heavy modifications in 
 Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
 
-\subsection{Exploring AR structure}
+\subsection{Exploring temporal lag structures}
 \label{ss:dyn-ar}
 
 I firstly relax the strict exogeneity assumption of the standard factors to weak exogeneity.
@@ -139,8 +140,9 @@ For handling panel data in an autoregressive setting,
 first-differencing will lead to the reduced-form error term $\Delta\varepsilon_t$
 spanning 2 periods.
 As a result, weak exogeneity of the transformed factors
-requires lags of $t-2$.
-These deep lags are valid instruments which defensible exclusion restriction.
+despite the factors being predetermined in levels in period $t$
+requires lags of $t-1$.
+These lags are valid instruments with defensible exclusion restrictions.
 Since the zero autocorrelation property applies to any firm $i$,
 the full vector of deep lag factor regressors and their transformations
 are plausibly exogenous.
@@ -166,7 +168,7 @@ are plausibly exogenous.
             k_{i,\tau} & l_{\tau}
         \end{pmatrix}
     ] &= 0_{(1\times t)}
-    ,\ \forall i\ \forall \tau\leq t\leq 1
+    ,\ \forall i\ \forall \tau\leq t
     \\
     \label{eq:dyn-weak-exog-pred-diff}
     \mathbb E[
@@ -176,7 +178,7 @@ are plausibly exogenous.
             \Delta \mathbf W^k\mathbf k_{\tau-1} & \Delta \mathbf W^k \mathbf l_{\tau-1}
         \end{pmatrix}
     ] &= 0_{(1\times t)}
-    ,\ \forall k\ \forall \tau\leq t\leq 2
+    ,\ \forall k\ \forall \tau\leq t
 \end{align}
 
 Alternatively, capital and labour may be flexible inputs:
@@ -191,13 +193,15 @@ In practice, as with any dynamic panel model, the procedure laid out in this pap
 is not bound by the features of this particular dataset, which happens to be annual.
 Future analysis repeating this question with quarterly observations may well
 exploit the plausible predetermined nature of some production factors.
+In these cases, exogeneity in the reduced form first-differenced model
+require deep lags of $t-2$ for exogeneity.
 \begin{align}
     \notag
     \text{Flexible factors:}
     \\ \notag
     K_{i,t}, L_{i,t} &\in \Omega_{t}
     \\ \notag
-    \mathbb E[\varepsilon_{i,t}|\Omega_{t}] &= 0 
+    \mathbb E[\varepsilon_{i,t}|\Omega_{t-1}] &= 0 
     \\
     \label{eq:dyn-weak-exog-flex}
     \mathbb E[
@@ -207,7 +211,7 @@ exploit the plausible predetermined nature of some production factors.
             k_{i,\tau-1} & l_{\tau-1}
         \end{pmatrix}
     ] &= 0_{(1\times t)}
-    ,\ \forall i\ \forall \tau\leq t\leq 1
+    ,\ \forall i\ \forall \tau\leq t
     \\
     \label{eq:dyn-weak-exog-flex-diff}
     \mathbb E[
@@ -217,16 +221,43 @@ exploit the plausible predetermined nature of some production factors.
             \Delta \mathbf W^k\mathbf k_{\tau-2} & \Delta \mathbf W^k \mathbf l_{\tau-2}
         \end{pmatrix}
     ] &= 0_{(1\times t)}
-    ,\ \forall k\ \forall \tau\leq t\leq 2
+    ,\ \forall k\ \forall \tau\leq t
 \end{align}
-
+\par
+It is certain that the autoregressor, $y_{t-1}$ is endogenous.
+$y_{t-1}$ mechanically contains a $\varepsilon_{t-1}$ residual term;
+first differencing for the reduced-form panel means that $\Delta\varepsilon_t$
+and $\Delta y_t$ will contain a linear combination of $\varepsilon_t$ and $\varepsilon_{t-1}$.
+When $\Delta y_{t-1}$ contains a linear combination of $\varepsilon_{t-1}$ and $\varepsilon_{t-2}$,
+they share a common component, violating exogeneity.
+Here, a simple first-order lag is sufficient temporal distance to give an instrument with exclusion.
+\begin{align}
+    \Delta y_{i,t-2} &\propto \Delta \varepsilon_{i,t-2} \Delta \varepsilon{i,t-3}
+    \\
+    \mathbb E[\Delta \epsilon_{i,t}\vert \begin{pmatrix}
+        \Delta \varepsilon_{i,t-2} & \Delta \varepsilon{i,t-3}
+    \end{pmatrix}] &= 0_{1\times 2}
+\end{align}
+This is additionally confirmed by Anderson-Rubin (AR) tests across all specifications,
+which testing the autoregressor $\Delta y_{t-1}$,
+consistently reject the null hypothesis at 1\% significance.
+By contrast, the AR(2) test, which checks for the same weak instruments
+but at the second-order lag $\Delta y_{t-2}$,
+there is repeatedly insufficient evidence to reject the null hypothesis,
+again confirming the theory of the System GMM that deep lags are a valid instrument.
+With coefficients estimated across such a vast and heterogenous dataset,
+these consistent results for the basic properties are useful to observe.
+\par
+As the properties of the spillover regressor, $\mathbf z^\text{spill}$ are unknown \itx{a priori},
+I employ a $t-2$ deep lag at minimum to instrument for that component.
+This leaves only the question about the classical regressors as discussed.
+\par
 In this dataset, the empirical experiments run suggest that the decision
 over whether the classical factors should be predetermined or not
-makes no difference for this dataset.
-I present estimations of the 
+make no difference.
 \wraptable
     {Dynamic panel: baseline instrumental specification}
-    {../../model/output/results_3a_basic_str}
+    {../../model/output/results_3a_dyn_basic_str}
     {
         \begin{itemize}
         \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
@@ -240,194 +271,187 @@ I present estimations of the
         \end{itemize}
     }
 
-Devising an internal instrument requires a similar evaluation of the components of $y_{j,t}$ as in the static problem.
-There is a dynamic corollary to the static derivation of the endogenous term $y_{i,t}$.
+Table \ref{tab:dyn_basic_str} presents results from the reduced model
+\eqref{eq:dyn-main-ar10}, varying whether capital alone is a predetermined factor,
+meaning its lags can start as soon as the $t-1$ period in Model (1.),
+whether labour is alone (2.), or they are both endogenous,
+requiring both their instrument lags to start from the $t-2$ period.
+\par
+Across all specifications, the test-statistic for the Sargan-Hansen J-test
+is insignificant, suggesting insufficient evidence that the exogenous moment condition
+can be met, requiring any change to the predetermined assumptions.
+This offers 2 pathways: either I can use the results of this test with confidence
+and proceed with the assumption of capital and labour as predetermined variables.
+This offers an additional time-axis observation, and thereby degree of freedom,
+to conduct this panel analysis.
+Alternatively, I can be cautious and continue to employ deep lags of at least $t-2$
+for capital and labour instruments.
+I proceed with the latter for this section's exposition,
+owing to the richness of Fame in the time dimension.
+Data samples with alternative cuts, such as subsections of the data examining
+a certain time, industry, or region, may justify the alternative option at this stage.
+
+\newpage
+\subsection{Higher-order instruments}
+\label{ss:dyn-instr-ho}
+
+A decomposition of the spatially endogenous component of the regression, $\mathbf Wy_t$,
+has a similar form to the static problem.
+It is helpful to show this to aid the construction of valid instruments:
+it is obvious writing $y_{j,t}$ in reduced form in \eqref{eq:dyn-reduced-endog-y}
+from where an exogenous instrument might come.
 \begin{align}
-    \mathbf y_t
-    &= \boldsymbol{\alpha} 
-        + \gamma_t \boldsymbol{\iota} 
-        + \beta_0 \boldsymbol{\iota} 
-        + \beta_1 \mathbf{k}_t 
-        + \beta_2 \mathbf{l}_t 
-        + \delta_0 \mathbf{W} \mathbf{y}_t
-        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
-        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t
-        + \varepsilon_t \notag \\
-    &\quad 
-        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} 
-    % \notag \\ &\quad 
-        + \sum_{m=1}^p (\xi_m - \delta_m\beta_1) \mathbf{W} \mathbf{k}_{t-m} 
-        + \sum_{m=1}^p (\zeta_m - \delta_m\beta_2) \mathbf{W} \mathbf{l}_{t-m} 
-        \\[1.5ex]
-    (\mathbb{I} - \delta_0 \mathbf{W})\mathbf{y}_t 
-    &= \boldsymbol{\alpha} 
-        + \gamma_t \boldsymbol{\iota} 
-        + \beta_0 \boldsymbol{\iota} 
-        + \beta_1 \mathbf{k}_t 
-        + \beta_2 \mathbf{l}_t 
-        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
-        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t \notag \\
-    &\quad 
-        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} \notag \\
-    &\quad 
-        + \sum_{m=1}^p \mathbf{W} \Big[ 
-            (\xi_m - \delta_m\beta_1)\mathbf{k}_{t-m} 
-            + (\zeta_m - \delta_m\beta_2)\mathbf{l}_{t-m} 
-        \Big] 
-        + \boldsymbol{\varepsilon}_t \\[2ex]
-    %
     \mathbf{y}_t 
-    &= \sum_{k=0}^\infty \delta_0^k \mathbf{W}^k \Bigg( 
+    &= \boldsymbol{\alpha} 
+        + \gamma_t \boldsymbol{\iota} 
+        + \beta_0 \boldsymbol{\iota} 
+        + \beta_1 \mathbf{k}_t 
+        + \beta_2 \mathbf{l}_t 
+        + \phi_1 \mathbf{y}_{t-1} 
+    \\ &\qquad \notag
+        + \delta_0 \mathbf{W} \mathbf{y}_t
+        + (\xi_0 - \delta_0\beta_1) \mathbf{W}\mathbf{k}_t 
+        + (\zeta_0 - \delta_0\beta_2) \mathbf{W}\mathbf{l}_t
+        + \boldsymbol{\varepsilon}_t
+    \\[1em]
+    \label{eq:dyn-reduced-spatial-lag}
+    &= \sum_{k=0}^\infty \delta_0^k \mathbf{W}^k \big( 
         \boldsymbol{\alpha} 
         + \gamma_t \boldsymbol{\iota} 
         + \beta_0 \boldsymbol{\iota} 
         + \beta_1 \mathbf{k}_t 
-        + \beta_2 \mathbf{l}_t 
-        + (\xi_0 - \delta_0\beta_1) \mathbf{W} \mathbf{k}_t 
-        + (\zeta_0 - \delta_0\beta_2) \mathbf{W} \mathbf{l}_t \notag \\
-    &\quad 
-        + \sum_{m=1}^p (\phi_m \mathbb{I} + \delta_m \mathbf{W}) \mathbf{y}_{t-m} \notag \\
-    &\quad 
-        + \sum_{m=1}^p \mathbf{W} \Big[ 
-            (\xi_m - \delta_m\beta_1)\mathbf{k}_{t-m} 
-            + (\zeta_m - \delta_m\beta_2)\mathbf{l}_{t-m} 
-        \Big] 
+        + \beta_2 \mathbf{l}_t \notag
+        + \phi_1 \mathbf{y}_{t-1} 
+    \\ &\qquad \notag
+        + (\xi_0 - \delta_0\beta_1) \mathbf{W}\mathbf{k}_t 
+        + (\zeta_0 - \delta_0\beta_2) \mathbf{W}\mathbf{l}_t
         + \boldsymbol{\varepsilon}_t 
-    \Bigg) \\[2ex]
-    %
+    \big)
+    \\
     y_{j,t} 
     &= \dots 
+        + \underbrace{
+            \phi_1 y_{j,t-1}
+        }_{\text{untransformed lag}_j}
         + \underbrace{ 
             \sum_{k=0}^\infty \left[ \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} 
             \begin{pmatrix}\mathbf{k}_t & \mathbf{l}_t\end{pmatrix} 
             \begin{pmatrix} \xi_0 \\ \zeta_0 \end{pmatrix} 
-        }_{\text{contemporaneous exogenous}_j} \notag \\
-    &\quad 
+        }_{\text{contemporaneous exogenous}_j}
+    \\ &\qquad \notag
         + \underbrace{ 
-            \sum_{m=1}^p \sum_{k=0}^\infty \left[ \phi_m \delta_0^k \mathbf{W}^k + \delta_m \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} \mathbf{y}_{t-m} 
-        }_{\text{entangled historical inertia \& peer effects}_j} \notag \\
-    &\quad 
+            \sum_{k=0}^\infty \left[ \phi_1 \delta_0^k \mathbf{W}^k \right]_{(j,)} 
+            \mathbf{y}_{t-1} 
+        }_{\text{lagged spatial}_j}
         + \underbrace{ 
-            \sum_{m=1}^p \sum_{k=0}^\infty \left[ \delta_0^k \mathbf{W}^{k+1} \right]_{(j,)} 
-            \begin{pmatrix}\mathbf{k}_{t-m} & \mathbf{l}_{t-m}\end{pmatrix} 
-            \begin{pmatrix} \xi_m - \delta_m\beta_1 \\ \zeta_m - \delta_m\beta_2 \end{pmatrix} 
-        }_{\text{historical exogenous network effects}_j} \notag \\
-    &\quad 
-        + \underbrace{ 
-            \sum_{k=0}^\infty [\delta_0^k \mathbf{W}^k]_{(j,)} \cdot \boldsymbol{\varepsilon}_t 
+            \sum_{k=0}^\infty [\delta_0^k \mathbf{W}^k]_{(j,)} 
+            \cdot \boldsymbol{\varepsilon}_t 
         }_{\text{error transformation}_j}
 \end{align}
-
-For system GMM, I need to show that the reduced-form first difference regressors are exogenous.
-The first-order autoregressor, $\Delta ln(y_{it})$ is endogenous.
-\begin{align}
-    \Delta y_{i,t} &= \Delta \gamma_t
-                + \beta_1 \Delta k_{i,t}
-                + \beta_2 \Delta l_{i,t}
-                + \sum_{k=1}^p \phi_k \Delta y_{i,t-k}
-                + \delta_0 \sum_{j\neq i} w_{ij,t} \Delta z_{j,t}
-                + \Delta \varepsilon_{i,t}
-    \\
-    \Delta \varepsilon_{i,t} &= \varepsilon_{i,t} - \varepsilon_{i,t-1}
-    \\ \notag
-    \Delta y_{i,t-1} &= \qquad\dots\qquad + \Delta\varepsilon_{i,t-1}
-    \\ \notag
-    &= \qquad\dots\qquad + \varepsilon_{i,t-1} - \varepsilon_{i,t-2}
-    \\ \notag
-    &\implies \mathbb E[ \Delta y_{i,t-1}\Delta\varepsilon_{i,t}] \neq 0
-    \\ \notag
-    \Delta y_{i,t-2} &= \qquad\dots\qquad + \varepsilon_{i,t-2} - \varepsilon_{i,t-3}
-    \\ \notag
-    &\implies \mathbb E[ \Delta y_{i,t-1}\Delta\varepsilon_{i,t}] = 0
-\end{align}
-
-This is confirmed by the Anderson-Rubin (AR(1)) test in my results,
-which rejects the null hypothesis at the 1\% level for all models,
-suggesting that first-order lags of log GVA are a weak instrument
-\todo{Why? Shouldn't they fail exclusion restriction, not instrument correlation}.
-In addition, I assume that capital, $k_{i,t}$ is pre-determined, as investment is chosen
-one period ahead, in line with standard Perpetual Inventory Method approaches\footnote{
-    Noting that this is ordinarily done on a quarterly basis,
-    however, due to data limitations we adopt the same thing here even though Fame
-    provides observations annually.
-}\todo{Review predetermined material. Additionally, explain the logic of instrumenting for capital}
+The comparison to equation \eqref{eq:static-red-endogenous-effect} is evident:
+the contemporaneous spatial lag term is still present,
+meaning $[\mathbf W^k]_{j,} \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}$
+is still a valid instrument.
+However, this may not be so useful under a cautious approach
+allowing for cross-sectional non-orthogonality of errors \eqref{eq:dyn-xs-corr-errors},
+as $\mathbf W_{j,} \begin{pmatrix}\mathbf k_t & \mathbf l_t\end{pmatrix}$,
+the spatial \itx{exogenous effect} regressor is itself endogenous, or only weakly exogenous,
+so higher-order spatial and temporal lags should be used to instrument for this term already.
 \par
-To overcome this endogeneity, I introduce deeper autoregressive lags as instrumental variables,
-as proposed by \cite{Anderson1981}.
-I use 3 autoregressive instrument lags starting from $t-2$:
-$\ln(y_{i,t-2}), \ln(y_{i,t-2}), \ln(y_{i,t-p-3})$ for log GVA,
-and 2 lags for capital $\ln(k_{i,t-p-1}), ln(k_{t-p-2})$.
-An Anderson-Rubin (AR(2)) test shows that deep lags are a valid instrument for log GVA.
-The test applied to the second lag of $ln(gva_1)$
-fails to reject the null hypothesis of for any specification,
-so I assume it is a valid instrument.
-\par
-Additionally, using multiple deep lags allows for overidentification:
-in this basic AR(1) specification, I have $k=4$ regressors and $l=7$ instruments.
-I could increase this. Fame is rich on the time dimension, with up to 19 lags at most for a firm,
-and a median of 6 lags, so I could safely provide more lags of regressors as instruments.
-Further lags is likely to have a decreasing marginal effect on explanatory power
-and additionally \todo(...)
-\par
+This decomposition yields several over new exogenous terms due to the lags involved.
+The first is the simple untransformed lag component, $\phi_1 y_{j,t-1}$,
+which still persists in the reduced form even after the spatial lag inversion.
+This permits the use of simple deep lags, $y_{j,t-2}, y_{j,t-3},\dots$ as instruments.
+There is an additional combined temporal and spatial lag transformation component,
+$[\mathbf W^k]_{j,}y_{t-1}$.
+This derivation shows that there are up to 3 functionally unique variable transformations
+which can be used as a valid instrument in this analysis:
 I estimate the equation fulfilling the vector of moment conditions,
 (\ref{eq:dyn-moment-conditions}) via GMM.
 \begin{align}
     \label{eq:dyn-moment-conditions}
-    \mathbb E [
+    \mathbb E[
         \Delta\varepsilon_{it}
         \vert
         \begin{pmatrix}
-            \Delta \ln(y_{i,t-2})     \\
-            \Delta \ln(y_{i,t-3})     \\
-            \Delta \ln(y_{i,t-4})     \\
-            \Delta \ln(k_{i,t-2})     \\
-            \Delta \ln(k_{i,t-3})     \\
-            \Delta \Sigma_jw_{ijt}z_{jt}
+            \Delta y_{j,t-2}                    \\
+            \Delta [\mathbf W^k]_{(j,)}y_{t-\tau}    \\
+            \Delta [\mathbf W^k]_{(j,)}k_{t-\tau}    \\
+            \Delta [\mathbf W^k]_{(j,)}l_{t-\tau}
         \end{pmatrix}
     ]
-    &= 0
+    &= 0 \forall k \forall \tau\geq 2
 \end{align}
-
+\par
+It is a function of this analysis' unique application of a dynamic panel GMM
+to a peer effects model that offers this plethora of lags and instruments
+to employ and credibly eliminate exogeneity from the peer effects \itx{endogenous}
+regressor while gaining an impressive amount of variance.
+\par
+I firstly adopt the classic dynamic panel GMM strategy proposed by \cite{Anderson1981}
+and simply use the deeper lags of $y_{j,t-2},\dots$ as instruments.
+With a rich temporal dataset such as Fame,
+multiple deep lags allows for overidentification, provided that additional information is being gained.
+I leave it for future analysis to employ Information Criteria tests
+to determine optimal number of lags in the simple autoregressor instrument.
+In Table \ref{tab:dyn_instruments_str}, I simply estimate \eqref{eq:dyn-main-ar10}
+varying the number of autoregressor lags from 3 lags between $t-2$ to $t-4$, to 5 lags between $t-2$ to $t-6$.
 \wraptable
     {Dynamic panel: deeper instrumental lags}
     {../../model/output/results_3b_dyn_instruments_str}
-    {
-        \begin{itemize}
-        \item[] Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
-                at the 95\% level to reject the null-hypothesis that the model is identified.
-        \item[] Anderson-Rubin AR(1) test:  `\checkmark' indicates the use of single-order lags is a weak instrument,
-                as expected from a first-differencing System GMM approach.
-        \item[] Anderson-Rubin AR(2) test: `\textsf{X}' indicates insufficient evidence to
-                reject the use of second-order lags due to their being a weak instrument,
-                as expected from the first-differencing with lags greater than 2nd-order to overcome contemporaneous endogeneity.
-                `checkmark' indicates some instruments used were weak.
-        \end{itemize}
-    }
+    {}
+While these results don't offer any obvious new insight from parameter estimates,
+they do confirm that continuing with the higher simple autoregressor lag strategy
+does not leave the estimation over-identified, with a continuing failure to reject
+the Sargan-Hansen J-test's null hypothesis.
+\par
+Due to the time constraints of this investigation,
+I leave it for future analysis to continue the narrative and exploration here
+to continue to test each type of instrument individually
+and in combination with each other.
+As I deployed in \nameref{s:models-static},
+estimating the first-stage of the reduced-form equation with simple OLS
+and comparing R$^2$ would offer insights on the strengths of instruments
+employed to explain the variation in the endogenous regressors.
+Additionally, as already discussed, Information Criteria tests would
+also helpfully determine optimal lags for use in instruments.
+My hypothesis is some combination of the untransformed autoregressive deep lag
+and spatially-transformed lagged \itx{endogenous} regressor
+would significantly improve identification.
 
+\subsection{Dynamic empirical results}
+\label{ss:dyn-empirical-results}
 
-% \wraptable
-%     {Dynamic panel: deeper vector regressor lags}
-%     {../../model/output/instr_3b_Jover}
-%     {Hansen J-test for over-identification: `\textsf{X}' indicates insufficient evidence
-%     at the 95\% level to reject the null-hypothesis that the model is identified.
-%     Anderson-Rubin AR(1) test: 
-%         Model includes a constant as the baseline for \itx{t} fixed effects.
-%     }
-
-% \wraptable
-%     {Dynamic panel: deeper autoregressive lags}
-%     {../../model/output/instr_3c_ar}
-%     {
-%         Model includes a constant as the baseline for \itx{t} fixed effects.
-%     }
-
-\par 
-Finally, a Sargan-Hansen J-test is implemented to check if these instruments are
-over-identified, meaning the moment conditions cannot be fulfilled with 95\% confidence.
-In all models, the J-test fails to reject the null hypothesis,
-meaning the model's moment conditions are jointly correct.
-
-\todo{!!!!}
-Following above reasoning, lags of $\Delta\sum_{j\neq i} w_{i,j,t}z_{j,t}$
-of a higher order than 2 are exogenous to my reduced-form specification.
-However, 
+The empirical tests so far as given in \tablerefp{tab:dyn_basic_str}
+and \tablerefp{tab:dyn_instruments_str} offer very little support
+for the deployment of the dynamic structure,
+with a consistently zero parameter on the autoregressor coefficient $\phi_1$.
+Additionally, specifications run so far with AR(1,q) structures of lag
+on the spatial components so far fail to find any significant
+coefficients for $\boldsymbol \theta_1, \boldsymbol\theta_2,\dots$
+as occurs in the static case.
+Taken as face value, this offers some credibility to the use of
+a static model to outline the problem.
+Especially with annually-frequency panel data,
+results form this section would argue that nearly all the variation
+of interest is explainable by the contemporaneous
+classical and spatial regressors employed in section \ref{s:models-static}.
+\par
+Taken seriously, this would suggest that spatial productivity spillovers are a static problem.
+As a policy question, it implies that firms are rational, efficient actors
+who take advantage or colocate in an area to take advantage of the contemporaneous
+spillovers exhibited from their high-performing neighbours.
+The dynamic formation of a cluster either therefore reflect
+repeated, serially uncorrelated productivity shocks
+in a region attributable to other factors than merely the spillover
+between high-performing firms,
+or that firms move to a cluster continually over time
+for some other driver than chasing the highest spillover
+to their TFP levels.
+\par
+Overall, this section provides a framework to continuing to test
+the use of dynamic instruments which may improve the explanatory
+power of lagged components of the dynamic specification,
+reaffirms theory from \cite{Arellano1991} on the use of deep lags as valid instruments,
+and further identifies interesting combinations of spatial and temporal lags
+that could prove powerful relevance terms to improve identification.

@@ -114,8 +114,7 @@ to help validate the choice of aggregates against known measurements.
 This specification does not yield consistent estimates when estimated with OLS,
 according to the structural model I give in section \ref{ss:static-identification}.
 $u_{i,t}$ is a non-structural error-residual correlated with $k_{i,t}$ and $l_{i,t}$.
-Nevertheless, it is a helpful exploration tool to observe if derived coefficients
-match macroeconomic estimates
+Nevertheless, it is a helpful exploration tool for parameter selection.
 \wraptable
     {Benchmark 2-factor TFP estimation}
     {../../model/output/final/results_0_tfp_combined}
@@ -139,6 +138,13 @@ almost entirely eliminates the capital share of income, or explanatory power of 
 Similar results are shown for a further decomposition of \itx{fixed\_total} to its asset components.
 I leave it for future analysis why this dataset yields this phenomenon and
 for the rest of the analysis, I use \itx{total\_assets} as the primary capital measure.
+\par
+Helpfully, estimates of the factor income shares for contemporaneous labour and capital
+stay roughly constant throughout all specifications of this analysis
+even as other derived parameters significantly jump around.
+This suggests the effect being measured by the spatial spillover
+is truly orthogonal and distinct from the classical production model
+core to the usual theory of the firm.
 
 % # --- #
 
