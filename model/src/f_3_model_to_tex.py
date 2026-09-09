@@ -534,7 +534,7 @@ def generate_latex_from_generic(
                 continue
             # Apply text logic to header columns, and numeric logic to data columns
             if i < hcols:
-                format_latex_column(val, rename_strat)
+                val = format_latex_column(val, rename_strat)
                 row_vals.append(val)
             else:
                 # Iterate additional header rows without applying float formatting
