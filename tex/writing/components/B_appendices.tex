@@ -196,10 +196,20 @@ Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
 \subsection{$\mathbf W$ transformations summary statistics}
 \label{app:data-w-transformations}
 
-\wraptable
-    {Summary statistics for $\mathbf W_d\mathbf x$ transformations and high-order variants}
-    {../../calculations/output/w_transforms_summ_n}
-    {}
+\begin{table}[hb!]
+    \centering
+    \begin{threeparttable}
+        \caption{Summary statistics for $\mathbf W_d\mathbf x$ and high-order transformations}
+        \input{../../calculations/output/w_transforms_summ_n}
+        \begin{tablenotes}
+            Simple means of each transformed vector reported,
+            standard deviation below in (parenthesis).
+            A cell entry represents the vector transformation, whether
+            higher order $\mathbf W_{d2}^2$ or none at all, \itx{base},
+            to a log aggregate variable, $y_{t}, k_t, l_t$.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
 \wraptable
     {Summary statistics for $\mathbf W_g\mathbf x$ transformations and high-order variants}
     {../../calculations/output/w_transforms_summ_g}
@@ -234,30 +244,25 @@ Depth 5 (4): ['w4g1_k -> (i-wg1)w4g1_k', ...]
     {../../model/output/results_2b_dd_noz_str}
     {}
 
-% # --- #
-\newpage
-\section{Dynamic panel: alternative specifications}
-\label{app:dynamic-panel-ho-ar}
+% % # --- #
+% \newpage
+% \section{Dynamic panel: alternative specifications}
+% \label{app:dynamic-panel-ho-ar}
 
 % \wraptable
-%     {Dynamic panel: higher-order autoregressive lags}
-%     {../../model/output/results_3a_supp_iv_ar(p)}
+%     {Dynamic panel: higher-order regressor lags 1-5}
+%     {../../model/output/old/instr_3c_ar}
 %     {}
 
 % \wraptable
 %     {Dynamic panel: higher-order regressor lags 1-5}
-%     {../../model/output/results_3b_supp_iv_var(p)}
+%     {../../model/output/old/instr_3a_identif}
+%     {}
+% \wraptable
+%     {Dynamic panel: higher-order regressor lags 1-5}
+%     {../../model/output/old/instr_3b_Jover}
 %     {}
 
-% \wraptable
-%     {Dynamic panel: higher-order regressor lags 6-10}
-%     {../../model/output/results_3c_supp_var(p)2}
-%     {}
-    
-% \wraptable
-%     {Dynamic panel: higher-order VAR(2,4) structures}
-%     {../../model/output/results_3d_supp_var(p,q)3}
-%     {} 
 
 \newpage
 \section{Data cuts: estimations with subsets}
