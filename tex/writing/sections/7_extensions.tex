@@ -1,11 +1,59 @@
-\section{Extensions}
+\section{Discussion and extensions}
 \label{s:extensions}
 
-\subsection{Drivers of the strength of spillover}
-\label{ss:ext-agglomeration-neg-land}
+This analysis achieves 3 of the 4 purposes it set out in section \ref{s:intro} well.
+I develop robust data science techniques appropriate for the task
+that allow efficient handling of mass spatial data of any size required
+for a credible spatial analysis, for which Fame likely represents the upper bound of observations.
+I apply the econometric theory of deploying higher-order spatial lags
+in a contemporaneous peer effect model,
+and demonstrates that this tool is useful in the critical
+setting of analysing spatial productivity.
+In this, I offer key insights on the contribution and importance
+of different specifications varying weights of spatial peers,
+and on the employment of different weighting structures, such as multiple non-overlapping groups,
+to improve identification.
+\par
+I extend this to the dynamic setting: I show that alternative deeper lags,
+this time on the temporal dimension, are permissible, aligning
+theory presented on dynamic panel structures from \cite{Arellano1991}
+and estimates proposed by \cite{Blundell1998} to a peer effects application,
+again, particularly that the policy-crucial question of spatial productivity
+can be investigated through these tools.
+I offer insights on the complimentary and overlapping nature
+of spatial and temporal lags, establishing a framework of investigation
+to evaluate the performance of selection of instruments.
+Additionally, I find some early evidence supporting the use of a static model
+in this question, with minimal significant results for dynamic effects
+for the spatial productivity spillover.
+Taken seriously, this provokes re-examination of the centrifugal forces
+occurring over time, inspiring colocation and urban development,
+if it implies that firms believe the benefits of positive productivity shocks
+to be durable.
+\par
+Nevertheless, the last purpose listed, aiming to achieve robust empirical
+estimates of the spillover are inconsistent.
+\itx{A priori} expectations of the key parameters estimated, $\delta_0,
+\xi_0, \zeta_0$ would expect them to be positively signed 
+A negative sign on some taken as truth, would imply competing,
+centrifugal effects such as congestion or constrained input resources.
+Even then, results presented are unusual for finding negative signs
+on some coefficients and not others,
+indeed specifications seem to consistently imply that
+$\delta_0 > 0 \implies \xi_0<0, \zeta_0<0$, and vice versa.
+This is an unusual pattern that most likely suggests misspecification:
+models are most likely trying to fit around some combination
+of the parameters of interest where the factors compete for contribution,
+and a sudden attribution to one via random noise signifies a decrease to the other.
+Alternatively, the unusual pattern of parameter movement
+could be some accounting 
+\par
+This paper handles several complicated econometric issues that require
+significant further scrutiny to yield a definitive answer to the nature
+of these results. Any one of the uncertain model choices discussed in this paper,
+likely in order of significance, the arbitrary deselection of peers
+by a 5km distance boundary, the choice to only 
 
-This approach takes a holistic, mass microdata approach
-to the techniques and estimates deployed
 
 \subsection{Selection of parameters}
 \label{ss:param-select-xvalidate}
@@ -17,14 +65,67 @@ In section \ref{ss:data-distance}, I discussed arbitrary choices over
 network and distance restrictions, using \itx{ttwa} boundaries
 and 5km max distances.
 
+\subsection{Improving estimates by granularity}
+\label{ss:ext-agglomeration-neg-land}
+
+This approach takes a holistic, mass microdata approach,
+which has the advantage of testing the limits of the structural model,
+and searching for baseline patterns of universal and persistent
+trends across time-firm observations.
+However, it omits investigation of serious economic consequence
+to explore hyper-regional, clustering phenomena
+that are core to the urban development narrative
+discussed in \ref{ss:lit-neg}. This has serious risk of trying to impose a single,
+3-factor production function specification, and unified parameter estimate
+in each of $\delta_0, \xi_0, \zeta_0$ for all firms,
+which represented a unified, mass of heterogeneity over their respectively
+differing industries, sizes, ages, practices, and fixed
+location and cultural factors.
+Some of these will be captured in firm fixed effects,
+leaving a very low R$^2$ of remaining variation that be captured
+in this aggregated analysis, other components of it will be time-varying.
+\par
+The strongest advantage of this investigation's approach
+is that it creates a platform for defensible regressions
+with the rich microdata handled, ready to estimate in new choice specifications
+of the researcher's interest. Future analysis should proceed with
+policy-relevant choice cuts. Section \ref{s:intro} outlined
+several key and emerging questions governing the economic and policy
+future of the UK. Evidence supporting these cases for regional policy
+would greatly benefit from the quantitative, restriction-free analysis
+which this paper establishes and explores.
+\par
+Some suggested cuts of data could be:
+\begin{\itemize}
+    \item Estimating and monitoring the strength of knowledge spillovers in the UK government's identified `innovation'
+    clusters (\ref{app:ext-cuts-clusters}.Table \ref{tab:cuts_clusters_str})
+    \item Evaluating the spillover strength of the UK's high-performing
+    cities (\ref{app:ext-cuts-clusters}.Table \ref{tab:tab:cuts_service_cities_str})
+    and towns (\ref{app:ext-cuts-clusters}.Table \ref{tab:tab:cuts_service_towns_str})
+\end{\itemize}
+I begin preliminary estimation and analysis of these phenomena, filtering the corpus of firms
+to selection on a place-industry basis, and estimating the same $\delta_0, \xi_0, \zeta_0$
+parameters. Results for a static, distance-decay model are given in Appendix \ref{app:ext-cuts-clusters}.
+However, similar to results given in the rest of the paper, these results are not significant, nor stable,
+for instance keeping within the \itx{a priori} limits of $\vert\theta_0\vert<1, \forall
+\theta_0\in\boldsymbol\theta_0$.
+\par
+We should therefore conclude from this that mere heterogeneity over the analysis' corpus of firms
+is not the cause of the parameter instability, the issues discussed above requiring further
+econometric investigation or data revision are likely necessary to bring the empirical
+component of this analysis to stable estimates.
+Nevertheless, this short exercise taking cuts of data demonstrates how policy-focussed investigations
+to derive credible empirical estimates would proceed from the framework I have established here.
+
 \subsection{Network fixed effects}
 \label{ss:ext-nfe}
 
-Firm and time fixed effects in a network setting may be considered insufficient,
-A local demand shocks, which can be thought of as a \itx{correlated} shock
+Local demand shocks can be thought of as \cite{Manski1993}'s \itx{correlated effects}
+discussed in section \ref{ss:lit-peer-effects-metrics}, such that
 $\mathbb E[\varepsilon_{i,t,g}\varepsilon_{i,t,h}]\neq 0$,
 where $(g,h)$ are some close members of a network or group within the interactions matrix $\mathbf W$.
-This is a phenomenon specific to peer effects analysis and differs from the usual omitted variable bias (OVB)
+This is a phenomenon specific to peer effects analysis
+and differs from the usual omitted variable bias (OVB)
 that impacts all firms discussed in standard econometric theory;
 here, specific identity of a group or network exposes members to a certain third-party common shock,
 for which a researcher should introduce controls.
@@ -146,5 +247,38 @@ Further analysis could investigate this issue more thoroughly
 and successfully implement these network fixed effects as the key to stripping out
 local demand effects or supply shocks.
 
-\subsection{Alternative data sources for location data}
+\subsection{Alternative location data}
 \label{ss:ext-alt-location}
+
+This analysis thoroughly explained the advantages of Fame's high observation count
+and the subsequent data science employed to handle its nuances.
+\par
+Alternative datasets were considered for this investigation.
+This investigation aimed to incorporate the `Longitudinal Business Database',
+a data spine designed to be implemented in a similar panel format
+to presented here with Fame,
+with consistent estimates over time\cite{Lemma2023}.
+This database is a novel innovation in data collecting procedures
+employing innovative techniques for consistency of data such as double-snapshotting,
+offers a similar time period coverage to Fame from 1999-2024,
+and is comprehensive as a corpus of firm in the UK, again similar to Fame,
+as it derived from the ONS' Inter-Departmental Business Register.
+It offers 2 crucial advantages:
+\begin{enumerate}
+    \item It tracks firms at the site (\itx{local unit}) level, solving the multisite
+    and attribution of GVA issue discussed in section \ref{s:data}.
+    \item Its use of double-snapshotting permits tracking of firm movers,
+    allowing a more sophisticated specification of firm entry and exit,
+    beyond the simplistic assumptions of static movers with controls presented here.
+\end{enumerate}
+\par
+As it employees collection methods as a register, rather than a sample,
+the Longitudinal Business Database is only available to
+registered ONS Secure Research Service project users.
+As my registration was finalised halfway through the 3-month timescale
+available for this MSc Dissertation project,
+my use of the LDBR was limited to only realising that 
+ingestion and cleaning methods employed for Fame would require significant revisions
+for the LBD's structure,
+so a planned joint approach was dropped.
+Nevertheless, the LBD continues to be a viable path for extending this analysis.
