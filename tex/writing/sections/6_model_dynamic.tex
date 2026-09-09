@@ -373,9 +373,9 @@ I estimate the equation fulfilling the vector of moment conditions,
 (\ref{eq:dyn-moment-conditions}) via GMM.
 \begin{align}
     \label{eq:dyn-moment-conditions}
-    \mathbb E \left[
+    \mathbb E [
         \Delta\varepsilon_{it}
-        \cdot
+        \vert
         \begin{pmatrix}
             \Delta \ln(y_{i,t-2})     \\
             \Delta \ln(y_{i,t-3})     \\
@@ -384,7 +384,7 @@ I estimate the equation fulfilling the vector of moment conditions,
             \Delta \ln(k_{i,t-3})     \\
             \Delta \Sigma_jw_{ijt}z_{jt}
         \end{pmatrix}
-    \right]
+    ]
     &= 0
 \end{align}
 

@@ -4,7 +4,7 @@ from pathlib import Path
 curr_dir = Path(__file__).parent
 bib_path = curr_dir / ".." / "tex" / "writing" / "references_main.bib"
 
-tasks = ["fix_authors", "fix_acronyms"] # options: "fix_authors", "fix_acronyms"
+tasks = [] # options: "fix_authors", "fix_acronyms"
 
 with open(bib_path, "r", encoding="utf-8") as f:
     content = f.read()

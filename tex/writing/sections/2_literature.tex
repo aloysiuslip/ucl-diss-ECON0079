@@ -1,61 +1,87 @@
 \section{Literature}
 \label{s:literature}
 
-\subsection{\todo{Agglomeration and Marshall}}
-\label{ss:lit-marshall}
-It has been common to analyses of economic growth since \cite{Marshall1920}
-to assume and qualitatively discuss some effect on firm-to-firm spillover of productivity.
-A productivity spillover underpins well-established economic phenomena
-such as the colocation of firms in urban clusters described in New Economic Geography literature
-such as \cite{Krugman1991}.
-It has been heavily analysed through industry and spatial density approaches
-in spatial and urban econometric literature such as \cite{Glaeser1992}.
+\subsection{Agglomeration and the productivity spillover}
+\label{ss:lit-agglom}
 
-My investigation is rooted in \cite{Marshall1920}'s taxonomy,
-which identifies three channels to productivity spillovers: (1) input-output costs, (2) labour pooling, and (3) knowledge spillovers.
-There is no reason to think these are exhaustive. We might theorise that there may be competitive effects and cultural factors.
-\cite{Krugman1991} also labels all these channels as 'centripetal' to an urban core; there are likewise 'centrifugal' factors that
-push firms away from the urban core, such as destructive (zero-sum) competition, congestion, and saturation costs.
-A further extension could develop models on these further channels and empirically test them.
-Furthermore, these productivity spillovers are incredibly salient to thinking about production structures.
+Agglomeration is the colocation of firms in spatial regions
+for the mutual benefit of a productivity spillover.
+It is the imperative force behind the development of cities
+(described illustriously in \cite{Goldin2023})
+and fundamental to considering alternative dimensions
+to the static 2-factor production model underlying most
+economics of firm production that mostly intuitively
+represents the pattern of growth and clustering
+seen in modern economies.
+Public attention was drawn to the phenomenon even in the heyday
+of the development of classical economics. \cite{Marshall1920}
+outlined a series of channels pertinent to increasing urbanisation
+around industrial clusters that characterised the late 19th Century across Europe.
+Agglomeration was definitively described by \cite{Krugman1991},
+an empirical investigation into the clustering of manufacturing firms
+using a `core-periphery' model of urban development.
+The paper, and the authors' subsequent work of the `New Economic Geography'
+field\cite{Krugman1998, Fujita2004, Koo2007}, was nuanced in its characterisation of
+`centripetal' forces, grounded in \cite{Marshall1920}'s taxonomy,
+accelerating towards a basin of attraction urban area
+until they are outweighed by the `centrigual' forces of a developed city:
+immobile factors, competition for resources, and congestion.
 \par
-In this investigation, I concentrate on (3) knowledge spillovers, tackling a difficult identification problem highlighted in Glaeser (2001).
-This is more relevant to the knowledge-based services economy that dominates the UK.
-Input-output costs and labour-pooling matter more for industrial manufacturing firms, especially the latter which was devised in response to
-the phenomenon emergence of industry towns.
+The movement spurred other considerable advances in spatial economics,
+which looked to estimate the raw underlying spatial spillover effect,
+supporting `New Economic Geography' contributions which tend to assume
+or abstract away from the spillover estimate itself.
+Several contributions outlined in \cite{Beeson1991} robustly estimate
+the contribution of increased city size to productivity levels;
+later work takes this on a more granular level,
+developing estimates of the contribution of indices of
+spatial and industry density for any given urban area \cite{Glaeser1992,Ellison2010}.
 \par
-Most agglomeration literature bundles all three channels together. Glaeser (2010) and Krugman (2010) identify how vital
-identifying knowledge spillovers are. That need to estimate them well only grows with the modern, knowledge economy of the UK.
-(Goldin, 2023) speculates that agglomeration effects have “increasing strength” attributable to the way in which
-"knowledge workers in particular become more productive when located near to one another.
-Information may be more available than ever, but the evidence suggests that it still tends to flow largely through in-person networks".
-
-\subsection{\todo{New Economic Geography}}
-\label{ss:lit-neg}
-
-However, \cite{Krugman1991} prefers not to assume this effect
-in their focus on the dynamic movement of firms.
-Instead, heterogenous cluster policies, such as initial external differences in the number of workers
-or firms are frequently assumed, with `forward and backward linkages' driving colocation
-endogenously from there. This paper helpfully tests the presence of spillovers,
-providing another centrifugal force directly incentivising firms to colocate. 
-
-\subsection{\todo{Modern approaches}}
-Specific approaches to investigating knowledge spillovers via innovation, instrumenting via patent publications comes from US evidence,
-including (Jaffe, 1993), (Berkes and Ruben, 2021) and more recently \cite{Bloom2013}.
+Density-based estimates of the agglomeration `centripetal' force provide
+a different interpretation to spillovers from firm-to-firm, both to implications on
+economic policy and their own confounding issues.
+Contributions at the turn of the 20th century offered some firm-level estimates,
+but tended to continue to make significant abstractions,
+such as imposing the equilibrium model of firm movement across 2 abstract cities or
+the placement of firms all on a 1-dimensional line \cite{Fujita1982, Ciccone1996, Desmet2010}.
+Nonetheless, these offer benchmarks to empirical estimates derived and
+helpful insights on extending the classical production functions
+and deploying distance-decay measures to simulate the spatial characteristic
+of knowledge decay or firm-firm interaction barriers, such as in \cite{Lucas2002},
+which I emulate in this paper.
 \par
-Knowledge spillovers have been a well-evidenced factor of
-managerial literature within the firm contributing to productivity gains.
-A field-starting MIT study from \cite{Allen1977} observed an exponentially declining curve depicting the
-frequency of communication between two individuals against their physical distance in an office.
+Estimates are summarised in \cite{Graham2018}, commissioned for the UK Department for Transport.
+They evaluate a mean across 47 international empirical studies around 5\%,
+positively signed, though noting the wide variance in estimates.
+They additionally lay out a step-by-step framework to estimating firm-to-firm productivity spillovers
+through a production function approach. Both group and distance-decay measures are discussed.
+Additionally, an overview of the measurable data and econometric options to carrying out an empirical investigation
+are comprehensively provided.
+This analysis implements their suggestion to employ a dynamic panel IV,
+alongside other spatial IV techniques as an instrumentation strategy.
+Recent papers utilising these econometric techniques, coupled with exploiting
+modern, public, mass data-collection have offered further insightful estimates
+on the firm productivity spillover in specific contexts.
+\cite{Bloom2013} uses instruments on innovation to isolate `centripetal' and `centrifugal' forces.
+\cite{Gruber2023} instruments place-based cost shocks to evaluate the pattern of colocation and productivity of scientists.
+There are few estimates that seek to take a UK approach to estimating this spillover factor
+on a firm-to-firm level.
+\par
+\cite{Graham2018} additionally substantively review the econometric pitfalls of estimation
+that challenge a spatial econometric investigation at the firm-level.
+They highlight the critical issue addressed in this paper
+on the simultaneous determination of the dependent variable and the causal productivity spillover,
+which causes estimates with a reduced-form TFP residual dependent variable to be
+``biased and inconsistent''\footnote{\cite{Graham2018}, p.30}
+This paper's advances on this literature are
+to move away from aggregated density measures to a firm-to-firm spillover,
+address endogeneity via a peer effects model.
 
 \subsection{Peer effects econometrics}
 \label{ss:lit-peer-effects-metrics}
 
-The \cite{Manski1993} model is a common baseline in literature on peer effects.
-It provides helpful structure to the study of joint behaviour of individuals
-who are members of a group or network, and can be applied to any examination
-of units with peers such as individuals, not merely firms.
+The \cite{Manski1993} `Linear-in-Means' model provides a baseline for the econometrics of peer effects.
+It provides helpful structure to examining joint behaviour of members of a group or network.
 \begin{align*}
     y_i \quad
         &=\quad c \quad
@@ -65,7 +91,7 @@ of units with peers such as individuals, not merely firms.
         + \underbrace{\xi\bar x_{-i,g}}   _{\substack{exogenous  \\\text{effect}}}
         + \quad \varepsilon_i
 \end{align*}
-The model firstly decomposes spillovers to a direct behavioural, or \itx{endogenous} effect,
+The model  decomposes spillovers to a direct behavioural, or \itx{endogenous} effect,
 $y_{j}\to y_{i}$, where the outcome of interest among peers
 affects that of the target individual.
 Robust applications of the Manski model demonstrate credible approaches to measuring the \itx{endogenous effect}.
@@ -73,11 +99,8 @@ Robust applications of the Manski model demonstrate credible approaches to measu
 the `Danish Dispersal Policy' of refugee arrivals (1986-1998).
 \cite{Chetty2016} measures a similar effect among high-poverty children through the US 1990s `Moving to Opportunity' scheme.
 These studies exploit quasi-randomness in the location assignment of individuals and peers
-for robust identification. As discussed in section \ref{ss:data-limitations},
-the dataset used for this analysis unfortunately offers no such granularity of features
-to identify movers, let alone evaluating the exogeneity of their colocation.
-The use of firm fixed effects and reasonable assumptions of location stickiness
-are employed to compensate for this risk of location endogeneity.
+for robust identification, a strength absent from this analysis' time-invariant dataset only partially mitigated by the use of fixed effects
+and assumptions of locaiton stickiness.
 \par
 Additionally, the \cite{Manski1993} model requires contextual or \itx{exogenous} effects,
 of which the variation of non-outcome of interest variables among peers
@@ -116,17 +139,11 @@ The focus of \cite{Manski1993}'s linear-in-means (LMM) contribution is to highli
 an econometric trap.
 The derivation give above shows that the initial structural equation
 cannot be estimated directly with OLS due to the endogeneity of $\bar y_{-i,g}: \mathbb E[\bar y_{-i,g}\varepsilon_i]\neq 0$.
-Transforming the equation to reduced form and omitting the endogenous regressor
-leads to underidentification: 3 parameter estimates yielded for 4 structural parameters.
-Causal variation in $y_{i,g}$ is unidentifiable as it is exactly collinear with all the other regressors.
-This underidentification is a famous one, hindering analysis of peer dynamics including via spatial interaction.
+Causal variation in $y_{i,g}$ is unidentifiable due to insufficient reduced-form parameters.
 \par
 A key solution to this is the deployment of instruments, $z_{-i}\propto \bar y_{-i}\ \cap\ z_{-i} \not\propto y_{i}$.
 An application employing credibly exogenous instruments for a peer effects measure in an individual crime setting
 is given in \cite{dustmann-landerso2024:gangs-babyfathers}.
-This study uses the sex-identity at birth of newborns as a valid instrument
-for the criminal behaviour of their babyfather gang-leaders,
-who serve as an influential peer on the target members of their gangs respectively.
 The equivalent valid instrument in this analysis which is correlated with the peer effect
 but has no direct effect on the target outcome of interest
 is an additional spatial lag of \itx{exogenous} regressors in the static model.
@@ -139,12 +156,6 @@ A modern paper, \cite{Bramoulle2009}, explores different identification techniqu
 for group and network structures. These structures are more complex than the \cite{Manski1993} model,
 which by using a variable of means $\bar y_{-i,g}$, implicitly assumes simple, `leave-one-in' group averages
 as the peer \itx{endogenous} regressor.
-\cite{Moffitt2001} makes a modification to drop the `large $g$ assumption'
-and instead exclude the target observation $y_{i,g}$ from calculation of the group mean $y_g$,
-which provides a helpful conceptual move from estimating a `neighbourhood effect',
-for which the target is still a contributor,
-towards more of a collection of influential peers.
-Nevertheless, this is still insufficient to offer identification.
 \par
 The paper subsequently explores many complex interaction structures summarised by the weighting matrix $\mathbf W$,
 the $n$-dimensional interactions matrix between firms.
@@ -154,8 +165,7 @@ The contributions from this paper are, in short, that complex $\mathbf W$ matric
 and network diameters ($s_d$) are key to discovering valid spatial lag instruments.
 Fortunately, these structures resemble realistic interactions common to empirical data,
 and are applicable to this analysis' pattern and layout of firm interactions.
-We should note in application that this strategy
-continues to assume exogenous assignment of spatial assignments
+This strategy continues to assume exogenous assignment of spatial assignments
 and so target-peer interactions.
 
 \wraptable
@@ -163,7 +173,7 @@ and so target-peer interactions.
     {./figures/2_tab_bdf_identification}
     {
         Adapted from \citepalt{Bramoulle2009} with notation
-        revised and abridgments to improve relevance to this analysis.
+        revised and abridgements to improve relevance to this analysis.
         (a) \citepalt{Manski1993}, in this model $\mathbf W^2=\mathbf W$ for linear dependence.
         (b) \citepalt{Moffitt2001}, in this model, $\mathbf W^2 = \frac1{s-1}\mathbb I + \frac{s-2}{s-1}\mathbf W$ for linear dependence.
         (c) \citepalt{Lee2007}.

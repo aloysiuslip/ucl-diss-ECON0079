@@ -359,15 +359,11 @@ Essentially, these reduce to checking that the matrices $\mathbb I, \mathbf W, \
 are linearly independent, which are sufficiently achieved for group interactions by
 having 2 or more differently-sized groups, or a network diameter of at least 2.
 \par
-This identification strategy is not a `free lunch'.
-It requires the underlying assumption that the group size, or network diameter,
-is in itself exogenously determined. This would be intuitively violated,
-if firms colocate based on the expected productivity benefits of moving to an area,
-namely to benefit from the supply-side spillovers we aim to investigate.
-Unfortunately, it is highly likely that firm location decisions are endogenous,
-this is the whole principle of the \nameref{ss:lit-neg} literature whose
-descriptive patterns of firm movements underlying productivity spillover I here aim to investigate.
-I am helped here, however, by the use of time-invariant weights.
+This identification strategy is not a `free lunch'; it still requires that peer assignment,
+via group size, or network diameter is itself exogenously determined.
+This would be intuitively violated, if firms colocate endogenously,
+unfortunately, exactly as discussed in section \ref{s:literature}.
+Some mitigation is provided by the use of time-invariant weights.
 Plausibly, over the observations of a panel dataset up to 20 years,
 if firm weights apply to each firm on a fixed basis,
 the temporal variation despite these constant location effects provide credible exogenous variation.
@@ -439,7 +435,7 @@ so does not help increase our identification of $y_{j,t}$.
 
 % --- %
 
-\subsection{Linear-in-means grouped model}
+\subsection{Linear-in-means group model}
 \label{ss:model-lmm}
 
 The initial model proceeds with the strict error orthogonality

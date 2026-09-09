@@ -4,111 +4,101 @@
 The strength of the spatial productivity spillover
 is crucial to policy and economic discussions on growth, production,
 and the formation of urban clusters, but it is notoriously tricky to
-estimate\footnote{Qualitative discussions in \cite{Krugman1998}, \cite{Fujita2004}}.
+estimate\footnote{\cite{Krugman1998}, \cite{Fujita2004}}.
 The purpose of this paper is to demonstrate that modern advances in
 rich microdata compilation, computing, and econometric theory and techniques
 mean that progress is possible in this decades-long empirical problem.
-Indeed, evidence is derived with a stylised, classical model
-only using features available from firm data,
-which provides a baseline for future more sophisticated models of households,
-urban development, and endogenous selection.
-This analysis offers four key contributions that are substantively novel:
+Indeed, evidence is derived by stripping away restrictions
+and stylised patterns of firm and household behaviour that simplify
+the problem in empirical literature,
+in favour of estimation with a stylised, classical model
+only using features available from firm data.
+This provides a baseline technique for future, more sophisticated models.
+The analysis offers four key contributions that are substantively novel:
 \begin{enumerate}
     \item The development of data science techniques to calculate spatial transformations
             on rich microdata to fulfil exogenous regression specifications
     \item The application of higher-order spatial lags as an internal instrument
             deploying a peer effects model in a firm productivity setting
-    \item The application of higher-order temporal lags as an internal instrument
+    \item The application of higher-order temporal lags as an instrument
             in a dynamic panel peer effects model,
-            contrasting model performance with these two instruments
-    \item Empirical estimates for a firm-to-firm spatial productivity spillover.
+            contrasting instrument performance
+    \item Empirical estimates of the firm-to-firm spatial productivity spillover.
     This is evidence that can underlie patterns of firm colocation discussed
     in the more sophisticated urban development literature,
     and provides a framework for future extensions to investigate heterogenous effects.
 \end{enumerate}
 \par % Section 2: literature
-This analysis acknowledges a large body of work on agglomeration,
-rooted historically in \cite{Marshall1920}, which elucidate the importance of
+This analysis acknowledges a large body of work on agglomeration
+which elucidates the importance of
 urban density and development on firm productivity.
 In section 2, I give an overview of the substantive contributions from
 urban economics and New Economic Geography (NEG),
 which explain agglomeration driver channels
 and offer sophisticated approaches to modelling to household and firm dynamic location choices.
 No attempt is made to recreate this whole body of work.
-Instead, this analysis abstracts away from the usual components of urban density
-and dynamic decision models. Despite being a spatial analysis,
-location is barely employed as a feature in the analysis of productivity
-except to identify each firm's spatial peers.
-From this mere spatial proximity,
-this analysis looks for empirical evidence isolating the pure productivity spillover
-from peers to a target firm.
-It therefore may provide empirical support for the centrifugal, pro-urbanisation force
-underlying the more sophisticated analyses of New Economic Geography and regional development.
+Instead, this analysis abstracts away from the urban modelling choices
+common to this literature. Despite being a spatial analysis,
+location is employed only as a feature to identify a group of spatial peers for every firm.
+From this mere spatial proximity, this analysis reviews approaches to generating empirical evidence
+on the pure productivity spillover from peers to a target firm,
+highlighting approaches to overcome empirical challenges on the way.
+If successful, evidence derived from this framework may provide \itx{prima facie}
+support for the centrifugal force driving urbanisation and cluster formation.
+This is crucial to both the descriptive analysis of economic geography
+and the prescription of regional policy.
 \par
-Section 2 also gives a brief overview of the econometric literature
-on peer effects model, from \cite{Manski1993}'s `Reflection Problem'
-to finding valid instruments in a more complex graph and network setting in \cite{Bramoulle2009}.
-This analysis leans heavily on that econometric theory
-to develop a model of peer effects for the productivity spillover between firms.
+Section 2 also gives an overview of the econometric literature
+on peer effects, from \cite{Manski1993}'s `Reflection Problem'
+to evaluating instrumental validity in a more complex graph and network setting in \cite{Bramoulle2009}.
+This analysis applies that econometric theory to the productivity spillover setting.
 \par
 In sections 3 and 4, I discuss the handling of data from Fame,
-a database of publicly-available, balance-sheet data from UK companies,
-unified and designed to be comprehensive for research.
-The cleaned Fame dataset provides more than 100,000 firms' data
-across many years.
-This is extremely useful for deriving precise econometric estimates,
-but a significant data science challenge to compute
-and manage the memory for vectors of millions of observations and their transformations.
-In these sections, I highlight my use of data science techniques
-to calculate the spatial weighting matrix $\mathbf W$
-and the iterated evaluation of its higher-order spatial lags of $\mathbf W$,
-such as $\mathbf W^2, \mathbf W^k, (\mathbb I-\mathbf W)$,
-on over 1 million observations.
-This offers a reusable method to calculate valid instruments
-and conduct transformations that are helpful for eliminating endogeneity.
-I provide a detailed guide to reproducing data methods in Appendix \ref{app:data-cleaning}
-and all code for this analysis is available publicly\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}.
+a compilation of publicly-available, balance-sheet data from UK companies
+designed for comparative research. The cleaned Fame dataset
+provides more than 150,000 firms' data and 1.1 million panel observations.
+Section 3 also highlights data science techniques developed for this paper
+to undertake complex matrix transformations of higher-order spatial lags of
+an $(n\times n)$ interactions matrix necessary to compute valid instruments
+and eliminate endogeneity.
+I provide a detailed guide to reproducing methods in Appendix \ref{app:data-cleaning},
+with all code available publicly\footnote{https://github.com/aloysiuslip/ucl-diss-ECON0079}.
 \par
 In section 5, I give the econometric analysis of a static model with spatial peer effects,
 conceptualisable as `spatial lags' of the classical regressors in a 3-factor production function.
-This implements econometric theory from \cite{Bramoulle2009} for the
-identification of higher-order spatial lags as valid instruments to the \itx{endogenous} regressor.
-I estimate models under both a `groups' peer structure,
-which argues that the strength of a productivity spillover
-is the average of nearby neighbours, and a `networks' model,
-which applies an individualised weight for each target-peer firm connection
-proportionate to the reciprocal of the physical distance between them.
+This contrasts the merits of different weighting approaches to analysing peer groups
+and the use of spatial lags as valid instruments to the peer effects \itx{endogenous} regressor.
+I estimate both `groups' models, where the strength of a productivity spillover
+is the average of nearby neighbours, and `networks' models,
+which applies a distance-decayed individualised weight for every target-peer firm pair.
 \par
-In section 6, I expand the use of internal instruments to higher-order temporal lags.
+In section 6, I expand the use of internal instruments to temporal lags.
 This builds on modern `System GMM' methods from \cite{Blundell1998}.
-These include an autoregressor and exploit the time variation of the panel structure
-to instrument for both the \itx{endogenous} peer effect components
-and all other regressors, which have their assumptions relaxed to weak endogeneity.
-These models offer limited evidence of a dynamic autoregressor coefficient,
-or significant coefficients for lagged peer effect variables,
+I discuss advantages of relaxing strict assumptions to `weak exogeneity'
+and evaluate the predetermined nature of classical production factors in a dynamic setting.
+These models offer minimal evidence of a dynamic autoregressor coefficient,
 validating the use of static models which restrict effects to the contemporaneous period.
 \par
-Throughout this analysis I prioritise extensions, additional groups, lags, and instruments,
-that expose the econometric properties of the model, rather than being designed to make them more policy-relevant.
-I propose that the baseline of establishing the method of investigation,
-with credible contributions to the data science, theory, and econometric method
-of this issue are sufficient for the scope of this paper.
-Policy-relevant extensions are discussed in Appendix \ref{ss:param-select-xvalidate}.
-I leave it for further analysis to build on the framework I establish this paper
-and seek to investigate true, policy-meaningful questions that I discuss in this introduction.
+Throughout this analysis, I prioritise extensions which expose the econometric properties of the model,
+establish a grounding for future analysis.
+I propose that this baseline establishing an investigation method,
+with credible contributions to the data science, theory, and econometric techniques of issue
+are sufficient for the scope of this paper.
+Policy-relevant extensions are discussed in Appendix \ref{ss:param-select-xvalidate},
+which I leave it for further analysis to execute.
+These have the potential to investigate the policy-meaningful questions I discuss in this introduction.
 
-\subsection{\todo{Productivity in the United Kingdom}}
+\subsection{Productivity in the United Kingdom}
 
-\subsection{\todo{Spatial productivity to political economy}}
-
-%% Background policy
-A revival of interest in regional, pro-second city policy
-has also taken place in the policies of the 2024 and 2026 governments in the United Kingdom.
-Regional economic policy declined strongly in the UK under the 1980s Thatcher government
-\todo{\dots}
-\par
-This consensus was maintained throughout the 1990s-2000s New Labour period,
+The United Kingdom was a regional economic powerhouse through the Industrial Revolution.
+From the concentration of textiles in Manchester
+to car manufacturing in the West Midlands,
+as the natural geographic distribution that leant itself to heavy industries,
+so did national interest in regional economic policy.
+Regional focus declined strongly in the UK under the 1980s Thatcher government
+and was largely maintained at lows throughout the 1990s-2000s New Labour period,
 where rapid economic growth known as `The Great Moderation' satiated impetus for change.
+\par
 The consensus was broken in 2017, with the seeds of a regional-industrial strategy in 2017,
 emerging under the Conservative May government.
 Under the background of a UK-EU Referendum result (``Brexit'')
@@ -120,7 +110,23 @@ identify action to "boost productivity, earning power, and competitiveness" on a
 basis\footnote{\cite{Mahmood2025}}.
 However, fewer of these strategies were fully developed and implemented by 2021.
 \par
+A revival of interest in regional, pro-second city policy
+has also taken place in the policies of the 2024 and 2026 governments in the United Kingdom.
 In 2026, the newly appointed Burnham government made the pledge for ``good growth in every
 postcode''\footnote{\cite{GOVUK2026}} with immediate speculation and interpretation from
-economic commentators\footnote{\cite{Gill2026}, \cite{DeSilva2026}} on what this might mean
-for the direction of regional and urban policy in the United Kingdom in the absence of further details.
+economic commentators\footnote{\cite{Gill2026}, \cite{DeSilva2026}} on the details for
+the direction of regional and urban policy in the United Kingdom in the absence of further details.
+\par
+It is well understood through the literature that follows that high productivity tends to follow urban clusters,
+and specialisation and devolution can be an engine for economic growth if deployed appropriately.
+However, the evidence on that appropriate manner is muddied at best,
+with most political and economic insight limited to observing and recounting trends of recent cluster development.
+There have been modern success stories in the United Kingdom, such as the sudden and successful
+rise of Canary Wharf in London as a financial hub, the emerging life sciences cluster in Cambridge
+and the `Golden Triangle', and creative industries such as video-game development in Edinburgh and the North of England.
+Nevertheless, with the UK government pushing to go further and deploy substantial fiscal tools
+as a means of regional productivity shocks\footnote{\cite{HMTreasury2026}},
+the crucial policy question remains on the endogenous sustainability of a spatially-connected system.
+Can the rise in productivity associated with clusters be attributed internally to the cluster itself,
+or is the result of repeated, other external factors? Guidance on this is crucial for effective policy.
+This analysis seeks to establish a baseline from which that evidence can be generated.
