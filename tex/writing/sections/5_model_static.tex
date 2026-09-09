@@ -729,6 +729,14 @@ The reduced-form equation and moment conditions of these models
 are identical to those of the group setting, except for the use of
 different weights which show up in $w_{ij,d}$ and $\mathbf W_d$.
 \begin{align}
+    \eqreref{eq:static-main-peer-effects}
+    y_{i,t} &= \alpha_i + \gamma_t + \beta_0 + \beta_1 k_{i,t} + \beta_2 l_{i,t} + \varepsilon_{i,t}
+        \\ \notag
+            &\qquad
+                    + \delta_0 \sum_{j\neq i} w_{ij}y_{j,t}
+                    + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij,g}k_{j,t}
+                    + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij,g}l_{j,t}
+    \\
     \Delta y_{i,t} &= \Delta\gamma_t
                     + \beta_1 \Delta k_{i,t}
                     + \beta_2 \Delta l_{i,t}
@@ -754,8 +762,8 @@ different weights which show up in $w_{ij,d}$ and $\mathbf W_d$.
     = 0_{l\times 2}
 \end{align}
 
-Results for the 3 respective reciprocal distance measures are given in \tablerefp{tab:dd-basic-str}.
-Note that each of the distance $d_1, d_2, d_3$ measures are non-orthogonal, distinct transformations
+Results for each of the 3 reciprocal distance measures are given in \tablerefp{tab:dd-basic-str}.
+Note that each of the distance $d_1, d_2, d_3$ measures are distinct transformations
 and so the properties discussed for the $W_{gs}$ matrices allowing them to be regressed at once
 do not here apply.
 In addition, I include a specification exploring employing more lags

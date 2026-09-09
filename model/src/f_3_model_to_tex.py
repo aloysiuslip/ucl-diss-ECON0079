@@ -264,7 +264,7 @@ def generate_latex_table(
         output_filepath: str | Path,
         show: list[int] | None = None,
         rename_strat: str | dict[str, str] | None = None,
-        hide_fe: bool | None = False,
+        hide_line: list[str] = [],
         var_order: list[str] | None = None,
         use_colnames: bool = True,
         start_at: int | None = 1,
@@ -272,8 +272,8 @@ def generate_latex_table(
         r2_type: list[str] = ['r2', 'r2-overall'],
     ) -> None:
 
-    if hide_fe is None:
-        hide_fe = False
+    if hide_line is None:
+        hide_line = []
     if start_at == None or start_at < 1:
         start_at = 1
     if stars is None:
@@ -381,7 +381,7 @@ def generate_latex_table(
     obs_row = "\t\tObs. & " + " & ".join([models[m].get('obs') for m in model_names]) + "\n\t\t\\\\"
     # Only add the i_row if there is at least one model with a non-empty entities_fe
     
-    if any(models[m].get('instruments') for m in model_names):
+    if 'instruments' not in hide_line and any(models[m].get('instruments') for m in model_names):
         instr_row = "\t\t\\footnotesize{Instr.} & "
         for m in model_names:
             instr_list = models[m].get('instruments', [])
@@ -400,11 +400,11 @@ def generate_latex_table(
             instr_row += instr_str + " & "
         instr_row = instr_row.rstrip(" & ") + "\n\t\t\\\\"
         latex_lines.append(instr_row)
-    if hide_fe != False and any(models[m].get('entities_fe') for m in model_names):
+    if 'entities_fe' not in hide_line and any(models[m].get('entities_fe') for m in model_names):
         latex_lines.append(i_row)
-    if hide_fe != False and any(models[m].get('time_fe') for m in model_names):
+    if 'time_fe' not in hide_line and any(models[m].get('time_fe') for m in model_names):
         latex_lines.append(t_row)
-    if any(models[m].get('obs') for m in model_names):
+    if 'obs' not in hide_line and any(models[m].get('obs') for m in model_names):
         latex_lines.append(obs_row)
     
 

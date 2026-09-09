@@ -17,7 +17,9 @@ class ModelSpec():
     panel_name: str | None = None
     include: bool = True
     category: str | None = None
-    differencing: str = 'mean'
+    differencing: str = 'mean',
+
+    filters: dict[str, list[str]] = field(default_factory=dict)
 
     # Model options
     use_linearmodels: bool = True

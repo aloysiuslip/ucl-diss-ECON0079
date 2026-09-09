@@ -224,7 +224,7 @@ Peer firms who were close to the target firm during the firm-year observation
 who subsequently moved away within-sample will have an extreme distance recorded,
 and so be excluded from tagged address groups and truncated distance calculations.
 Peer firms who are recorded as close to the target firm as they subsequently moved to the location.
-This reduces down the strength of the spillover coefficient $\theta_0$ estimated.
+This reduces the magnitude of the spillover coefficients in $\boldsymbol \theta_0$ estimated.
 
 \subsection{Location group classification}
 \label{ss:data-w-groups}
@@ -444,7 +444,7 @@ due to the small distances calculated.
 I show a histogram of distances calculated between firms in Figure \ref{fig:hist-distances-20km}. 
 \begin{figure}[hbtp]
     \caption{Histogram of distances between any target-firm pairing}
-    \label{fig:hist-distances-20km}
+    \label{fig:hist-distances-5km}
     \centering
     \graphicspath{ {../../descriptives/output/}}
     \includegraphics[width=\textwidth]{fig_panel_distance_distr.png}
@@ -459,18 +459,23 @@ I show a histogram of distances calculated between firms in Figure \ref{fig:hist
 \end{figure}
 
 To reduce computational complexity,
-I disregard any possible matches which don't share a Travel-to-Work-Areas (\itx{ttwa}).
+I disregard any possible matches which don't share a Travel-to-Work-Area (\itx{ttwa}).
 Not only are these firms more likely to be further apart,
 eliminating the need to calculate distances between, say,
 London and Glasgow,
 the \itx{ttwa} boundaries also a useful proxy for the functional boundaries
 of interacting economic agents, so it is a reasonable
 restriction to limit the peer effects of firms across those borders.
-Additionally, I disregard any spatial connection over a 5km limit,
-saving on memory and storage. The threshold provides a plausible limit
+Additionally, I disregard any spatial connection over a 5km limit.
+Practically, this saves on memory and storage.
+Conceptually, the threshold provides a plausible limit
 for the practical boundaries of one firm's peer effects on another,
-aligning helpfully with when contributions to a weighted average aggregate
-start to become too infinitesimal to matter using a reciprocal function for weights.
+and aligns helpfully with when contributions to a weighted average aggregate
+start to become infinitesimal using a reciprocal function for weights.
+This is a crucial additional assumption, as discussed further at the end of this section.
+Figure \ref{fig:hist-distances-5km}
+shows that the 5km boundary is a noticeable truncation of all firm-to-firm
+connections within a \itx{ttwa}.
 \par
 One final helpful property within the $\mathbf W_d$ matrix
 is the definition of a network itself.
@@ -535,14 +540,20 @@ The distance table has 734 million target-peer pairs;
 paradoxically, this implies both an incredibly
 rich, high-identification, interactions table due to a mean of 4,820 peers per target firm
 and also that the $\mathbf W_d$ matrix is mostly (over 96\%) sparse.
+\par
 The \itx{ttwa} and 5km boundaries are ultimately an arbitrary choice;
 stricter restrictions to create networks only within \itx{pc8} boundaries
 would have resulted in a $\mathbf W_d$ matrix that is 99.8\% sparse.
 While these could be considered reasonable restrictions,
-they matter a lot to the econometrics as firms disqualified as peers are not merely
+they matter a lot to the econometrics.
+Firms disqualified as peers are not merely
 excluded from the weighted average calculations,
-but considered valid candidates for instruments, as they are non-transitive peers-of-peers.
-Errors in the specification of this parameter could lead to Incorrect
+but are considered valid candidates for instruments with exclusion restriction,
+as we assume they are `too distant' to have a direct effect
+on the productivity of the target firm $i$;
+they are merely non-transitive peers-of-peers.
+This is therefore a crucial boundary:
+errors in the specification of this parameter could lead to Incorrect
 specification of the peer group of the target firm.
 I discuss in section \ref{ss:param-select-xvalidate} how the most appropriate approach
 would be to cross-validate these non-linear parameter selections

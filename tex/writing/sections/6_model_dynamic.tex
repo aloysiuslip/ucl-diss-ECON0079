@@ -62,9 +62,16 @@ are purely the use of the weak exogeneity assumption, and first-order autoregres
                 + \phi_1 y_{i,t-k} + \varepsilon_{i,t}
                 \\ \notag &\qquad 
                 + \delta_k \sum_{j\neq i} w_{ij}y_{j,t}
-                + (\xi_k-\delta_k\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
-                + (\zeta_k-\delta_k\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
+                + (\xi_0-\delta_0\beta_1) \cdot \sum_{j\neq i} w_{ij}k_{j,t}
+                + (\zeta_0-\delta_0\beta_2) \cdot \sum_{j\neq i} w_{ij}l_{j,t}
 \end{align}
+
+Estimation of this model is near-identical in reduced form
+to the coefficients described in the static problem,
+requiring only that I estimate one additional parameter $\hat\phi_1$.
+Instead, the crucial change comes in the choice of instruments.
+The dynamic specification allows me to employ and contrast the use
+of temporal higher-order lags, rather than spatial ones.
 
 \subsection{Dynamic panel identification}
 
@@ -86,8 +93,9 @@ for some moderate level of cross-sectional error correlation \eqref{eq:dyn-xs-co
     \qquad\text{(w.n.)}
 \end{align}
 
-No autocorrelation of errors may generally be seen as a more credible assumption,
-as in a dynamic, correctly-specified model with the correct autoregressive properties,
+No autocorrelation of errors may generally be seen as a more credible assumption
+than strictly no cross-correlation.
+In a dynamic, correctly-specified model with the correct autoregressive properties,
 time autocorrelation as component of the error term are modelled out.
 Conceptually, we could also argue that firms make efficient decisions,
 so if there is a shock observed in this period, firms ensure that in the next,
@@ -114,7 +122,7 @@ System GMM\footnote{Implemented with \cite{Wu2023}, with heavy modifications in 
 Valid instruments are therefore theoretically derived as $\Delta x_{i,\tau-j}$ for any $j$
 if $x_{i,\tau}$ is a valid instrument.
 
-\subsection{Testing AR structure}
+\subsection{Exploring AR structure}
 \label{ss:dyn-ar}
 
 I firstly relax the strict exogeneity assumption of the standard factors to weak exogeneity.

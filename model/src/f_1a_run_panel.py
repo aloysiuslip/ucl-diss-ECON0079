@@ -16,12 +16,12 @@ from panelbox.models.iv import PanelIV
 from panelbox.core.results import PanelResults
 
 from utils.f_0_dirs import get_data_dirs
+from f_1b_panel_helpers import add_fe, transform_nfe
 from f_2_extract import ModelSpec, extract_structural
 dirs = get_data_dirs(segment="model")
 
 use_linearmodels = True
 
-from model.src.f_1b_panel_helpers import add_fe, transform_nfe, extract_structural
 
 def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEffectsResults | PanelResults, str | dict[str, float], dict[str, pd.Series | None]]:
     mod, table_indicator, model_name = args
@@ -51,8 +51,10 @@ def run_panel(args: tuple[ModelSpec, pd.DataFrame | str, str]) -> tuple[PanelEff
         # 2. Get the data. We need to understand if it is a table or a DataFrame and get them both to a model form.
         if isinstance(table_indicator, str):
             con = ibis.duckdb.connect(dirs.db_path, read_only=True)
+            table_indicator = con.table(table_indicator)
+        if isinstance(table_indicator, ibis.Table):
             t_model: ibis.Table = (
-                con.table(table_indicator)
+                table_indicator
                 .distinct(on=['registered_number', 'year'])
                 .mutate(**{
                     f'ln_{p}': _[p].log() for p in params_raw_names if p in mod.to_log
