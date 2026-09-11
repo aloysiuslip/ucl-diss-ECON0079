@@ -44,9 +44,9 @@ Note that the ibis-framework package is not the same as the ibis package in PyPI
 # Model
 ### TODO
 - [X] Basic TFP panel regression
-- [X] LLM model 1: group TFP averages calculated  
-- [X] LLM model 1: run panel regression with these group averages  
-- [X] LLM model 1: run panel with industry vs non-industry groups too (6 more donut groups)
+- [X] LMM model 1: group TFP averages calculated  
+- [X] LMM model 1: run panel regression with these group averages  
+- [X] LMM model 1: run panel with industry vs non-industry groups too (6 more donut groups)
 - [X] Distance model 2: calculated distances with 5km limit.
 - [X] Distance model 2: improve viz by including each new node as peer.
 - [ ] Distance model 2: run panel regression with distances  
